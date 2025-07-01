@@ -3,8 +3,12 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Github, BookOpen } from "lucide-react";
 import Link from "next/link";
+import { useGitHubStars } from "@/context/GitHubStarsContext";
+import { formatStars } from "@/lib/utils";
 
 const CTA = () => {
+  const { stars } = useGitHubStars();
+
   return (
     <section className="py-20 bg-gradient-to-br from-blue-600 via-blue-700 to-violet-700 relative overflow-hidden">
       {/* Background decorations */}
@@ -122,7 +126,9 @@ docker run -d -p 3000:3000 \\
             transition={{ delay: 0.4, duration: 0.6 }}
           >
             <div className="text-center">
-              <div className="text-3xl font-bold text-white mb-2">1000+</div>
+              <div className="text-3xl font-bold text-white mb-2">
+                {stars ? formatStars(stars) : "..."}
+              </div>
               <div className="text-blue-100">GitHub Stars</div>
             </div>
             <div className="text-center">

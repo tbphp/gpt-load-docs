@@ -4,12 +4,14 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Github, Menu, X, Zap } from "lucide-react";
-import { cn } from "../lib/utils";
+import { cn, formatStars } from "../lib/utils";
+import { useGitHubStars } from "@/context/GitHubStarsContext";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const { stars } = useGitHubStars();
 
   useEffect(() => {
     // 初始化时检查滚动位置
@@ -95,6 +97,12 @@ const Navigation = () => {
             >
               <Github className="h-4 w-4" />
               <span>GitHub</span>
+              {stars !== null && (
+                <div className="ml-2 flex items-center space-x-1 rounded-md bg-gray-700 px-2 py-1 text-xs">
+                  <span>⭐</span>
+                  <span>{formatStars(stars)}</span>
+                </div>
+              )}
             </Link>
           </div>
 
@@ -141,6 +149,12 @@ const Navigation = () => {
                 >
                   <Github className="h-4 w-4" />
                   <span>GitHub</span>
+                  {stars !== null && (
+                    <div className="ml-2 flex items-center space-x-1 rounded-md bg-gray-700 px-2 py-1 text-xs">
+                      <span>⭐</span>
+                      <span>{formatStars(stars)}</span>
+                    </div>
+                  )}
                 </Link>
               </div>
             </motion.div>
