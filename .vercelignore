@@ -1,0 +1,19 @@
+# 部署相关文件
+out/
+.next/
+.vercel/
+.env.local
+.env.production.local
+.env
+
+# 日志文件
+*.log
+
+# 运行时文件
+pids/
+logs/
+results/
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
