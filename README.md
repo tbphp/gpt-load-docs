@@ -90,27 +90,6 @@ src/
     └── utils.ts          # 工具函数
 ```
 
-## 部署
-
-### Vercel 部署（推荐）
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/tbphp/gpt-load-docs)
-
-#### 自动部署
-
-1. Fork 本仓库到你的 GitHub 账户
-2. 在 [Vercel](https://vercel.com) 上导入项目
-3. Vercel 会自动检测并部署
-
-### 其他部署方式
-
-本项目支持多种部署方式：
-
-- **Netlify**: 支持自动部署
-- **GitHub Pages**: 静态文件部署
-- **Docker**: 容器化部署
-- **静态文件服务器**: Nginx, Apache 等
-
 ### 构建配置
 
 项目已配置为静态导出：
