@@ -159,23 +159,6 @@ const Footer = () => {
             </div>
           </div>
         </div>
-
-        {/* Sponsor section */}
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-          <p className="text-gray-400 text-sm mb-4">
-            CDN 加速和安全防护由腾讯 EdgeOne 赞助支持
-          </p>
-          <Link
-            href="https://edgeone.ai/?from=github"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block"
-          >
-            <div className="bg-white rounded-lg px-6 py-3 inline-flex items-center space-x-2 hover:bg-gray-100 transition-colors duration-200">
-              <span className="text-gray-900 font-semibold">EdgeOne</span>
-            </div>
-          </Link>
-        </div>
       </div>
     </footer>
   );

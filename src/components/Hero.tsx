@@ -89,15 +89,15 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              <div className="flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-lg border border-gray-200">
+              <div className="flex items-center space-x-2 bg-slate-100 text-slate-800 backdrop-blur-sm px-4 py-2 rounded-lg border border-gray-200">
                 <Shield className="h-4 w-4 text-green-600" />
                 <span className="text-sm font-medium">生产就绪</span>
               </div>
-              <div className="flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-lg border border-gray-200">
+              <div className="flex items-center space-x-2 bg-slate-100 text-slate-800 backdrop-blur-sm px-4 py-2 rounded-lg border border-gray-200">
                 <BarChart3 className="h-4 w-4 text-blue-600" />
                 <span className="text-sm font-medium">实时监控</span>
               </div>
-              <div className="flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-lg border border-gray-200">
+              <div className="flex items-center space-x-2 bg-slate-100 text-slate-800 backdrop-blur-sm px-4 py-2 rounded-lg border border-gray-200">
                 <Zap className="h-4 w-4 text-violet-600" />
                 <span className="text-sm font-medium">零拷贝流式</span>
               </div>
