@@ -119,8 +119,9 @@ const Navigation = () => {
 
           {/* Mobile menu button */}
           <button
-            className="md:hidden p-2"
+            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle mobile menu"
           >
             {isMobileMenuOpen ? (
               <X className="h-6 w-6 text-gray-700" />
@@ -140,33 +141,35 @@ const Navigation = () => {
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="py-4 space-y-4 border-t border-gray-200">
+              <div className="py-4 space-y-3 border-t border-gray-200">
                 {navItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="block text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
+                    className="block text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium py-2 px-2"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.label}
                   </Link>
                 ))}
-                <Link
-                  href="https://github.com/tbphp/gpt-load"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-2 bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors duration-200 w-fit"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  <Github className="h-4 w-4" />
-                  <span>GitHub</span>
-                  {stars !== null && (
-                    <div className="ml-2 flex items-center space-x-1 rounded-md bg-gray-700 px-2 py-1 text-xs">
-                      <span>⭐</span>
-                      <span>{formatStars(stars)}</span>
-                    </div>
-                  )}
-                </Link>
+                <div className="pt-2">
+                  <Link
+                    href="https://github.com/tbphp/gpt-load"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-2 bg-gray-900 text-white px-4 py-3 rounded-lg hover:bg-gray-800 transition-colors duration-200 w-full justify-center"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <Github className="h-4 w-4" />
+                    <span>GitHub</span>
+                    {stars !== null && (
+                      <div className="ml-2 flex items-center space-x-1 rounded-md bg-gray-700 px-2 py-1 text-xs">
+                        <span>⭐</span>
+                        <span>{formatStars(stars)}</span>
+                      </div>
+                    )}
+                  </Link>
+                </div>
               </div>
             </motion.div>
           )}

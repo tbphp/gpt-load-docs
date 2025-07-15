@@ -16,6 +16,7 @@ export const metadata: Metadata = {
     "企业级 AI 接口透明代理服务，完全保留各 AI 服务商的原生 API 格式。提供密钥轮询、多分组管理、负载均衡等功能，为您的 AI 应用提供稳定可靠的代理服务。",
   keywords: "GPT, OpenAI, API, 透明代理, 负载均衡, 密钥轮询, Go, 高性能",
   authors: [{ name: "tbphp" }],
+  viewport: "width=device-width, initial-scale=1, shrink-to-fit=no",
   icons: {
     icon: [
       { url: "/logo.png", sizes: "32x32", type: "image/png" },

@@ -6,7 +6,7 @@ import CTA from "../components/CTA";
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen overflow-x-hidden">
       <Hero />
       <Features />
       <Architecture />

@@ -5,13 +5,6 @@
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -23,4 +16,103 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* 移动端优化 */
+@media (max-width: 640px) {
+  /* 确保文本在小屏幕上不会太小 */
+  html {
+    font-size: 16px;
+  }
+
+  /* 优化触摸目标大小 */
+  button,
+  a,
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* 防止横向滚动 */
+  body {
+    overflow-x: hidden;
+  }
+
+  /* 优化代码块在移动端的显示 */
+  pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-size: 12px;
+  }
+
+  code {
+    word-break: break-word;
+    white-space: pre-wrap;
+  }
+
+  /* 确保图片响应式 */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* 移动端容器优化 */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* 移动端表格横向滚动 */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+/* 平板端优化 */
+@media (min-width: 641px) and (max-width: 1024px) {
+  pre {
+    font-size: 13px;
+  }
+}
+
+/* 优化滚动条 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* 确保焦点可见性（无障碍） */
+:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* 移动端动画优化 */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 针对移动端的文本选择优化 */
+::selection {
+  background-color: #3b82f6;
+  color: white;
 }

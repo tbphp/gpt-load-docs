@@ -71,113 +71,106 @@ const Features = () => {
     },
   ];
   return (
-    <section className="py-20 bg-gray-50">
-      {" "}
+    <section className="py-16 sm:py-20 bg-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {" "}
         <div className="max-w-6xl mx-auto">
-          {" "}
-          {/* Header */}{" "}
+          {/* Header */}
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-12 sm:mb-16"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            {" "}
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              {" "}
-              核心技术特性{" "}
-            </h2>{" "}
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              {" "}
-              企业级架构设计，专为生产环境优化{" "}
-            </p>{" "}
-          </motion.div>{" "}
-          {/* Features Grid */}{" "}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {" "}
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 px-4">
+              核心技术特性
+            </h2>
+            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
+              企业级架构设计，专为生产环境优化
+            </p>
+          </motion.div>
+          {/* Features Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {features.map((feature, index) => {
               const IconComponent = feature.icon;
               return (
                 <motion.div
                   key={index}
-                  className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200"
+                  className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  {" "}
-                  {/* Icon */}{" "}
-                  <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg mb-4">
-                    {" "}
-                    <IconComponent className="h-6 w-6 text-blue-600" />{" "}
-                  </div>{" "}
-                  {/* Title */}{" "}
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                    {" "}
-                    {feature.title}{" "}
-                  </h3>{" "}
-                  {/* Description */}{" "}
-                  <p className="text-gray-600 mb-4 leading-relaxed">
-                    {" "}
-                    {feature.description}{" "}
-                  </p>{" "}
-                  {/* Technical Details */}{" "}
-                  <div className="bg-gray-50 rounded-lg p-3">
-                    {" "}
-                    <div className="text-sm text-gray-500 font-mono">
-                      {" "}
-                      {feature.technical}{" "}
-                    </div>{" "}
-                  </div>{" "}
+                  {/* Icon */}
+                  <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg mb-3 sm:mb-4">
+                    <IconComponent className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
+                  </div>
+                  {/* Title */}
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3">
+                    {feature.title}
+                  </h3>
+                  {/* Description */}
+                  <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4 leading-relaxed">
+                    {feature.description}
+                  </p>
+                  {/* Technical Details */}
+                  <div className="bg-gray-50 rounded-lg p-2 sm:p-3">
+                    <div className="text-xs sm:text-sm text-gray-500 font-mono">
+                      {feature.technical}
+                    </div>
+                  </div>
                 </motion.div>
               );
             })}{" "}
           </div>{" "}
-          {/* Architecture Highlight */}{" "}
+          {/* Architecture Highlight */}
           <motion.div
-            className="mt-16 bg-gradient-to-r from-blue-600 to-violet-600 rounded-xl p-8 text-white text-center"
+            className="mt-12 sm:mt-16 bg-gradient-to-r from-blue-600 to-violet-600 rounded-xl p-6 sm:p-8 text-white text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
             viewport={{ once: true }}
           >
-            {" "}
-            <h3 className="text-2xl font-bold mb-4">
-              {" "}
-              生产就绪的企业级架构{" "}
-            </h3>{" "}
-            <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-              {" "}
+            <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
+              生产就绪的企业级架构
+            </h3>
+            <p className="text-blue-100 mb-4 sm:mb-6 max-w-2xl mx-auto text-sm sm:text-base">
               从单机部署到分布式集群，从开发环境到生产环境，GPT-Load
-              提供完整的解决方案{" "}
-            </p>{" "}
-            <div className="grid md:grid-cols-4 gap-6">
-              {" "}
+              提供完整的解决方案
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
               <div>
-                {" "}
-                <div className="text-3xl font-bold mb-2">Go 1.23+</div>{" "}
-                <div className="text-blue-200 text-sm">运行时环境</div>{" "}
-              </div>{" "}
+                <div className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">
+                  Go 1.23+
+                </div>
+                <div className="text-blue-200 text-xs sm:text-sm">
+                  运行时环境
+                </div>
+              </div>
               <div>
-                {" "}
-                <div className="text-3xl font-bold mb-2">MySQL 8.2+</div>{" "}
-                <div className="text-blue-200 text-sm">数据持久化</div>{" "}
-              </div>{" "}
+                <div className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">
+                  MySQL 8.2+
+                </div>
+                <div className="text-blue-200 text-xs sm:text-sm">
+                  数据持久化
+                </div>
+              </div>
               <div>
-                {" "}
-                <div className="text-3xl font-bold mb-2">Redis</div>{" "}
-                <div className="text-blue-200 text-sm">缓存 & 锁</div>{" "}
-              </div>{" "}
+                <div className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">
+                  Redis
+                </div>
+                <div className="text-blue-200 text-xs sm:text-sm">
+                  缓存 & 锁
+                </div>
+              </div>
               <div>
-                {" "}
-                <div className="text-3xl font-bold mb-2">Vue 3</div>{" "}
-                <div className="text-blue-200 text-sm">管理界面</div>{" "}
-              </div>{" "}
-            </div>{" "}
+                <div className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">
+                  Vue 3
+                </div>
+                <div className="text-blue-200 text-xs sm:text-sm">管理界面</div>
+              </div>
+            </div>
           </motion.div>{" "}
         </div>{" "}
       </div>{" "}
