@@ -17,7 +17,10 @@ export const metadata: Metadata = {
   keywords: "GPT, OpenAI, API, 透明代理, 负载均衡, 密钥轮询, Go, 高性能",
   authors: [{ name: "tbphp" }],
   icons: {
-    icon: "/logo.png",
+    icon: [
+      { url: "/logo.png", sizes: "32x32", type: "image/png" },
+      { url: "/logo.png", sizes: "16x16", type: "image/png" },
+    ],
     shortcut: "/logo.png",
     apple: "/logo.png",
   },
