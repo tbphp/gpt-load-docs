@@ -1,7 +1,7 @@
 import Hero from "../components/Hero";
 import Features from "../components/Features";
 import Architecture from "../components/Architecture";
-import Performance from "../components/Performance";
+import QuickStart from "../components/QuickStart";
 import CTA from "../components/CTA";
 
 export default function Home() {
@@ -10,7 +10,7 @@ export default function Home() {
       <Hero />
       <Features />
       <Architecture />
-      <Performance />
+      <QuickStart />
       <CTA />
     </main>
   );

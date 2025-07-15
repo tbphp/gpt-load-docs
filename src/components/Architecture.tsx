@@ -1,202 +1,223 @@
 "use client";
-
 import { motion } from "framer-motion";
-import { ArrowRight, Server, Users, Zap } from "lucide-react";
-
+import {
+  Database,
+  Server,
+  Users,
+  ArrowRight,
+  Shield,
+  RotateCcw,
+  Monitor,
+} from "lucide-react";
 const Architecture = () => {
+  const components = [
+    {
+      icon: Users,
+      title: "客户端应用",
+      description: "Web/移动应用通过标准 OpenAI API 格式调用",
+      items: ["HTTP/HTTPS 请求", "Bearer Token 认证", "JSON 格式交互"],
+    },
+    {
+      icon: Shield,
+      title: "GPT-Load 代理层",
+      description: "核心代理服务，负责请求转发和管理",
+      items: ["透明代理", "密钥管理", "负载均衡", "请求日志"],
+    },
+    {
+      icon: Server,
+      title: "AI 服务提供商",
+      description: "多种 AI 服务的统一接入",
+      items: ["OpenAI API", "Google Gemini", "其他兼容服务"],
+    },
+  ];
+  const infrastructure = [
+    {
+      icon: Database,
+      title: "MySQL 8.2+",
+      description: "持久化存储",
+      details: ["配置数据", "用户信息", "请求日志"],
+    },
+    {
+      icon: RotateCcw,
+      title: "Redis",
+      description: "缓存与锁",
+      details: ["密钥缓存", "分布式锁", "会话存储"],
+    },
+    {
+      icon: Monitor,
+      title: "Vue 3 管理后台",
+      description: "管理界面",
+      details: ["实时监控", "配置管理", "日志查看"],
+    },
+  ];
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+    <section className="py-20 bg-white">
+      {" "}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            系统架构
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            了解 GPT-Load 如何通过智能路由和负载均衡， 为您的应用提供稳定可靠的
-            AI API 服务。
-          </p>
-        </motion.div>
-
-        {/* Architecture diagram */}
-        <div className="relative max-w-6xl mx-auto">
-          <div className="flex flex-col lg:flex-row items-center justify-between space-y-8 lg:space-y-0 lg:space-x-8">
-            {/* Client applications */}
-            <motion.div
-              className="flex flex-col items-center space-y-4"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-200">
-                <Users className="h-12 w-12 text-blue-600 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-center mb-2">
-                  客户端应用
-                </h3>
-                <div className="space-y-2 text-sm text-gray-600">
-                  <div className="bg-gray-100 px-3 py-1 rounded">Web 应用</div>
-                  <div className="bg-gray-100 px-3 py-1 rounded">移动应用</div>
-                  <div className="bg-gray-100 px-3 py-1 rounded">API 服务</div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Arrow 1 */}
-            <motion.div
-              className="flex items-center"
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.4 }}
-            >
-              <ArrowRight className="h-8 w-8 text-blue-600 hidden lg:block" />
-              <div className="lg:hidden">
-                <div className="w-2 h-8 bg-blue-600 rounded-full" />
-              </div>
-            </motion.div>
-
-            {/* GPT-Load proxy */}
-            <motion.div
-              className="flex flex-col items-center"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-            >
-              <div className="bg-gradient-to-br from-blue-600 to-violet-600 rounded-lg p-6 shadow-xl text-white relative">
-                <motion.div
-                  className="absolute inset-0 bg-white rounded-lg opacity-20"
-                  animate={{ scale: [1, 1.05, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-                <Zap className="h-12 w-12 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-center mb-4">
-                  GPT-Load 代理
-                </h3>
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-green-400 rounded-full" />
-                    <span>密钥轮询</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-green-400 rounded-full" />
-                    <span>负载均衡</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-green-400 rounded-full" />
-                    <span>错误处理</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-green-400 rounded-full" />
-                    <span>实时监控</span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Arrow 2 */}
-            <motion.div
-              className="flex items-center"
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4, duration: 0.4 }}
-            >
-              <ArrowRight className="h-8 w-8 text-blue-600 hidden lg:block" />
-              <div className="lg:hidden">
-                <div className="w-2 h-8 bg-blue-600 rounded-full" />
-              </div>
-            </motion.div>
-
-            {/* API providers */}
-            <motion.div
-              className="flex flex-col items-center space-y-4"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-            >
-              <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-200">
-                <Server className="h-12 w-12 text-green-600 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-center mb-2">
-                  API 提供商
-                </h3>
-                <div className="space-y-2 text-sm text-gray-600">
-                  <div className="bg-gray-100 px-3 py-1 rounded">OpenAI</div>
-                  <div className="bg-gray-100 px-3 py-1 rounded">
-                    Azure OpenAI
-                  </div>
-                  <div className="bg-gray-100 px-3 py-1 rounded">
-                    第三方服务
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Flow indicators */}
+        {" "}
+        <div className="max-w-6xl mx-auto">
+          {" "}
+          {/* Header */}{" "}
           <motion.div
-            className="absolute top-1/2 left-1/4 transform -translate-y-1/2 hidden lg:block"
-            animate={{ opacity: [0.3, 1, 0.3] }}
-            transition={{ duration: 2, repeat: Infinity }}
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            <div className="w-2 h-2 bg-blue-600 rounded-full" />
-          </motion.div>
+            {" "}
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              {" "}
+              系统架构{" "}
+            </h2>{" "}
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              {" "}
+              基于 Go 语言的高性能透明代理架构，支持分布式部署和水平扩展{" "}
+            </p>{" "}
+          </motion.div>{" "}
+          {/* Data Flow */}{" "}
+          <div className="mb-16">
+            {" "}
+            <h3 className="text-2xl font-semibold text-gray-900 mb-8 text-center">
+              {" "}
+              数据流架构{" "}
+            </h3>{" "}
+            <div className="flex flex-col lg:flex-row items-center justify-between space-y-8 lg:space-y-0">
+              {" "}
+              {components.map((component, index) => {
+                const IconComponent = component.icon;
+                return (
+                  <div key={index} className="flex items-center">
+                    {" "}
+                    <motion.div
+                      className="bg-gray-50 rounded-xl p-6 max-w-xs text-center border border-gray-200"
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: index * 0.2 }}
+                    >
+                      {" "}
+                      <div className="flex items-center justify-center w-16 h-16 bg-blue-100 rounded-lg mx-auto mb-4">
+                        {" "}
+                        <IconComponent className="h-8 w-8 text-blue-600" />{" "}
+                      </div>{" "}
+                      <h4 className="text-lg font-semibold text-gray-900 mb-2">
+                        {" "}
+                        {component.title}{" "}
+                      </h4>{" "}
+                      <p className="text-gray-600 text-sm mb-4">
+                        {" "}
+                        {component.description}{" "}
+                      </p>{" "}
+                      <div className="space-y-1">
+                        {" "}
+                        {component.items.map((item, itemIndex) => (
+                          <div
+                            key={itemIndex}
+                            className="text-xs bg-white px-2 py-1 rounded border text-gray-700"
+                          >
+                            {" "}
+                            {item}{" "}
+                          </div>
+                        ))}{" "}
+                      </div>{" "}
+                    </motion.div>{" "}
+                    {/* Arrow */}{" "}
+                    {index < components.length - 1 && (
+                      <ArrowRight className="h-8 w-8 text-gray-400 mx-4 hidden lg:block" />
+                    )}{" "}
+                  </div>
+                );
+              })}{" "}
+            </div>{" "}
+          </div>{" "}
+          {/* Infrastructure */}{" "}
+          <div className="mb-16">
+            {" "}
+            <h3 className="text-2xl font-semibold text-gray-900 mb-8 text-center">
+              {" "}
+              基础设施组件{" "}
+            </h3>{" "}
+            <div className="grid md:grid-cols-3 gap-8">
+              {" "}
+              {infrastructure.map((item, index) => {
+                const IconComponent = item.icon;
+                return (
+                  <motion.div
+                    key={index}
+                    className="bg-gray-50 rounded-xl p-6 text-center border border-gray-200"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                  >
+                    {" "}
+                    <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg mx-auto mb-4">
+                      {" "}
+                      <IconComponent className="h-6 w-6 text-blue-600" />{" "}
+                    </div>{" "}
+                    <h4 className="text-xl font-semibold text-gray-900 mb-2">
+                      {" "}
+                      {item.title}{" "}
+                    </h4>{" "}
+                    <p className="text-gray-600 mb-4"> {item.description} </p>{" "}
+                    <div className="space-y-2">
+                      {" "}
+                      {item.details.map((detail, detailIndex) => (
+                        <div
+                          key={detailIndex}
+                          className="text-sm bg-white px-3 py-1 rounded border text-gray-700"
+                        >
+                          {" "}
+                          {detail}{" "}
+                        </div>
+                      ))}{" "}
+                    </div>{" "}
+                  </motion.div>
+                );
+              })}{" "}
+            </div>{" "}
+          </div>{" "}
+          {/* Deployment Options */}{" "}
           <motion.div
-            className="absolute top-1/2 right-1/4 transform -translate-y-1/2 hidden lg:block"
-            animate={{ opacity: [0.3, 1, 0.3] }}
-            transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+            className="bg-gradient-to-r from-gray-900 to-blue-900 rounded-xl p-8 text-white text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            <div className="w-2 h-2 bg-blue-600 rounded-full" />
-          </motion.div>
-        </div>
-
-        {/* Benefits */}
-        <motion.div
-          className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.6, duration: 0.6 }}
-        >
-          <div className="text-center">
-            <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-2xl font-bold text-blue-600">1</span>
-            </div>
-            <h3 className="text-lg font-semibold mb-2">统一接入</h3>
-            <p className="text-gray-600">
-              一个端点接入多个 AI 服务提供商，简化应用架构
-            </p>
-          </div>
-          <div className="text-center">
-            <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-2xl font-bold text-green-600">2</span>
-            </div>
-            <h3 className="text-lg font-semibold mb-2">智能路由</h3>
-            <p className="text-gray-600">
-              自动选择最优的 API 密钥和服务端点，确保最佳性能
-            </p>
-          </div>
-          <div className="text-center">
-            <div className="bg-violet-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-2xl font-bold text-violet-600">3</span>
-            </div>
-            <h3 className="text-lg font-semibold mb-2">故障容错</h3>
-            <p className="text-gray-600">
-              当某个服务出现问题时，自动切换到备用服务，保证业务连续性
-            </p>
-          </div>
-        </motion.div>
-      </div>
+            {" "}
+            <h3 className="text-2xl font-bold mb-4"> 灵活的部署方式 </h3>{" "}
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {" "}
+              <div className="text-left">
+                {" "}
+                <h4 className="text-lg font-semibold mb-3 text-blue-300">
+                  单机部署
+                </h4>{" "}
+                <ul className="space-y-2 text-blue-100">
+                  {" "}
+                  <li>• Docker Compose 一键启动</li>{" "}
+                  <li>• 包含完整的 MySQL + Redis</li>{" "}
+                  <li>• 适合开发和小规模生产</li>{" "}
+                </ul>{" "}
+              </div>{" "}
+              <div className="text-left">
+                {" "}
+                <h4 className="text-lg font-semibold mb-3 text-blue-300">
+                  集群部署
+                </h4>{" "}
+                <ul className="space-y-2 text-blue-100">
+                  {" "}
+                  <li>• Master/Slave 架构</li> <li>• 水平扩展支持</li>{" "}
+                  <li>• 高可用性保障</li>{" "}
+                </ul>{" "}
+              </div>{" "}
+            </div>{" "}
+          </motion.div>{" "}
+        </div>{" "}
+      </div>{" "}
     </section>
   );
 };
-
 export default Architecture;

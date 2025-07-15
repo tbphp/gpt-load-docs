@@ -1,202 +1,187 @@
 "use client";
-
 import { motion } from "framer-motion";
 import {
-  Zap,
+  Cpu,
   RotateCcw,
-  Shield,
+  Globe,
   BarChart3,
   Settings,
-  Globe,
+  Database,
+  Shield,
   FileText,
-  Lock,
-  Cpu,
+  Code,
 } from "lucide-react";
-
 const Features = () => {
   const features = [
     {
-      icon: RotateCcw,
-      title: "多密钥轮询",
-      description: "自动 API 密钥轮换和负载均衡，确保服务高可用性",
-      color: "text-blue-600",
-      bgColor: "bg-blue-100",
-    },
-    {
-      icon: BarChart3,
-      title: "多目标负载均衡",
-      description: "支持轮询多个上游 API 地址，分散请求压力",
-      color: "text-green-600",
-      bgColor: "bg-green-100",
-    },
-    {
-      icon: Shield,
-      title: "智能拉黑",
-      description: "区分永久性和临时性错误，智能密钥管理",
-      color: "text-red-600",
-      bgColor: "bg-red-100",
-    },
-    {
-      icon: BarChart3,
-      title: "实时监控",
-      description: "全面的统计信息、健康检查和黑名单管理",
-      color: "text-purple-600",
-      bgColor: "bg-purple-100",
-    },
-    {
-      icon: Settings,
-      title: "灵活配置",
-      description: "基于环境变量的配置，支持 .env 文件",
-      color: "text-orange-600",
-      bgColor: "bg-orange-100",
+      icon: Cpu,
+      title: "高性能架构",
+      description:
+        "基于 Go 1.23+ 开发，零拷贝流式传输，协程并发模型，支持高并发处理",
+      technical: "Go 协程 + HTTP/2 连接复用",
     },
     {
       icon: Globe,
-      title: "CORS 支持",
-      description: "完整的跨域请求支持，适配各种前端框架",
-      color: "text-cyan-600",
-      bgColor: "bg-cyan-100",
+      title: "透明代理",
+      description:
+        "完全保留原生 API 格式，无需修改现有代码即可接入多种 AI 服务",
+      technical: "OpenAI + Google Gemini 支持",
+    },
+    {
+      icon: RotateCcw,
+      title: "智能密钥管理",
+      description: "分组管理、动态轮换、自动重试，确保服务高可用性",
+      technical: "Redis 缓存 + 故障恢复机制",
+    },
+    {
+      icon: BarChart3,
+      title: "负载均衡",
+      description: "多上游支持、权重配置、健康检查，智能路由到可用节点",
+      technical: "加权轮询 + 健康检查",
+    },
+    {
+      icon: Settings,
+      title: "热重载配置",
+      description: "三层配置系统，环境变量、系统设置、分组配置，支持热更新",
+      technical: "环境变量 → 系统设置 → 分组设置",
+    },
+    {
+      icon: Database,
+      title: "集群支持",
+      description: "主从架构，无状态设计，支持水平扩展和分布式部署",
+      technical: "Master/Slave + Redis 分布式锁",
+    },
+    {
+      icon: Shield,
+      title: "安全机制",
+      description: "Bearer Token 认证、分组隔离、请求日志、敏感信息脱敏",
+      technical: "JWT + 访问控制 + 审计日志",
     },
     {
       icon: FileText,
-      title: "结构化日志",
-      description: "详细的日志记录，包含响应时间和密钥信息",
-      color: "text-indigo-600",
-      bgColor: "bg-indigo-100",
+      title: "管理后台",
+      description: "Vue 3 现代化界面，实时监控、日志查看、配置管理",
+      technical: "Vue 3 + TypeScript + Naive UI",
     },
     {
-      icon: Lock,
-      title: "可选认证",
-      description: "项目级 Bearer token 认证，保障 API 安全",
-      color: "text-pink-600",
-      bgColor: "bg-pink-100",
-    },
-    {
-      icon: Zap,
-      title: "高性能",
-      description: "零拷贝流式传输、并发处理和原子操作",
-      color: "text-yellow-600",
-      bgColor: "bg-yellow-100",
-    },
-    {
-      icon: Cpu,
-      title: "生产就绪",
-      description: "优雅关闭、错误恢复和内存管理",
-      color: "text-teal-600",
-      bgColor: "bg-teal-100",
+      icon: Code,
+      title: "开发友好",
+      description: "完整的 RESTful API、详细文档、Docker 一键部署",
+      technical: "OpenAPI + Docker Compose",
     },
   ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-      },
-    },
-  };
-
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-gray-50">
+      {" "}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            强大的功能特性
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            GPT-Load 为您的 AI 应用提供全方位的 API 代理解决方案，
-            从基础的负载均衡到高级的监控管理，一应俱全。
-          </p>
-        </motion.div>
-
-        {/* Features grid */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {features.map((feature, index) => {
-            const IconComponent = feature.icon;
-            return (
-              <motion.div
-                key={index}
-                className="group relative bg-white p-6 rounded-xl border border-gray-200 hover:border-gray-300 transition-all duration-300 hover:shadow-lg"
-                variants={itemVariants}
-                whileHover={{ y: -5 }}
-              >
-                {/* Icon */}
-                <div
-                  className={`inline-flex items-center justify-center w-12 h-12 rounded-lg ${feature.bgColor} mb-4 group-hover:scale-110 transition-transform duration-300`}
+        {" "}
+        <div className="max-w-6xl mx-auto">
+          {" "}
+          {/* Header */}{" "}
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            {" "}
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              {" "}
+              核心技术特性{" "}
+            </h2>{" "}
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              {" "}
+              企业级架构设计，专为生产环境优化{" "}
+            </p>{" "}
+          </motion.div>{" "}
+          {/* Features Grid */}{" "}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {" "}
+            {features.map((feature, index) => {
+              const IconComponent = feature.icon;
+              return (
+                <motion.div
+                  key={index}
+                  className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
                 >
-                  <IconComponent className={`h-6 w-6 ${feature.color}`} />
-                </div>
-
-                {/* Content */}
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {feature.description}
-                </p>
-
-                {/* Hover effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-violet-50 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
-              </motion.div>
-            );
-          })}
-        </motion.div>
-
-        {/* Performance stats */}
-        <motion.div
-          className="mt-20 bg-gradient-to-r from-blue-600 to-violet-600 rounded-2xl p-8 text-white"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-3xl font-bold mb-2">100+</div>
-              <div className="text-blue-100">并发请求</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold mb-2">&lt;10ms</div>
-              <div className="text-blue-100">响应延迟</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold mb-2">99.9%</div>
-              <div className="text-blue-100">服务可用性</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold mb-2">0</div>
-              <div className="text-blue-100">单点故障</div>
-            </div>
-          </div>
-        </motion.div>
-      </div>
+                  {" "}
+                  {/* Icon */}{" "}
+                  <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg mb-4">
+                    {" "}
+                    <IconComponent className="h-6 w-6 text-blue-600" />{" "}
+                  </div>{" "}
+                  {/* Title */}{" "}
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                    {" "}
+                    {feature.title}{" "}
+                  </h3>{" "}
+                  {/* Description */}{" "}
+                  <p className="text-gray-600 mb-4 leading-relaxed">
+                    {" "}
+                    {feature.description}{" "}
+                  </p>{" "}
+                  {/* Technical Details */}{" "}
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    {" "}
+                    <div className="text-sm text-gray-500 font-mono">
+                      {" "}
+                      {feature.technical}{" "}
+                    </div>{" "}
+                  </div>{" "}
+                </motion.div>
+              );
+            })}{" "}
+          </div>{" "}
+          {/* Architecture Highlight */}{" "}
+          <motion.div
+            className="mt-16 bg-gradient-to-r from-blue-600 to-violet-600 rounded-xl p-8 text-white text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            viewport={{ once: true }}
+          >
+            {" "}
+            <h3 className="text-2xl font-bold mb-4">
+              {" "}
+              生产就绪的企业级架构{" "}
+            </h3>{" "}
+            <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
+              {" "}
+              从单机部署到分布式集群，从开发环境到生产环境，GPT-Load
+              提供完整的解决方案{" "}
+            </p>{" "}
+            <div className="grid md:grid-cols-4 gap-6">
+              {" "}
+              <div>
+                {" "}
+                <div className="text-3xl font-bold mb-2">Go 1.23+</div>{" "}
+                <div className="text-blue-200 text-sm">运行时环境</div>{" "}
+              </div>{" "}
+              <div>
+                {" "}
+                <div className="text-3xl font-bold mb-2">MySQL 8.2+</div>{" "}
+                <div className="text-blue-200 text-sm">数据持久化</div>{" "}
+              </div>{" "}
+              <div>
+                {" "}
+                <div className="text-3xl font-bold mb-2">Redis</div>{" "}
+                <div className="text-blue-200 text-sm">缓存 & 锁</div>{" "}
+              </div>{" "}
+              <div>
+                {" "}
+                <div className="text-3xl font-bold mb-2">Vue 3</div>{" "}
+                <div className="text-blue-200 text-sm">管理界面</div>{" "}
+              </div>{" "}
+            </div>{" "}
+          </motion.div>{" "}
+        </div>{" "}
+      </div>{" "}
     </section>
   );
 };
-
 export default Features;

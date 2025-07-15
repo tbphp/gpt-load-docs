@@ -1,46 +1,39 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  BarChart3,
-  Zap,
-  Shield,
-  Clock,
-  TrendingUp,
-  Activity,
-} from "lucide-react";
+import { BarChart3, Zap, Shield, Clock, Activity } from "lucide-react";
 
 const Performance = () => {
   const metrics = [
     {
-      label: "响应时间",
-      value: "< 10ms",
-      description: "超低延迟的请求处理",
-      icon: Clock,
+      label: "默认并发数",
+      value: "100",
+      description: "MAX_CONCURRENT_REQUESTS 默认值",
+      icon: Activity,
       color: "text-blue-600",
       bgColor: "bg-blue-100",
     },
     {
-      label: "并发请求",
-      value: "1000+",
-      description: "高并发请求处理能力",
-      icon: Activity,
+      label: "Go 版本要求",
+      value: "1.23+",
+      description: "最低版本要求",
+      icon: Zap,
       color: "text-green-600",
       bgColor: "bg-green-100",
     },
     {
-      label: "可用性",
-      value: "99.9%",
-      description: "企业级服务可用性",
+      label: "连接池配置",
+      value: "100/50",
+      description: "最大空闲连接数/每主机连接数",
       icon: Shield,
       color: "text-red-600",
       bgColor: "bg-red-100",
     },
     {
-      label: "吞吐量",
-      value: "10K RPS",
-      description: "每秒请求处理数量",
-      icon: TrendingUp,
+      label: "请求超时",
+      value: "600s",
+      description: "默认请求超时时间",
+      icon: Clock,
       color: "text-purple-600",
       bgColor: "bg-purple-100",
     },
@@ -48,28 +41,28 @@ const Performance = () => {
 
   const comparisons = [
     {
-      metric: "响应时间",
-      without: "100-500ms",
-      with: "< 10ms",
-      improvement: "50x 提升",
+      metric: "配置管理",
+      without: "静态配置文件",
+      with: "动态热重载",
+      improvement: "无需重启",
     },
     {
-      metric: "错误率",
-      without: "5-15%",
-      with: "< 0.1%",
-      improvement: "150x 降低",
+      metric: "密钥管理",
+      without: "手动轮换",
+      with: "自动故障恢复",
+      improvement: "智能黑名单",
     },
     {
-      metric: "可用性",
-      without: "95-98%",
-      with: "99.9%",
-      improvement: "99.9% 保证",
+      metric: "集群部署",
+      without: "复杂选举机制",
+      with: "IS_SLAVE 标记",
+      improvement: "简单配置",
     },
     {
-      metric: "维护成本",
-      without: "高",
-      with: "低",
-      improvement: "80% 减少",
+      metric: "监控能力",
+      without: "基础日志",
+      with: "Web 管理界面",
+      improvement: "实时统计",
     },
   ];
 
@@ -85,10 +78,10 @@ const Performance = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            性能表现
+            技术特性
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            基于 Go 语言的高性能架构，为您的 AI 应用提供极致的性能体验
+            基于 Go 1.23+ 的高性能架构设计，为企业级应用提供可靠的代理服务
           </p>
         </motion.div>
 

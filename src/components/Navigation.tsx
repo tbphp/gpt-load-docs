@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Github, Menu, X, Zap } from "lucide-react";
+import { Github, Menu, X } from "lucide-react";
 import { cn, formatStars } from "../lib/utils";
 import { useGitHubStars } from "@/context/GitHubStarsContext";
 
@@ -35,7 +36,13 @@ const Navigation = () => {
         <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link href="/" className="flex items-center space-x-2">
-              <Zap className="h-8 w-8 text-blue-600" />
+              <Image
+                src="/logo.png"
+                alt="GPT-Load Logo"
+                width={32}
+                height={32}
+                className="w-8 h-8"
+              />
               <span className="text-xl font-bold text-gray-900">GPT-Load</span>
             </Link>
           </div>
@@ -47,8 +54,6 @@ const Navigation = () => {
   const navItems = [
     { href: "/", label: "首页" },
     { href: "/docs", label: "文档" },
-    { href: "/features", label: "功能特性" },
-    { href: "/examples", label: "使用示例" },
   ];
 
   return (
@@ -68,7 +73,13 @@ const Navigation = () => {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <div className="relative">
-              <Zap className="h-8 w-8 text-blue-600" />
+              <Image
+                src="/logo.png"
+                alt="GPT-Load Logo"
+                width={32}
+                height={32}
+                className="w-8 h-8"
+              />
               <motion.div
                 className="absolute inset-0 bg-blue-400 rounded-full opacity-20"
                 animate={{ scale: [1, 1.2, 1] }}

@@ -11,23 +11,37 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "GPT-Load - 高性能 AI API 代理服务器",
+  title: "GPT-Load - 高性能 AI 接口透明代理服务",
   description:
-    "高性能的 OpenAI 兼容 API 代理服务器，支持多密钥轮询、负载均衡和智能错误处理。为您的 AI 应用提供稳定可靠的 API 访问服务。",
-  keywords: "GPT, OpenAI, API, 代理, 负载均衡, 多密钥, Go, 高性能",
+    "企业级 AI 接口透明代理服务，完全保留各 AI 服务商的原生 API 格式。提供密钥轮询、多分组管理、负载均衡等功能，为您的 AI 应用提供稳定可靠的代理服务。",
+  keywords: "GPT, OpenAI, API, 透明代理, 负载均衡, 密钥轮询, Go, 高性能",
   authors: [{ name: "tbphp" }],
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
   openGraph: {
-    title: "GPT-Load - 高性能 AI API 代理服务器",
+    title: "GPT-Load - 高性能 AI 接口透明代理服务",
     description:
-      "高性能的 OpenAI 兼容 API 代理服务器，支持多密钥轮询、负载均衡和智能错误处理",
+      "企业级 AI 接口透明代理服务，完全保留各 AI 服务商的原生 API 格式，提供密钥轮询和负载均衡功能",
     type: "website",
     url: "https://gpt-load.com",
+    images: [
+      {
+        url: "/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "GPT-Load Logo",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "GPT-Load - 高性能 AI API 代理服务器",
+    title: "GPT-Load - 高性能 AI 接口透明代理服务",
     description:
-      "高性能的 OpenAI 兼容 API 代理服务器，支持多密钥轮询、负载均衡和智能错误处理",
+      "企业级 AI 接口透明代理服务，完全保留各 AI 服务商的原生 API 格式，提供密钥轮询和负载均衡功能",
+    images: ["/logo.png"],
   },
 };
 

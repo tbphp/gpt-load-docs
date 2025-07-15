@@ -1,32 +1,23 @@
 "use client";
 
 import Link from "next/link";
-import { Github, Twitter, Mail, Heart, Zap } from "lucide-react";
+import { Github, Mail, Heart, Zap } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const links = {
     product: [
-      { name: "功能特性", href: "/features" },
       { name: "使用文档", href: "/docs" },
-      { name: "API 参考", href: "/docs/api" },
-      { name: "更新日志", href: "/changelog" },
+      { name: "更新日志", href: "https://github.com/tbphp/gpt-load/releases" },
     ],
     community: [
       { name: "GitHub", href: "https://github.com/tbphp/gpt-load" },
       { name: "问题反馈", href: "https://github.com/tbphp/gpt-load/issues" },
-      { name: "讨论区", href: "https://github.com/tbphp/gpt-load/discussions" },
-      {
-        name: "贡献指南",
-        href: "https://github.com/tbphp/gpt-load/blob/main/CONTRIBUTING.md",
-      },
     ],
     resources: [
-      { name: "使用示例", href: "/examples" },
-      { name: "部署指南", href: "/docs/deployment" },
-      { name: "性能优化", href: "/docs/performance" },
-      { name: "故障排除", href: "/docs/troubleshooting" },
+      { name: "单机", href: "/docs/deployment" },
+      { name: "集群", href: "/docs/cluster" },
     ],
   };
 
@@ -55,15 +46,7 @@ const Footer = () => {
                 <Github className="h-5 w-5" />
               </Link>
               <Link
-                href="https://twitter.com/tbphp"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors duration-200"
-              >
-                <Twitter className="h-5 w-5" />
-              </Link>
-              <Link
-                href="mailto:support@gpt-load.com"
+                href="mailto:tangb7420@gmail.com"
                 className="text-gray-400 hover:text-white transition-colors duration-200"
               >
                 <Mail className="h-5 w-5" />
@@ -79,6 +62,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <Link
                     href={link.href}
+                    target={link.href.startsWith("http") ? "_blank" : undefined}
                     className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
                   >
                     {link.name}
@@ -113,7 +97,7 @@ const Footer = () => {
 
           {/* Resources links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">资源</h3>
+            <h3 className="text-lg font-semibold mb-4">部署</h3>
             <ul className="space-y-2">
               {links.resources.map((link) => (
                 <li key={link.name}>
@@ -135,7 +119,7 @@ const Footer = () => {
             <div className="text-gray-400 text-sm mb-4 md:mb-0">
               © {currentYear} GPT-Load. 使用{" "}
               <Link
-                href="https://opensource.org/licenses/MIT"
+                href="https://github.com/tbphp/gpt-load/blob/main/LICENSE"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-400 hover:text-blue-300 transition-colors duration-200"
