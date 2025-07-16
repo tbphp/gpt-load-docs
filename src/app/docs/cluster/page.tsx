@@ -125,8 +125,10 @@ export default function ClusterPage() {
                 <h4 className="font-semibold text-gray-800 mb-2">
                   部署 MySQL 集群
                 </h4>
-                <div className="bg-gray-900 rounded-lg p-4">
-                  建议使用云数据库集群服务，或自行部署独立的 MySQL 集群。
+                <div className="bg-gray-100 border border-gray-300 rounded-lg p-4">
+                  <p className="text-gray-700">
+                    建议使用云数据库集群服务，或自行部署独立的 MySQL 集群。
+                  </p>
                 </div>
               </div>
 
@@ -134,8 +136,11 @@ export default function ClusterPage() {
                 <h4 className="font-semibold text-gray-800 mb-2">
                   部署 Redis 集群
                 </h4>
-                <div className="bg-gray-900 rounded-lg p-4">
-                  建议使用 Redis Sentinel 或集群模式，确保高可用性和数据一致性。
+                <div className="bg-gray-100 border border-gray-300 rounded-lg p-4">
+                  <p className="text-gray-700">
+                    建议使用 Redis Sentinel
+                    或集群模式，确保高可用性和数据一致性。
+                  </p>
                 </div>
               </div>
             </div>
