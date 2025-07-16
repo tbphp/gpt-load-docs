@@ -191,7 +191,7 @@ export default function ClusterPage() {
                   </pre>
                 </div>
                 <p className="text-gray-800 mb-2 mt-2">
-                  主节点不配置，或者配置为IS_SLAVE=true。从节点配置为IS_SLAVE=true。
+                  主节点不配置，或者配置为IS_SLAVE=false。从节点配置为IS_SLAVE=true。
                 </p>
                 <p className="text-gray-800 mb-2">
                   保证整个集群只有一个主节点。
