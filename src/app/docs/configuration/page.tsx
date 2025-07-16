@@ -188,7 +188,7 @@ export default function ConfigurationPage() {
                     <td className="py-2 px-3">
                       <code className="bg-gray-100 px-1 rounded">PORT</code>
                     </td>
-                    <td className="py-2 px-3">3000</td>
+                    <td className="py-2 px-3">3001</td>
                     <td className="py-2 px-3">HTTP 服务器监听端口</td>
                   </tr>
                   <tr className="border-b border-gray-100">
@@ -206,7 +206,7 @@ export default function ConfigurationPage() {
                         SERVER_READ_TIMEOUT
                       </code>
                     </td>
-                    <td className="py-2 px-3">120秒</td>
+                    <td className="py-2 px-3">60秒</td>
                     <td className="py-2 px-3">HTTP 服务器读取请求超时</td>
                   </tr>
                   <tr className="border-b border-gray-100">
@@ -216,7 +216,7 @@ export default function ConfigurationPage() {
                         SERVER_WRITE_TIMEOUT
                       </code>
                     </td>
-                    <td className="py-2 px-3">1800秒</td>
+                    <td className="py-2 px-3">600秒</td>
                     <td className="py-2 px-3">HTTP 服务器写入响应超时</td>
                   </tr>
                   <tr>
@@ -226,7 +226,7 @@ export default function ConfigurationPage() {
                         SERVER_GRACEFUL_SHUTDOWN_TIMEOUT
                       </code>
                     </td>
-                    <td className="py-2 px-3">60秒</td>
+                    <td className="py-2 px-3">10秒</td>
                     <td className="py-2 px-3">服务优雅关闭等待时间</td>
                   </tr>
                 </tbody>
@@ -394,7 +394,7 @@ export default function ConfigurationPage() {
                     <td className="py-2 px-3">
                       <code className="bg-gray-100 px-1 rounded">app_url</code>
                     </td>
-                    <td className="py-2 px-3">http://localhost:3000</td>
+                    <td className="py-2 px-3">http://localhost:3001</td>
                     <td className="py-2 px-3">
                       项目基础 URL，用于拼接分组端点
                     </td>
@@ -410,14 +410,16 @@ export default function ConfigurationPage() {
                     <td className="py-2 px-3">请求日志数据库保留天数</td>
                   </tr>
                   <tr>
-                    <td className="py-2 px-3">日志写入间隔</td>
+                    <td className="py-2 px-3">日志延迟写入周期</td>
                     <td className="py-2 px-3">
                       <code className="bg-gray-100 px-1 rounded">
                         request_log_write_interval_minutes
                       </code>
                     </td>
                     <td className="py-2 px-3">5</td>
-                    <td className="py-2 px-3">日志从缓存写入数据库的周期</td>
+                    <td className="py-2 px-3">
+                      日志从缓存写入数据库的周期分钟数
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -515,12 +517,12 @@ export default function ConfigurationPage() {
                 <h4 className="font-semibold text-gray-800 mb-2">验证设置</h4>
                 <div className="text-sm text-gray-600">
                   <div>
-                    验证周期：
+                    验证间隔：
                     <code className="bg-gray-100 px-1 rounded ml-1">
                       60分钟
                     </code>
                   </div>
-                  <p className="text-xs mt-1">后台定时验证密钥的周期</p>
+                  <p className="text-xs mt-1">后台验证密钥的间隔时长</p>
                 </div>
               </div>
             </div>

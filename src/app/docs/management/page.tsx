@@ -25,14 +25,14 @@ export default function ManagementPage() {
           </h3>
           <div className="text-center">
             <code className="bg-white px-4 py-2 rounded-lg text-lg font-mono border text-gray-600">
-              http://localhost:3000
+              http://localhost:3001
             </code>
           </div>
           <div className="mt-6 grid md:grid-cols-2 gap-6">
             <div>
               <h4 className="font-semibold text-gray-800 mb-2">默认配置</h4>
               <ul className="text-gray-600 space-y-1 text-sm">
-                <li>• 端口: 3000 (可在配置中修改)</li>
+                <li>• 端口: 3001 (可在配置中修改)</li>
                 <li>• 协议: HTTP (可通过nginx配置 HTTPS)</li>
               </ul>
             </div>
