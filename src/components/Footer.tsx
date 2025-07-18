@@ -16,8 +16,8 @@ const Footer = () => {
       { name: "问题反馈", href: "https://github.com/tbphp/gpt-load/issues" },
     ],
     resources: [
-      { name: "单机", href: "/docs/installation" },
-      { name: "集群", href: "/docs/cluster" },
+      { name: "单机", href: "/docs/deployment/standalone" },
+      { name: "集群", href: "/docs/deployment/cluster" },
     ],
   };
 

@@ -24,7 +24,7 @@ const CTA = () => {
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-12 px-4">
               <Link
-                href="/docs/installation"
+                href="/docs/deployment/standalone"
                 className="inline-flex items-center space-x-2 bg-white text-blue-600 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-200 shadow-lg w-full sm:w-auto justify-center"
               >
                 <Download className="h-4 w-4 sm:h-5 sm:w-5" />
@@ -50,24 +50,6 @@ const CTA = () => {
                 <span>GitHub</span>
               </a>
             </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-gray-900 rounded-lg p-4 sm:p-6 max-w-2xl mx-auto overflow-hidden"
-            >
-              <div className="text-left">
-                <div className="text-gray-400 text-xs sm:text-sm mb-2">
-                  快速启动命令：
-                </div>
-                <code className="text-green-400 text-xs sm:text-sm break-all">
-                  git clone https://github.com/tbphp/gpt-load.git && cd gpt-load
-                  && cp .env.example .env && docker compose up -d
-                </code>
-              </div>
-            </motion.div>
           </motion.div>
         </div>
       </div>

@@ -123,11 +123,12 @@ export default function ClusterPage() {
             <div className="space-y-4">
               <div>
                 <h4 className="font-semibold text-gray-800 mb-2">
-                  部署 MySQL 集群
+                  部署 MySQL 集群(或者PostgreSQL)
                 </h4>
                 <div className="bg-gray-100 border border-gray-300 rounded-lg p-4">
                   <p className="text-gray-700">
-                    建议使用云数据库集群服务，或自行部署独立的 MySQL 集群。
+                    建议使用云数据库集群服务，或自行部署独立的 MySQL/PostgreSQL
+                    集群。
                   </p>
                 </div>
               </div>
@@ -166,13 +167,15 @@ export default function ClusterPage() {
     image: ghcr.io/tbphp/gpt-load:latest
     container_name: gpt-load
     ports:
-      - \"$\{PORT:-3001}:$\{PORT:-3001}\"
+      - "\${PORT:-3001}:\${PORT:-3001}"
     env_file:
       - .env
     restart: always
-    stop_grace_period: $\{SERVER_GRACEFUL_SHUTDOWN_TIMEOUT:-10}s
+    volumes:
+      - ./data:/app/data
+    stop_grace_period: \${SERVER_GRACEFUL_SHUTDOWN_TIMEOUT:-10}s
     healthcheck:
-      test: wget -q --spider -T 10 -O /dev/null http://localhost:$\{PORT:-3001}/health
+      test: wget -q --spider -T 10 -O /dev/null http://localhost:\${PORT:-3001}/health
       interval: 30s
       timeout: 10s
       retries: 3

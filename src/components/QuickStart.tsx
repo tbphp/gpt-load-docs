@@ -21,7 +21,7 @@ cd gpt-load`,
 cp .env.example .env
 
 # 编辑配置（可选）
-vim .env
+# vim .env
 
 # 主要配置项：
 # APP_PORT=3001
@@ -156,7 +156,7 @@ docker compose up -d
 
             <div className="mt-6 sm:mt-8 text-center">
               <Link
-                href="/docs/installation"
+                href="/docs/deployment"
                 className="inline-flex items-center space-x-2 bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 text-sm sm:text-base"
               >
                 <span>查看详细部署文档</span>

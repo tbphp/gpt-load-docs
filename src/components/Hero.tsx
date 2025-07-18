@@ -82,7 +82,7 @@ const Hero = () => {
             </Link>
 
             <Link
-              href="/docs/installation"
+              href="/docs/deployment"
               className="group border-2 border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 hover:shadow-md w-full sm:w-auto justify-center"
             >
               <Download className="h-5 w-5" />
@@ -150,18 +150,13 @@ const Hero = () => {
                 </span>
               </div>
               <pre className="text-green-400 text-xs sm:text-sm overflow-x-auto whitespace-pre-wrap break-words">
-                <code>{`# 克隆项目
-git clone https://github.com/tbphp/gpt-load.git
-cd gpt-load
+                <code>{`docker run -d --name gpt-load \\
+    -p 3001:3001 \\
+    -e AUTH_KEY=sk-123456 \\
+    -v "$(pwd)/data":/app/data \\
+    ghcr.io/tbphp/gpt-load:latest
 
-# 复制环境配置文件
-cp .env.example .env
-
-# 启动服务
-docker compose up -d
-
-# 访问管理界面：http://localhost:3001
-# 默认认证Key: sk-123456
+# 使用 sk-123456 登录管理界面：http://localhost:3001
 `}</code>
               </pre>
             </div>

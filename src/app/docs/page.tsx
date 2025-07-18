@@ -305,7 +305,7 @@ export default function DocsPage() {
           通过 Docker Compose 快速部署，几分钟内即可启动完整的 AI 接口代理服务{" "}
         </p>{" "}
         <Link
-          href="/docs/installation"
+          href="/docs/deployment"
           className="inline-flex items-center bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
         >
           {" "}
