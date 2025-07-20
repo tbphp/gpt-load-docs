@@ -18,7 +18,7 @@ export default function ChannelsPage() {
           支持的 AI 服务
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6 mb-8">
           <div className="border border-blue-200 rounded-lg p-6 bg-blue-50">
             <div className="flex items-center space-x-3 mb-4">
               <div className="bg-blue-100 p-2 rounded-lg">
@@ -50,6 +50,23 @@ export default function ChannelsPage() {
               <li>• Gemini Pro Vision</li>
               <li>• Gemini 原生 API 格式</li>
               <li>• 完整功能支持</li>
+            </ul>
+          </div>
+
+          <div className="border border-orange-200 rounded-lg p-6 bg-orange-50">
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="bg-orange-100 p-2 rounded-lg">
+                <Globe className="h-6 w-6 text-orange-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-orange-900">
+                Anthropic Claude 格式
+              </h3>
+            </div>
+            <ul className="text-orange-800 space-y-2 text-sm">
+              <li>• Claude 系列模型</li>
+              <li>• 高质量对话生成</li>
+              <li>• 原生 API 格式支持</li>
+              <li>• 完整功能保留</li>
             </ul>
           </div>
         </div>
@@ -471,6 +488,175 @@ response = requests.post(url, params=params, json=data)`}</code>
         </div>
       </div>
 
+      {/* Anthropic Format */}
+      <div className="mb-12">
+        <h2 className="text-3xl font-semibold text-gray-900 mb-6">
+          <Globe className="inline h-6 w-6 mr-2 text-orange-600" />
+          Anthropic Claude 格式调用
+        </h2>
+
+        <div className="space-y-8">
+          {/* Authentication */}
+          <div className="border border-gray-200 rounded-lg p-6">
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+              认证方式
+            </h3>
+            <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-4">
+              <p className="text-orange-800 text-sm">
+                Anthropic 格式使用{" "}
+                <code className="bg-orange-100 px-1 rounded">
+                  x-api-key: &#123;AUTH_KEY&#125;
+                </code>{" "}
+                头部认证
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-1 gap-6">
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-2">
+                  原始调用方式
+                </h4>
+                <div className="bg-gray-900 rounded-lg p-4">
+                  <pre className="text-green-400 text-sm whitespace-pre-wrap break-words">
+                    <code>{`curl -X POST https://api.anthropic.com/v1/messages \\
+  -H "x-api-key: sk-ant-api03-your-anthropic-key" \\
+  -H "anthropic-version: 2023-06-01" \\
+  -H "Content-Type: application/json" \\
+  -d '{"model": "claude-sonnet-4-20250514", "messages": [{"role": "user", "content": "Hello"}]}'`}</code>
+                  </pre>
+                </div>
+              </div>
+
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-2">
+                  代理调用方式
+                </h4>
+                <div className="bg-gray-900 rounded-lg p-4">
+                  <pre className="text-green-400 text-sm whitespace-pre-wrap break-words">
+                    <code>{`curl -X POST http://localhost:3001/proxy/anthropic/v1/messages \\
+  -H "x-api-key: sk-123456" \\
+  -H "anthropic-version: 2023-06-01" \\
+  -H "Content-Type: application/json" \\
+  -d '{"model": "claude-sonnet-4-20250514", "messages": [{"role": "user", "content": "Hello"}]}'`}</code>
+                  </pre>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-4 flex items-center space-x-2 text-sm">
+              <CheckCircle className="h-4 w-4 text-green-600" />
+              <span className="text-gray-600">
+                将{" "}
+                <code className="bg-gray-100 px-1 rounded">
+                  https://api.anthropic.com
+                </code>{" "}
+                替换为
+                <code className="bg-gray-100 px-1 rounded">
+                  http://localhost:3001/proxy/anthropic
+                </code>
+              </span>
+            </div>
+            <div className="mt-4 flex items-center space-x-2 text-sm">
+              <CheckCircle className="h-4 w-4 text-green-600" />
+              <span className="text-gray-600">
+                将 <code className="bg-gray-100 px-1 rounded">x-api-key</code>{" "}
+                头部中的原始 API Key 替换为统一认证密钥{" "}
+                <code className="bg-gray-100 px-1 rounded">sk-123456</code>
+                （默认）
+              </span>
+            </div>
+          </div>
+
+          {/* Supported Endpoints */}
+          <div className="border border-gray-200 rounded-lg p-6">
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+              支持的接口
+            </h3>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-2">主要接口</h4>
+                <ul className="text-gray-600 space-y-2 text-sm">
+                  <li>
+                    •{" "}
+                    <code className="bg-gray-100 px-1 rounded">
+                      /v1/messages
+                    </code>{" "}
+                    - 消息对话
+                  </li>
+                  <li>• 支持流式和非流式响应</li>
+                  <li>• 支持多轮对话</li>
+                  <li>• 完整的参数配置支持</li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-2">模型管理</h4>
+                <ul className="text-gray-600 space-y-2 text-sm">
+                  <li>
+                    •{" "}
+                    <code className="bg-gray-100 px-1 rounded">/v1/models</code>{" "}
+                    - 模型列表（如果可用）
+                  </li>
+                  <li>• 支持所有 Anthropic 原生接口</li>
+                  <li>• 保持原始 API 响应格式</li>
+                  <li>• 完整功能保留</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* SDK Configuration */}
+          <div className="border border-gray-200 rounded-lg p-6">
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+              SDK 配置示例
+            </h3>
+
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-2">Python SDK</h4>
+                <div className="bg-gray-900 rounded-lg p-4">
+                  <pre className="text-green-400 text-sm whitespace-pre-wrap break-words">
+                    <code>{`from anthropic import Anthropic
+
+client = Anthropic(
+    api_key="sk-123456",  # 使用统一认证密钥
+    base_url="http://localhost:3001/proxy/anthropic"  # 使用代理端点
+)
+
+response = client.messages.create(
+    model="claude-sonnet-4-20250514",
+    messages=[{"role": "user", "content": "Hello"}]
+)`}</code>
+                  </pre>
+                </div>
+              </div>
+
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-2">
+                  直接 HTTP 调用
+                </h4>
+                <div className="bg-gray-900 rounded-lg p-4">
+                  <pre className="text-green-400 text-sm whitespace-pre-wrap break-words">
+                    <code>{`import requests
+
+url = "http://localhost:3001/proxy/anthropic/v1/messages"
+headers = {
+    "x-api-key": "sk-123456",
+    "Content-Type": "application/json"
+}
+data = {
+    "model": "claude-sonnet-4-20250514",
+    "messages": [{"role": "user", "content": "Hello"}]
+}
+
+response = requests.post(url, headers=headers, json=data)`}</code>
+                  </pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Group Management */}
       <div className="mb-12">
         <h2 className="text-3xl font-semibold text-gray-900 mb-6">分组管理</h2>
@@ -499,7 +685,7 @@ response = requests.post(url, params=params, json=data)`}</code>
                 • <strong>分组名称</strong>：用于代理路径的标识符
               </li>
               <li>
-                • <strong>服务类型</strong>：OpenAI 或 Gemini 格式
+                • <strong>服务类型</strong>：OpenAI、Gemini 或 Anthropic 格式
               </li>
               <li>
                 • <strong>上游地址</strong>：原始 API 服务地址

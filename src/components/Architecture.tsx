@@ -27,7 +27,12 @@ const Architecture = () => {
       icon: Server,
       title: "AI 服务提供商",
       description: "多种 AI 服务的统一接入",
-      items: ["OpenAI API", "Google Gemini", "其他兼容服务"],
+      items: [
+        "OpenAI API",
+        "Google Gemini",
+        "Anthropic Claude",
+        "其他兼容服务",
+      ],
     },
   ];
   const infrastructure = [

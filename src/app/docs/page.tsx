@@ -42,7 +42,7 @@ export default function DocsPage() {
         <h2 className="text-3xl font-semibold text-gray-900 mb-6">
           支持的 AI 服务
         </h2>{" "}
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6">
           {" "}
           <div className="border border-gray-200 rounded-lg p-6">
             {" "}
@@ -70,6 +70,21 @@ export default function DocsPage() {
               {" "}
               <li>• Gemini Pro</li> <li>• Gemini Pro Vision</li>{" "}
               <li>• 支持多模态功能</li>{" "}
+            </ul>{" "}
+          </div>{" "}
+          <div className="border border-gray-200 rounded-lg p-6">
+            {" "}
+            <div className="flex items-center mb-4">
+              {" "}
+              <Shield className="h-6 w-6 text-orange-600 mr-3" />{" "}
+              <h3 className="text-xl font-semibold text-gray-900">
+                Anthropic Claude
+              </h3>{" "}
+            </div>{" "}
+            <ul className="text-gray-600 space-y-2">
+              {" "}
+              <li>• Claude 系列模型</li> <li>• 高质量对话生成</li>{" "}
+              <li>• 原生 API 格式支持</li>{" "}
             </ul>{" "}
           </div>{" "}
         </div>{" "}

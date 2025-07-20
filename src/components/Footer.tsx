@@ -33,8 +33,7 @@ const Footer = () => {
               <span className="text-lg sm:text-xl font-bold">GPT-Load</span>
             </Link>
             <p className="text-gray-400 mb-4 sm:mb-6 max-w-md text-sm sm:text-base">
-              高性能的 OpenAI 兼容 API 代理服务器，为您的 AI 应用提供稳定可靠的
-              API 访问服务。
+              高性能 AI 网关，为多种大模型服务提供统一的负载均衡和密钥管理。
             </p>
             <div className="flex space-x-4">
               <Link

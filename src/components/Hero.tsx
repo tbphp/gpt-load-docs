@@ -61,7 +61,7 @@ const Hero = () => {
             className="text-base sm:text-lg text-gray-600 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-4"
           >
             基于 Go 1.23+ 开发的企业级 AI 接口代理服务，支持 OpenAI、Google
-            Gemini 等多种 AI 服务提供商。
+            Gemini、Anthropic Claude 等多种 AI 服务提供商。
             提供智能密钥管理、负载均衡、高并发处理和完善的监控功能。
           </motion.p>
 

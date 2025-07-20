@@ -25,7 +25,7 @@ const Features = () => {
       title: "透明代理",
       description:
         "完全保留原生 API 格式，无需修改现有代码即可接入多种 AI 服务",
-      technical: "OpenAI + Google Gemini 支持",
+      technical: "OpenAI + Gemini + Anthropic 支持",
     },
     {
       icon: RotateCcw,
