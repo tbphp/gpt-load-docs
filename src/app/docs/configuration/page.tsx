@@ -328,6 +328,113 @@ export default function ConfigurationPage() {
               </div>
             </div>
           </div>
+
+          {/* Proxy Configuration */}
+          <div className="border border-gray-200 rounded-lg p-6">
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+              代理配置
+            </h3>
+            <div className="mb-4">
+              <p className="text-gray-600 text-sm">
+                GPT-Load 会自动从环境变量中读取代理设置，用于向上游 AI
+                服务商发起请求。
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-3">代理设置</h4>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-gray-200">
+                        <th className="text-left py-2 px-3 font-semibold text-gray-800">
+                          配置项
+                        </th>
+                        <th className="text-left py-2 px-3 font-semibold text-gray-800">
+                          环境变量
+                        </th>
+                        <th className="text-left py-2 px-3 font-semibold text-gray-800">
+                          说明
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-gray-600">
+                      <tr className="border-b border-gray-100">
+                        <td className="py-2 px-3">HTTP 代理</td>
+                        <td className="py-2 px-3">
+                          <code className="bg-gray-100 px-1 rounded">
+                            HTTP_PROXY
+                          </code>
+                        </td>
+                        <td className="py-2 px-3">
+                          用于 HTTP 请求的代理服务器地址
+                        </td>
+                      </tr>
+                      <tr className="border-b border-gray-100">
+                        <td className="py-2 px-3">HTTPS 代理</td>
+                        <td className="py-2 px-3">
+                          <code className="bg-gray-100 px-1 rounded">
+                            HTTPS_PROXY
+                          </code>
+                        </td>
+                        <td className="py-2 px-3">
+                          用于 HTTPS 请求的代理服务器地址
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 px-3">无代理</td>
+                        <td className="py-2 px-3">
+                          <code className="bg-gray-100 px-1 rounded">
+                            NO_PROXY
+                          </code>
+                        </td>
+                        <td className="py-2 px-3">
+                          不需要通过代理访问的主机或域名，逗号分隔
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-3">
+                  支持的协议格式
+                </h4>
+                <div className="space-y-3">
+                  <div>
+                    <span className="text-sm font-medium text-gray-700">
+                      HTTP:
+                    </span>
+                    <div className="bg-gray-900 rounded p-2 mt-1">
+                      <code className="text-green-400 text-xs">
+                        http://user:pass@host:port
+                      </code>
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-sm font-medium text-gray-700">
+                      HTTPS:
+                    </span>
+                    <div className="bg-gray-900 rounded p-2 mt-1">
+                      <code className="text-green-400 text-xs">
+                        https://user:pass@host:port
+                      </code>
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-sm font-medium text-gray-700">
+                      SOCKS5:
+                    </span>
+                    <div className="bg-gray-900 rounded p-2 mt-1">
+                      <code className="text-green-400 text-xs">
+                        socks5://user:pass@host:port
+                      </code>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
