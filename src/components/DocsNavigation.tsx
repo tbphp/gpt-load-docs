@@ -13,6 +13,7 @@ import {
   Server,
   Code,
   Layers,
+  Heart,
 } from "lucide-react";
 
 const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
@@ -43,6 +44,7 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
     { title: "系统架构", href: "/docs/build", icon: Wrench },
     { title: "渠道类型", href: "/docs/channels", icon: Globe },
     { title: "管理说明", href: "/docs/management", icon: Users },
+    { title: "支持赞助", href: "/docs/sponsor", icon: Heart },
   ];
 
   return (

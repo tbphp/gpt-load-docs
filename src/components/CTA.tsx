@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Github, BookOpen, Download } from "lucide-react";
+import { ArrowRight, Github, BookOpen, Download, Heart } from "lucide-react";
 import Link from "next/link";
 
 const CTA = () => {
@@ -49,6 +49,14 @@ const CTA = () => {
                 <Github className="h-4 w-4 sm:h-5 sm:w-5" />
                 <span>GitHub</span>
               </a>
+
+              <Link
+                href="/docs/sponsor"
+                className="inline-flex items-center space-x-2 bg-red-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-red-600 transition-all duration-200 shadow-lg w-full sm:w-auto justify-center"
+              >
+                <Heart className="h-4 w-4 sm:h-5 sm:w-5" />
+                <span>支持赞助</span>
+              </Link>
             </div>
           </motion.div>
         </div>

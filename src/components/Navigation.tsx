@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Github, Menu, X } from "lucide-react";
+import { Github, Menu, X, Heart } from "lucide-react";
 import { cn, formatStars } from "../lib/utils";
 import { useGitHubStars } from "@/context/GitHubStarsContext";
 
@@ -54,6 +54,7 @@ const Navigation = () => {
   const navItems = [
     { href: "/", label: "首页" },
     { href: "/docs", label: "文档" },
+    { href: "/docs/sponsor", label: "赞助", icon: Heart },
   ];
 
   return (
@@ -95,9 +96,15 @@ const Navigation = () => {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
+                className={cn(
+                  "transition-colors duration-200 font-medium flex items-center space-x-1",
+                  item.label === "赞助"
+                    ? "text-red-600 hover:text-red-700"
+                    : "text-gray-700 hover:text-blue-600"
+                )}
               >
-                {item.label}
+                {item.icon && <item.icon className="h-4 w-4" />}
+                <span>{item.label}</span>
               </Link>
             ))}
             <Link
@@ -146,10 +153,16 @@ const Navigation = () => {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="block text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium py-2 px-2"
+                    className={cn(
+                      "flex items-center space-x-2 transition-colors duration-200 font-medium py-2 px-2",
+                      item.label === "赞助"
+                        ? "text-red-600 hover:text-red-700"
+                        : "text-gray-700 hover:text-blue-600"
+                    )}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    {item.label}
+                    {item.icon && <item.icon className="h-4 w-4" />}
+                    <span>{item.label}</span>
                   </Link>
                 ))}
                 <div className="pt-2">

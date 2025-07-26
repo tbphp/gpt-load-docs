@@ -10,6 +10,7 @@ const Footer = () => {
     product: [
       { name: "使用文档", href: "/docs" },
       { name: "更新日志", href: "https://github.com/tbphp/gpt-load/releases" },
+      { name: "支持赞助", href: "/docs/sponsor" },
     ],
     community: [
       { name: "GitHub", href: "https://github.com/tbphp/gpt-load" },
