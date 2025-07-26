@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Github, Mail, Heart, Zap } from "lucide-react";
+import { Github, Mail, Heart, Zap, MessageCircle } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -15,6 +15,7 @@ const Footer = () => {
     community: [
       { name: "GitHub", href: "https://github.com/tbphp/gpt-load" },
       { name: "问题反馈", href: "https://github.com/tbphp/gpt-load/issues" },
+      { name: "Telegram", href: "https://t.me/+GHpy5SwEllg3MTUx" },
     ],
     resources: [
       { name: "单机", href: "/docs/deployment/standalone" },
@@ -44,6 +45,14 @@ const Footer = () => {
                 className="text-gray-400 hover:text-white transition-colors duration-200"
               >
                 <Github className="h-4 w-4 sm:h-5 sm:w-5" />
+              </Link>
+              <Link
+                href="https://t.me/+GHpy5SwEllg3MTUx"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors duration-200"
+              >
+                <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5" />
               </Link>
               <Link
                 href="mailto:tangb7420@gmail.com"
