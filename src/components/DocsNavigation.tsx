@@ -14,6 +14,7 @@ import {
   Code,
   Layers,
   Heart,
+  Sparkles,
 } from "lucide-react";
 
 const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
@@ -42,7 +43,18 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
     },
     { title: "配置说明", href: "/docs/configuration", icon: Settings },
     { title: "系统架构", href: "/docs/build", icon: Wrench },
-    { title: "渠道类型", href: "/docs/channels", icon: Globe },
+    {
+      title: "渠道类型",
+      href: "/docs/channels",
+      icon: Globe,
+      children: [
+        {
+          title: "Gemini 官方 OpenAI 兼容",
+          href: "/docs/gemini-openai",
+          icon: Sparkles,
+        },
+      ],
+    },
     { title: "管理说明", href: "/docs/management", icon: Users },
     { title: "支持赞助", href: "/docs/sponsor", icon: Heart },
   ];
