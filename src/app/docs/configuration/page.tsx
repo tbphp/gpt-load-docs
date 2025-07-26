@@ -292,13 +292,13 @@ export default function ConfigurationPage() {
                 <div className="space-y-3">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
-                      认证密钥
+                      管理端认证密钥
                     </label>
                     <code className="bg-red-100 text-red-800 px-2 py-1 rounded text-sm">
                       AUTH_KEY
                     </code>
                     <p className="text-xs text-red-600 mt-1">
-                      必需项：访问管理 API 的认证密钥
+                      必需项：访问 Web 管理界面的认证密钥
                     </p>
                   </div>
                 </div>
@@ -516,16 +516,26 @@ export default function ConfigurationPage() {
                     <td className="py-2 px-3">7</td>
                     <td className="py-2 px-3">请求日志数据库保留天数</td>
                   </tr>
-                  <tr>
-                    <td className="py-2 px-3">日志延迟写入周期</td>
+                  <tr className="border-b border-gray-100">
+                    <td className="py-2 px-3">日志写入间隔</td>
                     <td className="py-2 px-3">
                       <code className="bg-gray-100 px-1 rounded">
                         request_log_write_interval_minutes
                       </code>
                     </td>
-                    <td className="py-2 px-3">5</td>
+                    <td className="py-2 px-3">1</td>
+                    <td className="py-2 px-3">日志写入数据库周期（分钟）</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 px-3">全局代理密钥</td>
                     <td className="py-2 px-3">
-                      日志从缓存写入数据库的周期分钟数
+                      <code className="bg-gray-100 px-1 rounded">
+                        proxy_keys
+                      </code>
+                    </td>
+                    <td className="py-2 px-3">初始值为环境配置的 AUTH_KEY</td>
+                    <td className="py-2 px-3">
+                      全局生效的代理认证密钥，多个用逗号分隔
                     </td>
                   </tr>
                 </tbody>

@@ -114,7 +114,8 @@ export default function ChannelsPage() {
               <h4 className="font-semibold text-gray-800 mb-2">认证方式</h4>
               <ul className="text-gray-600 space-y-1 text-sm">
                 <li>• 保留各 AI 服务的原生认证格式</li>
-                <li>• 使用统一的认证密钥值</li>
+                <li>• 使用配置的代理密钥进行认证</li>
+                <li>• 支持全局和分组级别的代理密钥</li>
                 <li>• 完全透明的代理转发</li>
               </ul>
             </div>
@@ -139,7 +140,7 @@ export default function ChannelsPage() {
               <p className="text-blue-800 text-sm">
                 OpenAI 格式使用{" "}
                 <code className="bg-blue-100 px-1 rounded">
-                  Authorization: Bearer &#123;AUTH_KEY&#125;
+                  Authorization: Bearer &#123;代理密钥&#125;
                 </code>{" "}
                 头部认证
               </p>
@@ -167,7 +168,7 @@ export default function ChannelsPage() {
                 <div className="bg-gray-900 rounded-lg p-4">
                   <pre className="text-green-400 text-sm whitespace-pre-wrap break-words">
                     <code>{`curl -X POST http://localhost:3001/proxy/openai/v1/chat/completions \\
-  -H "Authorization: Bearer sk-123456" \\
+  -H "Authorization: Bearer your-proxy-key" \\
   -H "Content-Type: application/json" \\
   -d '{"model": "gpt-4.1-mini", "messages": [...]}'`}</code>
                   </pre>
@@ -193,9 +194,8 @@ export default function ChannelsPage() {
               <span className="text-gray-600">
                 将原始{" "}
                 <code className="bg-gray-100 px-1 rounded">OpenAI API Key</code>{" "}
-                替换为统一认证秘钥{" "}
-                <code className="bg-gray-100 px-1 rounded">sk-123456</code>
-                （默认）
+                替换为配置的{" "}
+                <code className="bg-gray-100 px-1 rounded">代理密钥</code>
               </span>
             </div>
           </div>
@@ -281,7 +281,7 @@ export default function ChannelsPage() {
                     <code>{`from openai import OpenAI
 
 client = OpenAI(
-    api_key="sk-123456",  # 使用统一认证密钥
+    api_key="your-proxy-key",  # 使用配置的代理密钥
     base_url="http://localhost:3001/proxy/openai"  # 使用代理端点
 )
 
@@ -302,7 +302,7 @@ response = client.chat.completions.create(
                     <code>{`import OpenAI from 'openai';
 
 const openai = new OpenAI({
-  apiKey: 'sk-123456',  // 使用统一认证密钥
+  apiKey: 'your-proxy-key',  // 使用配置的代理密钥
   baseURL: 'http://localhost:3001/proxy/openai'  // 使用代理端点
 });
 
@@ -335,7 +335,7 @@ const response = await openai.chat.completions.create({
               <p className="text-green-800 text-sm">
                 Gemini 格式使用 URL 参数{" "}
                 <code className="bg-green-100 px-1 rounded">
-                  key=&#123;AUTH_KEY&#125;
+                  key=&#123;代理密钥&#125;
                 </code>{" "}
                 认证
               </p>
@@ -361,7 +361,7 @@ const response = await openai.chat.completions.create({
                 </h4>
                 <div className="bg-gray-900 rounded-lg p-4">
                   <pre className="text-green-400 text-sm whitespace-pre-wrap break-words">
-                    <code>{`curl -X POST "http://localhost:3001/proxy/gemini/v1beta/models/gemini-2.5-pro:generateContent?key=sk-123456" \\
+                    <code>{`curl -X POST "http://localhost:3001/proxy/gemini/v1beta/models/gemini-2.5-pro:generateContent?key=your-proxy-key" \\
   -H "Content-Type: application/json" \\
   -d '{"contents": [{"parts": [{"text": "Hello"}]}]}'`}</code>
                   </pre>

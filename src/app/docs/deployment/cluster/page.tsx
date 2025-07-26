@@ -271,7 +271,9 @@ server {
                 <code className="bg-gray-100 px-2 py-1 rounded text-sm text-gray-800">
                   AUTH_KEY
                 </code>
-                <span className="text-gray-600 text-sm">必须相同</span>
+                <span className="text-gray-600 text-sm">
+                  必须相同（管理端密钥）
+                </span>
               </div>
               <div className="flex justify-between items-center">
                 <code className="bg-gray-100 px-2 py-1 rounded text-sm text-gray-800">

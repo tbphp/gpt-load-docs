@@ -138,10 +138,11 @@ export default function StandalonePage() {
                 </div>
                 <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
                   <p className="text-yellow-800 text-sm">
-                    默认认证密钥：
+                    默认管理密钥：
                     <code className="bg-yellow-100 px-1 rounded">
                       sk-123456
                     </code>
+                    （用于登录管理界面）
                   </p>
                 </div>
               </div>
@@ -489,11 +490,11 @@ export default function StandalonePage() {
         <ul className="space-y-2 text-gray-700 mb-6">
           <li className="flex items-center space-x-2">
             <CheckCircle className="h-4 w-4 text-green-600" />
-            <span>访问 Web 管理界面配置 AI 服务分组</span>
+            <span>配置代理密钥和管理 AI 服务分组</span>
           </li>
           <li className="flex items-center space-x-2">
             <CheckCircle className="h-4 w-4 text-green-600" />
-            <span>添加和管理 API 密钥</span>
+            <span>添加和管理 AI 服务商 API 密钥</span>
           </li>
           <li className="flex items-center space-x-2">
             <CheckCircle className="h-4 w-4 text-green-600" />
