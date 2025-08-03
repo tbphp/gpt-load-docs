@@ -168,13 +168,22 @@ export default function RooCodeIntegrationPage() {
         </h2>
 
         <div className="space-y-6">
+          {/* 方式一：Google Gemini 供应商 */}
           <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+            <div className="bg-blue-50 px-6 py-3 border-b border-gray-200">
+              <h3 className="text-lg font-semibold text-gray-900">
+                方式一：Google Gemini 供应商
+              </h3>
+              <p className="text-sm text-gray-600 mt-1">
+                使用原生 Gemini 接口格式（推荐）
+              </p>
+            </div>
             <div className="grid lg:grid-cols-2 gap-0">
               {/* 左侧文字内容 */}
               <div className="p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                <h4 className="text-base font-semibold text-gray-900 mb-4">
                   配置步骤
-                </h3>
+                </h4>
 
                 <div className="space-y-4">
                   <div className="flex items-start space-x-3">
@@ -244,6 +253,103 @@ export default function RooCodeIntegrationPage() {
                   </div>
                   <p className="text-gray-500 text-sm mt-2">点击图片放大查看</p>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 方式二：OpenAI Compatible 格式 */}
+          <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+            <div className="bg-green-50 px-6 py-3 border-b border-gray-200">
+              <h3 className="text-lg font-semibold text-gray-900">
+                方式二：OpenAI Compatible 格式
+              </h3>
+              <p className="text-sm text-gray-600 mt-1">
+                使用 OpenAI 兼容接口格式
+              </p>
+            </div>
+            <div className="grid lg:grid-cols-2 gap-0">
+              {/* 左侧文字内容 */}
+              <div className="p-6">
+                <h4 className="text-base font-semibold text-gray-900 mb-4">
+                  配置步骤
+                </h4>
+
+                <div className="space-y-4">
+                  <div className="flex items-start space-x-3">
+                    <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-gray-900 font-medium">选择供应商</p>
+                      <p className="text-gray-600 text-sm">
+                        在 Roo Code 中选择 &ldquo;OpenAI Compatible&rdquo;
+                        供应商
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-3">
+                    <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-gray-900 font-medium">设置代理地址</p>
+                      <div className="bg-gray-100 rounded-md p-3 mt-2">
+                        <code className="text-sm text-gray-800 break-all">
+                          http://localhost:3001/proxy/gemini/v1beta/openai
+                        </code>
+                      </div>
+                      <p className="text-gray-600 text-xs mt-1">
+                        其中 &ldquo;gemini&rdquo; 是您在 GPT-Load
+                        中配置的分组名称
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-3">
+                    <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-gray-900 font-medium">配置 API Key</p>
+                      <p className="text-gray-600 text-sm">
+                        输入您的 Gemini API Key
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 右侧图片 */}
+              <div className="bg-gray-50 flex items-center justify-center p-6 lg:border-l border-gray-200">
+                <div className="text-center">
+                  <div
+                    className="relative cursor-pointer group"
+                    onClick={() =>
+                      setExpandedImage("/int_roo_gemini_openai.png")
+                    }
+                  >
+                    <Image
+                      src="/int_roo_gemini_openai.png"
+                      alt="Gemini OpenAI Compatible 供应商配置截图"
+                      width={300}
+                      height={400}
+                      className="rounded-lg shadow-md transition-transform group-hover:scale-105"
+                    />
+                  </div>
+                  <p className="text-gray-500 text-sm mt-2">点击图片放大查看</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 配置建议 */}
+          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <div className="flex items-start space-x-3">
+              <div className="flex-shrink-0 w-5 h-5 bg-amber-400 rounded-full flex items-center justify-center mt-0.5">
+                <span className="text-white text-xs font-bold">!</span>
+              </div>
+              <div>
+                <h4 className="font-medium text-amber-900 mb-1">配置建议</h4>
+                <p className="text-amber-800 text-sm">
+                  推荐使用 <strong>方式一：Google Gemini 供应商</strong>
+                  ，因为它使用原生 Gemini
+                  接口格式，提供了更好的兼容性和完整的功能支持。
+                </p>
               </div>
             </div>
           </div>
