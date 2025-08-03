@@ -15,6 +15,7 @@ import {
   Layers,
   Heart,
   Sparkles,
+  Plug,
 } from "lucide-react";
 
 const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
@@ -52,6 +53,18 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
           title: "Gemini 官方 OpenAI 兼容",
           href: "/docs/gemini-openai",
           icon: Sparkles,
+        },
+      ],
+    },
+    {
+      title: "接入指南",
+      href: "/docs/integrations",
+      icon: Plug,
+      children: [
+        {
+          title: "Roo Code",
+          href: "/docs/integrations/roo-code",
+          icon: Code,
         },
       ],
     },
