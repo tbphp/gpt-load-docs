@@ -2,49 +2,9 @@
 
 import { AlertCircle, CheckCircle, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
-import { useState } from "react";
+import ImageViewer from "../../../../components/ImageViewer";
 
 export default function RooCodeIntegrationPage() {
-  const [expandedImage, setExpandedImage] = useState<string | null>(null);
-
-  const ImageModal = ({
-    src,
-    alt,
-    isOpen,
-    onClose,
-  }: {
-    src: string;
-    alt: string;
-    isOpen: boolean;
-    onClose: () => void;
-  }) => {
-    if (!isOpen) return null;
-
-    return (
-      <div
-        className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
-        onClick={onClose}
-      >
-        <div className="relative max-w-4xl max-h-full">
-          <Image
-            src={src}
-            alt={alt}
-            width={800}
-            height={600}
-            className="max-w-full max-h-full object-contain rounded-lg"
-            onClick={(e) => e.stopPropagation()}
-          />
-          <button
-            onClick={onClose}
-            className="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 transition-all"
-          >
-            ✕
-          </button>
-        </div>
-      </div>
-    );
-  };
   return (
     <div className="max-w-4xl mx-auto">
       {/* 页面标题 */}
@@ -137,21 +97,12 @@ export default function RooCodeIntegrationPage() {
 
               {/* 右侧图片 */}
               <div className="bg-gray-50 flex items-center justify-center p-6 lg:border-l border-gray-200">
-                <div className="text-center">
-                  <div
-                    className="relative cursor-pointer group"
-                    onClick={() => setExpandedImage("/int_roo_openai.png")}
-                  >
-                    <Image
-                      src="/int_roo_openai.png"
-                      alt="OpenAI Compatible 供应商配置截图"
-                      width={300}
-                      height={400}
-                      className="rounded-lg shadow-md transition-transform group-hover:scale-105"
-                    />
-                  </div>
-                  <p className="text-gray-500 text-sm mt-2">点击图片放大查看</p>
-                </div>
+                <ImageViewer
+                  src="/int_roo_openai.png"
+                  alt="OpenAI Compatible 供应商配置截图"
+                  width={300}
+                  height={400}
+                />
               </div>
             </div>
           </div>
@@ -238,21 +189,12 @@ export default function RooCodeIntegrationPage() {
 
               {/* 右侧图片 */}
               <div className="bg-gray-50 flex items-center justify-center p-6 lg:border-l border-gray-200">
-                <div className="text-center">
-                  <div
-                    className="relative cursor-pointer group"
-                    onClick={() => setExpandedImage("/int_roo_gemini.png")}
-                  >
-                    <Image
-                      src="/int_roo_gemini.png"
-                      alt="Google Gemini 供应商配置截图"
-                      width={300}
-                      height={400}
-                      className="rounded-lg shadow-md transition-transform group-hover:scale-105"
-                    />
-                  </div>
-                  <p className="text-gray-500 text-sm mt-2">点击图片放大查看</p>
-                </div>
+                <ImageViewer
+                  src="/int_roo_gemini.png"
+                  alt="Google Gemini 供应商配置截图"
+                  width={300}
+                  height={400}
+                />
               </div>
             </div>
           </div>
@@ -316,23 +258,12 @@ export default function RooCodeIntegrationPage() {
 
               {/* 右侧图片 */}
               <div className="bg-gray-50 flex items-center justify-center p-6 lg:border-l border-gray-200">
-                <div className="text-center">
-                  <div
-                    className="relative cursor-pointer group"
-                    onClick={() =>
-                      setExpandedImage("/int_roo_gemini_openai.png")
-                    }
-                  >
-                    <Image
-                      src="/int_roo_gemini_openai.png"
-                      alt="Gemini OpenAI Compatible 供应商配置截图"
-                      width={300}
-                      height={400}
-                      className="rounded-lg shadow-md transition-transform group-hover:scale-105"
-                    />
-                  </div>
-                  <p className="text-gray-500 text-sm mt-2">点击图片放大查看</p>
-                </div>
+                <ImageViewer
+                  src="/int_roo_gemini_openai.png"
+                  alt="Gemini OpenAI Compatible 供应商配置截图"
+                  width={300}
+                  height={400}
+                />
               </div>
             </div>
           </div>
@@ -415,21 +346,12 @@ export default function RooCodeIntegrationPage() {
 
               {/* 右侧图片 */}
               <div className="bg-gray-50 flex items-center justify-center p-6 lg:border-l border-gray-200">
-                <div className="text-center">
-                  <div
-                    className="relative cursor-pointer group"
-                    onClick={() => setExpandedImage("/int_roo_anthropic.png")}
-                  >
-                    <Image
-                      src="/int_roo_anthropic.png"
-                      alt="Anthropic 供应商配置截图"
-                      width={300}
-                      height={400}
-                      className="rounded-lg shadow-md transition-transform group-hover:scale-105"
-                    />
-                  </div>
-                  <p className="text-gray-500 text-sm mt-2">点击图片放大查看</p>
-                </div>
+                <ImageViewer
+                  src="/int_roo_anthropic.png"
+                  alt="Anthropic 供应商配置截图"
+                  width={300}
+                  height={400}
+                />
               </div>
             </div>
           </div>
@@ -475,14 +397,6 @@ export default function RooCodeIntegrationPage() {
           </Link>
         </div>
       </div>
-
-      {/* 图片放大模态框 */}
-      <ImageModal
-        src={expandedImage || ""}
-        alt="配置截图"
-        isOpen={!!expandedImage}
-        onClose={() => setExpandedImage(null)}
-      />
     </div>
   );
 }

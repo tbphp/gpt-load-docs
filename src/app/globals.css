@@ -116,3 +116,16 @@ body {
   background-color: #3b82f6;
   color: white;
 }
+
+/* 隐藏滚动条的工具类 */
+.scrollbar-hide {
+  /* Firefox */
+  scrollbar-width: none;
+  /* IE and Edge */
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  /* WebKit */
+  display: none;
+}
