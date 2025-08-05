@@ -1,4 +1,11 @@
-import { ArrowRight, Zap, Shield, Globe, Code2, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  Zap,
+  Globe,
+  Code2,
+  Sparkles,
+  Terminal,
+} from "lucide-react";
 import Link from "next/link";
 
 export default function IntegrationsPage() {
@@ -29,10 +36,10 @@ export default function IntegrationsPage() {
     },
     {
       name: "Claude Code Router",
-      description: "智能代码路由工具",
-      status: "coming-soon",
-      icon: Shield,
-      href: "#",
+      description: "智能代码路由工具，支持多模型切换",
+      status: "available",
+      icon: Terminal,
+      href: "/docs/integrations/claude-code-router",
       category: "开发工具",
     },
   ];

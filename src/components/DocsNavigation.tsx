@@ -16,6 +16,7 @@ import {
   Heart,
   Sparkles,
   Plug,
+  Terminal,
 } from "lucide-react";
 
 const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
@@ -65,6 +66,11 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
           title: "Roo Code",
           href: "/docs/integrations/roo-code",
           icon: Code,
+        },
+        {
+          title: "Claude Code Router",
+          href: "/docs/integrations/claude-code-router",
+          icon: Terminal,
         },
       ],
     },
