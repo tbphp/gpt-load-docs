@@ -28,10 +28,10 @@ export default function IntegrationsPage() {
     },
     {
       name: "Cherry Studio",
-      description: "桌面端AI对话应用",
-      status: "coming-soon",
+      description: "桌面端AI对话应用，支持多种AI模型",
+      status: "available",
       icon: Sparkles,
-      href: "#",
+      href: "/docs/integrations/cherry-studio",
       category: "桌面应用",
     },
     {

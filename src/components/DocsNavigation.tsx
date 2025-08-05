@@ -68,14 +68,19 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
           icon: Code,
         },
         {
+          title: "Claude Code Router",
+          href: "/docs/integrations/claude-code-router",
+          icon: Terminal,
+        },
+        {
           title: "New API",
           href: "/docs/integrations/new-api",
           icon: Globe,
         },
         {
-          title: "Claude Code Router",
-          href: "/docs/integrations/claude-code-router",
-          icon: Terminal,
+          title: "Cherry Studio",
+          href: "/docs/integrations/cherry-studio",
+          icon: Sparkles,
         },
       ],
     },
