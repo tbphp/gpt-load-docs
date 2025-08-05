@@ -144,10 +144,16 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
 
         return (
           <div key={index}>
-            <div
-              onClick={() => toggleItem(index)}
+            <Link
+              href={item.href}
+              onClick={() => {
+                toggleItem(index);
+                if (onItemClick) {
+                  onItemClick();
+                }
+              }}
               className={cn(
-                "flex items-center justify-between space-x-3 px-3 py-2 text-sm rounded-md transition-colors duration-200 cursor-pointer",
+                "flex items-center justify-between space-x-3 px-3 py-2 text-sm rounded-md transition-colors duration-200",
                 isChildActive
                   ? "bg-blue-50 text-blue-700 font-medium"
                   : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
@@ -168,7 +174,7 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
                   isOpen ? "rotate-90" : ""
                 )}
               />
-            </div>
+            </Link>
             {isOpen && (
               <div className="ml-3 mt-1 space-y-1">
                 {item.children.map((child, childIndex) => {
