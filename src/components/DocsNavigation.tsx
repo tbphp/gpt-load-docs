@@ -19,6 +19,8 @@ import {
   Plug,
   Terminal,
   ChevronRight,
+  GitBranch,
+  Shield,
 } from "lucide-react";
 
 const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
@@ -67,7 +69,28 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
         },
       ],
     },
-    { title: "系统架构", href: "/docs/build", icon: Wrench },
+    {
+      title: "架构与设计",
+      href: "/docs/architecture-design",
+      icon: Wrench,
+      children: [
+        {
+          title: "性能详解",
+          href: "/docs/architecture-design/performance",
+          icon: Sparkles,
+        },
+        {
+          title: "路径设计策略",
+          href: "/docs/architecture-design/routing-strategy",
+          icon: GitBranch,
+        },
+        {
+          title: "智能密钥管理",
+          href: "/docs/architecture-design/key-management",
+          icon: Shield,
+        },
+      ],
+    },
     {
       title: "渠道类型",
       href: "/docs/channels",
