@@ -107,11 +107,18 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
   ];
 
   const [openItems, setOpenItems] = useState<number[]>(() => {
-    const activeItemIndex = navigation.findIndex(
-      (item) =>
-        item.children &&
-        item.children.some((child) => pathname.startsWith(child.href))
-    );
+    let activeItemIndex = -1;
+    let longestMatch = 0;
+
+    navigation.forEach((item, index) => {
+      if (item.children && pathname.startsWith(item.href)) {
+        if (item.href.length > longestMatch) {
+          longestMatch = item.href.length;
+          activeItemIndex = index;
+        }
+      }
+    });
+
     return activeItemIndex !== -1 ? [activeItemIndex] : [];
   });
 
@@ -170,7 +177,7 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
               }}
               className={cn(
                 "flex items-center justify-between space-x-3 px-3 py-2 text-sm rounded-md transition-colors duration-200",
-                isChildActive
+                isActive || isChildActive
                   ? "bg-blue-50 text-blue-700 font-medium"
                   : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               )}
@@ -179,7 +186,7 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
                 <IconComponent
                   className={cn(
                     "h-4 w-4",
-                    isChildActive ? "text-blue-700" : "text-gray-500"
+                    isActive || isChildActive ? "text-blue-700" : "text-gray-500"
                   )}
                 />
                 <span>{item.title}</span>
