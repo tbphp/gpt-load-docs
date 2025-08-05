@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { cn } from "../lib/utils";
 import {
-  BookOpen,
   Settings,
   Wrench,
   Cloud,
@@ -21,13 +20,16 @@ import {
   ChevronRight,
   GitBranch,
   Shield,
+  Rocket,
+  BookUser,
 } from "lucide-react";
 
 const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
   const pathname = usePathname();
 
   const navigation = [
-    { title: "项目简介", href: "/docs", icon: BookOpen },
+    { title: "快速开始", href: "/docs", icon: Rocket },
+    { title: "项目简介", href: "/docs/introduction", icon: BookUser },
     {
       title: "部署指南",
       href: "/docs/deployment",
