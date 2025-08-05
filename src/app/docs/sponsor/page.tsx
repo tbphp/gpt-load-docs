@@ -2,18 +2,12 @@
 
 import Image from "next/image";
 import { Heart } from "lucide-react";
-import { motion } from "framer-motion";
 
 export default function SponsorPage() {
   return (
     <div className="max-w-4xl mx-auto">
       {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-center mb-12"
-      >
+      <div className="text-center mb-12">
         <div className="flex items-center justify-center mb-4">
           <Heart className="h-8 w-8 text-red-500 mr-3" />
           <h1 className="text-3xl font-bold text-gray-900">支持赞助</h1>
@@ -21,21 +15,13 @@ export default function SponsorPage() {
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
           如果 GPT-Load 对您有帮助，欢迎请作者喝杯咖啡 ☕️
         </p>
-      </motion.div>
+      </div>
 
       {/* Payment QR Codes */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.4 }}
-        className="mb-12"
-      >
+      <div className="mb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
           {/* WeChat Pay */}
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 text-center"
-          >
+          <div className="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 text-center">
             <div className="mb-6">
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 微信
@@ -56,13 +42,10 @@ export default function SponsorPage() {
             <div className="bg-green-600 rounded-lg p-3">
               <p className="text-sm text-white font-medium">微信扫一扫</p>
             </div>
-          </motion.div>
+          </div>
 
           {/* Alipay */}
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 text-center"
-          >
+          <div className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 text-center">
             <div className="mb-6">
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 支付宝
@@ -83,50 +66,38 @@ export default function SponsorPage() {
             <div className="bg-blue-600 rounded-lg p-3">
               <p className="text-sm text-white font-medium">支付宝扫一扫</p>
             </div>
-          </motion.div>
+          </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Online Sponsor Platforms */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.5 }}
-        className="mb-12"
-      >
+      <div className="mb-12">
         <div className="flex items-center justify-center mb-6">
           <Heart className="h-6 w-6 text-red-500 mr-3" />
           <h2 className="text-2xl font-semibold text-gray-900">在线赞助平台</h2>
         </div>
 
         <div className="flex justify-center">
-          <motion.a
+          <a
             href="https://afdian.com/a/gpt-load"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
             className="inline-flex items-center space-x-3 bg-gradient-to-r from-pink-500 to-red-500 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
           >
             <span className="text-2xl">💖</span>
             <div className="text-left">
               <div className="font-bold">爱发电赞助</div>
             </div>
-          </motion.a>
+          </a>
         </div>
 
         <p className="text-center text-gray-600 mt-4 text-sm">
           通过爱发电平台，您可以选择一次性赞助或定期支持项目发展
         </p>
-      </motion.div>
+      </div>
 
       {/* Thank You Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.6 }}
-        className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-8 text-center"
-      >
+      <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-8 text-center">
         <div className="flex items-center justify-center mb-4">
           <Heart className="h-6 w-6 text-red-500 mr-2" />
           <h2 className="text-2xl font-semibold text-gray-900">感谢您的支持</h2>
@@ -146,15 +117,10 @@ export default function SponsorPage() {
             ❤️ 开源精神万岁
           </span>
         </div>
-      </motion.div>
+      </div>
 
       {/* Alternative Support */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.8 }}
-        className="mt-12 text-center"
-      >
+      <div className="mt-12 text-center">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">
           其他支持方式
         </h3>
@@ -184,7 +150,7 @@ export default function SponsorPage() {
             🔧 贡献代码
           </a>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

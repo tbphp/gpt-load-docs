@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { cn } from "../lib/utils";
 import {
   BookOpen,
@@ -17,6 +18,7 @@ import {
   Sparkles,
   Plug,
   Terminal,
+  ChevronRight,
 } from "lucide-react";
 
 const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
@@ -88,6 +90,23 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
     { title: "支持赞助", href: "/docs/sponsor", icon: Heart },
   ];
 
+  const [openItems, setOpenItems] = useState<number[]>(() => {
+    const activeItemIndex = navigation.findIndex(
+      (item) =>
+        item.children &&
+        item.children.some((child) => pathname.startsWith(child.href))
+    );
+    return activeItemIndex !== -1 ? [activeItemIndex] : [];
+  });
+
+  const toggleItem = (index: number) => {
+    setOpenItems((prevOpenItems) =>
+      prevOpenItems.includes(index)
+        ? prevOpenItems.filter((i) => i !== index)
+        : [...prevOpenItems, index]
+    );
+  };
+
   return (
     <nav className="space-y-1">
       {navigation.map((item, index) => {
@@ -95,16 +114,19 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
         const isActive = pathname === item.href;
         const hasChildren = item.children && item.children.length > 0;
         const isChildActive =
-          hasChildren && item.children.some((child) => pathname === child.href);
+          hasChildren &&
+          item.children.some((child) => pathname.startsWith(child.href));
+        const isOpen = openItems.includes(index);
 
-        return (
-          <div key={index}>
+        if (!hasChildren) {
+          return (
             <Link
+              key={index}
               href={item.href}
               onClick={onItemClick}
               className={cn(
                 "flex items-center space-x-3 px-3 py-2 text-sm rounded-md transition-colors duration-200",
-                isActive || isChildActive
+                isActive
                   ? "bg-blue-50 text-blue-700 font-medium"
                   : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               )}
@@ -112,12 +134,42 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
               <IconComponent
                 className={cn(
                   "h-4 w-4",
-                  isActive || isChildActive ? "text-blue-700" : "text-gray-500"
+                  isActive ? "text-blue-700" : "text-gray-500"
                 )}
               />
               <span>{item.title}</span>
             </Link>
-            {hasChildren && (
+          );
+        }
+
+        return (
+          <div key={index}>
+            <div
+              onClick={() => toggleItem(index)}
+              className={cn(
+                "flex items-center justify-between space-x-3 px-3 py-2 text-sm rounded-md transition-colors duration-200 cursor-pointer",
+                isChildActive
+                  ? "bg-blue-50 text-blue-700 font-medium"
+                  : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              )}
+            >
+              <div className="flex items-center space-x-3">
+                <IconComponent
+                  className={cn(
+                    "h-4 w-4",
+                    isChildActive ? "text-blue-700" : "text-gray-500"
+                  )}
+                />
+                <span>{item.title}</span>
+              </div>
+              <ChevronRight
+                className={cn(
+                  "h-4 w-4 transform transition-transform duration-200",
+                  isOpen ? "rotate-90" : ""
+                )}
+              />
+            </div>
+            {isOpen && (
               <div className="ml-3 mt-1 space-y-1">
                 {item.children.map((child, childIndex) => {
                   const ChildIconComponent = child.icon;
