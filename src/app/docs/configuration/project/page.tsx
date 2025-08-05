@@ -1,0 +1,351 @@
+import { Database, Key } from "lucide-react";
+
+export default function ProjectConfigurationPage() {
+  return (
+    <div className="max-w-4xl mx-auto">
+      <h1 className="text-4xl font-bold text-gray-900 mb-8">项目配置</h1>
+      {/* Layer 2: System Settings */}
+      <div className="mb-12">
+        <h2 className="text-3xl font-semibold text-gray-900 mb-6">
+          <Database className="inline h-6 w-6 mr-2 text-orange-600" />
+          系统设置
+        </h2>
+
+        <div className="bg-orange-50 border border-orange-200 rounded-lg p-6 mb-8">
+          <h3 className="text-xl font-semibold text-orange-900 mb-3">
+            配置特点
+          </h3>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 className="font-semibold text-orange-800 mb-2">存储方式</h4>
+              <ul className="text-orange-700 space-y-1 text-sm">
+                <li>• 存储在数据库中</li>
+                <li>• 支持管理 API 动态修改</li>
+                <li>• 支持热重载无需重启</li>
+                <li>• 为整个应用提供行为基准</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold text-orange-800 mb-2">管理特性</h4>
+              <ul className="text-orange-700 space-y-1 text-sm">
+                <li>• Web 界面可视化配置</li>
+                <li>• RESTful API 程序化管理</li>
+                <li>• 配置验证和约束检查</li>
+                <li>• 变更历史记录和回滚</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-8">
+          {/* Basic Parameters */}
+          <div className="border border-gray-200 rounded-lg p-6">
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+              基础参数
+            </h3>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="text-left py-2 px-3 font-semibold text-gray-800">
+                      配置项
+                    </th>
+                    <th className="text-left py-2 px-3 font-semibold text-gray-800">
+                      字段名
+                    </th>
+                    <th className="text-left py-2 px-3 font-semibold text-gray-800">
+                      默认值
+                    </th>
+                    <th className="text-left py-2 px-3 font-semibold text-gray-800">
+                      说明
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="text-gray-600">
+                  <tr className="border-b border-gray-100">
+                    <td className="py-2 px-3">项目地址</td>
+                    <td className="py-2 px-3">
+                      <code className="bg-gray-100 px-1 rounded">app_url</code>
+                    </td>
+                    <td className="py-2 px-3">http://localhost:3001</td>
+                    <td className="py-2 px-3">
+                      项目基础 URL，用于拼接分组端点
+                    </td>
+                  </tr>
+                  <tr className="border-b border-gray-100">
+                    <td className="py-2 px-3">日志保留天数</td>
+                    <td className="py-2 px-3">
+                      <code className="bg-gray-100 px-1 rounded">
+                        request_log_retention_days
+                      </code>
+                    </td>
+                    <td className="py-2 px-3">7</td>
+                    <td className="py-2 px-3">请求日志数据库保留天数</td>
+                  </tr>
+                  <tr className="border-b border-gray-100">
+                    <td className="py-2 px-3">日志写入间隔</td>
+                    <td className="py-2 px-3">
+                      <code className="bg-gray-100 px-1 rounded">
+                        request_log_write_interval_minutes
+                      </code>
+                    </td>
+                    <td className="py-2 px-3">1</td>
+                    <td className="py-2 px-3">日志写入数据库周期（分钟）</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 px-3">全局代理密钥</td>
+                    <td className="py-2 px-3">
+                      <code className="bg-gray-100 px-1 rounded">
+                        proxy_keys
+                      </code>
+                    </td>
+                    <td className="py-2 px-3">初始值为环境配置的 AUTH_KEY</td>
+                    <td className="py-2 px-3">
+                      全局生效的代理认证密钥，多个用逗号分隔
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Request Settings */}
+          <div className="border border-gray-200 rounded-lg p-6">
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+              请求设置
+            </h3>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-3">超时配置</h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between text-gray-600">
+                    <span>请求超时：</span>
+                    <code className="bg-gray-100 px-1 rounded text-gray-600">
+                      600秒
+                    </code>
+                  </div>
+                  <div className="flex justify-between text-gray-600">
+                    <span>连接超时：</span>
+                    <code className="bg-gray-100 px-1 rounded text-gray-600">
+                      15秒
+                    </code>
+                  </div>
+                  <div className="flex justify-between text-gray-600">
+                    <span>响应头超时：</span>
+                    <code className="bg-gray-100 px-1 rounded text-gray-600">
+                      15秒
+                    </code>
+                  </div>
+                  <div className="flex justify-between text-gray-600">
+                    <span>空闲连接超时：</span>
+                    <code className="bg-gray-100 px-1 rounded text-gray-600">
+                      120秒
+                    </code>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-3">连接池配置</h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between text-gray-800">
+                    <span>最大空闲连接：</span>
+                    <code className="bg-gray-100 px-1 rounded text-gray-600">
+                      100
+                    </code>
+                  </div>
+                  <div className="flex justify-between text-gray-600">
+                    <span>每主机最大连接：</span>
+                    <code className="bg-gray-100 px-1 rounded text-gray-600">
+                      50
+                    </code>
+                  </div>
+                  <div className="flex justify-between text-gray-600">
+                    <span>最大并发请求：</span>
+                    <code className="bg-gray-100 px-1 rounded text-gray-600">
+                      100
+                    </code>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Key Configuration */}
+          <div className="border border-gray-200 rounded-lg p-6">
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+              密钥配置
+            </h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-2">重试设置</h4>
+                <div className="text-sm text-gray-600">
+                  <div>
+                    最大重试次数：
+                    <code className="bg-gray-100 px-1 rounded ml-1">3</code>
+                  </div>
+                  <p className="text-xs mt-1">单个请求使用不同密钥的重试次数</p>
+                </div>
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-2">黑名单设置</h4>
+                <div className="text-sm text-gray-600">
+                  <div>
+                    黑名单阈值：
+                    <code className="bg-gray-100 px-1 rounded ml-1">3</code>
+                  </div>
+                  <p className="text-xs mt-1">密钥连续失败多少次进入黑名单</p>
+                </div>
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-2">验证设置</h4>
+                <div className="text-sm text-gray-600">
+                  <div>
+                    验证间隔：
+                    <code className="bg-gray-100 px-1 rounded ml-1">
+                      60分钟
+                    </code>
+                  </div>
+                  <p className="text-xs mt-1">后台验证密钥的间隔时长</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Layer 3: Group Configuration */}
+      <div className="mb-12">
+        <h2 className="text-3xl font-semibold text-gray-900 mb-6">
+          <Key className="inline h-6 w-6 mr-2 text-green-600" />
+          分组配置
+        </h2>
+
+        <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-8">
+          <h3 className="text-xl font-semibold text-green-900 mb-3">
+            配置特点
+          </h3>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 className="font-semibold text-green-800 mb-2">优先级最高</h4>
+              <ul className="text-green-700 space-y-1 text-sm">
+                <li>• 可覆盖系统设置的任意参数</li>
+                <li>• 为特定分组定制专用行为</li>
+                <li>• 支持细粒度的性能调优</li>
+                <li>• 实现多租户隔离配置</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold text-green-800 mb-2">配置灵活性</h4>
+              <ul className="text-green-700 space-y-1 text-sm">
+                <li>• JSON 格式的灵活配置</li>
+                <li>• 支持参数覆盖和继承</li>
+                <li>• 动态计算有效配置</li>
+                <li>• 配置验证和约束检查</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-8">
+          {/* Overridable Settings */}
+          <div className="border border-gray-200 rounded-lg p-6">
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+              可覆盖的配置项
+            </h3>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-3">
+                  性能相关配置
+                </h4>
+                <ul className="text-gray-600 space-y-1 text-sm">
+                  <li>
+                    •{" "}
+                    <code className="bg-gray-100 px-1 rounded">
+                      request_timeout
+                    </code>{" "}
+                    - 请求超时
+                  </li>
+                  <li>
+                    •{" "}
+                    <code className="bg-gray-100 px-1 rounded">
+                      connect_timeout
+                    </code>{" "}
+                    - 连接超时
+                  </li>
+                  <li>
+                    •{" "}
+                    <code className="bg-gray-100 px-1 rounded">
+                      max_idle_conns
+                    </code>{" "}
+                    - 最大空闲连接
+                  </li>
+                  <li>
+                    •{" "}
+                    <code className="bg-gray-100 px-1 rounded">
+                      response_header_timeout
+                    </code>{" "}
+                    - 响应头超时
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-3">
+                  密钥管理配置
+                </h4>
+                <ul className="text-gray-600 space-y-1 text-sm">
+                  <li>
+                    •{" "}
+                    <code className="bg-gray-100 px-1 rounded">
+                      max_retries
+                    </code>{" "}
+                    - 最大重试次数
+                  </li>
+                  <li>
+                    •{" "}
+                    <code className="bg-gray-100 px-1 rounded">
+                      blacklist_threshold
+                    </code>{" "}
+                    - 黑名单阈值
+                  </li>
+                  <li>
+                    •{" "}
+                    <code className="bg-gray-100 px-1 rounded">
+                      key_validation_interval_minutes
+                    </code>{" "}
+                    - 验证周期
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Summary */}
+      <div className="mt-12 pt-8 border-t border-gray-200">
+        <h2 className="text-2xl font-semibold text-gray-900 mb-4">项目配置总结</h2>
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+          <p className="text-gray-700">
+            项目配置是 GPT-Load
+            配置系统的核心，提供了强大的动态管理能力，涵盖系统级和分组级的配置。
+          </p>
+          <ul className="list-disc list-inside mt-4 space-y-2 text-gray-600">
+            <li>
+              <strong>角色与分层</strong>
+              ：分为“系统设置”和“分组配置”，前者为全局基准，后者为特定场景提供覆盖，实现了层次化管理。
+            </li>
+            <li>
+              <strong>管理特性</strong>
+              ：支持通过 Web 界面和 API
+              进行动态修改，配置变更可热更新，无需重启服务，保证了系统的高可用性。
+            </li>
+            <li>
+              <strong>使用优势</strong>
+              ：提供了极高的灵活性和动态调整能力，允许针对不同业务场景（如多租户）进行细粒度隔离和优化。
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -45,7 +45,23 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
         },
       ],
     },
-    { title: "配置说明", href: "/docs/configuration", icon: Settings },
+    {
+      title: "配置管理",
+      href: "/docs/configuration",
+      icon: Settings,
+      children: [
+        {
+          title: "环境配置",
+          href: "/docs/configuration/environment",
+          icon: Server,
+        },
+        {
+          title: "项目配置",
+          href: "/docs/configuration/project",
+          icon: Wrench,
+        },
+      ],
+    },
     { title: "系统架构", href: "/docs/build", icon: Wrench },
     {
       title: "渠道类型",
