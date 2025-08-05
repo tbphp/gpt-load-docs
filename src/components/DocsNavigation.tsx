@@ -160,7 +160,7 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
   };
 
   return (
-    <nav className="space-y-1">
+    <nav className="space-y-1 pr-2">
       {navigation.map((item, index) => {
         const IconComponent = item.icon;
         const isActive = pathname === item.href;
