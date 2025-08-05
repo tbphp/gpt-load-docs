@@ -10,6 +10,7 @@ import {
   RefreshCw,
   ExternalLink,
 } from "lucide-react";
+import ImageViewer from "../../../../components/ImageViewer";
 
 export default function ClawCloudPage() {
   return (
@@ -22,6 +23,41 @@ export default function ClawCloudPage() {
         <p className="text-xl text-gray-600">
           使用 Claw Cloud 免费云端部署 GPT-Load，无需服务器，一键部署，快速体验
         </p>
+      </div>
+
+      {/* Important Warning */}
+      <div className="mb-12">
+        <div className="bg-red-50 border-l-4 border-red-400 p-6 rounded-lg shadow-sm">
+          <div className="flex items-start space-x-3">
+            <AlertTriangle className="h-6 w-6 text-red-500 mt-0.5 flex-shrink-0" />
+            <div>
+              <h3 className="text-lg font-bold text-red-900 mb-3">
+                ⚠️ 重要提醒：请务必备份您的数据！
+              </h3>
+              <div className="text-red-800 space-y-2">
+                <p className="font-medium">
+                  Claw Cloud
+                  是实验性免费服务，服务稳定性无法保证，存在以下风险：
+                </p>
+                <ul className="list-disc list-inside space-y-1 ml-4">
+                  <li>服务可能出现不稳定或临时不可用的情况</li>
+                  <li>数据可能因服务故障而丢失</li>
+                  <li>免费服务没有 SLA 保障</li>
+                  <li>实例可能会被重启或重新分配</li>
+                </ul>
+                <div className="mt-4 p-3 bg-red-100 rounded border">
+                  <p className="font-semibold text-red-900">🔄 强烈建议：</p>
+                  <ul className="list-disc list-inside mt-2 space-y-1">
+                    <li>定期导出和备份您的配置数据</li>
+                    <li>保存好所有重要的 API 密钥和配置信息</li>
+                    <li>对于生产环境，请考虑使用稳定的付费云服务</li>
+                    <li>将 Claw Cloud 仅用于测试和学习目的</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Overview */}
@@ -174,24 +210,17 @@ export default function ClawCloudPage() {
               </div>
 
               <div className="bg-gray-20 border border-gray-200 rounded-lg p-4">
-                <div className="text-center">
-                  <div className="bg-gray-100 rounded-lg p-4 mb-2 shadow-sm">
-                    <a
-                      href="/claw_1.png"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <img
-                        src="/claw_1.png"
-                        alt="Claw Cloud 区域选择界面"
-                        className="max-w-full h-auto max-h-80 mx-auto rounded-lg shadow-sm"
-                      />
-                    </a>
-                  </div>
-                  <p className="text-gray-600 text-sm">
-                    Claw Cloud 区域选择界面
-                  </p>
+                <div className="flex items-center justify-center">
+                  <ImageViewer
+                    src="/claw_1.png"
+                    alt="Claw Cloud 区域选择界面"
+                    width={250}
+                    height={400}
+                  />
                 </div>
+                <p className="text-gray-600 text-sm text-center mt-2">
+                  Claw Cloud 区域选择界面
+                </p>
               </div>
             </div>
           </div>
@@ -220,24 +249,17 @@ export default function ClawCloudPage() {
                   &quot;Create App&quot; 开始创建应用
                 </p>
                 <div className="bg-gray-20 border border-gray-200 rounded-lg p-4">
-                  <div className="text-center">
-                    <div className="bg-gray-100 rounded-lg p-4 mb-2 shadow-sm">
-                      <a
-                        href="/claw_2.png"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <img
-                          src="/claw_2.png"
-                          alt="Claw Cloud 创建应用界面"
-                          className="max-w-full h-auto max-h-80 mx-auto rounded-lg shadow-sm"
-                        />
-                      </a>
-                    </div>
-                    <p className="text-gray-600 text-sm">
-                      App Launchpad - 创建应用
-                    </p>
+                  <div className="flex items-center justify-center">
+                    <ImageViewer
+                      src="/claw_2.png"
+                      alt="Claw Cloud 创建应用界面"
+                      width={800}
+                      height={400}
+                    />
                   </div>
+                  <p className="text-gray-600 text-sm text-center mt-2">
+                    App Launchpad - 创建应用
+                  </p>
                 </div>
               </div>
             </div>
@@ -411,22 +433,17 @@ export default function ClawCloudPage() {
               </div>
 
               <div className="bg-gray-20 border border-gray-200 rounded-lg p-4">
-                <div className="text-center">
-                  <div className="bg-gray-100 rounded-lg p-4 mb-2 shadow-sm">
-                    <a
-                      href="/claw_3.png"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <img
-                        src="/claw_3.png"
-                        alt="Claw Cloud 应用配置界面"
-                        className="max-w-full h-auto max-h-80 mx-auto rounded-lg shadow-sm"
-                      />
-                    </a>
-                  </div>
-                  <p className="text-gray-600 text-sm">应用配置表单</p>
+                <div className="flex items-center justify-center">
+                  <ImageViewer
+                    src="/claw_3.png"
+                    alt="Claw Cloud 应用配置界面"
+                    width={600}
+                    height={400}
+                  />
                 </div>
+                <p className="text-gray-600 text-sm text-center mt-2">
+                  应用配置表单
+                </p>
               </div>
             </div>
           </div>

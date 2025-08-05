@@ -697,6 +697,16 @@ export default function CherryStudioIntegrationPage() {
         <h3 className="text-lg font-semibold text-gray-900 mb-4">相关资源</h3>
         <div className="space-y-2">
           <Link
+            href="https://docs.cherry-ai.com"
+            className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Cherry Studio 官方文档
+            <ExternalLink className="h-4 w-4 ml-1" />
+          </Link>
+          <br />
+          <Link
             href="/docs/configuration"
             className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200"
           >
