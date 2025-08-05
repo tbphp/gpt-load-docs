@@ -20,10 +20,10 @@ export default function IntegrationsPage() {
     },
     {
       name: "New API",
-      description: "现代化的API开发平台",
-      status: "coming-soon",
+      description: "现代化的API开发平台，支持多种AI模型",
+      status: "available",
       icon: Globe,
-      href: "#",
+      href: "/docs/integrations/new-api",
       category: "API工具",
     },
     {
