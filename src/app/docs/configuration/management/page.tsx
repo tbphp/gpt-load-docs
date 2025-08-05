@@ -1,13 +1,11 @@
-import { Users, Monitor, CheckCircle, AlertTriangle } from "lucide-react";
+import { Users, CheckCircle, AlertTriangle } from "lucide-react";
 
 export default function ManagementPage() {
   return (
     <div className="max-w-4xl mx-auto">
       {/* Header */}
       <div className="mb-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-6">
-          管理页面使用说明
-        </h1>
+        <h1 className="text-4xl font-bold text-gray-900 mb-6">管理端配置</h1>
         <p className="text-xl text-gray-600">
           完整的 Web 管理界面使用指南，包括分组管理、密钥配置、系统监控等功能
         </p>
@@ -42,48 +40,6 @@ export default function ManagementPage() {
                 <li>• 设置强密码保护</li>
                 <li>• 定期备份配置数据</li>
               </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Dashboard */}
-      <div className="mb-12">
-        <h2 className="text-3xl font-semibold text-gray-900 mb-6">
-          <Monitor className="inline h-6 w-6 mr-2 text-blue-600" />
-          仪表盘
-        </h2>
-
-        <div className="space-y-6">
-          <div className="border border-gray-200 rounded-lg p-6">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
-              用量统计
-            </h3>
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="text-center">
-                <div className="bg-green-100 p-4 rounded-lg mb-2">
-                  <div className="text-2xl font-bold text-green-600">
-                    密钥统计
-                  </div>
-                </div>
-                <p className="text-gray-600 text-sm">统计分组和秘钥信息</p>
-              </div>
-              <div className="text-center">
-                <div className="bg-blue-100 p-4 rounded-lg mb-2">
-                  <div className="text-2xl font-bold text-blue-600">
-                    请求统计
-                  </div>
-                </div>
-                <p className="text-gray-600 text-sm">总请求数、失败率</p>
-              </div>
-              <div className="text-center">
-                <div className="bg-purple-100 p-4 rounded-lg mb-2">
-                  <div className="text-2xl font-bold text-purple-600">
-                    请求趋势
-                  </div>
-                </div>
-                <p className="text-gray-600 text-sm">24小时请求折线图</p>
-              </div>
             </div>
           </div>
         </div>
@@ -185,25 +141,7 @@ export default function ManagementPage() {
 
       {/* Tips and Best Practices */}
       <div className="mb-12">
-        <h2 className="text-3xl font-semibold text-gray-900 mb-6">使用技巧</h2>
-
         <div className="space-y-6">
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-            <div className="flex items-start space-x-3">
-              <CheckCircle className="h-5 w-5 text-blue-600 mt-0.5" />
-              <div>
-                <h3 className="font-semibold text-blue-900 mb-2">最佳实践</h3>
-                <ul className="text-blue-800 space-y-1 text-sm">
-                  <li>• 定期备份分组配置和密钥数据</li>
-                  <li>• 监控密钥使用情况，及时更新失效密钥</li>
-                  <li>• 根据负载情况调整权重和限制配置</li>
-                  <li>• 启用健康检查确保上游服务可用性</li>
-                  <li>• 设置合理的告警阈值避免误报</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
           <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
             <div className="flex items-start space-x-3">
               <AlertTriangle className="h-5 w-5 text-yellow-600 mt-0.5" />

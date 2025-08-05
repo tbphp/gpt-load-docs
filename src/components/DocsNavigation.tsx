@@ -60,6 +60,11 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
           href: "/docs/configuration/project",
           icon: Wrench,
         },
+        {
+          title: "管理端配置",
+          href: "/docs/configuration/management",
+          icon: Users,
+        },
       ],
     },
     { title: "系统架构", href: "/docs/build", icon: Wrench },
@@ -102,7 +107,6 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
         },
       ],
     },
-    { title: "管理说明", href: "/docs/management", icon: Users },
     { title: "支持赞助", href: "/docs/sponsor", icon: Heart },
   ];
 
@@ -186,7 +190,9 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
                 <IconComponent
                   className={cn(
                     "h-4 w-4",
-                    isActive || isChildActive ? "text-blue-700" : "text-gray-500"
+                    isActive || isChildActive
+                      ? "text-blue-700"
+                      : "text-gray-500"
                   )}
                 />
                 <span>{item.title}</span>
