@@ -1,4 +1,14 @@
-import { Server, Database, Shield, Cpu, RotateCcw, Globe } from "lucide-react";
+import {
+  Server,
+  Database,
+  Shield,
+  Cpu,
+  RotateCcw,
+  Globe,
+  Zap,
+  CheckCircle,
+  Layers,
+} from "lucide-react";
 import Link from "next/link";
 export default function DocsPage() {
   return (
@@ -311,6 +321,88 @@ export default function DocsPage() {
           </div>{" "}
         </div>{" "}
       </div>{" "}
+      {/* 深入了解 */}
+      <div className="mb-12">
+        <h2 className="text-3xl font-semibold text-gray-900 mb-6 text-center">
+          深入了解 GPT-Load
+        </h2>
+        <p className="text-lg text-gray-600 text-center mb-8 max-w-3xl mx-auto">
+          探索 GPT-Load
+          的核心技术架构和高性能设计理念，了解如何实现极致的代理性能
+        </p>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          <Link
+            href="/docs/architecture-design/performance"
+            className="group bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300"
+          >
+            <div className="flex items-center mb-4">
+              <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center mr-4">
+                <Zap className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-blue-900 group-hover:text-blue-700">
+                  性能详解
+                </h3>
+                <p className="text-blue-600 text-sm">了解极致性能设计</p>
+              </div>
+            </div>
+            <div className="space-y-2 text-sm text-blue-800">
+              <div className="flex items-center">
+                <CheckCircle className="h-4 w-4 text-blue-600 mr-2" />
+                <span>零 I/O 操作代理机制</span>
+              </div>
+              <div className="flex items-center">
+                <CheckCircle className="h-4 w-4 text-blue-600 mr-2" />
+                <span>零拷贝流式传输技术</span>
+              </div>
+              <div className="flex items-center">
+                <CheckCircle className="h-4 w-4 text-blue-600 mr-2" />
+                <span>无锁并发处理架构</span>
+              </div>
+              <div className="flex items-center">
+                <CheckCircle className="h-4 w-4 text-blue-600 mr-2" />
+                <span>极低资源占用优化</span>
+              </div>
+            </div>
+          </Link>
+
+          <Link
+            href="/docs/architecture-design"
+            className="group bg-gradient-to-br from-purple-50 to-violet-50 border border-purple-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300"
+          >
+            <div className="flex items-center mb-4">
+              <div className="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center mr-4">
+                <Layers className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-purple-900 group-hover:text-purple-700">
+                  架构设计
+                </h3>
+                <p className="text-purple-600 text-sm">深入系统设计理念</p>
+              </div>
+            </div>
+            <div className="space-y-2 text-sm text-purple-800">
+              <div className="flex items-center">
+                <CheckCircle className="h-4 w-4 text-purple-600 mr-2" />
+                <span>智能密钥管理机制</span>
+              </div>
+              <div className="flex items-center">
+                <CheckCircle className="h-4 w-4 text-purple-600 mr-2" />
+                <span>路径处理策略设计</span>
+              </div>
+              <div className="flex items-center">
+                <CheckCircle className="h-4 w-4 text-purple-600 mr-2" />
+                <span>分布式集群架构</span>
+              </div>
+              <div className="flex items-center">
+                <CheckCircle className="h-4 w-4 text-purple-600 mr-2" />
+                <span>高可用性保障机制</span>
+              </div>
+            </div>
+          </Link>
+        </div>
+      </div>
       {/* Getting Started */}{" "}
       <div className="bg-gradient-to-r from-blue-600 to-violet-600 rounded-xl p-8 text-white text-center">
         {" "}
