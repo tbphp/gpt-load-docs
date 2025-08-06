@@ -69,6 +69,11 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
           href: "/docs/configuration/management",
           icon: Users,
         },
+        {
+          title: "Cloudflare AI Gateway",
+          href: "/docs/configuration/cloudflare-aigateway",
+          icon: Cloud,
+        },
       ],
     },
     {

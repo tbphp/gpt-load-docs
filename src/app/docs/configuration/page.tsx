@@ -129,9 +129,18 @@ export default function ConfigurationPage() {
               配置管理建议
             </h3>
             <ul className="text-green-800 space-y-2 text-sm">
-              <li>• <strong>统一管理</strong>：建议使用平台的 Web 界面进行集中管理，以确保一致性。</li>
-              <li>• <strong>定期审计</strong>：定期审查配置，移除不再使用的参数，确保系统整洁。</li>
-              <li>• <strong>版本控制</strong>：对于重要的配置变更，建议在版本控制系统中记录，便于追踪和回滚。</li>
+              <li>
+                • <strong>统一管理</strong>：建议使用平台的 Web
+                界面进行集中管理，以确保一致性。
+              </li>
+              <li>
+                • <strong>定期审计</strong>
+                ：定期审查配置，移除不再使用的参数，确保系统整洁。
+              </li>
+              <li>
+                • <strong>版本控制</strong>
+                ：对于重要的配置变更，建议在版本控制系统中记录，便于追踪和回滚。
+              </li>
             </ul>
           </div>
           <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
@@ -140,9 +149,18 @@ export default function ConfigurationPage() {
               注意事项
             </h3>
             <ul className="text-yellow-800 space-y-2 text-sm">
-              <li>• <strong>敏感信息</strong>：切勿在项目配置中存储密码、API 密钥等敏感信息，应使用环境变量。</li>
-              <li>• <strong>谨慎热更新</strong>：热更新功能强大，但需谨慎使用，避免在生产环境中引入意外行为。</li>
-              <li>• <strong>性能影响</strong>：频繁的配置变更可能对系统性能产生轻微影响，建议在低峰期操作。</li>
+              <li>
+                • <strong>敏感信息</strong>：切勿在项目配置中存储密码、API
+                密钥等敏感信息，应使用环境变量。
+              </li>
+              <li>
+                • <strong>谨慎热更新</strong>
+                ：热更新功能强大，但需谨慎使用，避免在生产环境中引入意外行为。
+              </li>
+              <li>
+                • <strong>性能影响</strong>
+                ：频繁的配置变更可能对系统性能产生轻微影响，建议在低峰期操作。
+              </li>
             </ul>
           </div>
         </div>
@@ -150,10 +168,8 @@ export default function ConfigurationPage() {
 
       {/* Further Reading */}
       <div className="mt-12 pt-8 border-t border-gray-200">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-          深入了解
-        </h2>
-        <div className="grid md:grid-cols-2 gap-6">
+        <h2 className="text-2xl font-semibold text-gray-900 mb-4">深入了解</h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <a
             href="/docs/configuration/environment"
             className="block bg-blue-50 hover:bg-blue-100 p-6 rounded-lg transition-colors"
@@ -174,6 +190,17 @@ export default function ConfigurationPage() {
             </h3>
             <p className="text-orange-700">
               探索通过数据库管理的系统级和分组级动态配置。
+            </p>
+          </a>
+          <a
+            href="/docs/configuration/cloudflare-aigateway"
+            className="block bg-cyan-50 hover:bg-cyan-100 p-6 rounded-lg transition-colors"
+          >
+            <h3 className="text-xl font-semibold text-cyan-900 mb-2">
+              Cloudflare AI Gateway
+            </h3>
+            <p className="text-cyan-700">
+              配置 Cloudflare AI Gateway 作为上游代理，优化 AI 服务性能。
             </p>
           </a>
         </div>
