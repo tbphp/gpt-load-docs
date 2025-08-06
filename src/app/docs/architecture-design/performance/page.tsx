@@ -110,26 +110,45 @@ export default function PerformancePage() {
               <div className="space-y-6">
                 {/* 机制说明 */}
                 <div>
-                  <h4 className="font-semibold text-gray-900 mb-3">实时透传机制</h4>
+                  <h4 className="font-semibold text-gray-900 mb-3">
+                    实时透传机制
+                  </h4>
                   <div className="bg-gray-50 rounded-lg p-4 mb-3">
                     <p className="text-gray-700 text-sm mb-2">
-                      GPT-Load 采用<strong>实时透传模式</strong>，直接将上游服务的数据流 
-                      (<code className="bg-gray-100 px-1 rounded">io.Reader</code>) 
-                      对接到客户端响应 (<code className="bg-gray-100 px-1 rounded">io.Writer</code>)，
+                      GPT-Load 采用<strong>实时透传模式</strong>
+                      ，直接将上游服务的数据流 (
+                      <code className="bg-gray-100 px-1 rounded">
+                        io.Reader
+                      </code>
+                      ) 对接到客户端响应 (
+                      <code className="bg-gray-100 px-1 rounded">
+                        io.Writer
+                      </code>
+                      )，
                       <strong>不进行任何中间缓冲、按行读取或内容解析</strong>。
                     </p>
                   </div>
-                  
+
                   <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                    <h5 className="font-semibold text-blue-900 mb-2">与传统流式处理的区别</h5>
+                    <h5 className="font-semibold text-blue-900 mb-2">
+                      与传统流式处理的区别
+                    </h5>
                     <div className="grid md:grid-cols-2 gap-4 text-sm">
                       <div>
-                        <p className="text-red-700 font-medium mb-1">❌ 传统方式</p>
-                        <p className="text-red-600">按行读取 → 解析处理 → 缓冲输出</p>
+                        <p className="text-red-700 font-medium mb-1">
+                          ❌ 传统方式
+                        </p>
+                        <p className="text-red-600">
+                          按行读取 → 解析处理 → 缓冲输出
+                        </p>
                       </div>
                       <div>
-                        <p className="text-green-700 font-medium mb-1">✅ GPT-Load 方式</p>
-                        <p className="text-green-600">上游数据流 → 直接透传 → 客户端</p>
+                        <p className="text-green-700 font-medium mb-1">
+                          ✅ GPT-Load 方式
+                        </p>
+                        <p className="text-green-600">
+                          上游数据流 → 直接透传 → 客户端
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -143,59 +162,71 @@ export default function PerformancePage() {
                       <div className="flex items-start space-x-2">
                         <CheckCircle className="h-4 w-4 text-green-500 mt-0.5" />
                         <div>
-                          <span className="text-gray-900 font-medium text-sm">避免数据包截断</span>
+                          <span className="text-gray-900 font-medium text-sm">
+                            避免数据包截断
+                          </span>
                           <p className="text-gray-600 text-xs mt-1">
                             不会因按行读取而破坏原始数据包结构
                           </p>
                         </div>
                       </div>
-                      
+
                       <div className="flex items-start space-x-2">
                         <CheckCircle className="h-4 w-4 text-green-500 mt-0.5" />
                         <div>
-                          <span className="text-gray-900 font-medium text-sm">极致兼容性</span>
+                          <span className="text-gray-900 font-medium text-sm">
+                            极致兼容性
+                          </span>
                           <p className="text-gray-600 text-xs mt-1">
                             天然支持 SSE、JSON 流、二进制等所有数据格式
                           </p>
                         </div>
                       </div>
-                      
+
                       <div className="flex items-start space-x-2">
                         <CheckCircle className="h-4 w-4 text-green-500 mt-0.5" />
                         <div>
-                          <span className="text-gray-900 font-medium text-sm">无限响应能力</span>
+                          <span className="text-gray-900 font-medium text-sm">
+                            无限响应能力
+                          </span>
                           <p className="text-gray-600 text-xs mt-1">
                             理论上可处理任意大小的上游响应数据
                           </p>
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="space-y-3">
                       <div className="flex items-start space-x-2">
                         <CheckCircle className="h-4 w-4 text-green-500 mt-0.5" />
                         <div>
-                          <span className="text-gray-900 font-medium text-sm">零延迟传输</span>
+                          <span className="text-gray-900 font-medium text-sm">
+                            零延迟传输
+                          </span>
                           <p className="text-gray-600 text-xs mt-1">
                             数据到达即转发，无缓冲等待时间
                           </p>
                         </div>
                       </div>
-                      
+
                       <div className="flex items-start space-x-2">
                         <CheckCircle className="h-4 w-4 text-green-500 mt-0.5" />
                         <div>
-                          <span className="text-gray-900 font-medium text-sm">极低内存占用</span>
+                          <span className="text-gray-900 font-medium text-sm">
+                            极低内存占用
+                          </span>
                           <p className="text-gray-600 text-xs mt-1">
                             不缓存数据，内存使用量与响应大小无关
                           </p>
                         </div>
                       </div>
-                      
+
                       <div className="flex items-start space-x-2">
                         <CheckCircle className="h-4 w-4 text-green-500 mt-0.5" />
                         <div>
-                          <span className="text-gray-900 font-medium text-sm">原生性能体验</span>
+                          <span className="text-gray-900 font-medium text-sm">
+                            原生性能体验
+                          </span>
                           <p className="text-gray-600 text-xs mt-1">
                             响应速度无限贴近上游服务原生表现
                           </p>
