@@ -441,7 +441,7 @@ export default function SourcePage() {
             配置说明
           </a>
           <a
-            href="/docs/build"
+            href="/docs/architecture-design"
             className="inline-flex items-center justify-center px-6 py-3 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors"
           >
             <Wrench className="h-4 w-4 mr-2" />

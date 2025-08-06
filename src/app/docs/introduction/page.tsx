@@ -324,7 +324,7 @@ export default function DocsPage() {
           className="inline-flex items-center bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
         >
           {" "}
-          查看安装指南{" "}
+          查看部署指南{" "}
         </Link>{" "}
       </div>{" "}
     </div>

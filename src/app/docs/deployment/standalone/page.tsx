@@ -514,11 +514,11 @@ export default function StandalonePage() {
             查看配置说明
           </a>
           <a
-            href="/docs/management"
+            href="/docs/configuration/management"
             className="inline-flex items-center justify-center px-6 py-3 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors"
           >
             <Shield className="h-4 w-4 mr-2" />
-            管理使用说明
+            管理端配置
           </a>
         </div>
       </div>
