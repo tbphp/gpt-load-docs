@@ -92,7 +92,7 @@ export default function ProjectConfigurationPage() {
                     <td className="py-2 px-3">1</td>
                     <td className="py-2 px-3">日志写入数据库周期（分钟）</td>
                   </tr>
-                  <tr>
+                  <tr className="border-b border-gray-100">
                     <td className="py-2 px-3">全局代理密钥</td>
                     <td className="py-2 px-3">
                       <code className="bg-gray-100 px-1 rounded">
@@ -102,6 +102,19 @@ export default function ProjectConfigurationPage() {
                     <td className="py-2 px-3">初始值为环境配置的 AUTH_KEY</td>
                     <td className="py-2 px-3">
                       全局生效的代理认证密钥，多个用逗号分隔
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 px-3">代理服务器地址</td>
+                    <td className="py-2 px-3">
+                      <code className="bg-gray-100 px-1 rounded">
+                        proxy_url
+                      </code>
+                    </td>
+                    <td className="py-2 px-3">空（使用环境变量）</td>
+                    <td className="py-2 px-3">
+                      全局 HTTP/HTTPS
+                      代理服务器地址，例如：http://user:pass@host:port
                     </td>
                   </tr>
                 </tbody>
@@ -204,6 +217,27 @@ export default function ProjectConfigurationPage() {
               </div>
             </div>
           </div>
+
+          {/* Proxy Configuration Priority Notice */}
+          <div className="border border-amber-200 bg-amber-50 rounded-lg p-6">
+            <h3 className="text-xl font-semibold text-amber-900 mb-4">
+              代理配置优先级
+            </h3>
+            <div className="mb-4">
+              <p className="text-amber-800 text-sm mb-2">
+                系统代理配置优先级为中等，会覆盖环境变量配置，但可被分组配置覆盖：
+              </p>
+              <div className="bg-amber-100 border border-amber-300 rounded p-3">
+                <code className="text-amber-900 font-semibold">
+                  分组配置 &gt; 系统配置 &gt; 环境配置
+                </code>
+              </div>
+            </div>
+            <p className="text-amber-700 text-sm">
+              当系统配置中的 <code>proxy_url</code>{" "}
+              为空时，将自动使用环境变量中的代理设置。
+            </p>
+          </div>
         </div>
       </div>
 
@@ -226,6 +260,7 @@ export default function ProjectConfigurationPage() {
                 <li>• 为特定分组定制专用行为</li>
                 <li>• 支持细粒度的性能调优</li>
                 <li>• 实现多租户隔离配置</li>
+                <li>• 代理配置优先级最高，覆盖系统和环境设置</li>
               </ul>
             </div>
             <div>
@@ -308,6 +343,11 @@ export default function ProjectConfigurationPage() {
                     </code>{" "}
                     - 验证周期
                   </li>
+                  <li>
+                    •{" "}
+                    <code className="bg-gray-100 px-1 rounded">proxy_url</code>{" "}
+                    - 代理服务器地址
+                  </li>
                 </ul>
               </div>
             </div>
@@ -328,12 +368,17 @@ export default function ProjectConfigurationPage() {
           <ul className="list-disc list-inside mt-4 space-y-2 text-gray-600">
             <li>
               <strong>角色与分层</strong>
-              ：分为“系统设置”和“分组配置”，前者为全局基准，后者为特定场景提供覆盖，实现了层次化管理。
+              ：分为&ldquo;系统设置&rdquo;和&ldquo;分组配置&rdquo;，前者为全局基准，后者为特定场景提供覆盖，实现了层次化管理。
             </li>
             <li>
               <strong>管理特性</strong>
               ：支持通过 Web 界面和 API
               进行动态修改，配置变更可热更新，无需重启服务，保证了系统的高可用性。
+            </li>
+            <li>
+              <strong>代理配置优先级</strong>
+              ：分组配置 &gt; 系统配置 &gt;
+              环境配置，实现了从全局到特定分组的灵活代理设置。
             </li>
             <li>
               <strong>使用优势</strong>

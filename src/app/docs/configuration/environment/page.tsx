@@ -215,9 +215,21 @@ export default function EnvironmentConfigurationPage() {
               代理配置
             </h3>
             <div className="mb-4">
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
+                <h4 className="font-semibold text-amber-800 mb-2">
+                  优先级说明
+                </h4>
+                <p className="text-amber-700 text-sm mb-2">
+                  代理配置支持三层优先级：
+                  <strong>分组配置 &gt; 系统配置 &gt; 环境配置</strong>
+                </p>
+                <p className="text-amber-700 text-sm">
+                  环境代理作为全局兜底配置，仅在系统配置和分组配置都未设置代理时生效。
+                </p>
+              </div>
               <p className="text-gray-600 text-sm">
-                GPT-Load 会自动从环境变量中读取代理设置，用于向上游 AI
-                服务商发起请求。
+                GPT-Load
+                会自动从环境变量中读取代理设置，作为最低优先级的全局代理配置。
               </p>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
