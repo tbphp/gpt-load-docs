@@ -394,6 +394,32 @@ export default function CloudflareAIGatewayPage() {
         </div>
       </section>
 
+      {/* 网络路由问题提醒 */}
+      <section className="mb-12">
+        <h2 className="text-xl font-bold text-gray-900 mb-4">
+          网络路由问题提醒
+        </h2>
+        <div className="bg-amber-50 border border-amber-200 rounded-lg p-6">
+          <div className="flex items-start space-x-3">
+            <AlertCircle className="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" />
+            <div>
+              <h3 className="font-medium text-amber-900 mb-2">关于区域封锁的提醒</h3>
+              <div className="text-amber-800 text-sm space-y-2">
+                <p>
+                  如果您的 GPT-Load 服务器位于中国大陆或香港，Cloudflare 可能会将请求路由至香港节点。
+                </p>
+                <p>
+                  由于许多 AI 服务商（如 OpenAI）不支持该区域，这可能导致 <code className="bg-amber-100 px-1 rounded">User location is not supported</code> 错误。
+                </p>
+                <p className="mt-2 font-medium">
+                  如遇此问题，请调整服务器的网络环境后重试。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 验证配置 */}
       <section className="mb-8">
         <h2 className="text-xl font-bold text-gray-900 mb-4">验证配置</h2>
