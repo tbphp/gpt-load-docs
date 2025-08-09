@@ -89,7 +89,7 @@ export default function EnvironmentConfigurationPage() {
                     <td className="py-2 px-3">600秒</td>
                     <td className="py-2 px-3">HTTP 服务器写入响应超时</td>
                   </tr>
-                  <tr>
+                  <tr className="border-b border-gray-100">
                     <td className="py-2 px-3">优雅关闭超时</td>
                     <td className="py-2 px-3">
                       <code className="bg-gray-100 px-1 rounded">
@@ -98,6 +98,16 @@ export default function EnvironmentConfigurationPage() {
                     </td>
                     <td className="py-2 px-3">10秒</td>
                     <td className="py-2 px-3">服务优雅关闭等待时间</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 px-3">并发数量</td>
+                    <td className="py-2 px-3">
+                      <code className="bg-gray-100 px-1 rounded">
+                        MAX_CONCURRENT_REQUESTS
+                      </code>
+                    </td>
+                    <td className="py-2 px-3">100</td>
+                    <td className="py-2 px-3">最大并发请求数量</td>
                   </tr>
                 </tbody>
               </table>
@@ -310,15 +320,27 @@ export default function EnvironmentConfigurationPage() {
 
       {/* Summary */}
       <div className="mt-12 pt-8 border-t border-gray-200">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-4">环境配置总结</h2>
+        <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+          环境配置总结
+        </h2>
         <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
           <p className="text-gray-700">
-            环境配置是 GPT-Load 配置系统的基石，主要负责提供应用运行所需的基础设施参数。
+            环境配置是 GPT-Load
+            配置系统的基石，主要负责提供应用运行所需的基础设施参数。
           </p>
           <ul className="list-disc list-inside mt-4 space-y-2 text-gray-600">
-            <li><strong>基础服务参数</strong>：定义了应用启动和运行所依赖的核心服务，如服务器端口、数据库连接等。</li>
-            <li><strong>管理特性</strong>：通过 <code>.env</code> 文件或操作系统环境变量进行配置，在应用启动时加载，确保了配置的稳定性和一致性。</li>
-            <li><strong>使用优势</strong>：为系统提供了可靠的默认值，同时将敏感信息（如数据库密码、API密钥）与代码库分离，增强了安全性。</li>
+            <li>
+              <strong>基础服务参数</strong>
+              ：定义了应用启动和运行所依赖的核心服务，如服务器端口、数据库连接等。
+            </li>
+            <li>
+              <strong>管理特性</strong>：通过 <code>.env</code>{" "}
+              文件或操作系统环境变量进行配置，在应用启动时加载，确保了配置的稳定性和一致性。
+            </li>
+            <li>
+              <strong>使用优势</strong>
+              ：为系统提供了可靠的默认值，同时将敏感信息（如数据库密码、API密钥）与代码库分离，增强了安全性。
+            </li>
           </ul>
         </div>
       </div>

@@ -159,12 +159,6 @@ export default function ProjectConfigurationPage() {
                       50
                     </code>
                   </div>
-                  <div className="flex justify-between text-gray-600">
-                    <span>最大并发请求：</span>
-                    <code className="bg-gray-100 px-1 rounded text-gray-600">
-                      100
-                    </code>
-                  </div>
                 </div>
               </div>
             </div>
@@ -323,7 +317,9 @@ export default function ProjectConfigurationPage() {
 
       {/* Summary */}
       <div className="mt-12 pt-8 border-t border-gray-200">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-4">项目配置总结</h2>
+        <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+          项目配置总结
+        </h2>
         <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
           <p className="text-gray-700">
             项目配置是 GPT-Load
