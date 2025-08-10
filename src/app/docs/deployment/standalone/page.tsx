@@ -236,10 +236,6 @@ export default function StandalonePage() {
                     <br />
                     &nbsp;&nbsp;restart: always
                     <br />
-                    &nbsp;&nbsp;ports:
-                    <br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;- &quot;3306:3306&quot;
-                    <br />
                     &nbsp;&nbsp;environment:
                     <br />
                     &nbsp;&nbsp;&nbsp;&nbsp;MYSQL_ROOT_PASSWORD: 123456
@@ -315,10 +311,6 @@ export default function StandalonePage() {
                     <br />
                     &nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_DB: gpt-load
                     <br />
-                    &nbsp;&nbsp;ports:
-                    <br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;- &quot;5432:5432&quot;
-                    <br />
                     &nbsp;&nbsp;volumes:
                     <br />
                     &nbsp;&nbsp;&nbsp;&nbsp;-
@@ -385,10 +377,6 @@ export default function StandalonePage() {
                   &nbsp;&nbsp;container_name: gpt-load-redis
                   <br />
                   &nbsp;&nbsp;restart: always
-                  <br />
-                  &nbsp;&nbsp;ports:
-                  <br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;- &quot;6379:6379&quot;
                   <br />
                   &nbsp;&nbsp;healthcheck:
                   <br />
