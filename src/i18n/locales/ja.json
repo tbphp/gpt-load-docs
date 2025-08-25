@@ -1,0 +1,60 @@
+{
+  "navigation": {
+    "home": "ホーム",
+    "docs": "ドキュメント",
+    "github": "GitHub",
+    "sponsor": "スポンサー"
+  },
+  "hero": {
+    "title": "GPT-Load",
+    "subtitle": "高性能 AI API 透明プロキシサービス",
+    "description": "企業レベルの AI API 透明プロキシサービスで、各 AI サービスプロバイダーのネイティブ API 形式を完全に保持します。キーローテーション、マルチグループ管理、ロードバランシングなどの機能を提供し、AI アプリケーションに安定で信頼性の高いプロキシサービスを提供します。",
+    "quickStart": "クイックスタート",
+    "documentation": "ドキュメント",
+    "githubRepo": "GitHub リポジトリ"
+  },
+  "architecture": {
+    "title": "アーキテクチャ設計",
+    "subtitle": "高性能でスケーラブルなアーキテクチャ設計",
+    "keyManagement": {
+      "title": "キー管理",
+      "description": "マルチキーローテーションとインテリジェントフェイルオーバーをサポート"
+    },
+    "loadBalancing": {
+      "title": "ロードバランシング",
+      "description": "複数のロードバランシング戦略でサービスの安定性を確保"
+    },
+    "monitoring": {
+      "title": "監視・アラート",
+      "description": "リアルタイムサービス監視で問題を迅速に検出"
+    }
+  },
+  "quickStart": {
+    "title": "クイックスタート",
+    "subtitle": "数分でデプロイ完了",
+    "step1": {
+      "title": "ダウンロード",
+      "description": "GitHub から最新バージョンをダウンロード"
+    },
+    "step2": {
+      "title": "設定",
+      "description": "API キーと設定ファイルを追加"
+    },
+    "step3": {
+      "title": "起動",
+      "description": "プログラムを実行して使用開始"
+    }
+  },
+  "cta": {
+    "title": "GPT-Load を使い始める",
+    "description": "今すぐ高性能 AI API プロキシサービスを体験",
+    "getStarted": "始める",
+    "learnMore": "詳しく見る"
+  },
+  "footer": {
+    "description": "高性能 AI API 透明プロキシサービス",
+    "quickLinks": "クイックリンク",
+    "community": "コミュニティ",
+    "support": "サポート"
+  }
+}

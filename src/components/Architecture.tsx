@@ -9,7 +9,10 @@ import {
   RotateCcw,
   Monitor,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
+
 const Architecture = () => {
+  const t = useTranslations("architecture");
   const components = [
     {
       icon: Users,
@@ -68,10 +71,10 @@ const Architecture = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 px-4">
-              系统架构
+              {t("title")}
             </h2>
             <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-              基于 Go 语言的高性能透明代理架构，支持分布式部署和水平扩展
+              {t("subtitle")}
             </p>
           </motion.div>
           {/* Data Flow */}

@@ -4,8 +4,10 @@ import { motion } from "framer-motion";
 import { ArrowRight, Github, Download, FileText } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const Hero = () => {
+  const t = useTranslations("hero");
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       {/* Simple background pattern */}
@@ -39,7 +41,7 @@ const Hero = () => {
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 px-4"
           >
             <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-              GPT-Load
+              {t("title")}
             </span>
           </motion.h1>
 
@@ -50,7 +52,7 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg sm:text-xl md:text-2xl text-gray-700 mb-4 font-medium px-4"
           >
-            高性能 AI 接口透明代理
+            {t("subtitle")}
           </motion.p>
 
           {/* Description */}
@@ -60,9 +62,7 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-base sm:text-lg text-gray-600 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-4"
           >
-            基于 Go 1.23+ 开发的企业级 AI 接口代理服务，支持 OpenAI、Google
-            Gemini、Anthropic Claude 等多种 AI 服务提供商。
-            提供智能密钥管理、负载均衡、高并发处理和完善的监控功能。
+            {t("description")}
           </motion.p>
 
           {/* Action Buttons */}
@@ -77,7 +77,7 @@ const Hero = () => {
               className="group bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-xl w-full sm:w-auto justify-center"
             >
               <FileText className="h-5 w-5" />
-              项目文档
+              {t("documentation")}
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Link>
 
@@ -86,7 +86,7 @@ const Hero = () => {
               className="group border-2 border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 hover:shadow-md w-full sm:w-auto justify-center"
             >
               <Download className="h-5 w-5" />
-              安装部署
+              {t("quickStart")}
             </Link>
 
             <a
@@ -96,7 +96,7 @@ const Hero = () => {
               className="group border-2 border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 hover:shadow-md w-full sm:w-auto justify-center"
             >
               <Github className="h-5 w-5" />
-              GitHub
+              {t("githubRepo")}
             </a>
           </motion.div>
 

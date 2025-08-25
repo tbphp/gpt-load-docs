@@ -4,6 +4,8 @@ import "./globals.css";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import { GitHubStarsProvider } from "@/context/GitHubStarsContext";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -49,19 +51,23 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const messages = await getMessages();
+
   return (
     <html lang="zh-CN">
       <body className={`${inter.variable} font-sans antialiased`}>
-        <GitHubStarsProvider>
-          <Navigation />
-          {children}
-          <Footer />
-        </GitHubStarsProvider>
+        <NextIntlClientProvider messages={messages}>
+          <GitHubStarsProvider>
+            <Navigation />
+            {children}
+            <Footer />
+          </GitHubStarsProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

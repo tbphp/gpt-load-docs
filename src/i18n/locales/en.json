@@ -1,0 +1,60 @@
+{
+  "navigation": {
+    "home": "Home",
+    "docs": "Documentation",
+    "github": "GitHub",
+    "sponsor": "Sponsor"
+  },
+  "hero": {
+    "title": "GPT-Load",
+    "subtitle": "High-Performance AI API Transparent Proxy Service",
+    "description": "Enterprise-grade AI API transparent proxy service that fully preserves the native API format of various AI service providers. Provides key rotation, multi-group management, load balancing, and other features to offer stable and reliable proxy services for your AI applications.",
+    "quickStart": "Quick Start",
+    "documentation": "Documentation",
+    "githubRepo": "GitHub Repository"
+  },
+  "architecture": {
+    "title": "Architecture Design",
+    "subtitle": "High-performance, scalable architecture design",
+    "keyManagement": {
+      "title": "Key Management",
+      "description": "Support multi-key rotation with intelligent failover"
+    },
+    "loadBalancing": {
+      "title": "Load Balancing",
+      "description": "Multiple load balancing strategies to ensure service stability"
+    },
+    "monitoring": {
+      "title": "Monitoring & Alerts",
+      "description": "Real-time service monitoring for timely issue detection"
+    }
+  },
+  "quickStart": {
+    "title": "Quick Start",
+    "subtitle": "Deploy in minutes",
+    "step1": {
+      "title": "Download",
+      "description": "Download the latest version from GitHub"
+    },
+    "step2": {
+      "title": "Configure",
+      "description": "Add API keys and configuration files"
+    },
+    "step3": {
+      "title": "Launch",
+      "description": "Run the program and start using"
+    }
+  },
+  "cta": {
+    "title": "Start Using GPT-Load",
+    "description": "Experience high-performance AI API proxy service now",
+    "getStarted": "Get Started",
+    "learnMore": "Learn More"
+  },
+  "footer": {
+    "description": "High-Performance AI API Transparent Proxy Service",
+    "quickLinks": "Quick Links",
+    "community": "Community",
+    "support": "Support"
+  }
+}

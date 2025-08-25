@@ -7,12 +7,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Github, Menu, X, Heart } from "lucide-react";
 import { cn, formatStars } from "../lib/utils";
 import { useGitHubStars } from "@/context/GitHubStarsContext";
+import { useTranslations } from "next-intl";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { stars } = useGitHubStars();
+  const t = useTranslations("navigation");
 
   useEffect(() => {
     // 初始化时检查滚动位置
@@ -52,9 +55,9 @@ const Navigation = () => {
   }
 
   const navItems = [
-    { href: "/", label: "首页" },
-    { href: "/docs", label: "文档" },
-    { href: "/docs/sponsor", label: "赞助", icon: Heart },
+    { href: "/", label: t("home") },
+    { href: "/docs", label: t("docs") },
+    { href: "/docs/sponsor", label: t("sponsor"), icon: Heart },
   ];
 
   return (
@@ -107,6 +110,7 @@ const Navigation = () => {
                 <span>{item.label}</span>
               </Link>
             ))}
+            <LanguageSwitcher />
             <Link
               href="https://github.com/tbphp/gpt-load"
               target="_blank"

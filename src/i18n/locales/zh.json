@@ -1,0 +1,60 @@
+{
+  "navigation": {
+    "home": "首页",
+    "docs": "文档",
+    "github": "GitHub",
+    "sponsor": "赞助"
+  },
+  "hero": {
+    "title": "GPT-Load",
+    "subtitle": "高性能 AI 接口透明代理服务",
+    "description": "企业级 AI 接口透明代理服务，完全保留各 AI 服务商的原生 API 格式。提供密钥轮询、多分组管理、负载均衡等功能，为您的 AI 应用提供稳定可靠的代理服务。",
+    "quickStart": "快速开始",
+    "documentation": "查看文档",
+    "githubRepo": "GitHub 仓库"
+  },
+  "architecture": {
+    "title": "架构设计",
+    "subtitle": "高性能、可扩展的架构设计",
+    "keyManagement": {
+      "title": "密钥管理",
+      "description": "支持多密钥轮询，智能失败切换"
+    },
+    "loadBalancing": {
+      "title": "负载均衡",
+      "description": "多种负载均衡策略，确保服务稳定"
+    },
+    "monitoring": {
+      "title": "监控告警",
+      "description": "实时监控服务状态，及时发现问题"
+    }
+  },
+  "quickStart": {
+    "title": "快速开始",
+    "subtitle": "几分钟内完成部署",
+    "step1": {
+      "title": "下载程序",
+      "description": "从 GitHub 下载最新版本"
+    },
+    "step2": {
+      "title": "配置密钥",
+      "description": "添加 API 密钥和配置文件"
+    },
+    "step3": {
+      "title": "启动服务",
+      "description": "运行程序开始使用"
+    }
+  },
+  "cta": {
+    "title": "开始使用 GPT-Load",
+    "description": "立即体验高性能 AI 接口代理服务",
+    "getStarted": "立即开始",
+    "learnMore": "了解更多"
+  },
+  "footer": {
+    "description": "高性能 AI 接口透明代理服务",
+    "quickLinks": "快速链接",
+    "community": "社区",
+    "support": "支持"
+  }
+}
