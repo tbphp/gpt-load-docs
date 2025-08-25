@@ -31,6 +31,22 @@
       "integrations": {
         "title": "サードパーティ統合 - GPT-Load ドキュメント",
         "description": "様々なサードパーティアプリケーションとツールとのGPT-Load統合設定ガイド"
+      },
+      "key-management": {
+        "title": "インテリジェントキー管理 - GPT-Loadドキュメント",
+        "description": "GPT-Loadのインテリジェントキー管理メカニズム（ポーリング、リトライ、障害処理、自動回復など）について詳しく説明します"
+      },
+      "performance": {
+        "title": "パフォーマンス詳細 - GPT-Loadドキュメント",
+        "description": "GPT-LoadがゼロI/O操作、ゼロコピーストリーミング、ロックフリー並行性を通じて究極のパフォーマンスを達成する方法について学びます。"
+      },
+      "routing-strategy": {
+        "title": "ルーティング戦略 - GPT-Loadドキュメント",
+        "description": "GPT-Loadのパス処理メカニズムを理解し、柔軟なパス設定を習得して、クライアントとアップストリームの正しい接続を確保します。"
+      },
+      "cluster": {
+        "title": "クラスター展開 - GPT-Loadドキュメント",
+        "description": "GPT-Load高可用性クラスター展開ソリューション、マスター/スレーブアーキテクチャと水平スケーリングをサポート"
       }
     },
     "docs": {
@@ -41,7 +57,7 @@
       "deployment": "デプロイメントガイド",
       "deploymentDesc": "GPT-Loadの詳細なデプロイメント手順と設定指示",
       "configuration": "設定管理",
-      "configurationDesc": "GPT-Loadの設定オプションとベストプラクティс"
+      "configurationDesc": "GPT-Loadの設定オプションとベストプラクティス"
     }
   },
   "navigation": {
@@ -120,13 +136,16 @@
     "copyright": "© {year} GPT-Load. <licenseLink>MITライセンス</licenseLink>の下でリリースされています。"
   },
   "docs": {
-    "quickStart": "クイックスタート",
+    "layout": {
+      "docsMenu": "ドキュメントメニュー",
+      "closeMenu": "メニューを閉じる"
+    },
     "introduction": "プロジェクト紹介",
     "deployment": {
       "title": "デプロイガイド",
       "standalone": "スタンドアロン",
       "source": "ソースコード",
-      "cluster": "クラスター",
+      "clusterDeployment": "クラスター",
       "clawCloud": "Claw Cloud"
     },
     "configuration": {
@@ -134,25 +153,624 @@
       "environment": "環境変数",
       "project": "プロジェクト設定",
       "management": "管理設定",
-      "cloudflare": "Cloudflare AI Gateway"
+      "cloudflareGateway": "Cloudflare AI Gateway"
     },
     "architecture": {
-      "title": "アーキテクチャ",
-      "keyManagement": "キー管理",
-      "performance": "パフォーマンス",
-      "routing": "ルーティング戦略"
+      "title": "アーキテクチャ設計"
     },
-    "channels": "チャネルサポート",
+    "keyManagement": {
+      "title": "キー管理"
+    },
+    "performance": {
+      "title": "パフォーマンス"
+    },
+    "routingStrategy": {
+      "title": "ルーティング戦略"
+    },
+    "channels": {
+      "title": "チャネルサポート"
+    },
     "integrations": {
       "title": "統合",
-      "cherry": "Cherry Studio",
-      "claude": "Claude Code Router",
-      "newapi": "New API",
-      "roocode": "Roo Code",
-      "gemini": "Gemini OpenAI"
+      "cherryStudio": "Cherry Studio",
+      "claudeCodeRouter": "Claude Code Router",
+      "newApi": "New API",
+      "rooCode": "Roo Code",
+      "geminiOpenai": "Gemini OpenAI"
     },
-    "cluster": "クラスターモード",
-    "sponsor": "スポンサー"
+    "clusterMode": {
+      "title": "クラスターモード"
+    },
+    "sponsor": {
+      "title": "スポンサー"
+    },
+    "architectureDesign": {
+      "header": {
+        "title": "システムアーキテクチャ",
+        "subtitle": "GPT-Loadの技術アーキテクチャと設計思想を深く理解する"
+      },
+      "overview": {
+        "title": "アーキテクチャ概要",
+        "banner": {
+          "title": "高性能透過型プロキシアーキテクチャ",
+          "description": "Go言語で構築された高性能OpenAI APIプロキシサービスで、マルチキーローテーション、負荷分散、インテリジェントなフェイルオーバーをサポートします。"
+        },
+        "items": [
+          { "title": "APIゲートウェイ", "description": "統一されたAPIエントリとルーティング" },
+          { "title": "負荷分散", "description": "インテリジェントなキーローテーションと配布" },
+          { "title": "データストレージ", "description": "MySQL + Redisのデュアルストレージ" },
+          { "title": "セキュリティ監視", "description": "レート制限、認証、監視" }
+        ]
+      },
+      "systemComponents": {
+        "title": "システムコンポーネント",
+        "components": [
+          {
+            "title": "コアサービス層",
+            "subSections": [
+              {
+                "title": "APIプロキシサービス",
+                "items": ["HTTP/HTTPS透過型プロキシ", "リクエストルーティングと転送", "ストリーミングレスポンス処理", "エラー処理とリトライ"]
+              },
+              {
+                "title": "ロードバランサ",
+                "items": ["ラウンドロビンアルゴリズム", "重み付け配布戦略", "ヘルスチェックメカニズム", "自動フェイルオーバー"]
+              }
+            ]
+          },
+          {
+            "title": "管理サービス層",
+            "subSections": [
+              {
+                "title": "Web管理画面",
+                "items": ["Vue 3 + TypeScript", "Naive UIコンポーネントライブラリ", "リアルタイム監視ダッシュボード", "設定管理インターフェース"]
+              },
+              {
+                "title": "REST API",
+                "items": ["キー管理API", "統計データAPI", "システム設定API", "監視メトリクスAPI"]
+              }
+            ]
+          },
+          {
+            "title": "データストレージ層",
+            "subSections": [
+              {
+                "title": "MySQLデータベース",
+                "items": ["キーと設定の永続化", "ユーザー認証データ", "履歴統計記録", "システムログストレージ"]
+              },
+              {
+                "title": "Redisキャッシュ",
+                "items": ["キーステータスキャッシュ", "レート制限カウンタ", "分散ロックメカニズム", "セッション状態管理"]
+              }
+            ]
+          }
+        ]
+      },
+      "dataFlow": {
+        "title": "データフロー",
+        "steps": [
+          { "title": "クライアントリクエスト", "description": "APIゲートウェイがOpenAI互換リクエストを受信" },
+          { "title": "キー選択", "description": "ロードバランサが利用可能なAPIキーを選択" },
+          { "title": "リクエスト転送", "description": "プロキシサービスがリクエストをOpenAI APIに転送" },
+          { "title": "レスポンス処理", "description": "ストリーミングレスポンスが処理されクライアントに返却" },
+          { "title": "データ記録", "description": "統計データとログをデータベースに記録" }
+        ]
+      },
+      "deploymentArchitectures": {
+        "title": "デプロイメントアーキテクチャ",
+        "architectures": [
+          {
+            "title": "スタンドアロンデプロイ",
+            "useCase": {
+              "title": "適用シーン",
+              "items": ["中小規模アプリケーション", "開発・テスト環境", "個人プロジェクト"]
+            }
+          },
+          {
+            "title": "クラスターデプロイ",
+            "useCase": {
+              "title": "適用シーン",
+              "items": ["大規模本番環境", "高可用性要件", "エンタープライズレベルのアプリケーション"]
+            }
+          }
+        ]
+      },
+      "techStack": {
+        "title": "技術スタック",
+        "categories": [
+          {
+            "title": "バックエンド技術",
+            "items": ["Go 1.23+", "Gin Webフレームワーク", "GORM ORM", "Go-Redis"]
+          },
+          {
+            "title": "フロントエンド技術",
+            "items": ["Vue 3", "TypeScript", "Naive UI", "Vite"]
+          },
+          {
+            "title": "インフラストラクチャ",
+            "items": ["MySQL 8.2+", "Redis", "Docker", "Nginx"]
+          }
+        ]
+      },
+      "designPrinciples": {
+        "title": "設計原則",
+        "principles": [
+          { "title": "高性能", "description": "Go言語の高い並行処理能力を活用し、数千QPSの要求処理をサポート" },
+          { "title": "高可用性", "description": "自動フェイルオーバー、ヘルスチェック、分散展開によりサービスの可用性を保証" },
+          { "title": "スケーラビリティ", "description": "モジュール設計とマイクロサービスアーキテクチャにより、水平および機能拡張をサポート" },
+          { "title": "透過型プロキシ", "description": "OpenAI APIと完全互換で、既存のコードを変更せずに統合可能" }
+        ]
+      }
+    },
+    "keyManagementPage": {
+      "header": {
+        "title": "インテリジェントキー管理",
+        "description": "GPT-Loadは、ポーリング負荷分散、自動障害検出、および回復メカニズムを通じて、高い可用性と安定性を確保するインテリジェントなキー管理メカニズムを使用しています。"
+      },
+      "polling": {
+        "title": "ポーリングメカニズム",
+        "goal": {
+          "title": "目標",
+          "description": "グループ内の複数のキー間でリクエストの公正な負荷分散を実現します。"
+        },
+        "implementation": {
+          "title": "実装",
+          "items": [
+            {
+              "title": "アトミックカウンタ",
+              "description": "高い同時実行性下でのポーリングの一貫性と公平性を保証します"
+            },
+            {
+              "title": "ステータスフィルタリング",
+              "description": "ポーリングは、グループ内の「アクティブ」ステータスのキーに限定されます"
+            }
+          ]
+        }
+      },
+      "retry": {
+        "title": "リトライと障害処理",
+        "trigger": {
+          "title": "トリガーシナリオ",
+          "description": "リクエストの失敗（HTTPステータス≥400またはネットワークエラー）時に自動的にトリガーされます"
+        },
+        "process": {
+          "title": "プロセスフロー",
+          "steps": [
+            {
+              "title": "失敗としてマーク",
+              "description": "現在の失敗したキーの<strong>失敗カウント</strong>をインクリメントします"
+            },
+            {
+              "title": "新しいキーを取得",
+              "description": "ポーリングを介してグループ内の<strong>次の</strong>利用可能なキーを直ちに取得します"
+            },
+            {
+              "title": "シームレスなリトライ",
+              "description": "クライアントに対して透過的に、新しいキーでリクエストをリトライします"
+            },
+            {
+              "title": "リトライ制限",
+              "description": "設定された<strong>最大リトライ試行回数</strong>。すべての試行が失敗した場合、最終エラーをクライアントに返します"
+            }
+          ]
+        }
+      },
+      "blacklistRecovery": {
+        "title": "キーのブラックリスト登録と回復"
+      },
+      "blacklist": {
+        "title": "ブラックリストメカニズム",
+        "trigger": {
+          "title": "トリガー条件",
+          "description": "キーの累積<strong>失敗カウント</strong>が<strong>ブラックリストしきい値</strong>に達したとき"
+        },
+        "action": {
+          "title": "アクション",
+          "items": [
+            "キーステータスが「無効」に更新されます",
+            "ポーリングキューから削除され、新しいリクエストは受け付けられません"
+          ]
+        }
+      },
+      "recovery": {
+        "title": "回復メカニズム",
+        "trigger": {
+          "title": "トリガー時間",
+          "description": "バックグラウンドのcronジョブが<strong>キー検証間隔</strong>で定期的に実行されます"
+        },
+        "process": {
+          "title": "回復プロセス",
+          "steps": [
+            {
+              "title": "ヘルスチェック",
+              "description": "ブラックリストに登録されたキーを使用して検証エンドポイント（例：モデルリスト）にリクエストします"
+            },
+            {
+              "title": "検証成功",
+              "description": "• キーステータスが「アクティブ」に復元されます<br>• <strong>失敗カウントが0にリセットされます</strong><br>• ポーリングキューに再追加されます"
+            },
+            {
+              "title": "検証失敗",
+              "description": "「無効」のままで、次のチェックサイクルを待ちます"
+            }
+          ]
+        }
+      },
+      "advantages": {
+        "title": "メカニズムの利点",
+        "items": [
+          {
+            "title": "負荷分散",
+            "description": "アトミックカウンタは、高い同時実行性下での公正なポーリングを保証します"
+          },
+          {
+            "title": "自動回復",
+            "description": "定期的なヘルスチェックによる自動障害回復"
+          },
+          {
+            "title": "障害分離",
+            "description": "障害のあるキーを迅速に特定してサービスの安定性を確保します"
+          }
+        ]
+      }
+    },
+    "performancePage": {
+      "title": "パフォーマンス詳細 - GPT-Load",
+      "description": "GPT-LoadがゼロI/O、ゼロコピーストリーミング、ロックフリー並行性などの設計を通じて、どのように極限のパフォーマンスを達成するかを学びます。",
+      "header": {
+        "title": "パフォーマンス詳細",
+        "description": "GPT-Loadは<strong>「プロキシパス優先」</strong>の高性能設計哲学を採用しており、すべての最適化はコアプロキシリクエストの究極のパフォーマンスと安定性を確保するために行われます。"
+      },
+      "coreFeatures": {
+        "title": "コアパフォーマンス特性",
+        "features": [
+          { "title": "ゼロI/O", "description": "プロキシリクエストは完全にメモリで処理" },
+          { "title": "ゼロコピー", "description": "直接ストリーミングデータ転送" },
+          { "title": "ロックフリー", "description": "アトミック操作による効率的な処理" },
+          { "title": "低フットプリント", "description": "シングルコア128MB RAMで実行" }
+        ]
+      },
+      "proxyPerformance": {
+        "title": "究極のプロキシリクエストパフォーマンス",
+        "zeroIoNote": "最小のレイテンシと最高の並行性を実現するため、プロキシリクエストのコアパスは<strong>「ゼロI/O操作」</strong>向けに設計されています。",
+        "inMemory": {
+          "title": "インメモリサービス",
+          "description": "ルーティングと意思決定に必要なすべてのデータ（グループ設定やキー情報を含む）は、サービス起動時および設定変更時にメモリにプリロードされます。プロキシリクエスト中にデータベースやディスクへのアクセスは不要です。"
+        },
+        "zeroCopy": {
+          "title": "ゼロコピーストリーミング",
+          "mechanism": {
+            "title": "リアルタイムパススルーメカニズム",
+            "description": "GPT-Loadは<strong>リアルタイムパススルーモード</strong>を使用し、上流サービスのデータストリーム（<code class=\"bg-gray-100 px-1 rounded\">io.Reader</code>）をクライアント応答（<code class=\"bg-gray-100 px-1 rounded\">io.Writer</code>）に直接接続し、<strong>中間バッファリング、行単位の読み取り、またはコンテンツの解析を行いません</strong>。"
+          },
+          "comparison": {
+            "title": "従来のストリーミングとの違い",
+            "traditional": {
+              "title": "❌ 従来の方法",
+              "description": "一行ずつ読む → 解析・処理 → バッファ出力"
+            },
+            "gptload": {
+              "title": "✅ GPT-Loadの方法",
+              "description": "アップストリームデータストリーム → 直接パススルー → クライアント"
+            }
+          },
+          "advantagesTitle": "コアな利点",
+          "advantages": [
+            { "title": "パケットの切り捨てを回避", "description": "一行ずつ読むことで元のデータパケット構造を壊しません" },
+            { "title": "究極の互換性", "description": "SSE、JSONストリーム、バイナリなど、すべてのデータ形式をネイティブにサポート" },
+            { "title": "無制限の応答", "description": "理論的にはどんなサイズのアップストリーム応答も処理可能" },
+            { "title": "ゼロレイテンシ転送", "description": "データは到着次第転送され、バッファリングの遅延なし" },
+            { "title": "極めて低いメモリ使用量", "description": "データはキャッシュされないため、メモリ使用量は応答サイズに依存しません" },
+            { "title": "ネイティブパフォーマンス", "description": "応答速度はネイティブの上流サービスとほぼ同じ" }
+          ]
+        },
+        "asyncLogging": {
+          "title": "非同期ロギング",
+          "description": "リクエストロギングは<strong>遅延非同期書き込み</strong>戦略を使用し、リクエスト応答ライフサイクルから完全に切り離されているため、ロギング操作がリアルタイムのプロキシパフォーマンスに干渉することはありません。"
+        }
+      },
+      "concurrency": {
+        "title": "動的リソースと並行性管理",
+        "httpClient": {
+          "title": "効率的なHTTPクライアントの再利用",
+          "items": [
+            "各グループに対して、基盤となる接続プールを持つ個別で再利用可能なHTTPクライアントインスタンスを維持します。",
+            "グループの設定（タイムアウトなど）が変更されると、システムは<strong>動的に</strong>新しいクライアントインスタンスをリアルタイムで生成し、新しい設定が即座に適用されるようにします。"
+          ]
+        },
+        "atomicLockFree": {
+          "title": "アトミック操作とロックフリー設計",
+          "description": "キーポーリングカウントなどの高頻度並行操作では、<code class=\"bg-gray-100 px-1 rounded\">sync/atomic</code>パッケージを使用してロックフリープログラミングを行い、Mutexロックに関連するパフォーマンスのオーバーヘッドを回避します。"
+        }
+      },
+      "scalability": {
+        "title": "非同期タスクとスケーラビリティ",
+        "asyncKeyManagement": {
+          "title": "大量キーの非同期管理",
+          "mechanism": {
+            "title": "メカニズム",
+            "description": "キーの追加や検証などの操作は、<strong>非同期バックグラウンドタスク</strong>として実行されます。"
+          },
+          "advantage": {
+            "title": "利点",
+            "description": "これにより、管理操作がサービスをブロックすることがなくなり、理論的にはシステムが数百万のキーを管理できるようになります。"
+          }
+        },
+        "clusterSupport": {
+          "title": "クラスターサポートと設定同期",
+          "architecture": {
+            "title": "アーキテクチャ",
+            "description": "水平スケーリングのためにマルチノードのマスター/スレーブアーキテクチャをサポートします。"
+          },
+          "sync": {
+            "title": "同期",
+            "items": [
+              "マスターノードでの設定変更は、Redis Pub/Sub通知を介してプッシュされます。",
+              "スレーブノードは、組み込みの<strong>設定シンクロナイザー</strong>を通じて更新をリッスンしてプルし、クラスター全体で設定の最終的な一貫性を実現します。"
+            ]
+          }
+        }
+      },
+      "resourceEfficiency": {
+        "title": "軽量＆リソース効率",
+        "lowUsage": {
+          "title": "極めて低いリソースフットプリント",
+          "description": "Goの効率的なメモリ管理と前述のパフォーマンス最適化（ゼロコピー、接続プーリングなど）のおかげで、GPT-Loadはコンパイルされたバイナリとして実行され、外部ランタイムの依存関係がなく、極めて低いリソースフットプリントを実現します。",
+          "specs": {
+            "cpu": "シングルコアCPU",
+            "memory": "128MB RAM"
+          }
+        },
+        "wideApplicability": {
+          "title": "幅広い適用性",
+          "description": "典型的なスタンドアロン展開では、低いCPUとメモリでスムーズなサービス運用を保証するのに十分です。",
+          "items": ["大企業の高並行シナリオに対応可能。", "リソースが限られている個人開発者に適しています。"]
+        }
+      }
+    },
+    "quickStartPage": {
+      "title": "クイックスタート",
+      "description": "以下の手順に従って、GPT-Loadを起動して実行します。",
+      "sectionTitle": "クイック起動",
+      "lightweightDeployment": {
+        "title": "軽量デプロイメント",
+        "description": "SQLiteデータベースとメモリ内ストレージを使用し、個人使用や迅速な試用に最適です。"
+      },
+      "prerequisites": {
+        "title": "前提条件",
+        "items": [
+          "Docker 20.10+ および Docker Compose",
+          "Linux/macOS/Windows オペレーティングシステム",
+          "少なくとも128MBのRAMと1GBのディスクスペース"
+        ]
+      },
+      "installationSteps": {
+        "title": "インストール手順",
+        "securityWarning": {
+          "title": "重要なセキュリティ警告",
+          "body": "デプロイする前に、デフォルトの管理者キーを変更する必要があります！",
+          "rules": [
+            "少なくとも20文字の複雑なキーを使用してください",
+            "大文字、小文字、数字、特殊文字を含めてください",
+            "<code>sk-123456</code> のようなデフォルトまたは単純なキーは絶対に使用しないでください",
+            "本番環境で脆弱なキーを使用すると、重大なセキュリティリスクにさらされます"
+          ],
+          "recommendation": "推奨キー形式: <code>sk-prod-[32文字のランダムな文字列]</code>"
+        },
+        "steps": [
+          {
+            "title": "作業ディレクトリの作成",
+            "command": "# ディレクトリを作成して移動<br/>mkdir -p gpt-load && cd gpt-load"
+          },
+          {
+            "title": "設定ファイルのダウンロード",
+            "command": "# Docker Compose設定をダウンロード<br/>wget https://raw.githubusercontent.com/tbphp/gpt-load/refs/heads/main/docker-compose.yml<br/><br/># 環境設定をダウンロード<br/>wget -O .env https://raw.githubusercontent.com/tbphp/gpt-load/refs/heads/main/.env.example",
+            "securityConfig": {
+              "title": "直ちにセキュリティ設定を変更",
+              "line1": "<code>.env</code> ファイルを編集し、次の内容を変更します：",
+              "code1": "AUTH_KEY=sk-123456",
+              "line2": "強力なキーに変更：",
+              "code2": "AUTH_KEY=sk-prod-your-strong-random-key-32-chars"
+            }
+          },
+          {
+            "title": "サービスの開始",
+            "command": "# GPT-Loadサービスを開始<br/>docker compose up -d"
+          },
+          {
+            "title": "デプロイの確認",
+            "command": "",
+            "visitAdmin": "管理インターフェースにアクセス：",
+            "loginNote": "<code>.env</code> ファイルで設定した <code>AUTH_KEY</code> を使用して管理インターフェースにログインします。"
+          }
+        ]
+      },
+      "commonCommands": {
+        "title": "一般的なコマンド",
+        "commands": [
+          {
+            "title": "ステータスの確認",
+            "command": "docker compose ps"
+          },
+          {
+            "title": "ログの表示",
+            "command": "docker compose logs -f"
+          },
+          {
+            "title": "サービスの再起動",
+            "command": "docker compose down && docker compose up -d"
+          },
+          {
+            "title": "バージョンの更新",
+            "command": "docker compose pull && docker compose down && docker compose up -d"
+          }
+        ]
+      },
+      "nextSteps": {
+        "text": "MySQL/PostgreSQLの使用やクラスターのセットアップなど、他のデプロイオプションについては、完全な<a><strong>デプロイガイド</strong></a>をご覧ください。"
+      }
+    },
+    "clusterPage": {
+      "content": {
+        "header": {
+          "title": "クラスター展開",
+          "description": "GPT-Load高可用性クラスター展開ソリューション、マスター/スレーブアーキテクチャと水平スケーリングをサポート"
+        },
+        "overview": {
+          "title": "クラスターアーキテクチャ概要",
+          "banner": {
+            "title": "エンタープライズグレードの高可用性アーキテクチャ",
+            "description": "大規模な本番環境向けに設計され、サービスの安定性と信頼性を確保します。"
+          },
+          "items": [
+            { "title": "マスター/スレーブアーキテクチャ", "description": "Redisに基づくマスターノード選出と設定同期", "icon": "Server" },
+            { "title": "水平スケーリング", "description": "ステートレスなスレーブノード設計で動的スケーリングをサポート", "icon": "Layers" },
+            { "title": "データ共有", "description": "MySQL + Redisによる統一されたデータストレージとキャッシング", "icon": "Database" }
+          ]
+        },
+        "prerequisites": {
+          "title": "展開環境要件",
+          "importantNote": {
+            "title": "重要事項",
+            "description": "本番環境では、独立した高可用性のMySQLおよびRedisサービスを使用することを強くお勧めします。"
+          },
+          "requirements": [
+            {
+              "title": "インフラストラクチャ",
+              "items": [
+                "サーバー:最低2台（マスター1台、スレーブ1台）、高可用性のために3台以上を推奨",
+                "ネットワーク:すべてのノード間で低遅延のネットワーク接続を確保"
+              ]
+            },
+            {
+              "title": "依存サービス",
+              "items": [
+                "MySQL:バージョン8.0+、データ永続化用",
+                "Redis:バージョン6.2+、キャッシング、分散ロック、メッセージキュー用"
+              ]
+            }
+          ]
+        },
+        "deploymentSteps": {
+          "title": "展開手順",
+          "steps": [
+            {
+              "title": "ステップ1：マスターノードの設定",
+              "sections": [
+                {
+                  "title": "環境変数設定",
+                  "content": "マスターノードの.envファイルで以下のコア設定を行います：",
+                  "code": "IS_SLAVE=false\nREDIS_HOST=your-redis-host\nREDIS_PORT=6379\nREDIS_PASSWORD=your-redis-password\nDB_HOST=your-mysql-host\nDB_PORT=3306\nDB_USER=your-mysql-user\nDB_PASSWORD=your-mysql-password\nDB_NAME=gpt_load"
+                }
+              ]
+            },
+            {
+              "title": "ステップ2：スレーブノードの設定",
+              "sections": [
+                {
+                  "title": "環境変数設定",
+                  "content": "すべてのスレーブノードの.envファイルで、IS_SLAVE=trueであることを確認し、マスターノードと同じデータベースとRedis設定を使用します。",
+                  "code": "IS_SLAVE=true\nREDIS_HOST=your-redis-host\n# ... その他の設定はマスターノードと同じ"
+                }
+              ]
+            },
+            {
+              "title": "ステップ3：クラスターの起動",
+              "sections": [
+                {
+                  "title": "起動シーケンス",
+                  "content": "必ずマスターノードを最初に起動し、完全に起動して初期化が完了した後に、すべてのスレーブノードを順次起動してください。",
+                  "note": "スレーブノードは起動時に自動的にRedisに接続し、Pub/Subメカニズムを介してマスターノードから最新の設定を同期します。"
+                }
+              ]
+            }
+          ]
+        },
+        "configManagement": {
+          "title": "設定管理と同期",
+          "sections": [
+            {
+              "title": "設定同期メカニズム",
+              "items": [
+                { "name": "マスター書き込み、スレーブ読み取り専用" },
+                { "name": "Redis Pub/Sub経由で更新をプッシュ" },
+                { "name": "スレーブは設定を自動同期" }
+              ]
+            },
+            {
+              "title": "コア同期データ",
+              "items": [
+                { "name": "グループ設定", "requirement": "リアルタイム同期" },
+                { "name": "キー情報", "requirement": "リアルタイム同期" },
+                { "name": "システム設定", "requirement": "リアルタイム同期" }
+              ]
+            }
+          ]
+        },
+        "monitoring": {
+          "title": "監視とメンテナンス",
+          "healthCheck": {
+            "title": "ヘルスチェック",
+            "clusterMonitoringTitle": "クラスター監視",
+            "status": {
+              "title": "ノードステータスチェック",
+              "command": "curl http://<node_ip>:3001/api/status",
+              "response": "\n{\n  \"status\": \"ok\",\n  \"version\": \"v1.0.0\"\n}"
+            },
+            "clusterMonitoring": [
+              "Prometheus + Grafanaを使用してクラスターメトリクスを監視",
+              "マスターノードの管理画面ですべてのノードステータスを表示",
+              "アラートルールを設定して異常を迅速に検出"
+            ]
+          },
+          "scaling": {
+            "title": "スケーリング",
+            "items": [
+              {
+                "title": "水平スケーリング",
+                "items": [
+                  "新しいノードの追加:スレーブとして設定して起動",
+                  "ノードの削除:スレーブノードサービスをシャットダウンするだけ"
+                ]
+              },
+              {
+                "title": "マスターノードの移行",
+                "items": [
+                  "古いマスターノードをシャットダウン",
+                  "スレーブノードの設定をIS_SLAVE=falseに変更",
+                  "そのノードを再起動して新しいマスターにする"
+                ]
+              }
+            ]
+          }
+        },
+        "bestPractices": {
+          "title": "ベストプラクティス",
+          "practices": [
+            {
+              "title": "推奨プラクティス",
+              "items": [
+                "外部の高可用性データベースとRedisサービスを使用",
+                "GPT-Loadクラスター用のロードバランサー（Nginxなど）を設定",
+                "データベースと設定ファイルを定期的にバックアップ",
+                "Redisの接続数とメモリ使用量を監視"
+              ],
+              "type": "good"
+            },
+            {
+              "title": "避けるべき操作",
+              "items": [
+                "複数のノードで同時に書き込み操作を実行する",
+                "マスターノードが完全に起動する前にスレーブノードを起動する",
+                "本番環境でデフォルトのAUTH_KEYを使用する",
+                "データベースとRedisの監視を怠る"
+              ],
+              "type": "bad"
+            }
+          ]
+        }
+      }
+    }
   },
   "features": {
     "title": "主な技術的特徴",
@@ -263,17 +881,29 @@
       "mysql": {
         "title": "MySQL 8.2+",
         "description": "永続ストレージ",
-        "details": ["設定データ", "ユーザー情報", "リクエストログ"]
+        "details": [
+          "設定データ",
+          "ユーザー情報",
+          "リクエストログ"
+        ]
       },
       "redis": {
         "title": "Redis",
         "description": "キャッシュ＆ロック",
-        "details": ["キーキャッシュ", "分散ロック", "セッションストレージ"]
+        "details": [
+          "キーキャッシュ",
+          "分散ロック",
+          "セッションストレージ"
+        ]
       },
       "vue": {
         "title": "Vue 3 管理バックエンド",
         "description": "管理インターフェース",
-        "details": ["リアルタイム監視", "設定管理", "ログ表示"]
+        "details": [
+          "リアルタイム監視",
+          "設定管理",
+          "ログ表示"
+        ]
       }
     },
     "deployment": {
@@ -294,25 +924,6 @@
         ]
       }
     }
-  },
-  "quickStartPage": {
-    "step2": {
-      "copyEnv": "環境設定ファイルをコピー",
-      "editConfig": "設定の編集（オプション）",
-      "mainConfig": "主な設定項目："
-    },
-    "step3": {
-      "startService": "サービスの開始（MySQLとRedisを含む）",
-      "visitAdmin": "管理画面にアクセス"
-    },
-    "requirements": {
-      "title": "システム要件",
-      "runtime": "ランタイム環境",
-      "storage": "データストレージ",
-      "cache": "キャッシュサービス",
-      "container": "コンテナランタイム"
-    },
-    "viewDocs": "詳細なデプロイメントドキュメントを表示"
   },
   "structuredData": {
     "organization": {
@@ -422,6 +1033,115 @@
         "activeKeys": "アクティブなキー:",
         "errorRate": "エラー率:"
       }
+    },
+    "routingStrategy": {
+      "metadata": {
+        "title": "ルーティング戦略 - GPT-Load",
+        "description": "GPT-Loadのパスハンドリングメカニズムを理解し、柔軟なパス設定方法を習得し、クライアントとアップストリームサービス間の正しい接続を確保します。"
+      },
+      "content": {
+        "header": {
+          "title": "ルーティング戦略",
+          "description": "GPT-Loadのパスハンドリングメカニズムを理解し、柔軟なパス設定方法を習得し、クライアントとアップストリームサービス間の正しい接続を確保します。"
+        },
+        "coreConcept": {
+          "title": "パスハンドリングの原則",
+          "principle": {
+            "title": "パススルー原則",
+            "description": "GPT-Loadはパススルー原則に従い、最大限の柔軟性を維持するためにパスの置換のみを担当します。中心的なロジックは、クライアントリクエストのプロキシプレフィックスを実際のアップストリームアドレスに置き換えることです。",
+            "rule": "置換ルール：",
+            "rulePrefix": "GPT-Loadサービスアドレス + /proxy/ + グループ名",
+            "ruleSuffix": "アップストリームアドレス"
+          }
+        },
+        "processingLogic": {
+          "title": "処理フローの例",
+          "serverAddress": "サービスアドレス：",
+          "upstreamUrl": "アップストリームURL：",
+          "groupName": "グループ名：",
+          "clientRequest": "クライアントリクエスト",
+          "actualRequest": "実際のリクエスト"
+        },
+        "configExamples": {
+          "title": "詳細な設定方法",
+          "description": "OpenRouterを例に（フルパス：{code}）、グループ名は{code}、チャネルタイプは{code}です：",
+          "configs": [
+            {
+              "title": "設定方法1：ドメイン分離",
+              "gptLoadConfig": {
+                "title": "GPT-Load設定",
+                "upstreamUrl": "https://openrouter.ai",
+                "testPath": "/api/v1/chat/completions"
+              },
+              "clientConfig": {
+                "title": "クライアント設定",
+                "apiUrl": "http://localhost:3001/proxy/openrouter/api"
+              }
+            },
+            {
+              "title": "設定方法2：APIパスを含む（推奨）",
+              "gptLoadConfig": {
+                "title": "GPT-Load設定",
+                "upstreamUrl": "https://openrouter.ai/api",
+                "testPath": "/v1/chat/completions"
+              },
+              "clientConfig": {
+                "title": "クライアント設定",
+                "apiUrl": "http://localhost:3001/proxy/openrouter"
+              }
+            },
+            {
+              "title": "設定方法3：フルバージョンパス",
+              "gptLoadConfig": {
+                "title": "GPT-Load設定",
+                "upstreamUrl": "https://openrouter.ai/api/v1",
+                "testPath": "/chat/completions"
+              },
+              "clientConfig": {
+                "title": "クライアント設定",
+                "apiUrl": "http://localhost:3001/proxy/openrouter/",
+                "note": "注意：クライアントが自動的にv1パスを追加するのを避けるため、/で終わる必要があります"
+              }
+            }
+          ]
+        },
+        "bestPractices": {
+          "title": "ベストプラクティス",
+          "practices": [
+            {
+              "title": "設定アドバイス",
+              "icon": "Route",
+              "recommendations": [
+                "明確で理解しやすい構造のため、設定方法2の使用を推奨します",
+                "最初に完全なアップストリームAPIアドレスを決定します",
+                "クライアントの特性に基づいて適切なパス分割点を選択します",
+                "設定の一貫性と保守性を維持します"
+              ]
+            },
+            {
+              "title": "デバッグのヒント",
+              "icon": "Globe",
+              "recommendations": [
+                "GPT-Loadリクエストログをチェックしてアップストリームアドレスを確認します",
+                "テストパスを使用して設定の正しさを検証します",
+                "クライアントのパス連結ルールに注意してください",
+                "さまざまなシナリオに適応するために設定を柔軟に調整します"
+              ]
+            }
+          ]
+        },
+        "summary": {
+          "title": "設定キーポイントの概要",
+          "description": "パスハンドリングのロジックを理解することが鍵です：GPT-Loadは単純な文字列置換のみを担当し、柔軟な設定方法でさまざまなクライアントとアップストリームサービスのニーズに適応できます。",
+          "corePrinciple": "コア原則：GPT-Loadによってプロキシされた後、{code}と{code}の両方の最終的なアップストリームアドレスが正しいことを確認します。"
+        }
+      },
+      "replaceWith": "に置き換えられます",
+      "serverAddress": "サービスアドレス",
+      "upstreamUrlLabel": "アップストリームURL",
+      "groupNameLabel": "グループ名",
+      "testPathLabel": "テストパス",
+      "clientApiUrlLabel": "Cherry Studio API URL"
     }
   }
 }

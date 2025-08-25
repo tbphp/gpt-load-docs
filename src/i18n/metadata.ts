@@ -106,6 +106,11 @@ type PageKey =
   | "docs/deployment"
   | "docs/configuration"
   | "architecture"
+  | "architecture-design"
+  | "key-management"
+  | "performance"
+  | "routing-strategy"
+  | "cluster"
   | "configuration"
   | "deployment"
   | "channels"
@@ -143,6 +148,26 @@ export async function generatePageMetadata(
     case "docs/configuration":
       pageTitle = `${t("docs.configuration")} - ${t("title")}`;
       pageDescription = t("docs.configurationDesc");
+      break;
+    case "architecture-design":
+      pageTitle = `${t("pages.architecture.title")} - ${t("title")}`;
+      pageDescription = t("pages.architecture.description");
+      break;
+    case "key-management":
+      pageTitle = `${t("pages.key-management.title")} - ${t("title")}`;
+      pageDescription = t("pages.key-management.description");
+      break;
+    case "performance":
+      pageTitle = `${t("pages.performance.title")} - ${t("title")}`;
+      pageDescription = t("pages.performance.description");
+      break;
+    case "routing-strategy":
+      pageTitle = `${t("pages.routing-strategy.title")} - ${t("title")}`;
+      pageDescription = t("pages.routing-strategy.description");
+      break;
+    case "cluster":
+      pageTitle = `${t("pages.cluster.title")} - ${t("title")}`;
+      pageDescription = t("pages.cluster.description");
       break;
   }
 

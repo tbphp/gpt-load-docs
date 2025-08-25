@@ -31,6 +31,22 @@
       "integrations": {
         "title": "Third-party Integrations - GPT-Load Documentation",
         "description": "GPT-Load integration configuration guide with various third-party applications and tools"
+      },
+      "key-management": {
+        "title": "Intelligent Key Management - GPT-Load Docs",
+        "description": "Learn about GPT-Load's intelligent key management mechanism, including polling, retries, fault handling, and automatic recovery"
+      },
+      "performance": {
+        "title": "Performance Details - GPT-Load Docs",
+        "description": "Learn how GPT-Load achieves ultimate performance through zero I/O operations, zero-copy streaming, and lock-free concurrency."
+      },
+      "routing-strategy": {
+        "title": "Routing Strategy - GPT-Load Docs",
+        "description": "Understand GPT-Load's path handling mechanism to master flexible path configuration and ensure correct client-upstream connections."
+      },
+      "cluster": {
+        "title": "Cluster Deployment - GPT-Load Docs",
+        "description": "GPT-Load high-availability cluster deployment solution, supporting master-slave architecture and horizontal scaling."
       }
     },
     "docs": {
@@ -120,13 +136,16 @@
     "copyright": "© {year} GPT-Load. Released under the <licenseLink>MIT License</licenseLink>."
   },
   "docs": {
-    "quickStart": "Quick Start",
+    "layout": {
+      "docsMenu": "Docs Menu",
+      "closeMenu": "Close Menu"
+    },
     "introduction": "Introduction",
     "deployment": {
       "title": "Deployment Guide",
       "standalone": "Standalone",
       "source": "Source Code",
-      "cluster": "Cluster",
+      "clusterDeployment": "Cluster",
       "clawCloud": "Claw Cloud"
     },
     "configuration": {
@@ -134,79 +153,803 @@
       "environment": "Environment Variables",
       "project": "Project Config",
       "management": "Management Config",
-      "cloudflare": "Cloudflare AI Gateway"
+      "cloudflareGateway": "Cloudflare AI Gateway"
     },
     "architecture": {
-      "title": "Architecture",
-      "keyManagement": "Key Management",
-      "performance": "Performance",
-      "routing": "Routing Strategy"
+      "title": "Architecture Design"
     },
-    "channels": "Channel Support",
+    "keyManagement": {
+      "title": "Key Management"
+    },
+    "performance": {
+      "title": "Performance"
+    },
+    "routingStrategy": {
+      "title": "Routing Strategy"
+    },
+    "channels": {
+      "title": "Channel Support"
+    },
     "integrations": {
       "title": "Integrations",
-      "cherry": "Cherry Studio",
-      "claude": "Claude Code Router",
-      "newapi": "New API",
-      "roocode": "Roo Code",
-      "gemini": "Gemini OpenAI"
+      "cherryStudio": "Cherry Studio",
+      "claudeCodeRouter": "Claude Code Router",
+      "newApi": "New API",
+      "rooCode": "Roo Code",
+      "geminiOpenai": "Gemini Official OpenAI Compatible"
     },
-    "cluster": "Cluster Mode",
-    "sponsor": "Sponsor"
+    "clusterMode": {
+      "title": "Cluster Mode"
+    },
+    "sponsor": {
+      "title": "Sponsor"
+    },
+    "architectureDesign": {
+      "header": {
+        "title": "System Architecture",
+        "subtitle": "Learn about the technical architecture and design philosophy of GPT-Load"
+      },
+      "overview": {
+        "title": "Architecture Overview",
+        "banner": {
+          "title": "High-Performance Transparent Proxy Architecture",
+          "description": "A high-performance OpenAI API proxy service built with Go, supporting multi-key rotation, load balancing, and intelligent failover"
+        },
+        "items": [
+          {
+            "title": "API Gateway",
+            "description": "Unified API entry and routing"
+          },
+          {
+            "title": "Load Balancing",
+            "description": "Intelligent key rotation and distribution"
+          },
+          {
+            "title": "Data Storage",
+            "description": "MySQL + Redis dual storage"
+          },
+          {
+            "title": "Security & Monitoring",
+            "description": "Rate limiting, authentication, and monitoring"
+          }
+        ]
+      },
+      "systemComponents": {
+        "title": "System Components",
+        "components": [
+          {
+            "title": "Core Service Layer",
+            "subSections": [
+              {
+                "title": "API Proxy Service",
+                "items": [
+                  "HTTP/HTTPS Transparent Proxy",
+                  "Request Routing and Forwarding",
+                  "Streaming Response Handling",
+                  "Error Handling and Retries"
+                ]
+              },
+              {
+                "title": "Load Balancer",
+                "items": [
+                  "Round Robin Algorithm",
+                  "Weight Distribution Strategy",
+                  "Health Check Mechanism",
+                  "Automatic Failover"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Management Service Layer",
+            "subSections": [
+              {
+                "title": "Web Admin Interface",
+                "items": [
+                  "Vue 3 + TypeScript",
+                  "Naive UI Component Library",
+                  "Real-time Monitoring Dashboard",
+                  "Configuration Management Interface"
+                ]
+              },
+              {
+                "title": "REST API",
+                "items": [
+                  "Key Management API",
+                  "Statistics Data API",
+                  "System Configuration API",
+                  "Monitoring Metrics API"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Data Storage Layer",
+            "subSections": [
+              {
+                "title": "MySQL Database",
+                "items": [
+                  "Key and Configuration Persistence",
+                  "User Authentication Data",
+                  "Historical Statistics Records",
+                  "System Log Storage"
+                ]
+              },
+              {
+                "title": "Redis Cache",
+                "items": [
+                  "Key Status Cache",
+                  "Rate Limiting Counters",
+                  "Distributed Lock Mechanism",
+                  "Session State Management"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "dataFlow": {
+        "title": "Data Flow",
+        "steps": [
+          {
+            "title": "Client Request",
+            "description": "API Gateway receives OpenAI-compatible requests"
+          },
+          {
+            "title": "Key Selection",
+            "description": "Load balancer selects an available API key"
+          },
+          {
+            "title": "Request Forwarding",
+            "description": "Proxy service forwards the request to the OpenAI API"
+          },
+          {
+            "title": "Response Handling",
+            "description": "Streaming response is processed and returned to the client"
+          },
+          {
+            "title": "Data Logging",
+            "description": "Statistical data and logs are recorded in the database"
+          }
+        ]
+      },
+      "deploymentArchitectures": {
+        "title": "Deployment Architectures",
+        "architectures": [
+          {
+            "title": "Standalone Deployment",
+            "useCase": {
+              "title": "Use Cases",
+              "items": [
+                "Small to medium-scale applications",
+                "Development and testing environments",
+                "Personal projects"
+              ]
+            }
+          },
+          {
+            "title": "Cluster Deployment",
+            "useCase": {
+              "title": "Use Cases",
+              "items": [
+                "Large-scale production environments",
+                "High availability requirements",
+                "Enterprise-level applications"
+              ]
+            }
+          }
+        ]
+      },
+      "techStack": {
+        "title": "Tech Stack",
+        "categories": [
+          {
+            "title": "Backend Technologies",
+            "items": ["Go 1.23+", "Gin Web Framework", "GORM ORM", "Go-Redis"]
+          },
+          {
+            "title": "Frontend Technologies",
+            "items": ["Vue 3", "TypeScript", "Naive UI", "Vite"]
+          },
+          {
+            "title": "Infrastructure",
+            "items": ["MySQL 8.2+", "Redis", "Docker", "Nginx"]
+          }
+        ]
+      },
+      "designPrinciples": {
+        "title": "Design Principles",
+        "principles": [
+          {
+            "title": "High Performance",
+            "description": "High concurrency processing based on Go, supporting thousands of QPS"
+          },
+          {
+            "title": "High Availability",
+            "description": "Automatic failover, health checks, and distributed deployment ensure service availability"
+          },
+          {
+            "title": "Scalability",
+            "description": "Modular design and microservices architecture support horizontal and functional scaling"
+          },
+          {
+            "title": "Transparent Proxy",
+            "description": "Fully compatible with OpenAI API, allowing integration without code modification"
+          }
+        ]
+      }
+    },
+    "keyManagementPage": {
+      "header": {
+        "title": "Intelligent Key Management",
+        "description": "GPT-Load uses an intelligent key management mechanism to ensure high availability and stability through polling load balancing, automatic fault detection, and recovery."
+      },
+      "polling": {
+        "title": "Polling Mechanism",
+        "goal": {
+          "title": "Goal",
+          "description": "Achieve fair load balancing of requests among multiple keys within a group."
+        },
+        "implementation": {
+          "title": "Implementation",
+          "items": [
+            {
+              "title": "Atomic Counter",
+              "description": "Ensures polling consistency and fairness under high concurrency"
+            },
+            {
+              "title": "Status Filtering",
+              "description": "Polling is limited to keys with an 'active' status within the group"
+            }
+          ]
+        }
+      },
+      "retry": {
+        "title": "Retry & Fault Handling",
+        "trigger": {
+          "title": "Trigger Scenarios",
+          "description": "Automatically triggered on request failure (HTTP Status ≥ 400 or network error)"
+        },
+        "process": {
+          "title": "Process Flow",
+          "steps": [
+            {
+              "title": "Mark as Failed",
+              "description": "Increment the <strong>failure count</strong> for the current failed key"
+            },
+            {
+              "title": "Get New Key",
+              "description": "Immediately fetch the <strong>next</strong> available key in the group via polling"
+            },
+            {
+              "title": "Seamless Retry",
+              "description": "Retry the request with the new key, transparent to the client"
+            },
+            {
+              "title": "Retry Limit",
+              "description": "Configured <strong>maximum retry attempts</strong>. Returns final error to the client if all attempts fail"
+            }
+          ]
+        }
+      },
+      "blacklistRecovery": {
+        "title": "Key Blacklisting & Recovery"
+      },
+      "blacklist": {
+        "title": "Blacklisting Mechanism",
+        "trigger": {
+          "title": "Trigger Condition",
+          "description": "When a key's cumulative <strong>failure count</strong> reaches the <strong>blacklist threshold</strong>"
+        },
+        "action": {
+          "title": "Action",
+          "items": [
+            "Key status is updated to 'invalid'",
+            "Removed from the polling queue, no new requests"
+          ]
+        }
+      },
+      "recovery": {
+        "title": "Recovery Mechanism",
+        "trigger": {
+          "title": "Trigger Time",
+          "description": "A background cron job runs periodically at the <strong>key validation interval</strong>"
+        },
+        "process": {
+          "title": "Recovery Process",
+          "steps": [
+            {
+              "title": "Health Check",
+              "description": "Request a validation endpoint (e.g., models list) using the blacklisted key"
+            },
+            {
+              "title": "Validation Success",
+              "description": "• Key status is restored to 'active'<br>• <strong>Failure count is reset to 0</strong><br>• Re-added to the polling queue"
+            },
+            {
+              "title": "Validation Failure",
+              "description": "Remains 'invalid', waiting for the next check cycle"
+            }
+          ]
+        }
+      },
+      "advantages": {
+        "title": "Mechanism Advantages",
+        "items": [
+          {
+            "title": "Load Balancing",
+            "description": "Atomic counter ensures fair polling under high concurrency"
+          },
+          {
+            "title": "Automatic Recovery",
+            "description": "Periodic health checks for automatic fault recovery"
+          },
+          {
+            "title": "Fault Isolation",
+            "description": "Quickly identifies faulty keys to ensure service stability"
+          }
+        ]
+      }
+    },
+    "performancePage": {
+      "title": "Performance Details - GPT-Load",
+      "description": "Learn how GPT-Load achieves ultimate performance through zero I/O operations, zero-copy streaming, and lock-free concurrency.",
+      "header": {
+        "title": "Performance Details",
+        "description": "GPT-Load adopts a <strong>&ldquo;proxy path first&rdquo;</strong> high-performance design philosophy, with all optimizations aimed at ensuring the ultimate performance and stability of core proxy requests."
+      },
+      "coreFeatures": {
+        "title": "Core Performance Features",
+        "features": [
+          {
+            "title": "Zero I/O Operations",
+            "description": "Proxy requests are fully processed in memory"
+          },
+          {
+            "title": "Zero-Copy Streaming",
+            "description": "Direct streaming data forwarding"
+          },
+          {
+            "title": "Lock-Free Concurrency",
+            "description": "Efficient processing with atomic operations"
+          },
+          {
+            "title": "Extremely Low Resource Usage",
+            "description": "Runs on single-core 128MB RAM"
+          }
+        ]
+      },
+      "proxyPerformance": {
+        "title": "Ultimate Proxy Request Performance",
+        "zeroIoNote": "To achieve the lowest latency and highest concurrency, the core path of proxy requests is designed for <strong>&ldquo;zero I/O operations&rdquo;</strong>.",
+        "inMemory": {
+          "title": "In-Memory Service",
+          "description": "All data required for routing and decision-making, including group configurations and key information, is preloaded into memory on service startup and configuration changes. No database or disk access is needed during proxy requests."
+        },
+        "zeroCopy": {
+          "title": "Zero-Copy Streaming",
+          "mechanism": {
+            "title": "Real-time Passthrough Mechanism",
+            "description": "GPT-Load uses a <strong>real-time passthrough mode</strong>, directly connecting the upstream service's data stream (<code class=\"bg-gray-100 px-1 rounded\">io.Reader</code>) to the client response (<code class=\"bg-gray-100 px-1 rounded\">io.Writer</code>), <strong>without any intermediate buffering, line-by-line reading, or content parsing</strong>."
+          },
+          "comparison": {
+            "title": "Comparison with Traditional Streaming",
+            "traditional": {
+              "title": "❌ Traditional Way",
+              "description": "Read line-by-line → Parse → Buffer output"
+            },
+            "gptload": {
+              "title": "✅ GPT-Load Way",
+              "description": "Upstream data stream → Direct passthrough → Client"
+            }
+          },
+          "advantagesTitle": "Core Advantages",
+          "advantages": [
+            {
+              "title": "Avoids Packet Truncation",
+              "description": "Does not break original data packet structure by reading line-by-line"
+            },
+            {
+              "title": "Ultimate Compatibility",
+              "description": "Natively supports all data formats like SSE, JSON streaming, and binary"
+            },
+            {
+              "title": "Unlimited Response Capability",
+              "description": "Theoretically handles any size of upstream response data"
+            },
+            {
+              "title": "Zero Latency Transmission",
+              "description": "Data is forwarded upon arrival, with no buffering delay"
+            },
+            {
+              "title": "Extremely Low Memory Usage",
+              "description": "Memory usage is independent of response size as data is not cached"
+            },
+            {
+              "title": "Native Performance Experience",
+              "description": "Response speed is nearly identical to the native performance of the upstream service"
+            }
+          ]
+        },
+        "asyncLogging": {
+          "title": "Asynchronous Logging",
+          "description": "Request logs are written using a <strong>delayed asynchronous</strong> strategy, completely decoupled from the request-response lifecycle to ensure that logging operations do not interfere with real-time proxy performance."
+        }
+      },
+      "concurrency": {
+        "title": "Dynamic Resources & Concurrency Management",
+        "httpClient": {
+          "title": "Efficient HTTP Client Reuse",
+          "items": [
+            "Maintains independent, reusable HTTP client instances with underlying connection pooling for each group",
+            "When group settings (like timeout) change, the system <strong>dynamically creates</strong> a new client instance in real-time to ensure immediate application of the new configuration"
+          ]
+        },
+        "atomicLockFree": {
+          "title": "Atomic Operations & Lock-Free Design",
+          "description": "In high-frequency concurrent operations like key polling counts, the <code class=\"bg-gray-100 px-1 rounded\">sync/atomic</code> package is used for lock-free programming, avoiding the performance overhead of mutexes."
+        }
+      },
+      "scalability": {
+        "title": "Asynchronous Tasks & Scalability",
+        "asyncKeyManagement": {
+          "title": "Asynchronous Management of Massive Keys",
+          "mechanism": {
+            "title": "Mechanism",
+            "description": "Operations like adding and validating keys are executed as <strong>asynchronous background tasks</strong>."
+          },
+          "advantage": {
+            "title": "Advantage",
+            "description": "This allows management operations not to block the service, theoretically enabling the system to manage millions of keys."
+          }
+        },
+        "clusterSupport": {
+          "title": "Cluster Support & Configuration Synchronization",
+          "architecture": {
+            "title": "Architecture",
+            "description": "Supports horizontal scaling with a multi-node Master-Slave architecture."
+          },
+          "sync": {
+            "title": "Synchronization",
+            "items": [
+              "Configuration changes on the master node are pushed as notifications via Redis Pub/Sub",
+              "Slave nodes listen for and pull updates through the built-in <strong>configuration synchronizer</strong>, achieving eventual consistency of configurations across the cluster"
+            ]
+          }
+        }
+      },
+      "resourceEfficiency": {
+        "title": "Lightweight & Resource Efficiency",
+        "lowUsage": {
+          "title": "Extremely Low Resource Usage",
+          "description": "Thanks to Go's efficient memory management and the performance optimizations mentioned above (e.g., zero-copy, connection pooling), GPT-Load runs as a compiled binary with no extra runtime dependencies, achieving extremely low resource usage.",
+          "specs": {
+            "cpu": "Single-core CPU",
+            "memory": "128MB RAM"
+          }
+        },
+        "wideApplicability": {
+          "title": "Wide Applicability",
+          "description": "In typical standalone deployments, it requires low CPU and memory to ensure smooth service operation.",
+          "items": [
+            "Handles high-concurrency scenarios for large enterprises",
+            "Suitable for individual developers with limited resources"
+          ]
+        }
+      }
+    },
+    "quickStartPage": {
+      "title": "Quick Start",
+      "description": "Follow these steps to quickly start and run GPT-Load.",
+      "sectionTitle": "Quick Launch",
+      "lightweightDeployment": {
+        "title": "Lightweight Deployment",
+        "description": "Uses SQLite database and in-memory storage, ideal for personal use and quick trials"
+      },
+      "prerequisites": {
+        "title": "Prerequisites",
+        "items": [
+          "Docker 20.10+ and Docker Compose",
+          "Linux/macOS/Windows OS",
+          "At least 128MB RAM and 1GB disk space"
+        ]
+      },
+      "installationSteps": {
+        "title": "Installation Steps",
+        "securityWarning": {
+          "title": "Important Security Notice",
+          "body": "You MUST change the default admin key before deployment!",
+          "rules": [
+            "Use a complex key of at least 20 characters",
+            "Include uppercase, lowercase, numbers, and special characters",
+            "NEVER use default or simple keys like <code>sk-123456</code>",
+            "Using a weak key in production poses a serious security risk"
+          ],
+          "recommendation": "Recommended key format: <code>sk-prod-[32-char-random-string]</code>"
+        },
+        "steps": [
+          {
+            "title": "Create a Working Directory",
+            "command": "# Create directory and enter<br/>mkdir -p gpt-load && cd gpt-load"
+          },
+          {
+            "title": "Download Configuration Files",
+            "command": "# Download Docker Compose config<br/>wget https://raw.githubusercontent.com/tbphp/gpt-load/refs/heads/main/docker-compose.yml<br/><br/># Download environment variables config<br/>wget -O .env https://raw.githubusercontent.com/tbphp/gpt-load/refs/heads/main/.env.example",
+            "securityConfig": {
+              "title": "Update Security Config Immediately",
+              "line1": "Edit the <code>.env</code> file, and change the following:",
+              "code1": "AUTH_KEY=sk-123456",
+              "line2": "to a strong key:",
+              "code2": "AUTH_KEY=sk-prod-your-strong-random-key-32-chars"
+            }
+          },
+          {
+            "title": "Start the Service",
+            "command": "# Start the GPT-Load service<br/>docker compose up -d"
+          },
+          {
+            "title": "Verify Deployment",
+            "command": "",
+            "visitAdmin": "Visit the admin interface:",
+            "loginNote": "Log in to the admin interface using the <code>AUTH_KEY</code> you set in the <code>.env</code> file"
+          }
+        ]
+      },
+      "commonCommands": {
+        "title": "Common Commands",
+        "commands": [
+          {
+            "title": "Check Status",
+            "command": "docker compose ps"
+          },
+          {
+            "title": "View Logs",
+            "command": "docker compose logs -f"
+          },
+          {
+            "title": "Restart Service",
+            "command": "docker compose down && docker compose up -d"
+          },
+          {
+            "title": "Update Version",
+            "command": "docker compose pull && docker compose down && docker compose up -d"
+          }
+        ]
+      },
+      "nextSteps": {
+        "text": "Want more deployment options, like using MySQL/PostgreSQL or setting up a cluster? Check out the full <a><strong>Deployment Guide</strong></a>."
+      }
+    },
+    "clusterPage": {
+      "content": {
+        "header": {
+          "title": "Cluster Deployment",
+          "description": "GPT-Load high-availability cluster deployment solution, supporting master-slave architecture and horizontal scaling."
+        },
+        "overview": {
+          "title": "Cluster Architecture Overview",
+          "banner": {
+            "title": "Enterprise-Grade High-Availability Architecture",
+            "description": "Designed for large-scale production environments to ensure service stability and reliability."
+          },
+          "items": [
+            {
+              "title": "Master-Slave Architecture",
+              "description": "Master node election and configuration synchronization based on Redis",
+              "icon": "Server"
+            },
+            {
+              "title": "Horizontal Scaling",
+              "description": "Stateless slave node design supports dynamic scaling",
+              "icon": "Layers"
+            },
+            {
+              "title": "Data Sharing",
+              "description": "Unified data storage and caching with MySQL + Redis",
+              "icon": "Database"
+            }
+          ]
+        },
+        "prerequisites": {
+          "title": "Deployment Environment Requirements",
+          "importantNote": {
+            "title": "Important Note",
+            "description": "In a production environment, it is strongly recommended to use independent, high-availability MySQL and Redis services."
+          },
+          "requirements": [
+            {
+              "title": "Infrastructure",
+              "items": [
+                "Servers: At least 2 (1 master, 1 slave); 3+ recommended for higher availability",
+                "Network: Ensure low-latency network connectivity between all nodes"
+              ]
+            },
+            {
+              "title": "Dependent Services",
+              "items": [
+                "MySQL: Version 8.0+; for data persistence",
+                "Redis: Version 6.2+; for caching, distributed locks, and message queue"
+              ]
+            }
+          ]
+        },
+        "deploymentSteps": {
+          "title": "Deployment Steps",
+          "steps": [
+            {
+              "title": "Step 1: Configure the Master Node",
+              "sections": [
+                {
+                  "title": "Environment Variable Configuration",
+                  "content": "Make the following core configurations in the master node's .env file:",
+                  "code": "IS_SLAVE=false\nREDIS_HOST=your-redis-host\nREDIS_PORT=6379\nREDIS_PASSWORD=your-redis-password\nDB_HOST=your-mysql-host\nDB_PORT=3306\nDB_USER=your-mysql-user\nDB_PASSWORD=your-mysql-password\nDB_NAME=gpt_load"
+                }
+              ]
+            },
+            {
+              "title": "Step 2: Configure Slave Nodes",
+              "sections": [
+                {
+                  "title": "Environment Variable Configuration",
+                  "content": "In the .env files of all slave nodes, ensure IS_SLAVE=true and use the same database and Redis configuration as the master node.",
+                  "code": "IS_SLAVE=true\nREDIS_HOST=your-redis-host\n# ... other configurations are the same as the master node"
+                }
+              ]
+            },
+            {
+              "title": "Step 3: Start the Cluster",
+              "sections": [
+                {
+                  "title": "Startup Order",
+                  "content": "Always start the master node first. Wait for it to fully initialize before starting all slave nodes.",
+                  "note": "Slave nodes will automatically connect to Redis on startup and synchronize the latest configuration from the master node via the Pub/Sub mechanism."
+                }
+              ]
+            }
+          ]
+        },
+        "configManagement": {
+          "title": "Configuration Management & Synchronization",
+          "sections": [
+            {
+              "title": "Configuration Synchronization Mechanism",
+              "items": [
+                { "name": "Master writes, slaves read-only" },
+                { "name": "Updates pushed via Redis Pub/Sub" },
+                { "name": "Slaves auto-sync configuration" }
+              ]
+            },
+            {
+              "title": "Core Synchronized Data",
+              "items": [
+                {
+                  "name": "Group Configuration",
+                  "requirement": "Real-time sync"
+                },
+                { "name": "Key Information", "requirement": "Real-time sync" },
+                { "name": "System Settings", "requirement": "Real-time sync" }
+              ]
+            }
+          ]
+        },
+        "monitoring": {
+          "title": "Monitoring & Maintenance",
+          "healthCheck": {
+            "title": "Health Check",
+            "clusterMonitoringTitle": "Cluster Monitoring",
+            "status": {
+              "title": "Node Status Check",
+              "command": "curl http://<node_ip>:3001/api/status",
+              "response": "\n{\n  \"status\": \"ok\",\n  \"version\": \"v1.0.0\"\n}"
+            },
+            "clusterMonitoring": [
+              "Monitor cluster metrics with Prometheus + Grafana",
+              "View all node statuses in the master node's admin interface",
+              "Configure alerting rules to detect anomalies promptly"
+            ]
+          },
+          "scaling": {
+            "title": "Scaling",
+            "items": [
+              {
+                "title": "Horizontal Scaling",
+                "items": [
+                  "Add new node: Configure as a slave and start it",
+                  "Remove node: Simply shut down the slave node service"
+                ]
+              },
+              {
+                "title": "Master Node Migration",
+                "items": [
+                  "Shut down the old master node",
+                  "Change a slave node's configuration to IS_SLAVE=false",
+                  "Restart the node to make it the new master"
+                ]
+              }
+            ]
+          }
+        },
+        "bestPractices": {
+          "title": "Best Practices",
+          "practices": [
+            {
+              "title": "Recommended Practices",
+              "items": [
+                "Use external, high-availability database and Redis services",
+                "Configure a load balancer (e.g., Nginx) for the GPT-Load cluster",
+                "Regularly back up the database and configuration files",
+                "Monitor Redis connection count and memory usage"
+              ],
+              "type": "good"
+            },
+            {
+              "title": "Practices to Avoid",
+              "items": [
+                "Performing write operations on multiple nodes simultaneously",
+                "Starting slave nodes before the master node is fully initialized",
+                "Using the default AUTH_KEY in a production environment",
+                "Neglecting to monitor the database and Redis"
+              ],
+              "type": "bad"
+            }
+          ]
+        }
+      }
+    }
   },
   "features": {
     "title": "Core Technical Features",
-    "subtitle": "Enterprise-grade architectural design, optimized for production environments",
+    "subtitle": "Enterprise-grade architecture design, optimized for production environments",
     "items": [
       {
         "title": "High-Performance Architecture",
-        "description": "Developed with Go 1.23+, zero-copy streaming, goroutine concurrency model, supporting high-concurrency processing",
-        "technical": "Go Goroutines + HTTP/2 Connection Multiplexing"
+        "description": "Developed with Go 1.23+, featuring zero-copy streaming and a coroutine concurrency model for high-concurrency handling.",
+        "technical": "Go Coroutines + HTTP/2 Connection Reuse"
       },
       {
         "title": "Transparent Proxy",
-        "description": "Fully preserves native API formats, allowing access to multiple AI services without code modification",
+        "description": "Fully preserves native API formats, allowing seamless integration with various AI services without code modification.",
         "technical": "OpenAI + Gemini + Anthropic Support"
       },
       {
         "title": "Intelligent Key Management",
-        "description": "Group management, dynamic rotation, and automatic retries to ensure high service availability",
-        "technical": "Redis Cache + Failover Mechanism"
+        "description": "Group management, dynamic rotation, and automatic retries ensure high service availability.",
+        "technical": "Redis Cache + Fault Recovery Mechanism"
       },
       {
         "title": "Load Balancing",
-        "description": "Multiple upstream support, weight configuration, and health checks for intelligent routing to available nodes",
-        "technical": "Weighted Round-Robin + Health Checks"
+        "description": "Multi-upstream support, weight configuration, and health checks for intelligent routing to available nodes.",
+        "technical": "Weighted Round Robin + Health Checks"
       },
       {
         "title": "Hot-Reload Configuration",
-        "description": "Three-layer configuration system (environment, system, group) with support for hot updates",
-        "technical": "Environment → System → Group Settings"
+        "description": "A three-tiered configuration system (environment variables, system settings, group settings) supports hot updates.",
+        "technical": "Environment Variables → System Settings → Group Settings"
       },
       {
         "title": "Cluster Support",
-        "description": "Master/slave architecture with a stateless design, supporting horizontal scaling and distributed deployment",
+        "description": "Master-slave architecture with a stateless design supports horizontal scaling and distributed deployment.",
         "technical": "Master/Slave + Redis Distributed Lock"
       },
       {
         "title": "Security Mechanisms",
-        "description": "Bearer Token authentication, group isolation, request logging, and sensitive information masking",
+        "description": "Bearer Token authentication, group isolation, request logging, and sensitive information redaction.",
         "technical": "JWT + Access Control + Audit Logs"
       },
       {
-        "title": "Admin Dashboard",
-        "description": "Modern Vue 3 interface for real-time monitoring, log viewing, and configuration management",
+        "title": "Admin Backend",
+        "description": "A modern interface with Vue 3 for real-time monitoring, log viewing, and configuration management.",
         "technical": "Vue 3 + TypeScript + Naive UI"
       },
       {
         "title": "Developer-Friendly",
-        "description": "Complete RESTful API, detailed documentation, and one-click deployment with Docker",
+        "description": "Complete RESTful API, detailed documentation, and one-click deployment with Docker.",
         "technical": "OpenAPI + Docker Compose"
       }
     ],
     "highlight": {
       "title": "Production-Ready Enterprise Architecture",
-      "description": "From standalone to distributed clusters, from development to production, GPT-Load provides a complete solution",
+      "description": "From standalone deployment to a distributed cluster, from development to production, GPT-Load provides a complete solution.",
       "runtime": "Runtime Environment",
       "storage": "Data Persistence",
       "cache": "Cache & Lock",
@@ -231,16 +974,16 @@
     "components": {
       "client": {
         "title": "Client Application",
-        "description": "Web/mobile apps call via standard OpenAI API format",
+        "description": "Web/mobile applications make calls using the standard OpenAI API format",
         "items": [
-          "HTTP/HTTPS Request",
-          "Bearer Token Auth",
+          "HTTP/HTTPS Requests",
+          "Bearer Token Authentication",
           "JSON Format Interaction"
         ]
       },
       "proxy": {
         "title": "GPT-Load Proxy Layer",
-        "description": "Core proxy service for request forwarding and management",
+        "description": "Core proxy service responsible for request forwarding and management",
         "items": [
           "Transparent Proxy",
           "Key Management",
@@ -255,7 +998,7 @@
           "OpenAI API",
           "Google Gemini",
           "Anthropic Claude",
-          "Other Compatible Services"
+          "Other compatible services"
         ]
       }
     },
@@ -294,29 +1037,10 @@
         "items": [
           "Master/Slave Architecture",
           "Horizontal scaling support",
-          "High availability assurance"
+          "High availability guarantee"
         ]
       }
     }
-  },
-  "quickStartPage": {
-    "step2": {
-      "copyEnv": "Copy environment configuration file",
-      "editConfig": "Edit configuration (optional)",
-      "mainConfig": "Main configuration items:"
-    },
-    "step3": {
-      "startService": "Start service (includes MySQL and Redis)",
-      "visitAdmin": "Access management interface"
-    },
-    "requirements": {
-      "title": "System Requirements",
-      "runtime": "Runtime Environment",
-      "storage": "Data Storage",
-      "cache": "Cache Service",
-      "container": "Container Runtime"
-    },
-    "viewDocs": "View detailed deployment documentation"
   },
   "structuredData": {
     "organization": {
@@ -330,13 +1054,13 @@
     "software": {
       "name": "GPT-Load",
       "operatingSystem": "Linux, macOS, Windows",
-      "applicationCategory": "DeveloperApplication"
+      "applicationCategory": "DeveloperTool"
     }
   },
   "imageViewer": {
     "close": "Close (Esc)",
     "closeHint": "Press Esc or click background to close",
-    "zoomHint": "Click image to zoom"
+    "zoomHint": "Click image to zoom in"
   },
   "languageSwitcher": {
     "loading": "Loading...",
@@ -344,22 +1068,22 @@
   },
   "performance": {
     "title": "Technical Features",
-    "subtitle": "High-performance architecture design based on Go 1.23+, providing reliable proxy services for enterprise-level applications.",
+    "subtitle": "High-performance architecture based on Go 1.23+, providing reliable proxy services for enterprise applications.",
     "metrics": [
       {
         "label": "Default Concurrency",
         "value": "100",
-        "description": "Default for MAX_CONCURRENT_REQUESTS"
+        "description": "MAX_CONCURRENT_REQUESTS default"
       },
       {
         "label": "Go Version Requirement",
         "value": "1.23+",
-        "description": "Minimum version requirement"
+        "description": "Minimum version required"
       },
       {
         "label": "Connection Pool Config",
         "value": "100/50",
-        "description": "Max Idle Conns / Max Idle Conns Per Host"
+        "description": "Max idle/per-host connections"
       },
       {
         "label": "Request Timeout",
@@ -369,37 +1093,37 @@
     ],
     "comparison": {
       "title": "Performance Comparison",
-      "subtitle": "Comparing direct API calls vs. using the GPT-Load proxy.",
+      "subtitle": "Comparing performance of direct API calls vs. using the GPT-Load proxy.",
       "header": {
         "metric": "Performance Metric",
         "without": "Direct API Call",
         "with": "Using GPT-Load",
-        "improvement": "Improvement"
+        "improvement": "Performance Gain"
       },
       "rows": [
         {
-          "metric": "Config Management",
-          "without": "Static Config File",
-          "with": "Dynamic Hot-Reload",
-          "improvement": "No Restart Needed"
+          "metric": "Configuration Management",
+          "without": "Static config file",
+          "with": "Dynamic hot-reload",
+          "improvement": "No restart needed"
         },
         {
           "metric": "Key Management",
-          "without": "Manual Rotation",
-          "with": "Auto Failover",
-          "improvement": "Smart Blacklisting"
+          "without": "Manual rotation",
+          "with": "Auto fault recovery",
+          "improvement": "Smart blacklist"
         },
         {
           "metric": "Cluster Deployment",
-          "without": "Complex Election",
-          "with": "IS_SLAVE Flag",
-          "improvement": "Simple Setup"
+          "without": "Complex election",
+          "with": "IS_SLAVE flag",
+          "improvement": "Simple configuration"
         },
         {
-          "metric": "Monitoring",
-          "without": "Basic Logs",
-          "with": "Web Dashboard",
-          "improvement": "Real-time Stats"
+          "metric": "Monitoring Capability",
+          "without": "Basic logs",
+          "with": "Web admin interface",
+          "improvement": "Real-time stats"
         }
       ]
     },
@@ -408,7 +1132,7 @@
       "features": [
         {
           "title": "Detailed Statistics",
-          "description": "Comprehensive monitoring of request counts, response times, error rates, etc."
+          "description": "Comprehensive monitoring of request counts, response times, error rates, and more."
         },
         {
           "title": "Health Checks",
@@ -422,10 +1146,119 @@
       "dashboard": {
         "title": "Monitoring Dashboard",
         "totalRequests": "Total Requests:",
-        "avgResponse": "Avg Response:",
+        "avgResponse": "Avg. Response:",
         "activeKeys": "Active Keys:",
         "errorRate": "Error Rate:"
       }
+    },
+    "routingStrategy": {
+      "metadata": {
+        "title": "Routing Strategy - GPT-Load",
+        "description": "Understand GPT-Load's path handling mechanism to master flexible path configuration and ensure correct client-upstream connections."
+      },
+      "content": {
+        "header": {
+          "title": "Routing Strategy",
+          "description": "Understand GPT-Load's path handling mechanism to master flexible path configuration and ensure correct client-upstream connections."
+        },
+        "coreConcept": {
+          "title": "Path Processing Principle",
+          "principle": {
+            "title": "Passthrough Principle",
+            "description": "GPT-Load follows a passthrough principle, only responsible for path replacement to maintain maximum flexibility. The core logic is to replace the proxy prefix in the client request with the actual upstream address.",
+            "rule": "Replacement Rule:",
+            "rulePrefix": "GPT-Load Service Address + /proxy/ + Group Name",
+            "ruleSuffix": "Upstream Address"
+          }
+        },
+        "processingLogic": {
+          "title": "Processing Flow Example",
+          "serverAddress": "Service Address:",
+          "upstreamUrl": "Upstream URL:",
+          "groupName": "Group Name:",
+          "clientRequest": "Client Request",
+          "actualRequest": "Actual Request"
+        },
+        "configExamples": {
+          "title": "Configuration Examples",
+          "description": "Using OpenRouter as an example (full path: {code}), with group name {code} and channel type {code}:",
+          "configs": [
+            {
+              "title": "Config Method 1: Domain Separation",
+              "gptLoadConfig": {
+                "title": "GPT-Load Config",
+                "upstreamUrl": "https://openrouter.ai",
+                "testPath": "/api/v1/chat/completions"
+              },
+              "clientConfig": {
+                "title": "Client Config",
+                "apiUrl": "http://localhost:3001/proxy/openrouter/api"
+              }
+            },
+            {
+              "title": "Config Method 2: Include API Path (Recommended)",
+              "gptLoadConfig": {
+                "title": "GPT-Load Config",
+                "upstreamUrl": "https://openrouter.ai/api",
+                "testPath": "/v1/chat/completions"
+              },
+              "clientConfig": {
+                "title": "Client Config",
+                "apiUrl": "http://localhost:3001/proxy/openrouter"
+              }
+            },
+            {
+              "title": "Config Method 3: Full Version Path",
+              "gptLoadConfig": {
+                "title": "GPT-Load Config",
+                "upstreamUrl": "https://openrouter.ai/api/v1",
+                "testPath": "/chat/completions"
+              },
+              "clientConfig": {
+                "title": "Client Config",
+                "apiUrl": "http://localhost:3001/proxy/openrouter/",
+                "note": "Note: Must end with a / to prevent the client from automatically appending the v1 path"
+              }
+            }
+          ]
+        },
+        "bestPractices": {
+          "title": "Best Practices",
+          "practices": [
+            {
+              "title": "Configuration Advice",
+              "icon": "Route",
+              "recommendations": [
+                "Recommend using Config Method 2 for a clear and understandable structure",
+                "First, determine the full upstream API address",
+                "Choose the appropriate path split point based on client characteristics",
+                "Maintain consistency and maintainability in your configuration"
+              ]
+            },
+            {
+              "title": "Debugging Tips",
+              "icon": "Globe",
+              "recommendations": [
+                "Check GPT-Load request logs to confirm the upstream address",
+                "Use the test path to verify the correctness of the configuration",
+                "Pay attention to the client's path concatenation rules",
+                "Flexibly adjust the configuration to adapt to different scenarios"
+              ]
+            }
+          ]
+        },
+        "summary": {
+          "title": "Configuration Summary",
+          "description": "Understanding the path handling logic is key: GPT-Load is only responsible for simple string replacement, and its flexible configuration can adapt to various client and upstream service needs.",
+          "corePrinciple": "Core Principle: Ensure that after being proxied by GPT-Load, the final upstream address for {code} and {code} is correct."
+        }
+      },
+      "replaceWith": "Replace with",
+      "serverAddress": "Service Address",
+      "upstreamUrlLabel": "Upstream URL",
+      "groupNameLabel": "Group Name",
+      "testPathLabel": "Test Path",
+      "clientApiUrlLabel": "Cherry Studio API URL"
     }
   }
 }

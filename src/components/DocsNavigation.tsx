@@ -30,7 +30,7 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
   const t = useTranslations("docs");
 
   const navigation = [
-    { title: t("quickStart"), href: "/docs", icon: Rocket },
+    { title: "快速开始", href: "/docs", icon: Rocket },
     { title: t("introduction"), href: "/docs/introduction", icon: BookUser },
     {
       title: t("deployment.title"),
@@ -48,7 +48,7 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
           icon: Code,
         },
         {
-          title: t("deployment.cluster"),
+          title: t("deployment.clusterDeployment"),
           href: "/docs/deployment/cluster",
           icon: Layers,
         },
@@ -80,7 +80,7 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
           icon: Users,
         },
         {
-          title: t("configuration.cloudflare"),
+          title: t("configuration.cloudflareGateway"),
           href: "/docs/configuration/cloudflare-aigateway",
           icon: Cloud,
         },
@@ -92,29 +92,29 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
       icon: Wrench,
       children: [
         {
-          title: t("architecture.performance"),
+          title: t("performance.title"),
           href: "/docs/architecture-design/performance",
           icon: Sparkles,
         },
         {
-          title: t("architecture.routing"),
+          title: t("routingStrategy.title"),
           href: "/docs/architecture-design/routing-strategy",
           icon: GitBranch,
         },
         {
-          title: t("architecture.keyManagement"),
+          title: t("keyManagement.title"),
           href: "/docs/architecture-design/key-management",
           icon: Shield,
         },
       ],
     },
     {
-      title: t("channels"),
+      title: t("channels.title"),
       href: "/docs/channels",
       icon: Globe,
       children: [
         {
-          title: t("integrations.gemini"),
+          title: t("integrations.geminiOpenai"),
           href: "/docs/gemini-openai",
           icon: Sparkles,
         },
@@ -126,28 +126,28 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
       icon: Plug,
       children: [
         {
-          title: t("integrations.roocode"),
+          title: t("integrations.rooCode"),
           href: "/docs/integrations/roo-code",
           icon: Code,
         },
         {
-          title: t("integrations.claude"),
+          title: t("integrations.claudeCodeRouter"),
           href: "/docs/integrations/claude-code-router",
           icon: Terminal,
         },
         {
-          title: t("integrations.newapi"),
+          title: t("integrations.newApi"),
           href: "/docs/integrations/new-api",
           icon: Globe,
         },
         {
-          title: t("integrations.cherry"),
+          title: t("integrations.cherryStudio"),
           href: "/docs/integrations/cherry-studio",
           icon: Sparkles,
         },
       ],
     },
-    { title: t("sponsor"), href: "/docs/sponsor", icon: Heart },
+    { title: t("sponsor.title"), href: "/docs/sponsor", icon: Heart },
   ];
 
   const [openItems, setOpenItems] = useState<number[]>(() => {

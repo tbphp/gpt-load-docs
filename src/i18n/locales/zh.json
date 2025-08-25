@@ -31,6 +31,22 @@
       "integrations": {
         "title": "第三方集成 - GPT-Load 文档",
         "description": "GPT-Load 与各种第三方应用和工具的集成配置指南"
+      },
+      "key-management": {
+        "title": "智能密钥管理 - GPT-Load 文档",
+        "description": "深入了解 GPT-Load 的智能密钥管理机制，包括轮询、重试、故障处理和自动恢复"
+      },
+      "performance": {
+        "title": "性能详解 - GPT-Load 文档",
+        "description": "深入了解 GPT-Load 如何通过零 I/O 操作、零拷贝流传输和无锁并发等设计实现极致性能。"
+      },
+      "routing-strategy": {
+        "title": "路径设计策略 - GPT-Load 文档",
+        "description": "理解 GPT-Load 的路径处理机制，掌握灵活的路径配置方法，确保客户端与上游服务的正确连接。"
+      },
+      "cluster": {
+        "title": "集群部署 - GPT-Load 文档",
+        "description": "GPT-Load 高可用集群部署方案，支持主从架构和水平扩展"
       }
     },
     "docs": {
@@ -120,31 +136,641 @@
     "copyright": "© {year} GPT-Load. 根据 <licenseLink>MIT 许可证</licenseLink> 开源发布。"
   },
   "docs": {
-    "quickStart": "快速开始",
+    "layout": {
+      "docsMenu": "文档菜单",
+      "closeMenu": "关闭菜单"
+    },
     "introduction": "项目简介",
-    "deployment": "部署指南",
-    "standalone": "单机部署",
-    "source": "源码部署",
-    "clusterDeployment": "集群部署",
-    "clawCloud": "Claw Cloud",
-    "configuration": "配置管理",
-    "environment": "环境配置",
-    "project": "项目配置",
-    "management": "管理端配置",
-    "cloudflareGateway": "Cloudflare AI Gateway",
-    "architecture": "架构与设计",
-    "keyManagement": "智能密钥管理",
-    "performance": "性能详解",
-    "routingStrategy": "路径设计策略",
-    "channels": "渠道类型",
-    "integrations": "接入指南",
-    "cherryStudio": "Cherry Studio",
-    "claudeCodeRouter": "Claude Code Router",
-    "newApi": "New API",
-    "rooCode": "Roo Code",
-    "geminiOpenai": "Gemini 官方 OpenAI 兼容",
-    "clusterMode": "集群模式",
-    "sponsor": "支持赞助"
+    "deployment": {
+      "title": "部署指南",
+      "standalone": "单机部署",
+      "source": "源码部署",
+      "clusterDeployment": "集群部署",
+      "clawCloud": "Claw Cloud"
+    },
+    "configuration": {
+      "title": "配置管理",
+      "environment": "环境配置",
+      "project": "项目配置",
+      "management": "管理端配置",
+      "cloudflareGateway": "Cloudflare AI Gateway"
+    },
+    "architecture": {
+      "title": "架构设计"
+    },
+    "keyManagement": {
+      "title": "智能密钥管理"
+    },
+    "performance": {
+      "title": "性能详解"
+    },
+    "routingStrategy": {
+      "title": "路径设计策略"
+    },
+    "channels": {
+      "title": "渠道类型"
+    },
+    "integrations": {
+      "title": "接入指南",
+      "cherryStudio": "Cherry Studio",
+      "claudeCodeRouter": "Claude Code Router",
+      "newApi": "New API",
+      "rooCode": "Roo Code",
+      "geminiOpenai": "Gemini 官方 OpenAI 兼容"
+    },
+    "clusterMode": {
+      "title": "集群模式"
+    },
+    "sponsor": {
+      "title": "支持赞助"
+    },
+    "architectureDesign": {
+      "header": {
+        "title": "系统架构",
+        "subtitle": "深入了解 GPT-Load 的技术架构和设计理念"
+      },
+      "overview": {
+        "title": "架构概览",
+        "banner": {
+          "title": "高性能透明代理架构",
+          "description": "基于 Go 语言构建的高性能 OpenAI API 代理服务，支持多密钥轮换、负载均衡和智能故障切换"
+        },
+        "items": [
+          { "title": "API 网关", "description": "统一的 API 入口和路由" },
+          { "title": "负载均衡", "description": "智能密钥轮换和分发" },
+          { "title": "数据存储", "description": "MySQL + Redis 双重存储" },
+          { "title": "安全监控", "description": "限流、认证和监控" }
+        ]
+      },
+      "systemComponents": {
+        "title": "系统组件",
+        "components": [
+          {
+            "title": "核心服务层",
+            "subSections": [
+              {
+                "title": "API 代理服务",
+                "items": ["HTTP/HTTPS 透明代理", "请求路由和转发", "响应流式处理", "错误处理和重试"]
+              },
+              {
+                "title": "负载均衡器",
+                "items": ["轮询（Round Robin）算法", "权重分配策略", "健康检查机制", "故障自动切换"]
+              }
+            ]
+          },
+          {
+            "title": "管理服务层",
+            "subSections": [
+              {
+                "title": "Web 管理界面",
+                "items": ["Vue 3 + TypeScript", "Naive UI 组件库", "实时监控面板", "配置管理界面"]
+              },
+              {
+                "title": "REST API",
+                "items": ["密钥管理接口", "统计数据接口", "系统配置接口", "监控指标接口"]
+              }
+            ]
+          },
+          {
+            "title": "数据存储层",
+            "subSections": [
+              {
+                "title": "MySQL 数据库",
+                "items": ["密钥和配置持久化", "用户认证数据", "历史统计记录", "系统日志存储"]
+              },
+              {
+                "title": "Redis 缓存",
+                "items": ["密钥状态缓存", "限流计数器", "分布式锁机制", "会话状态管理"]
+              }
+            ]
+          }
+        ]
+      },
+      "dataFlow": {
+        "title": "数据流向",
+        "steps": [
+          { "title": "客户端请求", "description": "API 网关接收 OpenAI 兼容请求" },
+          { "title": "密钥选择", "description": "负载均衡器选择可用的 API 密钥" },
+          { "title": "请求转发", "description": "代理服务转发请求到 OpenAI API" },
+          { "title": "响应处理", "description": "流式响应处理并返回给客户端" },
+          { "title": "数据记录", "description": "统计数据和日志记录到数据库" }
+        ]
+      },
+      "deploymentArchitectures": {
+        "title": "部署架构",
+        "architectures": [
+          {
+            "title": "单机部署",
+            "useCase": {
+              "title": "适用场景",
+              "items": ["中小规模应用", "开发测试环境", "个人项目使用"]
+            }
+          },
+          {
+            "title": "集群部署",
+            "useCase": {
+              "title": "适用场景",
+              "items": ["大规模生产环境", "高可用性要求", "企业级应用"]
+            }
+          }
+        ]
+      },
+      "techStack": {
+        "title": "技术栈",
+        "categories": [
+          {
+            "title": "后端技术",
+            "items": ["Go 1.23+", "Gin Web 框架", "GORM ORM", "Go-Redis"]
+          },
+          {
+            "title": "前端技术",
+            "items": ["Vue 3", "TypeScript", "Naive UI", "Vite"]
+          },
+          {
+            "title": "基础设施",
+            "items": ["MySQL 8.2+", "Redis", "Docker", "Nginx"]
+          }
+        ]
+      },
+      "designPrinciples": {
+        "title": "设计原则",
+        "principles": [
+          { "title": "高性能", "description": "基于 Go 语言的高并发处理能力，支持数千 QPS 的请求处理" },
+          { "title": "高可用", "description": "故障自动切换、健康检查和分布式部署保障服务可用性" },
+          { "title": "可扩展", "description": "模块化设计和微服务架构，支持水平扩展和功能扩展" },
+          { "title": "透明代理", "description": "完全兼容 OpenAI API，无需修改现有代码即可接入" }
+        ]
+      }
+    },
+    "keyManagementPage": {
+      "header": {
+        "title": "智能密钥管理",
+        "description": "GPT-Load 采用智能密钥管理机制，通过轮询负载均衡、自动故障检测和恢复机制，确保服务的高可用性和稳定性。"
+      },
+      "polling": {
+        "title": "轮询机制",
+        "goal": {
+          "title": "目标",
+          "description": "实现请求在分组内多个密钥间的公平负载均衡。"
+        },
+        "implementation": {
+          "title": "实现方式",
+          "items": [
+            {
+              "title": "原子计数器",
+              "description": "保证高并发下的轮询一致性和公平性"
+            },
+            {
+              "title": "状态过滤",
+              "description": "轮询范围仅限于分组内状态为“有效”的密钥"
+            }
+          ]
+        }
+      },
+      "retry": {
+        "title": "重试与故障处理",
+        "trigger": {
+          "title": "触发场景",
+          "description": "当请求失败时（HTTP Status ≥ 400 或网络错误）自动触发"
+        },
+        "process": {
+          "title": "处理流程",
+          "steps": [
+            {
+              "title": "标记失败",
+              "description": "为当前失败的密钥<strong>失败计数加一</strong>"
+            },
+            {
+              "title": "获取新密钥",
+              "description": "立即通过轮询机制获取分组内<strong>下一个</strong>可用密钥"
+            },
+            {
+              "title": "无感重试",
+              "description": "使用新密钥重新发起请求，此过程对客户端无感"
+            },
+            {
+              "title": "重试上限",
+              "description": "配置的<strong>最大重试次数</strong>。若所有尝试均失败，则向客户端返回最终错误"
+            }
+          ]
+        }
+      },
+      "blacklistRecovery": {
+        "title": "密钥拉黑与恢复"
+      },
+      "blacklist": {
+        "title": "拉黑机制",
+        "trigger": {
+          "title": "触发条件",
+          "description": "当密钥的累计<strong>失败计数</strong>达到<strong>黑名单阈值</strong>"
+        },
+        "action": {
+          "title": "执行动作",
+          "items": [
+            "密钥状态更新为“无效”",
+            "从轮询队列中移除，不再接收新请求"
+          ]
+        }
+      },
+      "recovery": {
+        "title": "恢复机制",
+        "trigger": {
+          "title": "触发时机",
+          "description": "后台定时任务，按<strong>密钥验证间隔</strong>周期执行"
+        },
+        "process": {
+          "title": "恢复流程",
+          "steps": [
+            {
+              "title": "健康检查",
+              "description": "使用被拉黑的密钥请求验证接口（如 models 列表）"
+            },
+            {
+              "title": "验证成功",
+              "description": "• 密钥状态恢复为“有效”<br>• <strong>失败计数重置为 0</strong><br>• 重新加入轮询队列"
+            },
+            {
+              "title": "验证失败",
+              "description": "保持“无效”状态，等待下一个检查周期"
+            }
+          ]
+        }
+      },
+      "advantages": {
+        "title": "机制优势",
+        "items": [
+          {
+            "title": "负载均衡",
+            "description": "原子计数器保证高并发下的公平轮询"
+          },
+          {
+            "title": "自动恢复",
+            "description": "定时健康检查，故障密钥自动恢复"
+          },
+          {
+            "title": "故障隔离",
+            "description": "快速识别故障密钥，确保服务稳定性"
+          }
+        ]
+      }
+    },
+    "performancePage": {
+      "title": "性能详解 - GPT-Load",
+      "description": "深入了解 GPT-Load 如何通过零 I/O 操作、零拷贝流传输和无锁并发等设计实现极致性能。",
+      "header": {
+        "title": "性能详解",
+        "description": "GPT-Load 采用<strong>&ldquo;代理路径优先&rdquo;</strong>的高性能设计哲学， 一切优化都为保障核心代理请求的极致性能和稳定性。"
+      },
+      "coreFeatures": {
+        "title": "核心性能特性",
+        "features": [
+          { "title": "零 I/O 操作", "description": "代理请求全内存处理" },
+          { "title": "零拷贝流传输", "description": "直接流式数据转发" },
+          { "title": "无锁并发", "description": "原子操作高效处理" },
+          { "title": "极低资源占用", "description": "单核 128MB 内存运行" }
+        ]
+      },
+      "proxyPerformance": {
+        "title": "极致的代理请求性能",
+        "zeroIoNote": "为了实现最低延迟和最高并发，代理请求的核心路径被设计为<strong>&ldquo;零 I/O 操作&rdquo;</strong>。",
+        "inMemory": {
+          "title": "全内存服务",
+          "description": "所有路由和决策所需的数据，包括分组配置、密钥信息等，都在服务启动和配置变更时预加载到内存中。代理请求期间无需任何数据库或磁盘访问。"
+        },
+        "zeroCopy": {
+          "title": "零拷贝流式传输 (Zero-Copy Streaming)",
+          "mechanism": {
+            "title": "实时透传机制",
+            "description": "GPT-Load 采用<strong>实时透传模式</strong>，直接将上游服务的数据流 (<code class=\"bg-gray-100 px-1 rounded\">io.Reader</code>) 对接到客户端响应 (<code class=\"bg-gray-100 px-1 rounded\">io.Writer</code>)，<strong>不进行任何中间缓冲、按行读取或内容解析</strong>。"
+          },
+          "comparison": {
+            "title": "与传统流式处理的区别",
+            "traditional": {
+              "title": "❌ 传统方式",
+              "description": "按行读取 → 解析处理 → 缓冲输出"
+            },
+            "gptload": {
+              "title": "✅ GPT-Load 方式",
+              "description": "上游数据流 → 直接透传 → 客户端"
+            }
+          },
+          "advantagesTitle": "核心优势",
+          "advantages": [
+            { "title": "避免数据包截断", "description": "不会因按行读取而破坏原始数据包结构" },
+            { "title": "极致兼容性", "description": "天然支持 SSE、JSON 流、二进制等所有数据格式" },
+            { "title": "无限响应能力", "description": "理论上可处理任意大小的上游响应数据" },
+            { "title": "零延迟传输", "description": "数据到达即转发，无缓冲等待时间" },
+            { "title": "极低内存占用", "description": "不缓存数据，内存使用量与响应大小无关" },
+            { "title": "原生性能体验", "description": "响应速度无限贴近上游服务原生表现" }
+          ]
+        },
+        "asyncLogging": {
+          "title": "异步日志",
+          "description": "请求日志的记录采用<strong>延迟异步写入</strong>策略，完全与请求-响应生命周期解耦，确保日志操作不会对实时代理性能产生任何干扰。"
+        }
+      },
+      "concurrency": {
+        "title": "动态资源与并发管理",
+        "httpClient": {
+          "title": "HTTP 客户端高效复用",
+          "items": [
+            "为每个分组维护独立的、可复用底层连接的 HTTP 客户端实例",
+            "当分组配置（如超时）变更时，系统会<strong>实时动态地</strong>生成新客户端实例，确保配置即时生效"
+          ]
+        },
+        "atomicLockFree": {
+          "title": "原子操作与无锁设计",
+          "description": "在密钥轮询计数等高频并发操作中，使用 <code class=\"bg-gray-100 px-1 rounded\">sync/atomic</code>包进行无锁化编程，避免了互斥锁（Mutex）带来的性能开销。"
+        }
+      },
+      "scalability": {
+        "title": "异步任务与可扩展性",
+        "asyncKeyManagement": {
+          "title": "海量密钥的异步管理",
+          "mechanism": {
+            "title": "机制",
+            "description": "添加和验证密钥等操作均作为<strong>异步后台任务</strong>执行。"
+          },
+          "advantage": {
+            "title": "优势",
+            "description": "使得管理操作不会阻塞服务，理论上允许系统管理百万级别的海量密钥。"
+          }
+        },
+        "clusterSupport": {
+          "title": "集群支持与配置同步",
+          "architecture": {
+            "title": "架构",
+            "description": "支持多节点主从（Master-Slave）架构进行水平扩展。"
+          },
+          "sync": {
+            "title": "同步",
+            "items": [
+              "主节点的配置变更通过 Redis Pub/Sub 推送通知",
+              "从节点通过内置的<strong>配置同步器</strong>监听并拉取更新，实现集群间配置的最终一致性"
+            ]
+          }
+        }
+      },
+      "resourceEfficiency": {
+        "title": "轻量级与资源效率",
+        "lowUsage": {
+          "title": "极低的资源占用",
+          "description": "得益于 Go 语言高效的内存管理以及上述性能优化（如零拷贝、连接池复用），GPT-Load 作为一个编译后的二进制文件运行，无额外运行时依赖，实现了极低的资源占用。",
+          "specs": {
+            "cpu": "单核 CPU",
+            "memory": "128MB 内存"
+          }
+        },
+        "wideApplicability": {
+          "title": "适用性广",
+          "description": "在典型的单机部署场景下，仅需较低的 CPU 和内存即可保障服务的流畅运行。",
+          "items": ["胜任大型企业的高并发场景", "适合资源有限的个人开发者环境"]
+        }
+      }
+    },
+    "quickStartPage": {
+      "title": "快速开始",
+      "description": "通过以下步骤快速启动和运行 GPT-Load。",
+      "sectionTitle": "快速启动",
+      "lightweightDeployment": {
+        "title": "轻量化部署",
+        "description": "使用 SQLite 数据库和内存存储，最适合个人使用和快速体验"
+      },
+      "prerequisites": {
+        "title": "环境要求",
+        "items": [
+          "Docker 20.10+ 和 Docker Compose",
+          "Linux/macOS/Windows 操作系统",
+          "至少 128MB 内存和 1GB 磁盘空间"
+        ]
+      },
+      "installationSteps": {
+        "title": "安装步骤",
+        "securityWarning": {
+          "title": "重要安全提醒",
+          "body": "在部署之前，您必须修改默认的管理密钥！",
+          "rules": [
+            "使用至少 20 个字符的复杂密钥",
+            "包含大小写字母、数字和特殊字符",
+            "绝不使用 <code>sk-123456</code> 等默认或简单密钥",
+            "生产环境中使用弱密钥将面临严重安全风险"
+          ],
+          "recommendation": "建议密钥格式：<code>sk-prod-[随机字符串32位]</code>"
+        },
+        "steps": [
+          {
+            "title": "创建工作目录",
+            "command": "# 创建目录并进入<br/>mkdir -p gpt-load && cd gpt-load"
+          },
+          {
+            "title": "下载配置文件",
+            "command": "# 下载 Docker Compose 配置<br/>wget https://raw.githubusercontent.com/tbphp/gpt-load/refs/heads/main/docker-compose.yml<br/><br/># 下载环境变量配置<br/>wget -O .env https://raw.githubusercontent.com/tbphp/gpt-load/refs/heads/main/.env.example",
+            "securityConfig": {
+              "title": "立即修改安全配置",
+              "line1": "编辑 <code>.env</code> 文件，将以下内容：",
+              "code1": "AUTH_KEY=sk-123456",
+              "line2": "修改为强密钥：",
+              "code2": "AUTH_KEY=sk-prod-your-strong-random-key-32-chars"
+            }
+          },
+          {
+            "title": "启动服务",
+            "command": "# 启动 GPT-Load 服务<br/>docker compose up -d"
+          },
+          {
+            "title": "验证部署",
+            "command": "",
+            "visitAdmin": "访问管理界面：",
+            "loginNote": "使用您在 <code>.env</code> 文件中设置的 <code>AUTH_KEY</code> 登录管理界面"
+          }
+        ]
+      },
+      "commonCommands": {
+        "title": "常用命令",
+        "commands": [
+          {
+            "title": "查看状态",
+            "command": "docker compose ps"
+          },
+          {
+            "title": "查看日志",
+            "command": "docker compose logs -f"
+          },
+          {
+            "title": "重启服务",
+            "command": "docker compose down && docker compose up -d"
+          },
+          {
+            "title": "更新版本",
+            "command": "docker compose pull && docker compose down && docker compose up -d"
+          }
+        ]
+      },
+      "nextSteps": {
+        "text": "想了解更多部署选项，例如使用 MySQL/PostgreSQL 或进行集群部署吗？请查看完整的 <a><strong>部署指南</strong></a>。"
+      }
+    },
+    "clusterPage": {
+      "content": {
+        "header": {
+          "title": "集群部署",
+          "description": "GPT-Load 高可用集群部署方案，支持主从架构和水平扩展"
+        },
+        "overview": {
+          "title": "集群架构概览",
+          "banner": {
+            "title": "企业级高可用架构",
+            "description": "专为大规模生产环境设计，确保服务的稳定性和可靠性"
+          },
+          "items": [
+            { "title": "主从架构", "description": "基于 Redis 实现主节点选举和配置同步", "icon": "Server" },
+            { "title": "水平扩展", "description": "无状态从节点设计，支持动态扩缩容", "icon": "Layers" },
+            { "title": "数据共享", "description": "MySQL + Redis 统一数据存储和缓存", "icon": "Database" }
+          ]
+        },
+        "prerequisites": {
+          "title": "部署环境要求",
+          "importantNote": {
+            "title": "重要提示",
+            "description": "在生产环境中，强烈建议使用独立的、高可用的 MySQL 和 Redis 服务。"
+          },
+          "requirements": [
+            {
+              "title": "基础设施",
+              "items": [
+                "服务器:至少 2 台（1 主 1 从）;推荐 3 台以上实现更高可用性",
+                "网络:确保所有节点之间网络互通，低延迟"
+              ]
+            },
+            {
+              "title": "依赖服务",
+              "items": [
+                "MySQL:版本 8.0+;用于数据持久化",
+                "Redis:版本 6.2+;用于缓存、分布式锁和消息队列"
+              ]
+            }
+          ]
+        },
+        "deploymentSteps": {
+          "title": "部署步骤",
+          "steps": [
+            {
+              "title": "第一步：配置主节点 (Master)",
+              "sections": [
+                {
+                  "title": "环境变量配置",
+                  "content": "在主节点的 .env 文件中进行如下核心配置：",
+                  "code": "IS_SLAVE=false\nREDIS_HOST=your-redis-host\nREDIS_PORT=6379\nREDIS_PASSWORD=your-redis-password\nDB_HOST=your-mysql-host\nDB_PORT=3306\nDB_USER=your-mysql-user\nDB_PASSWORD=your-mysql-password\nDB_NAME=gpt_load"
+                }
+              ]
+            },
+            {
+              "title": "第二步：配置从节点 (Slave)",
+              "sections": [
+                {
+                  "title": "环境变量配置",
+                  "content": "在所有从节点的 .env 文件中，确保 IS_SLAVE=true，并使用与主节点相同的数据库和 Redis 配置。",
+                  "code": "IS_SLAVE=true\nREDIS_HOST=your-redis-host\n# ... 其他配置与主节点相同"
+                }
+              ]
+            },
+            {
+              "title": "第三步：启动集群",
+              "sections": [
+                {
+                  "title": "启动顺序",
+                  "content": "务必先启动主节点，等待其完全启动并完成初始化后，再依次启动所有从节点。",
+                  "note": "从节点启动时会自动连接到 Redis，并通过 Pub/Sub 机制从主节点同步最新配置。"
+                }
+              ]
+            }
+          ]
+        },
+        "configManagement": {
+          "title": "配置管理与同步",
+          "sections": [
+            {
+              "title": "配置同步机制",
+              "items": [
+                { "name": "主节点写入，从节点只读" },
+                { "name": "通过 Redis Pub/Sub 推送更新" },
+                { "name": "从节点自动同步配置" }
+              ]
+            },
+            {
+              "title": "核心同步数据",
+              "items": [
+                { "name": "分组配置", "requirement": "实时同步" },
+                { "name": "密钥信息", "requirement": "实时同步" },
+                { "name": "系统设置", "requirement": "实时同步" }
+              ]
+            }
+          ]
+        },
+        "monitoring": {
+          "title": "监控与维护",
+          "healthCheck": {
+            "title": "健康检查",
+            "clusterMonitoringTitle": "集群监控",
+            "status": {
+              "title": "节点状态检查",
+              "command": "curl http://<node_ip>:3001/api/status",
+              "response": "\n{\n  \"status\": \"ok\",\n  \"version\": \"v1.0.0\"\n}"
+            },
+            "clusterMonitoring": [
+              "使用 Prometheus + Grafana 监控集群指标",
+              "在主节点管理界面查看所有节点状态",
+              "配置告警规则，及时发现异常"
+            ]
+          },
+          "scaling": {
+            "title": "扩缩容",
+            "items": [
+              {
+                "title": "水平扩展",
+                "items": [
+                  "添加新节点:配置为从节点并启动即可",
+                  "移除节点:直接关闭从节点服务"
+                ]
+              },
+              {
+                "title": "主节点迁移",
+                "items": [
+                  "关闭旧主节点",
+                  "将一个从节点配置修改为 IS_SLAVE=false",
+                  "重启该节点使其成为新主节点"
+                ]
+              }
+            ]
+          }
+        },
+        "bestPractices": {
+          "title": "最佳实践",
+          "practices": [
+            {
+              "title": "推荐实践",
+              "items": [
+                "使用外部高可用的数据库和 Redis 服务",
+                "为 GPT-Load 集群配置负载均衡器 (如 Nginx)",
+                "定期备份数据库和配置文件",
+                "监控 Redis 连接数和内存使用情况"
+              ],
+              "type": "good"
+            },
+            {
+              "title": "应避免的操作",
+              "items": [
+                "在多个节点上同时进行写操作",
+                "在主节点未完全启动时启动从节点",
+                "在生产环境中使用默认的 AUTH_KEY",
+                "忽略对数据库和 Redis 的监控"
+              ],
+              "type": "bad"
+            }
+          ]
+        }
+      }
+    }
   },
   "features": {
     "title": "核心技术特性",
@@ -224,12 +850,21 @@
       "client": {
         "title": "客户端应用",
         "description": "Web/移动应用通过标准 OpenAI API 格式调用",
-        "items": ["HTTP/HTTPS 请求", "Bearer Token 认证", "JSON 格式交互"]
+        "items": [
+          "HTTP/HTTPS 请求",
+          "Bearer Token 认证",
+          "JSON 格式交互"
+        ]
       },
       "proxy": {
         "title": "GPT-Load 代理层",
         "description": "核心代理服务，负责请求转发和管理",
-        "items": ["透明代理", "密钥管理", "负载均衡", "请求日志"]
+        "items": [
+          "透明代理",
+          "密钥管理",
+          "负载均衡",
+          "请求日志"
+        ]
       },
       "provider": {
         "title": "AI 服务提供商",
@@ -246,17 +881,29 @@
       "mysql": {
         "title": "MySQL 8.2+",
         "description": "持久化存储",
-        "details": ["配置数据", "用户信息", "请求日志"]
+        "details": [
+          "配置数据",
+          "用户信息",
+          "请求日志"
+        ]
       },
       "redis": {
         "title": "Redis",
         "description": "缓存与锁",
-        "details": ["密钥缓存", "分布式锁", "会话存储"]
+        "details": [
+          "密钥缓存",
+          "分布式锁",
+          "会话存储"
+        ]
       },
       "vue": {
         "title": "Vue 3 管理后台",
         "description": "管理界面",
-        "details": ["实时监控", "配置管理", "日志查看"]
+        "details": [
+          "实时监控",
+          "配置管理",
+          "日志查看"
+        ]
       }
     },
     "deployment": {
@@ -270,7 +917,11 @@
       },
       "cluster": {
         "title": "集群部署",
-        "items": ["Master/Slave 架构", "水平扩展支持", "高可用性保障"]
+        "items": [
+          "Master/Slave 架构",
+          "水平扩展支持",
+          "高可用性保障"
+        ]
       }
     }
   },
@@ -401,6 +1052,115 @@
         "activeKeys": "活跃密钥:",
         "errorRate": "错误率:"
       }
+    },
+    "routingStrategy": {
+      "metadata": {
+        "title": "路径设计策略 - GPT-Load",
+        "description": "理解 GPT-Load 的路径处理机制，掌握灵活的路径配置方法，确保客户端与上游服务的正确连接。"
+      },
+      "content": {
+        "header": {
+          "title": "路径设计策略",
+          "description": "理解 GPT-Load 的路径处理机制，掌握灵活的路径配置方法，确保客户端与上游服务的正确连接。"
+        },
+        "coreConcept": {
+          "title": "路径处理原理",
+          "principle": {
+            "title": "透传原则",
+            "description": "GPT-Load 遵循透传原则，仅负责路径替换，保持最大的灵活性。核心逻辑是将客户端请求中的代理前缀替换为实际的上游地址。",
+            "rule": "替换规则：",
+            "rulePrefix": "GPT-Load服务地址 + /proxy/ + 分组名",
+            "ruleSuffix": "上游地址"
+          }
+        },
+        "processingLogic": {
+          "title": "处理流程示例",
+          "serverAddress": "服务地址:",
+          "upstreamUrl": "上游地址:",
+          "groupName": "分组名:",
+          "clientRequest": "客户端请求",
+          "actualRequest": "实际请求"
+        },
+        "configExamples": {
+          "title": "配置方式详解",
+          "description": "以 OpenRouter 为例（完整路径：{code}）， 分组名为 {code}，渠道类型为 {code}：",
+          "configs": [
+            {
+              "title": "配置方式一：域名分离",
+              "gptLoadConfig": {
+                "title": "GPT-Load 配置",
+                "upstreamUrl": "https://openrouter.ai",
+                "testPath": "/api/v1/chat/completions"
+              },
+              "clientConfig": {
+                "title": "客户端配置",
+                "apiUrl": "http://localhost:3001/proxy/openrouter/api"
+              }
+            },
+            {
+              "title": "配置方式二：包含 API 路径（推荐）",
+              "gptLoadConfig": {
+                "title": "GPT-Load 配置",
+                "upstreamUrl": "https://openrouter.ai/api",
+                "testPath": "/v1/chat/completions"
+              },
+              "clientConfig": {
+                "title": "客户端配置",
+                "apiUrl": "http://localhost:3001/proxy/openrouter"
+              }
+            },
+            {
+              "title": "配置方式三：完整版本路径",
+              "gptLoadConfig": {
+                "title": "GPT-Load 配置",
+                "upstreamUrl": "https://openrouter.ai/api/v1",
+                "testPath": "/chat/completions"
+              },
+              "clientConfig": {
+                "title": "客户端配置",
+                "apiUrl": "http://localhost:3001/proxy/openrouter/",
+                "note": "注意：必须以 / 结尾，避免客户端自动拼接 v1 路径"
+              }
+            }
+          ]
+        },
+        "bestPractices": {
+          "title": "最佳实践",
+          "practices": [
+            {
+              "title": "配置建议",
+              "icon": "Route",
+              "recommendations": [
+                "推荐使用配置方式二，结构清晰易理解",
+                "先确定完整的上游 API 地址",
+                "根据客户端特性选择合适的路径分割点",
+                "保持配置的一致性和可维护性"
+              ]
+            },
+            {
+              "title": "调试技巧",
+              "icon": "Globe",
+              "recommendations": [
+                "查看 GPT-Load 请求日志确认上游地址",
+                "使用测试路径验证配置正确性",
+                "注意客户端的路径拼接规则",
+                "灵活调整配置以适应不同场景"
+              ]
+            }
+          ]
+        },
+        "summary": {
+          "title": "配置要点总结",
+          "description": "理解路径处理逻辑是关键：GPT-Load 只负责简单的字符串替换，灵活的配置方式能适应各种客户端和上游服务的需求。",
+          "corePrinciple": "核心原则：确保 {code} 和 {code} 经过 GPT-Load 代理后，最终请求的上游地址正确无误。"
+        }
+      },
+      "replaceWith": "替换为",
+      "serverAddress": "服务地址",
+      "upstreamUrlLabel": "上游地址",
+      "groupNameLabel": "分组名",
+      "testPathLabel": "测试路径",
+      "clientApiUrlLabel": "Cherry Studio API地址"
     }
   }
 }
