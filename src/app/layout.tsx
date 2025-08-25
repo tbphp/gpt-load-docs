@@ -49,7 +49,7 @@ export default async function RootLayout({
 }>) {
   const messages = await getMessages();
   const cookieStore = await cookies();
-  const currentLocale = cookieStore.get("locale")?.value || "zh";
+  const currentLocale = cookieStore.get("language")?.value || "zh";
 
   // 生成结构化数据
   const schemas = await Promise.all([

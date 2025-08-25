@@ -48,7 +48,9 @@
     "home": "Home",
     "docs": "Documentation",
     "github": "GitHub",
-    "sponsor": "Sponsor"
+    "sponsor": "Sponsor",
+    "logoAlt": "GPT-Load Logo",
+    "toggleMenu": "Toggle mobile menu"
   },
   "hero": {
     "title": "GPT-Load",
@@ -114,7 +116,8 @@
       "telegram": "Telegram",
       "standalone": "Standalone",
       "cluster": "Cluster"
-    }
+    },
+    "copyright": "© {year} GPT-Load. Released under the <licenseLink>MIT License</licenseLink>."
   },
   "docs": {
     "quickStart": "Quick Start",
@@ -162,17 +165,31 @@
       "client": {
         "title": "Client Application",
         "description": "Web/mobile apps call via standard OpenAI API format",
-        "items": ["HTTP/HTTPS Request", "Bearer Token Auth", "JSON Format Interaction"]
+        "items": [
+          "HTTP/HTTPS Request",
+          "Bearer Token Auth",
+          "JSON Format Interaction"
+        ]
       },
       "proxy": {
         "title": "GPT-Load Proxy Layer",
         "description": "Core proxy service for request forwarding and management",
-        "items": ["Transparent Proxy", "Key Management", "Load Balancing", "Request Logging"]
+        "items": [
+          "Transparent Proxy",
+          "Key Management",
+          "Load Balancing",
+          "Request Logging"
+        ]
       },
       "provider": {
         "title": "AI Service Provider",
         "description": "Unified access to multiple AI services",
-        "items": ["OpenAI API", "Google Gemini", "Anthropic Claude", "Other Compatible Services"]
+        "items": [
+          "OpenAI API",
+          "Google Gemini",
+          "Anthropic Claude",
+          "Other Compatible Services"
+        ]
       }
     },
     "infrastructureComponents": {
@@ -189,17 +206,29 @@
       "vue": {
         "title": "Vue 3 Admin Backend",
         "description": "Management Interface",
-        "details": ["Real-time Monitoring", "Configuration Management", "Log Viewing"]
+        "details": [
+          "Real-time Monitoring",
+          "Configuration Management",
+          "Log Viewing"
+        ]
       }
     },
     "deployment": {
       "standalone": {
         "title": "Standalone Deployment",
-        "items": ["One-click start with Docker Compose", "Includes complete MySQL + Redis", "Suitable for development and small-scale production"]
+        "items": [
+          "One-click start with Docker Compose",
+          "Includes complete MySQL + Redis",
+          "Suitable for development and small-scale production"
+        ]
       },
       "cluster": {
         "title": "Cluster Deployment",
-        "items": ["Master/Slave Architecture", "Horizontal scaling support", "High availability assurance"]
+        "items": [
+          "Master/Slave Architecture",
+          "Horizontal scaling support",
+          "High availability assurance"
+        ]
       }
     }
   },
@@ -221,5 +250,20 @@
       "container": "Container Runtime"
     },
     "viewDocs": "View detailed deployment documentation"
+  },
+  "structuredData": {
+    "organization": {
+      "name": "GPT-Load",
+      "contactType": "Technical Support"
+    },
+    "website": {
+      "name": "GPT-Load - AI API Load Balancer & Management Platform",
+      "publisher": "GPT-Load"
+    },
+    "software": {
+      "name": "GPT-Load",
+      "operatingSystem": "Linux, macOS, Windows",
+      "applicationCategory": "DeveloperApplication"
+    }
   }
 }

@@ -8,19 +8,19 @@ export async function generateOrganizationSchema(): Promise<object> {
     (cookieStore.get("locale")?.value as Locale) || defaultLocale;
   const t = await getTranslations({
     locale: currentLocale,
-    namespace: "metadata",
+    namespace: "structuredData.organization",
   });
 
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "GPT-Load",
-    description: t("description"),
+    name: t("name"),
+    description: (await getTranslations({ locale: currentLocale, namespace: "metadata" }))("description"),
     url: "https://gpt-load.com",
     logo: "https://gpt-load.com/logo.png",
     contactPoint: {
       "@type": "ContactPoint",
-      contactType: "technical support",
+      contactType: t("contactType"),
       url: "https://github.com/tbphp/gpt-load/issues",
     },
     sameAs: ["https://github.com/tbphp/gpt-load"],
@@ -33,14 +33,14 @@ export async function generateWebsiteSchema(): Promise<object> {
     (cookieStore.get("locale")?.value as Locale) || defaultLocale;
   const t = await getTranslations({
     locale: currentLocale,
-    namespace: "metadata",
+    namespace: "structuredData.website",
   });
 
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: t("title"),
-    description: t("description"),
+    name: t("name"),
+    description: (await getTranslations({ locale: currentLocale, namespace: "metadata" }))("description"),
     url: "https://gpt-load.com",
     potentialAction: {
       "@type": "SearchAction",
@@ -52,7 +52,7 @@ export async function generateWebsiteSchema(): Promise<object> {
     },
     publisher: {
       "@type": "Organization",
-      name: "GPT-Load",
+      name: t("publisher"),
     },
   };
 }
@@ -63,20 +63,20 @@ export async function generateSoftwareApplicationSchema(): Promise<object> {
     (cookieStore.get("locale")?.value as Locale) || defaultLocale;
   const t = await getTranslations({
     locale: currentLocale,
-    namespace: "metadata",
+    namespace: "structuredData.software",
   });
 
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: "GPT-Load",
-    description: t("description"),
+    name: t("name"),
+    description: (await getTranslations({ locale: currentLocale, namespace: "metadata" }))("description"),
     url: "https://gpt-load.com",
     downloadUrl: "https://github.com/tbphp/gpt-load",
     softwareVersion: "latest",
-    operatingSystem: "Linux, macOS, Windows",
+    operatingSystem: t("operatingSystem"),
     programmingLanguage: "Go",
-    applicationCategory: "DeveloperApplication",
+    applicationCategory: t("applicationCategory"),
     offers: {
       "@type": "Offer",
       price: "0",

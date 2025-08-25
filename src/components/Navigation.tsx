@@ -41,7 +41,7 @@ const Navigation = () => {
             <Link href="/" className="flex items-center space-x-2">
               <Image
                 src="/logo.png"
-                alt="GPT-Load Logo"
+                alt={t("logoAlt")}
                 width={32}
                 height={32}
                 className="w-8 h-8"
@@ -79,7 +79,7 @@ const Navigation = () => {
             <div className="relative">
               <Image
                 src="/logo.png"
-                alt="GPT-Load Logo"
+                alt={t("logoAlt")}
                 width={32}
                 height={32}
                 className="w-8 h-8"
@@ -101,7 +101,7 @@ const Navigation = () => {
                 href={item.href}
                 className={cn(
                   "transition-colors duration-200 font-medium flex items-center space-x-1",
-                  item.label === "赞助"
+                  item.href === "/docs/sponsor"
                     ? "text-red-600 hover:text-red-700"
                     : "text-gray-700 hover:text-blue-600"
                 )}
@@ -118,7 +118,7 @@ const Navigation = () => {
               className="flex items-center space-x-2 bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors duration-200"
             >
               <Github className="h-4 w-4" />
-              <span>GitHub</span>
+              <span>{t("github")}</span>
               {stars !== null && (
                 <div className="ml-2 flex items-center space-x-1 rounded-md bg-gray-700 px-2 py-1 text-xs">
                   <span>⭐</span>
@@ -132,7 +132,7 @@ const Navigation = () => {
           <button
             className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle mobile menu"
+            aria-label={t("toggleMenu")}
           >
             {isMobileMenuOpen ? (
               <X className="h-6 w-6 text-gray-700" />
@@ -159,7 +159,7 @@ const Navigation = () => {
                     href={item.href}
                     className={cn(
                       "flex items-center space-x-2 transition-colors duration-200 font-medium py-2 px-2",
-                      item.label === "赞助"
+                      item.href === "/docs/sponsor"
                         ? "text-red-600 hover:text-red-700"
                         : "text-gray-700 hover:text-blue-600"
                     )}
@@ -178,7 +178,7 @@ const Navigation = () => {
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     <Github className="h-4 w-4" />
-                    <span>GitHub</span>
+                    <span>{t("github")}</span>
                     {stars !== null && (
                       <div className="ml-2 flex items-center space-x-1 rounded-md bg-gray-700 px-2 py-1 text-xs">
                         <span>⭐</span>

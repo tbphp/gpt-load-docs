@@ -48,7 +48,9 @@
     "home": "首页",
     "docs": "文档",
     "github": "GitHub",
-    "sponsor": "赞助"
+    "sponsor": "赞助",
+    "logoAlt": "GPT-Load Logo",
+    "toggleMenu": "切换移动菜单"
   },
   "hero": {
     "title": "GPT-Load",
@@ -114,7 +116,8 @@
       "telegram": "Telegram",
       "standalone": "单机",
       "cluster": "集群"
-    }
+    },
+    "copyright": "© {year} GPT-Load. 根据 <licenseLink>MIT 许可证</licenseLink> 开源发布。"
   },
   "docs": {
     "quickStart": "快速开始",
@@ -172,7 +175,12 @@
       "provider": {
         "title": "AI 服务提供商",
         "description": "多种 AI 服务的统一接入",
-        "items": ["OpenAI API", "Google Gemini", "Anthropic Claude", "其他兼容服务"]
+        "items": [
+          "OpenAI API",
+          "Google Gemini",
+          "Anthropic Claude",
+          "其他兼容服务"
+        ]
       }
     },
     "infrastructureComponents": {
@@ -195,7 +203,11 @@
     "deployment": {
       "standalone": {
         "title": "单机部署",
-        "items": ["Docker Compose 一键启动", "包含完整的 MySQL + Redis", "适合开发和小规模生产"]
+        "items": [
+          "Docker Compose 一键启动",
+          "包含完整的 MySQL + Redis",
+          "适合开发和小规模生产"
+        ]
       },
       "cluster": {
         "title": "集群部署",
@@ -221,5 +233,20 @@
       "container": "容器运行时"
     },
     "viewDocs": "查看详细部署文档"
+  },
+  "structuredData": {
+    "organization": {
+      "name": "GPT-Load",
+      "contactType": "技术支持"
+    },
+    "website": {
+      "name": "GPT-Load - AI API 负载均衡与管理平台",
+      "publisher": "GPT-Load"
+    },
+    "software": {
+      "name": "GPT-Load",
+      "operatingSystem": "Linux, macOS, Windows",
+      "applicationCategory": "开发者工具"
+    }
   }
 }

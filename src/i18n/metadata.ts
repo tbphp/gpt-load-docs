@@ -15,6 +15,11 @@ export async function generateMetadata(locale?: Locale): Promise<Metadata> {
     namespace: "metadata",
   });
 
+  const tNav = await getTranslations({
+    locale: currentLocale,
+    namespace: "navigation",
+  });
+
   // 基础元数据
   const baseMetadata: Metadata = {
     title: t("title"),
@@ -43,7 +48,7 @@ export async function generateMetadata(locale?: Locale): Promise<Metadata> {
           url: "/logo.png",
           width: 1200,
           height: 630,
-          alt: "GPT-Load Logo",
+          alt: tNav("logoAlt"),
         },
       ],
     },

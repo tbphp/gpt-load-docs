@@ -48,7 +48,9 @@
     "home": "ホーム",
     "docs": "ドキュメント",
     "github": "GitHub",
-    "sponsor": "スポンサー"
+    "sponsor": "スポンサー",
+    "logoAlt": "GPT-Load ロゴ",
+    "toggleMenu": "モバイルメニューの切り替え"
   },
   "hero": {
     "title": "GPT-Load",
@@ -114,7 +116,8 @@
       "telegram": "Telegram",
       "standalone": "スタンドアロン",
       "cluster": "クラスター"
-    }
+    },
+    "copyright": "© {year} GPT-Load. <licenseLink>MITライセンス</licenseLink>の下でリリースされています。"
   },
   "docs": {
     "quickStart": "クイックスタート",
@@ -162,17 +165,31 @@
       "client": {
         "title": "クライアントアプリケーション",
         "description": "Web/モバイルアプリは標準のOpenAI API形式で呼び出します",
-        "items": ["HTTP/HTTPSリクエスト", "ビアラートークン認証", "JSON形式の対話"]
+        "items": [
+          "HTTP/HTTPSリクエスト",
+          "ビアラートークン認証",
+          "JSON形式の対話"
+        ]
       },
       "proxy": {
         "title": "GPT-Load プロキシ層",
         "description": "リクエストの転送と管理を担当するコアプロキシサービス",
-        "items": ["透過的プロキシ", "キー管理", "負荷分散", "リクエストロギング"]
+        "items": [
+          "透過的プロキシ",
+          "キー管理",
+          "負荷分散",
+          "リクエストロギング"
+        ]
       },
       "provider": {
         "title": "AIサービスプロバイダー",
         "description": "複数のAIサービスへの統一アクセス",
-        "items": ["OpenAI API", "Google Gemini", "Anthropic Claude", "その他の互換サービス"]
+        "items": [
+          "OpenAI API",
+          "Google Gemini",
+          "Anthropic Claude",
+          "その他の互換サービス"
+        ]
       }
     },
     "infrastructureComponents": {
@@ -195,11 +212,19 @@
     "deployment": {
       "standalone": {
         "title": "スタンドアロンデプロイ",
-        "items": ["Docker Composeでワンクリック起動", "完全なMySQL + Redisを含む", "開発および小規模生産に適しています"]
+        "items": [
+          "Docker Composeでワンクリック起動",
+          "完全なMySQL + Redisを含む",
+          "開発および小規模生産に適しています"
+        ]
       },
       "cluster": {
         "title": "クラスターデプロイ",
-        "items": ["マスター/スレーブアーキテクチャ", "水平スケーリングのサポート", "高可用性の保証"]
+        "items": [
+          "マスター/スレーブアーキテクチャ",
+          "水平スケーリングのサポート",
+          "高可用性の保証"
+        ]
       }
     }
   },
@@ -221,5 +246,20 @@
       "container": "コンテナランタイム"
     },
     "viewDocs": "詳細なデプロイメントドキュメントを表示"
+  },
+  "structuredData": {
+    "organization": {
+      "name": "GPT-Load",
+      "contactType": "テクニカルサポート"
+    },
+    "website": {
+      "name": "GPT-Load - AI APIロードバランサー＆管理プラットフォーム",
+      "publisher": "GPT-Load"
+    },
+    "software": {
+      "name": "GPT-Load",
+      "operatingSystem": "Linux, macOS, Windows",
+      "applicationCategory": "開発者ツール"
+    }
   }
 }
