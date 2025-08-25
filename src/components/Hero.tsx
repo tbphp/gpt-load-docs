@@ -152,13 +152,32 @@ const Hero = () => {
               <pre className="text-green-400 text-xs sm:text-sm overflow-x-auto whitespace-pre-wrap break-words">
                 <code>{`docker run -d --name gpt-load \\
     -p 3001:3001 \\
-    -e AUTH_KEY=sk-123456 \\
+    -e AUTH_KEY=your-secure-key-here \\
     -v "$(pwd)/data":/app/data \\
     ghcr.io/tbphp/gpt-load:latest
 
-# 使用 sk-123456 登录管理界面：http://localhost:3001
+# 访问管理界面：http://localhost:3001
 `}</code>
               </pre>
+
+              {/* Security Warning */}
+              <div className="mt-4 p-3 bg-red-900/20 border border-red-500/30 rounded-lg">
+                <div className="flex items-start space-x-2">
+                  <div className="text-red-400 text-lg">⚠️</div>
+                  <div>
+                    <div className="text-red-400 text-xs sm:text-sm font-bold">
+                      安全警告
+                    </div>
+                    <div className="text-red-300 text-xs mt-1">
+                      请务必将{" "}
+                      <code className="bg-red-800/30 px-1 rounded">
+                        your-secure-key-here
+                      </code>{" "}
+                      替换为复杂的密钥！ 使用默认或简单密钥存在严重安全风险。
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>

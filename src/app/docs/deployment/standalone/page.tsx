@@ -53,6 +53,40 @@ export default function StandalonePage() {
         <div className="mb-8">
           <h3 className="text-xl font-semibold text-gray-900 mb-4">安装步骤</h3>
 
+          {/* Critical Security Warning */}
+          <div className="bg-red-50 border-2 border-red-500 rounded-lg p-6 mb-8">
+            <div className="flex items-start space-x-3">
+              <div className="text-red-600 text-2xl">🚨</div>
+              <div>
+                <h4 className="text-lg font-bold text-red-800 mb-2">
+                  关键安全警告
+                </h4>
+                <div className="text-red-700 space-y-2">
+                  <p className="font-semibold">
+                    部署前必须更改默认管理密钥，否则存在严重安全风险！
+                  </p>
+                  <div className="bg-red-100 p-3 rounded-lg">
+                    <p className="font-medium text-red-800 mb-1">
+                      安全密钥要求：
+                    </p>
+                    <ul className="text-sm space-y-1 ml-4">
+                      <li>• 最少 20 个字符</li>
+                      <li>• 包含大小写字母、数字、特殊符号</li>
+                      <li>• 避免使用字典词汇或个人信息</li>
+                      <li>
+                        • 推荐格式：<code>sk-prod-[32位随机字符串]</code>
+                      </li>
+                    </ul>
+                  </div>
+                  <p className="text-sm font-medium text-red-800">
+                    ⚠️
+                    使用弱密钥可能导致系统被恶意访问，造成数据泄露或服务滥用！
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="space-y-6">
             <div className="border border-gray-200 rounded-lg p-6">
               <div className="flex items-center space-x-3 mb-4">
@@ -78,7 +112,7 @@ export default function StandalonePage() {
                   <span className="text-blue-600 font-semibold">2</span>
                 </div>
                 <h4 className="text-lg font-semibold text-gray-900">
-                  下载配置文件
+                  下载并配置安全参数
                 </h4>
               </div>
               <div className="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
@@ -94,6 +128,38 @@ export default function StandalonePage() {
                   wget -O .env
                   https://raw.githubusercontent.com/tbphp/gpt-load/refs/heads/main/.env.example
                 </code>
+              </div>
+
+              {/* Mandatory Security Configuration */}
+              <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-4">
+                <div className="flex items-start space-x-2">
+                  <div className="text-red-600 text-lg">⚠️</div>
+                  <div>
+                    <h5 className="font-bold text-red-800 mb-2">
+                      必须执行：修改管理密钥
+                    </h5>
+                    <p className="text-red-700 text-sm mb-3">
+                      立即编辑{" "}
+                      <code className="bg-red-200 px-1 rounded">.env</code>{" "}
+                      文件，将：
+                    </p>
+                    <div className="bg-gray-800 text-gray-100 p-2 rounded text-xs mb-2">
+                      <code>AUTH_KEY=sk-123456</code>
+                    </div>
+                    <p className="text-red-700 text-sm mb-2">
+                      替换为安全的密钥：
+                    </p>
+                    <div className="bg-gray-800 text-gray-100 p-2 rounded text-xs mb-3">
+                      <code>
+                        AUTH_KEY=sk-prod-AbCdEfGh123456$#@!XyZabc789012
+                      </code>
+                    </div>
+                    <div className="text-xs text-red-600 bg-red-100 p-2 rounded">
+                      <strong>提醒：</strong>
+                      请生成您自己的随机密钥，不要使用上面的示例密钥！
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -136,14 +202,35 @@ export default function StandalonePage() {
                     http://localhost:3001
                   </a>
                 </div>
-                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                  <p className="text-yellow-800 text-sm">
-                    默认管理密钥：
-                    <code className="bg-yellow-100 px-1 rounded">
-                      sk-123456
-                    </code>
-                    （用于登录管理界面）
-                  </p>
+                <div className="bg-green-50 border border-green-300 rounded-lg p-4">
+                  <div className="flex items-start space-x-2">
+                    <div className="text-green-600 text-lg">🔐</div>
+                    <div>
+                      <p className="text-green-800 text-sm font-medium mb-1">
+                        使用您自定义的管理密钥登录
+                      </p>
+                      <p className="text-green-700 text-xs">
+                        即您在{" "}
+                        <code className="bg-green-200 px-1 rounded">.env</code>{" "}
+                        文件中设置的
+                        <code className="bg-green-200 px-1 rounded">
+                          AUTH_KEY
+                        </code>{" "}
+                        值
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-amber-50 border border-amber-300 rounded-lg p-4">
+                  <div className="flex items-start space-x-2">
+                    <div className="text-amber-600 text-lg">💡</div>
+                    <div>
+                      <p className="text-amber-800 text-sm">
+                        <strong>安全提示：</strong>
+                        请妥善保管您的管理密钥，不要在日志、文档或代码中明文存储。
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -437,6 +524,29 @@ export default function StandalonePage() {
               常见问题
             </h3>
             <div className="space-y-4">
+              <div>
+                <h4 className="font-semibold text-gray-800">
+                  无法登录管理界面
+                </h4>
+                <p className="text-gray-600 text-sm mb-2">
+                  请检查您是否使用了正确的管理密钥：
+                </p>
+                <ul className="text-gray-600 text-sm space-y-1 ml-4">
+                  <li>
+                    • 确认{" "}
+                    <code className="bg-gray-100 px-1 rounded">.env</code>{" "}
+                    文件中的 AUTH_KEY 已修改
+                  </li>
+                  <li>
+                    • 重启服务后新密钥才会生效：
+                    <code className="bg-gray-100 px-1 rounded">
+                      docker compose restart
+                    </code>
+                  </li>
+                  <li>• 密钥区分大小写，请确保输入正确</li>
+                </ul>
+              </div>
+
               <div>
                 <h4 className="font-semibold text-gray-800">端口冲突</h4>
                 <p className="text-gray-600 text-sm mb-2">

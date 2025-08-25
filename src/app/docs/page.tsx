@@ -52,6 +52,36 @@ export default function QuickStartPage() {
         <div className="mb-8">
           <h3 className="text-xl font-semibold text-gray-900 mb-4">安装步骤</h3>
 
+          {/* Security Warning - High Priority */}
+          <div className="bg-red-50 border-2 border-red-500 rounded-lg p-6 mb-8">
+            <div className="flex items-start space-x-3">
+              <div className="text-red-600 text-2xl">🚨</div>
+              <div>
+                <h4 className="text-lg font-bold text-red-800 mb-2">
+                  重要安全提醒
+                </h4>
+                <div className="text-red-700 space-y-2">
+                  <p className="font-semibold">
+                    在部署之前，您必须修改默认的管理密钥！
+                  </p>
+                  <ul className="text-sm space-y-1 ml-4">
+                    <li>• 使用至少 20 个字符的复杂密钥</li>
+                    <li>• 包含大小写字母、数字和特殊字符</li>
+                    <li>
+                      • 绝不使用{" "}
+                      <code className="bg-red-200 px-1 rounded">sk-123456</code>{" "}
+                      等默认或简单密钥
+                    </li>
+                    <li>• 生产环境中使用弱密钥将面临严重安全风险</li>
+                  </ul>
+                  <p className="text-sm font-medium bg-red-100 p-2 rounded">
+                    建议密钥格式：<code>sk-prod-[随机字符串32位]</code>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="space-y-6">
             <div className="border border-gray-200 rounded-lg p-6">
               <div className="flex items-center space-x-3 mb-4">
@@ -94,6 +124,34 @@ export default function QuickStartPage() {
                   https://raw.githubusercontent.com/tbphp/gpt-load/refs/heads/main/.env.example
                 </code>
               </div>
+
+              {/* Security configuration step */}
+              <div className="bg-orange-50 border border-orange-300 rounded-lg p-4">
+                <div className="flex items-start space-x-2">
+                  <div className="text-orange-600 text-lg">🔐</div>
+                  <div>
+                    <h5 className="font-semibold text-orange-800 mb-2">
+                      立即修改安全配置
+                    </h5>
+                    <p className="text-orange-700 text-sm mb-2">
+                      编辑{" "}
+                      <code className="bg-orange-200 px-1 rounded">.env</code>{" "}
+                      文件，将以下内容：
+                    </p>
+                    <div className="bg-gray-800 text-gray-100 p-2 rounded text-xs mb-2">
+                      <code>AUTH_KEY=sk-123456</code>
+                    </div>
+                    <p className="text-orange-700 text-sm mb-2">
+                      修改为强密钥：
+                    </p>
+                    <div className="bg-gray-800 text-gray-100 p-2 rounded text-xs">
+                      <code>
+                        AUTH_KEY=sk-prod-your-strong-random-key-32-chars
+                      </code>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="border border-gray-200 rounded-lg p-6">
@@ -135,13 +193,15 @@ export default function QuickStartPage() {
                     http://localhost:3001
                   </a>
                 </div>
-                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                  <p className="text-yellow-800 text-sm">
-                    默认管理密钥：
-                    <code className="bg-yellow-100 px-1 rounded">
-                      sk-123456
-                    </code>
-                    （用于登录管理界面）
+                <div className="bg-green-50 border border-green-300 rounded-lg p-4">
+                  <p className="text-green-800 text-sm">
+                    使用您在{" "}
+                    <code className="bg-green-200 px-1 rounded">.env</code>{" "}
+                    文件中设置的
+                    <code className="bg-green-200 px-1 rounded">
+                      AUTH_KEY
+                    </code>{" "}
+                    登录管理界面
                   </p>
                 </div>
               </div>
@@ -183,7 +243,8 @@ export default function QuickStartPage() {
       {/* Next Steps */}
       <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
         <p className="text-gray-700">
-          想了解更多部署选项，例如使用 MySQL/PostgreSQL 或进行集群部署吗？请查看完整的{" "}
+          想了解更多部署选项，例如使用 MySQL/PostgreSQL
+          或进行集群部署吗？请查看完整的{" "}
           <a href="/docs/deployment" className="text-blue-600 hover:underline">
             <strong>部署指南</strong>
           </a>
