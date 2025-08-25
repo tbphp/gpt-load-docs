@@ -1,0 +1,63 @@
+{
+  "nav": {
+    "home": "ホーム",
+    "docs": "ドキュメント",
+    "sponsor": "スポンサー", 
+    "github": "GitHub",
+    "menu": "ドキュメントメニュー",
+    "close": "メニューを閉じる"
+  },
+  "hero": {
+    "title": "GPT-Load",
+    "subtitle": "高性能AI APIトランスペアレントプロキシ",
+    "description": "Go 1.23+で開発されたエンタープライズグレードのAI APIプロキシサービス。OpenAI、Google Gemini、Anthropic Claudeなどの複数のAIプロバイダーをサポート。インテリジェントキー管理、ロードバランシング、高同期処理、包括的監視機能を提供。",
+    "buttons": {
+      "docs": "ドキュメント",
+      "install": "インストール",
+      "github": "GitHub"
+    },
+    "tech": {
+      "backend": "バックエンド言語",
+      "database": "データストレージ",
+      "cache": "キャッシュシステム",
+      "frontend": "管理インターフェース"
+    },
+    "quickStart": {
+      "title": "クイックスタート",
+      "security": {
+        "title": "セキュリティ警告",
+        "message": "'your-secure-key-here'を強力なキーに置き換えてください！デフォルトまたは簡単なキーの使用は深刻なセキュリティリスクをもたらします。"
+      },
+      "access": "管理パネルにアクセス："
+    }
+  },
+  "footer": {
+    "copyright": "全著作権所有"
+  },
+  "docs": {
+    "quickStart": "クイックスタート",
+    "introduction": "プロジェクト紹介",
+    "deployment": "デプロイメント",
+    "standalone": "スタンドアローン",
+    "source": "ソースコード",
+    "cluster": "クラスター",
+    "clawCloud": "Claw Cloud",
+    "configuration": "設定管理",
+    "environment": "環境設定",
+    "project": "プロジェクト設定",
+    "management": "管理設定",
+    "cloudflareAigateway": "Cloudflare AI Gateway",
+    "architectureDesign": "アーキテクチャ設計",
+    "performance": "パフォーマンス",
+    "routingStrategy": "ルーティング戦略",
+    "keyManagement": "キー管理",
+    "channels": "チャンネル",
+    "geminiOpenai": "Gemini公式OpenAI互換",
+    "integrations": "統合ガイド",
+    "rooCode": "Roo Code",
+    "claudeCodeRouter": "Claude Code Router", 
+    "newApi": "New API",
+    "cherryStudio": "Cherry Studio",
+    "sponsor": "スポンサー"
+  }
+}

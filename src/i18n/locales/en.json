@@ -1,0 +1,63 @@
+{
+  "nav": {
+    "home": "Home",
+    "docs": "Docs",
+    "sponsor": "Sponsor",
+    "github": "GitHub",
+    "menu": "Docs Menu",
+    "close": "Close Menu"
+  },
+  "hero": {
+    "title": "GPT-Load",
+    "subtitle": "High-Performance AI API Transparent Proxy",
+    "description": "Enterprise-grade AI API proxy service developed with Go 1.23+, supporting multiple AI providers like OpenAI, Google Gemini, Anthropic Claude. Features intelligent key management, load balancing, high concurrency handling, and comprehensive monitoring.",
+    "buttons": {
+      "docs": "Documentation",
+      "install": "Installation",
+      "github": "GitHub"
+    },
+    "tech": {
+      "backend": "Backend Language",
+      "database": "Data Storage",
+      "cache": "Cache System", 
+      "frontend": "Admin Interface"
+    },
+    "quickStart": {
+      "title": "Quick Start",
+      "security": {
+        "title": "Security Warning",
+        "message": "Please replace 'your-secure-key-here' with a strong key! Using default or simple keys poses serious security risks."
+      },
+      "access": "Access admin panel:"
+    }
+  },
+  "footer": {
+    "copyright": "All rights reserved"
+  },
+  "docs": {
+    "quickStart": "Quick Start",
+    "introduction": "Introduction",
+    "deployment": "Deployment",
+    "standalone": "Standalone",
+    "source": "Source Code",
+    "cluster": "Cluster",
+    "clawCloud": "Claw Cloud",
+    "configuration": "Configuration",
+    "environment": "Environment",
+    "project": "Project",
+    "management": "Management",
+    "cloudflareAigateway": "Cloudflare AI Gateway",
+    "architectureDesign": "Architecture & Design",
+    "performance": "Performance",
+    "routingStrategy": "Routing Strategy",
+    "keyManagement": "Key Management", 
+    "channels": "Channels",
+    "geminiOpenai": "Gemini Official OpenAI Compatible",
+    "integrations": "Integrations",
+    "rooCode": "Roo Code",
+    "claudeCodeRouter": "Claude Code Router",
+    "newApi": "New API",
+    "cherryStudio": "Cherry Studio",
+    "sponsor": "Sponsor"
+  }
+}

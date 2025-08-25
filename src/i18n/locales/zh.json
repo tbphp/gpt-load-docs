@@ -1,0 +1,63 @@
+{
+  "nav": {
+    "home": "首页",
+    "docs": "文档",
+    "sponsor": "赞助",
+    "github": "GitHub",
+    "menu": "文档菜单",
+    "close": "关闭菜单"
+  },
+  "hero": {
+    "title": "GPT-Load",
+    "subtitle": "高性能 AI 接口透明代理",
+    "description": "基于 Go 1.23+ 开发的企业级 AI 接口代理服务，支持 OpenAI、Google Gemini、Anthropic Claude 等多种 AI 服务提供商。提供智能密钥管理、负载均衡、高并发处理和完善的监控功能。",
+    "buttons": {
+      "docs": "项目文档",
+      "install": "安装部署",
+      "github": "GitHub"
+    },
+    "tech": {
+      "backend": "后端语言",
+      "database": "数据存储", 
+      "cache": "缓存系统",
+      "frontend": "管理界面"
+    },
+    "quickStart": {
+      "title": "快速启动",
+      "security": {
+        "title": "安全警告",
+        "message": "请务必将 your-secure-key-here 替换为复杂的密钥！使用默认或简单密钥存在严重安全风险。"
+      },
+      "access": "访问管理界面："
+    }
+  },
+  "footer": {
+    "copyright": "版权所有"
+  },
+  "docs": {
+    "quickStart": "快速开始",
+    "introduction": "项目简介",
+    "deployment": "部署指南",
+    "standalone": "单机部署",
+    "source": "源码部署",
+    "cluster": "集群部署",
+    "clawCloud": "Claw Cloud",
+    "configuration": "配置管理",
+    "environment": "环境配置",
+    "project": "项目配置",
+    "management": "管理端配置",
+    "cloudflareAigateway": "Cloudflare AI Gateway",
+    "architectureDesign": "架构与设计",
+    "performance": "性能详解",
+    "routingStrategy": "路径设计策略", 
+    "keyManagement": "智能密钥管理",
+    "channels": "渠道类型",
+    "geminiOpenai": "Gemini 官方 OpenAI 兼容",
+    "integrations": "接入指南",
+    "rooCode": "Roo Code",
+    "claudeCodeRouter": "Claude Code Router",
+    "newApi": "New API",
+    "cherryStudio": "Cherry Studio",
+    "sponsor": "支持赞助"
+  }
+}

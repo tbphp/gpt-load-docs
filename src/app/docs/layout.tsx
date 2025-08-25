@@ -4,9 +4,11 @@ import { ReactNode, useState } from "react";
 import DocsNavigation from "../../components/DocsNavigation";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function DocsLayout({ children }: { children: ReactNode }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen bg-gray-50 pt-16">
@@ -20,12 +22,12 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
             {isMobileMenuOpen ? (
               <>
                 <X className="h-5 w-5 text-gray-600" />
-                <span className="text-gray-700">关闭菜单</span>
+                <span className="text-gray-700">{t("nav.close")}</span>
               </>
             ) : (
               <>
                 <Menu className="h-5 w-5 text-gray-600" />
-                <span className="text-gray-700">文档菜单</span>
+                <span className="text-gray-700">{t("nav.menu")}</span>
               </>
             )}
           </button>

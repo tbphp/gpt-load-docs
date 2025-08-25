@@ -4,8 +4,11 @@ import { motion } from "framer-motion";
 import { ArrowRight, Github, Download, FileText } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const Hero = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       {/* Simple background pattern */}
@@ -39,7 +42,7 @@ const Hero = () => {
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 px-4"
           >
             <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-              GPT-Load
+              {t("hero.title")}
             </span>
           </motion.h1>
 
@@ -50,7 +53,7 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg sm:text-xl md:text-2xl text-gray-700 mb-4 font-medium px-4"
           >
-            高性能 AI 接口透明代理
+            {t("hero.subtitle")}
           </motion.p>
 
           {/* Description */}
@@ -60,9 +63,7 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-base sm:text-lg text-gray-600 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-4"
           >
-            基于 Go 1.23+ 开发的企业级 AI 接口代理服务，支持 OpenAI、Google
-            Gemini、Anthropic Claude 等多种 AI 服务提供商。
-            提供智能密钥管理、负载均衡、高并发处理和完善的监控功能。
+            {t("hero.description")}
           </motion.p>
 
           {/* Action Buttons */}
@@ -77,7 +78,7 @@ const Hero = () => {
               className="group bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-xl w-full sm:w-auto justify-center"
             >
               <FileText className="h-5 w-5" />
-              项目文档
+              {t("hero.buttons.docs")}
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Link>
 
@@ -86,7 +87,7 @@ const Hero = () => {
               className="group border-2 border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 hover:shadow-md w-full sm:w-auto justify-center"
             >
               <Download className="h-5 w-5" />
-              安装部署
+              {t("hero.buttons.install")}
             </Link>
 
             <a
@@ -96,7 +97,7 @@ const Hero = () => {
               className="group border-2 border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 hover:shadow-md w-full sm:w-auto justify-center"
             >
               <Github className="h-5 w-5" />
-              GitHub
+              {t("hero.buttons.github")}
             </a>
           </motion.div>
 
@@ -111,25 +112,25 @@ const Hero = () => {
               <div className="text-base sm:text-lg font-bold text-blue-600 mb-1 sm:mb-2">
                 Go 1.23+
               </div>
-              <div className="text-xs sm:text-sm text-gray-600">后端语言</div>
+              <div className="text-xs sm:text-sm text-gray-600">{t("hero.tech.backend")}</div>
             </div>
             <div className="text-center p-3 sm:p-4 bg-white rounded-lg shadow-sm border border-gray-200">
               <div className="text-base sm:text-lg font-bold text-blue-600 mb-1 sm:mb-2">
                 MySQL
               </div>
-              <div className="text-xs sm:text-sm text-gray-600">数据存储</div>
+              <div className="text-xs sm:text-sm text-gray-600">{t("hero.tech.database")}</div>
             </div>
             <div className="text-center p-3 sm:p-4 bg-white rounded-lg shadow-sm border border-gray-200">
               <div className="text-base sm:text-lg font-bold text-blue-600 mb-1 sm:mb-2">
                 Redis
               </div>
-              <div className="text-xs sm:text-sm text-gray-600">缓存系统</div>
+              <div className="text-xs sm:text-sm text-gray-600">{t("hero.tech.cache")}</div>
             </div>
             <div className="text-center p-3 sm:p-4 bg-white rounded-lg shadow-sm border border-gray-200">
               <div className="text-base sm:text-lg font-bold text-blue-600 mb-1 sm:mb-2">
                 Vue 3
               </div>
-              <div className="text-xs sm:text-sm text-gray-600">管理界面</div>
+              <div className="text-xs sm:text-sm text-gray-600">{t("hero.tech.frontend")}</div>
             </div>
           </motion.div>
 
@@ -146,7 +147,7 @@ const Hero = () => {
                 <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                 <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                 <span className="text-gray-400 text-xs sm:text-sm ml-4">
-                  快速启动
+                  {t("hero.quickStart.title")}
                 </span>
               </div>
               <pre className="text-green-400 text-xs sm:text-sm overflow-x-auto whitespace-pre-wrap break-words">
@@ -166,14 +167,10 @@ const Hero = () => {
                   <div className="text-red-400 text-lg">⚠️</div>
                   <div>
                     <div className="text-red-400 text-xs sm:text-sm font-bold">
-                      安全警告
+                      {t("hero.quickStart.security.title")}
                     </div>
                     <div className="text-red-300 text-xs mt-1">
-                      请务必将{" "}
-                      <code className="bg-red-800/30 px-1 rounded">
-                        your-secure-key-here
-                      </code>{" "}
-                      替换为复杂的密钥！ 使用默认或简单密钥存在严重安全风险。
+                      {t("hero.quickStart.security.message")}
                     </div>
                   </div>
                 </div>

@@ -7,12 +7,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Github, Menu, X, Heart } from "lucide-react";
 import { cn, formatStars } from "../lib/utils";
 import { useGitHubStars } from "@/context/GitHubStarsContext";
+import { useTranslation } from "@/hooks/useTranslation";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { stars } = useGitHubStars();
+  const { t } = useTranslation();
 
   useEffect(() => {
     // 初始化时检查滚动位置
@@ -52,9 +55,9 @@ const Navigation = () => {
   }
 
   const navItems = [
-    { href: "/", label: "首页" },
-    { href: "/docs", label: "文档" },
-    { href: "/docs/sponsor", label: "赞助", icon: Heart },
+    { href: "/", label: t("nav.home") },
+    { href: "/docs", label: t("nav.docs") },
+    { href: "/docs/sponsor", label: t("nav.sponsor"), icon: Heart },
   ];
 
   return (
@@ -91,14 +94,14 @@ const Navigation = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
                   "transition-colors duration-200 font-medium flex items-center space-x-1",
-                  item.label === "赞助"
+                  item.label === t("nav.sponsor")
                     ? "text-red-600 hover:text-red-700"
                     : "text-gray-700 hover:text-blue-600"
                 )}
@@ -107,6 +110,10 @@ const Navigation = () => {
                 <span>{item.label}</span>
               </Link>
             ))}
+            
+            {/* Language Switcher */}
+            <LanguageSwitcher />
+            
             <Link
               href="https://github.com/tbphp/gpt-load"
               target="_blank"
@@ -114,7 +121,7 @@ const Navigation = () => {
               className="flex items-center space-x-2 bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors duration-200"
             >
               <Github className="h-4 w-4" />
-              <span>GitHub</span>
+              <span>{t("nav.github")}</span>
               {stars !== null && (
                 <div className="ml-2 flex items-center space-x-1 rounded-md bg-gray-700 px-2 py-1 text-xs">
                   <span>⭐</span>
@@ -155,7 +162,7 @@ const Navigation = () => {
                     href={item.href}
                     className={cn(
                       "flex items-center space-x-2 transition-colors duration-200 font-medium py-2 px-2",
-                      item.label === "赞助"
+                      item.label === t("nav.sponsor")
                         ? "text-red-600 hover:text-red-700"
                         : "text-gray-700 hover:text-blue-600"
                     )}
@@ -165,6 +172,12 @@ const Navigation = () => {
                     <span>{item.label}</span>
                   </Link>
                 ))}
+                
+                {/* Mobile Language Switcher */}
+                <div className="px-2 py-2">
+                  <LanguageSwitcher />
+                </div>
+                
                 <div className="pt-2">
                   <Link
                     href="https://github.com/tbphp/gpt-load"
@@ -174,7 +187,7 @@ const Navigation = () => {
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     <Github className="h-4 w-4" />
-                    <span>GitHub</span>
+                    <span>{t("nav.github")}</span>
                     {stars !== null && (
                       <div className="ml-2 flex items-center space-x-1 rounded-md bg-gray-700 px-2 py-1 text-xs">
                         <span>⭐</span>
