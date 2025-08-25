@@ -1,70 +1,46 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { BarChart3, Zap, Shield, Clock, Activity } from "lucide-react";
 
 const Performance = () => {
+  const t = useTranslations("performance");
+
   const metrics = [
     {
-      label: "默认并发数",
-      value: "100",
-      description: "MAX_CONCURRENT_REQUESTS 默认值",
       icon: Activity,
       color: "text-blue-600",
       bgColor: "bg-blue-100",
     },
     {
-      label: "Go 版本要求",
-      value: "1.23+",
-      description: "最低版本要求",
       icon: Zap,
       color: "text-green-600",
       bgColor: "bg-green-100",
     },
     {
-      label: "连接池配置",
-      value: "100/50",
-      description: "最大空闲连接数/每主机连接数",
       icon: Shield,
       color: "text-red-600",
       bgColor: "bg-red-100",
     },
     {
-      label: "请求超时",
-      value: "600s",
-      description: "默认请求超时时间",
       icon: Clock,
       color: "text-purple-600",
       bgColor: "bg-purple-100",
     },
-  ];
+  ].map((metric, index) => ({
+    ...metric,
+    label: t(`metrics.${index}.label`),
+    value: t(`metrics.${index}.value`),
+    description: t(`metrics.${index}.description`),
+  }));
 
-  const comparisons = [
-    {
-      metric: "配置管理",
-      without: "静态配置文件",
-      with: "动态热重载",
-      improvement: "无需重启",
-    },
-    {
-      metric: "密钥管理",
-      without: "手动轮换",
-      with: "自动故障恢复",
-      improvement: "智能黑名单",
-    },
-    {
-      metric: "集群部署",
-      without: "复杂选举机制",
-      with: "IS_SLAVE 标记",
-      improvement: "简单配置",
-    },
-    {
-      metric: "监控能力",
-      without: "基础日志",
-      with: "Web 管理界面",
-      improvement: "实时统计",
-    },
-  ];
+  const comparisons = t
+    .raw("comparison.rows")
+    .map(
+      (row: { metric: string; without: string; with: string; improvement: string }) =>
+        row
+    );
 
   return (
     <section className="py-20 bg-white">
@@ -78,10 +54,10 @@ const Performance = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            技术特性
+            {t("title")}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            基于 Go 1.23+ 的高性能架构设计，为企业级应用提供可靠的代理服务
+            {t("subtitle")}
           </p>
         </motion.div>
 
@@ -131,10 +107,10 @@ const Performance = () => {
           transition={{ duration: 0.6 }}
         >
           <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">性能对比</h3>
-            <p className="text-gray-600">
-              对比直接调用 API vs 使用 GPT-Load 代理的性能差异
-            </p>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              {t("comparison.title")}
+            </h3>
+            <p className="text-gray-600">{t("comparison.subtitle")}</p>
           </div>
 
           <div className="overflow-x-auto">
@@ -142,21 +118,21 @@ const Performance = () => {
               <thead>
                 <tr className="bg-gray-50 border-b border-gray-200">
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
-                    性能指标
+                    {t("comparison.header.metric")}
                   </th>
                   <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900">
-                    直接调用 API
+                    {t("comparison.header.without")}
                   </th>
                   <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900">
-                    使用 GPT-Load
+                    {t("comparison.header.with")}
                   </th>
                   <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900">
-                    性能提升
+                    {t("comparison.header.improvement")}
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {comparisons.map((comparison, index) => (
+                {comparisons.map((comparison: { metric: string; without: string; with: string; improvement: string }, index: number) => (
                   <motion.tr
                     key={index}
                     className="border-b border-gray-100 hover:bg-gray-50 transition-colors duration-200"
@@ -197,49 +173,47 @@ const Performance = () => {
           {/* Monitoring features */}
           <div>
             <h3 className="text-2xl font-bold text-gray-900 mb-6">
-              实时监控功能
+              {t("monitoring.title")}
             </h3>
             <div className="space-y-4">
-              <div className="flex items-start space-x-3">
-                <div className="flex-shrink-0 w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mt-1">
-                  <BarChart3 className="h-4 w-4 text-blue-600" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900">详细统计</h4>
-                  <p className="text-gray-600 text-sm">
-                    请求数量、响应时间、错误率等全方位监控
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start space-x-3">
-                <div className="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mt-1">
-                  <Activity className="h-4 w-4 text-green-600" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900">健康检查</h4>
-                  <p className="text-gray-600 text-sm">
-                    实时监控服务状态，及时发现并处理异常
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start space-x-3">
-                <div className="flex-shrink-0 w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center mt-1">
-                  <Zap className="h-4 w-4 text-purple-600" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900">性能分析</h4>
-                  <p className="text-gray-600 text-sm">
-                    深入分析性能瓶颈，优化系统配置
-                  </p>
-                </div>
-              </div>
+              {t
+                .raw("monitoring.features")
+                .map((feature: { title: string; description: string }, index: number) => (
+                  <div key={index} className="flex items-start space-x-3">
+                    <div
+                      className={`flex-shrink-0 w-6 h-6 ${
+                        ["bg-blue-100", "bg-green-100", "bg-purple-100"][
+                          index % 3
+                        ]
+                      } rounded-full flex items-center justify-center mt-1`}
+                    >
+                      {[BarChart3, Activity, Zap][index % 3]({
+                        className: `h-4 w-4 ${
+                          ["text-blue-600", "text-green-600", "text-purple-600"][
+                            index % 3
+                          ]
+                        }`,
+                      })}
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900">
+                        {feature.title}
+                      </h4>
+                      <p className="text-gray-600 text-sm">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
             </div>
           </div>
 
           {/* Mock dashboard */}
           <div className="bg-gray-900 rounded-xl p-6">
             <div className="flex items-center justify-between mb-4">
-              <h4 className="text-white font-semibold">监控面板</h4>
+              <h4 className="text-white font-semibold">
+                {t("monitoring.dashboard.title")}
+              </h4>
               <div className="flex space-x-2">
                 <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                 <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
@@ -248,19 +222,19 @@ const Performance = () => {
             </div>
             <div className="space-y-3 text-sm">
               <div className="flex justify-between text-green-400">
-                <span>🟢 总请求数:</span>
+                <span>🟢 {t("monitoring.dashboard.totalRequests")}</span>
                 <span>156,789</span>
               </div>
               <div className="flex justify-between text-blue-400">
-                <span>⚡ 平均响应:</span>
+                <span>⚡ {t("monitoring.dashboard.avgResponse")}</span>
                 <span>8.5ms</span>
               </div>
               <div className="flex justify-between text-yellow-400">
-                <span>🔑 活跃密钥:</span>
+                <span>🔑 {t("monitoring.dashboard.activeKeys")}</span>
                 <span>12/15</span>
               </div>
               <div className="flex justify-between text-red-400">
-                <span>❌ 错误率:</span>
+                <span>❌ {t("monitoring.dashboard.errorRate")}</span>
                 <span>0.02%</span>
               </div>
               <div className="mt-4 h-20 bg-gray-800 rounded flex items-end justify-between px-2 pb-2">

@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -26,118 +27,127 @@ import {
 
 const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
   const pathname = usePathname();
+  const t = useTranslations("docs");
 
   const navigation = [
-    { title: "快速开始", href: "/docs", icon: Rocket },
-    { title: "项目简介", href: "/docs/introduction", icon: BookUser },
+    { title: t("quickStart"), href: "/docs", icon: Rocket },
+    { title: t("introduction"), href: "/docs/introduction", icon: BookUser },
     {
-      title: "部署指南",
+      title: t("deployment.title"),
       href: "/docs/deployment",
       icon: Cloud,
       children: [
         {
-          title: "单机部署",
+          title: t("deployment.standalone"),
           href: "/docs/deployment/standalone",
           icon: Server,
         },
-        { title: "源码部署", href: "/docs/deployment/source", icon: Code },
-        { title: "集群部署", href: "/docs/deployment/cluster", icon: Layers },
         {
-          title: "Claw Cloud",
+          title: t("deployment.source"),
+          href: "/docs/deployment/source",
+          icon: Code,
+        },
+        {
+          title: t("deployment.cluster"),
+          href: "/docs/deployment/cluster",
+          icon: Layers,
+        },
+        {
+          title: t("deployment.clawCloud"),
           href: "/docs/deployment/claw-cloud",
           icon: Cloud,
         },
       ],
     },
     {
-      title: "配置管理",
+      title: t("configuration.title"),
       href: "/docs/configuration",
       icon: Settings,
       children: [
         {
-          title: "环境配置",
+          title: t("configuration.environment"),
           href: "/docs/configuration/environment",
           icon: Server,
         },
         {
-          title: "项目配置",
+          title: t("configuration.project"),
           href: "/docs/configuration/project",
           icon: Wrench,
         },
         {
-          title: "管理端配置",
+          title: t("configuration.management"),
           href: "/docs/configuration/management",
           icon: Users,
         },
         {
-          title: "Cloudflare AI Gateway",
+          title: t("configuration.cloudflare"),
           href: "/docs/configuration/cloudflare-aigateway",
           icon: Cloud,
         },
       ],
     },
     {
-      title: "架构与设计",
+      title: t("architecture.title"),
       href: "/docs/architecture-design",
       icon: Wrench,
       children: [
         {
-          title: "性能详解",
+          title: t("architecture.performance"),
           href: "/docs/architecture-design/performance",
           icon: Sparkles,
         },
         {
-          title: "路径设计策略",
+          title: t("architecture.routing"),
           href: "/docs/architecture-design/routing-strategy",
           icon: GitBranch,
         },
         {
-          title: "智能密钥管理",
+          title: t("architecture.keyManagement"),
           href: "/docs/architecture-design/key-management",
           icon: Shield,
         },
       ],
     },
     {
-      title: "渠道类型",
+      title: t("channels"),
       href: "/docs/channels",
       icon: Globe,
       children: [
         {
-          title: "Gemini 官方 OpenAI 兼容",
+          title: t("integrations.gemini"),
           href: "/docs/gemini-openai",
           icon: Sparkles,
         },
       ],
     },
     {
-      title: "接入指南",
+      title: t("integrations.title"),
       href: "/docs/integrations",
       icon: Plug,
       children: [
         {
-          title: "Roo Code",
+          title: t("integrations.roocode"),
           href: "/docs/integrations/roo-code",
           icon: Code,
         },
         {
-          title: "Claude Code Router",
+          title: t("integrations.claude"),
           href: "/docs/integrations/claude-code-router",
           icon: Terminal,
         },
         {
-          title: "New API",
+          title: t("integrations.newapi"),
           href: "/docs/integrations/new-api",
           icon: Globe,
         },
         {
-          title: "Cherry Studio",
+          title: t("integrations.cherry"),
           href: "/docs/integrations/cherry-studio",
           icon: Sparkles,
         },
       ],
     },
-    { title: "支持赞助", href: "/docs/sponsor", icon: Heart },
+    { title: t("sponsor"), href: "/docs/sponsor", icon: Heart },
   ];
 
   const [openItems, setOpenItems] = useState<number[]>(() => {

@@ -41,7 +41,7 @@
       "deployment": "デプロイメントガイド",
       "deploymentDesc": "GPT-Loadの詳細なデプロイメント手順と設定指示",
       "configuration": "設定管理",
-      "configurationDesc": "GPT-Loadの設定オプションとベストプラクティス"
+      "configurationDesc": "GPT-Loadの設定オプションとベストプラクティс"
     }
   },
   "navigation": {
@@ -122,29 +122,96 @@
   "docs": {
     "quickStart": "クイックスタート",
     "introduction": "プロジェクト紹介",
-    "deployment": "デプロイガイド",
-    "standalone": "スタンドアロンデプロイ",
-    "source": "ソースコードデプロイ",
-    "clusterDeployment": "クラスターデプロイ",
-    "clawCloud": "Claw Cloud",
-    "configuration": "設定管理",
-    "environment": "環境設定",
-    "project": "プロジェクト設定",
-    "management": "管理画面設定",
-    "cloudflareGateway": "Cloudflare AI Gateway",
-    "architecture": "アーキテクチャと設計",
-    "keyManagement": "キー管理",
-    "performance": "パフォーマンス最適化",
-    "routingStrategy": "ルーティング戦略",
+    "deployment": {
+      "title": "デプロイガイド",
+      "standalone": "スタンドアロン",
+      "source": "ソースコード",
+      "cluster": "クラスター",
+      "clawCloud": "Claw Cloud"
+    },
+    "configuration": {
+      "title": "設定",
+      "environment": "環境変数",
+      "project": "プロジェクト設定",
+      "management": "管理設定",
+      "cloudflare": "Cloudflare AI Gateway"
+    },
+    "architecture": {
+      "title": "アーキテクチャ",
+      "keyManagement": "キー管理",
+      "performance": "パフォーマンス",
+      "routing": "ルーティング戦略"
+    },
     "channels": "チャネルサポート",
-    "integrations": "サードパーティ統合",
-    "cherryStudio": "Cherry Studio",
-    "claudeCodeRouter": "Claude Code Router",
-    "newApi": "New API",
-    "rooCode": "Roo Code",
-    "geminiOpenai": "Gemini OpenAI 互換",
-    "clusterMode": "クラスターモード",
+    "integrations": {
+      "title": "統合",
+      "cherry": "Cherry Studio",
+      "claude": "Claude Code Router",
+      "newapi": "New API",
+      "roocode": "Roo Code",
+      "gemini": "Gemini OpenAI"
+    },
+    "cluster": "クラスターモード",
     "sponsor": "スポンサー"
+  },
+  "features": {
+    "title": "主な技術的特徴",
+    "subtitle": "本番環境向けに最適化されたエンタープライズレベルのアーキテクチャ設計",
+    "items": [
+      {
+        "title": "高性能アーキテクチャ",
+        "description": "Go 1.23+で開発、ゼロコピーストリーミング、ゴルーチン並行モデル、高並行処理をサポート",
+        "technical": "Go ゴルーチン + HTTP/2 接続多重化"
+      },
+      {
+        "title": "透過的プロキシ",
+        "description": "ネイティブAPI形式を完全に保持し、既存のコードを変更せずに複数のAIサービスにアクセス可能",
+        "technical": "OpenAI + Gemini + Anthropic サポート"
+      },
+      {
+        "title": "インテリジェントキー管理",
+        "description": "グループ管理、動的ローテーション、自動リトライにより、高いサービス可用性を確保",
+        "technical": "Redisキャッシュ + フェイルオーバーメカニズム"
+      },
+      {
+        "title": "ロードバランシング",
+        "description": "複数のアップストリームサポート、重み設定、ヘルスチェックにより、利用可能なノードへのインテリジェントなルーティングを実現",
+        "technical": "加重ラウンドロビン + ヘルスチェック"
+      },
+      {
+        "title": "ホットリロード設定",
+        "description": "3層の設定システム（環境、システム、グループ）で、ホットアップデートをサポート",
+        "technical": "環境 → システム → グループ設定"
+      },
+      {
+        "title": "クラスターサポート",
+        "description": "ステートレス設計のマスター/スレーブアーキテクチャで、水平スケーリングと分散展開をサポート",
+        "technical": "マスター/スレーブ + Redis 分散ロック"
+      },
+      {
+        "title": "セキュリティメカニズム",
+        "description": "Bearerトークン認証、グループ分離、リクエストロギング、機密情報のマスキング",
+        "technical": "JWT + アクセス制御 + 監査ログ"
+      },
+      {
+        "title": "管理ダッシュボード",
+        "description": "リアルタイム監視、ログ表示、設定管理のためのモダンなVue 3インターフェース",
+        "technical": "Vue 3 + TypeScript + Naive UI"
+      },
+      {
+        "title": "開発者フレンドリー",
+        "description": "完全なRESTful API、詳細なドキュメント、Dockerによるワンクリック展開",
+        "technical": "OpenAPI + Docker Compose"
+      }
+    ],
+    "highlight": {
+      "title": "本番環境対応のエンタープライズアーキテクチャ",
+      "description": "スタンドアロンから分散クラスターまで、開発から本番まで、GPT-Loadは完全なソリューションを提供",
+      "runtime": "ランタイム環境",
+      "storage": "データ永続化",
+      "cache": "キャッシュ＆ロック",
+      "admin": "管理インターフェース"
+    }
   },
   "techStack": {
     "backend": "バックエンド言語",
@@ -260,6 +327,101 @@
       "name": "GPT-Load",
       "operatingSystem": "Linux, macOS, Windows",
       "applicationCategory": "開発者ツール"
+    }
+  },
+  "imageViewer": {
+    "close": "閉じる (Esc)",
+    "closeHint": "Escキーを押すか、背景をクリックして閉じます",
+    "zoomHint": "画像をクリックして拡大表示"
+  },
+  "languageSwitcher": {
+    "loading": "読み込み中...",
+    "changeLanguage": "言語を切り替える"
+  },
+  "performance": {
+    "title": "技術特性",
+    "subtitle": "Go 1.23+ に基づく高性能アーキテクチャ設計、エンタープライズレベルのアプリケーションに信頼性の高いプロキシサービスを提供します。",
+    "metrics": [
+      {
+        "label": "デフォルトの同時実行数",
+        "value": "100",
+        "description": "MAX_CONCURRENT_REQUESTS のデフォルト値"
+      },
+      {
+        "label": "Go バージョン要件",
+        "value": "1.23+",
+        "description": "最小バージョン要件"
+      },
+      {
+        "label": "接続プールの設定",
+        "value": "100/50",
+        "description": "最大アイドル接続数 / ホストごとの最大アイドル接続数"
+      },
+      {
+        "label": "リクエストタイムアウト",
+        "value": "600s",
+        "description": "デフォルトのリクエストタイムアウト"
+      }
+    ],
+    "comparison": {
+      "title": "性能比較",
+      "subtitle": "直接 API を呼び出す場合と GPT-Load プロキシを使用する場合の比較。",
+      "header": {
+        "metric": "性能指標",
+        "without": "直接 API 呼び出し",
+        "with": "GPT-Load を使用",
+        "improvement": "改善点"
+      },
+      "rows": [
+        {
+          "metric": "設定管理",
+          "without": "静的設定ファイル",
+          "with": "動的ホットリロード",
+          "improvement": "再起動不要"
+        },
+        {
+          "metric": "キー管理",
+          "without": "手動ローテーション",
+          "with": "自動フェイルオーバー",
+          "improvement": "スマートブラックリスト"
+        },
+        {
+          "metric": "クラスター展開",
+          "without": "複雑な選出",
+          "with": "IS_SLAVE フラグ",
+          "improvement": "簡単なセットアップ"
+        },
+        {
+          "metric": "モニタリング",
+          "without": "基本ログ",
+          "with": "Web ダッシュボード",
+          "improvement": "リアルタイム統計"
+        }
+      ]
+    },
+    "monitoring": {
+      "title": "リアルタイムモニタリング機能",
+      "features": [
+        {
+          "title": "詳細な統計",
+          "description": "リクエスト数、応答時間、エラー率などの包括的なモニタリング。"
+        },
+        {
+          "title": "ヘルスチェック",
+          "description": "サービスの状態をリアルタイムで監視し、異常を迅速に検出して対処します。"
+        },
+        {
+          "title": "パフォーマンス分析",
+          "description": "パフォーマンスのボトルネックを詳細に分析し、システム設定を最適化します。"
+        }
+      ],
+      "dashboard": {
+        "title": "モニタリングダッシュボード",
+        "totalRequests": "総リクエスト数:",
+        "avgResponse": "平均応答:",
+        "activeKeys": "アクティブなキー:",
+        "errorRate": "エラー率:"
+      }
     }
   }
 }

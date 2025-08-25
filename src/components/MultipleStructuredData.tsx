@@ -15,7 +15,7 @@ export default async function MultipleStructuredData({
 
   const t = await getTranslations({
     locale,
-    namespace: "metadata",
+    namespace: "structuredData",
   });
 
   const structuredDataList = [];
@@ -24,8 +24,8 @@ export default async function MultipleStructuredData({
     const organizationData = {
       "@context": "https://schema.org",
       "@type": "Organization",
-      name: "GPT-Load",
-      description: t("description"),
+      name: t("organization.name"),
+      description: t("metadata.description"),
       url: process.env.NEXT_PUBLIC_SITE_URL || "https://gpt-load.com",
       logo: `${
         process.env.NEXT_PUBLIC_SITE_URL || "https://gpt-load.com"
@@ -40,8 +40,8 @@ export default async function MultipleStructuredData({
     const websiteData = {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      name: t("title"),
-      description: t("description"),
+      name: t("website.name"),
+      description: t("metadata.description"),
       url: process.env.NEXT_PUBLIC_SITE_URL || "https://gpt-load.com",
       inLanguage: [locale],
       potentialAction: {
@@ -62,14 +62,14 @@ export default async function MultipleStructuredData({
     const softwareData = {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      name: "GPT-Load",
-      description: t("description"),
-      applicationCategory: "DeveloperApplication",
-      operatingSystem: "Linux, macOS, Windows",
+      name: t("software.name"),
+      description: t("metadata.description"),
+      applicationCategory: t("software.applicationCategory"),
+      operatingSystem: t("software.operatingSystem"),
       softwareVersion: "1.0.0",
       author: {
         "@type": "Organization",
-        name: "GPT-Load Team",
+        name: t("organization.name"),
       },
       downloadUrl: "https://github.com/tbphp/gpt-load",
       codeRepository: "https://github.com/tbphp/gpt-load",

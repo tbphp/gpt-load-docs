@@ -133,18 +133,77 @@
     "management": "管理端配置",
     "cloudflareGateway": "Cloudflare AI Gateway",
     "architecture": "架构与设计",
-    "keyManagement": "密钥管理",
-    "performance": "性能优化",
-    "routingStrategy": "路由策略",
-    "channels": "渠道支持",
-    "integrations": "第三方集成",
+    "keyManagement": "智能密钥管理",
+    "performance": "性能详解",
+    "routingStrategy": "路径设计策略",
+    "channels": "渠道类型",
+    "integrations": "接入指南",
     "cherryStudio": "Cherry Studio",
     "claudeCodeRouter": "Claude Code Router",
     "newApi": "New API",
     "rooCode": "Roo Code",
-    "geminiOpenai": "Gemini OpenAI 兼容",
+    "geminiOpenai": "Gemini 官方 OpenAI 兼容",
     "clusterMode": "集群模式",
-    "sponsor": "赞助支持"
+    "sponsor": "支持赞助"
+  },
+  "features": {
+    "title": "核心技术特性",
+    "subtitle": "企业级架构设计，专为生产环境优化",
+    "items": [
+      {
+        "title": "高性能架构",
+        "description": "基于 Go 1.23+ 开发，零拷贝流式传输，协程并发模型，支持高并发处理",
+        "technical": "Go 协程 + HTTP/2 连接复用"
+      },
+      {
+        "title": "透明代理",
+        "description": "完全保留原生 API 格式，无需修改现有代码即可接入多种 AI 服务",
+        "technical": "OpenAI + Gemini + Anthropic 支持"
+      },
+      {
+        "title": "智能密钥管理",
+        "description": "分组管理、动态轮换、自动重试，确保服务高可用性",
+        "technical": "Redis 缓存 + 故障恢复机制"
+      },
+      {
+        "title": "负载均衡",
+        "description": "多上游支持、权重配置、健康检查，智能路由到可用节点",
+        "technical": "加权轮询 + 健康检查"
+      },
+      {
+        "title": "热重载配置",
+        "description": "三层配置系统，环境变量、系统设置、分组配置，支持热更新",
+        "technical": "环境变量 → 系统设置 → 分组设置"
+      },
+      {
+        "title": "集群支持",
+        "description": "主从架构，无状态设计，支持水平扩展和分布式部署",
+        "technical": "Master/Slave + Redis 分布式锁"
+      },
+      {
+        "title": "安全机制",
+        "description": "Bearer Token 认证、分组隔离、请求日志、敏感信息脱敏",
+        "technical": "JWT + 访问控制 + 审计日志"
+      },
+      {
+        "title": "管理后台",
+        "description": "Vue 3 现代化界面，实时监控、日志查看、配置管理",
+        "technical": "Vue 3 + TypeScript + Naive UI"
+      },
+      {
+        "title": "开发友好",
+        "description": "完整的 RESTful API、详细文档、Docker 一键部署",
+        "technical": "OpenAPI + Docker Compose"
+      }
+    ],
+    "highlight": {
+      "title": "生产就绪的企业级架构",
+      "description": "从单机部署到分布式集群，从开发环境到生产环境，GPT-Load 提供完整的解决方案",
+      "runtime": "运行时环境",
+      "storage": "数据持久化",
+      "cache": "缓存 & 锁",
+      "admin": "管理界面"
+    }
   },
   "techStack": {
     "backend": "后端语言",
@@ -247,6 +306,101 @@
       "name": "GPT-Load",
       "operatingSystem": "Linux, macOS, Windows",
       "applicationCategory": "开发者工具"
+    }
+  },
+  "imageViewer": {
+    "close": "关闭 (Esc)",
+    "closeHint": "按 Esc 键或点击背景关闭",
+    "zoomHint": "点击图片放大查看"
+  },
+  "languageSwitcher": {
+    "loading": "加载中...",
+    "changeLanguage": "切换语言"
+  },
+  "performance": {
+    "title": "技术特性",
+    "subtitle": "基于 Go 1.23+ 的高性能架构设计，为企业级应用提供可靠的代理服务。",
+    "metrics": [
+      {
+        "label": "默认并发数",
+        "value": "100",
+        "description": "MAX_CONCURRENT_REQUESTS 默认值"
+      },
+      {
+        "label": "Go 版本要求",
+        "value": "1.23+",
+        "description": "最低版本要求"
+      },
+      {
+        "label": "连接池配置",
+        "value": "100/50",
+        "description": "最大空闲连接数/每主机连接数"
+      },
+      {
+        "label": "请求超时",
+        "value": "600s",
+        "description": "默认请求超时时间"
+      }
+    ],
+    "comparison": {
+      "title": "性能对比",
+      "subtitle": "对比直接调用 API vs 使用 GPT-Load 代理的性能差异。",
+      "header": {
+        "metric": "性能指标",
+        "without": "直接调用 API",
+        "with": "使用 GPT-Load",
+        "improvement": "性能提升"
+      },
+      "rows": [
+        {
+          "metric": "配置管理",
+          "without": "静态配置文件",
+          "with": "动态热重载",
+          "improvement": "无需重启"
+        },
+        {
+          "metric": "密钥管理",
+          "without": "手动轮换",
+          "with": "自动故障恢复",
+          "improvement": "智能黑名单"
+        },
+        {
+          "metric": "集群部署",
+          "without": "复杂选举机制",
+          "with": "IS_SLAVE 标记",
+          "improvement": "简单配置"
+        },
+        {
+          "metric": "监控能力",
+          "without": "基础日志",
+          "with": "Web 管理界面",
+          "improvement": "实时统计"
+        }
+      ]
+    },
+    "monitoring": {
+      "title": "实时监控功能",
+      "features": [
+        {
+          "title": "详细统计",
+          "description": "请求数量、响应时间、错误率等全方位监控。"
+        },
+        {
+          "title": "健康检查",
+          "description": "实时监控服务状态，及时发现并处理异常。"
+        },
+        {
+          "title": "性能分析",
+          "description": "深入分析性能瓶颈，优化系统配置。"
+        }
+      ],
+      "dashboard": {
+        "title": "监控面板",
+        "totalRequests": "总请求数:",
+        "avgResponse": "平均响应:",
+        "activeKeys": "活跃密钥:",
+        "errorRate": "错误率:"
+      }
     }
   }
 }

@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { cookies } from "next/headers";
 import { defaultLocale, locales, type Locale } from "@/i18n/config";
 
@@ -10,6 +11,10 @@ export default async function SEOHead({ pageKey }: SEOHeadProps) {
   const locale =
     (cookieStore.get("language")?.value as Locale) || defaultLocale;
 
+  const t = await getTranslations({
+    locale,
+    namespace: "structuredData",
+  });
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://gpt-load.com";
 
   const currentPath = pageKey
@@ -39,13 +44,13 @@ export default async function SEOHead({ pageKey }: SEOHeadProps) {
       <link rel="canonical" href={`${baseUrl}${currentPath}`} />
 
       {/* Enhanced meta tags */}
-      <meta name="author" content="GPT-Load Team" />
-      <meta name="publisher" content="GPT-Load" />
+      <meta name="author" content={t("organization.name")} />
+      <meta name="publisher" content={t("website.publisher")} />
       <meta name="robots" content="index,follow" />
       <meta name="googlebot" content="index,follow" />
 
       {/* Open Graph enhanced */}
-      <meta property="og:site_name" content="GPT-Load" />
+      <meta property="og:site_name" content={t("website.name")} />
       <meta property="og:locale" content={locale.replace("-", "_")} />
       {locales
         .filter((lang) => lang !== locale)

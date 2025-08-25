@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
@@ -20,16 +21,15 @@ export default function ImageViewer({
   className = "",
   containerClassName = "",
 }: ImageViewerProps) {
+  const t = useTranslations("imageViewer");
   const [isExpanded, setIsExpanded] = useState(false);
 
-  // 键盘事件监听
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
       setIsExpanded(false);
     }
   };
 
-  // 监听键盘事件和防止背景滚动
   useEffect(() => {
     if (isExpanded) {
       document.addEventListener("keydown", handleKeyDown);
@@ -58,9 +58,7 @@ export default function ImageViewer({
         }}
         onClick={() => setIsExpanded(false)}
       >
-        {/* 固定大小的模态框容器 */}
         <div className="relative bg-white/10 backdrop-blur-sm rounded-lg max-w-5xl max-h-full w-full h-full flex flex-col">
-          {/* 图片容器 - 可滚动但不显示滚动条 */}
           <div
             className="flex-1 overflow-auto scrollbar-hide p-4"
             onClick={(e) => e.stopPropagation()}
@@ -78,7 +76,7 @@ export default function ImageViewer({
           <button
             onClick={() => setIsExpanded(false)}
             className="absolute top-2 right-2 text-white bg-black/60 backdrop-blur-sm rounded-full p-3 hover:bg-black/80 transition-all shadow-lg border border-white/20"
-            title="关闭 (Esc)"
+            title={t("close")}
           >
             <svg
               className="w-5 h-5"
@@ -95,7 +93,7 @@ export default function ImageViewer({
             </svg>
           </button>
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white/80 text-sm bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full">
-            按 Esc 键或点击背景关闭
+            {t("closeHint")}
           </div>
         </div>
       </div>
@@ -117,7 +115,7 @@ export default function ImageViewer({
             className={`rounded-lg shadow-md transition-transform group-hover:scale-105 origin-bottom ${className}`}
           />
         </div>
-        <p className="text-gray-500 text-sm mt-2">点击图片放大查看</p>
+        <p className="text-gray-500 text-sm mt-2">{t("zoomHint")}</p>
       </div>
       <ImageModal />
     </>

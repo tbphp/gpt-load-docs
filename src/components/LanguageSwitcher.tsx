@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Languages } from "lucide-react";
+import { useTranslations } from "next-intl";
 import {
   locales,
   localeNames,
@@ -14,6 +15,7 @@ const LanguageSwitcher = () => {
   const [currentLocale, setCurrentLocale] = useState<Locale>(defaultLocale);
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const t = useTranslations("languageSwitcher");
 
   useEffect(() => {
     setMounted(true);
@@ -48,7 +50,7 @@ const LanguageSwitcher = () => {
       <div className="relative">
         <button className="flex items-center space-x-2 px-3 py-2 text-sm text-gray-700 hover:text-gray-900 transition-colors">
           <Languages className="w-4 h-4" />
-          <span>中文</span>
+          <span>{t("loading")}</span>
           <ChevronDown className="w-4 h-4" />
         </button>
       </div>
@@ -77,6 +79,7 @@ const LanguageSwitcher = () => {
             <div
               className="fixed inset-0 z-40"
               onClick={() => setIsOpen(false)}
+              aria-label={t("changeLanguage")}
             />
             <motion.div
               initial={{ opacity: 0, y: -10 }}

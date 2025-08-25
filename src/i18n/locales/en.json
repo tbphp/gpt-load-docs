@@ -122,29 +122,96 @@
   "docs": {
     "quickStart": "Quick Start",
     "introduction": "Introduction",
-    "deployment": "Deployment Guide",
-    "standalone": "Standalone Deployment",
-    "source": "Source Code Deployment",
-    "clusterDeployment": "Cluster Deployment",
-    "clawCloud": "Claw Cloud",
-    "configuration": "Configuration Management",
-    "environment": "Environment Configuration",
-    "project": "Project Configuration",
-    "management": "Management Configuration",
-    "cloudflareGateway": "Cloudflare AI Gateway",
-    "architecture": "Architecture & Design",
-    "keyManagement": "Key Management",
-    "performance": "Performance Optimization",
-    "routingStrategy": "Routing Strategy",
+    "deployment": {
+      "title": "Deployment Guide",
+      "standalone": "Standalone",
+      "source": "Source Code",
+      "cluster": "Cluster",
+      "clawCloud": "Claw Cloud"
+    },
+    "configuration": {
+      "title": "Configuration",
+      "environment": "Environment Variables",
+      "project": "Project Config",
+      "management": "Management Config",
+      "cloudflare": "Cloudflare AI Gateway"
+    },
+    "architecture": {
+      "title": "Architecture",
+      "keyManagement": "Key Management",
+      "performance": "Performance",
+      "routing": "Routing Strategy"
+    },
     "channels": "Channel Support",
-    "integrations": "Third-party Integrations",
-    "cherryStudio": "Cherry Studio",
-    "claudeCodeRouter": "Claude Code Router",
-    "newApi": "New API",
-    "rooCode": "Roo Code",
-    "geminiOpenai": "Gemini OpenAI Compatible",
-    "clusterMode": "Cluster Mode",
+    "integrations": {
+      "title": "Integrations",
+      "cherry": "Cherry Studio",
+      "claude": "Claude Code Router",
+      "newapi": "New API",
+      "roocode": "Roo Code",
+      "gemini": "Gemini OpenAI"
+    },
+    "cluster": "Cluster Mode",
     "sponsor": "Sponsor"
+  },
+  "features": {
+    "title": "Core Technical Features",
+    "subtitle": "Enterprise-grade architectural design, optimized for production environments",
+    "items": [
+      {
+        "title": "High-Performance Architecture",
+        "description": "Developed with Go 1.23+, zero-copy streaming, goroutine concurrency model, supporting high-concurrency processing",
+        "technical": "Go Goroutines + HTTP/2 Connection Multiplexing"
+      },
+      {
+        "title": "Transparent Proxy",
+        "description": "Fully preserves native API formats, allowing access to multiple AI services without code modification",
+        "technical": "OpenAI + Gemini + Anthropic Support"
+      },
+      {
+        "title": "Intelligent Key Management",
+        "description": "Group management, dynamic rotation, and automatic retries to ensure high service availability",
+        "technical": "Redis Cache + Failover Mechanism"
+      },
+      {
+        "title": "Load Balancing",
+        "description": "Multiple upstream support, weight configuration, and health checks for intelligent routing to available nodes",
+        "technical": "Weighted Round-Robin + Health Checks"
+      },
+      {
+        "title": "Hot-Reload Configuration",
+        "description": "Three-layer configuration system (environment, system, group) with support for hot updates",
+        "technical": "Environment → System → Group Settings"
+      },
+      {
+        "title": "Cluster Support",
+        "description": "Master/slave architecture with a stateless design, supporting horizontal scaling and distributed deployment",
+        "technical": "Master/Slave + Redis Distributed Lock"
+      },
+      {
+        "title": "Security Mechanisms",
+        "description": "Bearer Token authentication, group isolation, request logging, and sensitive information masking",
+        "technical": "JWT + Access Control + Audit Logs"
+      },
+      {
+        "title": "Admin Dashboard",
+        "description": "Modern Vue 3 interface for real-time monitoring, log viewing, and configuration management",
+        "technical": "Vue 3 + TypeScript + Naive UI"
+      },
+      {
+        "title": "Developer-Friendly",
+        "description": "Complete RESTful API, detailed documentation, and one-click deployment with Docker",
+        "technical": "OpenAPI + Docker Compose"
+      }
+    ],
+    "highlight": {
+      "title": "Production-Ready Enterprise Architecture",
+      "description": "From standalone to distributed clusters, from development to production, GPT-Load provides a complete solution",
+      "runtime": "Runtime Environment",
+      "storage": "Data Persistence",
+      "cache": "Cache & Lock",
+      "admin": "Admin Interface"
+    }
   },
   "techStack": {
     "backend": "Backend Language",
@@ -264,6 +331,101 @@
       "name": "GPT-Load",
       "operatingSystem": "Linux, macOS, Windows",
       "applicationCategory": "DeveloperApplication"
+    }
+  },
+  "imageViewer": {
+    "close": "Close (Esc)",
+    "closeHint": "Press Esc or click background to close",
+    "zoomHint": "Click image to zoom"
+  },
+  "languageSwitcher": {
+    "loading": "Loading...",
+    "changeLanguage": "Change Language"
+  },
+  "performance": {
+    "title": "Technical Features",
+    "subtitle": "High-performance architecture design based on Go 1.23+, providing reliable proxy services for enterprise-level applications.",
+    "metrics": [
+      {
+        "label": "Default Concurrency",
+        "value": "100",
+        "description": "Default for MAX_CONCURRENT_REQUESTS"
+      },
+      {
+        "label": "Go Version Requirement",
+        "value": "1.23+",
+        "description": "Minimum version requirement"
+      },
+      {
+        "label": "Connection Pool Config",
+        "value": "100/50",
+        "description": "Max Idle Conns / Max Idle Conns Per Host"
+      },
+      {
+        "label": "Request Timeout",
+        "value": "600s",
+        "description": "Default request timeout"
+      }
+    ],
+    "comparison": {
+      "title": "Performance Comparison",
+      "subtitle": "Comparing direct API calls vs. using the GPT-Load proxy.",
+      "header": {
+        "metric": "Performance Metric",
+        "without": "Direct API Call",
+        "with": "Using GPT-Load",
+        "improvement": "Improvement"
+      },
+      "rows": [
+        {
+          "metric": "Config Management",
+          "without": "Static Config File",
+          "with": "Dynamic Hot-Reload",
+          "improvement": "No Restart Needed"
+        },
+        {
+          "metric": "Key Management",
+          "without": "Manual Rotation",
+          "with": "Auto Failover",
+          "improvement": "Smart Blacklisting"
+        },
+        {
+          "metric": "Cluster Deployment",
+          "without": "Complex Election",
+          "with": "IS_SLAVE Flag",
+          "improvement": "Simple Setup"
+        },
+        {
+          "metric": "Monitoring",
+          "without": "Basic Logs",
+          "with": "Web Dashboard",
+          "improvement": "Real-time Stats"
+        }
+      ]
+    },
+    "monitoring": {
+      "title": "Real-time Monitoring Features",
+      "features": [
+        {
+          "title": "Detailed Statistics",
+          "description": "Comprehensive monitoring of request counts, response times, error rates, etc."
+        },
+        {
+          "title": "Health Checks",
+          "description": "Real-time monitoring of service status to promptly detect and handle anomalies."
+        },
+        {
+          "title": "Performance Analysis",
+          "description": "In-depth analysis of performance bottlenecks to optimize system configuration."
+        }
+      ],
+      "dashboard": {
+        "title": "Monitoring Dashboard",
+        "totalRequests": "Total Requests:",
+        "avgResponse": "Avg Response:",
+        "activeKeys": "Active Keys:",
+        "errorRate": "Error Rate:"
+      }
     }
   }
 }
