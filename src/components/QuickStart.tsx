@@ -3,20 +3,22 @@
 import { motion } from "framer-motion";
 import { Terminal, Download, Settings, Play } from "lucide-react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const QuickStart = () => {
+  const t = useTranslations("quickStart");
   const steps = [
     {
       icon: Download,
-      title: "1. 克隆项目",
-      description: "从 GitHub 下载完整项目代码",
+      title: t("step1.title"),
+      description: t("step1.description"),
       code: `git clone https://github.com/tbphp/gpt-load.git
 cd gpt-load`,
     },
     {
       icon: Settings,
-      title: "2. 配置环境",
-      description: "复制并编辑环境配置文件",
+      title: t("step2.title"),
+      description: t("step2.description"),
       code: `# 复制环境配置文件
 cp .env.example .env
 
@@ -29,8 +31,8 @@ cp .env.example .env
     },
     {
       icon: Play,
-      title: "3. 启动服务",
-      description: "使用 Docker Compose 一键启动",
+      title: t("step3.title"),
+      description: t("step3.description"),
       code: `# 启动服务（包含 MySQL 和 Redis）
 docker compose up -d
 
@@ -53,13 +55,13 @@ docker compose up -d
           >
             <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-800 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
               <Terminal className="h-3 w-3 sm:h-4 sm:w-4" />
-              <span>快速开始</span>
+              <span>{t("title")}</span>
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 px-4">
-              3 步启动 GPT-Load
+              {t("subtitle")}
             </h2>
             <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-              通过 Docker Compose 快速部署，包含完整的数据库和缓存服务
+              {t("description")}
             </p>
           </motion.div>
 

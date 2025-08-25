@@ -1,4 +1,49 @@
 {
+  "metadata": {
+    "title": "GPT-Load - 高性能AI APIロードバランサー",
+    "description": "AI サービスプロバイダーのネイティブ API フォーマットを完全に保持するエンタープライズグレードの AI API 透明プロキシサービス。キーローテーション、マルチグループ管理、ロードバランシングを提供し、安定した信頼性の高い AI アプリケーション プロキシサービスを実現します。",
+    "keywords": "GPT, OpenAI, API, 透明プロキシ, ロードバランシング, キーローテーション, Go, 高性能",
+    "pages": {
+      "home": {
+        "title": "GPT-Load - AI API ロードバランサー & 管理プラットフォーム",
+        "description": "複数のAIモデルをサポートし、インテリジェントルーティングと可観測性監視を提供する高性能AI API ロードバランサーおよび管理プラットフォーム"
+      },
+      "docs": {
+        "title": "クイックスタート - GPT-Load ドキュメント",
+        "description": "GPT-Load AI APIロードバランシングプラットフォームを簡単なステップでデプロイして設定"
+      },
+      "architecture": {
+        "title": "システムアーキテクチャ - GPT-Load ドキュメント",
+        "description": "GPT-Loadの分散アーキテクチャ設計、コアコンポーネント、技術実装の詳細"
+      },
+      "configuration": {
+        "title": "設定 - GPT-Load ドキュメント",
+        "description": "環境変数、データベース、キャッシュ設定を含むGPT-Loadの詳細設定オプション"
+      },
+      "deployment": {
+        "title": "デプロイメントガイド - GPT-Load ドキュメント",
+        "description": "GPT-Loadデプロイメントソリューション：Docker、Kubernetes、ソースコードデプロイメントガイド"
+      },
+      "channels": {
+        "title": "チャネル管理 - GPT-Load ドキュメント",
+        "description": "GPT-Loadがサポートするハスパイサービスプロバイダーのチャネル設定と管理ガイド"
+      },
+      "integrations": {
+        "title": "サードパーティ統合 - GPT-Load ドキュメント",
+        "description": "様々なサードパーティアプリケーションとツールとのGPT-Load統合設定ガイド"
+      }
+    },
+    "docs": {
+      "title": "ドキュメント",
+      "description": "デプロイメントガイド、設定手順、アーキテクチャ設計を含むGPT-Loadの完全なドキュメント",
+      "introduction": "紹介",
+      "introductionDesc": "GPT-Loadのコア機能と設計哲学について学ぶ",
+      "deployment": "デプロイメントガイド",
+      "deploymentDesc": "GPT-Loadの詳細なデプロイメント手順と設定指示",
+      "configuration": "設定管理",
+      "configurationDesc": "GPT-Loadの設定オプションとベストプラクティス"
+    }
+  },
   "navigation": {
     "home": "ホーム",
     "docs": "ドキュメント",
@@ -31,30 +76,43 @@
   },
   "quickStart": {
     "title": "クイックスタート",
-    "subtitle": "数分でデプロイ完了",
+    "subtitle": "3ステップで GPT-Load を起動",
+    "description": "Docker Compose で迅速にデプロイ、完全なデータベースとキャッシュサービスを含む",
     "step1": {
-      "title": "ダウンロード",
-      "description": "GitHub から最新バージョンをダウンロード"
+      "title": "1. プロジェクトをクローン",
+      "description": "GitHub から完全なプロジェクトコードをダウンロード"
     },
     "step2": {
-      "title": "設定",
-      "description": "API キーと設定ファイルを追加"
+      "title": "2. 環境を設定",
+      "description": "環境設定ファイルをコピーして編集"
     },
     "step3": {
-      "title": "起動",
-      "description": "プログラムを実行して使用開始"
+      "title": "3. サービスを開始",
+      "description": "Docker Compose でワンクリック起動"
     }
   },
   "cta": {
-    "title": "GPT-Load を使い始める",
-    "description": "今すぐ高性能 AI API プロキシサービスを体験",
-    "getStarted": "始める",
-    "learnMore": "詳しく見る"
+    "title": "今すぐ GPT-Load を使い始める",
+    "description": "数分でデプロイが完了し、高性能 AI API プロキシサービスをお楽しみいただけます",
+    "getStarted": "クイックデプロイ",
+    "learnMore": "ドキュメントを見る"
   },
   "footer": {
-    "description": "高性能 AI API 透明プロキシサービス",
-    "quickLinks": "クイックリンク",
+    "description": "複数の大型モデルサービスに統合されたロードバランシングとキー管理を提供する高性能AIゲートウェイ。",
+    "product": "プロダクト",
     "community": "コミュニティ",
-    "support": "サポート"
+    "resources": "リソース",
+    "quickLinks": "クイックリンク",
+    "support": "サポート",
+    "links": {
+      "docs": "ドキュメント",
+      "changelog": "更新履歴",
+      "sponsor": "スポンサー",
+      "github": "GitHub",
+      "issues": "問題報告",
+      "telegram": "Telegram",
+      "standalone": "スタンドアロン",
+      "cluster": "クラスター"
+    }
   }
 }

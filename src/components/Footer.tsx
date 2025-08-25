@@ -2,24 +2,32 @@
 
 import Link from "next/link";
 import { Github, Mail, Heart, Zap, MessageCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const t = useTranslations("footer");
 
   const links = {
     product: [
-      { name: "使用文档", href: "/docs" },
-      { name: "更新日志", href: "https://github.com/tbphp/gpt-load/releases" },
-      { name: "支持赞助", href: "/docs/sponsor" },
+      { name: t("links.docs"), href: "/docs" },
+      {
+        name: t("links.changelog"),
+        href: "https://github.com/tbphp/gpt-load/releases",
+      },
+      { name: t("links.sponsor"), href: "/docs/sponsor" },
     ],
     community: [
-      { name: "GitHub", href: "https://github.com/tbphp/gpt-load" },
-      { name: "问题反馈", href: "https://github.com/tbphp/gpt-load/issues" },
-      { name: "Telegram", href: "https://t.me/+GHpy5SwEllg3MTUx" },
+      { name: t("links.github"), href: "https://github.com/tbphp/gpt-load" },
+      {
+        name: t("links.issues"),
+        href: "https://github.com/tbphp/gpt-load/issues",
+      },
+      { name: t("links.telegram"), href: "https://t.me/+GHpy5SwEllg3MTUx" },
     ],
     resources: [
-      { name: "单机", href: "/docs/deployment/standalone" },
-      { name: "集群", href: "/docs/deployment/cluster" },
+      { name: t("links.standalone"), href: "/docs/deployment/standalone" },
+      { name: t("links.cluster"), href: "/docs/deployment/cluster" },
     ],
   };
 
@@ -35,7 +43,7 @@ const Footer = () => {
               <span className="text-lg sm:text-xl font-bold">GPT-Load</span>
             </Link>
             <p className="text-gray-400 mb-4 sm:mb-6 max-w-md text-sm sm:text-base">
-              高性能 AI 网关，为多种大模型服务提供统一的负载均衡和密钥管理。
+              {t("description")}
             </p>
             <div className="flex space-x-4">
               <Link
@@ -66,7 +74,7 @@ const Footer = () => {
           {/* Product links */}
           <div>
             <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">
-              产品
+              {t("product")}
             </h3>
             <ul className="space-y-2">
               {links.product.map((link) => (
@@ -86,7 +94,7 @@ const Footer = () => {
           {/* Community links */}
           <div>
             <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">
-              社区
+              {t("community")}
             </h3>
             <ul className="space-y-2">
               {links.community.map((link) => (
@@ -111,7 +119,7 @@ const Footer = () => {
           {/* Resources links */}
           <div>
             <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">
-              部署
+              {t("resources")}
             </h3>
             <ul className="space-y-2">
               {links.resources.map((link) => (

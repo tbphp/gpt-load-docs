@@ -1,4 +1,49 @@
 {
+  "metadata": {
+    "title": "GPT-Load - 高性能 AI 接口透明代理服务",
+    "description": "企业级 AI 接口透明代理服务，完全保留各 AI 服务商的原生 API 格式。提供密钥轮询、多分组管理、负载均衡等功能，为您的 AI 应用提供稳定可靠的代理服务。",
+    "keywords": "GPT, OpenAI, API, 透明代理, 负载均衡, 密钥轮询, Go, 高性能",
+    "pages": {
+      "home": {
+        "title": "GPT-Load - AI API 负载均衡与管理平台",
+        "description": "高性能的 AI API 负载均衡与管理平台，支持多种 AI 模型接入、智能路由、可观测性监控"
+      },
+      "docs": {
+        "title": "快速开始 - GPT-Load 文档",
+        "description": "通过简单几步快速部署和配置 GPT-Load AI API 负载均衡平台"
+      },
+      "architecture": {
+        "title": "系统架构 - GPT-Load 文档",
+        "description": "深入了解 GPT-Load 的分布式架构设计、核心组件和技术实现方案"
+      },
+      "configuration": {
+        "title": "配置说明 - GPT-Load 文档",
+        "description": "详细的 GPT-Load 配置选项说明，包括环境变量、数据库、缓存等配置"
+      },
+      "deployment": {
+        "title": "部署指南 - GPT-Load 文档",
+        "description": "GPT-Load 多种部署方案：Docker、Kubernetes、源码部署等详细指南"
+      },
+      "channels": {
+        "title": "渠道管理 - GPT-Load 文档",
+        "description": "GPT-Load 支持的 AI 服务提供商渠道配置和管理指南"
+      },
+      "integrations": {
+        "title": "第三方集成 - GPT-Load 文档",
+        "description": "GPT-Load 与各种第三方应用和工具的集成配置指南"
+      }
+    },
+    "docs": {
+      "title": "文档",
+      "description": "GPT-Load 完整文档，包括部署指南、配置说明、架构设计等",
+      "introduction": "项目简介",
+      "introductionDesc": "了解 GPT-Load 的核心功能和设计理念",
+      "deployment": "部署指南",
+      "deploymentDesc": "详细的 GPT-Load 部署步骤和配置说明",
+      "configuration": "配置管理",
+      "configurationDesc": "GPT-Load 的各种配置选项和最佳实践"
+    }
+  },
   "navigation": {
     "home": "首页",
     "docs": "文档",
@@ -31,30 +76,70 @@
   },
   "quickStart": {
     "title": "快速开始",
-    "subtitle": "几分钟内完成部署",
+    "subtitle": "3 步启动 GPT-Load",
+    "description": "通过 Docker Compose 快速部署，包含完整的数据库和缓存服务",
     "step1": {
-      "title": "下载程序",
-      "description": "从 GitHub 下载最新版本"
+      "title": "1. 克隆项目",
+      "description": "从 GitHub 下载完整项目代码"
     },
     "step2": {
-      "title": "配置密钥",
-      "description": "添加 API 密钥和配置文件"
+      "title": "2. 配置环境",
+      "description": "复制并编辑环境配置文件"
     },
     "step3": {
-      "title": "启动服务",
-      "description": "运行程序开始使用"
+      "title": "3. 启动服务",
+      "description": "使用 Docker Compose 一键启动"
     }
   },
   "cta": {
     "title": "开始使用 GPT-Load",
-    "description": "立即体验高性能 AI 接口代理服务",
-    "getStarted": "立即开始",
-    "learnMore": "了解更多"
+    "description": "几分钟内即可部署完成，开始享受高性能的 AI 接口代理服务",
+    "getStarted": "快速部署",
+    "learnMore": "查看文档"
   },
   "footer": {
-    "description": "高性能 AI 接口透明代理服务",
-    "quickLinks": "快速链接",
+    "description": "高性能 AI 网关，为多种大模型服务提供统一的负载均衡和密钥管理。",
+    "product": "产品",
     "community": "社区",
-    "support": "支持"
+    "resources": "资源",
+    "quickLinks": "快速链接",
+    "support": "支持",
+    "links": {
+      "docs": "使用文档",
+      "changelog": "更新日志",
+      "sponsor": "支持赞助",
+      "github": "GitHub",
+      "issues": "问题反馈",
+      "telegram": "Telegram",
+      "standalone": "单机",
+      "cluster": "集群"
+    }
+  },
+  "docs": {
+    "quickStart": "快速开始",
+    "introduction": "项目简介",
+    "deployment": "部署指南",
+    "standalone": "单机部署",
+    "source": "源码部署",
+    "clusterDeployment": "集群部署",
+    "clawCloud": "Claw Cloud",
+    "configuration": "配置管理",
+    "environment": "环境配置",
+    "project": "项目配置",
+    "management": "管理端配置",
+    "cloudflareGateway": "Cloudflare AI Gateway",
+    "architecture": "架构与设计",
+    "keyManagement": "密钥管理",
+    "performance": "性能优化",
+    "routingStrategy": "路由策略",
+    "channels": "渠道支持",
+    "integrations": "第三方集成",
+    "cherryStudio": "Cherry Studio",
+    "claudeCodeRouter": "Claude Code Router",
+    "newApi": "New API",
+    "rooCode": "Roo Code",
+    "geminiOpenai": "Gemini OpenAI 兼容",
+    "clusterMode": "集群模式",
+    "sponsor": "赞助支持"
   }
 }

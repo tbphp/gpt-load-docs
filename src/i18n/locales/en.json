@@ -1,4 +1,49 @@
 {
+  "metadata": {
+    "title": "GPT-Load - High-Performance AI API Load Balancer",
+    "description": "Enterprise-grade AI API transparent proxy service that preserves native API formats of AI service providers. Provides key rotation, multi-group management, load balancing for stable and reliable AI application proxy services.",
+    "keywords": "GPT, OpenAI, API, transparent proxy, load balancing, key rotation, Go, high performance",
+    "pages": {
+      "home": {
+        "title": "GPT-Load - AI API Load Balancer & Management Platform",
+        "description": "High-performance AI API load balancer and management platform supporting multiple AI models, intelligent routing, and observability monitoring"
+      },
+      "docs": {
+        "title": "Quick Start - GPT-Load Documentation",
+        "description": "Deploy and configure GPT-Load AI API load balancing platform in a few simple steps"
+      },
+      "architecture": {
+        "title": "System Architecture - GPT-Load Documentation",
+        "description": "Deep dive into GPT-Load's distributed architecture design, core components and technical implementation"
+      },
+      "configuration": {
+        "title": "Configuration - GPT-Load Documentation",
+        "description": "Detailed GPT-Load configuration options including environment variables, database, cache settings"
+      },
+      "deployment": {
+        "title": "Deployment Guide - GPT-Load Documentation",
+        "description": "GPT-Load deployment solutions: Docker, Kubernetes, source code deployment guides"
+      },
+      "channels": {
+        "title": "Channel Management - GPT-Load Documentation",
+        "description": "GPT-Load supported AI service provider channel configuration and management guide"
+      },
+      "integrations": {
+        "title": "Third-party Integrations - GPT-Load Documentation",
+        "description": "GPT-Load integration configuration guide with various third-party applications and tools"
+      }
+    },
+    "docs": {
+      "title": "Documentation",
+      "description": "Complete GPT-Load documentation including deployment guides, configuration instructions, and architecture design",
+      "introduction": "Introduction",
+      "introductionDesc": "Learn about GPT-Load's core features and design philosophy",
+      "deployment": "Deployment Guide",
+      "deploymentDesc": "Detailed GPT-Load deployment steps and configuration instructions",
+      "configuration": "Configuration Management",
+      "configurationDesc": "GPT-Load configuration options and best practices"
+    }
+  },
   "navigation": {
     "home": "Home",
     "docs": "Documentation",
@@ -31,30 +76,43 @@
   },
   "quickStart": {
     "title": "Quick Start",
-    "subtitle": "Deploy in minutes",
+    "subtitle": "Launch GPT-Load in 3 Steps",
+    "description": "Deploy quickly with Docker Compose, including complete database and cache services",
     "step1": {
-      "title": "Download",
-      "description": "Download the latest version from GitHub"
+      "title": "1. Clone Project",
+      "description": "Download complete project code from GitHub"
     },
     "step2": {
-      "title": "Configure",
-      "description": "Add API keys and configuration files"
+      "title": "2. Configure Environment",
+      "description": "Copy and edit environment configuration file"
     },
     "step3": {
-      "title": "Launch",
-      "description": "Run the program and start using"
+      "title": "3. Start Service",
+      "description": "One-click startup with Docker Compose"
     }
   },
   "cta": {
-    "title": "Start Using GPT-Load",
-    "description": "Experience high-performance AI API proxy service now",
-    "getStarted": "Get Started",
-    "learnMore": "Learn More"
+    "title": "Get Started with GPT-Load Now",
+    "description": "Deploy in minutes and start enjoying high-performance AI API proxy services",
+    "getStarted": "Quick Deploy",
+    "learnMore": "View Documentation"
   },
   "footer": {
-    "description": "High-Performance AI API Transparent Proxy Service",
-    "quickLinks": "Quick Links",
+    "description": "High-performance AI gateway providing unified load balancing and key management for multiple large model services.",
+    "product": "Product",
     "community": "Community",
-    "support": "Support"
+    "resources": "Resources",
+    "quickLinks": "Quick Links",
+    "support": "Support",
+    "links": {
+      "docs": "Documentation",
+      "changelog": "Changelog",
+      "sponsor": "Sponsor",
+      "github": "GitHub",
+      "issues": "Issues",
+      "telegram": "Telegram",
+      "standalone": "Standalone",
+      "cluster": "Cluster"
+    }
   }
 }

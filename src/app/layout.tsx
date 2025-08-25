@@ -6,49 +6,40 @@ import Footer from "../components/Footer";
 import { GitHubStarsProvider } from "@/context/GitHubStarsContext";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
+import { generateMetadata as getI18nMetadata } from "@/i18n/metadata";
+import {
+  generateOrganizationSchema,
+  generateWebsiteSchema,
+  generateSoftwareApplicationSchema,
+} from "@/i18n/structured-data";
+import { MultipleStructuredData } from "@/components/StructuredData";
+import { cookies } from "next/headers";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
 });
 
-export const metadata: Metadata = {
-  title: "GPT-Load - 高性能 AI 接口透明代理服务",
-  description:
-    "企业级 AI 接口透明代理服务，完全保留各 AI 服务商的原生 API 格式。提供密钥轮询、多分组管理、负载均衡等功能，为您的 AI 应用提供稳定可靠的代理服务。",
-  keywords: "GPT, OpenAI, API, 透明代理, 负载均衡, 密钥轮询, Go, 高性能",
-  authors: [{ name: "tbphp" }],
-  viewport: "width=device-width, initial-scale=1, shrink-to-fit=no",
-  icons: {
-    icon: [
-      { url: "/logo.png", sizes: "32x32", type: "image/png" },
-      { url: "/logo.png", sizes: "16x16", type: "image/png" },
-    ],
-    shortcut: "/logo.png",
-    apple: "/logo.png",
-  },
-  openGraph: {
-    title: "GPT-Load - 高性能 AI 接口透明代理服务",
-    description:
-      "企业级 AI 接口透明代理服务，完全保留各 AI 服务商的原生 API 格式，提供密钥轮询和负载均衡功能",
-    type: "website",
-    url: "https://gpt-load.com",
-    images: [
-      {
-        url: "/logo.png",
-        width: 1200,
-        height: 630,
-        alt: "GPT-Load Logo",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "GPT-Load - 高性能 AI 接口透明代理服务",
-    description:
-      "企业级 AI 接口透明代理服务，完全保留各 AI 服务商的原生 API 格式，提供密钥轮询和负载均衡功能",
-    images: ["/logo.png"],
-  },
+export async function generateMetadata(): Promise<Metadata> {
+  const metadata = await getI18nMetadata();
+
+  return {
+    ...metadata,
+    icons: {
+      icon: [
+        { url: "/logo.png", sizes: "32x32", type: "image/png" },
+        { url: "/logo.png", sizes: "16x16", type: "image/png" },
+      ],
+      shortcut: "/logo.png",
+      apple: "/logo.png",
+    },
+  };
+}
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  shrinkToFit: "no",
 };
 
 export default async function RootLayout({
@@ -57,9 +48,24 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const messages = await getMessages();
+  const cookieStore = await cookies();
+  const currentLocale = cookieStore.get("locale")?.value || "zh";
+
+  // 生成结构化数据
+  const schemas = await Promise.all([
+    generateOrganizationSchema(),
+    generateWebsiteSchema(),
+    generateSoftwareApplicationSchema(),
+  ]);
+
+  // 获取对应的 HTML lang 值
+  const htmlLang = getHtmlLang(currentLocale as "zh" | "en" | "ja");
 
   return (
-    <html lang="zh-CN">
+    <html lang={htmlLang}>
+      <head>
+        <MultipleStructuredData schemas={schemas} />
+      </head>
       <body className={`${inter.variable} font-sans antialiased`}>
         <NextIntlClientProvider messages={messages}>
           <GitHubStarsProvider>
@@ -71,4 +77,17 @@ export default async function RootLayout({
       </body>
     </html>
   );
+}
+
+function getHtmlLang(locale: "zh" | "en" | "ja"): string {
+  switch (locale) {
+    case "zh":
+      return "zh-CN";
+    case "en":
+      return "en-US";
+    case "ja":
+      return "ja-JP";
+    default:
+      return "zh-CN";
+  }
 }

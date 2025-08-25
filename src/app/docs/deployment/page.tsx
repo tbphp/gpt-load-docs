@@ -12,6 +12,19 @@ import {
   ArrowRight,
 } from "lucide-react";
 
+import { Metadata } from "next";
+import { generatePageMetadata } from "@/i18n/metadata";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return await generatePageMetadata("deployment");
+}
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  shrinkToFit: "no",
+};
+
 export default function DeploymentPage() {
   return (
     <div className="max-w-4xl mx-auto">

@@ -8,6 +8,19 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
+import { Metadata } from "next";
+import { generatePageMetadata } from "@/i18n/metadata";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return await generatePageMetadata("integrations");
+}
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  shrinkToFit: "no",
+};
+
 export default function IntegrationsPage() {
   const integrations = [
     {

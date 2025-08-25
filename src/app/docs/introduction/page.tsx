@@ -10,6 +10,13 @@ import {
   Layers,
 } from "lucide-react";
 import Link from "next/link";
+import { Metadata } from "next";
+import { generatePageMetadata } from "@/i18n/metadata";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return await generatePageMetadata("docs/introduction");
+}
+
 export default function DocsPage() {
   return (
     <div className="max-w-4xl mx-auto">
