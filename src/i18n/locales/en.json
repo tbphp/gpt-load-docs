@@ -967,6 +967,25 @@
     "securityWarning": "Security Warning",
     "securityMessage": "Be sure to replace your-secure-key-here with a complex key! Using default or simple keys poses a serious security risk."
   },
+  "quickStartPage": {
+    "step2": {
+      "copyEnv": "Copy environment configuration file",
+      "editConfig": "Edit configuration (optional)",
+      "mainConfig": "Main configuration items:"
+    },
+    "step3": {
+      "startService": "Start service (including MySQL and Redis)",
+      "visitAdmin": "Visit admin interface"
+    },
+    "requirements": {
+      "title": "System Requirements",
+      "runtime": "Runtime Environment",
+      "storage": "Data Storage",
+      "cache": "Cache Service",
+      "container": "Container Runtime"
+    },
+    "viewDocs": "View detailed deployment documentation"
+  },
   "architecturePage": {
     "dataFlow": "Data Flow Architecture",
     "infrastructure": "Infrastructure Components",
