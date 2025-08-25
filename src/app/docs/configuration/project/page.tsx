@@ -133,7 +133,7 @@ export default function ProjectConfigurationPage() {
                       <span className="text-green-600 font-semibold">✅</span>
                     </td>
                     <td className="py-2 px-3">
-                      是否在请求日志中记录完整的请求体和响应体内容，启用会增加内存和存储占用
+                      是否在请求日志中记录完整的请求体内容，启用会增加内存和存储占用
                     </td>
                   </tr>
                 </tbody>
