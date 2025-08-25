@@ -8,6 +8,8 @@ import { useTranslations } from "next-intl";
 
 const Hero = () => {
   const t = useTranslations("hero");
+  const t2 = useTranslations("techStack");
+  const t3 = useTranslations("quickStartCode");
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       {/* Simple background pattern */}
@@ -111,25 +113,25 @@ const Hero = () => {
               <div className="text-base sm:text-lg font-bold text-blue-600 mb-1 sm:mb-2">
                 Go 1.23+
               </div>
-              <div className="text-xs sm:text-sm text-gray-600">后端语言</div>
+              <div className="text-xs sm:text-sm text-gray-600">{t2("backend")}</div>
             </div>
             <div className="text-center p-3 sm:p-4 bg-white rounded-lg shadow-sm border border-gray-200">
               <div className="text-base sm:text-lg font-bold text-blue-600 mb-1 sm:mb-2">
                 MySQL
               </div>
-              <div className="text-xs sm:text-sm text-gray-600">数据存储</div>
+              <div className="text-xs sm:text-sm text-gray-600">{t2("storage")}</div>
             </div>
             <div className="text-center p-3 sm:p-4 bg-white rounded-lg shadow-sm border border-gray-200">
               <div className="text-base sm:text-lg font-bold text-blue-600 mb-1 sm:mb-2">
                 Redis
               </div>
-              <div className="text-xs sm:text-sm text-gray-600">缓存系统</div>
+              <div className="text-xs sm:text-sm text-gray-600">{t2("cache")}</div>
             </div>
             <div className="text-center p-3 sm:p-4 bg-white rounded-lg shadow-sm border border-gray-200">
               <div className="text-base sm:text-lg font-bold text-blue-600 mb-1 sm:mb-2">
                 Vue 3
               </div>
-              <div className="text-xs sm:text-sm text-gray-600">管理界面</div>
+              <div className="text-xs sm:text-sm text-gray-600">{t2("admin")}</div>
             </div>
           </motion.div>
 
@@ -146,7 +148,7 @@ const Hero = () => {
                 <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                 <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                 <span className="text-gray-400 text-xs sm:text-sm ml-4">
-                  快速启动
+                  {t3("title")}
                 </span>
               </div>
               <pre className="text-green-400 text-xs sm:text-sm overflow-x-auto whitespace-pre-wrap break-words">
@@ -166,14 +168,10 @@ const Hero = () => {
                   <div className="text-red-400 text-lg">⚠️</div>
                   <div>
                     <div className="text-red-400 text-xs sm:text-sm font-bold">
-                      安全警告
+                      {t3("securityWarning")}
                     </div>
                     <div className="text-red-300 text-xs mt-1">
-                      请务必将{" "}
-                      <code className="bg-red-800/30 px-1 rounded">
-                        your-secure-key-here
-                      </code>{" "}
-                      替换为复杂的密钥！ 使用默认或简单密钥存在严重安全风险。
+                      {t3("securityMessage")}
                     </div>
                   </div>
                 </div>

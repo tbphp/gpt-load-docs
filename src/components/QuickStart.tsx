@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 
 const QuickStart = () => {
   const t = useTranslations("quickStart");
+  const t2 = useTranslations("quickStartPage");
   const steps = [
     {
       icon: Download,
@@ -19,13 +20,13 @@ cd gpt-load`,
       icon: Settings,
       title: t("step2.title"),
       description: t("step2.description"),
-      code: `# 复制环境配置文件
+      code: `# ${t2("step2.copyEnv")}
 cp .env.example .env
 
-# 编辑配置（可选）
+# ${t2("step2.editConfig")}
 # vim .env
 
-# 主要配置项：
+# ${t2("step2.mainConfig")}
 # APP_PORT=3001
 # APP_SECRET=your-secret-key`,
     },
@@ -33,10 +34,10 @@ cp .env.example .env
       icon: Play,
       title: t("step3.title"),
       description: t("step3.description"),
-      code: `# 启动服务（包含 MySQL 和 Redis）
+      code: `# ${t2("step3.startService")}
 docker compose up -d
 
-# 访问管理界面
+# ${t2("step3.visitAdmin")}
 # http://localhost:3001`,
     },
   ];
@@ -124,7 +125,7 @@ docker compose up -d
             viewport={{ once: true }}
           >
             <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4 sm:mb-6 text-center px-4">
-              系统要求
+              {t2("requirements.title")}
             </h3>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
@@ -132,26 +133,26 @@ docker compose up -d
                 <div className="text-base sm:text-lg font-bold text-blue-600 mb-1 sm:mb-2">
                   Go 1.23+
                 </div>
-                <div className="text-xs sm:text-sm text-gray-600">运行环境</div>
+                <div className="text-xs sm:text-sm text-gray-600">{t2("requirements.runtime")}</div>
               </div>
               <div className="text-center">
                 <div className="text-base sm:text-lg font-bold text-blue-600 mb-1 sm:mb-2">
                   MySQL 8.2+
                 </div>
-                <div className="text-xs sm:text-sm text-gray-600">数据存储</div>
+                <div className="text-xs sm:text-sm text-gray-600">{t2("requirements.storage")}</div>
               </div>
               <div className="text-center">
                 <div className="text-base sm:text-lg font-bold text-blue-600 mb-1 sm:mb-2">
                   Redis
                 </div>
-                <div className="text-xs sm:text-sm text-gray-600">缓存服务</div>
+                <div className="text-xs sm:text-sm text-gray-600">{t2("requirements.cache")}</div>
               </div>
               <div className="text-center">
                 <div className="text-base sm:text-lg font-bold text-blue-600 mb-1 sm:mb-2">
                   Docker
                 </div>
                 <div className="text-xs sm:text-sm text-gray-600">
-                  容器运行时
+                  {t2("requirements.container")}
                 </div>
               </div>
             </div>
@@ -161,7 +162,7 @@ docker compose up -d
                 href="/docs/deployment"
                 className="inline-flex items-center space-x-2 bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 text-sm sm:text-base"
               >
-                <span>查看详细部署文档</span>
+                <span>{t2("viewDocs")}</span>
                 <Terminal className="h-3 w-3 sm:h-4 sm:w-4" />
               </Link>
             </div>

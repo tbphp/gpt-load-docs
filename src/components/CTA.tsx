@@ -57,7 +57,7 @@ const CTA = () => {
                 className="inline-flex items-center space-x-2 bg-red-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-red-600 transition-all duration-200 shadow-lg w-full sm:w-auto justify-center"
               >
                 <Heart className="h-4 w-4 sm:h-5 sm:w-5" />
-                <span>支持赞助</span>
+                <span>{t("sponsor")}</span>
               </Link>
             </div>
           </motion.div>

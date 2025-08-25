@@ -95,7 +95,8 @@
     "title": "Get Started with GPT-Load Now",
     "description": "Deploy in minutes and start enjoying high-performance AI API proxy services",
     "getStarted": "Quick Deploy",
-    "learnMore": "View Documentation"
+    "learnMore": "View Documentation",
+    "sponsor": "Sponsor"
   },
   "footer": {
     "description": "High-performance AI gateway providing unified load balancing and key management for multiple large model services.",
@@ -114,5 +115,111 @@
       "standalone": "Standalone",
       "cluster": "Cluster"
     }
+  },
+  "docs": {
+    "quickStart": "Quick Start",
+    "introduction": "Introduction",
+    "deployment": "Deployment Guide",
+    "standalone": "Standalone Deployment",
+    "source": "Source Code Deployment",
+    "clusterDeployment": "Cluster Deployment",
+    "clawCloud": "Claw Cloud",
+    "configuration": "Configuration Management",
+    "environment": "Environment Configuration",
+    "project": "Project Configuration",
+    "management": "Management Configuration",
+    "cloudflareGateway": "Cloudflare AI Gateway",
+    "architecture": "Architecture & Design",
+    "keyManagement": "Key Management",
+    "performance": "Performance Optimization",
+    "routingStrategy": "Routing Strategy",
+    "channels": "Channel Support",
+    "integrations": "Third-party Integrations",
+    "cherryStudio": "Cherry Studio",
+    "claudeCodeRouter": "Claude Code Router",
+    "newApi": "New API",
+    "rooCode": "Roo Code",
+    "geminiOpenai": "Gemini OpenAI Compatible",
+    "clusterMode": "Cluster Mode",
+    "sponsor": "Sponsor"
+  },
+  "techStack": {
+    "backend": "Backend Language",
+    "storage": "Data Storage",
+    "cache": "Cache System",
+    "admin": "Admin Interface"
+  },
+  "quickStartCode": {
+    "title": "Quick Start",
+    "securityWarning": "Security Warning",
+    "securityMessage": "Be sure to replace your-secure-key-here with a complex key! Using default or simple keys poses a serious security risk."
+  },
+  "architecturePage": {
+    "dataFlow": "Data Flow Architecture",
+    "infrastructure": "Infrastructure Components",
+    "deploymentOptions": "Flexible Deployment Options",
+    "components": {
+      "client": {
+        "title": "Client Application",
+        "description": "Web/mobile apps call via standard OpenAI API format",
+        "items": ["HTTP/HTTPS Request", "Bearer Token Auth", "JSON Format Interaction"]
+      },
+      "proxy": {
+        "title": "GPT-Load Proxy Layer",
+        "description": "Core proxy service for request forwarding and management",
+        "items": ["Transparent Proxy", "Key Management", "Load Balancing", "Request Logging"]
+      },
+      "provider": {
+        "title": "AI Service Provider",
+        "description": "Unified access to multiple AI services",
+        "items": ["OpenAI API", "Google Gemini", "Anthropic Claude", "Other Compatible Services"]
+      }
+    },
+    "infrastructureComponents": {
+      "mysql": {
+        "title": "MySQL 8.2+",
+        "description": "Persistent Storage",
+        "details": ["Configuration Data", "User Information", "Request Logs"]
+      },
+      "redis": {
+        "title": "Redis",
+        "description": "Cache & Lock",
+        "details": ["Key Cache", "Distributed Lock", "Session Storage"]
+      },
+      "vue": {
+        "title": "Vue 3 Admin Backend",
+        "description": "Management Interface",
+        "details": ["Real-time Monitoring", "Configuration Management", "Log Viewing"]
+      }
+    },
+    "deployment": {
+      "standalone": {
+        "title": "Standalone Deployment",
+        "items": ["One-click start with Docker Compose", "Includes complete MySQL + Redis", "Suitable for development and small-scale production"]
+      },
+      "cluster": {
+        "title": "Cluster Deployment",
+        "items": ["Master/Slave Architecture", "Horizontal scaling support", "High availability assurance"]
+      }
+    }
+  },
+  "quickStartPage": {
+    "step2": {
+      "copyEnv": "Copy environment configuration file",
+      "editConfig": "Edit configuration (optional)",
+      "mainConfig": "Main configuration items:"
+    },
+    "step3": {
+      "startService": "Start service (includes MySQL and Redis)",
+      "visitAdmin": "Access management interface"
+    },
+    "requirements": {
+      "title": "System Requirements",
+      "runtime": "Runtime Environment",
+      "storage": "Data Storage",
+      "cache": "Cache Service",
+      "container": "Container Runtime"
+    },
+    "viewDocs": "View detailed deployment documentation"
   }
 }

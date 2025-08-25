@@ -95,7 +95,8 @@
     "title": "开始使用 GPT-Load",
     "description": "几分钟内即可部署完成，开始享受高性能的 AI 接口代理服务",
     "getStarted": "快速部署",
-    "learnMore": "查看文档"
+    "learnMore": "查看文档",
+    "sponsor": "支持赞助"
   },
   "footer": {
     "description": "高性能 AI 网关，为多种大模型服务提供统一的负载均衡和密钥管理。",
@@ -141,5 +142,84 @@
     "geminiOpenai": "Gemini OpenAI 兼容",
     "clusterMode": "集群模式",
     "sponsor": "赞助支持"
+  },
+  "techStack": {
+    "backend": "后端语言",
+    "storage": "数据存储",
+    "cache": "缓存系统",
+    "admin": "管理界面"
+  },
+  "quickStartCode": {
+    "title": "快速启动",
+    "securityWarning": "安全警告",
+    "securityMessage": "请务必将 your-secure-key-here 替换为复杂的密钥！ 使用默认或简单密钥存在严重安全风险。"
+  },
+  "architecturePage": {
+    "dataFlow": "数据流架构",
+    "infrastructure": "基础设施组件",
+    "deploymentOptions": "灵活的部署方式",
+    "components": {
+      "client": {
+        "title": "客户端应用",
+        "description": "Web/移动应用通过标准 OpenAI API 格式调用",
+        "items": ["HTTP/HTTPS 请求", "Bearer Token 认证", "JSON 格式交互"]
+      },
+      "proxy": {
+        "title": "GPT-Load 代理层",
+        "description": "核心代理服务，负责请求转发和管理",
+        "items": ["透明代理", "密钥管理", "负载均衡", "请求日志"]
+      },
+      "provider": {
+        "title": "AI 服务提供商",
+        "description": "多种 AI 服务的统一接入",
+        "items": ["OpenAI API", "Google Gemini", "Anthropic Claude", "其他兼容服务"]
+      }
+    },
+    "infrastructureComponents": {
+      "mysql": {
+        "title": "MySQL 8.2+",
+        "description": "持久化存储",
+        "details": ["配置数据", "用户信息", "请求日志"]
+      },
+      "redis": {
+        "title": "Redis",
+        "description": "缓存与锁",
+        "details": ["密钥缓存", "分布式锁", "会话存储"]
+      },
+      "vue": {
+        "title": "Vue 3 管理后台",
+        "description": "管理界面",
+        "details": ["实时监控", "配置管理", "日志查看"]
+      }
+    },
+    "deployment": {
+      "standalone": {
+        "title": "单机部署",
+        "items": ["Docker Compose 一键启动", "包含完整的 MySQL + Redis", "适合开发和小规模生产"]
+      },
+      "cluster": {
+        "title": "集群部署",
+        "items": ["Master/Slave 架构", "水平扩展支持", "高可用性保障"]
+      }
+    }
+  },
+  "quickStartPage": {
+    "step2": {
+      "copyEnv": "复制环境配置文件",
+      "editConfig": "编辑配置（可选）",
+      "mainConfig": "主要配置项："
+    },
+    "step3": {
+      "startService": "启动服务（包含 MySQL 和 Redis）",
+      "visitAdmin": "访问管理界面"
+    },
+    "requirements": {
+      "title": "系统要求",
+      "runtime": "运行环境",
+      "storage": "数据存储",
+      "cache": "缓存服务",
+      "container": "容器运行时"
+    },
+    "viewDocs": "查看详细部署文档"
   }
 }

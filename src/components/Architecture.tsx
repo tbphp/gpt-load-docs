@@ -13,49 +13,45 @@ import { useTranslations } from "next-intl";
 
 const Architecture = () => {
   const t = useTranslations("architecture");
+  const t2 = useTranslations("architecturePage");
   const components = [
     {
       icon: Users,
-      title: "客户端应用",
-      description: "Web/移动应用通过标准 OpenAI API 格式调用",
-      items: ["HTTP/HTTPS 请求", "Bearer Token 认证", "JSON 格式交互"],
+      title: t2("components.client.title"),
+      description: t2("components.client.description"),
+      items: t2.raw("components.client.items"),
     },
     {
       icon: Shield,
-      title: "GPT-Load 代理层",
-      description: "核心代理服务，负责请求转发和管理",
-      items: ["透明代理", "密钥管理", "负载均衡", "请求日志"],
+      title: t2("components.proxy.title"),
+      description: t2("components.proxy.description"),
+      items: t2.raw("components.proxy.items"),
     },
     {
       icon: Server,
-      title: "AI 服务提供商",
-      description: "多种 AI 服务的统一接入",
-      items: [
-        "OpenAI API",
-        "Google Gemini",
-        "Anthropic Claude",
-        "其他兼容服务",
-      ],
+      title: t2("components.provider.title"),
+      description: t2("components.provider.description"),
+      items: t2.raw("components.provider.items"),
     },
   ];
   const infrastructure = [
     {
       icon: Database,
-      title: "MySQL 8.2+",
-      description: "持久化存储",
-      details: ["配置数据", "用户信息", "请求日志"],
+      title: t2("infrastructureComponents.mysql.title"),
+      description: t2("infrastructureComponents.mysql.description"),
+      details: t2.raw("infrastructureComponents.mysql.details"),
     },
     {
       icon: RotateCcw,
-      title: "Redis",
-      description: "缓存与锁",
-      details: ["密钥缓存", "分布式锁", "会话存储"],
+      title: t2("infrastructureComponents.redis.title"),
+      description: t2("infrastructureComponents.redis.description"),
+      details: t2.raw("infrastructureComponents.redis.details"),
     },
     {
       icon: Monitor,
-      title: "Vue 3 管理后台",
-      description: "管理界面",
-      details: ["实时监控", "配置管理", "日志查看"],
+      title: t2("infrastructureComponents.vue.title"),
+      description: t2("infrastructureComponents.vue.description"),
+      details: t2.raw("infrastructureComponents.vue.details"),
     },
   ];
   return (
@@ -80,7 +76,7 @@ const Architecture = () => {
           {/* Data Flow */}
           <div className="mb-12 sm:mb-16">
             <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-6 sm:mb-8 text-center px-4">
-              数据流架构
+              {t2("dataFlow")}
             </h3>
             <div className="flex flex-col lg:flex-row items-center justify-between space-y-6 sm:space-y-8 lg:space-y-0 lg:space-x-4">
               {components.map((component, index) => {
@@ -107,14 +103,16 @@ const Architecture = () => {
                         {component.description}
                       </p>
                       <div className="space-y-1 sm:space-y-2">
-                        {component.items.map((item, itemIndex) => (
-                          <div
-                            key={itemIndex}
-                            className="text-xs sm:text-sm bg-white px-2 py-1 rounded border text-gray-700"
-                          >
-                            {item}
-                          </div>
-                        ))}
+                        {component.items.map(
+                          (item: string, itemIndex: number) => (
+                            <div
+                              key={itemIndex}
+                              className="text-xs sm:text-sm bg-white px-2 py-1 rounded border text-gray-700"
+                            >
+                              {item}
+                            </div>
+                          )
+                        )}
                       </div>
                     </motion.div>
                     {/* Arrow */}
@@ -129,7 +127,7 @@ const Architecture = () => {
           {/* Infrastructure */}
           <div className="mb-12 sm:mb-16">
             <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-6 sm:mb-8 text-center px-4">
-              基础设施组件
+              {t2("infrastructure")}
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
               {infrastructure.map((item, index) => {
@@ -153,14 +151,16 @@ const Architecture = () => {
                       {item.description}
                     </p>
                     <div className="space-y-1 sm:space-y-2">
-                      {item.details.map((detail, detailIndex) => (
-                        <div
-                          key={detailIndex}
-                          className="text-xs sm:text-sm bg-white px-2 sm:px-3 py-1 rounded border text-gray-700"
-                        >
-                          {detail}
-                        </div>
-                      ))}
+                      {item.details.map(
+                        (detail: string, detailIndex: number) => (
+                          <div
+                            key={detailIndex}
+                            className="text-xs sm:text-sm bg-white px-2 sm:px-3 py-1 rounded border text-gray-700"
+                          >
+                            {detail}
+                          </div>
+                        )
+                      )}
                     </div>
                   </motion.div>
                 );
@@ -176,27 +176,31 @@ const Architecture = () => {
             transition={{ duration: 0.6 }}
           >
             <h3 className="text-xl sm:text-2xl font-bold mb-4">
-              灵活的部署方式
+              {t2("deploymentOptions")}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
               <div className="text-left">
                 <h4 className="text-lg font-semibold mb-3 text-blue-300">
-                  单机部署
+                  {t2("deployment.standalone.title")}
                 </h4>
                 <ul className="space-y-2 text-blue-100 text-sm sm:text-base">
-                  <li>• Docker Compose 一键启动</li>
-                  <li>• 包含完整的 MySQL + Redis</li>
-                  <li>• 适合开发和小规模生产</li>
+                  {t2
+                    .raw("deployment.standalone.items")
+                    .map((item: string, index: number) => (
+                      <li key={index}>• {item}</li>
+                    ))}
                 </ul>
               </div>
               <div className="text-left">
                 <h4 className="text-lg font-semibold mb-3 text-blue-300">
-                  集群部署
+                  {t2("deployment.cluster.title")}
                 </h4>
                 <ul className="space-y-2 text-blue-100 text-sm sm:text-base">
-                  <li>• Master/Slave 架构</li>
-                  <li>• 水平扩展支持</li>
-                  <li>• 高可用性保障</li>
+                  {t2
+                    .raw("deployment.cluster.items")
+                    .map((item: string, index: number) => (
+                      <li key={index}>• {item}</li>
+                    ))}
                 </ul>
               </div>
             </div>

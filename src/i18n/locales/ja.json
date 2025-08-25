@@ -95,7 +95,8 @@
     "title": "今すぐ GPT-Load を使い始める",
     "description": "数分でデプロイが完了し、高性能 AI API プロキシサービスをお楽しみいただけます",
     "getStarted": "クイックデプロイ",
-    "learnMore": "ドキュメントを見る"
+    "learnMore": "ドキュメントを見る",
+    "sponsor": "スポンサー"
   },
   "footer": {
     "description": "複数の大型モデルサービスに統合されたロードバランシングとキー管理を提供する高性能AIゲートウェイ。",
@@ -114,5 +115,111 @@
       "standalone": "スタンドアロン",
       "cluster": "クラスター"
     }
+  },
+  "docs": {
+    "quickStart": "クイックスタート",
+    "introduction": "プロジェクト紹介",
+    "deployment": "デプロイガイド",
+    "standalone": "スタンドアロンデプロイ",
+    "source": "ソースコードデプロイ",
+    "clusterDeployment": "クラスターデプロイ",
+    "clawCloud": "Claw Cloud",
+    "configuration": "設定管理",
+    "environment": "環境設定",
+    "project": "プロジェクト設定",
+    "management": "管理画面設定",
+    "cloudflareGateway": "Cloudflare AI Gateway",
+    "architecture": "アーキテクチャと設計",
+    "keyManagement": "キー管理",
+    "performance": "パフォーマンス最適化",
+    "routingStrategy": "ルーティング戦略",
+    "channels": "チャネルサポート",
+    "integrations": "サードパーティ統合",
+    "cherryStudio": "Cherry Studio",
+    "claudeCodeRouter": "Claude Code Router",
+    "newApi": "New API",
+    "rooCode": "Roo Code",
+    "geminiOpenai": "Gemini OpenAI 互換",
+    "clusterMode": "クラスターモード",
+    "sponsor": "スポンサー"
+  },
+  "techStack": {
+    "backend": "バックエンド言語",
+    "storage": "データストレージ",
+    "cache": "キャッシュシステム",
+    "admin": "管理画面"
+  },
+  "quickStartCode": {
+    "title": "クイックスタート",
+    "securityWarning": "セキュリティ警告",
+    "securityMessage": "必ず your-secure-key-here を複雑なキーに置き換えてください！ デフォルトまたは単純なキーを使用すると、深刻なセキュリティリスクが生じます。"
+  },
+  "architecturePage": {
+    "dataFlow": "データフローアーキテクチャ",
+    "infrastructure": "インフラストラクチャコンポーネント",
+    "deploymentOptions": "柔軟なデプロイオプション",
+    "components": {
+      "client": {
+        "title": "クライアントアプリケーション",
+        "description": "Web/モバイルアプリは標準のOpenAI API形式で呼び出します",
+        "items": ["HTTP/HTTPSリクエスト", "ビアラートークン認証", "JSON形式の対話"]
+      },
+      "proxy": {
+        "title": "GPT-Load プロキシ層",
+        "description": "リクエストの転送と管理を担当するコアプロキシサービス",
+        "items": ["透過的プロキシ", "キー管理", "負荷分散", "リクエストロギング"]
+      },
+      "provider": {
+        "title": "AIサービスプロバイダー",
+        "description": "複数のAIサービスへの統一アクセス",
+        "items": ["OpenAI API", "Google Gemini", "Anthropic Claude", "その他の互換サービス"]
+      }
+    },
+    "infrastructureComponents": {
+      "mysql": {
+        "title": "MySQL 8.2+",
+        "description": "永続ストレージ",
+        "details": ["設定データ", "ユーザー情報", "リクエストログ"]
+      },
+      "redis": {
+        "title": "Redis",
+        "description": "キャッシュ＆ロック",
+        "details": ["キーキャッシュ", "分散ロック", "セッションストレージ"]
+      },
+      "vue": {
+        "title": "Vue 3 管理バックエンド",
+        "description": "管理インターフェース",
+        "details": ["リアルタイム監視", "設定管理", "ログ表示"]
+      }
+    },
+    "deployment": {
+      "standalone": {
+        "title": "スタンドアロンデプロイ",
+        "items": ["Docker Composeでワンクリック起動", "完全なMySQL + Redisを含む", "開発および小規模生産に適しています"]
+      },
+      "cluster": {
+        "title": "クラスターデプロイ",
+        "items": ["マスター/スレーブアーキテクチャ", "水平スケーリングのサポート", "高可用性の保証"]
+      }
+    }
+  },
+  "quickStartPage": {
+    "step2": {
+      "copyEnv": "環境設定ファイルをコピー",
+      "editConfig": "設定の編集（オプション）",
+      "mainConfig": "主な設定項目："
+    },
+    "step3": {
+      "startService": "サービスの開始（MySQLとRedisを含む）",
+      "visitAdmin": "管理画面にアクセス"
+    },
+    "requirements": {
+      "title": "システム要件",
+      "runtime": "ランタイム環境",
+      "storage": "データストレージ",
+      "cache": "キャッシュサービス",
+      "container": "コンテナランタイム"
+    },
+    "viewDocs": "詳細なデプロイメントドキュメントを表示"
   }
 }
