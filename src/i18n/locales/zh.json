@@ -31,8 +31,358 @@
       "access": "访问管理界面："
     }
   },
+  "architecture": {
+    "title": "系统架构",
+    "subtitle": "高性能透明代理架构设计",
+    "description": "GPT-Load 采用三层架构设计，提供高性能、高可用的 AI API 代理服务",
+    "components": {
+      "client": {
+        "title": "客户端应用",
+        "description": "Web/移动应用通过标准 OpenAI API 格式调用",
+        "items": ["HTTP/HTTPS 请求", "Bearer Token 认证", "JSON 格式交互"]
+      },
+      "proxy": {
+        "title": "GPT-Load 代理层", 
+        "description": "核心代理服务，负责请求转发和管理",
+        "items": ["透明代理", "密钥管理", "负载均衡", "请求日志"]
+      },
+      "providers": {
+        "title": "AI 服务提供商",
+        "description": "多种 AI 服务的统一接入",
+        "items": ["OpenAI API", "Google Gemini", "Anthropic Claude", "其他兼容服务"]
+      }
+    },
+    "infrastructure": {
+      "title": "基础设施",
+      "mysql": {
+        "title": "MySQL 8.2+",
+        "description": "持久化存储",
+        "details": ["配置数据", "用户信息", "请求日志"]
+      },
+      "redis": {
+        "title": "Redis",
+        "description": "缓存与锁", 
+        "details": ["密钥缓存", "分布式锁", "会话存储"]
+      },
+      "management": {
+        "title": "管理界面",
+        "description": "Web 控制面板",
+        "details": ["可视化配置", "监控仪表板", "日志查看"]
+      }
+    }
+  },
+  "features": {
+    "title": "核心特性",
+    "subtitle": "企业级功能设计",
+    "highPerformance": {
+      "title": "高性能架构",
+      "description": "基于 Go 1.23+ 开发，零拷贝流式传输，协程并发模型，支持高并发处理",
+      "technical": "Go 协程 + HTTP/2 连接复用"
+    },
+    "transparentProxy": {
+      "title": "透明代理",
+      "description": "完全保留原生 API 格式，无需修改现有代码即可接入多种 AI 服务",
+      "technical": "OpenAI + Gemini + Anthropic 支持"
+    },
+    "keyManagement": {
+      "title": "智能密钥管理",
+      "description": "分组管理、动态轮换、自动重试，确保服务高可用性",
+      "technical": "Redis 缓存 + 故障恢复机制"
+    },
+    "loadBalancing": {
+      "title": "负载均衡",
+      "description": "多上游支持、权重配置、健康检查，智能路由到可用节点",
+      "technical": "加权轮询 + 健康检查"
+    },
+    "hotReload": {
+      "title": "热重载配置",
+      "description": "三层配置系统，环境变量、系统设置、分组配置，支持热更新",
+      "technical": "环境变量 → 系统设置 → 分组设置"
+    },
+    "clusterSupport": {
+      "title": "集群支持",
+      "description": "水平扩展、分布式部署、高可用架构设计",
+      "technical": "Docker + Kubernetes 支持"
+    },
+    "security": {
+      "title": "安全机制",
+      "description": "Bearer Token 认证、分组隔离、请求日志、敏感信息脱敏",
+      "technical": "JWT + 访问控制 + 审计日志"
+    },
+    "admin": {
+      "title": "管理后台",
+      "description": "Vue 3 现代化界面，实时监控、日志查看、配置管理",
+      "technical": "Vue 3 + TypeScript + Naive UI"
+    },
+    "developerFriendly": {
+      "title": "开发友好",
+      "description": "完整的 RESTful API、详细文档、Docker 一键部署",
+      "technical": "OpenAPI + Docker Compose"
+    }
+  },
+  "performance": {
+    "title": "性能指标",
+    "subtitle": "高性能表现",
+    "description": "优化的性能配置，支持高并发和低延迟",
+    "metrics": {
+      "concurrent": {
+        "label": "默认并发数",
+        "value": "100", 
+        "description": "MAX_CONCURRENT_REQUESTS 默认值"
+      },
+      "goVersion": {
+        "label": "Go 版本要求",
+        "value": "1.23+",
+        "description": "最低版本要求"
+      },
+      "connectionPool": {
+        "label": "连接池配置",
+        "value": "100/50",
+        "description": "最大空闲连接数/每主机连接数"
+      },
+      "timeout": {
+        "label": "请求超时",
+        "value": "600s",
+        "description": "默认请求超时时间"
+      }
+    },
+    "comparisons": {
+      "title": "性能对比",
+      "configManagement": {
+        "metric": "配置管理",
+        "without": "静态配置文件",
+        "with": "动态热重载",
+        "improvement": "无需重启"
+      },
+      "keyManagement": {
+        "metric": "密钥管理", 
+        "without": "手动切换",
+        "with": "智能轮询",
+        "improvement": "自动故障转移"
+      },
+      "monitoring": {
+        "metric": "监控日志",
+        "without": "基础日志",
+        "with": "实时监控",
+        "improvement": "可视化面板"
+      },
+      "deployment": {
+        "metric": "部署方式",
+        "without": "单体应用", 
+        "with": "容器集群",
+        "improvement": "弹性扩展"
+      }
+    },
+    "optimization": {
+      "title": "性能优化建议",
+      "items": [
+        "根据实际负载调整 MAX_CONCURRENT_REQUESTS",
+        "配置合适的连接池大小", 
+        "使用 Redis 集群提升缓存性能",
+        "启用请求压缩减少网络开销",
+        "定期清理日志文件释放磁盘空间"
+      ]
+    }
+  },
+  "quickStart": {
+    "title": "快速开始",
+    "subtitle": "5分钟快速体验",
+    "steps": [
+      {
+        "title": "下载安装",
+        "description": "使用 Docker 一键部署"
+      },
+      {
+        "title": "配置密钥",
+        "description": "添加 AI 服务商 API 密钥"
+      },
+      {
+        "title": "开始使用", 
+        "description": "通过代理地址访问 AI 服务"
+      }
+    ],
+    "getStarted": "立即开始"
+  },
+  "cta": {
+    "title": "立即开始使用 GPT-Load",
+    "subtitle": "几分钟内即可部署完成，开始享受高性能的 AI 接口代理服务",
+    "buttons": {
+      "quickDeploy": "快速部署",
+      "viewDocs": "查看文档",
+      "github": "GitHub",
+      "sponsor": "支持赞助"
+    }
+  },
   "footer": {
-    "copyright": "版权所有"
+    "description": "高性能 AI 网关，为多种大模型服务提供统一的负载均衡和密钥管理。",
+    "product": "产品",
+    "community": "社区",
+    "resources": "部署",
+    "links": {
+      "docs": "使用文档",
+      "changelog": "更新日志",
+      "sponsor": "支持赞助",
+      "github": "GitHub",
+      "issues": "问题反馈",
+      "telegram": "Telegram",
+      "standalone": "单机",
+      "cluster": "集群"
+    },
+    "copyright": "版权所有",
+    "license": "MIT 协议",
+    "openSource": "开源发布"
+  },
+  "dataFlow": "数据流架构",
+  "infrastructure": "基础设施组件",
+  "deploymentOptions": {
+    "title": "灵活的部署方式",
+    "standalone": {
+      "title": "单机部署",
+      "features": [
+        "Docker Compose 一键启动",
+        "包含完整的 MySQL + Redis",
+        "适合开发和小规模生产"
+      ]
+    },
+    "cluster": {
+      "title": "集群部署",
+      "features": [
+        "Master/Slave 架构",
+        "水平扩展支持",
+        "高可用性保障"
+      ]
+    }
+  },
+  "systemRequirements": "系统要求",
+  "runtime": "运行环境",
+  "storage": "数据存储",
+  "cache": "缓存服务",
+  "containerRuntime": "容器运时",
+  "productionReady": {
+    "title": "生产就绪的企业级架构",
+    "description": "从单机部署到分布式集群，从开发环境到生产环境，GPT-Load提供完整的解决方案",
+    "runtime": "运行时环境",
+    "persistence": "数据持久化",
+    "cacheAndLock": "缓存 & 锁",
+    "adminUI": "管理界面"
+  },
+  "performanceComponent": {
+    "title": "技术特性",
+    "subtitle": "基于 Go 1.23+ 的高性能架构设计，为企业级应用提供可靠的代理服务",
+    "metrics": {
+      "defaultConcurrency": {
+        "label": "默认并发数",
+        "description": "MAX_CONCURRENT_REQUESTS 默认值"
+      },
+      "goVersion": {
+        "label": "Go 版本要求",
+        "description": "最低版本要求"
+      },
+      "connectionPool": {
+        "label": "连接池配置",
+        "description": "最大空闲连接数/每主机连接数"
+      },
+      "requestTimeout": {
+        "label": "请求超时",
+        "description": "默认请求超时时间"
+      }
+    },
+    "comparison": {
+      "title": "性能对比",
+      "subtitle": "对比直接调用 API vs 使用 GPT-Load 代理的性能差异",
+      "headers": {
+        "metric": "性能指标",
+        "directApi": "直接调用 API",
+        "withGptLoad": "使用 GPT-Load",
+        "improvement": "性能提升"
+      },
+      "items": {
+        "configManagement": {
+          "metric": "配置管理",
+          "without": "静态配置文件",
+          "with": "动态热重载",
+          "improvement": "无需重启"
+        },
+        "keyManagement": {
+          "metric": "密钥管理",
+          "without": "手动轮换",
+          "with": "自动故障恢复",
+          "improvement": "智能黑名单"
+        },
+        "clusterDeployment": {
+          "metric": "集群部署",
+          "without": "复杂选举机制",
+          "with": "IS_SLAVE 标记",
+          "improvement": "简单配置"
+        },
+        "monitoring": {
+          "metric": "监控能力",
+          "without": "基础日志",
+          "with": "Web 管理界面",
+          "improvement": "实时统计"
+        }
+      }
+    },
+    "monitoring": {
+      "title": "实时监控功能",
+      "features": {
+        "detailedStats": {
+          "title": "详细统计",
+          "description": "请求数量、响应时间、错误率等全方位监控"
+        },
+        "healthCheck": {
+          "title": "健康检查",
+          "description": "实时监控服务状态，及时发现并处理异常"
+        },
+        "performanceAnalysis": {
+          "title": "性能分析",
+          "description": "深入分析性能瓶颈，优化系统配置"
+        }
+      },
+      "dashboard": {
+        "title": "监控面板",
+        "metrics": {
+          "totalRequests": "🟢 总请求数:",
+          "avgResponse": "⚡ 平均响应:",
+          "activeKeys": "🔑 活跃密钥:",
+          "errorRate": "❌ 错误率:"
+        }
+      }
+    }
+  },
+  "quickStartComponent": {
+    "title": "快速开始",
+    "subtitle": "3 步启动 GPT-Load",
+    "description": "通过 Docker Compose 快速部署，包含完整的数据库和缓存服务",
+    "steps": {
+      "clone": {
+        "title": "1. 克隆项目",
+        "description": "从 GitHub 下载完整项目代码"
+      },
+      "configure": {
+        "title": "2. 配置环境",
+        "description": "复制并编辑环境配置文件"
+      },
+      "start": {
+        "title": "3. 启动服务",
+        "description": "使用 Docker Compose 一键启动"
+      }
+    },
+    "requirements": {
+      "title": "系统要求",
+      "runtime": "运行环境",
+      "storage": "数据存储",
+      "cache": "缓存服务",
+      "containerRuntime": "容器运时",
+      "viewDocs": "查看详细部署文档"
+    },
+    "codeComments": {
+      "copyEnv": "复制环境配置文件",
+      "editConfig": "编辑配置（可选）",
+      "mainConfig": "主要配置项：",
+      "startServices": "启动服务（包含 MySQL 和 Redis）",
+      "accessAdmin": "访问管理界面"
+    }
   },
   "docs": {
     "quickStart": "快速开始",
@@ -59,5 +409,144 @@
     "newApi": "New API",
     "cherryStudio": "Cherry Studio",
     "sponsor": "支持赞助"
+  },
+  "imageViewer": {
+    "closeButton": "关闭 (Esc)",
+    "instructions": "按 Esc 键或点击背景关闭",
+    "clickToEnlarge": "点击图片放大查看"
+  },
+  "introduction": {
+    "title": "GPT-Load 项目简介",
+    "subtitle": "一个高性能、企业级的 AI 接口透明代理服务，专门为需要集成多种 AI 服务的企业和开发者设计。采用 Go 语言开发，具备智能密钥管理、负载均衡和完善的监控功能，专为高并发生产环境而设计。",
+    "coreConcept": {
+      "title": "核心概念",
+      "transparentProxy": {
+        "title": "透明代理",
+        "description": "GPT-Load 作为透明代理服务，完全保留各 AI 服务商的原生 API 格式，不做任何格式转换或统一。用户如何请求 GPT-Load，GPT-Load 就如何请求上游服务，实现完全透明的代理功能。"
+      }
+    },
+    "supportedServices": {
+      "title": "支持的 AI 服务",
+      "openai": {
+        "features": ["官方 OpenAI API", "Azure OpenAI", "所有兼容 OpenAI 格式的第三方服务"]
+      },
+      "gemini": {
+        "features": ["Gemini Pro", "Gemini Pro Vision", "支持多模态功能"]
+      },
+      "claude": {
+        "features": ["Claude 系列模型", "高质量对话生成", "原生 API 格式支持"]
+      }
+    },
+    "coreFeatures": {
+      "title": "核心特性",
+      "highPerformance": {
+        "title": "高性能架构",
+        "description": "零拷贝流式传输，基于 Go 协程的并发模型，支持高并发连接"
+      },
+      "keyManagement": {
+        "title": "智能密钥管理",
+        "description": "分组管理、动态轮换、自动重试，确保服务高可用性"
+      },
+      "loadBalancing": {
+        "title": "负载均衡",
+        "description": "多上游支持、权重配置、健康检查，智能路由到可用节点"
+      },
+      "clusterSupport": {
+        "title": "集群支持",
+        "description": "Master/Slave 架构，无状态设计，支持水平扩展"
+      },
+      "hotReload": {
+        "title": "热重载配置",
+        "description": "三层配置系统，环境变量、系统设置、分组配置，支持热更新"
+      },
+      "adminPanel": {
+        "title": "管理后台",
+        "description": "Vue 3 现代化界面，实时监控、日志查看、配置管理"
+      }
+    },
+    "techStack": {
+      "title": "技术栈",
+      "backend": {
+        "title": "后端技术",
+        "items": [
+          {"name": "Go 1.23+", "desc": "主要编程语言"},
+          {"name": "Gin", "desc": "HTTP Web 框架"},
+          {"name": "GORM", "desc": "ORM 数据库操作框架"},
+          {"name": "MySQL 8.2+", "desc": "主数据库存储"},
+          {"name": "Redis", "desc": "分布式缓存和状态管理"},
+          {"name": "Uber Dig", "desc": "依赖注入容器"}
+        ]
+      },
+      "frontend": {
+        "title": "前端 & 运维",
+        "items": [
+          {"name": "Vue 3", "desc": "前端框架"},
+          {"name": "TypeScript", "desc": "类型安全"},
+          {"name": "Naive UI", "desc": "UI 组件库"},
+          {"name": "Docker", "desc": "容器化部署"},
+          {"name": "Docker Compose", "desc": "容器编排"},
+          {"name": "GitHub Actions", "desc": "CI/CD 流水线"}
+        ]
+      }
+    },
+    "architectureAdvantages": {
+      "title": "架构优势",
+      "microservices": {
+        "title": "微服务架构",
+        "items": ["模块化设计", "依赖注入", "接口驱动"]
+      },
+      "distributed": {
+        "title": "分布式设计",
+        "items": ["Master/Slave 模式", "分布式锁", "缓存同步"]
+      },
+      "highAvailability": {
+        "title": "高可用性",
+        "items": ["优雅降级", "故障恢复", "资源保护"]
+      }
+    },
+    "useCases": {
+      "title": "应用场景",
+      "enterprise": {
+        "title": "企业级 AI 服务",
+        "items": ["大规模 API 调用", "成本控制优化", "服务稳定性保障"]
+      },
+      "developer": {
+        "title": "开发者工具",
+        "items": ["API 统一接入", "调试和监控", "快速部署"]
+      },
+      "multiTenant": {
+        "title": "多租户服务",
+        "items": ["租户隔离", "配置定制", "使用统计"]
+      }
+    },
+    "deepDive": {
+      "title": "深入了解 GPT-Load",
+      "subtitle": "探索 GPT-Load 的核心技术架构和高性能设计理念，了解如何实现极致的代理性能",
+      "performance": {
+        "title": "性能详解",
+        "subtitle": "了解极致性能设计",
+        "features": [
+          "零 I/O 操作代理机制",
+          "零拷贝流式传输技术",
+          "无锁并发处理架构",
+          "极低资源占用优化"
+        ]
+      },
+      "architecture": {
+        "title": "架构设计",
+        "subtitle": "深入系统设计理念",
+        "features": [
+          "智能密钥管理机制",
+          "路径处理策略设计",
+          "分布式集群架构",
+          "高可用性保障机制"
+        ]
+      }
+    },
+    "gettingStarted": {
+      "title": "开始使用 GPT-Load",
+      "description": "通过 Docker Compose 快速部署，几分钟内即可启动完整的 AI 接口代理服务",
+      "button": "查看部署指南"
+    }
   }
 }

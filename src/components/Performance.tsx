@@ -2,37 +2,40 @@
 
 import { motion } from "framer-motion";
 import { BarChart3, Zap, Shield, Clock, Activity } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const Performance = () => {
+  const { t } = useTranslation();
+  
   const metrics = [
     {
-      label: "默认并发数",
+      label: t("performanceComponent.metrics.defaultConcurrency.label"),
       value: "100",
-      description: "MAX_CONCURRENT_REQUESTS 默认值",
+      description: t("performanceComponent.metrics.defaultConcurrency.description"),
       icon: Activity,
       color: "text-blue-600",
       bgColor: "bg-blue-100",
     },
     {
-      label: "Go 版本要求",
+      label: t("performanceComponent.metrics.goVersion.label"),
       value: "1.23+",
-      description: "最低版本要求",
+      description: t("performanceComponent.metrics.goVersion.description"),
       icon: Zap,
       color: "text-green-600",
       bgColor: "bg-green-100",
     },
     {
-      label: "连接池配置",
+      label: t("performanceComponent.metrics.connectionPool.label"),
       value: "100/50",
-      description: "最大空闲连接数/每主机连接数",
+      description: t("performanceComponent.metrics.connectionPool.description"),
       icon: Shield,
       color: "text-red-600",
       bgColor: "bg-red-100",
     },
     {
-      label: "请求超时",
+      label: t("performanceComponent.metrics.requestTimeout.label"),
       value: "600s",
-      description: "默认请求超时时间",
+      description: t("performanceComponent.metrics.requestTimeout.description"),
       icon: Clock,
       color: "text-purple-600",
       bgColor: "bg-purple-100",
@@ -41,28 +44,28 @@ const Performance = () => {
 
   const comparisons = [
     {
-      metric: "配置管理",
-      without: "静态配置文件",
-      with: "动态热重载",
-      improvement: "无需重启",
+      metric: t("performanceComponent.comparison.items.configManagement.metric"),
+      without: t("performanceComponent.comparison.items.configManagement.without"),
+      with: t("performanceComponent.comparison.items.configManagement.with"),
+      improvement: t("performanceComponent.comparison.items.configManagement.improvement"),
     },
     {
-      metric: "密钥管理",
-      without: "手动轮换",
-      with: "自动故障恢复",
-      improvement: "智能黑名单",
+      metric: t("performanceComponent.comparison.items.keyManagement.metric"),
+      without: t("performanceComponent.comparison.items.keyManagement.without"),
+      with: t("performanceComponent.comparison.items.keyManagement.with"),
+      improvement: t("performanceComponent.comparison.items.keyManagement.improvement"),
     },
     {
-      metric: "集群部署",
-      without: "复杂选举机制",
-      with: "IS_SLAVE 标记",
-      improvement: "简单配置",
+      metric: t("performanceComponent.comparison.items.clusterDeployment.metric"),
+      without: t("performanceComponent.comparison.items.clusterDeployment.without"),
+      with: t("performanceComponent.comparison.items.clusterDeployment.with"),
+      improvement: t("performanceComponent.comparison.items.clusterDeployment.improvement"),
     },
     {
-      metric: "监控能力",
-      without: "基础日志",
-      with: "Web 管理界面",
-      improvement: "实时统计",
+      metric: t("performanceComponent.comparison.items.monitoring.metric"),
+      without: t("performanceComponent.comparison.items.monitoring.without"),
+      with: t("performanceComponent.comparison.items.monitoring.with"),
+      improvement: t("performanceComponent.comparison.items.monitoring.improvement"),
     },
   ];
 
@@ -78,10 +81,10 @@ const Performance = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            技术特性
+            {t("performanceComponent.title")}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            基于 Go 1.23+ 的高性能架构设计，为企业级应用提供可靠的代理服务
+            {t("performanceComponent.subtitle")}
           </p>
         </motion.div>
 
@@ -131,9 +134,9 @@ const Performance = () => {
           transition={{ duration: 0.6 }}
         >
           <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">性能对比</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">{t("performanceComponent.comparison.title")}</h3>
             <p className="text-gray-600">
-              对比直接调用 API vs 使用 GPT-Load 代理的性能差异
+              {t("performanceComponent.comparison.subtitle")}
             </p>
           </div>
 
@@ -142,16 +145,16 @@ const Performance = () => {
               <thead>
                 <tr className="bg-gray-50 border-b border-gray-200">
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
-                    性能指标
+                    {t("performanceComponent.comparison.headers.metric")}
                   </th>
                   <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900">
-                    直接调用 API
+                    {t("performanceComponent.comparison.headers.directApi")}
                   </th>
                   <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900">
-                    使用 GPT-Load
+                    {t("performanceComponent.comparison.headers.withGptLoad")}
                   </th>
                   <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900">
-                    性能提升
+                    {t("performanceComponent.comparison.headers.improvement")}
                   </th>
                 </tr>
               </thead>
@@ -197,7 +200,7 @@ const Performance = () => {
           {/* Monitoring features */}
           <div>
             <h3 className="text-2xl font-bold text-gray-900 mb-6">
-              实时监控功能
+              {t("performanceComponent.monitoring.title")}
             </h3>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
@@ -205,9 +208,9 @@ const Performance = () => {
                   <BarChart3 className="h-4 w-4 text-blue-600" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900">详细统计</h4>
+                  <h4 className="font-semibold text-gray-900">{t("performanceComponent.monitoring.features.detailedStats.title")}</h4>
                   <p className="text-gray-600 text-sm">
-                    请求数量、响应时间、错误率等全方位监控
+                    {t("performanceComponent.monitoring.features.detailedStats.description")}
                   </p>
                 </div>
               </div>
@@ -216,9 +219,9 @@ const Performance = () => {
                   <Activity className="h-4 w-4 text-green-600" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900">健康检查</h4>
+                  <h4 className="font-semibold text-gray-900">{t("performanceComponent.monitoring.features.healthCheck.title")}</h4>
                   <p className="text-gray-600 text-sm">
-                    实时监控服务状态，及时发现并处理异常
+                    {t("performanceComponent.monitoring.features.healthCheck.description")}
                   </p>
                 </div>
               </div>
@@ -227,9 +230,9 @@ const Performance = () => {
                   <Zap className="h-4 w-4 text-purple-600" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900">性能分析</h4>
+                  <h4 className="font-semibold text-gray-900">{t("performanceComponent.monitoring.features.performanceAnalysis.title")}</h4>
                   <p className="text-gray-600 text-sm">
-                    深入分析性能瓶颈，优化系统配置
+                    {t("performanceComponent.monitoring.features.performanceAnalysis.description")}
                   </p>
                 </div>
               </div>
@@ -239,7 +242,7 @@ const Performance = () => {
           {/* Mock dashboard */}
           <div className="bg-gray-900 rounded-xl p-6">
             <div className="flex items-center justify-between mb-4">
-              <h4 className="text-white font-semibold">监控面板</h4>
+              <h4 className="text-white font-semibold">{t("performanceComponent.monitoring.dashboard.title")}</h4>
               <div className="flex space-x-2">
                 <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                 <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
@@ -248,19 +251,19 @@ const Performance = () => {
             </div>
             <div className="space-y-3 text-sm">
               <div className="flex justify-between text-green-400">
-                <span>🟢 总请求数:</span>
+                <span>{t("performanceComponent.monitoring.dashboard.metrics.totalRequests")}</span>
                 <span>156,789</span>
               </div>
               <div className="flex justify-between text-blue-400">
-                <span>⚡ 平均响应:</span>
+                <span>{t("performanceComponent.monitoring.dashboard.metrics.avgResponse")}</span>
                 <span>8.5ms</span>
               </div>
               <div className="flex justify-between text-yellow-400">
-                <span>🔑 活跃密钥:</span>
+                <span>{t("performanceComponent.monitoring.dashboard.metrics.activeKeys")}</span>
                 <span>12/15</span>
               </div>
               <div className="flex justify-between text-red-400">
-                <span>❌ 错误率:</span>
+                <span>{t("performanceComponent.monitoring.dashboard.metrics.errorRate")}</span>
                 <span>0.02%</span>
               </div>
               <div className="mt-4 h-20 bg-gray-800 rounded flex items-end justify-between px-2 pb-2">

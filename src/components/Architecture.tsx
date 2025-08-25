@@ -9,50 +9,48 @@ import {
   RotateCcw,
   Monitor,
 } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
 const Architecture = () => {
+  const { t } = useTranslation();
+  
   const components = [
     {
       icon: Users,
-      title: "客户端应用",
-      description: "Web/移动应用通过标准 OpenAI API 格式调用",
-      items: ["HTTP/HTTPS 请求", "Bearer Token 认证", "JSON 格式交互"],
+      title: t("architecture.components.client.title"),
+      description: t("architecture.components.client.description"),
+      items: (t("architecture.components.client.items") as unknown) as string[] || [],
     },
     {
       icon: Shield,
-      title: "GPT-Load 代理层",
-      description: "核心代理服务，负责请求转发和管理",
-      items: ["透明代理", "密钥管理", "负载均衡", "请求日志"],
+      title: t("architecture.components.proxy.title"),
+      description: t("architecture.components.proxy.description"),
+      items: (t("architecture.components.proxy.items") as unknown) as string[] || [],
     },
     {
       icon: Server,
-      title: "AI 服务提供商",
-      description: "多种 AI 服务的统一接入",
-      items: [
-        "OpenAI API",
-        "Google Gemini",
-        "Anthropic Claude",
-        "其他兼容服务",
-      ],
+      title: t("architecture.components.providers.title"),
+      description: t("architecture.components.providers.description"),
+      items: (t("architecture.components.providers.items") as unknown) as string[] || [],
     },
   ];
   const infrastructure = [
     {
       icon: Database,
-      title: "MySQL 8.2+",
-      description: "持久化存储",
-      details: ["配置数据", "用户信息", "请求日志"],
+      title: t("architecture.infrastructure.mysql.title"),
+      description: t("architecture.infrastructure.mysql.description"),
+      details: (t("architecture.infrastructure.mysql.details") as unknown) as string[] || [],
     },
     {
       icon: RotateCcw,
-      title: "Redis",
-      description: "缓存与锁",
-      details: ["密钥缓存", "分布式锁", "会话存储"],
+      title: t("architecture.infrastructure.redis.title"),
+      description: t("architecture.infrastructure.redis.description"),
+      details: (t("architecture.infrastructure.redis.details") as unknown) as string[] || [],
     },
     {
       icon: Monitor,
-      title: "Vue 3 管理后台",
-      description: "管理界面",
-      details: ["实时监控", "配置管理", "日志查看"],
+      title: t("architecture.infrastructure.management.title"),
+      description: t("architecture.infrastructure.management.description"),
+      details: (t("architecture.infrastructure.management.details") as unknown) as string[] || [],
     },
   ];
   return (
@@ -68,16 +66,16 @@ const Architecture = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 px-4">
-              系统架构
+              {t("architecture.title")}
             </h2>
             <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-              基于 Go 语言的高性能透明代理架构，支持分布式部署和水平扩展
+              {t("architecture.description")}
             </p>
           </motion.div>
           {/* Data Flow */}
           <div className="mb-12 sm:mb-16">
             <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-6 sm:mb-8 text-center px-4">
-              数据流架构
+              {t("dataFlow")}
             </h3>
             <div className="flex flex-col lg:flex-row items-center justify-between space-y-6 sm:space-y-8 lg:space-y-0 lg:space-x-4">
               {components.map((component, index) => {
@@ -126,7 +124,7 @@ const Architecture = () => {
           {/* Infrastructure */}
           <div className="mb-12 sm:mb-16">
             <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-6 sm:mb-8 text-center px-4">
-              基础设施组件
+              {t("infrastructure")}
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
               {infrastructure.map((item, index) => {
@@ -173,27 +171,27 @@ const Architecture = () => {
             transition={{ duration: 0.6 }}
           >
             <h3 className="text-xl sm:text-2xl font-bold mb-4">
-              灵活的部署方式
+              {t("deploymentOptions.title")}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
               <div className="text-left">
                 <h4 className="text-lg font-semibold mb-3 text-blue-300">
-                  单机部署
+                  {t("deploymentOptions.standalone.title")}
                 </h4>
                 <ul className="space-y-2 text-blue-100 text-sm sm:text-base">
-                  <li>• Docker Compose 一键启动</li>
-                  <li>• 包含完整的 MySQL + Redis</li>
-                  <li>• 适合开发和小规模生产</li>
+                  {(t("deploymentOptions.standalone.features") as string[]).map((feature, index) => (
+                    <li key={index}>• {feature}</li>
+                  ))}
                 </ul>
               </div>
               <div className="text-left">
                 <h4 className="text-lg font-semibold mb-3 text-blue-300">
-                  集群部署
+                  {t("deploymentOptions.cluster.title")}
                 </h4>
                 <ul className="space-y-2 text-blue-100 text-sm sm:text-base">
-                  <li>• Master/Slave 架构</li>
-                  <li>• 水平扩展支持</li>
-                  <li>• 高可用性保障</li>
+                  {(t("deploymentOptions.cluster.features") as string[]).map((feature, index) => (
+                    <li key={index}>• {feature}</li>
+                  ))}
                 </ul>
               </div>
             </div>

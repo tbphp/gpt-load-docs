@@ -3,38 +3,41 @@
 import { motion } from "framer-motion";
 import { Terminal, Download, Settings, Play } from "lucide-react";
 import Link from "next/link";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const QuickStart = () => {
+  const { t } = useTranslation();
+  
   const steps = [
     {
       icon: Download,
-      title: "1. 克隆项目",
-      description: "从 GitHub 下载完整项目代码",
+      title: t("quickStartComponent.steps.clone.title"),
+      description: t("quickStartComponent.steps.clone.description"),
       code: `git clone https://github.com/tbphp/gpt-load.git
 cd gpt-load`,
     },
     {
       icon: Settings,
-      title: "2. 配置环境",
-      description: "复制并编辑环境配置文件",
-      code: `# 复制环境配置文件
+      title: t("quickStartComponent.steps.configure.title"),
+      description: t("quickStartComponent.steps.configure.description"),
+      code: `# ${t("quickStartComponent.codeComments.copyEnv")}
 cp .env.example .env
 
-# 编辑配置（可选）
+# ${t("quickStartComponent.codeComments.editConfig")}
 # vim .env
 
-# 主要配置项：
+# ${t("quickStartComponent.codeComments.mainConfig")}
 # APP_PORT=3001
 # APP_SECRET=your-secret-key`,
     },
     {
       icon: Play,
-      title: "3. 启动服务",
-      description: "使用 Docker Compose 一键启动",
-      code: `# 启动服务（包含 MySQL 和 Redis）
+      title: t("quickStartComponent.steps.start.title"),
+      description: t("quickStartComponent.steps.start.description"),
+      code: `# ${t("quickStartComponent.codeComments.startServices")}
 docker compose up -d
 
-# 访问管理界面
+# ${t("quickStartComponent.codeComments.accessAdmin")}
 # http://localhost:3001`,
     },
   ];
@@ -53,13 +56,13 @@ docker compose up -d
           >
             <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-800 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
               <Terminal className="h-3 w-3 sm:h-4 sm:w-4" />
-              <span>快速开始</span>
+              <span>{t("quickStartComponent.title")}</span>
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 px-4">
-              3 步启动 GPT-Load
+              {t("quickStartComponent.subtitle")}
             </h2>
             <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-              通过 Docker Compose 快速部署，包含完整的数据库和缓存服务
+              {t("quickStartComponent.description")}
             </p>
           </motion.div>
 
@@ -122,7 +125,7 @@ docker compose up -d
             viewport={{ once: true }}
           >
             <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4 sm:mb-6 text-center px-4">
-              系统要求
+              {t("quickStartComponent.requirements.title")}
             </h3>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
@@ -130,26 +133,26 @@ docker compose up -d
                 <div className="text-base sm:text-lg font-bold text-blue-600 mb-1 sm:mb-2">
                   Go 1.23+
                 </div>
-                <div className="text-xs sm:text-sm text-gray-600">运行环境</div>
+                <div className="text-xs sm:text-sm text-gray-600">{t("quickStartComponent.requirements.runtime")}</div>
               </div>
               <div className="text-center">
                 <div className="text-base sm:text-lg font-bold text-blue-600 mb-1 sm:mb-2">
                   MySQL 8.2+
                 </div>
-                <div className="text-xs sm:text-sm text-gray-600">数据存储</div>
+                <div className="text-xs sm:text-sm text-gray-600">{t("quickStartComponent.requirements.storage")}</div>
               </div>
               <div className="text-center">
                 <div className="text-base sm:text-lg font-bold text-blue-600 mb-1 sm:mb-2">
                   Redis
                 </div>
-                <div className="text-xs sm:text-sm text-gray-600">缓存服务</div>
+                <div className="text-xs sm:text-sm text-gray-600">{t("quickStartComponent.requirements.cache")}</div>
               </div>
               <div className="text-center">
                 <div className="text-base sm:text-lg font-bold text-blue-600 mb-1 sm:mb-2">
                   Docker
                 </div>
                 <div className="text-xs sm:text-sm text-gray-600">
-                  容器运行时
+                  {t("quickStartComponent.requirements.containerRuntime")}
                 </div>
               </div>
             </div>
@@ -159,7 +162,7 @@ docker compose up -d
                 href="/docs/deployment"
                 className="inline-flex items-center space-x-2 bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 text-sm sm:text-base"
               >
-                <span>查看详细部署文档</span>
+                <span>{t("quickStartComponent.requirements.viewDocs")}</span>
                 <Terminal className="h-3 w-3 sm:h-4 sm:w-4" />
               </Link>
             </div>

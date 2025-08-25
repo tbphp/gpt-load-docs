@@ -2,24 +2,26 @@
 
 import Link from "next/link";
 import { Github, Mail, Heart, Zap, MessageCircle } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const Footer = () => {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   const links = {
     product: [
-      { name: "使用文档", href: "/docs" },
-      { name: "更新日志", href: "https://github.com/tbphp/gpt-load/releases" },
-      { name: "支持赞助", href: "/docs/sponsor" },
+      { name: t("footer.links.docs"), href: "/docs" },
+      { name: t("footer.links.changelog"), href: "https://github.com/tbphp/gpt-load/releases" },
+      { name: t("footer.links.sponsor"), href: "/docs/sponsor" },
     ],
     community: [
-      { name: "GitHub", href: "https://github.com/tbphp/gpt-load" },
-      { name: "问题反馈", href: "https://github.com/tbphp/gpt-load/issues" },
-      { name: "Telegram", href: "https://t.me/+GHpy5SwEllg3MTUx" },
+      { name: t("footer.links.github"), href: "https://github.com/tbphp/gpt-load" },
+      { name: t("footer.links.issues"), href: "https://github.com/tbphp/gpt-load/issues" },
+      { name: t("footer.links.telegram"), href: "https://t.me/+GHpy5SwEllg3MTUx" },
     ],
     resources: [
-      { name: "单机", href: "/docs/deployment/standalone" },
-      { name: "集群", href: "/docs/deployment/cluster" },
+      { name: t("footer.links.standalone"), href: "/docs/deployment/standalone" },
+      { name: t("footer.links.cluster"), href: "/docs/deployment/cluster" },
     ],
   };
 
@@ -35,7 +37,7 @@ const Footer = () => {
               <span className="text-lg sm:text-xl font-bold">GPT-Load</span>
             </Link>
             <p className="text-gray-400 mb-4 sm:mb-6 max-w-md text-sm sm:text-base">
-              高性能 AI 网关，为多种大模型服务提供统一的负载均衡和密钥管理。
+              {t("footer.description")}
             </p>
             <div className="flex space-x-4">
               <Link
@@ -66,7 +68,7 @@ const Footer = () => {
           {/* Product links */}
           <div>
             <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">
-              产品
+              {t("footer.product")}
             </h3>
             <ul className="space-y-2">
               {links.product.map((link) => (
@@ -86,7 +88,7 @@ const Footer = () => {
           {/* Community links */}
           <div>
             <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">
-              社区
+              {t("footer.community")}
             </h3>
             <ul className="space-y-2">
               {links.community.map((link) => (
@@ -111,7 +113,7 @@ const Footer = () => {
           {/* Resources links */}
           <div>
             <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">
-              部署
+              {t("footer.resources")}
             </h3>
             <ul className="space-y-2">
               {links.resources.map((link) => (
@@ -132,16 +134,16 @@ const Footer = () => {
         <div className="border-t border-gray-800 mt-8 sm:mt-12 pt-6 sm:pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-gray-400 text-xs sm:text-sm mb-3 md:mb-0 text-center md:text-left">
-              © {currentYear} GPT-Load. 使用{" "}
+              © {currentYear} GPT-Load. {t("footer.copyright")}{" "}
               <Link
                 href="https://github.com/tbphp/gpt-load/blob/main/LICENSE"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-400 hover:text-blue-300 transition-colors duration-200"
               >
-                MIT 协议
+                {t("footer.license")}
               </Link>{" "}
-              开源发布。
+              {t("footer.openSource")}。
             </div>
             <div className="flex items-center space-x-2 text-gray-400 text-xs sm:text-sm">
               <span>Made with</span>

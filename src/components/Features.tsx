@@ -11,63 +11,65 @@ import {
   FileText,
   Code,
 } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
+
 const Features = () => {
+  const { t } = useTranslation();
+  
   const features = [
     {
       icon: Cpu,
-      title: "高性能架构",
-      description:
-        "基于 Go 1.23+ 开发，零拷贝流式传输，协程并发模型，支持高并发处理",
-      technical: "Go 协程 + HTTP/2 连接复用",
+      title: t("features.highPerformance.title"),
+      description: t("features.highPerformance.description"),
+      technical: t("features.highPerformance.technical"),
     },
     {
       icon: Globe,
-      title: "透明代理",
-      description:
-        "完全保留原生 API 格式，无需修改现有代码即可接入多种 AI 服务",
-      technical: "OpenAI + Gemini + Anthropic 支持",
+      title: t("features.transparentProxy.title"),
+      description: t("features.transparentProxy.description"),
+      technical: t("features.transparentProxy.technical"),
     },
     {
       icon: RotateCcw,
-      title: "智能密钥管理",
-      description: "分组管理、动态轮换、自动重试，确保服务高可用性",
-      technical: "Redis 缓存 + 故障恢复机制",
+      title: t("features.keyManagement.title"),
+      description: t("features.keyManagement.description"),
+      technical: t("features.keyManagement.technical"),
     },
     {
       icon: BarChart3,
-      title: "负载均衡",
-      description: "多上游支持、权重配置、健康检查，智能路由到可用节点",
-      technical: "加权轮询 + 健康检查",
+      title: t("features.loadBalancing.title"),
+      description: t("features.loadBalancing.description"),
+      technical: t("features.loadBalancing.technical"),
     },
     {
       icon: Settings,
-      title: "热重载配置",
-      description: "三层配置系统，环境变量、系统设置、分组配置，支持热更新",
-      technical: "环境变量 → 系统设置 → 分组设置",
+      title: t("features.hotReload.title"),
+      description: t("features.hotReload.description"),
+      technical: t("features.hotReload.technical"),
     },
     {
       icon: Database,
-      title: "集群支持",
-      description: "主从架构，无状态设计，支持水平扩展和分布式部署",
-      technical: "Master/Slave + Redis 分布式锁",
+      title: t("features.clusterSupport.title"),
+      description: t("features.clusterSupport.description"),
+      technical: t("features.clusterSupport.technical"),
     },
     {
       icon: Shield,
-      title: "安全机制",
-      description: "Bearer Token 认证、分组隔离、请求日志、敏感信息脱敏",
-      technical: "JWT + 访问控制 + 审计日志",
+      title: t("features.security.title"),
+      description: t("features.security.description"),
+      technical: t("features.security.technical"),
     },
     {
       icon: FileText,
-      title: "管理后台",
-      description: "Vue 3 现代化界面，实时监控、日志查看、配置管理",
-      technical: "Vue 3 + TypeScript + Naive UI",
+      title: t("features.admin.title"),
+      description: t("features.admin.description"),
+      technical: t("features.admin.technical"),
     },
     {
       icon: Code,
-      title: "开发友好",
-      description: "完整的 RESTful API、详细文档、Docker 一键部署",
-      technical: "OpenAPI + Docker Compose",
+      title: t("features.developerFriendly.title"),
+      description: t("features.developerFriendly.description"),
+      technical: t("features.developerFriendly.technical"),
     },
   ];
   return (
@@ -83,10 +85,10 @@ const Features = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 px-4">
-              核心技术特性
+              {t("features.title")}
             </h2>
             <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-              企业级架构设计，专为生产环境优化
+              {t("features.subtitle")}
             </p>
           </motion.div>
           {/* Features Grid */}
@@ -133,11 +135,10 @@ const Features = () => {
             viewport={{ once: true }}
           >
             <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
-              生产就绪的企业级架构
+              {t("productionReady.title")}
             </h3>
             <p className="text-blue-100 mb-4 sm:mb-6 max-w-2xl mx-auto text-sm sm:text-base">
-              从单机部署到分布式集群，从开发环境到生产环境，GPT-Load
-              提供完整的解决方案
+              {t("productionReady.description")}
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
               <div>
@@ -145,7 +146,7 @@ const Features = () => {
                   Go 1.23+
                 </div>
                 <div className="text-blue-200 text-xs sm:text-sm">
-                  运行时环境
+                  {t("productionReady.runtime")}
                 </div>
               </div>
               <div>
@@ -153,7 +154,7 @@ const Features = () => {
                   MySQL 8.2+
                 </div>
                 <div className="text-blue-200 text-xs sm:text-sm">
-                  数据持久化
+                  {t("productionReady.persistence")}
                 </div>
               </div>
               <div>
@@ -161,14 +162,16 @@ const Features = () => {
                   Redis
                 </div>
                 <div className="text-blue-200 text-xs sm:text-sm">
-                  缓存 & 锁
+                  {t("productionReady.cacheAndLock")}
                 </div>
               </div>
               <div>
                 <div className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">
                   Vue 3
                 </div>
-                <div className="text-blue-200 text-xs sm:text-sm">管理界面</div>
+                <div className="text-blue-200 text-xs sm:text-sm">
+                  {t("productionReady.adminUI")}
+                </div>
               </div>
             </div>
           </motion.div>{" "}
