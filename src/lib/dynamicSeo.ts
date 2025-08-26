@@ -5,6 +5,17 @@ import { getServerLanguage } from './serverLanguage';
 import { normalizePath, getLocaleFromLang, generateDynamicTitle } from '@/utils/seoHelpers';
 
 /**
+ * 将页面类型转换为OpenGraph支持的类型
+ * @param pageType 页面类型
+ * @returns OpenGraph支持的类型
+ */
+function getOpenGraphType(pageType?: string): 'website' | 'article' {
+  if (pageType === 'article') return 'article';
+  // product 和其他类型都降级为 website
+  return 'website';
+}
+
+/**
  * 根据路径和语言生成动态元数据
  * @param pathname 页面路径
  * @param lang 语言（可选，将自动检测）
@@ -45,7 +56,7 @@ export async function generatePageMetadata(
       openGraph: {
         title: ogConfig.title,
         description: ogConfig.description,
-        type: pageConfig.type || 'website',
+        type: getOpenGraphType(pageConfig.type),
         url: `https://gpt-load.com${normalizedPath}`,
         locale: getLocaleFromLang(detectedLang),
         images: [

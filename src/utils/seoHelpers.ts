@@ -62,16 +62,19 @@ export function getDefaultConfigByPageType(pageType: 'website' | 'article' | 'pr
   const defaults = {
     website: {
       type: 'website' as const,
+      openGraphType: 'website' as 'website' | 'article',
       priority: 1.0,
       changeFrequency: 'monthly' as const
     },
     article: {
       type: 'article' as const,
+      openGraphType: 'article' as 'website' | 'article',
       priority: 0.8,
       changeFrequency: 'weekly' as const
     },
     product: {
       type: 'product' as const,
+      openGraphType: 'website' as 'website' | 'article', // OpenGraph 不支持 product，降级为 website
       priority: 0.9,
       changeFrequency: 'monthly' as const
     }
