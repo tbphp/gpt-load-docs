@@ -179,7 +179,7 @@ const Architecture = () => {
                   {t("deploymentOptions.standalone.title")}
                 </h4>
                 <ul className="space-y-2 text-blue-100 text-sm sm:text-base">
-                  {(t("deploymentOptions.standalone.features") as string[]).map((feature, index) => (
+                  {(t("deploymentOptions.standalone.features") as unknown as string[]).map((feature, index) => (
                     <li key={index}>• {feature}</li>
                   ))}
                 </ul>
@@ -189,7 +189,7 @@ const Architecture = () => {
                   {t("deploymentOptions.cluster.title")}
                 </h4>
                 <ul className="space-y-2 text-blue-100 text-sm sm:text-base">
-                  {(t("deploymentOptions.cluster.features") as string[]).map((feature, index) => (
+                  {(t("deploymentOptions.cluster.features") as unknown as string[]).map((feature, index) => (
                     <li key={index}>• {feature}</li>
                   ))}
                 </ul>

@@ -350,6 +350,40 @@
       }
     }
   },
+  "quickStartComponent": {
+    "title": "Quick Start",
+    "subtitle": "Start GPT-Load in 3 Steps",
+    "description": "Quick deployment via Docker Compose, including complete database and cache services",
+    "steps": {
+      "clone": {
+        "title": "1. Clone Project",
+        "description": "Download complete project code from GitHub"
+      },
+      "configure": {
+        "title": "2. Configure Environment",
+        "description": "Copy and edit environment configuration file"
+      },
+      "start": {
+        "title": "3. Start Services",
+        "description": "Use Docker Compose for one-click startup"
+      }
+    },
+    "requirements": {
+      "title": "System Requirements",
+      "runtime": "Runtime Environment",
+      "storage": "Data Storage",
+      "cache": "Cache Service",
+      "containerRuntime": "Container Runtime",
+      "viewDocs": "View Detailed Deployment Documentation"
+    },
+    "codeComments": {
+      "copyEnv": "Copy environment configuration file",
+      "editConfig": "Edit configuration (optional)",
+      "mainConfig": "Main configuration items:",
+      "startServices": "Start services (including MySQL and Redis)",
+      "accessAdmin": "Access admin interface"
+    }
+  },
   "docs": {
     "quickStart": "Quick Start",
     "introduction": "Introduction",
