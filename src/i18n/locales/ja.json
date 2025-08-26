@@ -120,70 +120,6 @@
       "technical": "OpenAPI + Docker Compose"
     }
   },
-  "performance": {
-    "title": "性能指標",
-    "subtitle": "高性能結果",
-    "description": "高同時実行性と低遅延をサポートする最適化された性能設定",
-    "metrics": {
-      "concurrent": {
-        "label": "デフォルト同時実行数",
-        "value": "100",
-        "description": "MAX_CONCURRENT_REQUESTSデフォルト値"
-      },
-      "goVersion": {
-        "label": "Goバージョン要件",
-        "value": "1.23+",
-        "description": "最低バージョン要件"
-      },
-      "connectionPool": {
-        "label": "接続プール設定",
-        "value": "100/50",
-        "description": "最大アイドル接続数/ホスト毎接続数"
-      },
-      "timeout": {
-        "label": "リクエストタイムアウト",
-        "value": "600s",
-        "description": "デフォルトリクエストタイムアウト"
-      }
-    },
-    "comparisons": {
-      "title": "性能比較",
-      "configManagement": {
-        "metric": "設定管理",
-        "without": "静的設定ファイル",
-        "with": "動的ホットリロード",
-        "improvement": "再起動不要"
-      },
-      "keyManagement": {
-        "metric": "キー管理",
-        "without": "手動切り替え",
-        "with": "スマートローテーション",
-        "improvement": "自動フェイルオーバー"
-      },
-      "monitoring": {
-        "metric": "監視・ログ",
-        "without": "基本ログ",
-        "with": "リアルタイム監視",
-        "improvement": "ビジュアルダッシュボード"
-      },
-      "deployment": {
-        "metric": "デプロイメント方法",
-        "without": "モノリシックアプリ",
-        "with": "コンテナクラスター",
-        "improvement": "弾性スケーリング"
-      }
-    },
-    "optimization": {
-      "title": "性能最適化のヒント",
-      "items": [
-        "実際の負荷に基づいてMAX_CONCURRENT_REQUESTSを調整",
-        "適切な接続プールサイズを設定",
-        "Redisクラスターを使用してキャッシュ性能を向上",
-        "リクエスト圧縮を有効にしてネットワークオーバーヘッドを削減",
-        "定期的にログファイルを清理してディスク容量を解放"
-      ]
-    }
-  },
   "quickStart": {
     "title": "クイックスタート",
     "subtitle": "5分間の素早い体験",
@@ -886,6 +822,147 @@
       "faultIsolation": {
         "title": "障害分離",
         "description": "障害キーを迅速に特定し、サービスの安定性を確保"
+      }
+    }
+  },
+  "performance": {
+    "title": "パフォーマンス詳解",
+    "subtitle": "GPT-Loadは「プロキシパス優先」の高性能設計哲学を採用し、すべての最適化はコアプロキシリクエストの究極の性能と安定性を保障するためです。",
+    "coreFeatures": {
+      "title": "コアパフォーマンス特性",
+      "zeroIO": {
+        "title": "ゼロI/O操作",
+        "description": "プロキシリクエストの完全メモリ内処理"
+      },
+      "zeroCopy": {
+        "title": "ゼロコピーストリーミング",
+        "description": "直接ストリーミングデータ転送"
+      },
+      "lockFree": {
+        "title": "ロックフリー並行処理",
+        "description": "効率的なアトミック操作処理"
+      },
+      "lowResource": {
+        "title": "極低リソース使用量",
+        "description": "シングルコア128MBメモリで動作"
+      }
+    },
+    "proxyPerformance": {
+      "title": "究極のプロキシリクエスト性能",
+      "description": "最低レイテンシと最高同時実行性を実現するため、プロキシリクエストのコアパスは「ゼロI/O操作」として設計されています。",
+      "inMemory": {
+        "title": "完全メモリ内サービス",
+        "description": "ルーティングと意思決定に必要なすべてのデータ（グループ設定、キー情報など）は、サービス起動と設定変更時にメモリに事前ロードされます。プロキシリクエスト中にデータベースやディスクアクセスは不要です。"
+      },
+      "zeroCopyStreaming": {
+        "title": "ゼロコピーストリーミング",
+        "mechanism": {
+          "title": "リアルタイム透過伝送メカニズム",
+          "description": "GPT-Loadはリアルタイム透過伝送モードを採用し、上流サービスのデータストリームを中間バッファリング、行別読み取り、内容解析なしでクライアント応答に直接接続します。"
+        },
+        "comparison": {
+          "title": "従来のストリーミング処理との違い",
+          "traditional": {
+            "label": "❌ 従来の方式",
+            "flow": "行読み取り → 解析処理 → バッファ出力"
+          },
+          "gptLoad": {
+            "label": "✅ GPT-Load方式",
+            "flow": "上流データストリーム → 直接透過 → クライアント"
+          }
+        },
+        "advantages": {
+          "title": "コア優位性",
+          "leftColumn": [
+            {
+              "title": "データパケット切断回避",
+              "description": "行別読み取りによる元のデータパケット構造の破損を回避"
+            },
+            {
+              "title": "究極の互換性",
+              "description": "SSE、JSONストリーム、バイナリなどすべてのデータ形式を自然にサポート"
+            },
+            {
+              "title": "無制限応答能力",
+              "description": "理論的に任意サイズの上流応答データを処理可能"
+            }
+          ],
+          "rightColumn": [
+            {
+              "title": "ゼロレイテンシ伝送",
+              "description": "データ到着即転送、バッファ待機時間なし"
+            },
+            {
+              "title": "極低メモリ使用量",
+              "description": "データキャッシュなし、メモリ使用量は応答サイズに無関係"
+            },
+            {
+              "title": "ネイティブ性能体験",
+              "description": "応答速度が上流サービスのネイティブ性能に無限に近い"
+            }
+          ]
+        }
+      },
+      "asyncLogging": {
+        "title": "非同期ログ",
+        "description": "リクエストログの記録は遅延非同期書き込み戦略を採用し、リクエスト-応答ライフサイクルから完全に分離され、ログ操作がリアルタイムプロキシ性能に干渉しないことを保証します。"
+      }
+    },
+    "resourceManagement": {
+      "title": "動的リソースと並行管理",
+      "httpReuse": {
+        "title": "効率的なHTTPクライアント再利用",
+        "features": [
+          "各グループに独立した、再利用可能な基盤接続を持つHTTPクライアントインスタンスを維持",
+          "グループ設定（タイムアウトなど）が変更されると、システムはリアルタイムで動的に新しいクライアントインスタンスを生成し、設定の即時有効性を保証"
+        ]
+      },
+      "atomicOperations": {
+        "title": "アトミック操作とロックフリー設計",
+        "description": "キーポーリングカウントなどの高頻度並行操作では、sync/atomicパッケージを使用してロックフリープログラミングを行い、ミューテックスロック（Mutex）による性能オーバーヘッドを回避します。"
+      }
+    },
+    "asyncTasks": {
+      "title": "非同期タスクとスケーラビリティ",
+      "massiveKeys": {
+        "title": "大量キーの非同期管理",
+        "mechanism": {
+          "title": "メカニズム",
+          "description": "キーの追加と検証などの操作はすべて非同期バックグラウンドタスクとして実行されます。"
+        },
+        "advantage": {
+          "title": "優位性",
+          "description": "管理操作がサービスをブロックせず、理論的にシステムが数百万レベルの大量キーを管理することを可能にします。"
+        }
+      },
+      "clusterSupport": {
+        "title": "クラスターサポートと設定同期",
+        "architecture": {
+          "title": "アーキテクチャ",
+          "description": "水平スケーリングのためのマルチノードMaster-Slaveアーキテクチャをサポート。"
+        },
+        "sync": {
+          "title": "同期",
+          "redis": "マスターノードの設定変更はRedis Pub/Sub通知でプッシュ",
+          "consistency": "スレーブノードは内蔵の設定同期器を通じて更新を監視・取得し、クラスター間設定の最終一貫性を実現"
+        }
+      }
+    },
+    "lightweight": {
+      "title": "軽量とリソース効率",
+      "lowResource": {
+        "title": "極低リソース使用量",
+        "description": "Go言語の効率的なメモリ管理と上記の性能最適化（ゼロコピー、接続プール再利用など）により、GPT-Loadはコンパイル済みバイナリファイルとして実行され、追加のランタイム依存関係なしで極低リソース使用量を実現します。",
+        "cpu": "シングルコアCPU",
+        "memory": "128MBメモリ"
+      },
+      "versatility": {
+        "title": "広い適用性",
+        "description": "典型的なシングルマシンデプロイメントシナリオでは、低いCPUとメモリのみでサービスのスムーズな動作を保障できます。",
+        "scenarios": [
+          "大企業の高同時実行シナリオに対応",
+          "リソース制限のある個人開発者環境に適合"
+        ]
       }
     }
   }

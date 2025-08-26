@@ -120,70 +120,6 @@
       "technical": "OpenAPI + Docker Compose"
     }
   },
-  "performance": {
-    "title": "性能指标",
-    "subtitle": "高性能表现",
-    "description": "优化的性能配置，支持高并发和低延迟",
-    "metrics": {
-      "concurrent": {
-        "label": "默认并发数",
-        "value": "100", 
-        "description": "MAX_CONCURRENT_REQUESTS 默认值"
-      },
-      "goVersion": {
-        "label": "Go 版本要求",
-        "value": "1.23+",
-        "description": "最低版本要求"
-      },
-      "connectionPool": {
-        "label": "连接池配置",
-        "value": "100/50",
-        "description": "最大空闲连接数/每主机连接数"
-      },
-      "timeout": {
-        "label": "请求超时",
-        "value": "600s",
-        "description": "默认请求超时时间"
-      }
-    },
-    "comparisons": {
-      "title": "性能对比",
-      "configManagement": {
-        "metric": "配置管理",
-        "without": "静态配置文件",
-        "with": "动态热重载",
-        "improvement": "无需重启"
-      },
-      "keyManagement": {
-        "metric": "密钥管理", 
-        "without": "手动切换",
-        "with": "智能轮询",
-        "improvement": "自动故障转移"
-      },
-      "monitoring": {
-        "metric": "监控日志",
-        "without": "基础日志",
-        "with": "实时监控",
-        "improvement": "可视化面板"
-      },
-      "deployment": {
-        "metric": "部署方式",
-        "without": "单体应用", 
-        "with": "容器集群",
-        "improvement": "弹性扩展"
-      }
-    },
-    "optimization": {
-      "title": "性能优化建议",
-      "items": [
-        "根据实际负载调整 MAX_CONCURRENT_REQUESTS",
-        "配置合适的连接池大小", 
-        "使用 Redis 集群提升缓存性能",
-        "启用请求压缩减少网络开销",
-        "定期清理日志文件释放磁盘空间"
-      ]
-    }
-  },
   "quickStart": {
     "title": "快速开始",
     "subtitle": "5分钟快速体验",
@@ -762,6 +698,27 @@
       }
     }
   },
+    "seo": {
+    "pages": {
+      "home": {
+        "title": "GPT-Load - 高性能 AI 接口透明代理服务",
+        "description": "企业级 AI 接口透明代理服务，完全保留各 AI 服务商的原生 API 格式。提供密钥轮询、多分组管理、负载均衡等功能。",
+        "keywords": "GPT, OpenAI, API, 透明代理, 负载均衡, 密钥轮询, Go, 高性能, AI代理, Gemini, Claude"
+      },
+      "docs": {
+        "quickStart": {
+          "title": "快速开始 - GPT-Load 部署指南",
+          "description": "5分钟快速部署GPT-Load，Docker一键启动，包含完整的数据库和缓存服务。",
+          "keywords": "GPT-Load部署, Docker部署, 快速开始, AI代理安装"
+        }
+      },
+      "introduction": {
+        "title": "项目简介 - GPT-Load 架构与技术栈详解",
+        "description": "深入了解GPT-Load的核心概念、技术架构、支持的AI服务和企业级功能特性。",
+        "keywords": "GPT-Load架构, AI代理技术, 透明代理原理, 微服务架构, Go语言"
+      }
+    }
+  },
   "keyManagement": {
     "title": "智能密钥管理",
     "subtitle": "GPT-Load 采用智能密钥管理机制，通过轮询负载均衡、自动故障检测和恢复机制，确保服务的高可用性和稳定性。",
@@ -868,24 +825,144 @@
       }
     }
   },
-  "seo": {
-    "pages": {
-      "home": {
-        "title": "GPT-Load - 高性能 AI 接口透明代理服务",
-        "description": "企业级 AI 接口透明代理服务，完全保留各 AI 服务商的原生 API 格式。提供密钥轮询、多分组管理、负载均衡等功能。",
-        "keywords": "GPT, OpenAI, API, 透明代理, 负载均衡, 密钥轮询, Go, 高性能, AI代理, Gemini, Claude"
+  "performance": {
+    "title": "性能详解",
+    "subtitle": "GPT-Load 采用\"代理路径优先\"的高性能设计哲学，一切优化都为保障核心代理请求的极致性能和稳定性。",
+    "coreFeatures": {
+      "title": "核心性能特性",
+      "zeroIO": {
+        "title": "零 I/O 操作",
+        "description": "代理请求全内存处理"
       },
-      "docs": {
-        "quickStart": {
-          "title": "快速开始 - GPT-Load 部署指南",
-          "description": "5分钟快速部署GPT-Load，Docker一键启动，包含完整的数据库和缓存服务。",
-          "keywords": "GPT-Load部署, Docker部署, 快速开始, AI代理安装"
+      "zeroCopy": {
+        "title": "零拷贝流传输",
+        "description": "直接流式数据转发"
+      },
+      "lockFree": {
+        "title": "无锁并发",
+        "description": "原子操作高效处理"
+      },
+      "lowResource": {
+        "title": "极低资源占用",
+        "description": "单核 128MB 内存运行"
+      }
+    },
+    "proxyPerformance": {
+      "title": "极致的代理请求性能",
+      "description": "为了实现最低延迟和最高并发，代理请求的核心路径被设计为\"零 I/O 操作\"。",
+      "inMemory": {
+        "title": "全内存服务",
+        "description": "所有路由和决策所需的数据，包括分组配置、密钥信息等，都在服务启动和配置变更时预加载到内存中。代理请求期间无需任何数据库或磁盘访问。"
+      },
+      "zeroCopyStreaming": {
+        "title": "零拷贝流式传输 (Zero-Copy Streaming)",
+        "mechanism": {
+          "title": "实时透传机制",
+          "description": "GPT-Load 采用实时透传模式，直接将上游服务的数据流对接到客户端响应，不进行任何中间缓冲、按行读取或内容解析。"
+        },
+        "comparison": {
+          "title": "与传统流式处理的区别",
+          "traditional": {
+            "label": "❌ 传统方式",
+            "flow": "按行读取 → 解析处理 → 缓冲输出"
+          },
+          "gptLoad": {
+            "label": "✅ GPT-Load 方式",
+            "flow": "上游数据流 → 直接透传 → 客户端"
+          }
+        },
+        "advantages": {
+          "title": "核心优势",
+          "leftColumn": [
+            {
+              "title": "避免数据包截断",
+              "description": "不会因按行读取而破坏原始数据包结构"
+            },
+            {
+              "title": "极致兼容性",
+              "description": "天然支持 SSE、JSON 流、二进制等所有数据格式"
+            },
+            {
+              "title": "无限响应能力",
+              "description": "理论上可处理任意大小的上游响应数据"
+            }
+          ],
+          "rightColumn": [
+            {
+              "title": "零延迟传输",
+              "description": "数据到达即转发，无缓冲等待时间"
+            },
+            {
+              "title": "极低内存占用",
+              "description": "不缓存数据，内存使用量与响应大小无关"
+            },
+            {
+              "title": "原生性能体验",
+              "description": "响应速度无限贴近上游服务原生表现"
+            }
+          ]
         }
       },
-      "introduction": {
-        "title": "项目简介 - GPT-Load 架构与技术栈详解",
-        "description": "深入了解GPT-Load的核心概念、技术架构、支持的AI服务和企业级功能特性。",
-        "keywords": "GPT-Load架构, AI代理技术, 透明代理原理, 微服务架构, Go语言"
+      "asyncLogging": {
+        "title": "异步日志",
+        "description": "请求日志的记录采用延迟异步写入策略，完全与请求-响应生命周期解耦，确保日志操作不会对实时代理性能产生任何干扰。"
+      }
+    },
+    "resourceManagement": {
+      "title": "动态资源与并发管理",
+      "httpReuse": {
+        "title": "HTTP 客户端高效复用",
+        "features": [
+          "为每个分组维护独立的、可复用底层连接的 HTTP 客户端实例",
+          "当分组配置（如超时）变更时，系统会实时动态地生成新客户端实例，确保配置即时生效"
+        ]
+      },
+      "atomicOperations": {
+        "title": "原子操作与无锁设计",
+        "description": "在密钥轮询计数等高频并发操作中，使用 sync/atomic 包进行无锁化编程，避免了互斥锁（Mutex）带来的性能开销。"
+      }
+    },
+    "asyncTasks": {
+      "title": "异步任务与可扩展性",
+      "massiveKeys": {
+        "title": "海量密钥的异步管理",
+        "mechanism": {
+          "title": "机制",
+          "description": "添加和验证密钥等操作均作为异步后台任务执行。"
+        },
+        "advantage": {
+          "title": "优势",
+          "description": "使得管理操作不会阻塞服务，理论上允许系统管理百万级别的海量密钥。"
+        }
+      },
+      "clusterSupport": {
+        "title": "集群支持与配置同步",
+        "architecture": {
+          "title": "架构",
+          "description": "支持多节点主从（Master-Slave）架构进行水平扩展。"
+        },
+        "sync": {
+          "title": "同步",
+          "redis": "主节点的配置变更通过 Redis Pub/Sub 推送通知",
+          "consistency": "从节点通过内置的配置同步器监听并拉取更新，实现集群间配置的最终一致性"
+        }
+      }
+    },
+    "lightweight": {
+      "title": "轻量级与资源效率",
+      "lowResource": {
+        "title": "极低的资源占用",
+        "description": "得益于 Go 语言高效的内存管理以及上述性能优化（如零拷贝、连接池复用），GPT-Load 作为一个编译后的二进制文件运行，无额外运行时依赖，实现了极低的资源占用。",
+        "cpu": "单核 CPU",
+        "memory": "128MB 内存"
+      },
+      "versatility": {
+        "title": "适用性广",
+        "description": "在典型的单机部署场景下，仅需较低的 CPU 和内存即可保障服务的流畅运行。",
+        "scenarios": [
+          "胜任大型企业的高并发场景",
+          "适合资源有限的个人开发者环境"
+        ]
       }
     }
   }

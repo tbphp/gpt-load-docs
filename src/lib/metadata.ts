@@ -136,6 +136,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       keywords: "インテリジェントキー管理, 負荷分散, 障害検出, キーローテーション, 自動復旧, GPT-Load",
       type: 'article'
     }
+  },
+  '/docs/architecture-design/performance': {
+    zh: {
+      title: "性能详解 - GPT-Load",
+      description: "深入了解GPT-Load的极致性能设计，包括零I/O操作、零拷贝流传输、无锁并发、异步任务等核心优化策略。",
+      keywords: "性能优化, 零拷贝, 流式传输, 无锁并发, 异步处理, 高性能代理, GPT-Load",
+      type: 'article'
+    },
+    en: {
+      title: "Performance Details - GPT-Load",
+      description: "Deep dive into GPT-Load's ultimate performance design, including zero I/O operations, zero-copy streaming, lock-free concurrency, async tasks and core optimization strategies.",
+      keywords: "performance optimization, zero-copy, streaming, lock-free concurrency, async processing, high-performance proxy, GPT-Load",
+      type: 'article'
+    },
+    ja: {
+      title: "パフォーマンス詳解 - GPT-Load",
+      description: "GPT-Loadの究極のパフォーマンス設計の詳細解説。ゼロI/O操作、ゼロコピーストリーミング、ロックフリー並行処理、非同期タスクなどのコア最適化戦略を含む。",
+      keywords: "パフォーマンス最適化, ゼロコピー, ストリーミング, ロックフリー並行処理, 非同期処理, 高性能プロキシ, GPT-Load",
+      type: 'article'
+    }
   }
   // 架构预留：后续可继续添加其他页面的SEO配置
 };

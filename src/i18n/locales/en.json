@@ -120,70 +120,6 @@
       "technical": "OpenAPI + Docker Compose"
     }
   },
-  "performance": {
-    "title": "Performance Metrics",
-    "subtitle": "High-Performance Results",
-    "description": "Optimized performance configuration supporting high concurrency and low latency",
-    "metrics": {
-      "concurrent": {
-        "label": "Default Concurrency",
-        "value": "100",
-        "description": "MAX_CONCURRENT_REQUESTS default value"
-      },
-      "goVersion": {
-        "label": "Go Version Requirement",
-        "value": "1.23+",
-        "description": "Minimum version requirement"
-      },
-      "connectionPool": {
-        "label": "Connection Pool Config",
-        "value": "100/50",
-        "description": "Max idle connections/per-host connections"
-      },
-      "timeout": {
-        "label": "Request Timeout",
-        "value": "600s",
-        "description": "Default request timeout"
-      }
-    },
-    "comparisons": {
-      "title": "Performance Comparison",
-      "configManagement": {
-        "metric": "Config Management",
-        "without": "Static Config Files",
-        "with": "Dynamic Hot Reload",
-        "improvement": "No Restart Required"
-      },
-      "keyManagement": {
-        "metric": "Key Management",
-        "without": "Manual Switching",
-        "with": "Smart Rotation",
-        "improvement": "Auto Failover"
-      },
-      "monitoring": {
-        "metric": "Monitoring & Logs",
-        "without": "Basic Logging",
-        "with": "Real-time Monitoring",
-        "improvement": "Visual Dashboard"
-      },
-      "deployment": {
-        "metric": "Deployment Method",
-        "without": "Monolithic App",
-        "with": "Container Cluster",
-        "improvement": "Elastic Scaling"
-      }
-    },
-    "optimization": {
-      "title": "Performance Optimization Tips",
-      "items": [
-        "Adjust MAX_CONCURRENT_REQUESTS based on actual load",
-        "Configure appropriate connection pool size",
-        "Use Redis cluster to improve cache performance",
-        "Enable request compression to reduce network overhead",
-        "Regularly clean log files to free disk space"
-      ]
-    }
-  },
   "quickStart": {
     "title": "Quick Start",
     "subtitle": "5-Minute Quick Experience",
@@ -886,6 +822,147 @@
       "faultIsolation": {
         "title": "Fault Isolation",
         "description": "Quickly identify failed keys to ensure service stability"
+      }
+    }
+  },
+  "performance": {
+    "title": "Performance Details",
+    "subtitle": "GPT-Load adopts a \"proxy path first\" high-performance design philosophy, where all optimizations ensure ultimate performance and stability of core proxy requests.",
+    "coreFeatures": {
+      "title": "Core Performance Features",
+      "zeroIO": {
+        "title": "Zero I/O Operations",
+        "description": "Full in-memory proxy request processing"
+      },
+      "zeroCopy": {
+        "title": "Zero-Copy Streaming",
+        "description": "Direct streaming data forwarding"
+      },
+      "lockFree": {
+        "title": "Lock-Free Concurrency",
+        "description": "Efficient atomic operation processing"
+      },
+      "lowResource": {
+        "title": "Ultra-Low Resource Usage",
+        "description": "Single core 128MB memory operation"
+      }
+    },
+    "proxyPerformance": {
+      "title": "Ultimate Proxy Request Performance",
+      "description": "To achieve minimum latency and maximum concurrency, the core path of proxy requests is designed as \"zero I/O operations\".",
+      "inMemory": {
+        "title": "Full In-Memory Service",
+        "description": "All data required for routing and decision-making, including group configurations and key information, are preloaded into memory during service startup and configuration changes. No database or disk access is needed during proxy requests."
+      },
+      "zeroCopyStreaming": {
+        "title": "Zero-Copy Streaming",
+        "mechanism": {
+          "title": "Real-time Transparent Transmission Mechanism",
+          "description": "GPT-Load adopts real-time transparent transmission mode, directly connecting upstream service data streams to client responses without any intermediate buffering, line-by-line reading, or content parsing."
+        },
+        "comparison": {
+          "title": "Difference from Traditional Streaming Processing",
+          "traditional": {
+            "label": "❌ Traditional Approach",
+            "flow": "Line reading → Parse processing → Buffer output"
+          },
+          "gptLoad": {
+            "label": "✅ GPT-Load Approach",
+            "flow": "Upstream data stream → Direct transmission → Client"
+          }
+        },
+        "advantages": {
+          "title": "Core Advantages",
+          "leftColumn": [
+            {
+              "title": "Avoid Data Packet Truncation",
+              "description": "Won't damage original data packet structure due to line-by-line reading"
+            },
+            {
+              "title": "Ultimate Compatibility",
+              "description": "Naturally supports all data formats including SSE, JSON streams, binary, etc."
+            },
+            {
+              "title": "Unlimited Response Capability",
+              "description": "Theoretically can handle upstream response data of any size"
+            }
+          ],
+          "rightColumn": [
+            {
+              "title": "Zero-Latency Transmission",
+              "description": "Data forwarded immediately upon arrival, no buffer waiting time"
+            },
+            {
+              "title": "Ultra-Low Memory Usage",
+              "description": "No data caching, memory usage independent of response size"
+            },
+            {
+              "title": "Native Performance Experience",
+              "description": "Response speed infinitely close to upstream service native performance"
+            }
+          ]
+        }
+      },
+      "asyncLogging": {
+        "title": "Asynchronous Logging",
+        "description": "Request logging uses delayed asynchronous write strategy, completely decoupled from request-response lifecycle, ensuring logging operations don't interfere with real-time proxy performance."
+      }
+    },
+    "resourceManagement": {
+      "title": "Dynamic Resource & Concurrency Management",
+      "httpReuse": {
+        "title": "Efficient HTTP Client Reuse",
+        "features": [
+          "Maintain independent HTTP client instances with reusable underlying connections for each group",
+          "When group configurations (like timeouts) change, system dynamically generates new client instances in real-time to ensure immediate configuration effectiveness"
+        ]
+      },
+      "atomicOperations": {
+        "title": "Atomic Operations & Lock-Free Design",
+        "description": "In high-frequency concurrent operations like key polling counting, use sync/atomic package for lock-free programming, avoiding performance overhead from mutex locks."
+      }
+    },
+    "asyncTasks": {
+      "title": "Asynchronous Tasks & Scalability",
+      "massiveKeys": {
+        "title": "Asynchronous Management of Massive Keys",
+        "mechanism": {
+          "title": "Mechanism",
+          "description": "Operations like adding and validating keys are all executed as asynchronous background tasks."
+        },
+        "advantage": {
+          "title": "Advantage",
+          "description": "Management operations don't block service, theoretically allowing system to manage millions of keys."
+        }
+      },
+      "clusterSupport": {
+        "title": "Cluster Support & Configuration Synchronization",
+        "architecture": {
+          "title": "Architecture",
+          "description": "Supports multi-node Master-Slave architecture for horizontal scaling."
+        },
+        "sync": {
+          "title": "Synchronization",
+          "redis": "Master node configuration changes pushed via Redis Pub/Sub notifications",
+          "consistency": "Slave nodes listen and pull updates through built-in configuration synchronizer, achieving eventual consistency across cluster configurations"
+        }
+      }
+    },
+    "lightweight": {
+      "title": "Lightweight & Resource Efficiency",
+      "lowResource": {
+        "title": "Ultra-Low Resource Usage",
+        "description": "Thanks to Go language's efficient memory management and the above performance optimizations (like zero-copy, connection pool reuse), GPT-Load runs as a compiled binary with no additional runtime dependencies, achieving ultra-low resource usage.",
+        "cpu": "Single core CPU",
+        "memory": "128MB memory"
+      },
+      "versatility": {
+        "title": "Wide Applicability",
+        "description": "In typical single-machine deployment scenarios, only low CPU and memory are needed to ensure smooth service operation.",
+        "scenarios": [
+          "Capable of handling high-concurrency scenarios for large enterprises",
+          "Suitable for resource-limited personal developer environments"
+        ]
       }
     }
   }
