@@ -1345,5 +1345,88 @@
         ]
       }
     }
+  },
+  "configurationPage": {
+    "title": "設定説明",
+    "subtitle": "GPT-Loadは強力で柔軟な3層設定システムを採用し、異なるシナリオでの設定ニーズに対応します",
+    "threeLayerArchitecture": {
+      "title": "3層設定システムアーキテクチャ",
+      "priorityTitle": "設定優先度",
+      "groupConfig": {
+        "name": "グループ設定",
+        "priority": "最高優先度"
+      },
+      "systemSettings": {
+        "name": "システム設定",
+        "priority": "中程度優先度"
+      },
+      "environmentVars": {
+        "name": "環境変数",
+        "priority": "基本優先度"
+      },
+      "managerDescription": "設定システムは",
+      "managerFunction": "を通じて設定の読み込み、統合、ホットアップデートを管理します"
+    },
+    "features": {
+      "title": "設定機能",
+      "items": [
+        "• <strong>3層アーキテクチャ</strong>：環境、システム、グループ",
+        "• <strong>優先度上書き</strong>：上位層が下位層を上書き",
+        "• <strong>ホットアップデートサポート</strong>：実行時の動的効果",
+        "• <strong>設定検証</strong>：厳密なデータ検証"
+      ]
+    },
+    "useCases": {
+      "title": "使用シナリオ",
+      "items": [
+        "• <strong>環境設定</strong>：基本サービスパラメータ",
+        "• <strong>システム設定</strong>：グローバルビジネス設定",
+        "• <strong>グループ設定</strong>：特定グループのカスタマイズ",
+        "• <strong>動的調整</strong>：リアルタイムパフォーマンス最適化"
+      ]
+    },
+    "managementMethods": {
+      "title": "管理方法",
+      "items": [
+        "• <strong>環境変数</strong>：.envファイルまたはシステム環境",
+        "• <strong>Web管理</strong>：オンライン設定インターフェース",
+        "• <strong>APIインターフェース</strong>：プログラムによる設定管理",
+        "• <strong>設定ファイル</strong>：JSON形式のインポート/エクスポート"
+      ]
+    },
+    "bestPractices": {
+      "title": "ベストプラクティス",
+      "recommendations": {
+        "title": "設定管理の推奨事項",
+        "items": [
+          "• <strong>統一管理</strong>：一貫性を確保するため、プラットフォームのWebインターフェースを使用した集中管理を推奨します。",
+          "• <strong>定期監査</strong>：定期的に設定を見直し、使用されなくなったパラメータを削除してシステムを整理します。",
+          "• <strong>バージョン管理</strong>：重要な設定変更については、追跡とロールバックのためにバージョン管理システムに記録することを推奨します。"
+        ]
+      },
+      "warnings": {
+        "title": "注意事項",
+        "items": [
+          "• <strong>機密情報</strong>：プロジェクト設定にパスワード、APIキーなどの機密情報を保存しないでください。環境変数を使用してください。",
+          "• <strong>ホットアップデートの慎重な使用</strong>：ホットアップデート機能は強力ですが、本番環境で予期しない動作を引き起こさないよう慎重に使用してください。",
+          "• <strong>パフォーマンスへの影響</strong>：頻繁な設定変更はシステムパフォーマンスに軽微な影響を与える可能性があります。オフピーク時間での操作を推奨します。"
+        ]
+      }
+    },
+    "furtherReading": {
+      "title": "詳細情報",
+      "environment": {
+        "title": "環境設定",
+        "description": "環境変数または.envファイルによるインフラストラクチャレベルの設定を確認します。"
+      },
+      "project": {
+        "title": "プロジェクト設定",
+        "description": "データベースで管理されるシステムレベルおよびグループレベルの動的設定を探索します。"
+      },
+      "cloudflareAiGateway": {
+        "title": "Cloudflare AI Gateway",
+        "description": "Cloudflare AI Gatewayをアップストリームプロキシとして設定し、AIサービスのパフォーマンスを最適化します。"
+      }
+    }
   }
 }

@@ -177,6 +177,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
+  '/docs/configuration': {
+    zh: {
+      title: "配置说明 - GPT-Load",
+      description: "掌握GPT-Load的三层配置系统架构，包括环境变量、系统设置、分组配置的优先级管理，以及热更新、配置验证等最佳实践。",
+      keywords: "配置管理, 三层配置, 热更新, 系统设置, 环境变量, 分组配置, 优先级管理, GPT-Load",
+      type: 'article'
+    },
+    en: {
+      title: "Configuration - GPT-Load",
+      description: "Master GPT-Load's three-tier configuration system architecture, including priority management of environment variables, system settings, group configurations, and best practices for hot reloading and configuration validation.",
+      keywords: "configuration management, three-tier configuration, hot reload, system settings, environment variables, group configuration, priority management, GPT-Load",
+      type: 'article'
+    },
+    ja: {
+      title: "設定説明 - GPT-Load",
+      description: "GPT-Loadの3層設定システムアーキテクチャをマスター。環境変数、システム設定、グループ設定の優先度管理、ホットリロード、設定検証のベストプラクティスを含む。",
+      keywords: "設定管理, 3層設定, ホットリロード, システム設定, 環境変数, グループ設定, 優先度管理, GPT-Load",
+      type: 'article'
+    }
+  },
   '/docs/channels': {
     zh: {
       title: "渠道类型 - GPT-Load",

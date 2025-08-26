@@ -1345,5 +1345,88 @@
         ]
       }
     }
+  },
+  "configurationPage": {
+    "title": "Configuration",
+    "subtitle": "GPT-Load adopts a powerful and flexible three-tier configuration system to meet configuration needs in different scenarios",
+    "threeLayerArchitecture": {
+      "title": "Three-Tier Configuration System Architecture",
+      "priorityTitle": "Configuration Priority",
+      "groupConfig": {
+        "name": "Group Configuration",
+        "priority": "Highest Priority"
+      },
+      "systemSettings": {
+        "name": "System Settings",
+        "priority": "Medium Priority"
+      },
+      "environmentVars": {
+        "name": "Environment Variables",
+        "priority": "Base Priority"
+      },
+      "managerDescription": "The configuration system uses",
+      "managerFunction": "to manage configuration loading, merging, and hot updates"
+    },
+    "features": {
+      "title": "Configuration Features",
+      "items": [
+        "• <strong>Three-Tier Architecture</strong>: Environment, system, group",
+        "• <strong>Priority Override</strong>: Upper layer overrides lower layer",
+        "• <strong>Hot Update Support</strong>: Runtime dynamic effect",
+        "• <strong>Configuration Validation</strong>: Strict data validation"
+      ]
+    },
+    "useCases": {
+      "title": "Use Cases",
+      "items": [
+        "• <strong>Environment Configuration</strong>: Basic service parameters",
+        "• <strong>System Configuration</strong>: Global business settings",
+        "• <strong>Group Configuration</strong>: Specific group customization",
+        "• <strong>Dynamic Tuning</strong>: Real-time performance optimization"
+      ]
+    },
+    "managementMethods": {
+      "title": "Management Methods",
+      "items": [
+        "• <strong>Environment Variables</strong>: .env files or system environment",
+        "• <strong>Web Management</strong>: Online configuration interface",
+        "• <strong>API Interface</strong>: Programmatic configuration management",
+        "• <strong>Configuration Files</strong>: JSON format import/export"
+      ]
+    },
+    "bestPractices": {
+      "title": "Best Practices",
+      "recommendations": {
+        "title": "Configuration Management Recommendations",
+        "items": [
+          "• <strong>Unified Management</strong>: Recommend using the platform's Web interface for centralized management to ensure consistency.",
+          "• <strong>Regular Audits</strong>: Regularly review configurations, remove unused parameters to keep the system clean.",
+          "• <strong>Version Control</strong>: For important configuration changes, recommend recording in version control system for tracking and rollback."
+        ]
+      },
+      "warnings": {
+        "title": "Precautions",
+        "items": [
+          "• <strong>Sensitive Information</strong>: Never store passwords, API keys and other sensitive information in project configuration, use environment variables instead.",
+          "• <strong>Careful Hot Updates</strong>: Hot update feature is powerful but should be used carefully to avoid unexpected behavior in production environment.",
+          "• <strong>Performance Impact</strong>: Frequent configuration changes may have slight impact on system performance, recommend operating during off-peak hours."
+        ]
+      }
+    },
+    "furtherReading": {
+      "title": "Further Reading",
+      "environment": {
+        "title": "Environment Configuration",
+        "description": "View infrastructure-level configuration through environment variables or .env files."
+      },
+      "project": {
+        "title": "Project Configuration",
+        "description": "Explore system-level and group-level dynamic configuration managed through database."
+      },
+      "cloudflareAiGateway": {
+        "title": "Cloudflare AI Gateway",
+        "description": "Configure Cloudflare AI Gateway as upstream proxy to optimize AI service performance."
+      }
+    }
   }
 }
