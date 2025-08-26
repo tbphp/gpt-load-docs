@@ -623,6 +623,145 @@
       "period": "."
     }
   },
+  "architectureDesign": {
+    "title": "System Architecture",
+    "subtitle": "In-depth understanding of GPT-Load's technical architecture and design philosophy",
+    "overview": {
+      "title": "Architecture Overview",
+      "highlightTitle": "High-Performance Transparent Proxy Architecture",
+      "highlightDescription": "High-performance OpenAI API proxy service built on Go language, supporting multi-key rotation, load balancing, and intelligent failover"
+    },
+    "components": {
+      "apiGateway": {
+        "title": "API Gateway",
+        "description": "Unified API entry point and routing"
+      },
+      "loadBalancer": {
+        "title": "Load Balancer",
+        "description": "Intelligent key rotation and distribution"
+      },
+      "dataStorage": {
+        "title": "Data Storage",
+        "description": "MySQL + Redis dual storage"
+      },
+      "securityMonitor": {
+        "title": "Security Monitor",
+        "description": "Rate limiting, authentication and monitoring"
+      }
+    },
+    "systemComponents": {
+      "title": "System Components",
+      "coreService": {
+        "title": "Core Service Layer",
+        "apiProxy": {
+          "title": "API Proxy Service",
+          "features": ["HTTP/HTTPS transparent proxy", "Request routing and forwarding", "Streaming response processing", "Error handling and retry"]
+        },
+        "loadBalancer": {
+          "title": "Load Balancer",
+          "features": ["Round Robin algorithm", "Weight allocation strategy", "Health check mechanism", "Automatic failover"]
+        }
+      },
+      "managementLayer": {
+        "title": "Management Service Layer",
+        "webInterface": {
+          "title": "Web Management Interface",
+          "features": ["Vue 3 + TypeScript", "Naive UI component library", "Real-time monitoring dashboard", "Configuration management interface"]
+        },
+        "restApi": {
+          "title": "REST API",
+          "features": ["Key management interface", "Statistics data interface", "System configuration interface", "Monitoring metrics interface"]
+        }
+      },
+      "dataLayer": {
+        "title": "Data Storage Layer",
+        "mysql": {
+          "title": "MySQL Database",
+          "features": ["Key and configuration persistence", "User authentication data", "Historical statistics records", "System log storage"]
+        },
+        "redis": {
+          "title": "Redis Cache",
+          "features": ["Key status cache", "Rate limiting counters", "Distributed lock mechanism", "Session state management"]
+        }
+      }
+    },
+    "dataFlow": {
+      "title": "Data Flow",
+      "steps": [
+        {
+          "title": "Client Request",
+          "description": "API gateway receives OpenAI-compatible requests"
+        },
+        {
+          "title": "Key Selection",
+          "description": "Load balancer selects available API keys"
+        },
+        {
+          "title": "Request Forwarding",
+          "description": "Proxy service forwards requests to OpenAI API"
+        },
+        {
+          "title": "Response Processing",
+          "description": "Streaming response processing and return to client"
+        },
+        {
+          "title": "Data Recording",
+          "description": "Statistics and logs recorded to database"
+        }
+      ]
+    },
+    "deploymentArchitectures": {
+      "title": "Deployment Architectures",
+      "standalone": {
+        "title": "Standalone Deployment",
+        "scenarios": {
+          "title": "Applicable Scenarios",
+          "items": ["Small to medium-scale applications", "Development and testing environments", "Personal project usage"]
+        }
+      },
+      "cluster": {
+        "title": "Cluster Deployment",
+        "scenarios": {
+          "title": "Applicable Scenarios",
+          "items": ["Large-scale production environments", "High availability requirements", "Enterprise-grade applications"]
+        }
+      }
+    },
+    "techStack": {
+      "title": "Technology Stack",
+      "backend": {
+        "title": "Backend Technologies",
+        "items": ["Go 1.23+", "Gin Web Framework", "GORM ORM", "Go-Redis"]
+      },
+      "frontend": {
+        "title": "Frontend Technologies",
+        "items": ["Vue 3", "TypeScript", "Naive UI", "Vite"]
+      },
+      "infrastructure": {
+        "title": "Infrastructure",
+        "items": ["MySQL 8.2+", "Redis", "Docker", "Nginx"]
+      }
+    },
+    "designPrinciples": {
+      "title": "Design Principles",
+      "highPerformance": {
+        "title": "High Performance",
+        "description": "Go language-based high-concurrency processing capability, supporting thousands of QPS request processing"
+      },
+      "highAvailability": {
+        "title": "High Availability",
+        "description": "Automatic failover, health checks, and distributed deployment ensure service availability"
+      },
+      "scalability": {
+        "title": "Scalability",
+        "description": "Modular design and microservice architecture support horizontal scaling and feature expansion"
+      },
+      "transparentProxy": {
+        "title": "Transparent Proxy",
+        "description": "Fully compatible with OpenAI API, no need to modify existing code for integration"
+      }
+    }
+  },
   "seo": {
     "pages": {
       "home": {

@@ -112,7 +112,43 @@ export function useTranslation() {
     return [];
   };
 
-  return { t, tArray, currentLanguage };
+  // 泛型函数，用于获取任何类型的数组（包括对象数组）
+  const tObjectArray = <T = unknown>(key: string): T[] => {
+    const value = key.split('.').reduce(
+      (current: unknown, keyPart) => {
+        if (current && typeof current === 'object' && keyPart in current) {
+          return (current as Record<string, unknown>)[keyPart];
+        }
+        return undefined;
+      }, 
+      translations[currentLanguage]
+    );
+    
+    if (Array.isArray(value)) {
+      return value as T[];
+    }
+
+    // 如果当前语言没有翻译，尝试使用中文作为fallback
+    if (currentLanguage !== 'zh') {
+      const zhValue = key.split('.').reduce(
+        (current: unknown, keyPart) => {
+          if (current && typeof current === 'object' && keyPart in current) {
+            return (current as Record<string, unknown>)[keyPart];
+          }
+          return undefined;
+        }, 
+        translations.zh
+      );
+      
+      if (Array.isArray(zhValue)) {
+        return zhValue as T[];
+      }
+    }
+
+    return [];
+  };
+
+  return { t, tArray, tObjectArray, currentLanguage };
 }
 
 // 导出translations用于外部更新

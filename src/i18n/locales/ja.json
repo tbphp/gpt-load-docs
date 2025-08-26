@@ -623,6 +623,145 @@
       "period": "をご覧ください。"
     }
   },
+  "architectureDesign": {
+    "title": "システムアーキテクチャ",
+    "subtitle": "GPT-Loadの技術アーキテクチャと設計理念の詳細理解",
+    "overview": {
+      "title": "アーキテクチャ概要",
+      "highlightTitle": "高性能透明プロキシアーキテクチャ",
+      "highlightDescription": "Go言語ベースの高性能OpenAI APIプロキシサービス、マルチキーローテーション、負荷分散、インテリジェントフェイルオーバーをサポート"
+    },
+    "components": {
+      "apiGateway": {
+        "title": "APIゲートウェイ",
+        "description": "統合APIエントリポイントとルーティング"
+      },
+      "loadBalancer": {
+        "title": "負荷分散",
+        "description": "インテリジェントキーローテーションと分散"
+      },
+      "dataStorage": {
+        "title": "データストレージ",
+        "description": "MySQL + Redis二重ストレージ"
+      },
+      "securityMonitor": {
+        "title": "セキュリティ監視",
+        "description": "レート制限、認証、監視"
+      }
+    },
+    "systemComponents": {
+      "title": "システムコンポーネント",
+      "coreService": {
+        "title": "コアサービス層",
+        "apiProxy": {
+          "title": "APIプロキシサービス",
+          "features": ["HTTP/HTTPS透明プロキシ", "リクエストルーティングと転送", "ストリーミングレスポンス処理", "エラーハンドリングと再試行"]
+        },
+        "loadBalancer": {
+          "title": "負荷分散装置",
+          "features": ["ラウンドロビンアルゴリズム", "重み割り当て戦略", "ヘルスチェック機構", "自動フェイルオーバー"]
+        }
+      },
+      "managementLayer": {
+        "title": "管理サービス層",
+        "webInterface": {
+          "title": "Web管理インターフェース",
+          "features": ["Vue 3 + TypeScript", "Naive UIコンポーネントライブラリ", "リアルタイム監視ダッシュボード", "設定管理インターフェース"]
+        },
+        "restApi": {
+          "title": "REST API",
+          "features": ["キー管理インターフェース", "統計データインターフェース", "システム設定インターフェース", "監視メトリクスインターフェース"]
+        }
+      },
+      "dataLayer": {
+        "title": "データストレージ層",
+        "mysql": {
+          "title": "MySQLデータベース",
+          "features": ["キーと設定の永続化", "ユーザー認証データ", "履歴統計レコード", "システムログストレージ"]
+        },
+        "redis": {
+          "title": "Redisキャッシュ",
+          "features": ["キーステータスキャッシュ", "レート制限カウンター", "分散ロック機構", "セッション状態管理"]
+        }
+      }
+    },
+    "dataFlow": {
+      "title": "データフロー",
+      "steps": [
+        {
+          "title": "クライアントリクエスト",
+          "description": "APIゲートウェイがOpenAI互換リクエストを受信"
+        },
+        {
+          "title": "キー選択",
+          "description": "負荷分散装置が利用可能なAPIキーを選択"
+        },
+        {
+          "title": "リクエスト転送",
+          "description": "プロキシサービスがOpenAI APIにリクエストを転送"
+        },
+        {
+          "title": "レスポンス処理",
+          "description": "ストリーミングレスポンス処理してクライアントに返却"
+        },
+        {
+          "title": "データ記録",
+          "description": "統計データとログをデータベースに記録"
+        }
+      ]
+    },
+    "deploymentArchitectures": {
+      "title": "デプロイメントアーキテクチャ",
+      "standalone": {
+        "title": "スタンドアロンデプロイメント",
+        "scenarios": {
+          "title": "適用シナリオ",
+          "items": ["中小規模アプリケーション", "開発テスト環境", "個人プロジェクト使用"]
+        }
+      },
+      "cluster": {
+        "title": "クラスターデプロイメント",
+        "scenarios": {
+          "title": "適用シナリオ",
+          "items": ["大規模本番環境", "高可用性要件", "エンタープライズグレードアプリケーション"]
+        }
+      }
+    },
+    "techStack": {
+      "title": "技術スタック",
+      "backend": {
+        "title": "バックエンド技術",
+        "items": ["Go 1.23+", "Gin Webフレームワーク", "GORM ORM", "Go-Redis"]
+      },
+      "frontend": {
+        "title": "フロントエンド技術",
+        "items": ["Vue 3", "TypeScript", "Naive UI", "Vite"]
+      },
+      "infrastructure": {
+        "title": "インフラストラクチャ",
+        "items": ["MySQL 8.2+", "Redis", "Docker", "Nginx"]
+      }
+    },
+    "designPrinciples": {
+      "title": "設計原則",
+      "highPerformance": {
+        "title": "高性能",
+        "description": "Go言語ベースの高同時性処理能力、数千QPSのリクエスト処理をサポート"
+      },
+      "highAvailability": {
+        "title": "高可用性",
+        "description": "自動フェイルオーバー、ヘルスチェック、分散デプロイメントでサービス可用性を保証"
+      },
+      "scalability": {
+        "title": "スケーラビリティ",
+        "description": "モジュラー設計とマイクロサービスアーキテクチャで水平スケーリングと機能拡張をサポート"
+      },
+      "transparentProxy": {
+        "title": "透明プロキシ",
+        "description": "OpenAI APIと完全互換、既存コードの変更なしで統合可能"
+      }
+    }
+  },
   "seo": {
     "pages": {
       "home": {

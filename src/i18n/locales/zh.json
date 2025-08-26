@@ -623,6 +623,145 @@
       "period": "。"
     }
   },
+  "architectureDesign": {
+    "title": "系统架构",
+    "subtitle": "深入了解 GPT-Load 的技术架构和设计理念",
+    "overview": {
+      "title": "架构概览",
+      "highlightTitle": "高性能透明代理架构",
+      "highlightDescription": "基于 Go 语言构建的高性能 OpenAI API 代理服务，支持多密钥轮换、负载均衡和智能故障切换"
+    },
+    "components": {
+      "apiGateway": {
+        "title": "API 网关",
+        "description": "统一的 API 入口和路由"
+      },
+      "loadBalancer": {
+        "title": "负载均衡",
+        "description": "智能密钥轮换和分发"
+      },
+      "dataStorage": {
+        "title": "数据存储",
+        "description": "MySQL + Redis 双重存储"
+      },
+      "securityMonitor": {
+        "title": "安全监控",
+        "description": "限流、认证和监控"
+      }
+    },
+    "systemComponents": {
+      "title": "系统组件",
+      "coreService": {
+        "title": "核心服务层",
+        "apiProxy": {
+          "title": "API 代理服务",
+          "features": ["HTTP/HTTPS 透明代理", "请求路由和转发", "响应流式处理", "错误处理和重试"]
+        },
+        "loadBalancer": {
+          "title": "负载均衡器",
+          "features": ["轮询（Round Robin）算法", "权重分配策略", "健康检查机制", "故障自动切换"]
+        }
+      },
+      "managementLayer": {
+        "title": "管理服务层",
+        "webInterface": {
+          "title": "Web 管理界面",
+          "features": ["Vue 3 + TypeScript", "Naive UI 组件库", "实时监控面板", "配置管理界面"]
+        },
+        "restApi": {
+          "title": "REST API",
+          "features": ["密钥管理接口", "统计数据接口", "系统配置接口", "监控指标接口"]
+        }
+      },
+      "dataLayer": {
+        "title": "数据存储层",
+        "mysql": {
+          "title": "MySQL 数据库",
+          "features": ["密钥和配置持久化", "用户认证数据", "历史统计记录", "系统日志存储"]
+        },
+        "redis": {
+          "title": "Redis 缓存",
+          "features": ["密钥状态缓存", "限流计数器", "分布式锁机制", "会话状态管理"]
+        }
+      }
+    },
+    "dataFlow": {
+      "title": "数据流向",
+      "steps": [
+        {
+          "title": "客户端请求",
+          "description": "API 网关接收 OpenAI 兼容请求"
+        },
+        {
+          "title": "密钥选择",
+          "description": "负载均衡器选择可用的 API 密钥"
+        },
+        {
+          "title": "请求转发",
+          "description": "代理服务转发请求到 OpenAI API"
+        },
+        {
+          "title": "响应处理",
+          "description": "流式响应处理并返回给客户端"
+        },
+        {
+          "title": "数据记录",
+          "description": "统计数据和日志记录到数据库"
+        }
+      ]
+    },
+    "deploymentArchitectures": {
+      "title": "部署架构",
+      "standalone": {
+        "title": "单机部署",
+        "scenarios": {
+          "title": "适用场景",
+          "items": ["中小规模应用", "开发测试环境", "个人项目使用"]
+        }
+      },
+      "cluster": {
+        "title": "集群部署",
+        "scenarios": {
+          "title": "适用场景",
+          "items": ["大规模生产环境", "高可用性要求", "企业级应用"]
+        }
+      }
+    },
+    "techStack": {
+      "title": "技术栈",
+      "backend": {
+        "title": "后端技术",
+        "items": ["Go 1.23+", "Gin Web 框架", "GORM ORM", "Go-Redis"]
+      },
+      "frontend": {
+        "title": "前端技术",
+        "items": ["Vue 3", "TypeScript", "Naive UI", "Vite"]
+      },
+      "infrastructure": {
+        "title": "基础设施",
+        "items": ["MySQL 8.2+", "Redis", "Docker", "Nginx"]
+      }
+    },
+    "designPrinciples": {
+      "title": "设计原则",
+      "highPerformance": {
+        "title": "高性能",
+        "description": "基于 Go 语言的高并发处理能力，支持数千 QPS 的请求处理"
+      },
+      "highAvailability": {
+        "title": "高可用",
+        "description": "故障自动切换、健康检查和分布式部署保障服务可用性"
+      },
+      "scalability": {
+        "title": "可扩展",
+        "description": "模块化设计和微服务架构，支持水平扩展和功能扩展"
+      },
+      "transparentProxy": {
+        "title": "透明代理",
+        "description": "完全兼容 OpenAI API，无需修改现有代码即可接入"
+      }
+    }
+  },
   "seo": {
     "pages": {
       "home": {
