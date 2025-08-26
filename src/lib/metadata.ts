@@ -116,6 +116,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       keywords: "システムアーキテクチャ, GPT-Loadアーキテクチャ, 透明プロキシアーキテクチャ, 高性能プロキシ, Goマイクロサービス, 分散システム, ロードバランシング",
       type: 'article'
     }
+  },
+  '/docs/architecture-design/key-management': {
+    zh: {
+      title: "智能密钥管理 - GPT-Load",
+      description: "详细了解GPT-Load智能密钥管理机制，包括轮询负载均衡、自动故障检测、密钥拉黑与恢复等核心功能。",
+      keywords: "智能密钥管理, 负载均衡, 故障检测, 密钥轮询, 自动恢复, GPT-Load",
+      type: 'article'
+    },
+    en: {
+      title: "Intelligent Key Management - GPT-Load",
+      description: "Detailed understanding of GPT-Load intelligent key management mechanism, including polling load balancing, automatic failure detection, key blacklisting and recovery.",
+      keywords: "intelligent key management, load balancing, failure detection, key rotation, automatic recovery, GPT-Load",
+      type: 'article'
+    },
+    ja: {
+      title: "インテリジェントキー管理 - GPT-Load",
+      description: "GPT-Loadのインテリジェントキー管理機構の詳細理解。ポーリング負荷分散、自動障害検出、キーブラックリストと復旧を含む。",
+      keywords: "インテリジェントキー管理, 負荷分散, 障害検出, キーローテーション, 自動復旧, GPT-Load",
+      type: 'article'
+    }
   }
   // 架构预留：后续可继续添加其他页面的SEO配置
 };

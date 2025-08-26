@@ -782,5 +782,111 @@
         "keywords": "GPT-Load architecture, AI proxy technology, transparent proxy principles, microservice architecture, Go language"
       }
     }
+  },
+  "keyManagement": {
+    "title": "Intelligent Key Management",
+    "subtitle": "GPT-Load employs intelligent key management mechanisms through polling load balancing, automatic failure detection, and recovery mechanisms to ensure high service availability and stability.",
+    "polling": {
+      "title": "Polling Mechanism",
+      "objective": {
+        "title": "Objective",
+        "description": "Achieve fair load balancing for requests among multiple keys within a group."
+      },
+      "implementation": {
+        "title": "Implementation",
+        "atomicCounter": {
+          "title": "Atomic Counter",
+          "description": "Ensures polling consistency and fairness under high concurrency"
+        },
+        "statusFilter": {
+          "title": "Status Filtering",
+          "description": "Polling scope limited to keys with 'valid' status within the group"
+        }
+      }
+    },
+    "retry": {
+      "title": "Retry & Failure Handling",
+      "trigger": {
+        "title": "Trigger Scenarios",
+        "description": "Automatically triggered when request fails (HTTP Status ≥ 400 or network errors)"
+      },
+      "process": {
+        "title": "Processing Flow",
+        "step1": {
+          "title": "Mark Failure",
+          "description": "Increment failure count for the current failed key"
+        },
+        "step2": {
+          "title": "Get New Key",
+          "description": "Immediately obtain the next available key within the group through polling"
+        },
+        "step3": {
+          "title": "Transparent Retry",
+          "description": "Retry request with new key, transparent to client"
+        },
+        "step4": {
+          "title": "Retry Limit",
+          "description": "Configured maximum retry attempts. If all attempts fail, return final error to client"
+        }
+      }
+    },
+    "blacklist": {
+      "title": "Key Blacklisting & Recovery",
+      "mechanism": {
+        "title": "Blacklisting Mechanism",
+        "trigger": {
+          "title": "Trigger Condition",
+          "description": "When a key's cumulative failure count reaches the blacklist threshold"
+        },
+        "actions": {
+          "title": "Actions Taken",
+          "items": [
+            "Key status updated to 'invalid'",
+            "Removed from polling queue, no longer receives new requests"
+          ]
+        }
+      }
+    },
+    "recovery": {
+      "title": "Recovery Mechanism",
+      "timing": {
+        "title": "Trigger Timing",
+        "description": "Background scheduled task executed at key validation intervals"
+      },
+      "process": {
+        "title": "Recovery Process",
+        "step1": {
+          "title": "Health Check",
+          "description": "Use blacklisted key to request validation endpoint (e.g., models list)"
+        },
+        "step2": {
+          "title": "Validation Success",
+          "items": [
+            "Key status restored to 'valid'",
+            "Failure count reset to 0",
+            "Re-added to polling queue"
+          ]
+        },
+        "step3": {
+          "title": "Validation Failure",
+          "description": "Maintain 'invalid' status, wait for next check cycle"
+        }
+      }
+    },
+    "advantages": {
+      "title": "Mechanism Advantages",
+      "loadBalancing": {
+        "title": "Load Balancing",
+        "description": "Atomic counter ensures fair polling under high concurrency"
+      },
+      "autoRecovery": {
+        "title": "Auto Recovery",
+        "description": "Scheduled health checks and automatic recovery of failed keys"
+      },
+      "faultIsolation": {
+        "title": "Fault Isolation",
+        "description": "Quickly identify failed keys to ensure service stability"
+      }
+    }
   }
 }

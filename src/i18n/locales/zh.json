@@ -762,6 +762,112 @@
       }
     }
   },
+  "keyManagement": {
+    "title": "智能密钥管理",
+    "subtitle": "GPT-Load 采用智能密钥管理机制，通过轮询负载均衡、自动故障检测和恢复机制，确保服务的高可用性和稳定性。",
+    "polling": {
+      "title": "轮询机制",
+      "objective": {
+        "title": "目标",
+        "description": "实现请求在分组内多个密钥间的公平负载均衡。"
+      },
+      "implementation": {
+        "title": "实现方式",
+        "atomicCounter": {
+          "title": "原子计数器",
+          "description": "保证高并发下的轮询一致性和公平性"
+        },
+        "statusFilter": {
+          "title": "状态过滤",
+          "description": "轮询范围仅限于分组内状态为\"有效\"的密钥"
+        }
+      }
+    },
+    "retry": {
+      "title": "重试与故障处理",
+      "trigger": {
+        "title": "触发场景",
+        "description": "当请求失败时（HTTP Status ≥ 400 或网络错误）自动触发"
+      },
+      "process": {
+        "title": "处理流程",
+        "step1": {
+          "title": "标记失败",
+          "description": "为当前失败的密钥失败计数加一"
+        },
+        "step2": {
+          "title": "获取新密钥",
+          "description": "立即通过轮询机制获取分组内下一个可用密钥"
+        },
+        "step3": {
+          "title": "无感重试",
+          "description": "使用新密钥重新发起请求，此过程对客户端无感"
+        },
+        "step4": {
+          "title": "重试上限",
+          "description": "配置的最大重试次数。若所有尝试均失败，则向客户端返回最终错误"
+        }
+      }
+    },
+    "blacklist": {
+      "title": "密钥拉黑与恢复",
+      "mechanism": {
+        "title": "拉黑机制",
+        "trigger": {
+          "title": "触发条件",
+          "description": "当密钥的累计失败计数达到黑名单阈值"
+        },
+        "actions": {
+          "title": "执行动作",
+          "items": [
+            "密钥状态更新为\"无效\"",
+            "从轮询队列中移除，不再接收新请求"
+          ]
+        }
+      }
+    },
+    "recovery": {
+      "title": "恢复机制",
+      "timing": {
+        "title": "触发时机",
+        "description": "后台定时任务，按密钥验证间隔周期执行"
+      },
+      "process": {
+        "title": "恢复流程",
+        "step1": {
+          "title": "健康检查",
+          "description": "使用被拉黑的密钥请求验证接口（如 models 列表）"
+        },
+        "step2": {
+          "title": "验证成功",
+          "items": [
+            "密钥状态恢复为\"有效\"",
+            "失败计数重置为 0",
+            "重新加入轮询队列"
+          ]
+        },
+        "step3": {
+          "title": "验证失败",
+          "description": "保持\"无效\"状态，等待下一个检查周期"
+        }
+      }
+    },
+    "advantages": {
+      "title": "机制优势",
+      "loadBalancing": {
+        "title": "负载均衡",
+        "description": "原子计数器保证高并发下的公平轮询"
+      },
+      "autoRecovery": {
+        "title": "自动恢复",
+        "description": "定时健康检查，故障密钥自动恢复"
+      },
+      "faultIsolation": {
+        "title": "故障隔离",
+        "description": "快速识别故障密钥，确保服务稳定性"
+      }
+    }
+  },
   "seo": {
     "pages": {
       "home": {
