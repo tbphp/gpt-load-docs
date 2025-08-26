@@ -549,6 +549,80 @@
       "button": "View Deployment Guide"
     }
   },
+  "docsQuickStart": {
+    "title": "Quick Start",
+    "subtitle": "Get GPT-Load up and running quickly with these steps.",
+    "quickLaunch": {
+      "title": "Quick Launch",
+      "lightweightDeployment": {
+        "title": "Lightweight Deployment",
+        "description": "Uses SQLite database and memory storage, perfect for personal use and quick testing"
+      }
+    },
+    "requirements": {
+      "title": "System Requirements",
+      "docker": "Docker 20.10+ and Docker Compose",
+      "os": "Linux/macOS/Windows operating systems",
+      "resources": "At least 128MB memory and 1GB disk space"
+    },
+    "installation": {
+      "title": "Installation Steps"
+    },
+    "security": {
+      "title": "Important Security Notice",
+      "warning": "You must change the default management key before deployment!",
+      "requirements": {
+        "complex": "Use at least 20 characters for complex keys",
+        "characters": "Include uppercase, lowercase, numbers and special characters",
+        "avoid": "Never use",
+        "simpleKeys": "or other default/simple keys",
+        "productionRisk": "Using weak keys in production environments poses serious security risks"
+      },
+      "recommendedFormat": "Recommended key format",
+      "randomString": "random string",
+      "characters": "characters"
+    },
+    "steps": {
+      "createDirectory": {
+        "title": "Create Working Directory",
+        "comment": "Create directory and enter"
+      },
+      "downloadConfig": {
+        "title": "Download Configuration Files",
+        "dockerComment": "Download Docker Compose configuration",
+        "envComment": "Download environment variable configuration",
+        "securityConfig": {
+          "title": "Modify Security Configuration Immediately",
+          "editFile": "Edit",
+          "changeFrom": "file, change the following:",
+          "changeTo": "to a strong key:"
+        }
+      },
+      "startServices": {
+        "title": "Start Services",
+        "comment": "Start GPT-Load service"
+      },
+      "verify": {
+        "title": "Verify Deployment",
+        "accessAdmin": "Access admin interface",
+        "useAuthKey": "Use the",
+        "fileSet": "set in the",
+        "login": "file to login to the admin interface"
+      }
+    },
+    "commands": {
+      "title": "Common Commands",
+      "checkStatus": "Check Status",
+      "viewLogs": "View Logs",
+      "restart": "Restart Service",
+      "update": "Update Version"
+    },
+    "nextSteps": {
+      "description": "Want to learn more deployment options, such as using MySQL/PostgreSQL or cluster deployment? Check out the complete",
+      "deploymentGuide": "Deployment Guide",
+      "period": "."
+    }
+  },
   "seo": {
     "pages": {
       "home": {

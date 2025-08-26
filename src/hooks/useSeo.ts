@@ -72,7 +72,8 @@ function getSeoConfigForPath(pathname: string, language: string) {
  */
 function updatePageTitle(title: string) {
   if (title && title !== document.title) {
-    document.title = generateDynamicTitle(title);
+    const newTitle = generateDynamicTitle(title);
+    document.title = newTitle;
   }
 }
 

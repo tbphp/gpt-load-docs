@@ -3,9 +3,15 @@
 import { useLanguage } from '../i18n/context';
 import { SupportedLanguage } from '../i18n/utils';
 
-// 翻译类型定义
+// 翻译类型定义 - 支持各种嵌套结构
+type TranslationValue = 
+  | string 
+  | string[] 
+  | { [key: string]: TranslationValue }
+  | Array<{ [key: string]: TranslationValue }>;
+
 export interface Translations {
-  [key: string]: any;
+  [key: string]: TranslationValue;
 }
 
 // 导入翻译文件
@@ -21,10 +27,45 @@ const translations: Record<SupportedLanguage, Translations> = {
 };
 
 /**
- * 获取嵌套对象的值
+ * 获取嵌套对象的值 - 类型安全版本
+ * 支持数组和对象，但只返回字符串类型的值
  */
-function getNestedValue(obj: any, path: string): string | undefined {
-  return path.split('.').reduce((current, key) => current?.[key], obj);
+function getNestedValue(obj: Record<string, unknown>, path: string): string | undefined {
+  const value = path.split('.').reduce(
+    (current: unknown, key) => {
+      if (current && typeof current === 'object' && key in current) {
+        return (current as Record<string, unknown>)[key];
+      }
+      return undefined;
+    }, 
+    obj
+  );
+  
+  // 只返回字符串类型的值，数组和对象不作为翻译结果返回
+  return typeof value === 'string' ? value : undefined;
+}
+
+/**
+ * 获取嵌套对象中的数组值 - 专门处理数组类型
+ */
+function getNestedArrayValue(obj: Record<string, unknown>, path: string): string[] {
+  const value = path.split('.').reduce(
+    (current: unknown, key) => {
+      if (current && typeof current === 'object' && key in current) {
+        return (current as Record<string, unknown>)[key];
+      }
+      return undefined;
+    }, 
+    obj
+  );
+  
+  // 如果是字符串数组，直接返回
+  if (Array.isArray(value) && value.every(item => typeof item === 'string')) {
+    return value as string[];
+  }
+  
+  // 否则返回空数组
+  return [];
 }
 
 /**
@@ -52,7 +93,26 @@ export function useTranslation() {
     return fallback || key;
   };
 
-  return { t, currentLanguage };
+  const tArray = (key: string): string[] => {
+    const value = getNestedArrayValue(translations[currentLanguage], key);
+    
+    if (value.length > 0) {
+      return value;
+    }
+
+    // 如果当前语言没有翻译，尝试使用中文作为fallback
+    if (currentLanguage !== 'zh') {
+      const zhValue = getNestedArrayValue(translations.zh, key);
+      if (zhValue.length > 0) {
+        return zhValue;
+      }
+    }
+
+    // 返回空数组
+    return [];
+  };
+
+  return { t, tArray, currentLanguage };
 }
 
 // 导出translations用于外部更新

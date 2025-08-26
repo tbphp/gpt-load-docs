@@ -549,6 +549,80 @@
       "button": "查看部署指南"
     }
   },
+  "docsQuickStart": {
+    "title": "快速开始",
+    "subtitle": "通过以下步骤快速启动和运行 GPT-Load。",
+    "quickLaunch": {
+      "title": "快速启动",
+      "lightweightDeployment": {
+        "title": "轻量化部署",
+        "description": "使用 SQLite 数据库和内存存储，最适合个人使用和快速体验"
+      }
+    },
+    "requirements": {
+      "title": "环境要求",
+      "docker": "Docker 20.10+ 和 Docker Compose",
+      "os": "Linux/macOS/Windows 操作系统",
+      "resources": "至少 128MB 内存和 1GB 磁盘空间"
+    },
+    "installation": {
+      "title": "安装步骤"
+    },
+    "security": {
+      "title": "重要安全提醒",
+      "warning": "在部署之前，您必须修改默认的管理密钥！",
+      "requirements": {
+        "complex": "使用至少 20 个字符的复杂密钥",
+        "characters": "包含大小写字母、数字和特殊字符",
+        "avoid": "绝不使用",
+        "simpleKeys": "等默认或简单密钥",
+        "productionRisk": "生产环境中使用弱密钥将面临严重安全风险"
+      },
+      "recommendedFormat": "建议密钥格式",
+      "randomString": "随机字符串",
+      "characters": "位"
+    },
+    "steps": {
+      "createDirectory": {
+        "title": "创建工作目录",
+        "comment": "创建目录并进入"
+      },
+      "downloadConfig": {
+        "title": "下载配置文件",
+        "dockerComment": "下载 Docker Compose 配置",
+        "envComment": "下载环境变量配置",
+        "securityConfig": {
+          "title": "立即修改安全配置",
+          "editFile": "编辑",
+          "changeFrom": "文件，将以下内容：",
+          "changeTo": "修改为强密钥："
+        }
+      },
+      "startServices": {
+        "title": "启动服务",
+        "comment": "启动 GPT-Load 服务"
+      },
+      "verify": {
+        "title": "验证部署",
+        "accessAdmin": "访问管理界面",
+        "useAuthKey": "使用您在",
+        "fileSet": "文件中设置的",
+        "login": "登录管理界面"
+      }
+    },
+    "commands": {
+      "title": "常用命令",
+      "checkStatus": "查看状态",
+      "viewLogs": "查看日志",
+      "restart": "重启服务",
+      "update": "更新版本"
+    },
+    "nextSteps": {
+      "description": "想了解更多部署选项，例如使用 MySQL/PostgreSQL 或进行集群部署吗？请查看完整的",
+      "deploymentGuide": "部署指南",
+      "period": "。"
+    }
+  },
   "seo": {
     "pages": {
       "home": {

@@ -11,26 +11,26 @@ import {
 } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 const Architecture = () => {
-  const { t } = useTranslation();
+  const { t, tArray } = useTranslation();
   
   const components = [
     {
       icon: Users,
       title: t("architecture.components.client.title"),
       description: t("architecture.components.client.description"),
-      items: (t("architecture.components.client.items") as unknown) as string[] || [],
+      items: tArray("architecture.components.client.items"),
     },
     {
       icon: Shield,
       title: t("architecture.components.proxy.title"),
       description: t("architecture.components.proxy.description"),
-      items: (t("architecture.components.proxy.items") as unknown) as string[] || [],
+      items: tArray("architecture.components.proxy.items"),
     },
     {
       icon: Server,
       title: t("architecture.components.providers.title"),
       description: t("architecture.components.providers.description"),
-      items: (t("architecture.components.providers.items") as unknown) as string[] || [],
+      items: tArray("architecture.components.providers.items"),
     },
   ];
   const infrastructure = [
@@ -38,19 +38,19 @@ const Architecture = () => {
       icon: Database,
       title: t("architecture.infrastructure.mysql.title"),
       description: t("architecture.infrastructure.mysql.description"),
-      details: (t("architecture.infrastructure.mysql.details") as unknown) as string[] || [],
+      details: tArray("architecture.infrastructure.mysql.details"),
     },
     {
       icon: RotateCcw,
       title: t("architecture.infrastructure.redis.title"),
       description: t("architecture.infrastructure.redis.description"),
-      details: (t("architecture.infrastructure.redis.details") as unknown) as string[] || [],
+      details: tArray("architecture.infrastructure.redis.details"),
     },
     {
       icon: Monitor,
       title: t("architecture.infrastructure.management.title"),
       description: t("architecture.infrastructure.management.description"),
-      details: (t("architecture.infrastructure.management.details") as unknown) as string[] || [],
+      details: tArray("architecture.infrastructure.management.details"),
     },
   ];
   return (
@@ -179,7 +179,7 @@ const Architecture = () => {
                   {t("deploymentOptions.standalone.title")}
                 </h4>
                 <ul className="space-y-2 text-blue-100 text-sm sm:text-base">
-                  {(t("deploymentOptions.standalone.features") as unknown as string[]).map((feature, index) => (
+                  {tArray("deploymentOptions.standalone.features").map((feature, index) => (
                     <li key={index}>• {feature}</li>
                   ))}
                 </ul>
@@ -189,7 +189,7 @@ const Architecture = () => {
                   {t("deploymentOptions.cluster.title")}
                 </h4>
                 <ul className="space-y-2 text-blue-100 text-sm sm:text-base">
-                  {(t("deploymentOptions.cluster.features") as unknown as string[]).map((feature, index) => (
+                  {tArray("deploymentOptions.cluster.features").map((feature, index) => (
                     <li key={index}>• {feature}</li>
                   ))}
                 </ul>

@@ -549,6 +549,80 @@
       "button": "デプロイメントガイドを見る"
     }
   },
+  "docsQuickStart": {
+    "title": "クイックスタート",
+    "subtitle": "以下の手順でGPT-Loadを迅速に起動・実行します。",
+    "quickLaunch": {
+      "title": "クイック起動",
+      "lightweightDeployment": {
+        "title": "軽量デプロイメント",
+        "description": "SQLiteデータベースとメモリストレージを使用、個人使用とクイックテストに最適"
+      }
+    },
+    "requirements": {
+      "title": "システム要件",
+      "docker": "Docker 20.10+ と Docker Compose",
+      "os": "Linux/macOS/Windows オペレーティングシステム",
+      "resources": "最低128MBメモリと1GBディスク容量"
+    },
+    "installation": {
+      "title": "インストール手順"
+    },
+    "security": {
+      "title": "重要なセキュリティ通知",
+      "warning": "デプロイ前にデフォルトの管理キーを変更する必要があります！",
+      "requirements": {
+        "complex": "複素キーには最低20文字を使用",
+        "characters": "大文字、小文字、数字、特殊文字を含む",
+        "avoid": "決して使用しない",
+        "simpleKeys": "やその他のデフォルト/シンプルキー",
+        "productionRisk": "本番環境で弱いキーを使用すると深刻なセキュリティリスクが生じます"
+      },
+      "recommendedFormat": "推奨キー形式",
+      "randomString": "ランダム文字列",
+      "characters": "文字"
+    },
+    "steps": {
+      "createDirectory": {
+        "title": "作業ディレクトリを作成",
+        "comment": "ディレクトリを作成して入る"
+      },
+      "downloadConfig": {
+        "title": "設定ファイルをダウンロード",
+        "dockerComment": "Docker Compose設定をダウンロード",
+        "envComment": "環境変数設定をダウンロード",
+        "securityConfig": {
+          "title": "セキュリティ設定を即座に変更",
+          "editFile": "編集",
+          "changeFrom": "ファイル、次の内容を変更：",
+          "changeTo": "強いキーに："
+        }
+      },
+      "startServices": {
+        "title": "サービス開始",
+        "comment": "GPT-Loadサービスを開始"
+      },
+      "verify": {
+        "title": "デプロイメント確認",
+        "accessAdmin": "管理インターフェースにアクセス",
+        "useAuthKey": "使用する",
+        "fileSet": "ファイルに設定された",
+        "login": "で管理インターフェースにログイン"
+      }
+    },
+    "commands": {
+      "title": "一般的なコマンド",
+      "checkStatus": "ステータス確認",
+      "viewLogs": "ログ表示",
+      "restart": "サービス再起動",
+      "update": "バージョン更新"
+    },
+    "nextSteps": {
+      "description": "MySQL/PostgreSQLの使用やクラスターデプロイメントなど、より多くのデプロイメントオプションを学びたいですか？完全な",
+      "deploymentGuide": "デプロイメントガイド",
+      "period": "をご覧ください。"
+    }
+  },
   "seo": {
     "pages": {
       "home": {

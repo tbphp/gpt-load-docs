@@ -44,7 +44,7 @@ export async function generatePageMetadata(
       description: pageConfig.description,
       keywords: pageConfig.keywords,
       authors: [{ name: "tbphp" }],
-      viewport: "width=device-width, initial-scale=1, shrink-to-fit=no",
+      metadataBase: new URL('https://gpt-load.com'),
       icons: {
         icon: [
           { url: "/logo.png", sizes: "32x32", type: "image/png" },
@@ -142,13 +142,15 @@ async function generateFallbackMetadata(): Promise<Metadata> {
       title: config.title,
       description: config.description,
       keywords: config.keywords,
+      metadataBase: new URL('https://gpt-load.com'),
     };
   } catch {
     // 最后的降级方案
     return {
       title: "GPT-Load - 高性能 AI 接口透明代理服务",
       description: "企业级 AI 接口透明代理服务",
-      keywords: "GPT-Load, AI, 代理"
+      keywords: "GPT-Load, AI, 代理",
+      metadataBase: new URL('https://gpt-load.com'),
     };
   }
 }
