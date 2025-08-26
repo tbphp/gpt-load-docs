@@ -1,4 +1,10 @@
 import { Zap, CheckCircle } from "lucide-react";
+import { generatePageMetadata } from "@/lib/dynamicSeo";
+
+// 页面级SEO元数据生成
+export async function generateMetadata() {
+  return generatePageMetadata('/docs');
+}
 
 export default function QuickStartPage() {
   return (

@@ -548,5 +548,26 @@
       "description": "通过 Docker Compose 快速部署，几分钟内即可启动完整的 AI 接口代理服务",
       "button": "查看部署指南"
     }
+  },
+  "seo": {
+    "pages": {
+      "home": {
+        "title": "GPT-Load - 高性能 AI 接口透明代理服务",
+        "description": "企业级 AI 接口透明代理服务，完全保留各 AI 服务商的原生 API 格式。提供密钥轮询、多分组管理、负载均衡等功能。",
+        "keywords": "GPT, OpenAI, API, 透明代理, 负载均衡, 密钥轮询, Go, 高性能, AI代理, Gemini, Claude"
+      },
+      "docs": {
+        "quickStart": {
+          "title": "快速开始 - GPT-Load 部署指南",
+          "description": "5分钟快速部署GPT-Load，Docker一键启动，包含完整的数据库和缓存服务。",
+          "keywords": "GPT-Load部署, Docker部署, 快速开始, AI代理安装"
+        }
+      },
+      "introduction": {
+        "title": "项目简介 - GPT-Load 架构与技术栈详解",
+        "description": "深入了解GPT-Load的核心概念、技术架构、支持的AI服务和企业级功能特性。",
+        "keywords": "GPT-Load架构, AI代理技术, 透明代理原理, 微服务架构, Go语言"
+      }
+    }
   }
 }

@@ -249,7 +249,7 @@
       "features": [
         "Master/Slaveアーキテクチャ",
         "水平スケーリングサポート",
-        "高可用性保障"
+        "高可用性保証"
       ]
     }
   },
@@ -547,6 +547,27 @@
       "title": "GPT-Loadを使い始める",
       "description": "Docker Composeを使ったクイックデプロイメント、数分で完全なAIインターフェースプロキシサービスを開始",
       "button": "デプロイメントガイドを見る"
+    }
+  },
+  "seo": {
+    "pages": {
+      "home": {
+        "title": "GPT-Load - 高性能AI APIトランスペアレントプロキシ",
+        "description": "エンタープライズグレードのAI APIプロキシサービス。各AIプロバイダーのネイティブAPIフォーマットを完全に保持。キーローテーション、マルチグループ管理、ロードバランシング機能を提供。",
+        "keywords": "GPT, OpenAI, API, トランスペアレントプロキシ, ロードバランシング, キーローテーション, Go, 高性能, AIプロキシ, Gemini, Claude"
+      },
+      "docs": {
+        "quickStart": {
+          "title": "クイックスタート - GPT-Load デプロイメントガイド",
+          "description": "Dockerワンクリック起動で5分でGPT-Loadをデプロイ。完全なデータベースとキャッシュサービスを含む。",
+          "keywords": "GPT-Loadデプロイメント, Dockerデプロイメント, クイックスタート, AIプロキシインストール"
+        }
+      },
+      "introduction": {
+        "title": "プロジェクト紹介 - GPT-Load アーキテクチャと技術スタック",
+        "description": "GPT-Loadのコアコンセプト、技術アーキテクチャ、サポートされているAIサービス、エンタープライズ機能の詳細。",
+        "keywords": "GPT-Loadアーキテクチャ, AIプロキシ技術, 透明プロキシ原理, マイクロサービスアーキテクチャ, Go言語"
+      }
     }
   }
 }

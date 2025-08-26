@@ -41,3 +41,61 @@ export const OG_CONFIGS: Record<SupportedLanguage, MetaConfig> = {
     keywords: ""
   }
 };
+
+// 页面级SEO配置接口
+export interface PageSeoConfig {
+  title: string;
+  description: string;
+  keywords: string;
+  type?: 'website' | 'article' | 'product';
+}
+
+// 页面级SEO配置映射架构
+export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoConfig>> = {
+  '/': {
+    zh: { ...META_CONFIGS.zh, type: 'website' },
+    en: { ...META_CONFIGS.en, type: 'website' },
+    ja: { ...META_CONFIGS.ja, type: 'website' }
+  },
+  '/docs': {
+    zh: {
+      title: "快速开始 - GPT-Load 部署指南",
+      description: "5分钟快速部署GPT-Load，Docker一键启动，包含完整的数据库和缓存服务。支持多种AI服务的透明代理。",
+      keywords: "GPT-Load部署, Docker部署, 快速开始, AI代理安装, 透明代理部署",
+      type: 'article'
+    },
+    en: {
+      title: "Quick Start - GPT-Load Deployment Guide",
+      description: "Deploy GPT-Load in 5 minutes with Docker one-click startup, including complete database and cache services. Transparent proxy for multiple AI services.",
+      keywords: "GPT-Load deployment, Docker deployment, quick start, AI proxy installation, transparent proxy setup",
+      type: 'article'
+    },
+    ja: {
+      title: "クイックスタート - GPT-Load デプロイメントガイド",
+      description: "Dockerワンクリック起動で5分でGPT-Loadをデプロイ。完全なデータベースとキャッシュサービスを含む。複数のAIサービスの透明プロキシ。",
+      keywords: "GPT-Loadデプロイメント, Dockerデプロイメント, クイックスタート, AIプロキシインストール, 透明プロキシセットアップ",
+      type: 'article'
+    }
+  },
+  '/docs/introduction': {
+    zh: {
+      title: "项目简介 - GPT-Load 架构与技术栈详解",
+      description: "深入了解GPT-Load的核心概念、技术架构、支持的AI服务和企业级功能特性。基于Go语言的高性能设计。",
+      keywords: "GPT-Load架构, AI代理技术, 透明代理原理, 微服务架构, Go语言, 高并发",
+      type: 'article'
+    },
+    en: {
+      title: "Project Introduction - GPT-Load Architecture & Tech Stack",
+      description: "Deep dive into GPT-Load's core concepts, technical architecture, supported AI services, and enterprise-grade features. High-performance design based on Go.",
+      keywords: "GPT-Load architecture, AI proxy technology, transparent proxy principles, microservice architecture, Go language, high concurrency",
+      type: 'article'
+    },
+    ja: {
+      title: "プロジェクト紹介 - GPT-Load アーキテクチャと技術スタック",
+      description: "GPT-Loadのコアコンセプト、技術アーキテクチャ、サポートされているAIサービス、エンタープライズ機能の詳細。Goベースの高性能設計。",
+      keywords: "GPT-Loadアーキテクチャ, AIプロキシ技術, 透明プロキシ原理, マイクロサービスアーキテクチャ, Go言語, 高同時実行",
+      type: 'article'
+    }
+  }
+  // 架构预留：后续可继续添加其他页面的SEO配置
+};

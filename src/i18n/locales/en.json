@@ -548,5 +548,26 @@
       "description": "Quick deployment via Docker Compose, start a complete AI interface proxy service in minutes",
       "button": "View Deployment Guide"
     }
+  },
+  "seo": {
+    "pages": {
+      "home": {
+        "title": "GPT-Load - High-Performance AI API Transparent Proxy",
+        "description": "Enterprise-grade AI API proxy service that fully preserves native API formats from various AI providers. Features key rotation, multi-group management, load balancing.",
+        "keywords": "GPT, OpenAI, API, transparent proxy, load balancing, key rotation, Go, high performance, AI proxy, Gemini, Claude"
+      },
+      "docs": {
+        "quickStart": {
+          "title": "Quick Start - GPT-Load Deployment Guide",
+          "description": "Deploy GPT-Load in 5 minutes with Docker one-click startup, including complete database and cache services.",
+          "keywords": "GPT-Load deployment, Docker deployment, quick start, AI proxy installation"
+        }
+      },
+      "introduction": {
+        "title": "Project Introduction - GPT-Load Architecture & Tech Stack",
+        "description": "Deep dive into GPT-Load's core concepts, technical architecture, supported AI services, and enterprise-grade features.",
+        "keywords": "GPT-Load architecture, AI proxy technology, transparent proxy principles, microservice architecture, Go language"
+      }
+    }
   }
 }
