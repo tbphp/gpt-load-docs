@@ -825,6 +825,82 @@
       }
     }
   },
+  "routingStrategy": {
+    "title": "ルーティング戦略",
+    "subtitle": "GPT-Loadのパス処理メカニズムを理解し、柔軟なパス設定方法をマスターして、クライアントとアップストリームサービス間の正しい接続を確保する。",
+    "coreProcessing": {
+      "title": "パス処理原理",
+      "transparentPrinciple": {
+        "title": "透過原則",
+        "description": "GPT-Loadは透過原則に従い、パス置換のみを担当し、最大限の柔軟性を維持します。コアロジックは、クライアントリクエスト内のプロキシプレフィックスを実際のアップストリームアドレスに置き換えることです。",
+        "rule": "置換ルール：GPT-Loadサービスアドレス + /proxy/ + グループ名    置換先    アップストリームアドレス"
+      }
+    },
+    "processingFlow": {
+      "title": "処理フロー例",
+      "serviceAddress": "サービスアドレス",
+      "upstreamAddress": "アップストリームアドレス",
+      "groupName": "グループ名",
+      "clientRequest": "クライアントリクエスト",
+      "actualRequest": "実際のリクエスト"
+    },
+    "configurationMethods": {
+      "title": "設定方法詳細",
+      "description": "OpenRouterを例に（完全パス：https://openrouter.ai/api/v1/chat/completions）、グループ名がopenrouter、チャンネルタイプがopenai：",
+      "method1": {
+        "title": "設定方法1：ドメイン分離",
+        "gptLoadConfig": "GPT-Load設定",
+        "upstreamAddress": "アップストリームアドレス",
+        "testPath": "テストパス",
+        "clientConfig": "クライアント設定",
+        "cherryStudioApi": "Cherry Studio APIアドレス"
+      },
+      "method2": {
+        "title": "設定方法2：APIパスを含む（推奨）",
+        "gptLoadConfig": "GPT-Load設定",
+        "upstreamAddress": "アップストリームアドレス",
+        "testPath": "テストパス",
+        "clientConfig": "クライアント設定",
+        "cherryStudioApi": "Cherry Studio APIアドレス"
+      },
+      "method3": {
+        "title": "設定方法3：完全バージョンパス",
+        "gptLoadConfig": "GPT-Load設定",
+        "upstreamAddress": "アップストリームアドレス",
+        "testPath": "テストパス",
+        "clientConfig": "クライアント設定",
+        "cherryStudioApi": "Cherry Studio APIアドレス",
+        "note": "注意：/で終わる必要があり、クライアントの自動v1パス追加を避ける"
+      }
+    },
+    "bestPractices": {
+      "title": "ベストプラクティス",
+      "configurationSuggestions": {
+        "title": "設定提案",
+        "items": [
+          "• 設定方法2を推奨、構造が明確で理解しやすい",
+          "• まず完全なアップストリームAPIアドレスを確定",
+          "• クライアントの特性に応じて適切なパス分割点を選択",
+          "• 設定の一貫性と保守性を維持"
+        ]
+      },
+      "debuggingTips": {
+        "title": "デバッグのコツ",
+        "items": [
+          "• GPT-Loadリクエストログを確認してアップストリームアドレスを確認",
+          "• テストパスを使用して設定の正確性を検証",
+          "• クライアントのパス連結ルールに注意",
+          "• 異なるシナリオに適応するため柔軟に設定を調整"
+        ]
+      }
+    },
+    "summary": {
+      "title": "設定要点まとめ",
+      "description": "パス処理ロジックの理解が鍵：GPT-Loadは単純な文字列置換のみを担当し、柔軟な設定方法で様々なクライアントとアップストリームサービスのニーズに対応できます。",
+      "corePrinciple": "コア原則",
+      "principle": "テストアドレスとクライアントリクエストアドレスがGPT-Loadプロキシを経由した後、最終的なアップストリームアドレスが正確であることを確保。"
+    }
+  },
   "performance": {
     "title": "パフォーマンス詳解",
     "subtitle": "GPT-Loadは「プロキシパス優先」の高性能設計哲学を採用し、すべての最適化はコアプロキシリクエストの究極の性能と安定性を保障するためです。",

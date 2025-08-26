@@ -156,6 +156,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       keywords: "パフォーマンス最適化, ゼロコピー, ストリーミング, ロックフリー並行処理, 非同期処理, 高性能プロキシ, GPT-Load",
       type: 'article'
     }
+  },
+  '/docs/architecture-design/routing-strategy': {
+    zh: {
+      title: "路径设计策略 - GPT-Load",
+      description: "深入理解GPT-Load的路径处理机制和配置方法，掌握透明代理的路径替换原理，学习最佳配置实践。",
+      keywords: "路径设计, 透明代理, 路径配置, API路由, 上游地址, 代理配置, GPT-Load",
+      type: 'article'
+    },
+    en: {
+      title: "Routing Strategy - GPT-Load",
+      description: "In-depth understanding of GPT-Load's path processing mechanism and configuration methods, master transparent proxy path replacement principles, learn best configuration practices.",
+      keywords: "routing strategy, transparent proxy, path configuration, API routing, upstream address, proxy configuration, GPT-Load",
+      type: 'article'
+    },
+    ja: {
+      title: "ルーティング戦略 - GPT-Load",
+      description: "GPT-Loadのパス処理メカニズムと設定方法の詳細理解。透明プロキシのパス置換原理をマスターし、最適な設定実践を学ぶ。",
+      keywords: "ルーティング戦略, 透明プロキシ, パス設定, APIルーティング, アップストリームアドレス, プロキシ設定, GPT-Load",
+      type: 'article'
+    }
   }
   // 架构预留：后续可继续添加其他页面的SEO配置
 };

@@ -825,6 +825,82 @@
       }
     }
   },
+  "routingStrategy": {
+    "title": "Routing Strategy",
+    "subtitle": "Understand GPT-Load's path processing mechanism, master flexible path configuration methods to ensure proper connection between clients and upstream services.",
+    "coreProcessing": {
+      "title": "Path Processing Principles",
+      "transparentPrinciple": {
+        "title": "Transparent Principle",
+        "description": "GPT-Load follows the transparent principle, only responsible for path replacement while maintaining maximum flexibility. The core logic is to replace the proxy prefix in client requests with the actual upstream address.",
+        "rule": "Replacement Rule: GPT-Load Service Address + /proxy/ + Group Name    Replaced with    Upstream Address"
+      }
+    },
+    "processingFlow": {
+      "title": "Processing Flow Example",
+      "serviceAddress": "Service Address",
+      "upstreamAddress": "Upstream Address",
+      "groupName": "Group Name",
+      "clientRequest": "Client Request",
+      "actualRequest": "Actual Request"
+    },
+    "configurationMethods": {
+      "title": "Configuration Methods",
+      "description": "Using OpenRouter as an example (full path: https://openrouter.ai/api/v1/chat/completions), group name is openrouter, channel type is openai:",
+      "method1": {
+        "title": "Configuration Method 1: Domain Separation",
+        "gptLoadConfig": "GPT-Load Configuration",
+        "upstreamAddress": "Upstream Address",
+        "testPath": "Test Path",
+        "clientConfig": "Client Configuration",
+        "cherryStudioApi": "Cherry Studio API Address"
+      },
+      "method2": {
+        "title": "Configuration Method 2: Include API Path (Recommended)",
+        "gptLoadConfig": "GPT-Load Configuration",
+        "upstreamAddress": "Upstream Address",
+        "testPath": "Test Path",
+        "clientConfig": "Client Configuration",
+        "cherryStudioApi": "Cherry Studio API Address"
+      },
+      "method3": {
+        "title": "Configuration Method 3: Complete Version Path",
+        "gptLoadConfig": "GPT-Load Configuration",
+        "upstreamAddress": "Upstream Address",
+        "testPath": "Test Path",
+        "clientConfig": "Client Configuration",
+        "cherryStudioApi": "Cherry Studio API Address",
+        "note": "Note: Must end with /, avoid client auto-appending v1 path"
+      }
+    },
+    "bestPractices": {
+      "title": "Best Practices",
+      "configurationSuggestions": {
+        "title": "Configuration Suggestions",
+        "items": [
+          "• Recommend using configuration method 2 for clear structure",
+          "• First determine the complete upstream API address",
+          "• Choose appropriate path split point based on client characteristics",
+          "• Maintain configuration consistency and maintainability"
+        ]
+      },
+      "debuggingTips": {
+        "title": "Debugging Tips",
+        "items": [
+          "• Check GPT-Load request logs to confirm upstream address",
+          "• Use test path to verify configuration correctness",
+          "• Pay attention to client path concatenation rules",
+          "• Flexibly adjust configuration to adapt to different scenarios"
+        ]
+      }
+    },
+    "summary": {
+      "title": "Configuration Summary",
+      "description": "Understanding path processing logic is key: GPT-Load only handles simple string replacement, flexible configuration methods can adapt to various client and upstream service needs.",
+      "corePrinciple": "Core Principle",
+      "principle": "Ensure that test address and client request address, after GPT-Load proxy, reach the correct upstream address."
+    }
+  },
   "performance": {
     "title": "Performance Details",
     "subtitle": "GPT-Load adopts a \"proxy path first\" high-performance design philosophy, where all optimizations ensure ultimate performance and stability of core proxy requests.",

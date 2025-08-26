@@ -1,14 +1,16 @@
-import { Metadata, Viewport } from 'next'
 import { generatePageMetadata } from "@/lib/dynamicSeo";
 import PerformancePageContent from "@/components/PerformancePageContent";
 
-export async function generateMetadata(): Promise<Metadata> {
+// 页面级SEO元数据生成
+export async function generateMetadata() {
   return generatePageMetadata('/docs/architecture-design/performance');
 }
 
-export const viewport: Viewport = {
+// Viewport 配置
+export const viewport = {
   width: 'device-width',
   initialScale: 1,
+  shrinkToFit: 'no',
 }
 
 export default function PerformancePage() {

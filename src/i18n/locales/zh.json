@@ -825,6 +825,82 @@
       }
     }
   },
+  "routingStrategy": {
+    "title": "路径设计策略",
+    "subtitle": "理解 GPT-Load 的路径处理机制，掌握灵活的路径配置方法，确保客户端与上游服务的正确连接。",
+    "coreProcessing": {
+      "title": "路径处理原理",
+      "transparentPrinciple": {
+        "title": "透传原则",
+        "description": "GPT-Load 遵循透传原则，仅负责路径替换，保持最大的灵活性。核心逻辑是将客户端请求中的代理前缀替换为实际的上游地址。",
+        "rule": "替换规则：GPT-Load服务地址 + /proxy/ + 分组名    替换为    上游地址"
+      }
+    },
+    "processingFlow": {
+      "title": "处理流程示例",
+      "serviceAddress": "服务地址",
+      "upstreamAddress": "上游地址",
+      "groupName": "分组名",
+      "clientRequest": "客户端请求",
+      "actualRequest": "实际请求"
+    },
+    "configurationMethods": {
+      "title": "配置方式详解",
+      "description": "以 OpenRouter 为例（完整路径：https://openrouter.ai/api/v1/chat/completions），分组名为 openrouter，渠道类型为 openai：",
+      "method1": {
+        "title": "配置方式一：域名分离",
+        "gptLoadConfig": "GPT-Load 配置",
+        "upstreamAddress": "上游地址",
+        "testPath": "测试路径",
+        "clientConfig": "客户端配置",
+        "cherryStudioApi": "Cherry Studio API地址"
+      },
+      "method2": {
+        "title": "配置方式二：包含 API 路径（推荐）",
+        "gptLoadConfig": "GPT-Load 配置",
+        "upstreamAddress": "上游地址",
+        "testPath": "测试路径",
+        "clientConfig": "客户端配置",
+        "cherryStudioApi": "Cherry Studio API地址"
+      },
+      "method3": {
+        "title": "配置方式三：完整版本路径",
+        "gptLoadConfig": "GPT-Load 配置",
+        "upstreamAddress": "上游地址",
+        "testPath": "测试路径",
+        "clientConfig": "客户端配置",
+        "cherryStudioApi": "Cherry Studio API地址",
+        "note": "注意：必须以 / 结尾，避免客户端自动拼接 v1 路径"
+      }
+    },
+    "bestPractices": {
+      "title": "最佳实践",
+      "configurationSuggestions": {
+        "title": "配置建议",
+        "items": [
+          "• 推荐使用配置方式二，结构清晰易理解",
+          "• 先确定完整的上游 API 地址",
+          "• 根据客户端特性选择合适的路径分割点",
+          "• 保持配置的一致性和可维护性"
+        ]
+      },
+      "debuggingTips": {
+        "title": "调试技巧",
+        "items": [
+          "• 查看 GPT-Load 请求日志确认上游地址",
+          "• 使用测试路径验证配置正确性",
+          "• 注意客户端的路径拼接规则",
+          "• 灵活调整配置以适应不同场景"
+        ]
+      }
+    },
+    "summary": {
+      "title": "配置要点总结",
+      "description": "理解路径处理逻辑是关键：GPT-Load 只负责简单的字符串替换，灵活的配置方式能适应各种客户端和上游服务的需求。",
+      "corePrinciple": "核心原则",
+      "principle": "确保测试地址和客户端请求地址经过 GPT-Load 代理后，最终请求的上游地址正确无误。"
+    }
+  },
   "performance": {
     "title": "性能详解",
     "subtitle": "GPT-Load 采用\"代理路径优先\"的高性能设计哲学，一切优化都为保障核心代理请求的极致性能和稳定性。",
