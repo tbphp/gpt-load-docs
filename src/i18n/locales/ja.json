@@ -901,6 +901,310 @@
       "principle": "テストアドレスとクライアントリクエストアドレスがGPT-Loadプロキシを経由した後、最終的なアップストリームアドレスが正確であることを確保。"
     }
   },
+  "channels": {
+    "title": "チャネルタイプ",
+    "subtitle": "GPT-Loadは複数の主流AIサービスプロバイダーをサポートし、ネイティブAPIフォーマットと体験を保持したまま、完全に透明なプロキシアクセスを提供します。",
+    "supportedServices": {
+      "title": "サポートされているサービス",
+      "openai": {
+        "title": "OpenAI",
+        "features": [
+          "Chat Completions API",
+          "Embeddings API",
+          "Images API",
+          "Audio API",
+          "Files API",
+          "Models API"
+        ]
+      },
+      "gemini": {
+        "title": "Google Gemini",
+        "features": [
+          "Generate Content API",
+          "ストリーミングサポート",
+          "マルチモーダル入力",
+          "安全設定",
+          "生成設定",
+          "モデル管理"
+        ]
+      },
+      "claude": {
+        "title": "Anthropic Claude",
+        "features": [
+          "Messages API",
+          "ストリーミング応答",
+          "システムプロンプト",
+          "ツール使用",
+          "トークンカウント",
+          "モデルアクセス"
+        ]
+      },
+      "extensibility": {
+        "title": "拡張性",
+        "description": "アーキテクチャ設計により、標準化されたインターフェースアダプテーション層を通じて、新しいAIサービスプロバイダーを迅速に追加し、統合アクセスを実現します。"
+      }
+    },
+    "proxyFormat": {
+      "title": "プロキシフォーマット",
+      "unifiedEndpoint": {
+        "title": "統一プロキシエンドポイント",
+        "format": "http://localhost:3001/proxy/{group-name}"
+      },
+      "parameters": {
+        "title": "パラメータ説明",
+        "items": [
+          "group-name: 管理画面で作成されたグループ名",
+          "任意のパスサフィックスをサポート、完全透明転送",
+          "元のAPIのすべての機能特性を保持"
+        ]
+      },
+      "authentication": {
+        "title": "認証方式",
+        "items": [
+          "元のサービスのAPI Keyを使用",
+          "Authorization: Bearer {token} ヘッダーで渡す",
+          "グループレベルのキーローテーションと負荷分散をサポート"
+        ]
+      }
+    },
+    "openaiFormat": {
+      "title": "OpenAI形式接続",
+      "authentication": {
+        "title": "認証設定",
+        "description": "GPT-LoadはOpenAI SDKと完全に互換性があり、base_urlを変更するだけでシームレスに切り替えできます。"
+      },
+      "examples": {
+        "original": {
+          "title": "元のOpenAIリクエスト",
+          "code": "curl https://api.openai.com/v1/chat/completions \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Authorization: Bearer $OPENAI_API_KEY\" \\\n  -d '{\n    \"model\": \"gpt-4\",\n    \"messages\": [\n      {\n        \"role\": \"user\",\n        \"content\": \"Hello!\"\n      }\n    ]\n  }'"
+        },
+        "proxy": {
+          "title": "GPT-Loadプロキシ経由",
+          "code": "curl http://localhost:3001/proxy/openai/v1/chat/completions \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Authorization: Bearer $OPENAI_API_KEY\" \\\n  -d '{\n    \"model\": \"gpt-4\",\n    \"messages\": [\n      {\n        \"role\": \"user\",\n        \"content\": \"Hello!\"\n      }\n    ]\n  }'"
+        }
+      },
+      "migration": {
+        "step1": "APIベースアドレスの変更のみ、その他のコードは完全に変更不要",
+        "step2": "すべてのOpenAI SDK機能をサポート"
+      },
+      "endpoints": {
+        "title": "サポートされているエンドポイント",
+        "main": {
+          "title": "コアAPI",
+          "items": [
+            "/v1/chat/completions - チャット補完",
+            "/v1/embeddings - ベクトル埋め込み",
+            "/v1/images/generations - 画像生成",
+            "/v1/audio/speech - 音声合成",
+            "/v1/audio/transcriptions - 音声文字起こし"
+          ]
+        },
+        "other": {
+          "title": "その他のAPI",
+          "items": [
+            "/v1/models - モデル一覧",
+            "/v1/files - ファイル管理",
+            "/v1/fine_tuning/jobs - ファインチューニングジョブ",
+            "/v1/assistants - アシスタントAPI",
+            "/v1/threads - 会話スレッド"
+          ]
+        }
+      },
+      "sdk": {
+        "title": "SDK設定",
+        "python": {
+          "title": "Python SDK",
+          "code": "from openai import OpenAI\n\nclient = OpenAI(\n    api_key=\"your-openai-api-key\",\n    base_url=\"http://localhost:3001/proxy/openai\"\n)\n\nresponse = client.chat.completions.create(\n    model=\"gpt-4\",\n    messages=[\n        {\"role\": \"user\", \"content\": \"Hello!\"}\n    ]\n)"
+        },
+        "nodejs": {
+          "title": "Node.js SDK",
+          "code": "import OpenAI from 'openai';\n\nconst openai = new OpenAI({\n  apiKey: 'your-openai-api-key',\n  baseURL: 'http://localhost:3001/proxy/openai'\n});\n\nconst response = await openai.chat.completions.create({\n  model: 'gpt-4',\n  messages: [\n    { role: 'user', content: 'Hello!' }\n  ]\n});"
+        }
+      }
+    },
+    "geminiFormat": {
+      "title": "Gemini形式接続",
+      "authentication": {
+        "title": "認証設定",
+        "description": "Google Gemini APIと完全に互換性があり、マルチモーダル入力やストリーミング応答を含むすべてのネイティブ機能をサポートします。"
+      },
+      "examples": {
+        "original": {
+          "title": "元のGeminiリクエスト",
+          "code": "curl https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=$API_KEY \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n    \"contents\": [{\n      \"parts\": [{\n        \"text\": \"Write a story about a magic backpack.\"\n      }]\n    }]\n  }'"
+        },
+        "proxy": {
+          "title": "GPT-Loadプロキシ経由",
+          "code": "curl http://localhost:3001/proxy/gemini/v1beta/models/gemini-pro:generateContent?key=$API_KEY \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n    \"contents\": [{\n      \"parts\": [{\n        \"text\": \"Write a story about a magic backpack.\"\n      }]\n    }]\n  }'"
+        }
+      },
+      "migration": {
+        "step1": "リクエストベースアドレスをGPT-Loadプロキシアドレスに置換",
+        "step2": "すべてのパラメータと認証方式は変更せず"
+      },
+      "endpoints": {
+        "title": "サポートされているエンドポイント",
+        "content": {
+          "title": "コンテンツ生成",
+          "items": [
+            "/v1beta/models/*/generateContent - コンテンツ生成",
+            "/v1beta/models/*/streamGenerateContent - ストリーミング生成",
+            "/v1beta/models/*/countTokens - トークンカウント",
+            "/v1beta/models/*/embedContent - ベクトル埋め込み"
+          ]
+        },
+        "models": {
+          "title": "モデル管理",
+          "items": [
+            "/v1beta/models - モデル一覧",
+            "/v1beta/models/* - モデル詳細",
+            "/v1beta/tuning/createTunedModel - ファインチューニング作成",
+            "/v1beta/tuning/tunedModels - ファインチューニング一覧"
+          ]
+        }
+      },
+      "sdk": {
+        "title": "SDK設定",
+        "python": {
+          "title": "Python SDK",
+          "code": "import google.generativeai as genai\n\n# API Key設定\ngenai.configure(\n    api_key=\"your-gemini-api-key\",\n    client_options={\"api_endpoint\": \"http://localhost:3001/proxy/gemini\"}\n)\n\nmodel = genai.GenerativeModel('gemini-pro')\nresponse = model.generate_content(\"Hello!\")"
+        },
+        "http": {
+          "title": "HTTPリクエスト",
+          "code": "POST http://localhost:3001/proxy/gemini/v1beta/models/gemini-pro:generateContent?key=YOUR_API_KEY\nContent-Type: application/json\n\n{\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"Explain how AI works\"\n    }]\n  }]\n}"
+        }
+      }
+    },
+    "claudeFormat": {
+      "title": "Claude形式接続",
+      "authentication": {
+        "title": "認証設定",
+        "description": "Anthropic Claude APIと完全に互換性があり、Messages API、ツール使用、ストリーミング応答などすべての高度な機能をサポートします。"
+      },
+      "examples": {
+        "original": {
+          "title": "元のClaudeリクエスト",
+          "code": "curl https://api.anthropic.com/v1/messages \\\n  -H \"Content-Type: application/json\" \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -d '{\n    \"model\": \"claude-3-sonnet-20240229\",\n    \"max_tokens\": 1024,\n    \"messages\": [\n      {\"role\": \"user\", \"content\": \"Hello, Claude\"}\n    ]\n  }'"
+        },
+        "proxy": {
+          "title": "GPT-Loadプロキシ経由",
+          "code": "curl http://localhost:3001/proxy/claude/v1/messages \\\n  -H \"Content-Type: application/json\" \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -d '{\n    \"model\": \"claude-3-sonnet-20240229\",\n    \"max_tokens\": 1024,\n    \"messages\": [\n      {\"role\": \"user\", \"content\": \"Hello, Claude\"}\n    ]\n  }'"
+        }
+      },
+      "migration": {
+        "step1": "APIベースアドレスをGPT-Loadプロキシエンドポイントに更新",
+        "step2": "すべてのヘッダー情報とリクエスト形式は変更せず"
+      },
+      "endpoints": {
+        "title": "サポートされているエンドポイント",
+        "main": {
+          "title": "コアAPI",
+          "items": [
+            "/v1/messages - メッセージ会話",
+            "/v1/messages/streaming - ストリーミング会話",
+            "/v1/complete - テキスト補完（レガシー）",
+            "/v1/tools - ツール使用"
+          ]
+        },
+        "models": {
+          "title": "モデル管理",
+          "items": [
+            "/v1/models - 利用可能モデル一覧",
+            "Claude-3全シリーズモデルをサポート",
+            "カスタムmax_tokens制限をサポート",
+            "システムプロンプト設定をサポート"
+          ]
+        }
+      },
+      "sdk": {
+        "title": "SDK設定",
+        "python": {
+          "title": "Python SDK",
+          "code": "from anthropic import Anthropic\n\nclient = Anthropic(\n    api_key=\"your-claude-api-key\",\n    base_url=\"http://localhost:3001/proxy/claude\"\n)\n\nmessage = client.messages.create(\n    model=\"claude-3-sonnet-20240229\",\n    max_tokens=1024,\n    messages=[\n        {\"role\": \"user\", \"content\": \"Hello!\"}\n    ]\n)"
+        },
+        "http": {
+          "title": "HTTPリクエスト",
+          "code": "POST http://localhost:3001/proxy/claude/v1/messages\nContent-Type: application/json\nx-api-key: YOUR_API_KEY\nanthropic-version: 2023-06-01\n\n{\n  \"model\": \"claude-3-sonnet-20240229\",\n  \"max_tokens\": 1024,\n  \"messages\": [\n    {\"role\": \"user\", \"content\": \"Hello!\"}\n  ]\n}"
+        }
+      }
+    },
+    "groupManagement": {
+      "title": "グループ管理",
+      "creation": {
+        "title": "グループ作成",
+        "steps": [
+          "GPT-Load管理画面にアクセス",
+          "「環境管理」->「グループ設定」に移動",
+          "「新規グループ」をクリックしてグループ情報を入力",
+          "対応するチャネルタイプ（OpenAI/Gemini/Claude）を選択",
+          "アップストリームアドレスとテストパスを設定",
+          "API キーを追加して接続をテスト",
+          "設定を保存してグループを有効化"
+        ]
+      },
+      "configuration": {
+        "title": "設定要点",
+        "items": [
+          "グループ名はプロキシパスの一部になります",
+          "一つのグループに複数のAPI キーを設定可能",
+          "自動的にキーローテーションと負荷分散を実行",
+          "キーヘルスチェックとフェイルオーバーをサポート",
+          "リクエスト頻度制限とクォータ管理を設定可能"
+        ]
+      }
+    },
+    "migration": {
+      "title": "移行ガイド",
+      "guide": {
+        "title": "移行ステップ",
+        "steps": [
+          {
+            "title": "現状評価",
+            "description": "現在使用しているAIサービスとAPI呼び出し方法を分析"
+          },
+          {
+            "title": "GPT-Loadデプロイ",
+            "description": "クイックスタートガイドに従ってGPT-Loadサービスをデプロイ"
+          },
+          {
+            "title": "設定更新",
+            "description": "アプリケーション内のAPIベースアドレスをGPT-Loadに向けるよう修正"
+          }
+        ]
+      },
+      "seamless": {
+        "title": "シームレス移行",
+        "description": "GPT-Loadの設計思想は完全に透明で、移行プロセス中はビジネスロジックを修正する必要がなく、APIエンドポイントアドレスを変更するだけで統一管理と負荷分散の利点を享受できます。"
+      }
+    },
+    "summary": {
+      "title": "まとめ",
+      "transparent": {
+        "title": "透明プロキシ",
+        "features": [
+          "ネイティブAPIフォーマットを保持",
+          "ビジネスコードの修正不要",
+          "すべての機能特性をサポート"
+        ]
+      },
+      "unified": {
+        "title": "統一管理",
+        "features": [
+          "マルチサービス統一アクセス",
+          "集中キー管理",
+          "統一監視アラート"
+        ]
+      },
+      "scalable": {
+        "title": "高スケーラブル",
+        "features": [
+          "負荷分散とフェイルオーバー",
+          "水平スケーリングサポート",
+          "エンタープライズグレードパフォーマンス"
+        ]
+      }
+    }
+  },
   "performance": {
     "title": "パフォーマンス詳解",
     "subtitle": "GPT-Loadは「プロキシパス優先」の高性能設計哲学を採用し、すべての最適化はコアプロキシリクエストの究極の性能と安定性を保障するためです。",

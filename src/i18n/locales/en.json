@@ -901,6 +901,310 @@
       "principle": "Ensure that test address and client request address, after GPT-Load proxy, reach the correct upstream address."
     }
   },
+  "channels": {
+    "title": "Channel Types",
+    "subtitle": "GPT-Load supports multiple mainstream AI service providers, offering completely transparent proxy access while maintaining native API format and experience.",
+    "supportedServices": {
+      "title": "Supported Services",
+      "openai": {
+        "title": "OpenAI",
+        "features": [
+          "Chat Completions API",
+          "Embeddings API",
+          "Images API",
+          "Audio API",
+          "Files API",
+          "Models API"
+        ]
+      },
+      "gemini": {
+        "title": "Google Gemini",
+        "features": [
+          "Generate Content API",
+          "Streaming Support",
+          "Multi-modal Inputs",
+          "Safety Settings",
+          "Generation Config",
+          "Models Management"
+        ]
+      },
+      "claude": {
+        "title": "Anthropic Claude",
+        "features": [
+          "Messages API",
+          "Streaming Responses",
+          "System Prompts",
+          "Tool Use",
+          "Token Counting",
+          "Models Access"
+        ]
+      },
+      "extensibility": {
+        "title": "Extensibility",
+        "description": "Architecture designed to quickly add new AI service providers through standardized interface adaptation layer for unified access."
+      }
+    },
+    "proxyFormat": {
+      "title": "Proxy Format",
+      "unifiedEndpoint": {
+        "title": "Unified Proxy Endpoint",
+        "format": "http://localhost:3001/proxy/{group-name}"
+      },
+      "parameters": {
+        "title": "Parameter Description",
+        "items": [
+          "group-name: Group name created in the management interface",
+          "Supports arbitrary path suffixes with complete transparent forwarding",
+          "Maintains all functionality of the original API"
+        ]
+      },
+      "authentication": {
+        "title": "Authentication",
+        "items": [
+          "Use original service's API Key",
+          "Pass through Authorization: Bearer {token} header",
+          "Supports group-level key rotation and load balancing"
+        ]
+      }
+    },
+    "openaiFormat": {
+      "title": "OpenAI Format Integration",
+      "authentication": {
+        "title": "Authentication Configuration",
+        "description": "GPT-Load is fully compatible with OpenAI SDK, only need to change base_url for seamless switching."
+      },
+      "examples": {
+        "original": {
+          "title": "Original OpenAI Request",
+          "code": "curl https://api.openai.com/v1/chat/completions \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Authorization: Bearer $OPENAI_API_KEY\" \\\n  -d '{\n    \"model\": \"gpt-4\",\n    \"messages\": [\n      {\n        \"role\": \"user\",\n        \"content\": \"Hello!\"\n      }\n    ]\n  }'"
+        },
+        "proxy": {
+          "title": "Via GPT-Load Proxy",
+          "code": "curl http://localhost:3001/proxy/openai/v1/chat/completions \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Authorization: Bearer $OPENAI_API_KEY\" \\\n  -d '{\n    \"model\": \"gpt-4\",\n    \"messages\": [\n      {\n        \"role\": \"user\",\n        \"content\": \"Hello!\"\n      }\n    ]\n  }'"
+        }
+      },
+      "migration": {
+        "step1": "Only need to change API base address, all other code remains unchanged",
+        "step2": "Supports all OpenAI SDK functionality"
+      },
+      "endpoints": {
+        "title": "Supported Endpoints",
+        "main": {
+          "title": "Core APIs",
+          "items": [
+            "/v1/chat/completions - Chat completions",
+            "/v1/embeddings - Vector embeddings",
+            "/v1/images/generations - Image generation",
+            "/v1/audio/speech - Text-to-speech",
+            "/v1/audio/transcriptions - Speech-to-text"
+          ]
+        },
+        "other": {
+          "title": "Other APIs",
+          "items": [
+            "/v1/models - Model listing",
+            "/v1/files - File management",
+            "/v1/fine_tuning/jobs - Fine-tuning jobs",
+            "/v1/assistants - Assistants API",
+            "/v1/threads - Conversation threads"
+          ]
+        }
+      },
+      "sdk": {
+        "title": "SDK Configuration",
+        "python": {
+          "title": "Python SDK",
+          "code": "from openai import OpenAI\n\nclient = OpenAI(\n    api_key=\"your-openai-api-key\",\n    base_url=\"http://localhost:3001/proxy/openai\"\n)\n\nresponse = client.chat.completions.create(\n    model=\"gpt-4\",\n    messages=[\n        {\"role\": \"user\", \"content\": \"Hello!\"}\n    ]\n)"
+        },
+        "nodejs": {
+          "title": "Node.js SDK",
+          "code": "import OpenAI from 'openai';\n\nconst openai = new OpenAI({\n  apiKey: 'your-openai-api-key',\n  baseURL: 'http://localhost:3001/proxy/openai'\n});\n\nconst response = await openai.chat.completions.create({\n  model: 'gpt-4',\n  messages: [\n    { role: 'user', content: 'Hello!' }\n  ]\n});"
+        }
+      }
+    },
+    "geminiFormat": {
+      "title": "Gemini Format Integration",
+      "authentication": {
+        "title": "Authentication Configuration",
+        "description": "Fully compatible with Google Gemini API, supporting all native features including multi-modal inputs and streaming responses."
+      },
+      "examples": {
+        "original": {
+          "title": "Original Gemini Request",
+          "code": "curl https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=$API_KEY \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n    \"contents\": [{\n      \"parts\": [{\n        \"text\": \"Write a story about a magic backpack.\"\n      }]\n    }]\n  }'"
+        },
+        "proxy": {
+          "title": "Via GPT-Load Proxy",
+          "code": "curl http://localhost:3001/proxy/gemini/v1beta/models/gemini-pro:generateContent?key=$API_KEY \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n    \"contents\": [{\n      \"parts\": [{\n        \"text\": \"Write a story about a magic backpack.\"\n      }]\n    }]\n  }'"
+        }
+      },
+      "migration": {
+        "step1": "Replace request base address with GPT-Load proxy address",
+        "step2": "Keep all parameters and authentication methods unchanged"
+      },
+      "endpoints": {
+        "title": "Supported Endpoints",
+        "content": {
+          "title": "Content Generation",
+          "items": [
+            "/v1beta/models/*/generateContent - Content generation",
+            "/v1beta/models/*/streamGenerateContent - Streaming generation",
+            "/v1beta/models/*/countTokens - Token counting",
+            "/v1beta/models/*/embedContent - Vector embeddings"
+          ]
+        },
+        "models": {
+          "title": "Model Management",
+          "items": [
+            "/v1beta/models - Model listing",
+            "/v1beta/models/* - Model details",
+            "/v1beta/tuning/createTunedModel - Fine-tuning creation",
+            "/v1beta/tuning/tunedModels - Fine-tuning list"
+          ]
+        }
+      },
+      "sdk": {
+        "title": "SDK Configuration",
+        "python": {
+          "title": "Python SDK",
+          "code": "import google.generativeai as genai\n\n# Configure API Key\ngenai.configure(\n    api_key=\"your-gemini-api-key\",\n    client_options={\"api_endpoint\": \"http://localhost:3001/proxy/gemini\"}\n)\n\nmodel = genai.GenerativeModel('gemini-pro')\nresponse = model.generate_content(\"Hello!\")"
+        },
+        "http": {
+          "title": "HTTP Request",
+          "code": "POST http://localhost:3001/proxy/gemini/v1beta/models/gemini-pro:generateContent?key=YOUR_API_KEY\nContent-Type: application/json\n\n{\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"Explain how AI works\"\n    }]\n  }]\n}"
+        }
+      }
+    },
+    "claudeFormat": {
+      "title": "Claude Format Integration",
+      "authentication": {
+        "title": "Authentication Configuration",
+        "description": "Fully compatible with Anthropic Claude API, supporting Messages API, tool usage, streaming responses and all advanced features."
+      },
+      "examples": {
+        "original": {
+          "title": "Original Claude Request",
+          "code": "curl https://api.anthropic.com/v1/messages \\\n  -H \"Content-Type: application/json\" \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -d '{\n    \"model\": \"claude-3-sonnet-20240229\",\n    \"max_tokens\": 1024,\n    \"messages\": [\n      {\"role\": \"user\", \"content\": \"Hello, Claude\"}\n    ]\n  }'"
+        },
+        "proxy": {
+          "title": "Via GPT-Load Proxy",
+          "code": "curl http://localhost:3001/proxy/claude/v1/messages \\\n  -H \"Content-Type: application/json\" \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -d '{\n    \"model\": \"claude-3-sonnet-20240229\",\n    \"max_tokens\": 1024,\n    \"messages\": [\n      {\"role\": \"user\", \"content\": \"Hello, Claude\"}\n    ]\n  }'"
+        }
+      },
+      "migration": {
+        "step1": "Update API base address to GPT-Load proxy endpoint",
+        "step2": "Keep all headers and request format unchanged"
+      },
+      "endpoints": {
+        "title": "Supported Endpoints",
+        "main": {
+          "title": "Core APIs",
+          "items": [
+            "/v1/messages - Message conversations",
+            "/v1/messages/streaming - Streaming conversations",
+            "/v1/complete - Text completion (Legacy)",
+            "/v1/tools - Tool usage"
+          ]
+        },
+        "models": {
+          "title": "Model Management",
+          "items": [
+            "/v1/models - Available model list",
+            "Supports full Claude-3 model series",
+            "Supports custom max_tokens limits",
+            "Supports system prompt configuration"
+          ]
+        }
+      },
+      "sdk": {
+        "title": "SDK Configuration",
+        "python": {
+          "title": "Python SDK",
+          "code": "from anthropic import Anthropic\n\nclient = Anthropic(\n    api_key=\"your-claude-api-key\",\n    base_url=\"http://localhost:3001/proxy/claude\"\n)\n\nmessage = client.messages.create(\n    model=\"claude-3-sonnet-20240229\",\n    max_tokens=1024,\n    messages=[\n        {\"role\": \"user\", \"content\": \"Hello!\"}\n    ]\n)"
+        },
+        "http": {
+          "title": "HTTP Request",
+          "code": "POST http://localhost:3001/proxy/claude/v1/messages\nContent-Type: application/json\nx-api-key: YOUR_API_KEY\nanthropic-version: 2023-06-01\n\n{\n  \"model\": \"claude-3-sonnet-20240229\",\n  \"max_tokens\": 1024,\n  \"messages\": [\n    {\"role\": \"user\", \"content\": \"Hello!\"}\n  ]\n}"
+        }
+      }
+    },
+    "groupManagement": {
+      "title": "Group Management",
+      "creation": {
+        "title": "Creating Groups",
+        "steps": [
+          "Access GPT-Load management interface",
+          "Navigate to \"Environment Management\" -> \"Group Settings\"",
+          "Click \"Add Group\" and fill in group information",
+          "Select corresponding channel type (OpenAI/Gemini/Claude)",
+          "Configure upstream address and test path",
+          "Add API keys and test connection",
+          "Save configuration and enable group"
+        ]
+      },
+      "configuration": {
+        "title": "Configuration Points",
+        "items": [
+          "Group name becomes part of the proxy path",
+          "Supports multiple API keys per group",
+          "Automatic key rotation and load balancing",
+          "Supports key health checks and failover",
+          "Can set request rate limits and quota management"
+        ]
+      }
+    },
+    "migration": {
+      "title": "Migration Guide",
+      "guide": {
+        "title": "Migration Steps",
+        "steps": [
+          {
+            "title": "Assess Current State",
+            "description": "Analyze current AI services and API calling methods"
+          },
+          {
+            "title": "Deploy GPT-Load",
+            "description": "Deploy GPT-Load service following the quick start guide"
+          },
+          {
+            "title": "Update Configuration",
+            "description": "Modify API base addresses in applications to point to GPT-Load"
+          }
+        ]
+      },
+      "seamless": {
+        "title": "Seamless Migration",
+        "description": "GPT-Load's design philosophy is complete transparency. During migration, no business logic modification is needed, just change API endpoint addresses to enjoy unified management and load balancing benefits."
+      }
+    },
+    "summary": {
+      "title": "Summary",
+      "transparent": {
+        "title": "Transparent Proxy",
+        "features": [
+          "Maintains native API format",
+          "No need to modify business code",
+          "Supports all functionality"
+        ]
+      },
+      "unified": {
+        "title": "Unified Management",
+        "features": [
+          "Multi-service unified access",
+          "Centralized key management",
+          "Unified monitoring and alerting"
+        ]
+      },
+      "scalable": {
+        "title": "Highly Scalable",
+        "features": [
+          "Load balancing and failover",
+          "Horizontal scaling support",
+          "Enterprise-grade performance"
+        ]
+      }
+    }
+  },
   "performance": {
     "title": "Performance Details",
     "subtitle": "GPT-Load adopts a \"proxy path first\" high-performance design philosophy, where all optimizations ensure ultimate performance and stability of core proxy requests.",

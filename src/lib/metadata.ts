@@ -176,6 +176,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       keywords: "ルーティング戦略, 透明プロキシ, パス設定, APIルーティング, アップストリームアドレス, プロキシ設定, GPT-Load",
       type: 'article'
     }
+  },
+  '/docs/channels': {
+    zh: {
+      title: "渠道类型 - GPT-Load",
+      description: "全面了解GPT-Load支持的AI服务渠道，包括OpenAI、Gemini、Claude等主流服务的接入配置、认证方式、SDK使用和迁移指南。",
+      keywords: "AI渠道, OpenAI接入, Gemini配置, Claude API, 多服务接入, API代理, 统一接口, GPT-Load",
+      type: 'article'
+    },
+    en: {
+      title: "Channel Types - GPT-Load",
+      description: "Comprehensive understanding of AI service channels supported by GPT-Load, including access configuration, authentication methods, SDK usage and migration guides for mainstream services like OpenAI, Gemini, Claude.",
+      keywords: "AI channels, OpenAI integration, Gemini configuration, Claude API, multi-service access, API proxy, unified interface, GPT-Load",
+      type: 'article'
+    },
+    ja: {
+      title: "チャネルタイプ - GPT-Load",
+      description: "GPT-LoadがサポートするAIサービスチャネルの包括的理解。OpenAI、Gemini、Claude等の主流サービスのアクセス設定、認証方式、SDK使用、移行ガイドを含む。",
+      keywords: "AIチャネル, OpenAI統合, Gemini設定, Claude API, マルチサービスアクセス, APIプロキシ, 統一インターフェース, GPT-Load",
+      type: 'article'
+    }
   }
   // 架构预留：后续可继续添加其他页面的SEO配置
 };

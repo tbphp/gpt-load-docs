@@ -901,6 +901,310 @@
       "principle": "确保测试地址和客户端请求地址经过 GPT-Load 代理后，最终请求的上游地址正确无误。"
     }
   },
+  "channels": {
+    "title": "渠道类型",
+    "subtitle": "GPT-Load 支持多种主流 AI 服务提供商，提供完全透明的代理访问，保持原生 API 格式和体验。",
+    "supportedServices": {
+      "title": "支持的服务",
+      "openai": {
+        "title": "OpenAI",
+        "features": [
+          "Chat Completions API",
+          "Embeddings API",
+          "Images API",
+          "Audio API",
+          "Files API",
+          "Models API"
+        ]
+      },
+      "gemini": {
+        "title": "Google Gemini",
+        "features": [
+          "Generate Content API",
+          "Streaming Support",
+          "Multi-modal Inputs",
+          "Safety Settings",
+          "Generation Config",
+          "Models Management"
+        ]
+      },
+      "claude": {
+        "title": "Anthropic Claude",
+        "features": [
+          "Messages API",
+          "Streaming Responses",
+          "System Prompts",
+          "Tool Use",
+          "Token Counting",
+          "Models Access"
+        ]
+      },
+      "extensibility": {
+        "title": "扩展性",
+        "description": "架构设计支持快速添加新的 AI 服务提供商，通过标准化的接口适配层实现统一访问。"
+      }
+    },
+    "proxyFormat": {
+      "title": "代理格式",
+      "unifiedEndpoint": {
+        "title": "统一代理端点",
+        "format": "http://localhost:3001/proxy/{group-name}"
+      },
+      "parameters": {
+        "title": "参数说明",
+        "items": [
+          "group-name: 在管理界面创建的分组名称",
+          "支持任意路径后缀，完全透明转发",
+          "保持原始 API 的所有功能特性"
+        ]
+      },
+      "authentication": {
+        "title": "认证方式",
+        "items": [
+          "使用原始服务的 API Key",
+          "通过 Authorization: Bearer {token} 头传递",
+          "支持分组级别的密钥轮询和负载均衡"
+        ]
+      }
+    },
+    "openaiFormat": {
+      "title": "OpenAI 格式接入",
+      "authentication": {
+        "title": "认证配置",
+        "description": "GPT-Load 完全兼容 OpenAI SDK，只需更改 base_url 即可无缝切换。"
+      },
+      "examples": {
+        "original": {
+          "title": "原始 OpenAI 请求",
+          "code": "curl https://api.openai.com/v1/chat/completions \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Authorization: Bearer $OPENAI_API_KEY\" \\\n  -d '{\n    \"model\": \"gpt-4\",\n    \"messages\": [\n      {\n        \"role\": \"user\",\n        \"content\": \"Hello!\"\n      }\n    ]\n  }'"
+        },
+        "proxy": {
+          "title": "通过 GPT-Load 代理",
+          "code": "curl http://localhost:3001/proxy/openai/v1/chat/completions \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Authorization: Bearer $OPENAI_API_KEY\" \\\n  -d '{\n    \"model\": \"gpt-4\",\n    \"messages\": [\n      {\n        \"role\": \"user\",\n        \"content\": \"Hello!\"\n      }\n    ]\n  }'"
+        }
+      },
+      "migration": {
+        "step1": "仅需更改 API 基础地址，其他代码完全不变",
+        "step2": "支持所有 OpenAI SDK 的功能特性"
+      },
+      "endpoints": {
+        "title": "支持的端点",
+        "main": {
+          "title": "核心接口",
+          "items": [
+            "/v1/chat/completions - 聊天补全",
+            "/v1/embeddings - 向量嵌入",
+            "/v1/images/generations - 图像生成",
+            "/v1/audio/speech - 语音合成",
+            "/v1/audio/transcriptions - 语音转文字"
+          ]
+        },
+        "other": {
+          "title": "其他接口",
+          "items": [
+            "/v1/models - 模型列表",
+            "/v1/files - 文件管理",
+            "/v1/fine_tuning/jobs - 微调任务",
+            "/v1/assistants - 助手接口",
+            "/v1/threads - 对话线程"
+          ]
+        }
+      },
+      "sdk": {
+        "title": "SDK 配置",
+        "python": {
+          "title": "Python SDK",
+          "code": "from openai import OpenAI\n\nclient = OpenAI(\n    api_key=\"your-openai-api-key\",\n    base_url=\"http://localhost:3001/proxy/openai\"\n)\n\nresponse = client.chat.completions.create(\n    model=\"gpt-4\",\n    messages=[\n        {\"role\": \"user\", \"content\": \"Hello!\"}\n    ]\n)"
+        },
+        "nodejs": {
+          "title": "Node.js SDK",
+          "code": "import OpenAI from 'openai';\n\nconst openai = new OpenAI({\n  apiKey: 'your-openai-api-key',\n  baseURL: 'http://localhost:3001/proxy/openai'\n});\n\nconst response = await openai.chat.completions.create({\n  model: 'gpt-4',\n  messages: [\n    { role: 'user', content: 'Hello!' }\n  ]\n});"
+        }
+      }
+    },
+    "geminiFormat": {
+      "title": "Gemini 格式接入",
+      "authentication": {
+        "title": "认证配置",
+        "description": "完全兼容 Google Gemini API，支持所有原生功能，包括多模态输入和流式响应。"
+      },
+      "examples": {
+        "original": {
+          "title": "原始 Gemini 请求",
+          "code": "curl https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=$API_KEY \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n    \"contents\": [{\n      \"parts\": [{\n        \"text\": \"Write a story about a magic backpack.\"\n      }]\n    }]\n  }'"
+        },
+        "proxy": {
+          "title": "通过 GPT-Load 代理",
+          "code": "curl http://localhost:3001/proxy/gemini/v1beta/models/gemini-pro:generateContent?key=$API_KEY \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n    \"contents\": [{\n      \"parts\": [{\n        \"text\": \"Write a story about a magic backpack.\"\n      }]\n    }]\n  }'"
+        }
+      },
+      "migration": {
+        "step1": "替换请求基础地址为 GPT-Load 代理地址",
+        "step2": "保持所有参数和认证方式不变"
+      },
+      "endpoints": {
+        "title": "支持的端点",
+        "content": {
+          "title": "内容生成",
+          "items": [
+            "/v1beta/models/*/generateContent - 内容生成",
+            "/v1beta/models/*/streamGenerateContent - 流式生成",
+            "/v1beta/models/*/countTokens - 令牌计数",
+            "/v1beta/models/*/embedContent - 向量嵌入"
+          ]
+        },
+        "models": {
+          "title": "模型管理",
+          "items": [
+            "/v1beta/models - 模型列表",
+            "/v1beta/models/* - 模型详情",
+            "/v1beta/tuning/createTunedModel - 微调创建",
+            "/v1beta/tuning/tunedModels - 微调列表"
+          ]
+        }
+      },
+      "sdk": {
+        "title": "SDK 配置",
+        "python": {
+          "title": "Python SDK",
+          "code": "import google.generativeai as genai\n\n# 配置 API Key\ngenai.configure(\n    api_key=\"your-gemini-api-key\",\n    client_options={\"api_endpoint\": \"http://localhost:3001/proxy/gemini\"}\n)\n\nmodel = genai.GenerativeModel('gemini-pro')\nresponse = model.generate_content(\"Hello!\")"
+        },
+        "http": {
+          "title": "HTTP 请求",
+          "code": "POST http://localhost:3001/proxy/gemini/v1beta/models/gemini-pro:generateContent?key=YOUR_API_KEY\nContent-Type: application/json\n\n{\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"Explain how AI works\"\n    }]\n  }]\n}"
+        }
+      }
+    },
+    "claudeFormat": {
+      "title": "Claude 格式接入",
+      "authentication": {
+        "title": "认证配置",
+        "description": "完全兼容 Anthropic Claude API，支持 Messages API、工具使用、流式响应等所有高级功能。"
+      },
+      "examples": {
+        "original": {
+          "title": "原始 Claude 请求",
+          "code": "curl https://api.anthropic.com/v1/messages \\\n  -H \"Content-Type: application/json\" \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -d '{\n    \"model\": \"claude-3-sonnet-20240229\",\n    \"max_tokens\": 1024,\n    \"messages\": [\n      {\"role\": \"user\", \"content\": \"Hello, Claude\"}\n    ]\n  }'"
+        },
+        "proxy": {
+          "title": "通过 GPT-Load 代理",
+          "code": "curl http://localhost:3001/proxy/claude/v1/messages \\\n  -H \"Content-Type: application/json\" \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -d '{\n    \"model\": \"claude-3-sonnet-20240229\",\n    \"max_tokens\": 1024,\n    \"messages\": [\n      {\"role\": \"user\", \"content\": \"Hello, Claude\"}\n    ]\n  }'"
+        }
+      },
+      "migration": {
+        "step1": "更新 API 基础地址为 GPT-Load 代理端点",
+        "step2": "保持所有头部信息和请求格式不变"
+      },
+      "endpoints": {
+        "title": "支持的端点",
+        "main": {
+          "title": "核心接口",
+          "items": [
+            "/v1/messages - 消息对话",
+            "/v1/messages/streaming - 流式对话",
+            "/v1/complete - 文本补全（Legacy）",
+            "/v1/tools - 工具使用"
+          ]
+        },
+        "models": {
+          "title": "模型管理",
+          "items": [
+            "/v1/models - 可用模型列表",
+            "支持 Claude-3 全系列模型",
+            "支持自定义 max_tokens 限制",
+            "支持系统提示词设置"
+          ]
+        }
+      },
+      "sdk": {
+        "title": "SDK 配置",
+        "python": {
+          "title": "Python SDK",
+          "code": "from anthropic import Anthropic\n\nclient = Anthropic(\n    api_key=\"your-claude-api-key\",\n    base_url=\"http://localhost:3001/proxy/claude\"\n)\n\nmessage = client.messages.create(\n    model=\"claude-3-sonnet-20240229\",\n    max_tokens=1024,\n    messages=[\n        {\"role\": \"user\", \"content\": \"Hello!\"}\n    ]\n)"
+        },
+        "http": {
+          "title": "HTTP 请求",
+          "code": "POST http://localhost:3001/proxy/claude/v1/messages\nContent-Type: application/json\nx-api-key: YOUR_API_KEY\nanthropic-version: 2023-06-01\n\n{\n  \"model\": \"claude-3-sonnet-20240229\",\n  \"max_tokens\": 1024,\n  \"messages\": [\n    {\"role\": \"user\", \"content\": \"Hello!\"}\n  ]\n}"
+        }
+      }
+    },
+    "groupManagement": {
+      "title": "分组管理",
+      "creation": {
+        "title": "创建分组",
+        "steps": [
+          "访问 GPT-Load 管理界面",
+          "进入\"环境管理\" -> \"分组设置\"",
+          "点击\"新增分组\"填写分组信息",
+          "选择对应的渠道类型（OpenAI/Gemini/Claude）",
+          "配置上游地址和测试路径",
+          "添加 API 密钥并测试连接",
+          "保存配置并启用分组"
+        ]
+      },
+      "configuration": {
+        "title": "配置要点",
+        "items": [
+          "分组名将作为代理路径的一部分",
+          "支持一个分组配置多个 API 密钥",
+          "自动进行密钥轮询和负载均衡",
+          "支持密钥健康检查和故障转移",
+          "可设置请求频率限制和配额管理"
+        ]
+      }
+    },
+    "migration": {
+      "title": "迁移指南",
+      "guide": {
+        "title": "迁移步骤",
+        "steps": [
+          {
+            "title": "评估现状",
+            "description": "分析当前使用的 AI 服务和 API 调用方式"
+          },
+          {
+            "title": "部署 GPT-Load",
+            "description": "按照快速开始指南部署 GPT-Load 服务"
+          },
+          {
+            "title": "更新配置",
+            "description": "修改应用中的 API 基础地址指向 GPT-Load"
+          }
+        ]
+      },
+      "seamless": {
+        "title": "无缝迁移",
+        "description": "GPT-Load 的设计理念是完全透明，迁移过程中无需修改业务逻辑，只需更改 API 端点地址即可享受统一管理和负载均衡的好处。"
+      }
+    },
+    "summary": {
+      "title": "总结",
+      "transparent": {
+        "title": "透明代理",
+        "features": [
+          "保持原生 API 格式",
+          "无需修改业务代码",
+          "支持所有功能特性"
+        ]
+      },
+      "unified": {
+        "title": "统一管理",
+        "features": [
+          "多服务统一接入",
+          "集中密钥管理",
+          "统一监控告警"
+        ]
+      },
+      "scalable": {
+        "title": "高可扩展",
+        "features": [
+          "负载均衡与故障转移",
+          "水平扩展支持",
+          "企业级性能保障"
+        ]
+      }
+    }
+  },
   "performance": {
     "title": "性能详解",
     "subtitle": "GPT-Load 采用\"代理路径优先\"的高性能设计哲学，一切优化都为保障核心代理请求的极致性能和稳定性。",
