@@ -27,18 +27,28 @@ export function useLanguage(): LanguageContextType {
 
 interface LanguageProviderProps {
   children: ReactNode;
+  initialLanguage?: SupportedLanguage;
 }
 
-export function LanguageProvider({ children }: LanguageProviderProps) {
-  const [currentLanguage, setCurrentLanguage] = useState<SupportedLanguage>(DEFAULT_LANGUAGE);
-  const [isLoading, setIsLoading] = useState(true);
+export function LanguageProvider({ children, initialLanguage }: LanguageProviderProps) {
+  const [currentLanguage, setCurrentLanguage] = useState<SupportedLanguage>(
+    initialLanguage || DEFAULT_LANGUAGE
+  );
+  const [isLoading, setIsLoading] = useState(!initialLanguage);
 
   useEffect(() => {
-    // 客户端初始化语言
+    // 如果有服务端传入的初始语言，则无需客户端检测
+    if (initialLanguage) {
+      setCurrentLanguage(initialLanguage);
+      setIsLoading(false);
+      return;
+    }
+    
+    // 兜底：客户端初始化语言（仅在没有服务端语言时）
     const detectedLanguage = initLanguage();
     setCurrentLanguage(detectedLanguage);
     setIsLoading(false);
-  }, []);
+  }, [initialLanguage]);
 
   const switchLanguage = (newLang: SupportedLanguage) => {
     // 更新 Cookie
