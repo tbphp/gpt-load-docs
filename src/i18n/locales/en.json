@@ -1924,5 +1924,184 @@
         "<strong>Usage Advantages</strong>: Provides reliable default values for the system while separating sensitive information (such as database passwords, API keys) from the codebase, enhancing security."
       ]
     }
+  },
+  "projectConfigurationPage": {
+    "title": "Project Configuration",
+    "systemSettings": {
+      "title": "System Settings",
+      "characteristics": {
+        "title": "Configuration Features",
+        "storage": {
+          "title": "Storage Method",
+          "database": "Stored in database",
+          "dynamicModification": "Supports dynamic modification via management API",
+          "hotReload": "Supports hot reload without restart",
+          "baseline": "Provides behavioral baseline for the entire application"
+        },
+        "management": {
+          "title": "Management Features",
+          "webInterface": "Web interface visual configuration",
+          "restfulApi": "RESTful API programmatic management",
+          "validation": "Configuration validation and constraint checking",
+          "history": "Change history tracking and rollback"
+        }
+      },
+      "table": {
+        "headers": {
+          "configItem": "Configuration Item",
+          "fieldName": "Field Name",
+          "defaultValue": "Default Value",
+          "groupOverridable": "Group Overridable",
+          "description": "Description"
+        }
+      },
+      "basicParameters": {
+        "title": "Basic Parameters",
+        "appUrl": {
+          "name": "Project URL",
+          "description": "Project base URL for concatenating group endpoints"
+        },
+        "proxyKeys": {
+          "name": "Global Proxy Keys",
+          "defaultValue": "Initial value is AUTH_KEY from environment config",
+          "description": "Globally effective proxy authentication keys, separated by commas"
+        },
+        "logRetention": {
+          "name": "Log Retention Days",
+          "description": "Request log database retention days, 0 for no cleanup"
+        },
+        "logWriteInterval": {
+          "name": "Log Write Interval",
+          "description": "Log write to database cycle (minutes)"
+        },
+        "enableRequestBodyLogging": {
+          "name": "Enable Log Details",
+          "description": "Whether to record complete request body content in request logs, enabling will increase memory and storage usage"
+        }
+      },
+      "requestSettings": {
+        "title": "Request Settings",
+        "requestTimeout": {
+          "name": "Request Timeout",
+          "description": "Complete lifecycle timeout for forwarded requests (seconds)"
+        },
+        "connectTimeout": {
+          "name": "Connect Timeout",
+          "description": "Connection establishment timeout with upstream service (seconds)"
+        },
+        "idleConnTimeout": {
+          "name": "Idle Connection Timeout",
+          "description": "HTTP client idle connection timeout (seconds)"
+        },
+        "responseHeaderTimeout": {
+          "name": "Response Header Timeout",
+          "description": "Timeout waiting for upstream response headers (seconds)"
+        },
+        "maxIdleConns": {
+          "name": "Max Idle Connections",
+          "description": "Maximum total idle connections in connection pool"
+        },
+        "maxIdleConnsPerHost": {
+          "name": "Max Idle Connections Per Host",
+          "description": "Maximum idle connections per upstream host"
+        },
+        "proxyUrl": {
+          "name": "Proxy Server Address",
+          "description": "HTTP/HTTPS proxy for forwarding requests, uses environment config if empty"
+        }
+      },
+      "keyConfiguration": {
+        "title": "Key Configuration",
+        "maxRetries": {
+          "name": "Max Retries",
+          "description": "Maximum retry attempts for a single request using different keys"
+        },
+        "blacklistThreshold": {
+          "name": "Blacklist Threshold",
+          "description": "Number of consecutive failures before a key enters blacklist"
+        },
+        "keyValidationInterval": {
+          "name": "Key Validation Interval",
+          "description": "Background scheduled key validation cycle (minutes)"
+        },
+        "keyValidationConcurrency": {
+          "name": "Key Validation Concurrency",
+          "description": "Concurrency level for background scheduled validation of invalid keys"
+        },
+        "keyValidationTimeout": {
+          "name": "Key Validation Timeout",
+          "description": "API request timeout for background scheduled validation of individual keys (seconds)"
+        }
+      },
+      "proxyConfigPriority": {
+        "title": "Proxy Configuration Priority",
+        "description": "System proxy configuration has medium priority, overrides environment variable config but can be overridden by group config:",
+        "hierarchy": "Group Config > System Config > Environment Config",
+        "fallback": "When proxy_url in system configuration is empty, environment variable proxy settings will be used automatically."
+      }
+    },
+    "groupConfiguration": {
+      "title": "Group Configuration",
+      "characteristics": {
+        "title": "Configuration Features",
+        "highestPriority": {
+          "title": "Highest Priority",
+          "override": "Can override any parameter in system settings",
+          "customize": "Customize dedicated behavior for specific groups",
+          "tuning": "Supports fine-grained performance tuning",
+          "isolation": "Implements multi-tenant isolated configuration",
+          "proxyPriority": "Proxy configuration has highest priority, overrides system and environment settings"
+        },
+        "flexibility": {
+          "title": "Configuration Flexibility",
+          "jsonFormat": "Flexible configuration in JSON format",
+          "inheritance": "Supports parameter override and inheritance",
+          "dynamicCalculation": "Dynamic calculation of effective configuration",
+          "validation": "Configuration validation and constraint checking"
+        }
+      },
+      "overridableSettings": {
+        "title": "Overridable Configuration Items",
+        "requestConnection": {
+          "title": "Request and Connection Configuration",
+          "requestTimeout": "Request timeout",
+          "connectTimeout": "Connect timeout",
+          "idleConnTimeout": "Idle connection timeout",
+          "responseHeaderTimeout": "Response header timeout",
+          "maxIdleConns": "Max idle connections",
+          "maxIdleConnsPerHost": "Max idle connections per host",
+          "proxyUrl": "Proxy server address"
+        },
+        "keyManagement": {
+          "title": "Key Management Configuration",
+          "maxRetries": "Max retries",
+          "blacklistThreshold": "Blacklist threshold",
+          "keyValidationInterval": "Key validation interval",
+          "keyValidationConcurrency": "Key validation concurrency",
+          "keyValidationTimeout": "Key validation timeout",
+          "enableRequestBodyLogging": "Enable log details"
+        }
+      }
+    },
+    "summary": {
+      "title": "Project Configuration Summary",
+      "description": "Project configuration is the core of GPT-Load configuration system, providing powerful dynamic management capabilities covering system-level and group-level configuration.",
+      "roleAndLayering": {
+        "title": "Role and Layering",
+        "description": "Divided into \"System Settings\" and \"Group Configuration\", the former as global baseline, the latter providing overrides for specific scenarios, implementing hierarchical management."
+      },
+      "managementFeatures": {
+        "title": "Management Features",
+        "description": "Supports dynamic modification through Web interface and API, configuration changes can be hot-reloaded without service restart, ensuring high system availability."
+      },
+      "proxyConfigPriority": {
+        "title": "Proxy Configuration Priority",
+        "description": "Group Config > System Config > Environment Config, implementing flexible proxy settings from global to specific groups."
+      },
+      "usageAdvantages": {
+        "title": "Usage Advantages",
+        "description": "Provides extremely high flexibility and dynamic adjustment capabilities, allowing fine-grained isolation and optimization for different business scenarios (such as multi-tenancy)."
+      }
+    }
   }
 }

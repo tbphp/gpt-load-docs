@@ -1924,5 +1924,184 @@
         "<strong>使用优势</strong>：为系统提供了可靠的默认值，同时将敏感信息（如数据库密码、API密钥）与代码库分离，增强了安全性。"
       ]
     }
+  },
+  "projectConfigurationPage": {
+    "title": "项目配置",
+    "systemSettings": {
+      "title": "系统设置",
+      "characteristics": {
+        "title": "配置特点",
+        "storage": {
+          "title": "存储方式",
+          "database": "存储在数据库中",
+          "dynamicModification": "支持管理 API 动态修改",
+          "hotReload": "支持热重载无需重启",
+          "baseline": "为整个应用提供行为基准"
+        },
+        "management": {
+          "title": "管理特性",
+          "webInterface": "Web 界面可视化配置",
+          "restfulApi": "RESTful API 程序化管理",
+          "validation": "配置验证和约束检查",
+          "history": "变更历史记录和回滚"
+        }
+      },
+      "table": {
+        "headers": {
+          "configItem": "配置项",
+          "fieldName": "字段名",
+          "defaultValue": "默认值",
+          "groupOverridable": "分组可覆盖",
+          "description": "说明"
+        }
+      },
+      "basicParameters": {
+        "title": "基础参数",
+        "appUrl": {
+          "name": "项目地址",
+          "description": "项目基础 URL，用于拼接分组端点"
+        },
+        "proxyKeys": {
+          "name": "全局代理密钥",
+          "defaultValue": "初始值为环境配置的 AUTH_KEY",
+          "description": "全局生效的代理认证密钥，多个用逗号分隔"
+        },
+        "logRetention": {
+          "name": "日志保留天数",
+          "description": "请求日志数据库保留天数，0 为不清理"
+        },
+        "logWriteInterval": {
+          "name": "日志写入间隔",
+          "description": "日志写入数据库周期（分钟）"
+        },
+        "enableRequestBodyLogging": {
+          "name": "启用日志详情",
+          "description": "是否在请求日志中记录完整的请求体内容，启用会增加内存和存储占用"
+        }
+      },
+      "requestSettings": {
+        "title": "请求设置",
+        "requestTimeout": {
+          "name": "请求超时",
+          "description": "转发请求完整生命周期超时（秒）"
+        },
+        "connectTimeout": {
+          "name": "连接超时",
+          "description": "与上游服务建立连接超时（秒）"
+        },
+        "idleConnTimeout": {
+          "name": "空闲连接超时",
+          "description": "HTTP 客户端空闲连接超时（秒）"
+        },
+        "responseHeaderTimeout": {
+          "name": "响应头超时",
+          "description": "等待上游响应头超时（秒）"
+        },
+        "maxIdleConns": {
+          "name": "最大空闲连接数",
+          "description": "连接池最大空闲连接总数"
+        },
+        "maxIdleConnsPerHost": {
+          "name": "每主机最大空闲连接数",
+          "description": "每个上游主机最大空闲连接数"
+        },
+        "proxyUrl": {
+          "name": "代理服务器地址",
+          "description": "用于转发请求的 HTTP/HTTPS 代理，为空则使用环境配置"
+        }
+      },
+      "keyConfiguration": {
+        "title": "密钥配置",
+        "maxRetries": {
+          "name": "最大重试次数",
+          "description": "单个请求使用不同密钥的最大重试次数"
+        },
+        "blacklistThreshold": {
+          "name": "黑名单阈值",
+          "description": "密钥连续失败多少次后进入黑名单"
+        },
+        "keyValidationInterval": {
+          "name": "密钥验证间隔",
+          "description": "后台定时验证密钥周期（分钟）"
+        },
+        "keyValidationConcurrency": {
+          "name": "密钥验证并发数",
+          "description": "后台定时验证无效 Key 时的并发数"
+        },
+        "keyValidationTimeout": {
+          "name": "密钥验证超时",
+          "description": "后台定时验证单个 Key 时的 API 请求超时时间（秒）"
+        }
+      },
+      "proxyConfigPriority": {
+        "title": "代理配置优先级",
+        "description": "系统代理配置优先级为中等，会覆盖环境变量配置，但可被分组配置覆盖：",
+        "hierarchy": "分组配置 > 系统配置 > 环境配置",
+        "fallback": "当系统配置中的 proxy_url 为空时，将自动使用环境变量中的代理设置。"
+      }
+    },
+    "groupConfiguration": {
+      "title": "分组配置",
+      "characteristics": {
+        "title": "配置特点",
+        "highestPriority": {
+          "title": "优先级最高",
+          "override": "可覆盖系统设置的任意参数",
+          "customize": "为特定分组定制专用行为",
+          "tuning": "支持细粒度的性能调优",
+          "isolation": "实现多租户隔离配置",
+          "proxyPriority": "代理配置优先级最高，覆盖系统和环境设置"
+        },
+        "flexibility": {
+          "title": "配置灵活性",
+          "jsonFormat": "JSON 格式的灵活配置",
+          "inheritance": "支持参数覆盖和继承",
+          "dynamicCalculation": "动态计算有效配置",
+          "validation": "配置验证和约束检查"
+        }
+      },
+      "overridableSettings": {
+        "title": "可覆盖的配置项",
+        "requestConnection": {
+          "title": "请求与连接配置",
+          "requestTimeout": "请求超时",
+          "connectTimeout": "连接超时",
+          "idleConnTimeout": "空闲连接超时",
+          "responseHeaderTimeout": "响应头超时",
+          "maxIdleConns": "最大空闲连接数",
+          "maxIdleConnsPerHost": "每主机最大空闲连接数",
+          "proxyUrl": "代理服务器地址"
+        },
+        "keyManagement": {
+          "title": "密钥管理配置",
+          "maxRetries": "最大重试次数",
+          "blacklistThreshold": "黑名单阈值",
+          "keyValidationInterval": "密钥验证间隔",
+          "keyValidationConcurrency": "密钥验证并发数",
+          "keyValidationTimeout": "密钥验证超时",
+          "enableRequestBodyLogging": "启用日志详情"
+        }
+      }
+    },
+    "summary": {
+      "title": "项目配置总结",
+      "description": "项目配置是 GPT-Load 配置系统的核心，提供了强大的动态管理能力，涵盖系统级和分组级的配置。",
+      "roleAndLayering": {
+        "title": "角色与分层",
+        "description": "分为\"系统设置\"和\"分组配置\"，前者为全局基准，后者为特定场景提供覆盖，实现了层次化管理。"
+      },
+      "managementFeatures": {
+        "title": "管理特性",
+        "description": "支持通过 Web 界面和 API 进行动态修改，配置变更可热更新，无需重启服务，保证了系统的高可用性。"
+      },
+      "proxyConfigPriority": {
+        "title": "代理配置优先级",
+        "description": "分组配置 > 系统配置 > 环境配置，实现了从全局到特定分组的灵活代理设置。"
+      },
+      "usageAdvantages": {
+        "title": "使用优势",
+        "description": "提供了极高的灵活性和动态调整能力，允许针对不同业务场景（如多租户）进行细粒度隔离和优化。"
+      }
+    }
   }
 }

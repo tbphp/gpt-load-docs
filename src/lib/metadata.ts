@@ -276,6 +276,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       keywords: "グループ設定管理, グループ作成, 基本設定, アップストリーム設定, 高級設定, ロードバランシング, パラメーターオーバーライド, GPT-Load設定",
       type: 'article'
     }
+  },
+  '/docs/configuration/project': {
+    zh: {
+      title: "项目配置 - GPT-Load",
+      description: "GPT-Load项目配置系统的完整指南，包括系统设置、分组配置的详细参数说明、配置优先级管理和最佳实践。",
+      keywords: "项目配置, 系统设置, 分组配置, 配置管理, 参数配置, 热重载, 动态配置, GPT-Load配置",
+      type: 'article'
+    },
+    en: {
+      title: "Project Configuration - GPT-Load",
+      description: "Complete guide to GPT-Load project configuration system, including detailed parameter descriptions for system settings, group configurations, configuration priority management and best practices.",
+      keywords: "project configuration, system settings, group configuration, configuration management, parameter settings, hot reload, dynamic configuration, GPT-Load configuration",
+      type: 'article'
+    },
+    ja: {
+      title: "プロジェクト設定 - GPT-Load",
+      description: "GPT-Loadプロジェクト設定システムの完全ガイド。システム設定、グループ設定の詳細なパラメーター説明、設定優先度管理とベストプラクティスを含みます。",
+      keywords: "プロジェクト設定, システム設定, グループ設定, 設定管理, パラメーター設定, ホットリロード, 動的設定, GPT-Load設定",
+      type: 'article'
+    }
   }
   // 架构预留：后续可继续添加其他页面的SEO配置
 };

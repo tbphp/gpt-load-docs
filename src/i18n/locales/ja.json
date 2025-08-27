@@ -1924,5 +1924,184 @@
         "<strong>使用上の利点</strong>：システムに信頼性の高いデフォルト値を提供し、同時に機密情報（データベースパスワード、APIキーなど）をコードベースから分離し、セキュリティを強化。"
       ]
     }
+  },
+  "projectConfigurationPage": {
+    "title": "プロジェクト設定",
+    "systemSettings": {
+      "title": "システム設定",
+      "characteristics": {
+        "title": "特徴",
+        "storage": {
+          "title": "保存方法",
+          "database": "データベースに保存",
+          "dynamicModification": "動的変更をサポート",
+          "hotReload": "ホットリロードをサポート",
+          "baseline": "グループ設定のベースラインとして機能"
+        },
+        "management": {
+          "title": "管理方法",
+          "webInterface": "Webインターフェース管理",
+          "restfulApi": "RESTful APIインターフェース",
+          "validation": "設定検証メカニズム",
+          "history": "設定履歴記録"
+        }
+      },
+      "table": {
+        "headers": {
+          "configItem": "設定項目",
+          "fieldName": "フィールド名",
+          "defaultValue": "デフォルト値",
+          "groupOverridable": "グループオーバーライド可能",
+          "description": "説明"
+        }
+      },
+      "basicParameters": {
+        "title": "基本パラメータ",
+        "appUrl": {
+          "name": "アプリケーションURL",
+          "description": "アプリケーションアクセスの基本アドレス、絶対リンクの生成に使用"
+        },
+        "proxyKeys": {
+          "name": "プロキシキー",
+          "defaultValue": "なし",
+          "description": "システムレベルのプロキシキー、グループキーで上書き可能"
+        },
+        "logRetention": {
+          "name": "ログ保持日数",
+          "description": "データベース内のリクエストログ保持時間"
+        },
+        "logWriteInterval": {
+          "name": "ログ書き込み間隔",
+          "description": "リクエストログの一括書き込み時間間隔（分）"
+        },
+        "enableRequestBodyLogging": {
+          "name": "リクエストボディログを有効化",
+          "description": "リクエストボディの内容をログに記録するかどうか"
+        }
+      },
+      "requestSettings": {
+        "title": "リクエスト設定",
+        "requestTimeout": {
+          "name": "リクエストタイムアウト",
+          "description": "単一リクエストの最大待機時間（秒）"
+        },
+        "connectTimeout": {
+          "name": "接続タイムアウト",
+          "description": "接続確立の最大待機時間（秒）"
+        },
+        "idleConnTimeout": {
+          "name": "アイドル接続タイムアウト",
+          "description": "接続プール内のアイドル接続のタイムアウト時間（秒）"
+        },
+        "responseHeaderTimeout": {
+          "name": "レスポンスヘッダータイムアウト",
+          "description": "レスポンスヘッダーの最大待機時間（秒）"
+        },
+        "maxIdleConns": {
+          "name": "最大アイドル接続数",
+          "description": "接続プール内の最大アイドル接続数"
+        },
+        "maxIdleConnsPerHost": {
+          "name": "ホスト毎の最大アイドル接続数",
+          "description": "各ホストの最大アイドル接続数"
+        },
+        "proxyUrl": {
+          "name": "プロキシURL",
+          "description": "アップストリームにリクエストを送信する際に使用するプロキシサーバーアドレス"
+        }
+      },
+      "keyConfiguration": {
+        "title": "キー設定",
+        "maxRetries": {
+          "name": "最大リトライ回数",
+          "description": "単一リクエスト失敗時の最大リトライ回数"
+        },
+        "blacklistThreshold": {
+          "name": "ブラックリスト閾値",
+          "description": "キーが連続して失敗する回数でブラックリストに追加"
+        },
+        "keyValidationInterval": {
+          "name": "キー検証間隔",
+          "description": "バックグラウンドでキーの有効性を検証する時間間隔（分）"
+        },
+        "keyValidationConcurrency": {
+          "name": "キー検証同時実行数",
+          "description": "キー検証の同時実行スレッド数"
+        },
+        "keyValidationTimeout": {
+          "name": "キー検証タイムアウト",
+          "description": "個別のキー検証リクエストのタイムアウト時間（秒）"
+        }
+      },
+      "proxyConfigPriority": {
+        "title": "プロキシ設定優先度",
+        "description": "プロキシ設定は以下の優先順序に従い、上位の設定が下位の設定を上書きします：",
+        "hierarchy": "グループプロキシ設定 > システムプロキシ設定 > 環境プロキシ設定",
+        "fallback": "グループとシステムの両方でプロキシが設定されていない場合、環境変数のプロキシ設定にフォールバックします。"
+      }
+    },
+    "groupConfiguration": {
+      "title": "グループ設定",
+      "characteristics": {
+        "title": "特徴",
+        "highestPriority": {
+          "title": "最高優先度",
+          "override": "システムと環境設定を上書き",
+          "customize": "特定グループのパラメータをカスタマイズ",
+          "tuning": "細かい調整をサポート",
+          "isolation": "グループ間の設定分離を実現",
+          "proxyPriority": "プロキシ設定の最高優先度"
+        },
+        "flexibility": {
+          "title": "柔軟性",
+          "jsonFormat": "JSON形式の設定",
+          "inheritance": "システムデフォルト値を継承",
+          "dynamicCalculation": "ランタイム動的計算",
+          "validation": "設定有効性検証"
+        }
+      },
+      "overridableSettings": {
+        "title": "オーバーライド可能設定",
+        "requestConnection": {
+          "title": "リクエスト接続",
+          "requestTimeout": "リクエストタイムアウト",
+          "connectTimeout": "接続タイムアウト",
+          "idleConnTimeout": "アイドル接続タイムアウト",
+          "responseHeaderTimeout": "レスポンスヘッダータイムアウト",
+          "maxIdleConns": "最大アイドル接続数",
+          "maxIdleConnsPerHost": "ホスト毎の最大アイドル接続数",
+          "proxyUrl": "プロキシURL"
+        },
+        "keyManagement": {
+          "title": "キー管理",
+          "maxRetries": "最大リトライ回数",
+          "blacklistThreshold": "ブラックリスト閾値",
+          "keyValidationInterval": "キー検証間隔",
+          "keyValidationConcurrency": "キー検証同時実行数",
+          "keyValidationTimeout": "キー検証タイムアウト",
+          "enableRequestBodyLogging": "リクエストボディログを有効化"
+        }
+      }
+    },
+    "summary": {
+      "title": "まとめ",
+      "description": "GPT-Loadの3層設定システムは、異なるシナリオに対して柔軟で強力な設定管理機能を提供します。",
+      "roleAndLayering": {
+        "title": "役割分層",
+        "description": "環境設定はインフラストラクチャパラメータを提供し、システム設定はグローバルビジネスルールを定義し、グループ設定は細かいカスタマイズを可能にします"
+      },
+      "managementFeatures": {
+        "title": "管理機能",
+        "description": "Webインターフェース管理、APIインターフェース操作、設定検証、ホットリロードなどの最新の設定管理機能をサポート"
+      },
+      "proxyConfigPriority": {
+        "title": "プロキシ設定優先度",
+        "description": "3層プロキシ設定により、グローバルからローカルまでの柔軟なプロキシ戦略を確保し、異なるシナリオでのネットワークニーズに対応"
+      },
+      "usageAdvantages": {
+        "title": "使用上の利点",
+        "description": "設定の集中管理、動的調整、バージョン管理、環境分離を実現し、システムの保守性と操作性を大幅に向上"
+      }
+    }
   }
 }
