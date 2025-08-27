@@ -496,6 +496,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       keywords: "New API統合, GPT-Load統合, OpenAIチャンネル, Gemini設定, Anthropic統合, チャンネル管理, AIモデルプロキシ, New APIプラットフォーム, 思考機能, 検索ツール",
       type: 'article'
     }
+  },
+  '/docs/integrations/roo-code': {
+    zh: {
+      title: "Roo Code 接入指南 - GPT-Load",
+      description: "详细指南教您将GPT-Load代理服务接入Roo Code智能代码助手中，支持OpenAI、Gemini和Anthropic三种渠道类型，包含完整的配置步骤和方法说明。",
+      keywords: "Roo Code接入, GPT-Load集成, 智能代码助手, OpenAI Compatible, Google Gemini, Anthropic Claude, 代码助手配置, AI编程工具",
+      type: 'article'
+    },
+    en: {
+      title: "Roo Code Integration Guide - GPT-Load",
+      description: "Comprehensive guide to integrate GPT-Load proxy service with Roo Code intelligent code assistant, supporting OpenAI, Gemini, and Anthropic channel types with complete configuration steps and methods.",
+      keywords: "Roo Code integration, GPT-Load integration, intelligent code assistant, OpenAI Compatible, Google Gemini, Anthropic Claude, code assistant configuration, AI programming tools",
+      type: 'article'
+    },
+    ja: {
+      title: "Roo Code 統合ガイド - GPT-Load",
+      description: "GPT-LoadプロキシサービスをRoo Codeインテリジェントコードアシスタントと統合する包括的ガイド。OpenAI、Gemini、Anthropicの3つのチャンネルタイプをサポートし、完全な設定手順と方法説明を含みます。",
+      keywords: "Roo Code統合, GPT-Load統合, インテリジェントコードアシスタント, OpenAI Compatible, Google Gemini, Anthropic Claude, コードアシスタント設定, AIプログラミングツール",
+      type: 'article'
+    }
   }
   // 架构预留：后续可继续添加其他页面的SEO配置
 };

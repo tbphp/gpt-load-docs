@@ -3667,5 +3667,119 @@
       "gptLoadConfig": "GPT-Load 設定ガイド",
       "channelTypes": "チャネルタイプドキュメント"
     }
+  },
+  "rooCode": {
+    "title": "Roo Code 統合ガイド",
+    "description": "このガイドでは、GPT-Loadプロキシサービスを Roo Code インテリジェントコードアシスタントに統合する方法を説明します。OpenAI、Gemini、Anthropic の3つのチャンネルタイプをサポートしています。",
+    "prerequisites": {
+      "title": "前提条件",
+      "description": "GPT-Loadサービスが正常にデプロイされ、起動していることを確認してください。デフォルトでは http://localhost:3001 で動作します"
+    },
+    "openai": {
+      "title": "OpenAI チャンネル設定",
+      "imageAlt": "OpenAI Compatible プロバイダー設定スクリーンショット",
+      "steps": {
+        "title": "設定手順",
+        "selectProvider": {
+          "title": "プロバイダーを選択",
+          "description": "Roo Code で \"OpenAI Compatible\" プロバイダーを選択"
+        },
+        "setProxy": {
+          "title": "プロキシアドレスを設定",
+          "url": "http://localhost:3001/proxy/openai/v1",
+          "note": "ここで \"openai\" は GPT-Load で設定したグループ名です"
+        },
+        "configKey": {
+          "title": "API Key を設定",
+          "description": "GPT-Load で設定したプロキシキーを入力"
+        }
+      }
+    },
+    "gemini": {
+      "title": "Gemini チャンネル設定",
+      "method1": {
+        "title": "方法1：Google Gemini プロバイダー",
+        "subtitle": "ネイティブ Gemini インターフェース形式を使用（推奨）",
+        "imageAlt": "Google Gemini プロバイダー設定スクリーンショット",
+        "steps": {
+          "title": "設定手順",
+          "selectProvider": {
+            "title": "プロバイダーを選択",
+            "description": "Roo Code で \"Google Gemini\" プロバイダーを選択"
+          },
+          "enableCustomUrl": {
+            "title": "カスタムベース URL を有効化",
+            "description": "\"カスタムベース URL を使用\" オプションにチェック"
+          },
+          "setProxy": {
+            "title": "プロキシアドレスを設定",
+            "url": "http://localhost:3001/proxy/gemini",
+            "note": "ここで \"gemini\" は GPT-Load で設定したグループ名です"
+          },
+          "configKey": {
+            "title": "API Key を設定",
+            "description": "Gemini API Key を入力"
+          }
+        }
+      },
+      "method2": {
+        "title": "方法2：OpenAI Compatible 形式",
+        "subtitle": "OpenAI 互換インターフェース形式を使用",
+        "imageAlt": "Gemini OpenAI Compatible プロバイダー設定スクリーンショット",
+        "steps": {
+          "title": "設定手順",
+          "selectProvider": {
+            "title": "プロバイダーを選択",
+            "description": "Roo Code で \"OpenAI Compatible\" プロバイダーを選択"
+          },
+          "setProxy": {
+            "title": "プロキシアドレスを設定",
+            "url": "http://localhost:3001/proxy/gemini/v1beta/openai",
+            "note": "ここで \"gemini\" は GPT-Load で設定したグループ名です"
+          },
+          "configKey": {
+            "title": "API Key を設定",
+            "description": "Gemini API Key を入力"
+          }
+        }
+      },
+      "recommendation": {
+        "title": "設定推奨事項",
+        "description": "方法1：Google Gemini プロバイダー の使用を推奨します。ネイティブ Gemini インターフェース形式を使用するため、より良い互換性と完全な機能サポートを提供します。"
+      }
+    },
+    "anthropic": {
+      "title": "Anthropic (Claude) チャンネル設定",
+      "imageAlt": "Anthropic プロバイダー設定スクリーンショット",
+      "steps": {
+        "title": "設定手順",
+        "selectProvider": {
+          "title": "プロバイダーを選択",
+          "description": "Roo Code で \"Anthropic\" プロバイダーを選択"
+        },
+        "setProxy": {
+          "title": "プロキシアドレスを設定",
+          "url": "http://localhost:3001/proxy/anthropic",
+          "note": "ここで \"anthropic\" は GPT-Load で設定したグループ名です"
+        },
+        "configKey": {
+          "title": "API Key を設定",
+          "description": "Anthropic API Key を入力"
+        }
+      }
+    },
+    "verification": {
+      "title": "設定を検証",
+      "test": {
+        "title": "接続テスト",
+        "description": "設定完了後、Roo Code でテストメッセージを送信して正常な応答を確認してください。問題が発生した場合は、GPT-Load サービスが正常に動作しているか、グループ名が正しいかを確認してください。"
+      }
+    },
+    "relatedResources": {
+      "title": "関連リソース",
+      "rooCodeDocs": "Roo Code 公式ドキュメント",
+      "gptLoadConfig": "GPT-Load 設定ガイド",
+      "channelTypes": "チャンネルタイプドキュメント"
+    }
   }
 }

@@ -3667,5 +3667,119 @@
       "gptLoadConfig": "GPT-Load Configuration Guide",
       "channelTypes": "Channel Types Documentation"
     }
+  },
+  "rooCode": {
+    "title": "Roo Code Integration Guide",
+    "description": "This guide will help you integrate GPT-Load proxy service into Roo Code intelligent code assistant, supporting OpenAI, Gemini, and Anthropic channel types.",
+    "prerequisites": {
+      "title": "Prerequisites",
+      "description": "Ensure you have successfully deployed and started the GPT-Load service, running by default at http://localhost:3001"
+    },
+    "openai": {
+      "title": "OpenAI Channel Configuration",
+      "imageAlt": "OpenAI Compatible provider configuration screenshot",
+      "steps": {
+        "title": "Configuration Steps",
+        "selectProvider": {
+          "title": "Select Provider",
+          "description": "Select \"OpenAI Compatible\" provider in Roo Code"
+        },
+        "setProxy": {
+          "title": "Set Proxy Address",
+          "url": "http://localhost:3001/proxy/openai/v1",
+          "note": "Where \"openai\" is the group name you configured in GPT-Load"
+        },
+        "configKey": {
+          "title": "Configure API Key",
+          "description": "Enter the proxy key configured in GPT-Load"
+        }
+      }
+    },
+    "gemini": {
+      "title": "Gemini Channel Configuration",
+      "method1": {
+        "title": "Method 1: Google Gemini Provider",
+        "subtitle": "Using native Gemini interface format (recommended)",
+        "imageAlt": "Google Gemini provider configuration screenshot",
+        "steps": {
+          "title": "Configuration Steps",
+          "selectProvider": {
+            "title": "Select Provider",
+            "description": "Select \"Google Gemini\" provider in Roo Code"
+          },
+          "enableCustomUrl": {
+            "title": "Enable Custom Base URL",
+            "description": "Check \"Use custom base URL\" option"
+          },
+          "setProxy": {
+            "title": "Set Proxy Address",
+            "url": "http://localhost:3001/proxy/gemini",
+            "note": "Where \"gemini\" is the group name you configured in GPT-Load"
+          },
+          "configKey": {
+            "title": "Configure API Key",
+            "description": "Enter your Gemini API Key"
+          }
+        }
+      },
+      "method2": {
+        "title": "Method 2: OpenAI Compatible Format",
+        "subtitle": "Using OpenAI compatible interface format",
+        "imageAlt": "Gemini OpenAI Compatible provider configuration screenshot",
+        "steps": {
+          "title": "Configuration Steps",
+          "selectProvider": {
+            "title": "Select Provider",
+            "description": "Select \"OpenAI Compatible\" provider in Roo Code"
+          },
+          "setProxy": {
+            "title": "Set Proxy Address",
+            "url": "http://localhost:3001/proxy/gemini/v1beta/openai",
+            "note": "Where \"gemini\" is the group name you configured in GPT-Load"
+          },
+          "configKey": {
+            "title": "Configure API Key",
+            "description": "Enter your Gemini API Key"
+          }
+        }
+      },
+      "recommendation": {
+        "title": "Configuration Recommendation",
+        "description": "We recommend using Method 1: Google Gemini Provider, as it uses the native Gemini interface format, providing better compatibility and complete feature support."
+      }
+    },
+    "anthropic": {
+      "title": "Anthropic (Claude) Channel Configuration",
+      "imageAlt": "Anthropic provider configuration screenshot",
+      "steps": {
+        "title": "Configuration Steps",
+        "selectProvider": {
+          "title": "Select Provider",
+          "description": "Select \"Anthropic\" provider in Roo Code"
+        },
+        "setProxy": {
+          "title": "Set Proxy Address",
+          "url": "http://localhost:3001/proxy/anthropic",
+          "note": "Where \"anthropic\" is the group name you configured in GPT-Load"
+        },
+        "configKey": {
+          "title": "Configure API Key",
+          "description": "Enter your Anthropic API Key"
+        }
+      }
+    },
+    "verification": {
+      "title": "Verify Configuration",
+      "test": {
+        "title": "Test Connection",
+        "description": "After configuration is complete, send a test message in Roo Code to confirm normal response. If you encounter issues, please check if the GPT-Load service is running normally and if the group name is correct."
+      }
+    },
+    "relatedResources": {
+      "title": "Related Resources",
+      "rooCodeDocs": "Roo Code Official Documentation",
+      "gptLoadConfig": "GPT-Load Configuration Guide",
+      "channelTypes": "Channel Types Documentation"
+    }
   }
 }

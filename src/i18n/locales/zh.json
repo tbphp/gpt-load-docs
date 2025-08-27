@@ -3667,5 +3667,119 @@
       "gptLoadConfig": "GPT-Load 配置说明",
       "channelTypes": "渠道类型说明"
     }
+  },
+  "rooCode": {
+    "title": "Roo Code 接入指南",
+    "description": "本指南将帮助您将 GPT-Load 代理服务接入到 Roo Code 智能代码助手中，支持 OpenAI、Gemini 和 Anthropic 三种渠道类型。",
+    "prerequisites": {
+      "title": "前置条件",
+      "description": "确保您已经成功部署并启动了 GPT-Load 服务，默认运行在 http://localhost:3001"
+    },
+    "openai": {
+      "title": "OpenAI 渠道配置",
+      "imageAlt": "OpenAI Compatible 供应商配置截图",
+      "steps": {
+        "title": "配置步骤",
+        "selectProvider": {
+          "title": "选择供应商",
+          "description": "在 Roo Code 中选择 \"OpenAI Compatible\" 供应商"
+        },
+        "setProxy": {
+          "title": "设置代理地址",
+          "url": "http://localhost:3001/proxy/openai/v1",
+          "note": "其中 \"openai\" 是您在 GPT-Load 中配置的分组名称"
+        },
+        "configKey": {
+          "title": "配置 API Key",
+          "description": "输入 GPT-Load 中配置的代理密钥"
+        }
+      }
+    },
+    "gemini": {
+      "title": "Gemini 渠道配置",
+      "method1": {
+        "title": "方式一：Google Gemini 供应商",
+        "subtitle": "使用原生 Gemini 接口格式（推荐）",
+        "imageAlt": "Google Gemini 供应商配置截图",
+        "steps": {
+          "title": "配置步骤",
+          "selectProvider": {
+            "title": "选择供应商",
+            "description": "在 Roo Code 中选择 \"Google Gemini\" 供应商"
+          },
+          "enableCustomUrl": {
+            "title": "启用自定义基础 URL",
+            "description": "勾选\"使用自定义基础 URL\"选项"
+          },
+          "setProxy": {
+            "title": "设置代理地址",
+            "url": "http://localhost:3001/proxy/gemini",
+            "note": "其中 \"gemini\" 是您在 GPT-Load 中配置的分组名称"
+          },
+          "configKey": {
+            "title": "配置 API Key",
+            "description": "输入您的 Gemini API Key"
+          }
+        }
+      },
+      "method2": {
+        "title": "方式二：OpenAI Compatible 格式",
+        "subtitle": "使用 OpenAI 兼容接口格式",
+        "imageAlt": "Gemini OpenAI Compatible 供应商配置截图",
+        "steps": {
+          "title": "配置步骤",
+          "selectProvider": {
+            "title": "选择供应商",
+            "description": "在 Roo Code 中选择 \"OpenAI Compatible\" 供应商"
+          },
+          "setProxy": {
+            "title": "设置代理地址",
+            "url": "http://localhost:3001/proxy/gemini/v1beta/openai",
+            "note": "其中 \"gemini\" 是您在 GPT-Load 中配置的分组名称"
+          },
+          "configKey": {
+            "title": "配置 API Key",
+            "description": "输入您的 Gemini API Key"
+          }
+        }
+      },
+      "recommendation": {
+        "title": "配置建议",
+        "description": "推荐使用 方式一：Google Gemini 供应商，因为它使用原生 Gemini 接口格式，提供了更好的兼容性和完整的功能支持。"
+      }
+    },
+    "anthropic": {
+      "title": "Anthropic (Claude) 渠道配置",
+      "imageAlt": "Anthropic 供应商配置截图",
+      "steps": {
+        "title": "配置步骤",
+        "selectProvider": {
+          "title": "选择供应商",
+          "description": "在 Roo Code 中选择 \"Anthropic\" 供应商"
+        },
+        "setProxy": {
+          "title": "设置代理地址",
+          "url": "http://localhost:3001/proxy/anthropic",
+          "note": "其中 \"anthropic\" 是您在 GPT-Load 中配置的分组名称"
+        },
+        "configKey": {
+          "title": "配置 API Key",
+          "description": "输入您的 Anthropic API Key"
+        }
+      }
+    },
+    "verification": {
+      "title": "验证配置",
+      "test": {
+        "title": "测试连接",
+        "description": "配置完成后，在 Roo Code 中发送一个测试消息，确认能够正常响应。如果遇到问题，请检查 GPT-Load 服务是否正常运行，以及分组名称是否正确。"
+      }
+    },
+    "relatedResources": {
+      "title": "相关资源",
+      "rooCodeDocs": "Roo Code 官方文档",
+      "gptLoadConfig": "GPT-Load 配置说明",
+      "channelTypes": "渠道类型说明"
+    }
   }
 }
