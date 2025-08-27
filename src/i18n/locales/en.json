@@ -3817,5 +3817,51 @@
       "gptLoadConfig": "GPT-Load Configuration Guide",
       "channelTypes": "Channel Types Documentation"
     }
+  },
+  "sponsor": {
+    "title": "Sponsor",
+    "subtitle": "If GPT-Load helps you, welcome to buy the author a coffee ☕️",
+    "paymentMethods": {
+      "wechat": {
+        "title": "WeChat",
+        "description": "Scan QR code to sponsor",
+        "qrCodeAlt": "WeChat payment QR code",
+        "instruction": "WeChat scan"
+      },
+      "alipay": {
+        "title": "Alipay",
+        "description": "Scan QR code to sponsor",
+        "qrCodeAlt": "Alipay payment QR code",
+        "instruction": "Alipay scan"
+      }
+    },
+    "onlinePlatform": {
+      "title": "Online Sponsor Platform",
+      "afdian": {
+        "title": "Afdian Sponsor",
+        "description": "Through Afdian platform, you can choose one-time sponsorship or regular support for project development"
+      }
+    },
+    "thankYou": {
+      "title": "Thank You for Your Support",
+      "message": "Every support from you is our motivation to continuously improve GPT-Load. We deeply appreciate it regardless of the amount!",
+      "tags": [
+        "💝 Every heart counts",
+        "🚀 Make the project better",
+        "❤️ Long live open source"
+      ]
+    },
+    "alternativeSupport": {
+      "title": "Other Support Methods",
+      "github": {
+        "title": "⭐ GitHub Star"
+      },
+      "issues": {
+        "title": "🐛 Report Issues"
+      },
+      "contribute": {
+        "title": "🔧 Contribute Code"
+      }
+    }
   }
 }

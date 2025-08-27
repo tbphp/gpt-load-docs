@@ -516,6 +516,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       keywords: "Roo Code統合, GPT-Load統合, インテリジェントコードアシスタント, OpenAI Compatible, Google Gemini, Anthropic Claude, コードアシスタント設定, AIプログラミングツール",
       type: 'article'
     }
+  },
+  '/docs/sponsor': {
+    zh: {
+      title: "支持赞助 - GPT-Load",
+      description: "如果GPT-Load对您有帮助，欢迎通过微信、支付宝、爱发电等方式支持项目发展。您的每一份支持都是我们持续改进的动力。",
+      keywords: "GPT-Load赞助, 项目支持, 微信赞助, 支付宝赞助, 爱发电, 开源支持, 项目捐赠",
+      type: 'article'
+    },
+    en: {
+      title: "Sponsor - GPT-Load",
+      description: "If GPT-Load helps you, welcome to support the project through WeChat, Alipay, Afdian and other ways. Every support is our motivation for continuous improvement.",
+      keywords: "GPT-Load sponsor, project support, WeChat sponsor, Alipay sponsor, Afdian, open source support, project donation",
+      type: 'article'
+    },
+    ja: {
+      title: "スポンサー - GPT-Load",
+      description: "GPT-Loadがお役に立った場合は、WeChat、Alipay、Afdianなどの方法でプロジェクトをサポートしてください。すべてのサポートは私たちの継続的な改善のモチベーションです。",
+      keywords: "GPT-Loadスポンサー, プロジェクトサポート, WeChatスポンサー, Alipayスポンサー, Afdian, オープンソースサポート, プロジェクト寄付",
+      type: 'article'
+    }
   }
   // 架构预留：后续可继续添加其他页面的SEO配置
 };

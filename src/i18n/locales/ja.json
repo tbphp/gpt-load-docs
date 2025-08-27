@@ -3817,5 +3817,51 @@
       "gptLoadConfig": "GPT-Load 設定ガイド",
       "channelTypes": "チャンネルタイプドキュメント"
     }
+  },
+  "sponsor": {
+    "title": "スポンサー",
+    "subtitle": "GPT-Loadがお役に立ちましたら、作者にコーヒーをおごってください ☕️",
+    "paymentMethods": {
+      "wechat": {
+        "title": "WeChat",
+        "description": "QRコードをスキャンしてスポンサー",
+        "qrCodeAlt": "WeChat 支払いQRコード",
+        "instruction": "WeChatスキャン"
+      },
+      "alipay": {
+        "title": "Alipay",
+        "description": "QRコードをスキャンしてスポンサー",
+        "qrCodeAlt": "Alipay 支払いQRコード",
+        "instruction": "Alipayスキャン"
+      }
+    },
+    "onlinePlatform": {
+      "title": "オンラインスポンサープラットフォーム",
+      "afdian": {
+        "title": "Afdianスポンサー",
+        "description": "Afdianプラットフォームを通じて、一回限りのスポンサーまたは定期的なプロジェクト開発支援を選択できます"
+      }
+    },
+    "thankYou": {
+      "title": "ご支援いただきありがとうございます",
+      "message": "皆様からのご支援は、GPT-Loadを継続的に改善するための原動力です。金額の大小にかかわらず、心より感謝申し上げます！",
+      "tags": [
+        "💝 すべての気持ちが貴重",
+        "🚀 プロジェクトをさらに向上させる",
+        "❤️ オープンソース精神万歳"
+      ]
+    },
+    "alternativeSupport": {
+      "title": "その他の支援方法",
+      "github": {
+        "title": "⭐ GitHub Star"
+      },
+      "issues": {
+        "title": "🐛 問題を報告"
+      },
+      "contribute": {
+        "title": "🔧 コードを貢献"
+      }
+    }
   }
 }
