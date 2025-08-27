@@ -8,7 +8,8 @@ type TranslationValue =
   | string 
   | string[] 
   | { [key: string]: TranslationValue }
-  | Array<{ [key: string]: TranslationValue }>;
+  | Array<{ [key: string]: TranslationValue }>
+  | Array<{ [key: string]: string | string[] | undefined }>;
 
 export interface Translations {
   [key: string]: TranslationValue;
@@ -21,9 +22,9 @@ import jaTranslations from '../i18n/locales/ja.json';
 
 // 翻译数据
 const translations: Record<SupportedLanguage, Translations> = {
-  zh: zhTranslations,
-  en: enTranslations,
-  ja: jaTranslations,
+  zh: zhTranslations as Translations,
+  en: enTranslations as Translations,
+  ja: jaTranslations as Translations,
 };
 
 /**
