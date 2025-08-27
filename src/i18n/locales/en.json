@@ -346,6 +346,186 @@
     "cherryStudio": "Cherry Studio",
     "sponsor": "Sponsor"
   },
+  "standalone": {
+    "title": "Standalone Deployment",
+    "subtitle": "Standalone deployment is the simplest deployment method for GPT-Load, suitable for individual users and small teams to get started quickly. Supports from lightweight quick start to optional deployment with full functionality.",
+    "quickStart": {
+      "title": "Quick Start",
+      "lightweight": {
+        "title": "Lightweight Deployment",
+        "description": "Uses SQLite database and memory storage, best for personal use and quick experience"
+      }
+    },
+    "requirements": {
+      "title": "System Requirements",
+      "items": [
+        "Docker 20.10+ and Docker Compose",
+        "Linux/macOS/Windows operating systems",
+        "At least 128MB memory and 1GB disk space"
+      ]
+    },
+    "installation": {
+      "title": "Installation Steps",
+      "step1": {
+        "title": "Create Working Directory",
+        "comment": "# Create directory and enter"
+      },
+      "step2": {
+        "title": "Download and Configure Security Parameters",
+        "dockerComment": "# Download Docker Compose configuration",
+        "envComment": "# Download environment variable configuration",
+        "securityConfig": {
+          "title": "Must Execute: Modify Management Key",
+          "editFile": "Immediately edit",
+          "changeFrom": "file, change:",
+          "changeTo": "to a secure key:",
+          "reminder": {
+            "title": "Reminder:",
+            "message": "Please generate your own random key, do not use the example key above!"
+          }
+        }
+      },
+      "step3": {
+        "title": "Start Services",
+        "comment": "# Start GPT-Load service"
+      },
+      "step4": {
+        "title": "Verify Deployment",
+        "accessAdmin": "Access admin interface:",
+        "useAuthKey": "Login with your custom management key",
+        "fileSet": "That is, the",
+        "login": "value set in the",
+        "value": "file",
+        "securityTip": {
+          "title": "Security Tip:",
+          "message": "Please keep your management key safe and do not store it in plain text in logs, documents, or code."
+        }
+      }
+    },
+    "security": {
+      "warning": {
+        "title": "Critical Security Warning",
+        "message": "You must change the default management key before deployment, otherwise there are serious security risks!"
+      },
+      "requirements": {
+        "title": "Security Key Requirements:",
+        "items": [
+          "At least 20 characters",
+          "Include uppercase letters, lowercase letters, numbers, and special symbols",
+          "Avoid using dictionary words or personal information",
+          "Recommended format: sk-prod-[32-character random string]"
+        ]
+      },
+      "risk": "⚠️ Using weak keys may lead to malicious system access, causing data leaks or service abuse!"
+    },
+    "commonCommands": {
+      "title": "Common Commands",
+      "items": [
+        {
+          "title": "Check Status",
+          "code": "docker compose ps"
+        },
+        {
+          "title": "View Logs",
+          "code": "docker compose logs -f"
+        },
+        {
+          "title": "Restart Service",
+          "code": "docker compose down && docker compose up -d"
+        },
+        {
+          "title": "Update Version",
+          "code": "docker compose pull && docker compose down && docker compose up -d"
+        }
+      ]
+    },
+    "optional": {
+      "title": "Optional Deployment",
+      "performance": {
+        "title": "Enhanced Performance",
+        "description": "Configure MySQL/PostgreSQL database and Redis cache to improve system performance and reliability"
+      },
+      "database": {
+        "title": "Database Configuration",
+        "configs": [
+          {
+            "name": "MySQL Configuration",
+            "steps": [
+              "1. Edit <code class=\"bg-gray-100 px-1 rounded\">docker-compose.yml</code>, uncomment MySQL service:<div class=\"bg-gray-900 text-gray-100 p-4 rounded-lg text-sm\"><code>&nbsp;&nbsp;depends_on:<br />&nbsp;&nbsp;&nbsp;&nbsp;mysql:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;condition: service_healthy<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;restart: true<br /><br />mysql:<br />&nbsp;&nbsp;image: mysql:8.2<br />&nbsp;&nbsp;container_name: gpt-load-mysql<br />&nbsp;&nbsp;restart: always<br />&nbsp;&nbsp;environment:<br />&nbsp;&nbsp;&nbsp;&nbsp;MYSQL_ROOT_PASSWORD: 123456<br />&nbsp;&nbsp;&nbsp;&nbsp;MYSQL_DATABASE: gpt-load<br />&nbsp;&nbsp;volumes:<br />&nbsp;&nbsp;&nbsp;&nbsp;- ./data/mysql:/var/lib/mysql<br />&nbsp;&nbsp;healthcheck:<br />&nbsp;&nbsp;&nbsp;&nbsp;test: [\"CMD\", \"mysqladmin\", \"ping\", \"-h\", \"localhost\"]<br />&nbsp;&nbsp;&nbsp;&nbsp;interval: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;timeout: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;retries: 10</code></div>",
+              "2. Configure database connection in <code class=\"bg-gray-100 px-1 rounded\">.env</code> file:<div class=\"bg-gray-900 text-gray-100 p-4 rounded-lg text-sm\"><code>DATABASE_DSN=root:123456@tcp(mysql:3306)/gpt-load?charset=utf8mb4&parseTime=True&loc=Local</code></div>"
+            ]
+          },
+          {
+            "name": "PostgreSQL Configuration",
+            "steps": [
+              "1. Edit <code class=\"bg-gray-100 px-1 rounded\">docker-compose.yml</code>, uncomment PostgreSQL service:<div class=\"bg-gray-900 text-gray-100 p-4 rounded-lg text-sm\"><code>&nbsp;&nbsp;depends_on:<br />&nbsp;&nbsp;&nbsp;&nbsp;postgres:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;condition: service_healthy<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;restart: true<br /><br />postgres:<br />&nbsp;&nbsp;image: \"postgres:16\"<br />&nbsp;&nbsp;container_name: gpt-load-postgres<br />&nbsp;&nbsp;environment:<br />&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_USER: postgres<br />&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_PASSWORD: 123456<br />&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_DB: gpt-load<br />&nbsp;&nbsp;volumes:<br />&nbsp;&nbsp;&nbsp;&nbsp;- ./data/postgres:/var/lib/postgresql/data<br />&nbsp;&nbsp;healthcheck:<br />&nbsp;&nbsp;&nbsp;&nbsp;test: [\"CMD-SHELL\", \"pg_isready -U postgres -d \"]<br />&nbsp;&nbsp;&nbsp;&nbsp;interval: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;timeout: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;retries: 10</code></div>",
+              "2. Configure database connection in <code class=\"bg-gray-100 px-1 rounded\">.env</code> file:<div class=\"bg-gray-900 text-gray-100 p-4 rounded-lg text-sm\"><code>DATABASE_DSN=postgres://postgres:123456@postgres:5432/gpt-load?sslmode=disable</code></div>"
+            ]
+          }
+        ]
+      },
+      "redis": {
+        "title": "Redis Configuration",
+        "step1": {
+          "description": "1. Edit",
+          "action": ", uncomment Redis service:",
+          "code": "&nbsp;&nbsp;depends_on:<br />&nbsp;&nbsp;&nbsp;&nbsp;redis:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;condition: service_healthy<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;restart: true<br /><br />redis:<br />&nbsp;&nbsp;image: redis:latest<br />&nbsp;&nbsp;container_name: gpt-load-redis<br />&nbsp;&nbsp;restart: always<br />&nbsp;&nbsp;healthcheck:<br />&nbsp;&nbsp;&nbsp;&nbsp;test: [\"CMD\", \"redis-cli\", \"ping\"]<br />&nbsp;&nbsp;&nbsp;&nbsp;interval: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;timeout: 3s<br />&nbsp;&nbsp;&nbsp;&nbsp;retries: 3"
+        },
+        "step2": {
+          "description": "2. Configure Redis connection in",
+          "action": "file:"
+        }
+      },
+      "restart": {
+        "title": "Restart Services",
+        "description": "After configuration is complete, restart all services:",
+        "stopComment": "# Stop services",
+        "startComment": "# Restart services"
+      }
+    },
+    "troubleshooting": {
+      "title": "Troubleshooting",
+      "commonIssues": {
+        "title": "Common Issues"
+      },
+      "items": [
+        {
+          "title": "Cannot login to admin interface",
+          "description": "Please check if you are using the correct management key:",
+          "solution": "<ul class=\"text-gray-600 text-sm space-y-1 ml-4\"><li>• Confirm that AUTH_KEY in <code class=\"bg-gray-100 px-1 rounded\">.env</code> file has been modified</li><li>• The new key takes effect after restarting the service: <code class=\"bg-gray-100 px-1 rounded\">docker compose restart</code></li><li>• Keys are case-sensitive, please ensure correct input</li></ul>"
+        },
+        {
+          "title": "Port conflict",
+          "description": "If port 3001 is occupied, you can modify it in <code class=\"bg-gray-100 px-1 rounded\">.env</code> file:",
+          "solution": "<div class=\"bg-gray-100 p-2 rounded text-sm\"><code>PORT=3002</code></div>"
+        },
+        {
+          "title": "Database connection failed",
+          "description": "Check if database service is running normally:",
+          "solution": "<div class=\"bg-gray-100 p-2 rounded text-sm\"><code>docker compose logs mysql</code></div>"
+        },
+        {
+          "title": "Insufficient memory",
+          "description": "Ensure the system has sufficient memory resources. After enabling database services, at least 1GB of available memory is recommended",
+          "solution": ""
+        }
+      ]
+    },
+    "nextSteps": {
+      "title": "Next Steps",
+      "description": "After deployment is complete, you can:",
+      "items": [
+        "Configure proxy keys and manage AI service groups",
+        "Add and manage AI service provider API keys",
+        "Adjust system configuration and performance parameters",
+        "Start using API proxy services"
+      ],
+      "buttons": {
+        "configuration": "View Configuration Guide",
+        "management": "Management Configuration"
+      }
+    }
+  },
   "clawCloud": {
     "title": "Claw Cloud Deployment",
     "subtitle": "Deploy GPT-Load to Claw Cloud for free. No server required, one-click deployment for quick experience.",

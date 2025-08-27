@@ -346,6 +346,186 @@
     "cherryStudio": "Cherry Studio",
     "sponsor": "支持赞助"
   },
+  "standalone": {
+    "title": "单机部署",
+    "subtitle": "单机部署是 GPT-Load 最简单的部署方式，适合个人用户和小团队快速上手。支持从轻量化快速启动到完整功能的可选部署。",
+    "quickStart": {
+      "title": "快速启动",
+      "lightweight": {
+        "title": "轻量化部署",
+        "description": "使用 SQLite 数据库和内存存储，最适合个人使用和快速体验"
+      }
+    },
+    "requirements": {
+      "title": "环境要求",
+      "items": [
+        "Docker 20.10+ 和 Docker Compose",
+        "Linux/macOS/Windows 操作系统",
+        "至少 128MB 内存和 1GB 磁盘空间"
+      ]
+    },
+    "installation": {
+      "title": "安装步骤",
+      "step1": {
+        "title": "创建工作目录",
+        "comment": "# 创建目录并进入"
+      },
+      "step2": {
+        "title": "下载并配置安全参数",
+        "dockerComment": "# 下载 Docker Compose 配置",
+        "envComment": "# 下载环境变量配置",
+        "securityConfig": {
+          "title": "必须执行：修改管理密钥",
+          "editFile": "立即编辑",
+          "changeFrom": "文件，将：",
+          "changeTo": "替换为安全的密钥：",
+          "reminder": {
+            "title": "提醒：",
+            "message": "请生成您自己的随机密钥，不要使用上面的示例密钥！"
+          }
+        }
+      },
+      "step3": {
+        "title": "启动服务",
+        "comment": "# 启动 GPT-Load 服务"
+      },
+      "step4": {
+        "title": "验证部署",
+        "accessAdmin": "访问管理界面：",
+        "useAuthKey": "使用您自定义的管理密钥登录",
+        "fileSet": "即您在",
+        "login": "文件中设置的",
+        "value": "值",
+        "securityTip": {
+          "title": "安全提示：",
+          "message": "请妥善保管您的管理密钥，不要在日志、文档或代码中明文存储。"
+        }
+      }
+    },
+    "security": {
+      "warning": {
+        "title": "关键安全警告",
+        "message": "部署前必须更改默认管理密钥，否则存在严重安全风险！"
+      },
+      "requirements": {
+        "title": "安全密钥要求：",
+        "items": [
+          "最少 20 个字符",
+          "包含大小写字母、数字、特殊符号",
+          "避免使用字典词汇或个人信息",
+          "推荐格式：sk-prod-[32位随机字符串]"
+        ]
+      },
+      "risk": "⚠️ 使用弱密钥可能导致系统被恶意访问，造成数据泄露或服务滥用！"
+    },
+    "commonCommands": {
+      "title": "常用命令",
+      "items": [
+        {
+          "title": "查看状态",
+          "code": "docker compose ps"
+        },
+        {
+          "title": "查看日志",
+          "code": "docker compose logs -f"
+        },
+        {
+          "title": "重启服务",
+          "code": "docker compose down && docker compose up -d"
+        },
+        {
+          "title": "更新版本",
+          "code": "docker compose pull && docker compose down && docker compose up -d"
+        }
+      ]
+    },
+    "optional": {
+      "title": "可选部署",
+      "performance": {
+        "title": "增强性能",
+        "description": "配置 MySQL/PostgreSQL 数据库和 Redis 缓存，提升系统性能和可靠性"
+      },
+      "database": {
+        "title": "数据库配置",
+        "configs": [
+          {
+            "name": "MySQL 配置",
+            "steps": [
+              "1. 编辑 <code class=\"bg-gray-100 px-1 rounded\">docker-compose.yml</code>，取消 MySQL 服务的注释：<div class=\"bg-gray-900 text-gray-100 p-4 rounded-lg text-sm\"><code>&nbsp;&nbsp;depends_on:<br />&nbsp;&nbsp;&nbsp;&nbsp;mysql:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;condition: service_healthy<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;restart: true<br /><br />mysql:<br />&nbsp;&nbsp;image: mysql:8.2<br />&nbsp;&nbsp;container_name: gpt-load-mysql<br />&nbsp;&nbsp;restart: always<br />&nbsp;&nbsp;environment:<br />&nbsp;&nbsp;&nbsp;&nbsp;MYSQL_ROOT_PASSWORD: 123456<br />&nbsp;&nbsp;&nbsp;&nbsp;MYSQL_DATABASE: gpt-load<br />&nbsp;&nbsp;volumes:<br />&nbsp;&nbsp;&nbsp;&nbsp;- ./data/mysql:/var/lib/mysql<br />&nbsp;&nbsp;healthcheck:<br />&nbsp;&nbsp;&nbsp;&nbsp;test: [\"CMD\", \"mysqladmin\", \"ping\", \"-h\", \"localhost\"]<br />&nbsp;&nbsp;&nbsp;&nbsp;interval: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;timeout: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;retries: 10</code></div>",
+              "2. 在 <code class=\"bg-gray-100 px-1 rounded\">.env</code> 文件中配置数据库连接：<div class=\"bg-gray-900 text-gray-100 p-4 rounded-lg text-sm\"><code>DATABASE_DSN=root:123456@tcp(mysql:3306)/gpt-load?charset=utf8mb4&parseTime=True&loc=Local</code></div>"
+            ]
+          },
+          {
+            "name": "PostgreSQL 配置",
+            "steps": [
+              "1. 编辑 <code class=\"bg-gray-100 px-1 rounded\">docker-compose.yml</code>，取消 PostgreSQL 服务的注释：<div class=\"bg-gray-900 text-gray-100 p-4 rounded-lg text-sm\"><code>&nbsp;&nbsp;depends_on:<br />&nbsp;&nbsp;&nbsp;&nbsp;postgres:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;condition: service_healthy<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;restart: true<br /><br />postgres:<br />&nbsp;&nbsp;image: \"postgres:16\"<br />&nbsp;&nbsp;container_name: gpt-load-postgres<br />&nbsp;&nbsp;environment:<br />&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_USER: postgres<br />&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_PASSWORD: 123456<br />&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_DB: gpt-load<br />&nbsp;&nbsp;volumes:<br />&nbsp;&nbsp;&nbsp;&nbsp;- ./data/postgres:/var/lib/postgresql/data<br />&nbsp;&nbsp;healthcheck:<br />&nbsp;&nbsp;&nbsp;&nbsp;test: [\"CMD-SHELL\", \"pg_isready -U postgres -d \"]<br />&nbsp;&nbsp;&nbsp;&nbsp;interval: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;timeout: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;retries: 10</code></div>",
+              "2. 在 <code class=\"bg-gray-100 px-1 rounded\">.env</code> 文件中配置数据库连接：<div class=\"bg-gray-900 text-gray-100 p-4 rounded-lg text-sm\"><code>DATABASE_DSN=postgres://postgres:123456@postgres:5432/gpt-load?sslmode=disable</code></div>"
+            ]
+          }
+        ]
+      },
+      "redis": {
+        "title": "Redis 配置",
+        "step1": {
+          "description": "1. 编辑",
+          "action": "，取消 Redis 服务的注释：",
+          "code": "&nbsp;&nbsp;depends_on:<br />&nbsp;&nbsp;&nbsp;&nbsp;redis:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;condition: service_healthy<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;restart: true<br /><br />redis:<br />&nbsp;&nbsp;image: redis:latest<br />&nbsp;&nbsp;container_name: gpt-load-redis<br />&nbsp;&nbsp;restart: always<br />&nbsp;&nbsp;healthcheck:<br />&nbsp;&nbsp;&nbsp;&nbsp;test: [\"CMD\", \"redis-cli\", \"ping\"]<br />&nbsp;&nbsp;&nbsp;&nbsp;interval: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;timeout: 3s<br />&nbsp;&nbsp;&nbsp;&nbsp;retries: 3"
+        },
+        "step2": {
+          "description": "2. 在",
+          "action": "文件中配置 Redis 连接："
+        }
+      },
+      "restart": {
+        "title": "重新启动服务",
+        "description": "配置完成后，重新启动所有服务：",
+        "stopComment": "# 停止服务",
+        "startComment": "# 重新启动服务"
+      }
+    },
+    "troubleshooting": {
+      "title": "故障排除",
+      "commonIssues": {
+        "title": "常见问题"
+      },
+      "items": [
+        {
+          "title": "无法登录管理界面",
+          "description": "请检查您是否使用了正确的管理密钥：",
+          "solution": "<ul class=\"text-gray-600 text-sm space-y-1 ml-4\"><li>• 确认 <code class=\"bg-gray-100 px-1 rounded\">.env</code> 文件中的 AUTH_KEY 已修改</li><li>• 重启服务后新密钥才会生效：<code class=\"bg-gray-100 px-1 rounded\">docker compose restart</code></li><li>• 密钥区分大小写，请确保输入正确</li></ul>"
+        },
+        {
+          "title": "端口冲突",
+          "description": "如果 3001 端口被占用，可以在 <code class=\"bg-gray-100 px-1 rounded\">.env</code> 文件中修改：",
+          "solution": "<div class=\"bg-gray-100 p-2 rounded text-sm\"><code>PORT=3002</code></div>"
+        },
+        {
+          "title": "数据库连接失败",
+          "description": "检查数据库服务是否正常启动：",
+          "solution": "<div class=\"bg-gray-100 p-2 rounded text-sm\"><code>docker compose logs mysql</code></div>"
+        },
+        {
+          "title": "内存不足",
+          "description": "确保系统有足够的内存资源，开发数据库服务后，建议至少 1GB 可用内存",
+          "solution": ""
+        }
+      ]
+    },
+    "nextSteps": {
+      "title": "下一步",
+      "description": "部署完成后，您可以：",
+      "items": [
+        "配置代理密钥和管理 AI 服务分组",
+        "添加和管理 AI 服务商 API 密钥",
+        "调整系统配置和性能参数",
+        "开始使用 API 代理服务"
+      ],
+      "buttons": {
+        "configuration": "查看配置说明",
+        "management": "管理端配置"
+      }
+    }
+  },
   "clawCloud": {
     "title": "Claw Cloud 部署",
     "subtitle": "使用 Claw Cloud 免费云端部署 GPT-Load，无需服务器，一键部署，快速体验",

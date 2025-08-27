@@ -346,6 +346,186 @@
     "cherryStudio": "Cherry Studio",
     "sponsor": "スポンサー"
   },
+  "standalone": {
+    "title": "スタンドアロンデプロイメント",
+    "subtitle": "スタンドアロンデプロイメントは GPT-Load の最もシンプルなデプロイメント方法で、個人ユーザーや小規模チームがすぐに始められます。軽量なクイックスタートから完全機能のオプションデプロイメントまでサポートします。",
+    "quickStart": {
+      "title": "クイックスタート",
+      "lightweight": {
+        "title": "軽量デプロイメント",
+        "description": "SQLiteデータベースとメモリストレージを使用し、個人使用やクイック体験に最適"
+      }
+    },
+    "requirements": {
+      "title": "システム要件",
+      "items": [
+        "Docker 20.10+ と Docker Compose",
+        "Linux/macOS/Windows オペレーティングシステム",
+        "最低128MBメモリと1GBディスク容量"
+      ]
+    },
+    "installation": {
+      "title": "インストール手順",
+      "step1": {
+        "title": "作業ディレクトリの作成",
+        "comment": "# ディレクトリを作成して移動"
+      },
+      "step2": {
+        "title": "セキュリティパラメータのダウンロードと設定",
+        "dockerComment": "# Docker Compose設定をダウンロード",
+        "envComment": "# 環境変数設定をダウンロード",
+        "securityConfig": {
+          "title": "必須実行：管理キーの変更",
+          "editFile": "すぐに編集",
+          "changeFrom": "ファイルで、次を変更：",
+          "changeTo": "安全なキーに置き換える：",
+          "reminder": {
+            "title": "注意：",
+            "message": "独自のランダムキーを生成してください。上記のサンプルキーは使用しないでください！"
+          }
+        }
+      },
+      "step3": {
+        "title": "サービスの開始",
+        "comment": "# GPT-Loadサービスを開始"
+      },
+      "step4": {
+        "title": "デプロイメントの検証",
+        "accessAdmin": "管理インターフェースにアクセス：",
+        "useAuthKey": "カスタム管理キーでログイン",
+        "fileSet": "つまり、",
+        "login": "ファイルに設定された",
+        "value": "の値",
+        "securityTip": {
+          "title": "セキュリティのヒント：",
+          "message": "管理キーを安全に保管し、ログ、ドキュメント、またはコードに平文で保存しないでください。"
+        }
+      }
+    },
+    "security": {
+      "warning": {
+        "title": "重要なセキュリティ警告",
+        "message": "デプロイメント前にデフォルトの管理キーを変更する必要があります。そうしないと深刻なセキュリティリスクがあります！"
+      },
+      "requirements": {
+        "title": "セキュリティキー要件：",
+        "items": [
+          "最低20文字",
+          "大文字、小文字、数字、特殊記号を含む",
+          "辞書の単語や個人情報の使用を避ける",
+          "推奨形式：sk-prod-[32文字のランダム文字列]"
+        ]
+      },
+      "risk": "⚠️ 弱いキーを使用すると、悪意のあるシステムアクセスにつながり、データ漏洩やサービス悪用を引き起こす可能性があります！"
+    },
+    "commonCommands": {
+      "title": "一般的なコマンド",
+      "items": [
+        {
+          "title": "ステータス確認",
+          "code": "docker compose ps"
+        },
+        {
+          "title": "ログ表示",
+          "code": "docker compose logs -f"
+        },
+        {
+          "title": "サービス再起動",
+          "code": "docker compose down && docker compose up -d"
+        },
+        {
+          "title": "バージョン更新",
+          "code": "docker compose pull && docker compose down && docker compose up -d"
+        }
+      ]
+    },
+    "optional": {
+      "title": "オプションデプロイメント",
+      "performance": {
+        "title": "パフォーマンス向上",
+        "description": "MySQL/PostgreSQLデータベースとRedisキャッシュを設定してシステムパフォーマンスと信頼性を向上"
+      },
+      "database": {
+        "title": "データベース設定",
+        "configs": [
+          {
+            "name": "MySQL設定",
+            "steps": [
+              "1. <code class=\"bg-gray-100 px-1 rounded\">docker-compose.yml</code>を編集し、MySQLサービスのコメントアウトを解除：<div class=\"bg-gray-900 text-gray-100 p-4 rounded-lg text-sm\"><code>&nbsp;&nbsp;depends_on:<br />&nbsp;&nbsp;&nbsp;&nbsp;mysql:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;condition: service_healthy<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;restart: true<br /><br />mysql:<br />&nbsp;&nbsp;image: mysql:8.2<br />&nbsp;&nbsp;container_name: gpt-load-mysql<br />&nbsp;&nbsp;restart: always<br />&nbsp;&nbsp;environment:<br />&nbsp;&nbsp;&nbsp;&nbsp;MYSQL_ROOT_PASSWORD: 123456<br />&nbsp;&nbsp;&nbsp;&nbsp;MYSQL_DATABASE: gpt-load<br />&nbsp;&nbsp;volumes:<br />&nbsp;&nbsp;&nbsp;&nbsp;- ./data/mysql:/var/lib/mysql<br />&nbsp;&nbsp;healthcheck:<br />&nbsp;&nbsp;&nbsp;&nbsp;test: [\"CMD\", \"mysqladmin\", \"ping\", \"-h\", \"localhost\"]<br />&nbsp;&nbsp;&nbsp;&nbsp;interval: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;timeout: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;retries: 10</code></div>",
+              "2. <code class=\"bg-gray-100 px-1 rounded\">.env</code>ファイルでデータベース接続を設定：<div class=\"bg-gray-900 text-gray-100 p-4 rounded-lg text-sm\"><code>DATABASE_DSN=root:123456@tcp(mysql:3306)/gpt-load?charset=utf8mb4&parseTime=True&loc=Local</code></div>"
+            ]
+          },
+          {
+            "name": "PostgreSQL設定",
+            "steps": [
+              "1. <code class=\"bg-gray-100 px-1 rounded\">docker-compose.yml</code>を編集し、PostgreSQLサービスのコメントアウトを解除：<div class=\"bg-gray-900 text-gray-100 p-4 rounded-lg text-sm\"><code>&nbsp;&nbsp;depends_on:<br />&nbsp;&nbsp;&nbsp;&nbsp;postgres:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;condition: service_healthy<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;restart: true<br /><br />postgres:<br />&nbsp;&nbsp;image: \"postgres:16\"<br />&nbsp;&nbsp;container_name: gpt-load-postgres<br />&nbsp;&nbsp;environment:<br />&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_USER: postgres<br />&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_PASSWORD: 123456<br />&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_DB: gpt-load<br />&nbsp;&nbsp;volumes:<br />&nbsp;&nbsp;&nbsp;&nbsp;- ./data/postgres:/var/lib/postgresql/data<br />&nbsp;&nbsp;healthcheck:<br />&nbsp;&nbsp;&nbsp;&nbsp;test: [\"CMD-SHELL\", \"pg_isready -U postgres -d \"]<br />&nbsp;&nbsp;&nbsp;&nbsp;interval: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;timeout: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;retries: 10</code></div>",
+              "2. <code class=\"bg-gray-100 px-1 rounded\">.env</code>ファイルでデータベース接続を設定：<div class=\"bg-gray-900 text-gray-100 p-4 rounded-lg text-sm\"><code>DATABASE_DSN=postgres://postgres:123456@postgres:5432/gpt-load?sslmode=disable</code></div>"
+            ]
+          }
+        ]
+      },
+      "redis": {
+        "title": "Redis設定",
+        "step1": {
+          "description": "1. 編集",
+          "action": "、Redisサービスのコメントアウトを解除：",
+          "code": "&nbsp;&nbsp;depends_on:<br />&nbsp;&nbsp;&nbsp;&nbsp;redis:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;condition: service_healthy<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;restart: true<br /><br />redis:<br />&nbsp;&nbsp;image: redis:latest<br />&nbsp;&nbsp;container_name: gpt-load-redis<br />&nbsp;&nbsp;restart: always<br />&nbsp;&nbsp;healthcheck:<br />&nbsp;&nbsp;&nbsp;&nbsp;test: [\"CMD\", \"redis-cli\", \"ping\"]<br />&nbsp;&nbsp;&nbsp;&nbsp;interval: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;timeout: 3s<br />&nbsp;&nbsp;&nbsp;&nbsp;retries: 3"
+        },
+        "step2": {
+          "description": "2. Redis接続を設定",
+          "action": "ファイル："
+        }
+      },
+      "restart": {
+        "title": "サービスの再起動",
+        "description": "設定完了後、すべてのサービスを再起動：",
+        "stopComment": "# サービス停止",
+        "startComment": "# サービス再起動"
+      }
+    },
+    "troubleshooting": {
+      "title": "トラブルシューティング",
+      "commonIssues": {
+        "title": "よくある問題"
+      },
+      "items": [
+        {
+          "title": "管理インターフェースにログインできない",
+          "description": "正しい管理キーを使用しているか確認してください：",
+          "solution": "<ul class=\"text-gray-600 text-sm space-y-1 ml-4\"><li>• <code class=\"bg-gray-100 px-1 rounded\">.env</code>ファイルのAUTH_KEYが変更されていることを確認</li><li>• サービス再起動後に新しいキーが有効になります：<code class=\"bg-gray-100 px-1 rounded\">docker compose restart</code></li><li>• キーは大文字小文字を区別します。正確な入力を確認してください</li></ul>"
+        },
+        {
+          "title": "ポート競合",
+          "description": "ポート3001が使用されている場合、<code class=\"bg-gray-100 px-1 rounded\">.env</code>ファイルで変更できます：",
+          "solution": "<div class=\"bg-gray-100 p-2 rounded text-sm\"><code>PORT=3002</code></div>"
+        },
+        {
+          "title": "データベース接続失敗",
+          "description": "データベースサービスが正常に動作しているか確認：",
+          "solution": "<div class=\"bg-gray-100 p-2 rounded text-sm\"><code>docker compose logs mysql</code></div>"
+        },
+        {
+          "title": "メモリ不足",
+          "description": "システムに十分なメモリリソースがあることを確認してください。データベースサービスを有効にした後、最低1GBの利用可能メモリを推奨",
+          "solution": ""
+        }
+      ]
+    },
+    "nextSteps": {
+      "title": "次のステップ",
+      "description": "デプロイメント完了後、以下ができます：",
+      "items": [
+        "プロキシキーの設定とAIサービスグループの管理",
+        "AIサービスプロバイダのAPIキーの追加と管理",
+        "システム設定とパフォーマンスパラメータの調整",
+        "APIプロキシサービスの使用開始"
+      ],
+      "buttons": {
+        "configuration": "設定ガイドを表示",
+        "management": "管理設定"
+      }
+    }
+  },
   "clawCloud": {
     "title": "Claw Cloud デプロイメント",
     "subtitle": "Claw Cloudを使用してGPT-Loadを無料でデプロイ。サーバー不要、ワンクリックデプロイメントで素早い体験。",

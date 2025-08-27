@@ -376,6 +376,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       keywords: "ソースコードデプロイメント, Go開発環境, ソースコンパイル, 開発者デプロイメント, 機能カスタマイズ, プロジェクト構造, トラブルシューティング, GPT-Loadソース",
       type: 'article'
     }
+  },
+  '/docs/deployment/standalone': {
+    zh: {
+      title: "单机部署 - GPT-Load",
+      description: "GPT-Load单机部署完整指南，支持轻量化SQLite快速启动和MySQL/PostgreSQL/Redis增强配置，适合个人用户和小团队快速上手。",
+      keywords: "单机部署, Docker部署, SQLite部署, MySQL配置, PostgreSQL配置, Redis配置, 快速部署, GPT-Load",
+      type: 'article'
+    },
+    en: {
+      title: "Standalone Deployment - GPT-Load",
+      description: "Complete guide for GPT-Load standalone deployment, supporting lightweight SQLite quick start and MySQL/PostgreSQL/Redis enhanced configuration, suitable for individual users and small teams.",
+      keywords: "standalone deployment, Docker deployment, SQLite deployment, MySQL configuration, PostgreSQL configuration, Redis configuration, quick deployment, GPT-Load",
+      type: 'article'
+    },
+    ja: {
+      title: "スタンドアロンデプロイメント - GPT-Load",
+      description: "GPT-Loadスタンドアロンデプロイメントの完全ガイド。軽量SQLiteクイックスタートとMySQL/PostgreSQL/Redis拡張設定をサポート。個人ユーザーと小チームに適しています。",
+      keywords: "スタンドアロンデプロイメント, Dockerデプロイメント, SQLiteデプロイメント, MySQL設定, PostgreSQL設定, Redis設定, クイックデプロイメント, GPT-Load",
+      type: 'article'
+    }
   }
   // 架构预留：后续可继续添加其他页面的SEO配置
 };
