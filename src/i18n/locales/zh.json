@@ -2103,5 +2103,106 @@
         "description": "提供了极高的灵活性和动态调整能力，允许针对不同业务场景（如多租户）进行细粒度隔离和优化。"
       }
     }
+  },
+  "deploymentPage": {
+    "title": "部署指南",
+    "subtitle": "GPT-Load 提供多种部署方案，满足不同场景的需求。从轻量化的单机部署到企业级的集群部署，选择最适合您的方案。",
+    "viewDetails": "查看详情",
+    "standalone": {
+      "title": "单机部署",
+      "subtitle": "轻量化部署，适合个人和小团队",
+      "quickStart": {
+        "title": "快速启动",
+        "description": "使用 Docker Compose 一键部署，SQLite + 内存存储"
+      },
+      "optional": {
+        "title": "可选部署",
+        "description": "配置 MySQL/PostgreSQL 和 Redis，提升性能"
+      }
+    },
+    "source": {
+      "title": "源码部署",
+      "subtitle": "开发者友好，完全自定义",
+      "fullControl": {
+        "title": "完全控制",
+        "description": "自定义构建、配置和部署流程"
+      },
+      "development": {
+        "title": "开发调试",
+        "description": "适合开发环境和功能定制"
+      }
+    },
+    "cluster": {
+      "title": "集群部署",
+      "subtitle": "企业级高可用方案",
+      "masterSlave": {
+        "title": "主从架构",
+        "description": "分布式部署，支持水平扩展"
+      },
+      "highAvailability": {
+        "title": "高可用",
+        "description": "故障转移和负载均衡"
+      }
+    },
+    "clawCloud": {
+      "title": "Claw Cloud",
+      "subtitle": "免费云端部署方案",
+      "cloudDeploy": {
+        "title": "云端部署",
+        "description": "无需服务器，一键部署到云端"
+      },
+      "freeQuota": {
+        "title": "免费额度",
+        "description": "每月 5 美元免费额度"
+      }
+    },
+    "comparison": {
+      "title": "方案对比",
+      "headers": {
+        "solution": "部署方案",
+        "scenario": "适用场景",
+        "requirements": "技术要求",
+        "performance": "性能表现",
+        "complexity": "运维难度"
+      },
+      "rows": {
+        "standalone": {
+          "solution": "单机部署",
+          "scenario": "个人、小团队",
+          "requirements": "Docker 基础",
+          "performance": "中等",
+          "complexity": "简单"
+        },
+        "source": {
+          "solution": "源码部署",
+          "scenario": "开发调试",
+          "requirements": "Go 开发经验",
+          "performance": "高",
+          "complexity": "中等"
+        },
+        "cluster": {
+          "solution": "集群部署",
+          "scenario": "企业生产",
+          "requirements": "K8s/运维经验",
+          "performance": "很高",
+          "complexity": "复杂"
+        },
+        "clawCloud": {
+          "solution": "Claw Cloud",
+          "scenario": "快速体验",
+          "requirements": "GitHub 账号",
+          "performance": "中等",
+          "complexity": "最简单"
+        }
+      }
+    },
+    "gettingStarted": {
+      "title": "开始部署",
+      "description": "如果您是首次使用 GPT-Load，我们推荐从单机部署开始，它提供了最佳的学习曲线和快速体验。",
+      "buttons": {
+        "standalone": "单机快速部署",
+        "clawCloud": "免费云端体验"
+      }
+    }
   }
 }

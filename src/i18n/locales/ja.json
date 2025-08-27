@@ -2103,5 +2103,106 @@
         "description": "設定の集中管理、動的調整、バージョン管理、環境分離を実現し、システムの保守性と操作性を大幅に向上"
       }
     }
+  },
+  "deploymentPage": {
+    "title": "デプロイメントガイド",
+    "subtitle": "GPT-Loadは様々なシナリオのニーズに対応する複数のデプロイメントオプションを提供しています。軽量なスタンドアロンデプロイメントからエンタープライズグレードのクラスターデプロイメントまで、最適なソリューションをお選びください。",
+    "viewDetails": "詳細を見る",
+    "standalone": {
+      "title": "スタンドアロンデプロイメント",
+      "subtitle": "個人や小規模チーム向けの軽量デプロイメント",
+      "quickStart": {
+        "title": "クイックスタート",
+        "description": "Docker Composeでワンクリックデプロイ、SQLite + メモリストレージ"
+      },
+      "optional": {
+        "title": "オプションデプロイメント",
+        "description": "MySQL/PostgreSQLとRedisを設定してパフォーマンスを向上"
+      }
+    },
+    "source": {
+      "title": "ソースコードデプロイメント",
+      "subtitle": "開発者フレンドリー、完全カスタマイズ可能",
+      "fullControl": {
+        "title": "完全制御",
+        "description": "ビルド、設定、デプロイプロセスをカスタマイズ"
+      },
+      "development": {
+        "title": "開発デバッグ",
+        "description": "開発環境と機能カスタマイズに適している"
+      }
+    },
+    "cluster": {
+      "title": "クラスターデプロイメント",
+      "subtitle": "エンタープライズグレードの高可用性ソリューション",
+      "masterSlave": {
+        "title": "マスター/スレーブアーキテクチャ",
+        "description": "水平スケーリングサポート付きの分散デプロイメント"
+      },
+      "highAvailability": {
+        "title": "高可用性",
+        "description": "フェイルオーバーとロードバランシング"
+      }
+    },
+    "clawCloud": {
+      "title": "Claw Cloud",
+      "subtitle": "無料クラウドデプロイメントソリューション",
+      "cloudDeploy": {
+        "title": "クラウドデプロイ",
+        "description": "サーバー不要、ワンクリックでクラウドにデプロイ"
+      },
+      "freeQuota": {
+        "title": "無料枠",
+        "description": "月額5ドルの無料枠"
+      }
+    },
+    "comparison": {
+      "title": "ソリューション比較",
+      "headers": {
+        "solution": "デプロイメントソリューション",
+        "scenario": "適用シナリオ",
+        "requirements": "技術要件",
+        "performance": "パフォーマンス",
+        "complexity": "運用の複雑さ"
+      },
+      "rows": {
+        "standalone": {
+          "solution": "スタンドアロンデプロイメント",
+          "scenario": "個人、小規模チーム",
+          "requirements": "Docker基礎知識",
+          "performance": "中程度",
+          "complexity": "シンプル"
+        },
+        "source": {
+          "solution": "ソースコードデプロイメント",
+          "scenario": "開発＆デバッグ",
+          "requirements": "Go開発経験",
+          "performance": "高い",
+          "complexity": "中程度"
+        },
+        "cluster": {
+          "solution": "クラスターデプロイメント",
+          "scenario": "エンタープライズプロダクション",
+          "requirements": "K8s/運用経験",
+          "performance": "非常に高い",
+          "complexity": "複雑"
+        },
+        "clawCloud": {
+          "solution": "Claw Cloud",
+          "scenario": "クイック体験",
+          "requirements": "GitHubアカウント",
+          "performance": "中程度",
+          "complexity": "最もシンプル"
+        }
+      }
+    },
+    "gettingStarted": {
+      "title": "デプロイを開始",
+      "description": "GPT-Loadを初めて使用する場合は、最適な学習曲線とクイック体験を提供するスタンドアロンデプロイメントから始めることをお勧めします。",
+      "buttons": {
+        "standalone": "スタンドアロンクイックデプロイ",
+        "clawCloud": "無料クラウド体験"
+      }
+    }
   }
 }

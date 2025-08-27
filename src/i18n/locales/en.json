@@ -2103,5 +2103,106 @@
         "description": "Provides extremely high flexibility and dynamic adjustment capabilities, allowing fine-grained isolation and optimization for different business scenarios (such as multi-tenancy)."
       }
     }
+  },
+  "deploymentPage": {
+    "title": "Deployment Guide",
+    "subtitle": "GPT-Load provides multiple deployment options to meet different scenario requirements. From lightweight standalone deployment to enterprise-grade cluster deployment, choose the most suitable solution for you.",
+    "viewDetails": "View Details",
+    "standalone": {
+      "title": "Standalone Deployment",
+      "subtitle": "Lightweight deployment for individuals and small teams",
+      "quickStart": {
+        "title": "Quick Start",
+        "description": "One-click deployment with Docker Compose, SQLite + memory storage"
+      },
+      "optional": {
+        "title": "Optional Deployment",
+        "description": "Configure MySQL/PostgreSQL and Redis for improved performance"
+      }
+    },
+    "source": {
+      "title": "Source Code Deployment",
+      "subtitle": "Developer-friendly, fully customizable",
+      "fullControl": {
+        "title": "Full Control",
+        "description": "Customize build, configuration and deployment process"
+      },
+      "development": {
+        "title": "Development Debugging",
+        "description": "Suitable for development environments and feature customization"
+      }
+    },
+    "cluster": {
+      "title": "Cluster Deployment",
+      "subtitle": "Enterprise-grade high availability solution",
+      "masterSlave": {
+        "title": "Master-Slave Architecture",
+        "description": "Distributed deployment with horizontal scaling support"
+      },
+      "highAvailability": {
+        "title": "High Availability",
+        "description": "Failover and load balancing"
+      }
+    },
+    "clawCloud": {
+      "title": "Claw Cloud",
+      "subtitle": "Free cloud deployment solution",
+      "cloudDeploy": {
+        "title": "Cloud Deployment",
+        "description": "No server required, one-click deployment to cloud"
+      },
+      "freeQuota": {
+        "title": "Free Quota",
+        "description": "$5 free quota per month"
+      }
+    },
+    "comparison": {
+      "title": "Solution Comparison",
+      "headers": {
+        "solution": "Deployment Solution",
+        "scenario": "Use Cases",
+        "requirements": "Technical Requirements",
+        "performance": "Performance",
+        "complexity": "Operations Complexity"
+      },
+      "rows": {
+        "standalone": {
+          "solution": "Standalone Deployment",
+          "scenario": "Personal, Small Teams",
+          "requirements": "Docker Basics",
+          "performance": "Medium",
+          "complexity": "Simple"
+        },
+        "source": {
+          "solution": "Source Code Deployment",
+          "scenario": "Development & Debugging",
+          "requirements": "Go Development Experience",
+          "performance": "High",
+          "complexity": "Medium"
+        },
+        "cluster": {
+          "solution": "Cluster Deployment",
+          "scenario": "Enterprise Production",
+          "requirements": "K8s/Operations Experience",
+          "performance": "Very High",
+          "complexity": "Complex"
+        },
+        "clawCloud": {
+          "solution": "Claw Cloud",
+          "scenario": "Quick Experience",
+          "requirements": "GitHub Account",
+          "performance": "Medium",
+          "complexity": "Simplest"
+        }
+      }
+    },
+    "gettingStarted": {
+      "title": "Getting Started",
+      "description": "If you are new to GPT-Load, we recommend starting with standalone deployment, which provides the best learning curve and quick experience.",
+      "buttons": {
+        "standalone": "Quick Standalone Deployment",
+        "clawCloud": "Free Cloud Experience"
+      }
+    }
   }
 }

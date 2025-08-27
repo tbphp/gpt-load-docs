@@ -277,6 +277,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
+  '/docs/deployment': {
+    zh: {
+      title: "部署指南 - GPT-Load",
+      description: "GPT-Load提供多种部署方案，从轻量化的单机部署到企业级的集群部署。包含完整的Docker、源码、集群和云端部署指南。",
+      keywords: "GPT-Load部署, Docker部署, 单机部署, 集群部署, 源码部署, Claw Cloud, 部署指南, 高可用部署",
+      type: 'article'
+    },
+    en: {
+      title: "Deployment Guide - GPT-Load",
+      description: "GPT-Load offers multiple deployment options, from lightweight standalone deployment to enterprise-grade cluster deployment. Complete guides for Docker, source code, cluster and cloud deployment.",
+      keywords: "GPT-Load deployment, Docker deployment, standalone deployment, cluster deployment, source deployment, Claw Cloud, deployment guide, high availability deployment",
+      type: 'article'
+    },
+    ja: {
+      title: "デプロイメントガイド - GPT-Load",
+      description: "GPT-Loadは軽量なスタンドアロンデプロイメントからエンタープライズグレードのクラスターデプロイメントまで、複数のデプロイメントオプションを提供。Docker、ソースコード、クラスター、クラウドデプロイメントの完全ガイド。",
+      keywords: "GPT-Loadデプロイメント, Dockerデプロイメント, スタンドアロンデプロイメント, クラスターデプロイメント, ソースデプロイメント, Claw Cloud, デプロイメントガイド, 高可用性デプロイメント",
+      type: 'article'
+    }
+  },
   '/docs/configuration/project': {
     zh: {
       title: "项目配置 - GPT-Load",
