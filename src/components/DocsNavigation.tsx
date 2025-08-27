@@ -140,6 +140,7 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
       ],
     },
     { title: t("docs.sponsor"), href: "/docs/sponsor", icon: Heart },
+    { title: t("docs.contributors"), href: "/docs/contributors", icon: Users },
   ];
 
   const [openItems, setOpenItems] = useState<number[]>(() => {

@@ -344,7 +344,8 @@
     "claudeCodeRouter": "Claude Code Router",
     "newApi": "New API",
     "cherryStudio": "Cherry Studio",
-    "sponsor": "支持赞助"
+    "sponsor": "支持赞助",
+    "contributors": "贡献者"
   },
   "geminiOpenai": {
     "title": "Gemini 官方支持的 OpenAI 兼容格式",
@@ -3862,6 +3863,43 @@
       "contribute": {
         "title": "🔧 贡献代码"
       }
+    }
+  },
+  "contributors": {
+    "title": "贡献者",
+    "description": "感谢所有为 GPT-Load 项目做出贡献的开发者们！",
+    "thanks": {
+      "title": "致谢",
+      "message": "GPT-Load 能够发展到今天，离不开社区中每一位贡献者的支持。无论是代码贡献、问题反馈、文档完善还是功能建议，每一份贡献都推动着项目不断进步。",
+      "note": "项目采用开源协作模式，欢迎更多开发者加入我们！"
+    },
+    "list": {
+      "title": "项目贡献者",
+      "loading": "加载贡献者信息中...",
+      "error": "加载失败，请稍后重试",
+      "alt": "GPT-Load 项目贡献者",
+      "viewOnGithub": "在 GitHub 查看"
+    },
+    "howTo": {
+      "title": "如何参与贡献",
+      "codeTitle": "代码贡献",
+      "codeItems": [
+        "Fork 项目仓库",
+        "创建功能分支",
+        "提交代码更改",
+        "发起 Pull Request"
+      ],
+      "otherTitle": "其他贡献",
+      "otherItems": [
+        "报告 Bug 和问题",
+        "完善项目文档",
+        "提供功能建议",
+        "参与社区讨论"
+      ]
+    },
+    "cta": {
+      "github": "访问 GitHub",
+      "issues": "提交问题"
     }
   }
 }

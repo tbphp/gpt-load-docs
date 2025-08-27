@@ -344,7 +344,8 @@
     "claudeCodeRouter": "Claude Code Router",
     "newApi": "New API",
     "cherryStudio": "Cherry Studio",
-    "sponsor": "Sponsor"
+    "sponsor": "Sponsor",
+    "contributors": "Contributors"
   },
   "geminiOpenai": {
     "title": "Gemini Official OpenAI Compatible Format",
@@ -3862,6 +3863,43 @@
       "contribute": {
         "title": "🔧 Contribute Code"
       }
+    }
+  },
+  "contributors": {
+    "title": "Contributors",
+    "description": "Thanks to all the developers who have contributed to the GPT-Load project!",
+    "thanks": {
+      "title": "Acknowledgments",
+      "message": "GPT-Load's growth to this day is inseparable from the support of every contributor in the community. Whether it's code contributions, issue reports, documentation improvements, or feature suggestions, every contribution drives the project forward.",
+      "note": "The project adopts an open-source collaborative model, and we welcome more developers to join us!"
+    },
+    "list": {
+      "title": "Project Contributors",
+      "loading": "Loading contributor information...",
+      "error": "Loading failed, please try again later",
+      "alt": "GPT-Load project contributors",
+      "viewOnGithub": "View on GitHub"
+    },
+    "howTo": {
+      "title": "How to Contribute",
+      "codeTitle": "Code Contributions",
+      "codeItems": [
+        "Fork the repository",
+        "Create feature branch",
+        "Submit code changes",
+        "Create Pull Request"
+      ],
+      "otherTitle": "Other Contributions",
+      "otherItems": [
+        "Report bugs and issues",
+        "Improve documentation",
+        "Provide feature suggestions",
+        "Participate in community discussions"
+      ]
+    },
+    "cta": {
+      "github": "Visit GitHub",
+      "issues": "Submit Issues"
     }
   }
 }

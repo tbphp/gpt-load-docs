@@ -536,6 +536,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       keywords: "GPT-Loadスポンサー, プロジェクトサポート, WeChatスポンサー, Alipayスポンサー, Afdian, オープンソースサポート, プロジェクト寄付",
       type: 'article'
     }
+  },
+  '/contributors': {
+    zh: {
+      title: "贡献者 - GPT-Load",
+      description: "感谢所有为GPT-Load项目做出贡献的开发者们！查看项目贡献者列表，了解如何参与开源贡献，一起推动项目发展。",
+      keywords: "GPT-Load贡献者, 开源贡献, 项目贡献者, GitHub贡献, 代码贡献, 社区参与, 开源协作",
+      type: 'article'
+    },
+    en: {
+      title: "Contributors - GPT-Load",
+      description: "Thanks to all developers who have contributed to the GPT-Load project! View the project contributors list and learn how to participate in open source contributions to drive project development together.",
+      keywords: "GPT-Load contributors, open source contribution, project contributors, GitHub contribution, code contribution, community participation, open source collaboration",
+      type: 'article'
+    },
+    ja: {
+      title: "貢献者 - GPT-Load",
+      description: "GPT-Loadプロジェクトに貢献してくださったすべての開発者の皆様に感謝いたします！プロジェクト貢献者リストを確認し、オープンソース貢献への参加方法を学んで、一緒にプロジェクトの発展を推進しましょう。",
+      keywords: "GPT-Load貢献者, オープンソース貢献, プロジェクト貢献者, GitHub貢献, コード貢献, コミュニティ参加, オープンソース協働",
+      type: 'article'
+    }
   }
   // 架构预留：后续可继续添加其他页面的SEO配置
 };

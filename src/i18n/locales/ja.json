@@ -344,7 +344,8 @@
     "claudeCodeRouter": "Claude Code Router", 
     "newApi": "New API",
     "cherryStudio": "Cherry Studio",
-    "sponsor": "スポンサー"
+    "sponsor": "スポンサー",
+    "contributors": "貢献者"
   },
   "geminiOpenai": {
     "title": "Gemini 公式 OpenAI 互換フォーマット",
@@ -3862,6 +3863,43 @@
       "contribute": {
         "title": "🔧 コードを貢献"
       }
+    }
+  },
+  "contributors": {
+    "title": "貢献者",
+    "description": "GPT-Loadプロジェクトに貢献してくださったすべての開発者の皆様に感謝いたします！",
+    "thanks": {
+      "title": "謝辞",
+      "message": "GPT-Loadが今日まで発展できたのは、コミュニティの各貢献者の支援があってこそです。コード貢献、問題報告、ドキュメント改善、機能提案など、すべての貢献がプロジェクトの継続的な進歩を推進しています。",
+      "note": "プロジェクトはオープンソース協働モデルを採用しており、より多くの開発者の参加を歓迎します！"
+    },
+    "list": {
+      "title": "プロジェクト貢献者",
+      "loading": "貢献者情報を読み込み中...",
+      "error": "読み込みに失敗しました。しばらくしてから再試行してください",
+      "alt": "GPT-Loadプロジェクト貢献者",
+      "viewOnGithub": "GitHubで表示"
+    },
+    "howTo": {
+      "title": "貢献方法",
+      "codeTitle": "コード貢献",
+      "codeItems": [
+        "プロジェクトリポジトリをフォーク",
+        "機能ブランチを作成",
+        "コード変更をコミット",
+        "プルリクエストを作成"
+      ],
+      "otherTitle": "その他の貢献",
+      "otherItems": [
+        "バグや問題を報告",
+        "プロジェクトドキュメントを改善",
+        "機能提案を提供",
+        "コミュニティディスカッションに参加"
+      ]
+    },
+    "cta": {
+      "github": "GitHubにアクセス",
+      "issues": "問題を提出"
     }
   }
 }
