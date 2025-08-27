@@ -217,6 +217,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
+  '/docs/configuration/environment': {
+    zh: {
+      title: "环境配置 - GPT-Load",
+      description: "详细了解GPT-Load的环境变量配置体系，包括服务器配置、数据库连接、安全认证、代理设置等核心环境参数的设置方法和最佳实践。",
+      keywords: "环境配置, 环境变量, 服务器配置, 数据库配置, 安全配置, 代理配置, GPT-Load部署, 系统配置",
+      type: 'article'
+    },
+    en: {
+      title: "Environment Configuration - GPT-Load",
+      description: "Detailed understanding of GPT-Load's environment variable configuration system, including setup methods and best practices for server configuration, database connections, security authentication, proxy settings and other core environment parameters.",
+      keywords: "environment configuration, environment variables, server configuration, database configuration, security configuration, proxy configuration, GPT-Load deployment, system configuration",
+      type: 'article'
+    },
+    ja: {
+      title: "環境設定 - GPT-Load",
+      description: "GPT-Loadの環境変数設定システムの詳細理解。サーバー設定、データベース接続、セキュリティ認証、プロキシ設定など、コア環境パラメータの設定方法とベストプラクティスを含む。",
+      keywords: "環境設定, 環境変数, サーバー設定, データベース設定, セキュリティ設定, プロキシ設定, GPT-Loadデプロイメント, システム設定",
+      type: 'article'
+    }
+  },
   '/docs/channels': {
     zh: {
       title: "渠道类型 - GPT-Load",

@@ -1553,5 +1553,164 @@
       "gptLoadConfig": "GPT-Load Configuration Guide",
       "channelTypes": "Channel Types Guide"
     }
+  },
+  "environmentConfiguration": {
+    "title": "Environment Configuration",
+    "characteristics": {
+      "title": "Configuration Features",
+      "loadingMethod": {
+        "title": "Loading Method",
+        "items": [
+          "• Through environment variables or .env files",
+          "• One-time read at application startup",
+          "• Cannot be modified at runtime",
+          "• Provides basic configuration defaults"
+        ]
+      },
+      "useCase": {
+        "title": "Use Cases",
+        "items": [
+          "• Server basic parameter configuration",
+          "• Database connection information",
+          "• Security authentication keys",
+          "• Logging and monitoring settings"
+        ]
+      }
+    },
+    "serverConfig": {
+      "title": "Server Configuration",
+      "table": {
+        "configItem": "Configuration Item",
+        "envVar": "Environment Variable",
+        "defaultValue": "Default Value",
+        "description": "Description"
+      },
+      "items": [
+        {
+          "name": "Service Port",
+          "envVar": "PORT",
+          "defaultValue": "3001",
+          "description": "HTTP server listening port"
+        },
+        {
+          "name": "Service Address",
+          "envVar": "HOST",
+          "defaultValue": "0.0.0.0",
+          "description": "HTTP server binding address"
+        },
+        {
+          "name": "Read Timeout",
+          "envVar": "SERVER_READ_TIMEOUT",
+          "defaultValue": "60 seconds",
+          "description": "HTTP server request read timeout"
+        },
+        {
+          "name": "Write Timeout",
+          "envVar": "SERVER_WRITE_TIMEOUT",
+          "defaultValue": "600 seconds",
+          "description": "HTTP server response write timeout"
+        },
+        {
+          "name": "Graceful Shutdown Timeout",
+          "envVar": "SERVER_GRACEFUL_SHUTDOWN_TIMEOUT",
+          "defaultValue": "10 seconds",
+          "description": "Service graceful shutdown wait time"
+        },
+        {
+          "name": "Concurrent Requests",
+          "envVar": "MAX_CONCURRENT_REQUESTS",
+          "defaultValue": "100",
+          "description": "Maximum concurrent request count"
+        }
+      ]
+    },
+    "databaseConfig": {
+      "title": "Database Configuration",
+      "mysql": {
+        "title": "MySQL Database",
+        "envLabel": "Environment Variable:",
+        "format": "user:pass@tcp(host:3306)/db?charset=utf8mb4"
+      },
+      "redis": {
+        "title": "Redis Cache",
+        "envLabel": "Environment Variable:",
+        "format": "redis://localhost:6379/0"
+      }
+    },
+    "securityConfig": {
+      "title": "Security Configuration",
+      "auth": {
+        "title": "Authentication Settings",
+        "key": "Management Authentication Key",
+        "description": "Required: Authentication key for accessing Web management interface"
+      },
+      "cors": {
+        "title": "CORS Settings",
+        "enable": "Enable CORS",
+        "origins": "Allowed Origins",
+        "methods": "Allowed Methods"
+      }
+    },
+    "proxyConfig": {
+      "title": "Proxy Configuration",
+      "priority": {
+        "title": "Priority Description",
+        "description": "Proxy configuration supports three-tier priority:",
+        "fallback": "Group Config > System Config > Environment Config",
+        "envNote": "Environment proxy serves as global fallback configuration, only takes effect when neither system config nor group config has proxy settings."
+      },
+      "autoRead": "GPT-Load will automatically read proxy settings from environment variables as the lowest priority global proxy configuration.",
+      "settings": {
+        "title": "Proxy Settings",
+        "table": {
+          "configItem": "Configuration Item",
+          "envVar": "Environment Variable",
+          "description": "Description"
+        },
+        "items": [
+          {
+            "name": "HTTP Proxy",
+            "envVar": "HTTP_PROXY",
+            "description": "Proxy server address for HTTP requests"
+          },
+          {
+            "name": "HTTPS Proxy",
+            "envVar": "HTTPS_PROXY",
+            "description": "Proxy server address for HTTPS requests"
+          },
+          {
+            "name": "No Proxy",
+            "envVar": "NO_PROXY",
+            "description": "Hosts or domains that don't need proxy access, comma-separated"
+          }
+        ]
+      },
+      "formats": {
+        "title": "Supported Protocol Formats",
+        "items": [
+          {
+            "protocol": "HTTP",
+            "format": "http://user:pass@host:port"
+          },
+          {
+            "protocol": "HTTPS",
+            "format": "https://user:pass@host:port"
+          },
+          {
+            "protocol": "SOCKS5",
+            "format": "socks5://user:pass@host:port"
+          }
+        ]
+      }
+    },
+    "summary": {
+      "title": "Environment Configuration Summary",
+      "description": "Environment configuration is the cornerstone of GPT-Load's configuration system, primarily responsible for providing basic infrastructure parameters required for application operation.",
+      "features": [
+        "<strong>Basic Service Parameters</strong>: Defines core services that the application startup and operation depend on, such as server ports, database connections, etc.",
+        "<strong>Management Features</strong>: Configured through <code>.env</code> files or operating system environment variables, loaded at application startup, ensuring configuration stability and consistency.",
+        "<strong>Usage Advantages</strong>: Provides reliable default values for the system while separating sensitive information (such as database passwords, API keys) from the codebase, enhancing security."
+      ]
+    }
   }
 }

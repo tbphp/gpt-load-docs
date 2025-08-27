@@ -1553,5 +1553,164 @@
       "gptLoadConfig": "GPT-Load 配置说明",
       "channelTypes": "渠道类型说明"
     }
+  },
+  "environmentConfiguration": {
+    "title": "环境配置",
+    "characteristics": {
+      "title": "配置特点",
+      "loadingMethod": {
+        "title": "加载方式",
+        "items": [
+          "• 通过环境变量或 .env 文件",
+          "• 应用启动时一次性读取",
+          "• 运行时不可修改",
+          "• 提供基础配置默认值"
+        ]
+      },
+      "useCase": {
+        "title": "适用场景",
+        "items": [
+          "• 服务器基础参数配置",
+          "• 数据库连接信息",
+          "• 安全认证密钥",
+          "• 日志和监控设置"
+        ]
+      }
+    },
+    "serverConfig": {
+      "title": "服务器配置",
+      "table": {
+        "configItem": "配置项",
+        "envVar": "环境变量",
+        "defaultValue": "默认值",
+        "description": "说明"
+      },
+      "items": [
+        {
+          "name": "服务端口",
+          "envVar": "PORT",
+          "defaultValue": "3001",
+          "description": "HTTP 服务器监听端口"
+        },
+        {
+          "name": "服务地址",
+          "envVar": "HOST",
+          "defaultValue": "0.0.0.0",
+          "description": "HTTP 服务器绑定地址"
+        },
+        {
+          "name": "读取超时",
+          "envVar": "SERVER_READ_TIMEOUT",
+          "defaultValue": "60秒",
+          "description": "HTTP 服务器读取请求超时"
+        },
+        {
+          "name": "写入超时",
+          "envVar": "SERVER_WRITE_TIMEOUT",
+          "defaultValue": "600秒",
+          "description": "HTTP 服务器写入响应超时"
+        },
+        {
+          "name": "优雅关闭超时",
+          "envVar": "SERVER_GRACEFUL_SHUTDOWN_TIMEOUT",
+          "defaultValue": "10秒",
+          "description": "服务优雅关闭等待时间"
+        },
+        {
+          "name": "并发数量",
+          "envVar": "MAX_CONCURRENT_REQUESTS",
+          "defaultValue": "100",
+          "description": "最大并发请求数量"
+        }
+      ]
+    },
+    "databaseConfig": {
+      "title": "数据库配置",
+      "mysql": {
+        "title": "MySQL 数据库",
+        "envLabel": "环境变量：",
+        "format": "user:pass@tcp(host:3306)/db?charset=utf8mb4"
+      },
+      "redis": {
+        "title": "Redis 缓存",
+        "envLabel": "环境变量：",
+        "format": "redis://localhost:6379/0"
+      }
+    },
+    "securityConfig": {
+      "title": "安全配置",
+      "auth": {
+        "title": "认证设置",
+        "key": "管理端认证密钥",
+        "description": "必需项：访问 Web 管理界面的认证密钥"
+      },
+      "cors": {
+        "title": "CORS 设置",
+        "enable": "启用 CORS",
+        "origins": "允许来源",
+        "methods": "允许方法"
+      }
+    },
+    "proxyConfig": {
+      "title": "代理配置",
+      "priority": {
+        "title": "优先级说明",
+        "description": "代理配置支持三层优先级：",
+        "fallback": "分组配置 > 系统配置 > 环境配置",
+        "envNote": "环境代理作为全局兜底配置，仅在系统配置和分组配置都未设置代理时生效。"
+      },
+      "autoRead": "GPT-Load 会自动从环境变量中读取代理设置，作为最低优先级的全局代理配置。",
+      "settings": {
+        "title": "代理设置",
+        "table": {
+          "configItem": "配置项",
+          "envVar": "环境变量",
+          "description": "说明"
+        },
+        "items": [
+          {
+            "name": "HTTP 代理",
+            "envVar": "HTTP_PROXY",
+            "description": "用于 HTTP 请求的代理服务器地址"
+          },
+          {
+            "name": "HTTPS 代理",
+            "envVar": "HTTPS_PROXY",
+            "description": "用于 HTTPS 请求的代理服务器地址"
+          },
+          {
+            "name": "无代理",
+            "envVar": "NO_PROXY",
+            "description": "不需要通过代理访问的主机或域名，逗号分隔"
+          }
+        ]
+      },
+      "formats": {
+        "title": "支持的协议格式",
+        "items": [
+          {
+            "protocol": "HTTP",
+            "format": "http://user:pass@host:port"
+          },
+          {
+            "protocol": "HTTPS",
+            "format": "https://user:pass@host:port"
+          },
+          {
+            "protocol": "SOCKS5",
+            "format": "socks5://user:pass@host:port"
+          }
+        ]
+      }
+    },
+    "summary": {
+      "title": "环境配置总结",
+      "description": "环境配置是 GPT-Load 配置系统的基石，主要负责提供应用运行所需的基础设施参数。",
+      "features": [
+        "<strong>基础服务参数</strong>：定义了应用启动和运行所依赖的核心服务，如服务器端口、数据库连接等。",
+        "<strong>管理特性</strong>：通过 <code>.env</code> 文件或操作系统环境变量进行配置，在应用启动时加载，确保了配置的稳定性和一致性。",
+        "<strong>使用优势</strong>：为系统提供了可靠的默认值，同时将敏感信息（如数据库密码、API密钥）与代码库分离，增强了安全性。"
+      ]
+    }
   }
 }

@@ -1553,5 +1553,164 @@
       "gptLoadConfig": "GPT-Load設定ガイド",
       "channelTypes": "チャネルタイプガイド"
     }
+  },
+  "environmentConfiguration": {
+    "title": "環境設定",
+    "characteristics": {
+      "title": "設定特点",
+      "loadingMethod": {
+        "title": "加載方式",
+        "items": [
+          "• 環境変数または .env ファイルで",
+          "• アプリケーション起動時に一度読み込み",
+          "• 実行時に変更不可",
+          "• 基本設定デフォルト値を提供"
+        ]
+      },
+      "useCase": {
+        "title": "適用シーン",
+        "items": [
+          "• サーバー基本パラメータ設定",
+          "• データベース接続情報",
+          "• セキュリティ認証キー",
+          "• ログと監視設定"
+        ]
+      }
+    },
+    "serverConfig": {
+      "title": "サーバー設定",
+      "table": {
+        "configItem": "設定項目",
+        "envVar": "環境変数",
+        "defaultValue": "デフォルト値",
+        "description": "説明"
+      },
+      "items": [
+        {
+          "name": "サービスポート",
+          "envVar": "PORT",
+          "defaultValue": "3001",
+          "description": "HTTP サーバーリスニングポート"
+        },
+        {
+          "name": "サービスアドレス",
+          "envVar": "HOST",
+          "defaultValue": "0.0.0.0",
+          "description": "HTTP サーバーバインドアドレス"
+        },
+        {
+          "name": "読み取りタイムアウト",
+          "envVar": "SERVER_READ_TIMEOUT",
+          "defaultValue": "60秒",
+          "description": "HTTP サーバーリクエスト読み取りタイムアウト"
+        },
+        {
+          "name": "書き込みタイムアウト",
+          "envVar": "SERVER_WRITE_TIMEOUT",
+          "defaultValue": "600秒",
+          "description": "HTTP サーバーレスポンス書き込みタイムアウト"
+        },
+        {
+          "name": "グレースフルシャットダウンタイムアウト",
+          "envVar": "SERVER_GRACEFUL_SHUTDOWN_TIMEOUT",
+          "defaultValue": "10秒",
+          "description": "サービスグレースフルシャットダウン待機時間"
+        },
+        {
+          "name": "同時数",
+          "envVar": "MAX_CONCURRENT_REQUESTS",
+          "defaultValue": "100",
+          "description": "最大同時リクエスト数"
+        }
+      ]
+    },
+    "databaseConfig": {
+      "title": "データベース設定",
+      "mysql": {
+        "title": "MySQL データベース",
+        "envLabel": "環境変数：",
+        "format": "user:pass@tcp(host:3306)/db?charset=utf8mb4"
+      },
+      "redis": {
+        "title": "Redis キャッシュ",
+        "envLabel": "環境変数：",
+        "format": "redis://localhost:6379/0"
+      }
+    },
+    "securityConfig": {
+      "title": "セキュリティ設定",
+      "auth": {
+        "title": "認証設定",
+        "key": "管理端認証キー",
+        "description": "必須項目：Web 管理インターフェースへのアクセス認証キー"
+      },
+      "cors": {
+        "title": "CORS 設定",
+        "enable": "CORS 有効化",
+        "origins": "許可オリジン",
+        "methods": "許可メソッド"
+      }
+    },
+    "proxyConfig": {
+      "title": "プロキシ設定",
+      "priority": {
+        "title": "優先度説明",
+        "description": "プロキシ設定は3層優先度をサポート：",
+        "fallback": "グループ設定 > システム設定 > 環境設定",
+        "envNote": "環境プロキシはグローバルフォールバック設定として機能し、システム設定とグループ設定のどちらもプロキシ設定がない場合のみ有効。"
+      },
+      "autoRead": "GPT-Load は環境変数からプロキシ設定を自動的に読み取り、最低優先度のグローバルプロキシ設定として使用します。",
+      "settings": {
+        "title": "プロキシ設定",
+        "table": {
+          "configItem": "設定項目",
+          "envVar": "環境変数",
+          "description": "説明"
+        },
+        "items": [
+          {
+            "name": "HTTP プロキシ",
+            "envVar": "HTTP_PROXY",
+            "description": "HTTP リクエスト用プロキシサーバーアドレス"
+          },
+          {
+            "name": "HTTPS プロキシ",
+            "envVar": "HTTPS_PROXY",
+            "description": "HTTPS リクエスト用プロキシサーバーアドレス"
+          },
+          {
+            "name": "プロキシなし",
+            "envVar": "NO_PROXY",
+            "description": "プロキシアクセスが不要なホストまたはドメイン、カンマ区切り"
+          }
+        ]
+      },
+      "formats": {
+        "title": "サポートされているプロトコルフォーマット",
+        "items": [
+          {
+            "protocol": "HTTP",
+            "format": "http://user:pass@host:port"
+          },
+          {
+            "protocol": "HTTPS",
+            "format": "https://user:pass@host:port"
+          },
+          {
+            "protocol": "SOCKS5",
+            "format": "socks5://user:pass@host:port"
+          }
+        ]
+      }
+    },
+    "summary": {
+      "title": "環境設定まとめ",
+      "description": "環境設定は GPT-Load 設定システムの础石で、アプリケーションの実行に必要な基本インフラストラクチャパラメータを提供する主要な役割を担っています。",
+      "features": [
+        "<strong>基本サービスパラメータ</strong>：アプリケーションの起動と実行が依存するコアサービスを定義し、サーバーポート、データベース接続など。",
+        "<strong>管理特性</strong>：<code>.env</code> ファイルまたはオペレーティングシステムの環境変数で設定し、アプリケーション起動時にロードし、設定の安定性と一貫性を保証。",
+        "<strong>使用上の利点</strong>：システムに信頼性の高いデフォルト値を提供し、同時に機密情報（データベースパスワード、APIキーなど）をコードベースから分離し、セキュリティを強化。"
+      ]
+    }
   }
 }
