@@ -10,9 +10,31 @@ interface ServerConfigItem {
   description: string;
 }
 
+interface AuthDatabaseConfigItem {
+  name: string;
+  envVar: string;
+  defaultValue: string;
+  description: string;
+}
+
+interface PerformanceCorsConfigItem {
+  name: string;
+  envVar: string;
+  defaultValue: string;
+  description: string;
+}
+
+interface LogConfigItem {
+  name: string;
+  envVar: string;
+  defaultValue: string;
+  description: string;
+}
+
 interface ProxyConfigItem {
   name: string;
   envVar: string;
+  defaultValue: string;
   description: string;
 }
 
@@ -95,98 +117,120 @@ export default function EnvironmentPageContent() {
             </div>
           </div>
 
-          {/* Database Configuration */}
+          {/* Authentication & Database Configuration */}
           <div className="border border-gray-200 rounded-lg p-6">
             <h3 className="text-xl font-semibold text-gray-900 mb-4">
-              {t("environmentConfiguration.databaseConfig.title")}
+              {t("environmentConfiguration.authDatabaseConfig.title")}
             </h3>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <h4 className="font-semibold text-gray-800 mb-3">
-                  {t("environmentConfiguration.databaseConfig.mysql.title")}
-                </h4>
-                <div className="space-y-2">
-                  <div>
-                    <span className="text-sm font-medium text-gray-700">
-                      {t("environmentConfiguration.databaseConfig.mysql.envLabel")}
-                    </span>
-                    <code className="bg-gray-100 px-2 py-1 rounded text-sm ml-2 text-gray-600">
-                      DATABASE_DSN
-                    </code>
-                  </div>
-                  <div className="bg-gray-900 rounded p-2">
-                    <code className="text-green-400 text-xs">
-                      {t("environmentConfiguration.databaseConfig.mysql.format")}
-                    </code>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <h4 className="font-semibold text-gray-800 mb-3">{t("environmentConfiguration.databaseConfig.redis.title")}</h4>
-                <div className="space-y-2">
-                  <div>
-                    <span className="text-sm font-medium text-gray-700">
-                      {t("environmentConfiguration.databaseConfig.redis.envLabel")}
-                    </span>
-                    <code className="bg-gray-100 px-2 py-1 rounded text-sm ml-2 text-gray-600">
-                      REDIS_DSN
-                    </code>
-                  </div>
-                  <div className="bg-gray-900 rounded p-2">
-                    <code className="text-green-400 text-xs">
-                      {t("environmentConfiguration.databaseConfig.redis.format")}
-                    </code>
-                  </div>
-                </div>
-              </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="text-left py-2 px-3 font-semibold text-gray-800">
+                      {t("environmentConfiguration.authDatabaseConfig.table.configItem")}
+                    </th>
+                    <th className="text-left py-2 px-3 font-semibold text-gray-800">
+                      {t("environmentConfiguration.authDatabaseConfig.table.envVar")}
+                    </th>
+                    <th className="text-left py-2 px-3 font-semibold text-gray-800">
+                      {t("environmentConfiguration.authDatabaseConfig.table.defaultValue")}
+                    </th>
+                    <th className="text-left py-2 px-3 font-semibold text-gray-800">
+                      {t("environmentConfiguration.authDatabaseConfig.table.description")}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="text-gray-600">
+                  {tObjectArray<AuthDatabaseConfigItem>("environmentConfiguration.authDatabaseConfig.items").map((item, index) => (
+                    <tr key={index} className="border-b border-gray-100">
+                      <td className="py-2 px-3">{item.name}</td>
+                      <td className="py-2 px-3">
+                        <code className="bg-gray-100 px-1 rounded">{item.envVar}</code>
+                      </td>
+                      <td className="py-2 px-3">{item.defaultValue}</td>
+                      <td className="py-2 px-3" dangerouslySetInnerHTML={{ __html: item.description }} />
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
 
-          {/* Security Configuration */}
+          {/* Performance & CORS Configuration */}
           <div className="border border-gray-200 rounded-lg p-6">
             <h3 className="text-xl font-semibold text-gray-900 mb-4">
-              {t("environmentConfiguration.securityConfig.title")}
+              {t("environmentConfiguration.performanceCorsConfig.title")}
             </h3>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <h4 className="font-semibold text-gray-800 mb-3">{t("environmentConfiguration.securityConfig.auth.title")}</h4>
-                <div className="space-y-3">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      {t("environmentConfiguration.securityConfig.auth.key")}
-                    </label>
-                    <code className="bg-red-100 text-red-800 px-2 py-1 rounded text-sm">
-                      AUTH_KEY
-                    </code>
-                    <p className="text-xs text-red-600 mt-1">
-                      {t("environmentConfiguration.securityConfig.auth.description")}
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <h4 className="font-semibold text-gray-800 mb-3">{t("environmentConfiguration.securityConfig.cors.title")}</h4>
-                <div className="space-y-2 text-sm text-gray-800">
-                  <div>
-                    <strong>{t("environmentConfiguration.securityConfig.cors.enable")}：</strong>
-                    <code className="bg-gray-100 px-1 rounded ml-1 text-gray-600">
-                      ENABLE_CORS=true
-                    </code>
-                  </div>
-                  <div>
-                    <strong>{t("environmentConfiguration.securityConfig.cors.origins")}：</strong>
-                    <code className="bg-gray-100 px-1 rounded ml-1 text-gray-600">
-                      ALLOWED_ORIGINS=*
-                    </code>
-                  </div>
-                  <div>
-                    <strong>{t("environmentConfiguration.securityConfig.cors.methods")}：</strong>
-                    <code className="bg-gray-100 px-1 rounded ml-1 text-gray-600">
-                      ALLOWED_METHODS=GET,POST,...
-                    </code>
-                  </div>
-                </div>
-              </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="text-left py-2 px-3 font-semibold text-gray-800">
+                      {t("environmentConfiguration.performanceCorsConfig.table.configItem")}
+                    </th>
+                    <th className="text-left py-2 px-3 font-semibold text-gray-800">
+                      {t("environmentConfiguration.performanceCorsConfig.table.envVar")}
+                    </th>
+                    <th className="text-left py-2 px-3 font-semibold text-gray-800">
+                      {t("environmentConfiguration.performanceCorsConfig.table.defaultValue")}
+                    </th>
+                    <th className="text-left py-2 px-3 font-semibold text-gray-800">
+                      {t("environmentConfiguration.performanceCorsConfig.table.description")}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="text-gray-600">
+                  {tObjectArray<PerformanceCorsConfigItem>("environmentConfiguration.performanceCorsConfig.items").map((item, index) => (
+                    <tr key={index} className="border-b border-gray-100">
+                      <td className="py-2 px-3">{item.name}</td>
+                      <td className="py-2 px-3">
+                        <code className="bg-gray-100 px-1 rounded">{item.envVar}</code>
+                      </td>
+                      <td className="py-2 px-3">{item.defaultValue}</td>
+                      <td className="py-2 px-3">{item.description}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Log Configuration */}
+          <div className="border border-gray-200 rounded-lg p-6">
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+              {t("environmentConfiguration.logConfig.title")}
+            </h3>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="text-left py-2 px-3 font-semibold text-gray-800">
+                      {t("environmentConfiguration.logConfig.table.configItem")}
+                    </th>
+                    <th className="text-left py-2 px-3 font-semibold text-gray-800">
+                      {t("environmentConfiguration.logConfig.table.envVar")}
+                    </th>
+                    <th className="text-left py-2 px-3 font-semibold text-gray-800">
+                      {t("environmentConfiguration.logConfig.table.defaultValue")}
+                    </th>
+                    <th className="text-left py-2 px-3 font-semibold text-gray-800">
+                      {t("environmentConfiguration.logConfig.table.description")}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="text-gray-600">
+                  {tObjectArray<LogConfigItem>("environmentConfiguration.logConfig.items").map((item, index) => (
+                    <tr key={index} className="border-b border-gray-100">
+                      <td className="py-2 px-3">{item.name}</td>
+                      <td className="py-2 px-3">
+                        <code className="bg-gray-100 px-1 rounded">{item.envVar}</code>
+                      </td>
+                      <td className="py-2 px-3">{item.defaultValue}</td>
+                      <td className="py-2 px-3">{item.description}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
 
@@ -212,7 +256,7 @@ export default function EnvironmentPageContent() {
                 {t("environmentConfiguration.proxyConfig.autoRead")}
               </p>
             </div>
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="space-y-6">
               <div>
                 <h4 className="font-semibold text-gray-800 mb-3">{t("environmentConfiguration.proxyConfig.settings.title")}</h4>
                 <div className="overflow-x-auto">
@@ -224,6 +268,9 @@ export default function EnvironmentPageContent() {
                         </th>
                         <th className="text-left py-2 px-3 font-semibold text-gray-800">
                           {t("environmentConfiguration.proxyConfig.settings.table.envVar")}
+                        </th>
+                        <th className="text-left py-2 px-3 font-semibold text-gray-800">
+                          {t("environmentConfiguration.proxyConfig.settings.table.defaultValue")}
                         </th>
                         <th className="text-left py-2 px-3 font-semibold text-gray-800">
                           {t("environmentConfiguration.proxyConfig.settings.table.description")}
@@ -239,6 +286,7 @@ export default function EnvironmentPageContent() {
                               {item.envVar}
                             </code>
                           </td>
+                          <td className="py-2 px-3">{item.defaultValue}</td>
                           <td className="py-2 px-3">
                             {item.description}
                           </td>
@@ -252,7 +300,7 @@ export default function EnvironmentPageContent() {
                 <h4 className="font-semibold text-gray-800 mb-3">
                   {t("environmentConfiguration.proxyConfig.formats.title")}
                 </h4>
-                <div className="space-y-3">
+                <div className="grid md:grid-cols-3 gap-4">
                   {tObjectArray<ProxyFormat>("environmentConfiguration.proxyConfig.formats.items").map((format, index) => (
                     <div key={index}>
                       <span className="text-sm font-medium text-gray-700">

@@ -1601,55 +1601,151 @@
         {
           "name": "読み取りタイムアウト",
           "envVar": "SERVER_READ_TIMEOUT",
-          "defaultValue": "60秒",
-          "description": "HTTP サーバーリクエスト読み取りタイムアウト"
+          "defaultValue": "60",
+          "description": "HTTP サーバー読み取りタイムアウト（秒）"
         },
         {
           "name": "書き込みタイムアウト",
           "envVar": "SERVER_WRITE_TIMEOUT",
-          "defaultValue": "600秒",
-          "description": "HTTP サーバーレスポンス書き込みタイムアウト"
+          "defaultValue": "600",
+          "description": "HTTP サーバー書き込みタイムアウト（秒）"
+        },
+        {
+          "name": "アイドルタイムアウト",
+          "envVar": "SERVER_IDLE_TIMEOUT",
+          "defaultValue": "120",
+          "description": "HTTP 接続アイドルタイムアウト（秒）"
         },
         {
           "name": "グレースフルシャットダウンタイムアウト",
           "envVar": "SERVER_GRACEFUL_SHUTDOWN_TIMEOUT",
-          "defaultValue": "10秒",
-          "description": "サービスグレースフルシャットダウン待機時間"
+          "defaultValue": "10",
+          "description": "サービスグレースフルシャットダウン待機時間（秒）"
         },
         {
-          "name": "同時数",
-          "envVar": "MAX_CONCURRENT_REQUESTS",
-          "defaultValue": "100",
-          "description": "最大同時リクエスト数"
+          "name": "スレーブノードモード",
+          "envVar": "IS_SLAVE",
+          "defaultValue": "false",
+          "description": "クラスター展開時のスレーブノード識別子"
+        },
+        {
+          "name": "タイムゾーン",
+          "envVar": "TZ",
+          "defaultValue": "Asia/Shanghai",
+          "description": "タイムゾーンを指定"
         }
       ]
     },
-    "databaseConfig": {
-      "title": "データベース設定",
-      "mysql": {
-        "title": "MySQL データベース",
-        "envLabel": "環境変数：",
-        "format": "user:pass@tcp(host:3306)/db?charset=utf8mb4"
+    "authDatabaseConfig": {
+      "title": "認証・データベース設定",
+      "table": {
+        "configItem": "設定項目",
+        "envVar": "環境変数",
+        "defaultValue": "デフォルト値",
+        "description": "説明"
       },
-      "redis": {
-        "title": "Redis キャッシュ",
-        "envLabel": "環境変数：",
-        "format": "redis://localhost:6379/0"
-      }
+      "items": [
+        {
+          "name": "管理キー",
+          "envVar": "AUTH_KEY",
+          "defaultValue": "sk-123456",
+          "description": "管理端のアクセス認証キー、強固なパスワードに変更してください"
+        },
+        {
+          "name": "データベース接続",
+          "envVar": "DATABASE_DSN",
+          "defaultValue": "./data/gpt-load.db",
+          "description": "データベース接続文字列（DSN）またはファイルパス"
+        },
+        {
+          "name": "Redis 接続",
+          "envVar": "REDIS_DSN",
+          "defaultValue": "-",
+          "description": "Redis 接続文字列、空の場合はメモリストレージを使用"
+        }
+      ]
     },
-    "securityConfig": {
-      "title": "セキュリティ設定",
-      "auth": {
-        "title": "認証設定",
-        "key": "管理端認証キー",
-        "description": "必須項目：Web 管理インターフェースへのアクセス認証キー"
+    "performanceCorsConfig": {
+      "title": "パフォーマンス・CORS設定",
+      "table": {
+        "configItem": "設定項目",
+        "envVar": "環境変数",
+        "defaultValue": "デフォルト値",
+        "description": "説明"
       },
-      "cors": {
-        "title": "CORS 設定",
-        "enable": "CORS 有効化",
-        "origins": "許可オリジン",
-        "methods": "許可メソッド"
-      }
+      "items": [
+        {
+          "name": "最大同時リクエスト",
+          "envVar": "MAX_CONCURRENT_REQUESTS",
+          "defaultValue": "100",
+          "description": "システムが許可する最大同時リクエスト数"
+        },
+        {
+          "name": "CORS 有効化",
+          "envVar": "ENABLE_CORS",
+          "defaultValue": "true",
+          "description": "クロスオリジンリソース共有を有効にするかどうか"
+        },
+        {
+          "name": "許可オリジン",
+          "envVar": "ALLOWED_ORIGINS",
+          "defaultValue": "*",
+          "description": "許可されるオリジン、カンマ区切り"
+        },
+        {
+          "name": "許可メソッド",
+          "envVar": "ALLOWED_METHODS",
+          "defaultValue": "GET,POST,PUT,DELETE,OPTIONS",
+          "description": "許可される HTTP メソッド"
+        },
+        {
+          "name": "許可ヘッダー",
+          "envVar": "ALLOWED_HEADERS",
+          "defaultValue": "*",
+          "description": "許可されるリクエストヘッダー、カンマ区切り"
+        },
+        {
+          "name": "認証情報許可",
+          "envVar": "ALLOW_CREDENTIALS",
+          "defaultValue": "false",
+          "description": "認証情報の送信を許可するかどうか"
+        }
+      ]
+    },
+    "logConfig": {
+      "title": "ログ設定",
+      "table": {
+        "configItem": "設定項目",
+        "envVar": "環境変数",
+        "defaultValue": "デフォルト値",
+        "description": "説明"
+      },
+      "items": [
+        {
+          "name": "ログレベル",
+          "envVar": "LOG_LEVEL",
+          "defaultValue": "info",
+          "description": "ログレベル：debug, info, warn, error"
+        },
+        {
+          "name": "ログフォーマット",
+          "envVar": "LOG_FORMAT",
+          "defaultValue": "text",
+          "description": "ログフォーマット：text, json"
+        },
+        {
+          "name": "ファイルログ有効",
+          "envVar": "LOG_ENABLE_FILE",
+          "defaultValue": "false",
+          "description": "ファイルログ出力を有効にするかどうか"
+        },
+        {
+          "name": "ログファイルパス",
+          "envVar": "LOG_FILE_PATH",
+          "defaultValue": "./data/logs/app.log",
+          "description": "ログファイル保存パス"
+        }
+      ]
     },
     "proxyConfig": {
       "title": "プロキシ設定",
@@ -1659,28 +1755,32 @@
         "fallback": "グループ設定 > システム設定 > 環境設定",
         "envNote": "環境プロキシはグローバルフォールバック設定として機能し、システム設定とグループ設定のどちらもプロキシ設定がない場合のみ有効。"
       },
-      "autoRead": "GPT-Load は環境変数からプロキシ設定を自動的に読み取り、最低優先度のグローバルプロキシ設定として使用します。",
+      "autoRead": "GPT-Load は環境変数からプロキシ設定を自動的に読み取り、上流 AI サービスプロバイダーへのリクエストに使用します。",
       "settings": {
         "title": "プロキシ設定",
         "table": {
           "configItem": "設定項目",
           "envVar": "環境変数",
+          "defaultValue": "デフォルト値",
           "description": "説明"
         },
         "items": [
           {
             "name": "HTTP プロキシ",
             "envVar": "HTTP_PROXY",
+            "defaultValue": "-",
             "description": "HTTP リクエスト用プロキシサーバーアドレス"
           },
           {
             "name": "HTTPS プロキシ",
             "envVar": "HTTPS_PROXY",
+            "defaultValue": "-",
             "description": "HTTPS リクエスト用プロキシサーバーアドレス"
           },
           {
             "name": "プロキシなし",
             "envVar": "NO_PROXY",
+            "defaultValue": "-",
             "description": "プロキシアクセスが不要なホストまたはドメイン、カンマ区切り"
           }
         ]
@@ -1705,7 +1805,7 @@
     },
     "summary": {
       "title": "環境設定まとめ",
-      "description": "環境設定は GPT-Load 設定システムの础石で、アプリケーションの実行に必要な基本インフラストラクチャパラメータを提供する主要な役割を担っています。",
+      "description": "環境設定は GPT-Load 設定システムの基盤で、アプリケーションの実行に必要なインフラストラクチャパラメータを提供する主要な役割を担っています。",
       "features": [
         "<strong>基本サービスパラメータ</strong>：アプリケーションの起動と実行が依存するコアサービスを定義し、サーバーポート、データベース接続など。",
         "<strong>管理特性</strong>：<code>.env</code> ファイルまたはオペレーティングシステムの環境変数で設定し、アプリケーション起動時にロードし、設定の安定性と一貫性を保証。",

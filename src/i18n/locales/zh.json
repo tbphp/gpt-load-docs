@@ -1601,55 +1601,151 @@
         {
           "name": "读取超时",
           "envVar": "SERVER_READ_TIMEOUT",
-          "defaultValue": "60秒",
-          "description": "HTTP 服务器读取请求超时"
+          "defaultValue": "60",
+          "description": "HTTP 服务器读取超时（秒）"
         },
         {
           "name": "写入超时",
           "envVar": "SERVER_WRITE_TIMEOUT",
-          "defaultValue": "600秒",
-          "description": "HTTP 服务器写入响应超时"
+          "defaultValue": "600",
+          "description": "HTTP 服务器写入超时（秒）"
+        },
+        {
+          "name": "空闲超时",
+          "envVar": "SERVER_IDLE_TIMEOUT",
+          "defaultValue": "120",
+          "description": "HTTP 连接空闲超时（秒）"
         },
         {
           "name": "优雅关闭超时",
           "envVar": "SERVER_GRACEFUL_SHUTDOWN_TIMEOUT",
-          "defaultValue": "10秒",
-          "description": "服务优雅关闭等待时间"
+          "defaultValue": "10",
+          "description": "服务优雅关闭等待时间（秒）"
         },
         {
-          "name": "并发数量",
-          "envVar": "MAX_CONCURRENT_REQUESTS",
-          "defaultValue": "100",
-          "description": "最大并发请求数量"
+          "name": "从节点模式",
+          "envVar": "IS_SLAVE",
+          "defaultValue": "false",
+          "description": "集群部署时从节点标识"
+        },
+        {
+          "name": "时区",
+          "envVar": "TZ",
+          "defaultValue": "Asia/Shanghai",
+          "description": "指定时区"
         }
       ]
     },
-    "databaseConfig": {
-      "title": "数据库配置",
-      "mysql": {
-        "title": "MySQL 数据库",
-        "envLabel": "环境变量：",
-        "format": "user:pass@tcp(host:3306)/db?charset=utf8mb4"
+    "authDatabaseConfig": {
+      "title": "认证与数据库配置",
+      "table": {
+        "configItem": "配置项",
+        "envVar": "环境变量",
+        "defaultValue": "默认值",
+        "description": "说明"
       },
-      "redis": {
-        "title": "Redis 缓存",
-        "envLabel": "环境变量：",
-        "format": "redis://localhost:6379/0"
-      }
+      "items": [
+        {
+          "name": "管理密钥",
+          "envVar": "AUTH_KEY",
+          "defaultValue": "sk-123456",
+          "description": "管理端的访问认证密钥，请修改为强密码"
+        },
+        {
+          "name": "数据库连接",
+          "envVar": "DATABASE_DSN",
+          "defaultValue": "./data/gpt-load.db",
+          "description": "数据库连接字符串 (DSN) 或文件路径"
+        },
+        {
+          "name": "Redis 连接",
+          "envVar": "REDIS_DSN",
+          "defaultValue": "-",
+          "description": "Redis 连接字符串，为空时使用内存存储"
+        }
+      ]
     },
-    "securityConfig": {
-      "title": "安全配置",
-      "auth": {
-        "title": "认证设置",
-        "key": "管理端认证密钥",
-        "description": "必需项：访问 Web 管理界面的认证密钥"
+    "performanceCorsConfig": {
+      "title": "性能与跨域配置",
+      "table": {
+        "configItem": "配置项",
+        "envVar": "环境变量",
+        "defaultValue": "默认值",
+        "description": "说明"
       },
-      "cors": {
-        "title": "CORS 设置",
-        "enable": "启用 CORS",
-        "origins": "允许来源",
-        "methods": "允许方法"
-      }
+      "items": [
+        {
+          "name": "最大并发请求",
+          "envVar": "MAX_CONCURRENT_REQUESTS",
+          "defaultValue": "100",
+          "description": "系统允许的最大并发请求数"
+        },
+        {
+          "name": "启用 CORS",
+          "envVar": "ENABLE_CORS",
+          "defaultValue": "true",
+          "description": "是否启用跨域资源共享"
+        },
+        {
+          "name": "允许的来源",
+          "envVar": "ALLOWED_ORIGINS",
+          "defaultValue": "*",
+          "description": "允许的来源，逗号分隔"
+        },
+        {
+          "name": "允许的方法",
+          "envVar": "ALLOWED_METHODS",
+          "defaultValue": "GET,POST,PUT,DELETE,OPTIONS",
+          "description": "允许的 HTTP 方法"
+        },
+        {
+          "name": "允许的头部",
+          "envVar": "ALLOWED_HEADERS",
+          "defaultValue": "*",
+          "description": "允许的请求头，逗号分隔"
+        },
+        {
+          "name": "允许凭据",
+          "envVar": "ALLOW_CREDENTIALS",
+          "defaultValue": "false",
+          "description": "是否允许发送凭据"
+        }
+      ]
+    },
+    "logConfig": {
+      "title": "日志配置",
+      "table": {
+        "configItem": "配置项",
+        "envVar": "环境变量",
+        "defaultValue": "默认值",
+        "description": "说明"
+      },
+      "items": [
+        {
+          "name": "日志级别",
+          "envVar": "LOG_LEVEL",
+          "defaultValue": "info",
+          "description": "日志级别：debug, info, warn, error"
+        },
+        {
+          "name": "日志格式",
+          "envVar": "LOG_FORMAT",
+          "defaultValue": "text",
+          "description": "日志格式：text, json"
+        },
+        {
+          "name": "启用文件日志",
+          "envVar": "LOG_ENABLE_FILE",
+          "defaultValue": "false",
+          "description": "是否启用文件日志输出"
+        },
+        {
+          "name": "日志文件路径",
+          "envVar": "LOG_FILE_PATH",
+          "defaultValue": "./data/logs/app.log",
+          "description": "日志文件存储路径"
+        }
+      ]
     },
     "proxyConfig": {
       "title": "代理配置",
@@ -1659,28 +1755,32 @@
         "fallback": "分组配置 > 系统配置 > 环境配置",
         "envNote": "环境代理作为全局兜底配置，仅在系统配置和分组配置都未设置代理时生效。"
       },
-      "autoRead": "GPT-Load 会自动从环境变量中读取代理设置，作为最低优先级的全局代理配置。",
+      "autoRead": "GPT-Load 会自动从环境变量中读取代理设置，用于向上游 AI 服务商发起请求。",
       "settings": {
         "title": "代理设置",
         "table": {
           "configItem": "配置项",
           "envVar": "环境变量",
+          "defaultValue": "默认值",
           "description": "说明"
         },
         "items": [
           {
             "name": "HTTP 代理",
             "envVar": "HTTP_PROXY",
+            "defaultValue": "-",
             "description": "用于 HTTP 请求的代理服务器地址"
           },
           {
             "name": "HTTPS 代理",
             "envVar": "HTTPS_PROXY",
+            "defaultValue": "-",
             "description": "用于 HTTPS 请求的代理服务器地址"
           },
           {
             "name": "无代理",
             "envVar": "NO_PROXY",
+            "defaultValue": "-",
             "description": "不需要通过代理访问的主机或域名，逗号分隔"
           }
         ]

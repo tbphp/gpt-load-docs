@@ -1601,55 +1601,151 @@
         {
           "name": "Read Timeout",
           "envVar": "SERVER_READ_TIMEOUT",
-          "defaultValue": "60 seconds",
-          "description": "HTTP server request read timeout"
+          "defaultValue": "60",
+          "description": "HTTP server read timeout (seconds)"
         },
         {
           "name": "Write Timeout",
           "envVar": "SERVER_WRITE_TIMEOUT",
-          "defaultValue": "600 seconds",
-          "description": "HTTP server response write timeout"
+          "defaultValue": "600",
+          "description": "HTTP server write timeout (seconds)"
+        },
+        {
+          "name": "Idle Timeout",
+          "envVar": "SERVER_IDLE_TIMEOUT",
+          "defaultValue": "120",
+          "description": "HTTP connection idle timeout (seconds)"
         },
         {
           "name": "Graceful Shutdown Timeout",
           "envVar": "SERVER_GRACEFUL_SHUTDOWN_TIMEOUT",
-          "defaultValue": "10 seconds",
-          "description": "Service graceful shutdown wait time"
+          "defaultValue": "10",
+          "description": "Service graceful shutdown wait time (seconds)"
         },
         {
-          "name": "Concurrent Requests",
-          "envVar": "MAX_CONCURRENT_REQUESTS",
-          "defaultValue": "100",
-          "description": "Maximum concurrent request count"
+          "name": "Slave Node Mode",
+          "envVar": "IS_SLAVE",
+          "defaultValue": "false",
+          "description": "Slave node identifier for cluster deployment"
+        },
+        {
+          "name": "Timezone",
+          "envVar": "TZ",
+          "defaultValue": "Asia/Shanghai",
+          "description": "Specify timezone"
         }
       ]
     },
-    "databaseConfig": {
-      "title": "Database Configuration",
-      "mysql": {
-        "title": "MySQL Database",
-        "envLabel": "Environment Variable:",
-        "format": "user:pass@tcp(host:3306)/db?charset=utf8mb4"
+    "authDatabaseConfig": {
+      "title": "Authentication & Database Configuration",
+      "table": {
+        "configItem": "Configuration Item",
+        "envVar": "Environment Variable",
+        "defaultValue": "Default Value",
+        "description": "Description"
       },
-      "redis": {
-        "title": "Redis Cache",
-        "envLabel": "Environment Variable:",
-        "format": "redis://localhost:6379/0"
-      }
+      "items": [
+        {
+          "name": "Admin Key",
+          "envVar": "AUTH_KEY",
+          "defaultValue": "sk-123456",
+          "description": "Admin access authentication key, please change to a strong password"
+        },
+        {
+          "name": "Database Connection",
+          "envVar": "DATABASE_DSN",
+          "defaultValue": "./data/gpt-load.db",
+          "description": "Database connection string (DSN) or file path"
+        },
+        {
+          "name": "Redis Connection",
+          "envVar": "REDIS_DSN",
+          "defaultValue": "-",
+          "description": "Redis connection string, use memory storage when empty"
+        }
+      ]
     },
-    "securityConfig": {
-      "title": "Security Configuration",
-      "auth": {
-        "title": "Authentication Settings",
-        "key": "Management Authentication Key",
-        "description": "Required: Authentication key for accessing Web management interface"
+    "performanceCorsConfig": {
+      "title": "Performance & CORS Configuration",
+      "table": {
+        "configItem": "Configuration Item",
+        "envVar": "Environment Variable",
+        "defaultValue": "Default Value",
+        "description": "Description"
       },
-      "cors": {
-        "title": "CORS Settings",
-        "enable": "Enable CORS",
-        "origins": "Allowed Origins",
-        "methods": "Allowed Methods"
-      }
+      "items": [
+        {
+          "name": "Max Concurrent Requests",
+          "envVar": "MAX_CONCURRENT_REQUESTS",
+          "defaultValue": "100",
+          "description": "Maximum number of concurrent requests allowed by the system"
+        },
+        {
+          "name": "Enable CORS",
+          "envVar": "ENABLE_CORS",
+          "defaultValue": "true",
+          "description": "Whether to enable Cross-Origin Resource Sharing"
+        },
+        {
+          "name": "Allowed Origins",
+          "envVar": "ALLOWED_ORIGINS",
+          "defaultValue": "*",
+          "description": "Allowed origins, comma-separated"
+        },
+        {
+          "name": "Allowed Methods",
+          "envVar": "ALLOWED_METHODS",
+          "defaultValue": "GET,POST,PUT,DELETE,OPTIONS",
+          "description": "Allowed HTTP methods"
+        },
+        {
+          "name": "Allowed Headers",
+          "envVar": "ALLOWED_HEADERS",
+          "defaultValue": "*",
+          "description": "Allowed request headers, comma-separated"
+        },
+        {
+          "name": "Allow Credentials",
+          "envVar": "ALLOW_CREDENTIALS",
+          "defaultValue": "false",
+          "description": "Whether to allow sending credentials"
+        }
+      ]
+    },
+    "logConfig": {
+      "title": "Log Configuration",
+      "table": {
+        "configItem": "Configuration Item",
+        "envVar": "Environment Variable",
+        "defaultValue": "Default Value",
+        "description": "Description"
+      },
+      "items": [
+        {
+          "name": "Log Level",
+          "envVar": "LOG_LEVEL",
+          "defaultValue": "info",
+          "description": "Log level: debug, info, warn, error"
+        },
+        {
+          "name": "Log Format",
+          "envVar": "LOG_FORMAT",
+          "defaultValue": "text",
+          "description": "Log format: text, json"
+        },
+        {
+          "name": "Enable File Log",
+          "envVar": "LOG_ENABLE_FILE",
+          "defaultValue": "false",
+          "description": "Whether to enable file log output"
+        },
+        {
+          "name": "Log File Path",
+          "envVar": "LOG_FILE_PATH",
+          "defaultValue": "./data/logs/app.log",
+          "description": "Log file storage path"
+        }
+      ]
     },
     "proxyConfig": {
       "title": "Proxy Configuration",
@@ -1659,28 +1755,32 @@
         "fallback": "Group Config > System Config > Environment Config",
         "envNote": "Environment proxy serves as global fallback configuration, only takes effect when neither system config nor group config has proxy settings."
       },
-      "autoRead": "GPT-Load will automatically read proxy settings from environment variables as the lowest priority global proxy configuration.",
+      "autoRead": "GPT-Load automatically reads proxy settings from environment variables for upstream AI service provider requests.",
       "settings": {
         "title": "Proxy Settings",
         "table": {
           "configItem": "Configuration Item",
           "envVar": "Environment Variable",
+          "defaultValue": "Default Value",
           "description": "Description"
         },
         "items": [
           {
             "name": "HTTP Proxy",
             "envVar": "HTTP_PROXY",
+            "defaultValue": "-",
             "description": "Proxy server address for HTTP requests"
           },
           {
             "name": "HTTPS Proxy",
             "envVar": "HTTPS_PROXY",
+            "defaultValue": "-",
             "description": "Proxy server address for HTTPS requests"
           },
           {
             "name": "No Proxy",
             "envVar": "NO_PROXY",
+            "defaultValue": "-",
             "description": "Hosts or domains that don't need proxy access, comma-separated"
           }
         ]
@@ -1705,9 +1805,9 @@
     },
     "summary": {
       "title": "Environment Configuration Summary",
-      "description": "Environment configuration is the cornerstone of GPT-Load's configuration system, primarily responsible for providing basic infrastructure parameters required for application operation.",
+      "description": "Environment configuration is the foundation of the GPT-Load configuration system, primarily responsible for providing infrastructure parameters required for application operation.",
       "features": [
-        "<strong>Basic Service Parameters</strong>: Defines core services that the application startup and operation depend on, such as server ports, database connections, etc.",
+        "<strong>Basic Service Parameters</strong>: Defines core services that application startup and operation depend on, such as server ports, database connections, etc.",
         "<strong>Management Features</strong>: Configured through <code>.env</code> files or operating system environment variables, loaded at application startup, ensuring configuration stability and consistency.",
         "<strong>Usage Advantages</strong>: Provides reliable default values for the system while separating sensitive information (such as database passwords, API keys) from the codebase, enhancing security."
       ]
