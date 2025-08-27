@@ -346,6 +346,91 @@
     "cherryStudio": "Cherry Studio",
     "sponsor": "スポンサー"
   },
+  "geminiOpenai": {
+    "title": "Gemini 公式 OpenAI 互換フォーマット",
+    "subtitle": "GPT-Load は Google Gemini の公式 OpenAI 互換フォーマットをサポートし、標準の OpenAI SDK とツールを使用して Gemini モデルの強力な機能にアクセスできます。",
+    "notice": "注意：これはフォーマット変換ではなく、Gemini公式のOpenAI互換フォーマットの透明プロキシです。詳細は公式ドキュメントを参照してください：",
+    "configuration": {
+      "title": "GPT-Load での設定",
+      "steps": [
+        {
+          "title": "ステップ1：Geminiグループの作成",
+          "items": [
+            "• <strong>グループ名</strong>：gemini（推奨名）",
+            "• <strong>チャネルタイプ</strong>：&ldquo;gemini&rdquo; タイプを選択",
+            "• <strong>アップストリームアドレス</strong>：https://generativelanguage.googleapis.com",
+            "• <strong>API キー</strong>：Gemini API Key を追加"
+          ]
+        },
+        {
+          "title": "ステップ2：プロキシエンドポイントの取得",
+          "items": []
+        }
+      ],
+      "groupConfig": {
+        "title": "グループ設定"
+      },
+      "importantNotes": {
+        "title": "重要事項",
+        "items": [
+          "• 公式 Google の generativelanguage.googleapis.com エンドポイントを使用",
+          "• API キーが有効で十分なクォータがあることを確認",
+          "• グループ作成後、自動的に OpenAI 互換フォーマットをサポート",
+          "• ロードバランシングとフェイルオーバーをサポート"
+        ]
+      },
+      "proxyEndpoint": {
+        "format": "プロキシエンドポイント形式：",
+        "description": "GPT-Load は Gemini グループ専用の OpenAI 互換エンドポイントを生成します",
+        "fullPath": "完全な呼び出しパス",
+        "endpoint": "http://localhost:3001/proxy/gemini/v1beta/openai/chat/completions"
+      }
+    },
+    "examples": {
+      "title": "クライアント呼び出し例",
+      "cherryStudio": {
+        "title": "Cherry Studio 設定",
+        "recommended": "推奨：",
+        "description": "Cherry Studio は優秀な AI クライアントで、Gemini OpenAI 互換フォーマットを完全にサポートします",
+        "stepsTitle": "設定手順",
+        "steps": [
+          "Cherry Studio を開く",
+          "新しいチャネルを作成し、プロバイダータイプで OpenAI を選択",
+          "ベース URL をプロキシエンドポイントに設定",
+          "プロキシキーを入力",
+          "Gemini モデルの使用を開始"
+        ],
+        "paramsTitle": "設定パラメータ",
+        "params": [
+          {
+            "label": "プロバイダータイプ：",
+            "value": "OpenAI"
+          },
+          {
+            "label": "ベース URL：",
+            "value": "http://localhost:3001/proxy/gemini/v1beta/openai/",
+            "note": "（/ で終わる必要があります）"
+          },
+          {
+            "label": "API Key：",
+            "value": "your-proxy-key"
+          }
+        ]
+      },
+      "curl": {
+        "title": "cURL 直接呼び出し",
+        "code": "curl -X POST \"http://localhost:3001/proxy/gemini/v1beta/openai/chat/completions\" \\\\\n  -H \"Authorization: Bearer your-proxy-key\" \\\\\n  -H \"Content-Type: application/json\" \\\\\n  -d '{\n    \"model\": \"gemini-2.5-flash\",\n    \"messages\": [\n      {\n        \"role\": \"user\",\n        \"content\": \"hi\"\n      }\n    ]\n  }'"
+      }
+    },
+    "notes": {
+      "title": "注意事項",
+      "items": [
+        "• GPT-Load のバージョンが最新であることを確認し、Gemini OpenAI 互換フォーマットをサポートする",
+        "• Cherry Studio のベース URL はスラッシュ（/）で終わる必要があり、そうでないと呼び出しが失敗する可能性があります",
+        "• Gemini API Key には十分なクォータと正しい権限が必要です"
+      ]
+    }
+  },
   "standalone": {
     "title": "スタンドアロンデプロイメント",
     "subtitle": "スタンドアロンデプロイメントは GPT-Load の最もシンプルなデプロイメント方法で、個人ユーザーや小規模チームがすぐに始められます。軽量なクイックスタートから完全機能のオプションデプロイメントまでサポートします。",

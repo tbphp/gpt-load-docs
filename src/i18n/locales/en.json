@@ -346,6 +346,91 @@
     "cherryStudio": "Cherry Studio",
     "sponsor": "Sponsor"
   },
+  "geminiOpenai": {
+    "title": "Gemini Official OpenAI Compatible Format",
+    "subtitle": "GPT-Load now supports Google Gemini's official OpenAI compatible format, allowing you to access the powerful capabilities of Gemini models using standard OpenAI SDK and tools.",
+    "notice": "Note: This is not format conversion, but transparent proxying of Gemini's official OpenAI compatible format. For details, please refer to the official documentation:",
+    "configuration": {
+      "title": "Configuration in GPT-Load",
+      "steps": [
+        {
+          "title": "Step 1: Create Gemini Group",
+          "items": [
+            "• <strong>Group Name</strong>: gemini (recommended name)",
+            "• <strong>Channel Type</strong>: Select &ldquo;gemini&rdquo; type",
+            "• <strong>Upstream Address</strong>: https://generativelanguage.googleapis.com",
+            "• <strong>API Key</strong>: Add your Gemini API Key"
+          ]
+        },
+        {
+          "title": "Step 2: Get Proxy Endpoint",
+          "items": []
+        }
+      ],
+      "groupConfig": {
+        "title": "Group Configuration"
+      },
+      "importantNotes": {
+        "title": "Important Notes",
+        "items": [
+          "• Use official Google generativelanguage.googleapis.com endpoint",
+          "• Ensure API key is valid and has sufficient quota",
+          "• Group will automatically support OpenAI compatible format after creation",
+          "• Supports load balancing and failover"
+        ]
+      },
+      "proxyEndpoint": {
+        "format": "Proxy Endpoint Format:",
+        "description": "GPT-Load will generate dedicated OpenAI compatible endpoints for Gemini groups",
+        "fullPath": "Complete Call Path",
+        "endpoint": "http://localhost:3001/proxy/gemini/v1beta/openai/chat/completions"
+      }
+    },
+    "examples": {
+      "title": "Client Call Examples",
+      "cherryStudio": {
+        "title": "Cherry Studio Configuration",
+        "recommended": "Recommended:",
+        "description": "Cherry Studio is an excellent AI client that perfectly supports Gemini OpenAI compatible format",
+        "stepsTitle": "Configuration Steps",
+        "steps": [
+          "Open Cherry Studio",
+          "Create new channel, select OpenAI as provider type",
+          "Set base URL to proxy endpoint",
+          "Enter proxy key",
+          "Start using Gemini models"
+        ],
+        "paramsTitle": "Configuration Parameters",
+        "params": [
+          {
+            "label": "Provider Type:",
+            "value": "OpenAI"
+          },
+          {
+            "label": "Base URL:",
+            "value": "http://localhost:3001/proxy/gemini/v1beta/openai/",
+            "note": "(Must end with /)"
+          },
+          {
+            "label": "API Key:",
+            "value": "your-proxy-key"
+          }
+        ]
+      },
+      "curl": {
+        "title": "cURL Direct Call",
+        "code": "curl -X POST \"http://localhost:3001/proxy/gemini/v1beta/openai/chat/completions\" \\\\\n  -H \"Authorization: Bearer your-proxy-key\" \\\\\n  -H \"Content-Type: application/json\" \\\\\n  -d '{\n    \"model\": \"gemini-2.5-flash\",\n    \"messages\": [\n      {\n        \"role\": \"user\",\n        \"content\": \"hi\"\n      }\n    ]\n  }'"
+      }
+    },
+    "notes": {
+      "title": "Notes",
+      "items": [
+        "• Ensure GPT-Load version is latest to support Gemini OpenAI compatible format",
+        "• Cherry Studio base URL must end with slash (/), otherwise calls may fail",
+        "• Gemini API Key needs sufficient quota and correct permissions"
+      ]
+    }
+  },
   "standalone": {
     "title": "Standalone Deployment",
     "subtitle": "Standalone deployment is the simplest deployment method for GPT-Load, suitable for individual users and small teams to get started quickly. Supports from lightweight quick start to optional deployment with full functionality.",

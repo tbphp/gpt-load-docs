@@ -346,6 +346,91 @@
     "cherryStudio": "Cherry Studio",
     "sponsor": "支持赞助"
   },
+  "geminiOpenai": {
+    "title": "Gemini 官方支持的 OpenAI 兼容格式",
+    "subtitle": "GPT-Load 现已支持 Google Gemini 的官方 OpenAI 兼容格式，让您能够使用标准的 OpenAI SDK 和工具来访问 Gemini 模型的强大功能。",
+    "notice": "注意：这并不是格式转换，只是对Gemini官方的OpenAI兼容格式进行透明代理。详情请参考官方文档：",
+    "configuration": {
+      "title": "GPT-Load 中的配置",
+      "steps": [
+        {
+          "title": "步骤一：创建 Gemini 分组",
+          "items": [
+            "• <strong>分组名称</strong>：gemini（建议使用此名称）",
+            "• <strong>渠道类型</strong>：选择 &ldquo;gemini&rdquo; 类型",
+            "• <strong>上游地址</strong>：https://generativelanguage.googleapis.com",
+            "• <strong>API 密钥</strong>：添加您的 Gemini API Key"
+          ]
+        },
+        {
+          "title": "步骤二：获取代理端点",
+          "items": []
+        }
+      ],
+      "groupConfig": {
+        "title": "分组配置"
+      },
+      "importantNotes": {
+        "title": "重要说明",
+        "items": [
+          "• 使用官方 Google 的 generativelanguage.googleapis.com 端点",
+          "• 确保 API 密钥有效且有足够的配额",
+          "• 分组创建后会自动兼容 OpenAI 兼容格式",
+          "• 支持负载均衡和故障转移"
+        ]
+      },
+      "proxyEndpoint": {
+        "format": "代理端点格式：",
+        "description": "GPT-Load 会为 Gemini 分组生成专用的 OpenAI 兼容端点",
+        "fullPath": "完整调用路径",
+        "endpoint": "http://localhost:3001/proxy/gemini/v1beta/openai/chat/completions"
+      }
+    },
+    "examples": {
+      "title": "客户端调用示例",
+      "cherryStudio": {
+        "title": "Cherry Studio 配置",
+        "recommended": "推荐使用：",
+        "description": "Cherry Studio 是一个优秀的 AI 客户端，完美支持 Gemini OpenAI 兼容格式",
+        "stepsTitle": "配置步骤",
+        "steps": [
+          "打开 Cherry Studio",
+          "创建新的渠道，提供商类型选择OpenAI",
+          "设置基础URL为代理端点",
+          "输入代理密钥",
+          "开始使用 Gemini 模型"
+        ],
+        "paramsTitle": "配置参数",
+        "params": [
+          {
+            "label": "提供商类型：",
+            "value": "OpenAI"
+          },
+          {
+            "label": "基础URL：",
+            "value": "http://localhost:3001/proxy/gemini/v1beta/openai/",
+            "note": "（必须以 / 结尾）"
+          },
+          {
+            "label": "API Key：",
+            "value": "your-proxy-key"
+          }
+        ]
+      },
+      "curl": {
+        "title": "cURL 直接调用",
+        "code": "curl -X POST \"http://localhost:3001/proxy/gemini/v1beta/openai/chat/completions\" \\\\\n  -H \"Authorization: Bearer your-proxy-key\" \\\\\n  -H \"Content-Type: application/json\" \\\\\n  -d '{\n    \"model\": \"gemini-2.5-flash\",\n    \"messages\": [\n      {\n        \"role\": \"user\",\n        \"content\": \"hi\"\n      }\n    ]\n  }'"
+      }
+    },
+    "notes": {
+      "title": "注意事项",
+      "items": [
+        "• 确保 GPT-Load 版本最新以支持 Gemini OpenAI 兼容格式",
+        "• Cherry Studio 基础URL必须以斜杠（/）结尾，否则可能导致调用失败",
+        "• Gemini API Key 需要有足够的配额和正确的权限"
+      ]
+    }
+  },
   "standalone": {
     "title": "单机部署",
     "subtitle": "单机部署是 GPT-Load 最简单的部署方式，适合个人用户和小团队快速上手。支持从轻量化快速启动到完整功能的可选部署。",

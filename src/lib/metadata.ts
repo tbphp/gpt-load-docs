@@ -396,6 +396,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       keywords: "スタンドアロンデプロイメント, Dockerデプロイメント, SQLiteデプロイメント, MySQL設定, PostgreSQL設定, Redis設定, クイックデプロイメント, GPT-Load",
       type: 'article'
     }
+  },
+  '/docs/gemini-openai': {
+    zh: {
+      title: "Gemini 官方 OpenAI 兼容格式 - GPT-Load",
+      description: "GPT-Load支持Google Gemini官方OpenAI兼容格式，使用标准OpenAI SDK访问Gemini模型。包含完整的配置步骤和Cherry Studio集成指南。",
+      keywords: "Gemini OpenAI兼容, Gemini API, OpenAI SDK, Cherry Studio, GPT-Load配置, Gemini代理, AI模型兼容",
+      type: 'article'
+    },
+    en: {
+      title: "Gemini Official OpenAI Compatible Format - GPT-Load",
+      description: "GPT-Load supports Google Gemini's official OpenAI compatible format, allowing access to Gemini models using standard OpenAI SDK. Complete configuration steps and Cherry Studio integration guide included.",
+      keywords: "Gemini OpenAI compatible, Gemini API, OpenAI SDK, Cherry Studio, GPT-Load configuration, Gemini proxy, AI model compatibility",
+      type: 'article'
+    },
+    ja: {
+      title: "Gemini 公式 OpenAI 互換フォーマット - GPT-Load",
+      description: "GPT-LoadはGoogle Geminiの公式OpenAI互換フォーマットをサポートし、標準のOpenAI SDKでGeminiモデルにアクセス可能。完全な設定手順とCherry Studio統合ガイドを含みます。",
+      keywords: "Gemini OpenAI互換, Gemini API, OpenAI SDK, Cherry Studio, GPT-Load設定, Geminiプロキシ, AIモデル互換性",
+      type: 'article'
+    }
   }
   // 架构预留：后续可继续添加其他页面的SEO配置
 };
