@@ -930,140 +930,6 @@
     "instructions": "Press Esc or click background to close",
     "clickToEnlarge": "Click image to enlarge"
   },
-  "introduction": {
-    "title": "GPT-Load Project Introduction",
-    "subtitle": "A high-performance, enterprise-grade AI API transparent proxy service designed specifically for enterprises and developers who need to integrate multiple AI services. Built with Go, featuring intelligent key management, load balancing, and comprehensive monitoring, designed for high-concurrency production environments.",
-    "coreConcept": {
-      "title": "Core Concepts",
-      "transparentProxy": {
-        "title": "Transparent Proxy",
-        "description": "GPT-Load serves as a transparent proxy service, completely preserving the native API formats of various AI service providers without any format conversion or unification. How users request GPT-Load is exactly how GPT-Load requests upstream services, achieving fully transparent proxy functionality."
-      }
-    },
-    "supportedServices": {
-      "title": "Supported AI Services",
-      "openai": {
-        "features": ["Official OpenAI API", "Azure OpenAI", "All third-party services compatible with OpenAI format"]
-      },
-      "gemini": {
-        "features": ["Gemini Pro", "Gemini Pro Vision", "Multimodal functionality support"]
-      },
-      "claude": {
-        "features": ["Claude series models", "High-quality dialogue generation", "Native API format support"]
-      }
-    },
-    "coreFeatures": {
-      "title": "Core Features",
-      "highPerformance": {
-        "title": "High-Performance Architecture",
-        "description": "Zero-copy streaming transmission, Go coroutine-based concurrency model, supporting high concurrent connections"
-      },
-      "keyManagement": {
-        "title": "Intelligent Key Management",
-        "description": "Group management, dynamic rotation, automatic retry, ensuring high service availability"
-      },
-      "loadBalancing": {
-        "title": "Load Balancing",
-        "description": "Multi-upstream support, weight configuration, health checks, intelligent routing to available nodes"
-      },
-      "clusterSupport": {
-        "title": "Cluster Support",
-        "description": "Master/Slave architecture, stateless design, supporting horizontal scaling"
-      },
-      "hotReload": {
-        "title": "Hot Reload Configuration",
-        "description": "Three-tier configuration system: environment variables, system settings, group configurations, supporting hot updates"
-      },
-      "adminPanel": {
-        "title": "Admin Dashboard",
-        "description": "Vue 3 modern interface, real-time monitoring, log viewing, configuration management"
-      }
-    },
-    "techStack": {
-      "title": "Technology Stack",
-      "backend": {
-        "title": "Backend Technologies",
-        "items": [
-          {"name": "Go 1.23+", "desc": "Primary programming language"},
-          {"name": "Gin", "desc": "HTTP Web framework"},
-          {"name": "GORM", "desc": "ORM database framework"},
-          {"name": "MySQL 8.2+", "desc": "Primary database storage"},
-          {"name": "Redis", "desc": "Distributed cache and state management"},
-          {"name": "Uber Dig", "desc": "Dependency injection container"}
-        ]
-      },
-      "frontend": {
-        "title": "Frontend & DevOps",
-        "items": [
-          {"name": "Vue 3", "desc": "Frontend framework"},
-          {"name": "TypeScript", "desc": "Type safety"},
-          {"name": "Naive UI", "desc": "UI component library"},
-          {"name": "Docker", "desc": "Containerized deployment"},
-          {"name": "Docker Compose", "desc": "Container orchestration"},
-          {"name": "GitHub Actions", "desc": "CI/CD pipeline"}
-        ]
-      }
-    },
-    "architectureAdvantages": {
-      "title": "Architecture Advantages",
-      "microservices": {
-        "title": "Microservices Architecture",
-        "items": ["Modular design", "Dependency injection", "Interface-driven"]
-      },
-      "distributed": {
-        "title": "Distributed Design",
-        "items": ["Master/slave mode", "Distributed locks", "Cache synchronization"]
-      },
-      "highAvailability": {
-        "title": "High Availability",
-        "items": ["Graceful degradation", "Fault recovery", "Resource protection"]
-      }
-    },
-    "useCases": {
-      "title": "Use Cases",
-      "enterprise": {
-        "title": "Enterprise AI Services",
-        "items": ["Large-scale API calls", "Cost control optimization", "Service stability guarantee"]
-      },
-      "developer": {
-        "title": "Developer Tools",
-        "items": ["Unified API access", "Debugging and monitoring", "Quick deployment"]
-      },
-      "multiTenant": {
-        "title": "Multi-tenant Services",
-        "items": ["Tenant isolation", "Custom configuration", "Usage statistics"]
-      }
-    },
-    "deepDive": {
-      "title": "Deep Dive into GPT-Load",
-      "subtitle": "Explore GPT-Load's core technical architecture and high-performance design philosophy, learn how to achieve ultimate proxy performance",
-      "performance": {
-        "title": "Performance Details",
-        "subtitle": "Understand ultimate performance design",
-        "features": [
-          "Zero I/O operation proxy mechanism",
-          "Zero-copy streaming transmission technology",
-          "Lock-free concurrent processing architecture",
-          "Ultra-low resource usage optimization"
-        ]
-      },
-      "architecture": {
-        "title": "Architecture Design",
-        "subtitle": "Deep dive into system design philosophy",
-        "features": [
-          "Intelligent key management mechanism",
-          "Path processing strategy design",
-          "Distributed cluster architecture",
-          "High availability guarantee mechanism"
-        ]
-      }
-    },
-    "gettingStarted": {
-      "title": "Get Started with GPT-Load",
-      "description": "Quick deployment via Docker Compose, start a complete AI interface proxy service in minutes",
-      "button": "View Deployment Guide"
-    }
-  },
   "docsQuickStart": {
     "title": "Quick Start",
     "subtitle": "Get GPT-Load up and running quickly with these steps.",
@@ -3666,6 +3532,176 @@
       "cherryStudioDocs": "Cherry Studio Official Documentation",
       "gptLoadConfig": "GPT-Load Configuration Guide",
       "channelTypes": "Channel Types Documentation"
+    }
+  },
+  "introduction": {
+    "title": "GPT-Load Project Introduction",
+    "subtitle": "A high-performance, enterprise-grade AI interface transparent proxy service, specifically designed for enterprises and developers who need to integrate multiple AI services. Built with Go language, featuring intelligent key management, load balancing, and comprehensive monitoring capabilities, designed for high-concurrency production environments.",
+    "coreConcept": {
+      "title": "Core Concept",
+      "transparentProxy": {
+        "title": "Transparent Proxy",
+        "description": "GPT-Load serves as a transparent proxy service, completely preserving the native API formats of various AI service providers without any format conversion or unification. How users request GPT-Load is exactly how GPT-Load requests upstream services, achieving completely transparent proxy functionality."
+      }
+    },
+    "supportedServices": {
+      "title": "Supported AI Services",
+      "openai": {
+        "features": [
+          "• Official OpenAI API",
+          "• Azure OpenAI",
+          "• All third-party services compatible with OpenAI format"
+        ]
+      },
+      "gemini": {
+        "features": [
+          "• Gemini Pro",
+          "• Gemini Pro Vision",
+          "• Support for multimodal features"
+        ]
+      },
+      "claude": {
+        "features": [
+          "• Claude series models",
+          "• High-quality conversation generation",
+          "• Native API format support"
+        ]
+      }
+    },
+    "coreFeatures": {
+      "title": "Core Features",
+      "highPerformance": {
+        "title": "High-Performance Architecture",
+        "description": "Zero-copy streaming transmission, Go goroutine-based concurrency model, supporting high-concurrency connections"
+      },
+      "keyManagement": {
+        "title": "Intelligent Key Management",
+        "description": "Group management, dynamic rotation, automatic retry, ensuring high service availability"
+      },
+      "loadBalancing": {
+        "title": "Load Balancing",
+        "description": "Multi-upstream support, weight configuration, health checks, intelligent routing to available nodes"
+      },
+      "clusterSupport": {
+        "title": "Cluster Support",
+        "description": "Master/Slave architecture, stateless design, supporting horizontal scaling"
+      },
+      "hotReload": {
+        "title": "Hot Reload Configuration",
+        "description": "Three-tier configuration system: environment variables, system settings, group configuration, supporting hot updates"
+      },
+      "adminPanel": {
+        "title": "Admin Panel",
+        "description": "Vue 3 modern interface, real-time monitoring, log viewing, configuration management"
+      }
+    },
+    "techStack": {
+      "title": "Technology Stack",
+      "backend": {
+        "title": "Backend Technologies",
+        "items": [
+          {"name": "Go 1.23+", "desc": "Primary programming language"},
+          {"name": "Gin", "desc": "HTTP Web framework"},
+          {"name": "GORM", "desc": "ORM database operation framework"},
+          {"name": "MySQL 8.2+", "desc": "Primary database storage"},
+          {"name": "Redis", "desc": "Distributed cache and state management"},
+          {"name": "Uber Dig", "desc": "Dependency injection container"}
+        ]
+      },
+      "frontend": {
+        "title": "Frontend & DevOps",
+        "items": [
+          {"name": "Vue 3", "desc": "Frontend framework"},
+          {"name": "TypeScript", "desc": "Type safety"},
+          {"name": "Naive UI", "desc": "UI component library"},
+          {"name": "Docker", "desc": "Containerized deployment"},
+          {"name": "Docker Compose", "desc": "Container orchestration"},
+          {"name": "GitHub Actions", "desc": "CI/CD pipeline"}
+        ]
+      }
+    },
+    "architectureAdvantages": {
+      "title": "Architecture Advantages",
+      "microservices": {
+        "title": "Microservices Architecture",
+        "items": [
+          "• Modular design",
+          "• Dependency injection",
+          "• Interface-driven"
+        ]
+      },
+      "distributed": {
+        "title": "Distributed Design",
+        "items": [
+          "• Master/Slave mode",
+          "• Distributed locks",
+          "• Cache synchronization"
+        ]
+      },
+      "highAvailability": {
+        "title": "High Availability",
+        "items": [
+          "• Graceful degradation",
+          "• Fault recovery",
+          "• Resource protection"
+        ]
+      }
+    },
+    "useCases": {
+      "title": "Use Cases",
+      "enterprise": {
+        "title": "Enterprise AI Services",
+        "items": [
+          "• Large-scale API calls",
+          "• Cost control optimization",
+          "• Service stability assurance"
+        ]
+      },
+      "developer": {
+        "title": "Developer Tools",
+        "items": [
+          "• Unified API access",
+          "• Debugging and monitoring",
+          "• Rapid deployment"
+        ]
+      },
+      "multiTenant": {
+        "title": "Multi-tenant Services",
+        "items": [
+          "• Tenant isolation",
+          "• Configuration customization",
+          "• Usage statistics"
+        ]
+      }
+    },
+    "deepDive": {
+      "title": "Deep Dive into GPT-Load",
+      "subtitle": "Explore GPT-Load's core technical architecture and high-performance design philosophy, learn how to achieve ultimate proxy performance",
+      "performance": {
+        "title": "Performance Details",
+        "subtitle": "Understanding ultimate performance design",
+        "features": [
+          "Zero I/O operation proxy mechanism",
+          "Zero-copy streaming transmission technology",
+          "Lock-free concurrent processing architecture",
+          "Ultra-low resource usage optimization"
+        ]
+      },
+      "architecture": {
+        "title": "Architecture Design",
+        "subtitle": "Deep dive into system design philosophy",
+        "features": [
+          "Intelligent key management mechanism",
+          "Path processing strategy design",
+          "Distributed cluster architecture",
+          "High availability guarantee mechanism"
+        ]
+      }
+    },
+    "gettingStarted": {
+      "title": "Getting Started with GPT-Load",
+      "description": "Deploy quickly with Docker Compose, start a complete AI interface proxy service in just a few minutes",
+      "button": "View Deployment Guide"
     }
   },
   "rooCode": {

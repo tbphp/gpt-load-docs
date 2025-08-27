@@ -930,140 +930,6 @@
     "instructions": "按 Esc 键或点击背景关闭",
     "clickToEnlarge": "点击图片放大查看"
   },
-  "introduction": {
-    "title": "GPT-Load 项目简介",
-    "subtitle": "一个高性能、企业级的 AI 接口透明代理服务，专门为需要集成多种 AI 服务的企业和开发者设计。采用 Go 语言开发，具备智能密钥管理、负载均衡和完善的监控功能，专为高并发生产环境而设计。",
-    "coreConcept": {
-      "title": "核心概念",
-      "transparentProxy": {
-        "title": "透明代理",
-        "description": "GPT-Load 作为透明代理服务，完全保留各 AI 服务商的原生 API 格式，不做任何格式转换或统一。用户如何请求 GPT-Load，GPT-Load 就如何请求上游服务，实现完全透明的代理功能。"
-      }
-    },
-    "supportedServices": {
-      "title": "支持的 AI 服务",
-      "openai": {
-        "features": ["官方 OpenAI API", "Azure OpenAI", "所有兼容 OpenAI 格式的第三方服务"]
-      },
-      "gemini": {
-        "features": ["Gemini Pro", "Gemini Pro Vision", "支持多模态功能"]
-      },
-      "claude": {
-        "features": ["Claude 系列模型", "高质量对话生成", "原生 API 格式支持"]
-      }
-    },
-    "coreFeatures": {
-      "title": "核心特性",
-      "highPerformance": {
-        "title": "高性能架构",
-        "description": "零拷贝流式传输，基于 Go 协程的并发模型，支持高并发连接"
-      },
-      "keyManagement": {
-        "title": "智能密钥管理",
-        "description": "分组管理、动态轮换、自动重试，确保服务高可用性"
-      },
-      "loadBalancing": {
-        "title": "负载均衡",
-        "description": "多上游支持、权重配置、健康检查，智能路由到可用节点"
-      },
-      "clusterSupport": {
-        "title": "集群支持",
-        "description": "Master/Slave 架构，无状态设计，支持水平扩展"
-      },
-      "hotReload": {
-        "title": "热重载配置",
-        "description": "三层配置系统，环境变量、系统设置、分组配置，支持热更新"
-      },
-      "adminPanel": {
-        "title": "管理后台",
-        "description": "Vue 3 现代化界面，实时监控、日志查看、配置管理"
-      }
-    },
-    "techStack": {
-      "title": "技术栈",
-      "backend": {
-        "title": "后端技术",
-        "items": [
-          {"name": "Go 1.23+", "desc": "主要编程语言"},
-          {"name": "Gin", "desc": "HTTP Web 框架"},
-          {"name": "GORM", "desc": "ORM 数据库操作框架"},
-          {"name": "MySQL 8.2+", "desc": "主数据库存储"},
-          {"name": "Redis", "desc": "分布式缓存和状态管理"},
-          {"name": "Uber Dig", "desc": "依赖注入容器"}
-        ]
-      },
-      "frontend": {
-        "title": "前端 & 运维",
-        "items": [
-          {"name": "Vue 3", "desc": "前端框架"},
-          {"name": "TypeScript", "desc": "类型安全"},
-          {"name": "Naive UI", "desc": "UI 组件库"},
-          {"name": "Docker", "desc": "容器化部署"},
-          {"name": "Docker Compose", "desc": "容器编排"},
-          {"name": "GitHub Actions", "desc": "CI/CD 流水线"}
-        ]
-      }
-    },
-    "architectureAdvantages": {
-      "title": "架构优势",
-      "microservices": {
-        "title": "微服务架构",
-        "items": ["模块化设计", "依赖注入", "接口驱动"]
-      },
-      "distributed": {
-        "title": "分布式设计",
-        "items": ["Master/Slave 模式", "分布式锁", "缓存同步"]
-      },
-      "highAvailability": {
-        "title": "高可用性",
-        "items": ["优雅降级", "故障恢复", "资源保护"]
-      }
-    },
-    "useCases": {
-      "title": "应用场景",
-      "enterprise": {
-        "title": "企业级 AI 服务",
-        "items": ["大规模 API 调用", "成本控制优化", "服务稳定性保障"]
-      },
-      "developer": {
-        "title": "开发者工具",
-        "items": ["API 统一接入", "调试和监控", "快速部署"]
-      },
-      "multiTenant": {
-        "title": "多租户服务",
-        "items": ["租户隔离", "配置定制", "使用统计"]
-      }
-    },
-    "deepDive": {
-      "title": "深入了解 GPT-Load",
-      "subtitle": "探索 GPT-Load 的核心技术架构和高性能设计理念，了解如何实现极致的代理性能",
-      "performance": {
-        "title": "性能详解",
-        "subtitle": "了解极致性能设计",
-        "features": [
-          "零 I/O 操作代理机制",
-          "零拷贝流式传输技术",
-          "无锁并发处理架构",
-          "极低资源占用优化"
-        ]
-      },
-      "architecture": {
-        "title": "架构设计",
-        "subtitle": "深入系统设计理念",
-        "features": [
-          "智能密钥管理机制",
-          "路径处理策略设计",
-          "分布式集群架构",
-          "高可用性保障机制"
-        ]
-      }
-    },
-    "gettingStarted": {
-      "title": "开始使用 GPT-Load",
-      "description": "通过 Docker Compose 快速部署，几分钟内即可启动完整的 AI 接口代理服务",
-      "button": "查看部署指南"
-    }
-  },
   "docsQuickStart": {
     "title": "快速开始",
     "subtitle": "通过以下步骤快速启动和运行 GPT-Load。",
@@ -3666,6 +3532,176 @@
       "cherryStudioDocs": "Cherry Studio 官方文档",
       "gptLoadConfig": "GPT-Load 配置说明",
       "channelTypes": "渠道类型说明"
+    }
+  },
+  "introduction": {
+    "title": "GPT-Load 项目简介",
+    "subtitle": "一个高性能、企业级的 AI 接口透明代理服务，专门为需要集成多种 AI 服务的企业和开发者设计。采用 Go 语言开发，具备智能密钥管理、负载均衡和完善的监控功能，专为高并发生产环境而设计。",
+    "coreConcept": {
+      "title": "核心概念",
+      "transparentProxy": {
+        "title": "透明代理",
+        "description": "GPT-Load 作为透明代理服务，完全保留各 AI 服务商的原生 API 格式，不做任何格式转换或统一。用户如何请求 GPT-Load，GPT-Load 就如何请求上游服务，实现完全透明的代理功能。"
+      }
+    },
+    "supportedServices": {
+      "title": "支持的 AI 服务",
+      "openai": {
+        "features": [
+          "• 官方 OpenAI API",
+          "• Azure OpenAI",
+          "• 所有兼容 OpenAI 格式的第三方服务"
+        ]
+      },
+      "gemini": {
+        "features": [
+          "• Gemini Pro",
+          "• Gemini Pro Vision",
+          "• 支持多模态功能"
+        ]
+      },
+      "claude": {
+        "features": [
+          "• Claude 系列模型",
+          "• 高质量对话生成",
+          "• 原生 API 格式支持"
+        ]
+      }
+    },
+    "coreFeatures": {
+      "title": "核心特性",
+      "highPerformance": {
+        "title": "高性能架构",
+        "description": "零拷贝流式传输，基于 Go 协程的并发模型，支持高并发连接"
+      },
+      "keyManagement": {
+        "title": "智能密钥管理",
+        "description": "分组管理、动态轮换、自动重试，确保服务高可用性"
+      },
+      "loadBalancing": {
+        "title": "负载均衡",
+        "description": "多上游支持、权重配置、健康检查，智能路由到可用节点"
+      },
+      "clusterSupport": {
+        "title": "集群支持",
+        "description": "Master/Slave 架构，无状态设计，支持水平扩展"
+      },
+      "hotReload": {
+        "title": "热重载配置",
+        "description": "三层配置系统，环境变量、系统设置、分组配置，支持热更新"
+      },
+      "adminPanel": {
+        "title": "管理后台",
+        "description": "Vue 3 现代化界面，实时监控、日志查看、配置管理"
+      }
+    },
+    "techStack": {
+      "title": "技术栈",
+      "backend": {
+        "title": "后端技术",
+        "items": [
+          {"name": "Go 1.23+", "desc": "主要编程语言"},
+          {"name": "Gin", "desc": "HTTP Web 框架"},
+          {"name": "GORM", "desc": "ORM 数据库操作框架"},
+          {"name": "MySQL 8.2+", "desc": "主数据库存储"},
+          {"name": "Redis", "desc": "分布式缓存和状态管理"},
+          {"name": "Uber Dig", "desc": "依赖注入容器"}
+        ]
+      },
+      "frontend": {
+        "title": "前端 & 运维",
+        "items": [
+          {"name": "Vue 3", "desc": "前端框架"},
+          {"name": "TypeScript", "desc": "类型安全"},
+          {"name": "Naive UI", "desc": "UI 组件库"},
+          {"name": "Docker", "desc": "容器化部署"},
+          {"name": "Docker Compose", "desc": "容器编排"},
+          {"name": "GitHub Actions", "desc": "CI/CD 流水线"}
+        ]
+      }
+    },
+    "architectureAdvantages": {
+      "title": "架构优势",
+      "microservices": {
+        "title": "微服务架构",
+        "items": [
+          "• 模块化设计",
+          "• 依赖注入",
+          "• 接口驱动"
+        ]
+      },
+      "distributed": {
+        "title": "分布式设计",
+        "items": [
+          "• Master/Slave 模式",
+          "• 分布式锁",
+          "• 缓存同步"
+        ]
+      },
+      "highAvailability": {
+        "title": "高可用性",
+        "items": [
+          "• 优雅降级",
+          "• 故障恢复",
+          "• 资源保护"
+        ]
+      }
+    },
+    "useCases": {
+      "title": "应用场景",
+      "enterprise": {
+        "title": "企业级 AI 服务",
+        "items": [
+          "• 大规模 API 调用",
+          "• 成本控制优化",
+          "• 服务稳定性保障"
+        ]
+      },
+      "developer": {
+        "title": "开发者工具",
+        "items": [
+          "• API 统一接入",
+          "• 调试和监控",
+          "• 快速部署"
+        ]
+      },
+      "multiTenant": {
+        "title": "多租户服务",
+        "items": [
+          "• 租户隔离",
+          "• 配置定制",
+          "• 使用统计"
+        ]
+      }
+    },
+    "deepDive": {
+      "title": "深入了解 GPT-Load",
+      "subtitle": "探索 GPT-Load 的核心技术架构和高性能设计理念，了解如何实现极致的代理性能",
+      "performance": {
+        "title": "性能详解",
+        "subtitle": "了解极致性能设计",
+        "features": [
+          "零 I/O 操作代理机制",
+          "零拷贝流式传输技术",
+          "无锁并发处理架构",
+          "极低资源占用优化"
+        ]
+      },
+      "architecture": {
+        "title": "架构设计",
+        "subtitle": "深入系统设计理念",
+        "features": [
+          "智能密钥管理机制",
+          "路径处理策略设计",
+          "分布式集群架构",
+          "高可用性保障机制"
+        ]
+      }
+    },
+    "gettingStarted": {
+      "title": "开始使用 GPT-Load",
+      "description": "通过 Docker Compose 快速部署，几分钟内即可启动完整的 AI 接口代理服务",
+      "button": "查看部署指南"
     }
   },
   "rooCode": {
