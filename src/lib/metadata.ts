@@ -336,6 +336,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       keywords: "Claw Cloudデプロイメント, 無料クラウドデプロイメント, GPT-Loadクラウドデプロイメント, GitHubデプロイメント, ワンクリックデプロイメント, クラウドプロキシ, 無料クォータ",
       type: 'article'
     }
+  },
+  '/docs/deployment/cluster': {
+    zh: {
+      title: "集群部署 - GPT-Load",
+      description: "GPT-Load高可用集群部署完整指南。支持主从架构、水平扩展、分布式部署，包含基础设施要求、部署步骤、配置管理、监控运维等企业级部署方案。",
+      keywords: "集群部署, 高可用部署, 主从架构, 分布式部署, Docker集群, MySQL集群, Redis集群, 负载均衡, 水平扩展, 企业级部署",
+      type: 'article'
+    },
+    en: {
+      title: "Cluster Deployment - GPT-Load",
+      description: "Complete guide for GPT-Load high-availability cluster deployment. Supports master-slave architecture, horizontal scaling, distributed deployment with infrastructure requirements, deployment steps, configuration management, monitoring and maintenance.",
+      keywords: "cluster deployment, high availability deployment, master-slave architecture, distributed deployment, Docker cluster, MySQL cluster, Redis cluster, load balancing, horizontal scaling, enterprise deployment",
+      type: 'article'
+    },
+    ja: {
+      title: "クラスターデプロイメント - GPT-Load",
+      description: "GPT-Load高可用性クラスターデプロイメントの完全ガイド。マスタースレーブアーキテクチャ、水平スケーリング、分散デプロイメントをサポート。インフラ要件、デプロイメント手順、設定管理、監視運用を含む。",
+      keywords: "クラスターデプロイメント, 高可用性デプロイメント, マスタースレーブアーキテクチャ, 分散デプロイメント, Dockerクラスター, MySQLクラスター, Redisクラスター, ロードバランシング, 水平スケーリング, エンタープライズデプロイメント",
+      type: 'article'
+    }
   }
   // 架构预留：后续可继续添加其他页面的SEO配置
 };

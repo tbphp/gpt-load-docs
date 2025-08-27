@@ -2506,5 +2506,186 @@
         "clawCloud": "Free Cloud Experience"
       }
     }
+  },
+  "cluster": {
+    "title": "Cluster Deployment",
+    "subtitle": "GPT-Load high availability cluster deployment solution with master-slave architecture and horizontal scaling support",
+    "overview": {
+      "title": "Cluster Architecture Overview",
+      "architecture": {
+        "title": "Distributed Master-Slave Architecture",
+        "description": "Adopts a one-master-multiple-slave distributed architecture where the master node handles management functions and slave nodes focus on proxy services, achieving high availability and load distribution"
+      },
+      "components": {
+        "master": {
+          "title": "Master Node",
+          "description": "Web management interface, configuration management, statistics analysis"
+        },
+        "slave": {
+          "title": "Slave Node",
+          "description": "Focused on API proxy services, supports horizontal scaling"
+        },
+        "storage": {
+          "title": "Shared Storage",
+          "description": "Unified MySQL and Redis cluster"
+        }
+      }
+    },
+    "prerequisites": {
+      "title": "Deployment Requirements",
+      "warning": {
+        "title": "Important Notice",
+        "description": "Database and Redis are required for cluster deployment, used for distributed coordination and state synchronization"
+      },
+      "infrastructure": {
+        "title": "Infrastructure Requirements",
+        "database": {
+          "title": "Database Cluster",
+          "items": [
+            "• MySQL 8.2+ high availability cluster",
+            "• Support master-slave replication or Galera cluster",
+            "• Recommended to configure read-write separation",
+            "• Regular backup and disaster recovery mechanisms"
+          ]
+        },
+        "cache": {
+          "title": "Cache Cluster",
+          "items": [
+            "• Redis cluster or sentinel mode",
+            "• Used for distributed locks and state synchronization",
+            "• Configure persistence and failover",
+            "• Monitor memory usage and performance"
+          ]
+        }
+      }
+    },
+    "deploymentSteps": {
+      "title": "Deployment Steps",
+      "step1": {
+        "title": "Prepare Shared Infrastructure",
+        "database": {
+          "title": "Deploy MySQL Cluster (or PostgreSQL)",
+          "description": "Recommend using cloud database cluster services or deploying independent MySQL/PostgreSQL clusters."
+        },
+        "redis": {
+          "title": "Deploy Redis Cluster",
+          "description": "Recommend using Redis Sentinel or cluster mode to ensure high availability and data consistency."
+        }
+      },
+      "step2": {
+        "title": "Node docker-compose.yml Reference (Same for Master and Slave)",
+        "dockerCompose": "services:\n  gpt-load:\n    image: ghcr.io/tbphp/gpt-load:latest\n    container_name: gpt-load\n    ports:\n      - \"${PORT:-3001}:${PORT:-3001}\"\n    env_file:\n      - .env\n    restart: always\n    volumes:\n      - ./data:/app/data\n    stop_grace_period: ${SERVER_GRACEFUL_SHUTDOWN_TIMEOUT:-10}s\n    healthcheck:\n      test: wget -q --spider -T 10 -O /dev/null http://localhost:${PORT:-3001}/health\n      interval: 30s\n      timeout: 10s\n      retries: 3\n      start_period: 40s",
+        "slaveConfig": {
+          "title": "Use Configuration to Distinguish Master and Slave Nodes",
+          "code": "IS_SLAVE=true",
+          "description1": "Master node: not configured or set to IS_SLAVE=false. Slave node: set to IS_SLAVE=true.",
+          "description2": "Ensure only one master node in the entire cluster."
+        }
+      },
+      "step3": {
+        "title": "Configure Load Balancing",
+        "description": "Use Nginx or other load balancers to distribute requests to different slave nodes",
+        "nginx": {
+          "title": "Nginx Configuration Example",
+          "config": "# nginx.conf\nupstream gpt_load_cluster {\n    server master-node-ip:3001 weight=3;\n    server slave-node1-ip:3001 weight=5;\n    server slave-node2-ip:3001 weight=5;\n    # Add more slave nodes as needed\n}\n\nserver {\n    listen 80;\n    server_name your-domain.com;\n\n    location / {\n        proxy_pass http://gpt_load_cluster;\n        proxy_set_header Host $host;\n        proxy_set_header X-Real-IP $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto $scheme;\n\n        # If using CF or other proxy services, set real IP\n        set_real_ip_from 0.0.0.0/0;\n        real_ip_header X-Forwarded-For;\n    }\n}"
+        }
+      }
+    },
+    "configurationManagement": {
+      "title": "Configuration Management",
+      "unified": {
+        "title": "Unified Configuration Requirements",
+        "items": [
+          {
+            "key": "AUTH_KEY",
+            "description": "Must be the same (management key)"
+          },
+          {
+            "key": "DATABASE_DSN",
+            "description": "Must be the same"
+          },
+          {
+            "key": "REDIS_DSN",
+            "description": "Must be the same"
+          },
+          {
+            "key": "IS_SLAVE",
+            "description": "Set to true for slave nodes"
+          }
+        ]
+      },
+      "dynamic": {
+        "title": "Dynamic Configuration Synchronization",
+        "items": [
+          "• System settings stored in MySQL auto-sync",
+          "• Group configurations pushed to all nodes in real-time",
+          "• Key status shared through Redis in real-time",
+          "• Configuration changes require no service restart"
+        ]
+      }
+    },
+    "monitoring": {
+      "title": "Monitoring and Operations",
+      "healthCheck": {
+        "title": "Health Check",
+        "nodeStatus": {
+          "title": "Node Health Status",
+          "code": "# Check node status\ncurl http://node:3001/health\n\n# Response example\n{\n  \"status\": \"healthy\",\n  \"timestamp\": \"2025-07-15T12:56:00Z\",\n  \"uptime\": \"11.822967ms\"\n}"
+        },
+        "clusterStatus": {
+          "title": "Cluster Status Monitoring",
+          "items": [
+            "• Monitor request volume and response time of each node",
+            "• Check database and Redis connection status"
+          ]
+        }
+      },
+      "scaling": {
+        "title": "Scaling and Capacity Management",
+        "scaleOut": {
+          "title": "Horizontal Scaling",
+          "items": [
+            "• Add slave nodes as needed",
+            "• Update load balancer configuration",
+            "• New nodes automatically sync configuration",
+            "• Seamlessly integrate with existing services"
+          ]
+        },
+        "gracefulShutdown": {
+          "title": "Graceful Shutdown",
+          "items": [
+            "• Remove node from load balancer",
+            "• Wait for existing requests to complete",
+            "• Send stop signal to container",
+            "• Clean up related resources and logs"
+          ]
+        }
+      }
+    },
+    "bestPractices": {
+      "title": "Best Practices",
+      "recommended": {
+        "title": "✅ Recommended Practices",
+        "items": [
+          "• Use container orchestration tools (Docker Swarm/K8s)",
+          "• Configure high availability for database and Redis",
+          "• Set up comprehensive monitoring and alerting systems",
+          "• Regular backup of configurations and data",
+          "• Use configuration management tools for unified deployment",
+          "• Implement blue-green deployment or rolling updates"
+        ]
+      },
+      "avoid": {
+        "title": "❌ Practices to Avoid",
+        "items": [
+          "• Single point of failure for database or cache",
+          "• Inconsistent configuration between nodes",
+          "• Ignoring network latency and partition issues",
+          "• Lack of monitoring and log collection",
+          "• Manual management of large numbers of node configurations",
+          "• Direct modification of production environment configuration"
+        ]
+      }
+    }
   }
 }

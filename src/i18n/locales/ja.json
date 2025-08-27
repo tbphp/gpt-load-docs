@@ -2506,5 +2506,186 @@
         "clawCloud": "無料クラウド体験"
       }
     }
+  },
+  "cluster": {
+    "title": "クラスターデプロイメント",
+    "subtitle": "GPT-Load高可用性クラスターデプロイメントソリューション、マスタースレーブアーキテクチャと水平スケーリングをサポート",
+    "overview": {
+      "title": "クラスターアーキテクチャ概要",
+      "architecture": {
+        "title": "分散マスタースレーブアーキテクチャ",
+        "description": "ワンマスターマルチスレーブの分散アーキテクチャを採用。マスターノードは管理機能を担当し、スレーブノードはプロキシサービスに専念し、高可用性と負荷分散を実現"
+      },
+      "components": {
+        "master": {
+          "title": "マスターノード",
+          "description": "Web管理インターフェース、設定管理、統計分析"
+        },
+        "slave": {
+          "title": "スレーブノード",
+          "description": "APIプロキシサービスに専念、水平スケーリングをサポート"
+        },
+        "storage": {
+          "title": "共有ストレージ",
+          "description": "統一されたMySQLとRedisクラスター"
+        }
+      }
+    },
+    "prerequisites": {
+      "title": "デプロイメント要件",
+      "warning": {
+        "title": "重要なお知らせ",
+        "description": "クラスターデプロイメント時、データベースとRedisは必須です。分散協調と状態同期に使用されます"
+      },
+      "infrastructure": {
+        "title": "インフラストラクチャ要件",
+        "database": {
+          "title": "データベースクラスター",
+          "items": [
+            "• MySQL 8.2+高可用性クラスター",
+            "• マスタースレーブレプリケーションまたはGaleraクラスターをサポート",
+            "• 読み書き分離の設定を推奨",
+            "• 定期的なバックアップと障害復旧メカニズム"
+          ]
+        },
+        "cache": {
+          "title": "キャッシュクラスター",
+          "items": [
+            "• Redisクラスターまたはセンチネルモード",
+            "• 分散ロックと状態同期に使用",
+            "• 永続化とフェイルオーバーを設定",
+            "• メモリ使用量とパフォーマンスを監視"
+          ]
+        }
+      }
+    },
+    "deploymentSteps": {
+      "title": "デプロイメント手順",
+      "step1": {
+        "title": "共有インフラストラクチャの準備",
+        "database": {
+          "title": "MySQLクラスター（またはPostgreSQL）のデプロイ",
+          "description": "クラウドデータベースクラスターサービスの使用、または独立したMySQL/PostgreSQLクラスターの自己デプロイを推奨します。"
+        },
+        "redis": {
+          "title": "Redisクラスターのデプロイ",
+          "description": "Redis Sentinelまたはクラスターモードの使用を推奨し、高可用性とデータ一貫性を確保します。"
+        }
+      },
+      "step2": {
+        "title": "ノードdocker-compose.yml内容参考（マスタースレーブノード共通）",
+        "dockerCompose": "services:\n  gpt-load:\n    image: ghcr.io/tbphp/gpt-load:latest\n    container_name: gpt-load\n    ports:\n      - \"${PORT:-3001}:${PORT:-3001}\"\n    env_file:\n      - .env\n    restart: always\n    volumes:\n      - ./data:/app/data\n    stop_grace_period: ${SERVER_GRACEFUL_SHUTDOWN_TIMEOUT:-10}s\n    healthcheck:\n      test: wget -q --spider -T 10 -O /dev/null http://localhost:${PORT:-3001}/health\n      interval: 30s\n      timeout: 10s\n      retries: 3\n      start_period: 40s",
+        "slaveConfig": {
+          "title": "設定を使用してマスタースレーブノードを区別",
+          "code": "IS_SLAVE=true",
+          "description1": "マスターノード：設定なしまたはIS_SLAVE=falseに設定。スレーブノード：IS_SLAVE=trueに設定。",
+          "description2": "クラスター全体でマスターノードが1つだけであることを確保。"
+        }
+      },
+      "step3": {
+        "title": "ロードバランシング設定",
+        "description": "Nginxまたは他のロードバランサーを使用して、リクエストを異なるスレーブノードに分散",
+        "nginx": {
+          "title": "Nginx設定例",
+          "config": "# nginx.conf\nupstream gpt_load_cluster {\n    server master-node-ip:3001 weight=3;\n    server slave-node1-ip:3001 weight=5;\n    server slave-node2-ip:3001 weight=5;\n    # 必要に応じてスレーブノードを追加\n}\n\nserver {\n    listen 80;\n    server_name your-domain.com;\n\n    location / {\n        proxy_pass http://gpt_load_cluster;\n        proxy_set_header Host $host;\n        proxy_set_header X-Real-IP $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto $scheme;\n\n        # CFや他のプロキシサービスを使用する場合、リアルIPを設定\n        set_real_ip_from 0.0.0.0/0;\n        real_ip_header X-Forwarded-For;\n    }\n}"
+        }
+      }
+    },
+    "configurationManagement": {
+      "title": "設定管理",
+      "unified": {
+        "title": "統一設定要件",
+        "items": [
+          {
+            "key": "AUTH_KEY",
+            "description": "同一である必要があります（管理キー）"
+          },
+          {
+            "key": "DATABASE_DSN",
+            "description": "同一である必要があります"
+          },
+          {
+            "key": "REDIS_DSN",
+            "description": "同一である必要があります"
+          },
+          {
+            "key": "IS_SLAVE",
+            "description": "スレーブノードはtrueに設定"
+          }
+        ]
+      },
+      "dynamic": {
+        "title": "動的設定同期",
+        "items": [
+          "• システム設定はMySQLに保存され自動同期",
+          "• グループ設定はすべてのノードにリアルタイム配信",
+          "• キー状態はRedisを通じてリアルタイム共有",
+          "• 設定変更時にサービス再起動は不要"
+        ]
+      }
+    },
+    "monitoring": {
+      "title": "監視と運用",
+      "healthCheck": {
+        "title": "ヘルスチェック",
+        "nodeStatus": {
+          "title": "ノード健康状態",
+          "code": "# ノード状態確認\ncurl http://node:3001/health\n\n# レスポンス例\n{\n  \"status\": \"healthy\",\n  \"timestamp\": \"2025-07-15T12:56:00Z\",\n  \"uptime\": \"11.822967ms\"\n}"
+        },
+        "clusterStatus": {
+          "title": "クラスター状態監視",
+          "items": [
+            "• 各ノードのリクエスト量とレスポンス時間を監視",
+            "• データベースとRedis接続状態を確認"
+          ]
+        }
+      },
+      "scaling": {
+        "title": "スケーリングと容量管理",
+        "scaleOut": {
+          "title": "水平スケーリング",
+          "items": [
+            "• 必要に応じてスレーブノード数を増加",
+            "• ロードバランサー設定を更新",
+            "• 新しいノードが自動的に設定を同期",
+            "• 既存サービスにシームレスに統合"
+          ]
+        },
+        "gracefulShutdown": {
+          "title": "グレースフルシャットダウン",
+          "items": [
+            "• ロードバランサーからノードを削除",
+            "• 既存リクエストの処理完了を待機",
+            "• コンテナに停止信号を送信",
+            "• 関連リソースとログをクリーンアップ"
+          ]
+        }
+      }
+    },
+    "bestPractices": {
+      "title": "ベストプラクティス",
+      "recommended": {
+        "title": "✅ 推奨事項",
+        "items": [
+          "• コンテナオーケストレーションツールの使用（Docker Swarm/K8s）",
+          "• データベースとRedisの高可用性設定",
+          "• 包括的な監視とアラートシステムの設定",
+          "• 設定とデータの定期的なバックアップ",
+          "• 統一デプロイメント用の設定管理ツールの使用",
+          "• ブルーグリーンデプロイメントまたはローリングアップデートの実装"
+        ]
+      },
+      "avoid": {
+        "title": "❌ 避けるべき事項",
+        "items": [
+          "• データベースまたはキャッシュの単一障害点",
+          "• ノード間の設定不整合",
+          "• ネットワーク遅延と分割問題の無視",
+          "• 監視とログ収集の不足",
+          "• 大量のノード設定の手動管理",
+          "• 本番環境設定の直接変更"
+        ]
+      }
+    }
   }
 }

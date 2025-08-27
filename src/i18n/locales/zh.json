@@ -2506,5 +2506,186 @@
         "clawCloud": "免费云端体验"
       }
     }
+  },
+  "cluster": {
+    "title": "集群部署",
+    "subtitle": "GPT-Load 高可用集群部署方案，支持主从架构和水平扩展",
+    "overview": {
+      "title": "集群架构概览",
+      "architecture": {
+        "title": "分布式主从架构",
+        "description": "采用一主多从的分布式架构，主节点负责管理功能，从节点专注代理服务，实现高可用和负载分散"
+      },
+      "components": {
+        "master": {
+          "title": "主节点 (Master)",
+          "description": "Web 管理界面、配置管理、统计分析"
+        },
+        "slave": {
+          "title": "从节点 (Slave)",
+          "description": "专注 API 代理服务，支持水平扩展"
+        },
+        "storage": {
+          "title": "共享存储",
+          "description": "统一的 MySQL 和 Redis 集群"
+        }
+      }
+    },
+    "prerequisites": {
+      "title": "部署要求",
+      "warning": {
+        "title": "重要提示",
+        "description": "集群部署时 数据库 和 Redis 是必需的，用于分布式协调和状态同步"
+      },
+      "infrastructure": {
+        "title": "基础设施要求",
+        "database": {
+          "title": "数据库集群",
+          "items": [
+            "• MySQL 8.2+ 高可用集群",
+            "• 支持主从复制或 Galera 集群",
+            "• 建议配置读写分离",
+            "• 定期备份和故障恢复机制"
+          ]
+        },
+        "cache": {
+          "title": "缓存集群",
+          "items": [
+            "• Redis 集群或哨兵模式",
+            "• 用于分布式锁和状态同步",
+            "• 配置持久化和故障转移",
+            "• 监控内存使用和性能"
+          ]
+        }
+      }
+    },
+    "deploymentSteps": {
+      "title": "部署步骤",
+      "step1": {
+        "title": "准备共享基础设施",
+        "database": {
+          "title": "部署 MySQL 集群(或者PostgreSQL)",
+          "description": "建议使用云数据库集群服务，或自行部署独立的 MySQL/PostgreSQL 集群。"
+        },
+        "redis": {
+          "title": "部署 Redis 集群",
+          "description": "建议使用 Redis Sentinel 或集群模式，确保高可用性和数据一致性。"
+        }
+      },
+      "step2": {
+        "title": "节点docker-compose.yml内容参考（主从节点一致）",
+        "dockerCompose": "services:\n  gpt-load:\n    image: ghcr.io/tbphp/gpt-load:latest\n    container_name: gpt-load\n    ports:\n      - \"${PORT:-3001}:${PORT:-3001}\"\n    env_file:\n      - .env\n    restart: always\n    volumes:\n      - ./data:/app/data\n    stop_grace_period: ${SERVER_GRACEFUL_SHUTDOWN_TIMEOUT:-10}s\n    healthcheck:\n      test: wget -q --spider -T 10 -O /dev/null http://localhost:${PORT:-3001}/health\n      interval: 30s\n      timeout: 10s\n      retries: 3\n      start_period: 40s",
+        "slaveConfig": {
+          "title": "使用配置区分主从节点",
+          "code": "IS_SLAVE=true",
+          "description1": "主节点不配置，或者配置为IS_SLAVE=false。从节点配置为IS_SLAVE=true。",
+          "description2": "保证整个集群只有一个主节点。"
+        }
+      },
+      "step3": {
+        "title": "配置负载均衡",
+        "description": "使用 Nginx 或其他负载均衡器分发请求到不同的从节点",
+        "nginx": {
+          "title": "Nginx 配置示例",
+          "config": "# nginx.conf\nupstream gpt_load_cluster {\n    server master-node-ip:3001 weight=3;\n    server slave-node1-ip:3001 weight=5;\n    server slave-node2-ip:3001 weight=5;\n    # 可添加更多从节点\n}\n\nserver {\n    listen 80;\n    server_name your-domain.com;\n\n    location / {\n        proxy_pass http://gpt_load_cluster;\n        proxy_set_header Host $host;\n        proxy_set_header X-Real-IP $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto $scheme;\n\n        # 如果使用CF或其他代理服务，需要设置真实IP\n        set_real_ip_from 0.0.0.0/0;\n        real_ip_header X-Forwarded-For;\n    }\n}"
+        }
+      }
+    },
+    "configurationManagement": {
+      "title": "配置管理",
+      "unified": {
+        "title": "统一配置要求",
+        "items": [
+          {
+            "key": "AUTH_KEY",
+            "description": "必须相同（管理端密钥）"
+          },
+          {
+            "key": "DATABASE_DSN",
+            "description": "必须相同"
+          },
+          {
+            "key": "REDIS_DSN",
+            "description": "必须相同"
+          },
+          {
+            "key": "IS_SLAVE",
+            "description": "从节点为 true"
+          }
+        ]
+      },
+      "dynamic": {
+        "title": "动态配置同步",
+        "items": [
+          "• 系统设置存储在 MySQL 中自动同步",
+          "• 分组配置实时推送到所有节点",
+          "• 密钥状态通过 Redis 实时共享",
+          "• 配置变更无需重启服务"
+        ]
+      }
+    },
+    "monitoring": {
+      "title": "监控与运维",
+      "healthCheck": {
+        "title": "健康检查",
+        "nodeStatus": {
+          "title": "节点健康状态",
+          "code": "# 检查节点状态\ncurl http://node:3001/health\n\n# 响应示例\n{\n  \"status\": \"healthy\",\n  \"timestamp\": \"2025-07-15T12:56:00Z\",\n  \"uptime\": \"11.822967ms\"\n}"
+        },
+        "clusterStatus": {
+          "title": "集群状态监控",
+          "items": [
+            "• 监控各节点请求量和响应时间",
+            "• 检查数据库和 Redis 连接状态"
+          ]
+        }
+      },
+      "scaling": {
+        "title": "扩容与缩容",
+        "scaleOut": {
+          "title": "水平扩容",
+          "items": [
+            "• 按需增加从节点数量",
+            "• 更新负载均衡器配置",
+            "• 新节点自动同步配置",
+            "• 无缝接入现有服务"
+          ]
+        },
+        "gracefulShutdown": {
+          "title": "优雅下线",
+          "items": [
+            "• 从负载均衡器移除节点",
+            "• 等待现有请求处理完成",
+            "• 发送停止信号给容器",
+            "• 清理相关资源和日志"
+          ]
+        }
+      }
+    },
+    "bestPractices": {
+      "title": "最佳实践",
+      "recommended": {
+        "title": "✅ 推荐做法",
+        "items": [
+          "• 使用容器编排工具 (Docker Swarm/K8s)",
+          "• 配置数据库和 Redis 的高可用",
+          "• 设置完整的监控和告警系统",
+          "• 定期备份配置和数据",
+          "• 使用配置管理工具统一部署",
+          "• 实施蓝绿部署或滚动更新"
+        ]
+      },
+      "avoid": {
+        "title": "❌ 避免做法",
+        "items": [
+          "• 单点故障的数据库或缓存",
+          "• 节点间配置不一致",
+          "• 忽略网络延迟和分区问题",
+          "• 缺乏监控和日志收集",
+          "• 手动管理大量节点配置",
+          "• 直接修改生产环境配置"
+        ]
+      }
+    }
   }
 }
