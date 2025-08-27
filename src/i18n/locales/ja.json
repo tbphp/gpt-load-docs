@@ -1555,74 +1555,115 @@
     }
   },
   "managementPage": {
-    "title": "管理設定",
-    "subtitle": "グループ管理、キー設定、システム監視等の機能を含む、完全なWeb管理インターフェース使用ガイド",
-    "access": {
-      "title": "管理インターフェースにアクセス",
-      "interface": {
-        "title": "管理インターフェースアドレス",
-        "url": "http://localhost:3001"
+    "title": "グループ設定管理",
+    "subtitle": "グループ作成と設定の完全ガイド。基本設定、アップストリームアドレス、高級設定などの機能の詳細な設定方法を含みます",
+    "basicConfig": {
+      "title": "基本設定",
+      "groupName": {
+        "label": "グループ名",
+        "description": "グループの一意識別子で、システム内部での識別と管理に使用。意味のある名前を推奨"
       },
-      "defaultConfig": {
-        "title": "デフォルト設定",
-        "port": "ポート: 3001 (設定で変更可能)",
-        "protocol": "プロトコル: HTTP (nginxでHTTPS設定可能)"
+      "displayName": {
+        "label": "表示名",
+        "description": "グループのフレンドリーな表示名で、フロントエンドインターフェースでの表示に使用し、可読性を向上"
       },
-      "security": {
-        "title": "セキュリティ推奨事項",
-        "password": "強力なパスワード保護を設定",
-        "backup": "設定データの定期バックアップ"
+      "channelType": {
+        "label": "チャンネルタイプ",
+        "description": "アップストリームサービスのタイプ識別子で、API互換性とリクエスト形式を決定"
+      },
+      "testModel": {
+        "label": "テストモデル",
+        "description": "接続テストに使用するモデル名で、設定の正確性を確保"
+      },
+      "proxyKey": {
+        "label": "プロキシキー",
+        "description": "システムが生成するプロキシキーで、APIアクセス認証に使用。生成とコピー操作をサポート"
+      },
+      "priority": {
+        "label": "優先度重み",
+        "description": "グループの優先度重みで、数値が高いほど優先度が高く、ロードバランシング戦略に影響"
       }
     },
-    "groupManagement": {
-      "title": "グループ管理",
-      "createGroup": {
-        "title": "新しいグループを作成",
-        "basicSettings": {
-          "title": "基本設定",
-          "groupName": {
-            "label": "グループ名",
-            "description": "プロキシパス用の一意識別子、例：\"openai\"、\"gemini\""
-          },
-          "serviceType": {
-            "label": "サービスタイプ",
-            "description": "OpenAI形式またはGemini形式を選択"
-          },
-          "groupDescription": {
-            "label": "グループ説明",
-            "description": "オプションのグループ説明情報"
-          }
+    "upstreamConfig": {
+      "title": "アップストリームアドレス設定",
+      "multiAddress": {
+        "title": "マルチアドレスロードバランシング",
+        "description": "ロード分散と高可用性を実現するために複数のアップストリームアドレスの設定をサポート。注意：複数のアドレスは同一サービスの異なるアクセスポインであり、異なるサービスプロバイダーではありません。",
+        "loadBalancing": "重みベースのラウンドロビンアルゴリズムでリクエストを分散",
+        "sameService": "すべてのアドレスは同一アップストリームサービスの異なるノードである必要",
+        "weightRoundRobin": "重み付きラウンドロビンをサポートし、スマートなロード分散を実現"
+      },
+      "configuration": {
+        "title": "設定例",
+        "weight1": "重み: 1 (メインアドレス)",
+        "weight2": "重み: 1 (バックアップアドレス)"
+      },
+      "features": {
+        "title": "機能の利点",
+        "highAvailability": "高可用性：単一障害時の自動切り替え",
+        "autoFailover": "自動フェイルオーバー：異常ノードの自動除去",
+        "performance": "パフォーマンス最適化：近隣ノードアクセスで応答速度向上",
+        "monitoring": "リアルタイム監視：ノード状態と応答時間の監視"
+      }
+    },
+    "advancedConfig": {
+      "title": "高級設定",
+      "groupOverride": {
+        "title": "グループ設定オーバーライド",
+        "description": "グループレベルの設定パラメータで、グローバルシステム設定よりも高い優先度を持ちます。未設定のパラメータはシステムデフォルト値を使用。",
+        "priority": {
+          "title": "設定優先度",
+          "group": "グループ設定（最高優先度）",
+          "system": "システム設定（中程度優先度）",
+          "default": "デフォルト設定（最低優先度）"
         },
-        "upstreamConfig": {
-          "title": "アップストリーム設定",
-          "upstreamAddress": {
-            "label": "アップストリームアドレス",
-            "description": "元のAPIサービスアドレス、例：https://api.openai.com"
-          },
-          "loadBalancing": {
-            "label": "ロードバランシング",
-            "description": "ラウンドロビン、重み付きラウンドロビン、最小接続数等の戦略をサポート"
-          },
-          "healthCheck": {
-            "label": "ヘルスチェック",
-            "description": "アップストリームサービスの可用性を定期的にチェック"
-          }
+        "reference": {
+          "title": "参考ドキュメント",
+          "description": "詳細なオーバーライド可能設定項目はプロジェクト設定ページを参照"
+        }
+      },
+      "customHeaders": {
+        "title": "カスタムリクエストヘッダー",
+        "functionality": {
+          "title": "機能説明",
+          "add": "カスタムHTTPリクエストヘッダーの追加",
+          "remove": "既存のリクエストヘッダーフィールドの削除",
+          "modify": "既存のリクエストヘッダー値の修正"
         },
-        "steps": {
-          "title": "作成ステップ",
-          "step1": "1. グループ基本情報を入力",
-          "step2": "2. アップストリームサービスアドレスを設定",
-          "step3": "3. グループを保存"
+        "examples": {
+          "title": "設定例",
+          "auth": "Authorization: Bearer custom-token",
+          "userAgent": "User-Agent: GPT-Load/1.0"
+        }
+      },
+      "parameterOverride": {
+        "title": "パラメーターオーバーライド",
+        "description": "高級JSON形式のリクエストパラメーターオーバーライド機能で、ユーザーリクエスト内の特定パラメーターを強制的にオーバーライド。設定後はすべてのリクエストに自動的にマージ。",
+        "format": {
+          "title": "JSON形式"
+        },
+        "useCases": {
+          "title": "使用シナリオ",
+          "defaultParams": "デフォルトパラメーター値の設定",
+          "limitParams": "パラメーター範囲の制限",
+          "securityParams": "セキュリティパラメーターの強制"
         }
       }
     },
     "bestPractices": {
-      "title": "注意事項",
-      "security": "管理インターフェースには機密情報が含まれるため、パブリックネットワークに公開しないでください",
-      "keyInfo": "キー情報は追加時のみ表示されるため、安全に保管してください",
-      "coreConfig": "コア設定の変更後はサービスの再起動が必要です",
-      "deleteGroup": "グループを削除する前に使用中のクライアントがないことを確認してください",
-      "errorLogs": "潜在的な問題のトラブルシューティングのため、定期的にエラーログを確認してください"
+      "title": "設定ベストプラクティス",
+      "configuration": {
+        "title": "設定管理",
+        "testing": "設定変更前にテスト環境で検証",
+        "backup": "重要な設定変更前に現在の設定をバックアップ",
+        "validation": "テスト機能で設定の有効性を検証"
+      },
+      "security": {
+        "title": "セキュリティ推奨",
+        "keyRotation": "定期APIキーローテーションでセキュリティを確保",
+        "accessControl": "管理インターフェースアクセス権限の制限",
+        "monitoring": "異常アクセスとエラーログの監視"
+      }
     }
   },
   "environmentConfiguration": {

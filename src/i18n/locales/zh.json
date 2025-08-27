@@ -1555,74 +1555,115 @@
     }
   },
   "managementPage": {
-    "title": "管理端配置",
-    "subtitle": "完整的 Web 管理界面使用指南，包括分组管理、密钥配置、系统监控等功能",
-    "access": {
-      "title": "访问管理界面",
-      "interface": {
-        "title": "管理界面地址",
-        "url": "http://localhost:3001"
+    "title": "分组配置管理",
+    "subtitle": "分组创建和配置的完整指南，包括基础配置、上游地址、高级设置等功能的详细配置说明",
+    "basicConfig": {
+      "title": "基础配置",
+      "groupName": {
+        "label": "分组名称",
+        "description": "分组的唯一标识符，用于系统内部识别和管理，建议使用有意义的命名"
       },
-      "defaultConfig": {
-        "title": "默认配置",
-        "port": "端口: 3001 (可在配置中修改)",
-        "protocol": "协议: HTTP (可通过nginx配置 HTTPS)"
+      "displayName": {
+        "label": "显示名称",
+        "description": "分组的友好显示名称，用于前端界面展示，提高可读性"
       },
-      "security": {
-        "title": "安全建议",
-        "password": "设置强密码保护",
-        "backup": "定期备份配置数据"
+      "channelType": {
+        "label": "渠道类型",
+        "description": "上游服务的类型标识，决定了API兼容性和请求格式"
+      },
+      "testModel": {
+        "label": "测试模型",
+        "description": "用于连接测试的模型名称，确保配置正确性"
+      },
+      "proxyKey": {
+        "label": "代理密钥",
+        "description": "系统生成的代理密钥，用于API访问认证，支持生成和复制操作"
+      },
+      "priority": {
+        "label": "排序权重",
+        "description": "分组的优先级权重，数值越高优先级越高，影响负载均衡策略"
       }
     },
-    "groupManagement": {
-      "title": "分组管理",
-      "createGroup": {
-        "title": "创建新分组",
-        "basicSettings": {
-          "title": "基础设置",
-          "groupName": {
-            "label": "分组名称",
-            "description": "用于代理路径的唯一标识符，如\"openai\"、\"gemini\""
-          },
-          "serviceType": {
-            "label": "服务类型",
-            "description": "选择 OpenAI 格式或 Gemini 格式"
-          },
-          "groupDescription": {
-            "label": "分组描述",
-            "description": "可选的分组说明信息"
-          }
+    "upstreamConfig": {
+      "title": "上游地址配置",
+      "multiAddress": {
+        "title": "多地址负载均衡",
+        "description": "支持配置多个上游地址实现负载分担和高可用性。注意：多个地址应为同一服务的不同接入点，而非不同的服务提供商。",
+        "loadBalancing": "基于权重的轮询算法分发请求",
+        "sameService": "所有地址必须为同一上游服务的不同节点",
+        "weightRoundRobin": "支持加权轮询，实现智能负载分担"
+      },
+      "configuration": {
+        "title": "配置示例",
+        "weight1": "权重: 1 (主要地址)",
+        "weight2": "权重: 1 (备用地址)"
+      },
+      "features": {
+        "title": "特性优势",
+        "highAvailability": "高可用性：单点故障时自动切换",
+        "autoFailover": "自动故障转移：异常节点自动剔除",
+        "performance": "性能优化：就近节点访问提升响应速度",
+        "monitoring": "实时监控：节点状态和响应时间监控"
+      }
+    },
+    "advancedConfig": {
+      "title": "高级配置",
+      "groupOverride": {
+        "title": "分组配置覆盖",
+        "description": "分组级别的配置参数，优先级高于全局系统配置。未配置的参数将使用系统默认值。",
+        "priority": {
+          "title": "配置优先级",
+          "group": "分组配置（最高优先级）",
+          "system": "系统配置（中等优先级）",
+          "default": "默认配置（最低优先级）"
         },
-        "upstreamConfig": {
-          "title": "上游配置",
-          "upstreamAddress": {
-            "label": "上游地址",
-            "description": "原始 API 服务地址，如 https://api.openai.com"
-          },
-          "loadBalancing": {
-            "label": "负载均衡",
-            "description": "支持轮询、加权轮询、最少连接等策略"
-          },
-          "healthCheck": {
-            "label": "健康检查",
-            "description": "定期检查上游服务可用性"
-          }
+        "reference": {
+          "title": "参考文档",
+          "description": "详细的可覆盖配置项请参考项目配置页面说明"
+        }
+      },
+      "customHeaders": {
+        "title": "自定义请求头",
+        "functionality": {
+          "title": "功能说明",
+          "add": "添加自定义HTTP请求头",
+          "remove": "删除现有的请求头字段",
+          "modify": "修改已存在的请求头值"
         },
-        "steps": {
-          "title": "创建步骤",
-          "step1": "1. 填写分组基础信息",
-          "step2": "2. 配置上游服务地址",
-          "step3": "3. 保存分组"
+        "examples": {
+          "title": "配置示例",
+          "auth": "Authorization: Bearer custom-token",
+          "userAgent": "User-Agent: GPT-Load/1.0"
+        }
+      },
+      "parameterOverride": {
+        "title": "参数覆盖",
+        "description": "高级JSON格式的请求参数覆盖功能，用于强制覆盖用户请求中的特定参数。配置后将自动合并到所有请求中。",
+        "format": {
+          "title": "JSON格式"
+        },
+        "useCases": {
+          "title": "使用场景",
+          "defaultParams": "设置默认参数值",
+          "limitParams": "限制参数范围",
+          "securityParams": "强制安全参数"
         }
       }
     },
     "bestPractices": {
-      "title": "注意事项",
-      "security": "管理界面包含敏感信息，请勿暴露在公网",
-      "keyInfo": "密钥信息仅在添加时显示，请妥善保存",
-      "coreConfig": "修改核心配置后需要重启服务生效",
-      "deleteGroup": "删除分组前请确保没有正在使用的客户端",
-      "errorLogs": "定期查看错误日志排查潜在问题"
+      "title": "配置最佳实践",
+      "configuration": {
+        "title": "配置管理",
+        "testing": "配置变更前先在测试环境验证",
+        "backup": "重要配置变更前备份当前设置",
+        "validation": "使用测试功能验证配置有效性"
+      },
+      "security": {
+        "title": "安全建议",
+        "keyRotation": "定期轮换API密钥确保安全",
+        "accessControl": "限制管理界面访问权限",
+        "monitoring": "监控异常访问和错误日志"
+      }
     }
   },
   "environmentConfiguration": {

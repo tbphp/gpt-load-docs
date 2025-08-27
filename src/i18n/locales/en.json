@@ -1555,74 +1555,115 @@
     }
   },
   "managementPage": {
-    "title": "Management Configuration",
-    "subtitle": "Complete Web management interface usage guide, including group management, key configuration, system monitoring and other functions",
-    "access": {
-      "title": "Access Management Interface",
-      "interface": {
-        "title": "Management Interface Address",
-        "url": "http://localhost:3001"
+    "title": "Group Configuration Management",
+    "subtitle": "Complete guide for group creation and configuration, including detailed configuration instructions for basic settings, upstream addresses, advanced settings and other features",
+    "basicConfig": {
+      "title": "Basic Configuration",
+      "groupName": {
+        "label": "Group Name",
+        "description": "Unique identifier for the group, used for internal system identification and management. Recommend using meaningful naming"
       },
-      "defaultConfig": {
-        "title": "Default Configuration",
-        "port": "Port: 3001 (configurable)",
-        "protocol": "Protocol: HTTP (HTTPS via nginx)"
+      "displayName": {
+        "label": "Display Name",
+        "description": "Friendly display name for the group, used for frontend interface display to improve readability"
       },
-      "security": {
-        "title": "Security Recommendations",
-        "password": "Set strong password protection",
-        "backup": "Regular backup of configuration data"
+      "channelType": {
+        "label": "Channel Type",
+        "description": "Type identifier of upstream service, determines API compatibility and request format"
+      },
+      "testModel": {
+        "label": "Test Model",
+        "description": "Model name used for connection testing to ensure configuration correctness"
+      },
+      "proxyKey": {
+        "label": "Proxy Key",
+        "description": "System-generated proxy key for API access authentication, supports generation and copy operations"
+      },
+      "priority": {
+        "label": "Priority Weight",
+        "description": "Priority weight of the group, higher values have higher priority, affecting load balancing strategy"
       }
     },
-    "groupManagement": {
-      "title": "Group Management",
-      "createGroup": {
-        "title": "Create New Group",
-        "basicSettings": {
-          "title": "Basic Settings",
-          "groupName": {
-            "label": "Group Name",
-            "description": "Unique identifier for proxy paths, such as \"openai\", \"gemini\""
-          },
-          "serviceType": {
-            "label": "Service Type",
-            "description": "Choose OpenAI format or Gemini format"
-          },
-          "groupDescription": {
-            "label": "Group Description",
-            "description": "Optional group description information"
-          }
+    "upstreamConfig": {
+      "title": "Upstream Address Configuration",
+      "multiAddress": {
+        "title": "Multi-Address Load Balancing",
+        "description": "Supports configuring multiple upstream addresses for load distribution and high availability. Note: Multiple addresses should be different access points of the same service, not different service providers.",
+        "loadBalancing": "Weight-based round-robin algorithm distributes requests",
+        "sameService": "All addresses must be different nodes of the same upstream service",
+        "weightRoundRobin": "Supports weighted round-robin for intelligent load distribution"
+      },
+      "configuration": {
+        "title": "Configuration Examples",
+        "weight1": "Weight: 1 (Primary address)",
+        "weight2": "Weight: 1 (Backup address)"
+      },
+      "features": {
+        "title": "Feature Advantages",
+        "highAvailability": "High availability: Automatic switching during single point failures",
+        "autoFailover": "Automatic failover: Abnormal nodes automatically removed",
+        "performance": "Performance optimization: Nearby node access improves response speed",
+        "monitoring": "Real-time monitoring: Node status and response time monitoring"
+      }
+    },
+    "advancedConfig": {
+      "title": "Advanced Configuration",
+      "groupOverride": {
+        "title": "Group Configuration Override",
+        "description": "Group-level configuration parameters with higher priority than global system configuration. Unconfigured parameters will use system defaults.",
+        "priority": {
+          "title": "Configuration Priority",
+          "group": "Group Configuration (Highest priority)",
+          "system": "System Configuration (Medium priority)",
+          "default": "Default Configuration (Lowest priority)"
         },
-        "upstreamConfig": {
-          "title": "Upstream Configuration",
-          "upstreamAddress": {
-            "label": "Upstream Address",
-            "description": "Original API service address, such as https://api.openai.com"
-          },
-          "loadBalancing": {
-            "label": "Load Balancing",
-            "description": "Supports round-robin, weighted round-robin, least connections and other strategies"
-          },
-          "healthCheck": {
-            "label": "Health Check",
-            "description": "Periodically check upstream service availability"
-          }
+        "reference": {
+          "title": "Reference Documentation",
+          "description": "For detailed overridable configuration items, please refer to the project configuration page"
+        }
+      },
+      "customHeaders": {
+        "title": "Custom Request Headers",
+        "functionality": {
+          "title": "Functionality",
+          "add": "Add custom HTTP request headers",
+          "remove": "Remove existing request header fields",
+          "modify": "Modify existing request header values"
         },
-        "steps": {
-          "title": "Creation Steps",
-          "step1": "1. Fill in group basic information",
-          "step2": "2. Configure upstream service address",
-          "step3": "3. Save group"
+        "examples": {
+          "title": "Configuration Examples",
+          "auth": "Authorization: Bearer custom-token",
+          "userAgent": "User-Agent: GPT-Load/1.0"
+        }
+      },
+      "parameterOverride": {
+        "title": "Parameter Override",
+        "description": "Advanced JSON format request parameter override functionality for forcibly overriding specific parameters in user requests. Once configured, it will automatically merge into all requests.",
+        "format": {
+          "title": "JSON Format"
+        },
+        "useCases": {
+          "title": "Use Cases",
+          "defaultParams": "Set default parameter values",
+          "limitParams": "Limit parameter ranges",
+          "securityParams": "Force security parameters"
         }
       }
     },
     "bestPractices": {
-      "title": "Important Notes",
-      "security": "Management interface contains sensitive information, do not expose to public network",
-      "keyInfo": "Key information is only displayed when added, please keep it safe",
-      "coreConfig": "Service restart required after modifying core configuration",
-      "deleteGroup": "Ensure no clients are using before deleting group",
-      "errorLogs": "Regularly check error logs for troubleshooting potential issues"
+      "title": "Configuration Best Practices",
+      "configuration": {
+        "title": "Configuration Management",
+        "testing": "Validate in test environment before configuration changes",
+        "backup": "Backup current settings before important configuration changes",
+        "validation": "Use test functionality to validate configuration effectiveness"
+      },
+      "security": {
+        "title": "Security Recommendations",
+        "keyRotation": "Regular API key rotation to ensure security",
+        "accessControl": "Restrict management interface access permissions",
+        "monitoring": "Monitor abnormal access and error logs"
+      }
     }
   },
   "environmentConfiguration": {

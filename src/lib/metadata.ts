@@ -259,21 +259,21 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
   },
   '/docs/configuration/management': {
     zh: {
-      title: "管理端配置 - GPT-Load",
-      description: "完整的Web管理界面使用指南，包括分组管理、密钥配置、系统监控等功能的详细配置说明和最佳实践。",
-      keywords: "管理端配置, Web管理界面, 分组管理, 密钥配置, 系统监控, 管理后台, GPT-Load配置",
+      title: "分组配置管理 - GPT-Load",
+      description: "分组创建和配置的完整指南，包括基础配置、上游地址、高级设置等功能的详细配置说明和最佳实践。",
+      keywords: "分组配置管理, 分组创建, 基础配置, 上游地址配置, 高级设置, 负载均衡, 参数覆盖, GPT-Load配置",
       type: 'article'
     },
     en: {
-      title: "Management Configuration - GPT-Load",
-      description: "Complete web management interface usage guide, including detailed configuration instructions and best practices for group management, key configuration, system monitoring and other functions.",
-      keywords: "management configuration, web management interface, group management, key configuration, system monitoring, admin panel, GPT-Load configuration",
+      title: "Group Configuration Management - GPT-Load",
+      description: "Complete guide for group creation and configuration, including detailed configuration instructions and best practices for basic settings, upstream addresses, advanced settings and other features.",
+      keywords: "group configuration management, group creation, basic configuration, upstream configuration, advanced settings, load balancing, parameter override, GPT-Load configuration",
       type: 'article'
     },
     ja: {
-      title: "管理設定 - GPT-Load",
-      description: "グループ管理、キー設定、システム監視等の機能の詳細な設定説明とベストプラクティスを含む、完全なWeb管理インターフェース使用ガイド。",
-      keywords: "管理設定, Web管理インターフェース, グループ管理, キー設定, システム監視, 管理パネル, GPT-Load設定",
+      title: "グループ設定管理 - GPT-Load",
+      description: "グループ作成と設定の完全ガイド。基本設定、アップストリームアドレス、高級設定などの機能の詳細な設定方法とベストプラクティスを含みます。",
+      keywords: "グループ設定管理, グループ作成, 基本設定, アップストリーム設定, 高級設定, ロードバランシング, パラメーターオーバーライド, GPT-Load設定",
       type: 'article'
     }
   }
