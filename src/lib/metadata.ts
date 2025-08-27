@@ -256,6 +256,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       keywords: "AIチャネル, OpenAI統合, Gemini設定, Claude API, マルチサービスアクセス, APIプロキシ, 統一インターフェース, GPT-Load",
       type: 'article'
     }
+  },
+  '/docs/configuration/management': {
+    zh: {
+      title: "管理端配置 - GPT-Load",
+      description: "完整的Web管理界面使用指南，包括分组管理、密钥配置、系统监控等功能的详细配置说明和最佳实践。",
+      keywords: "管理端配置, Web管理界面, 分组管理, 密钥配置, 系统监控, 管理后台, GPT-Load配置",
+      type: 'article'
+    },
+    en: {
+      title: "Management Configuration - GPT-Load",
+      description: "Complete web management interface usage guide, including detailed configuration instructions and best practices for group management, key configuration, system monitoring and other functions.",
+      keywords: "management configuration, web management interface, group management, key configuration, system monitoring, admin panel, GPT-Load configuration",
+      type: 'article'
+    },
+    ja: {
+      title: "管理設定 - GPT-Load",
+      description: "グループ管理、キー設定、システム監視等の機能の詳細な設定説明とベストプラクティスを含む、完全なWeb管理インターフェース使用ガイド。",
+      keywords: "管理設定, Web管理インターフェース, グループ管理, キー設定, システム監視, 管理パネル, GPT-Load設定",
+      type: 'article'
+    }
   }
   // 架构预留：后续可继续添加其他页面的SEO配置
 };

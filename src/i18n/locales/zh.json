@@ -1554,6 +1554,77 @@
       "channelTypes": "渠道类型说明"
     }
   },
+  "managementPage": {
+    "title": "管理端配置",
+    "subtitle": "完整的 Web 管理界面使用指南，包括分组管理、密钥配置、系统监控等功能",
+    "access": {
+      "title": "访问管理界面",
+      "interface": {
+        "title": "管理界面地址",
+        "url": "http://localhost:3001"
+      },
+      "defaultConfig": {
+        "title": "默认配置",
+        "port": "端口: 3001 (可在配置中修改)",
+        "protocol": "协议: HTTP (可通过nginx配置 HTTPS)"
+      },
+      "security": {
+        "title": "安全建议",
+        "password": "设置强密码保护",
+        "backup": "定期备份配置数据"
+      }
+    },
+    "groupManagement": {
+      "title": "分组管理",
+      "createGroup": {
+        "title": "创建新分组",
+        "basicSettings": {
+          "title": "基础设置",
+          "groupName": {
+            "label": "分组名称",
+            "description": "用于代理路径的唯一标识符，如\"openai\"、\"gemini\""
+          },
+          "serviceType": {
+            "label": "服务类型",
+            "description": "选择 OpenAI 格式或 Gemini 格式"
+          },
+          "groupDescription": {
+            "label": "分组描述",
+            "description": "可选的分组说明信息"
+          }
+        },
+        "upstreamConfig": {
+          "title": "上游配置",
+          "upstreamAddress": {
+            "label": "上游地址",
+            "description": "原始 API 服务地址，如 https://api.openai.com"
+          },
+          "loadBalancing": {
+            "label": "负载均衡",
+            "description": "支持轮询、加权轮询、最少连接等策略"
+          },
+          "healthCheck": {
+            "label": "健康检查",
+            "description": "定期检查上游服务可用性"
+          }
+        },
+        "steps": {
+          "title": "创建步骤",
+          "step1": "1. 填写分组基础信息",
+          "step2": "2. 配置上游服务地址",
+          "step3": "3. 保存分组"
+        }
+      }
+    },
+    "bestPractices": {
+      "title": "注意事项",
+      "security": "管理界面包含敏感信息，请勿暴露在公网",
+      "keyInfo": "密钥信息仅在添加时显示，请妥善保存",
+      "coreConfig": "修改核心配置后需要重启服务生效",
+      "deleteGroup": "删除分组前请确保没有正在使用的客户端",
+      "errorLogs": "定期查看错误日志排查潜在问题"
+    }
+  },
   "environmentConfiguration": {
     "title": "环境配置",
     "characteristics": {

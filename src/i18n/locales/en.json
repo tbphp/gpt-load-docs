@@ -1554,6 +1554,77 @@
       "channelTypes": "Channel Types Guide"
     }
   },
+  "managementPage": {
+    "title": "Management Configuration",
+    "subtitle": "Complete Web management interface usage guide, including group management, key configuration, system monitoring and other functions",
+    "access": {
+      "title": "Access Management Interface",
+      "interface": {
+        "title": "Management Interface Address",
+        "url": "http://localhost:3001"
+      },
+      "defaultConfig": {
+        "title": "Default Configuration",
+        "port": "Port: 3001 (configurable)",
+        "protocol": "Protocol: HTTP (HTTPS via nginx)"
+      },
+      "security": {
+        "title": "Security Recommendations",
+        "password": "Set strong password protection",
+        "backup": "Regular backup of configuration data"
+      }
+    },
+    "groupManagement": {
+      "title": "Group Management",
+      "createGroup": {
+        "title": "Create New Group",
+        "basicSettings": {
+          "title": "Basic Settings",
+          "groupName": {
+            "label": "Group Name",
+            "description": "Unique identifier for proxy paths, such as \"openai\", \"gemini\""
+          },
+          "serviceType": {
+            "label": "Service Type",
+            "description": "Choose OpenAI format or Gemini format"
+          },
+          "groupDescription": {
+            "label": "Group Description",
+            "description": "Optional group description information"
+          }
+        },
+        "upstreamConfig": {
+          "title": "Upstream Configuration",
+          "upstreamAddress": {
+            "label": "Upstream Address",
+            "description": "Original API service address, such as https://api.openai.com"
+          },
+          "loadBalancing": {
+            "label": "Load Balancing",
+            "description": "Supports round-robin, weighted round-robin, least connections and other strategies"
+          },
+          "healthCheck": {
+            "label": "Health Check",
+            "description": "Periodically check upstream service availability"
+          }
+        },
+        "steps": {
+          "title": "Creation Steps",
+          "step1": "1. Fill in group basic information",
+          "step2": "2. Configure upstream service address",
+          "step3": "3. Save group"
+        }
+      }
+    },
+    "bestPractices": {
+      "title": "Important Notes",
+      "security": "Management interface contains sensitive information, do not expose to public network",
+      "keyInfo": "Key information is only displayed when added, please keep it safe",
+      "coreConfig": "Service restart required after modifying core configuration",
+      "deleteGroup": "Ensure no clients are using before deleting group",
+      "errorLogs": "Regularly check error logs for troubleshooting potential issues"
+    }
+  },
   "environmentConfiguration": {
     "title": "Environment Configuration",
     "characteristics": {

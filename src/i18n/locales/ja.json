@@ -1554,6 +1554,77 @@
       "channelTypes": "チャネルタイプガイド"
     }
   },
+  "managementPage": {
+    "title": "管理設定",
+    "subtitle": "グループ管理、キー設定、システム監視等の機能を含む、完全なWeb管理インターフェース使用ガイド",
+    "access": {
+      "title": "管理インターフェースにアクセス",
+      "interface": {
+        "title": "管理インターフェースアドレス",
+        "url": "http://localhost:3001"
+      },
+      "defaultConfig": {
+        "title": "デフォルト設定",
+        "port": "ポート: 3001 (設定で変更可能)",
+        "protocol": "プロトコル: HTTP (nginxでHTTPS設定可能)"
+      },
+      "security": {
+        "title": "セキュリティ推奨事項",
+        "password": "強力なパスワード保護を設定",
+        "backup": "設定データの定期バックアップ"
+      }
+    },
+    "groupManagement": {
+      "title": "グループ管理",
+      "createGroup": {
+        "title": "新しいグループを作成",
+        "basicSettings": {
+          "title": "基本設定",
+          "groupName": {
+            "label": "グループ名",
+            "description": "プロキシパス用の一意識別子、例：\"openai\"、\"gemini\""
+          },
+          "serviceType": {
+            "label": "サービスタイプ",
+            "description": "OpenAI形式またはGemini形式を選択"
+          },
+          "groupDescription": {
+            "label": "グループ説明",
+            "description": "オプションのグループ説明情報"
+          }
+        },
+        "upstreamConfig": {
+          "title": "アップストリーム設定",
+          "upstreamAddress": {
+            "label": "アップストリームアドレス",
+            "description": "元のAPIサービスアドレス、例：https://api.openai.com"
+          },
+          "loadBalancing": {
+            "label": "ロードバランシング",
+            "description": "ラウンドロビン、重み付きラウンドロビン、最小接続数等の戦略をサポート"
+          },
+          "healthCheck": {
+            "label": "ヘルスチェック",
+            "description": "アップストリームサービスの可用性を定期的にチェック"
+          }
+        },
+        "steps": {
+          "title": "作成ステップ",
+          "step1": "1. グループ基本情報を入力",
+          "step2": "2. アップストリームサービスアドレスを設定",
+          "step3": "3. グループを保存"
+        }
+      }
+    },
+    "bestPractices": {
+      "title": "注意事項",
+      "security": "管理インターフェースには機密情報が含まれるため、パブリックネットワークに公開しないでください",
+      "keyInfo": "キー情報は追加時のみ表示されるため、安全に保管してください",
+      "coreConfig": "コア設定の変更後はサービスの再起動が必要です",
+      "deleteGroup": "グループを削除する前に使用中のクライアントがないことを確認してください",
+      "errorLogs": "潜在的な問題のトラブルシューティングのため、定期的にエラーログを確認してください"
+    }
+  },
   "environmentConfiguration": {
     "title": "環境設定",
     "characteristics": {
