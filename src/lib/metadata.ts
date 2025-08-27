@@ -416,6 +416,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       keywords: "Gemini OpenAI互換, Gemini API, OpenAI SDK, Cherry Studio, GPT-Load設定, Geminiプロキシ, AIモデル互換性",
       type: 'article'
     }
+  },
+  '/docs/integrations': {
+    zh: {
+      title: "接入指南 - GPT-Load",
+      description: "GPT-Load支持接入各种AI应用和开发工具，包括Roo Code、New API、Cherry Studio、Claude Code Router等。通过统一代理接口实现负载均衡和故障转移。",
+      keywords: "GPT-Load接入, AI应用集成, 开发工具, API工具, 桌面应用, Roo Code, New API, Cherry Studio, Claude Code Router",
+      type: 'article'
+    },
+    en: {
+      title: "Integration Guide - GPT-Load",
+      description: "GPT-Load supports integration with various AI applications and development tools, including Roo Code, New API, Cherry Studio, Claude Code Router. Achieve load balancing and failover through unified proxy interface.",
+      keywords: "GPT-Load integration, AI application integration, development tools, API tools, desktop applications, Roo Code, New API, Cherry Studio, Claude Code Router",
+      type: 'article'
+    },
+    ja: {
+      title: "統合ガイド - GPT-Load",
+      description: "GPT-LoadはRoo Code、New API、Cherry Studio、Claude Code Routerなど、様々なAIアプリケーションと開発ツールとの統合をサポート。統一プロキシインターフェースを通じて負荷分散とフェイルオーバーを実現。",
+      keywords: "GPT-Load統合, AIアプリケーション統合, 開発ツール, APIツール, デスクトップアプリケーション, Roo Code, New API, Cherry Studio, Claude Code Router",
+      type: 'article'
+    }
   }
   // 架构预留：后续可继续添加其他页面的SEO配置
 };

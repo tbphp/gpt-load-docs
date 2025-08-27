@@ -3091,5 +3091,88 @@
         "systemArchitecture": "System Architecture"
       }
     }
+  },
+  "integrations": {
+    "title": "Integration Guide",
+    "description": "GPT-Load supports integration with various AI applications and development tools. Through a unified proxy interface, you can easily integrate multiple AI services into your favorite applications, achieving load balancing and failover.",
+    "advantages": {
+      "title": "Integration Advantages",
+      "items": [
+        {
+          "title": "Unified Interface",
+          "description": "One configuration supports multiple AI services"
+        },
+        {
+          "title": "Load Balancing",
+          "description": "Automatically distribute requests to improve availability"
+        },
+        {
+          "title": "Failover",
+          "description": "Automatically switch to backup when service is abnormal"
+        }
+      ]
+    },
+    "integrations": [
+      {
+        "name": "Roo Code",
+        "description": "Intelligent code assistant supporting multiple AI models",
+        "status": "available",
+        "icon": "Code2",
+        "href": "/docs/integrations/roo-code",
+        "category": "Development Tools"
+      },
+      {
+        "name": "New API",
+        "description": "Modern API development platform supporting multiple AI models",
+        "status": "available",
+        "icon": "Globe",
+        "href": "/docs/integrations/new-api",
+        "category": "API Tools"
+      },
+      {
+        "name": "Cherry Studio",
+        "description": "Desktop AI chat application supporting multiple AI models",
+        "status": "available",
+        "icon": "Sparkles",
+        "href": "/docs/integrations/cherry-studio",
+        "category": "Desktop Applications"
+      },
+      {
+        "name": "Claude Code Router",
+        "description": "Intelligent code routing tool supporting multi-model switching",
+        "status": "available",
+        "icon": "Terminal",
+        "href": "/docs/integrations/claude-code-router",
+        "category": "Development Tools"
+      }
+    ],
+    "categories": [
+      {
+        "title": "Development Tools",
+        "description": "Integration with various development tools and IDEs",
+        "items": []
+      },
+      {
+        "title": "API Tools",
+        "description": "Integration with API development and testing platforms",
+        "items": []
+      },
+      {
+        "title": "Desktop Applications",
+        "description": "Access configuration for desktop AI applications",
+        "items": []
+      }
+    ],
+    "status": {
+      "available": "Available",
+      "comingSoon": "Coming Soon"
+    },
+    "viewGuide": "View Integration Guide",
+    "comingSoon": "Coming Soon",
+    "contribution": {
+      "title": "Contribute Integration Guide",
+      "description": "If you have successfully integrated GPT-Load into other applications, welcome to contribute your integration guide. This will help more users benefit.",
+      "githubLink": "Contribute on GitHub"
+    }
   }
 }

@@ -3091,5 +3091,88 @@
         "systemArchitecture": "システムアーキテクチャ"
       }
     }
+  },
+  "integrations": {
+    "title": "統合ガイド",
+    "description": "GPT-Loadは様々なAIアプリケーションと開発ツールとの統合をサポートします。統一されたプロキシインターフェースを通じて、複数のAIサービスをお気に入りのアプリケーションに簡単に統合し、負荷分散とフェイルオーバーを実現できます。",
+    "advantages": {
+      "title": "統合の利点",
+      "items": [
+        {
+          "title": "統一インターフェース",
+          "description": "一度の設定で複数のAIサービスをサポート"
+        },
+        {
+          "title": "負荷分散",
+          "description": "自動的にリクエストを分散して可用性を向上"
+        },
+        {
+          "title": "フェイルオーバー",
+          "description": "サービス異常時に自動的にバックアップに切り替え"
+        }
+      ]
+    },
+    "integrations": [
+      {
+        "name": "Roo Code",
+        "description": "複数のAIモデルをサポートするインテリジェントコードアシスタント",
+        "status": "available",
+        "icon": "Code2",
+        "href": "/docs/integrations/roo-code",
+        "category": "開発ツール"
+      },
+      {
+        "name": "New API",
+        "description": "複数のAIモデルをサポートするモダンAPI開発プラットフォーム",
+        "status": "available",
+        "icon": "Globe",
+        "href": "/docs/integrations/new-api",
+        "category": "APIツール"
+      },
+      {
+        "name": "Cherry Studio",
+        "description": "複数のAIモデルをサポートするデスクトップAIチャットアプリケーション",
+        "status": "available",
+        "icon": "Sparkles",
+        "href": "/docs/integrations/cherry-studio",
+        "category": "デスクトップアプリケーション"
+      },
+      {
+        "name": "Claude Code Router",
+        "description": "マルチモデル切り替えをサポートするインテリジェントコードルーティングツール",
+        "status": "available",
+        "icon": "Terminal",
+        "href": "/docs/integrations/claude-code-router",
+        "category": "開発ツール"
+      }
+    ],
+    "categories": [
+      {
+        "title": "開発ツール",
+        "description": "様々な開発ツールやIDEとの統合",
+        "items": []
+      },
+      {
+        "title": "APIツール",
+        "description": "API開発とテストプラットフォームとの統合",
+        "items": []
+      },
+      {
+        "title": "デスクトップアプリケーション",
+        "description": "デスクトップAIアプリケーションのアクセス設定",
+        "items": []
+      }
+    ],
+    "status": {
+      "available": "利用可能",
+      "comingSoon": "近日公開"
+    },
+    "viewGuide": "統合ガイドを表示",
+    "comingSoon": "近日公開",
+    "contribution": {
+      "title": "統合ガイドに貢献",
+      "description": "GPT-Loadを他のアプリケーションに統合できた場合は、ぜひ統合ガイドに貢献してください。これにより、より多くのユーザーが恩恵を受けることができます。",
+      "githubLink": "GitHubで貢献"
+    }
   }
 }

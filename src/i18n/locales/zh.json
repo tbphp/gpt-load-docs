@@ -3091,5 +3091,88 @@
         "systemArchitecture": "系统架构"
       }
     }
+  },
+  "integrations": {
+    "title": "接入指南",
+    "description": "GPT-Load 支持接入各种AI应用和开发工具。通过统一的代理接口，您可以轻松地将多个AI服务集成到您喜爱的应用中，实现负载均衡和故障转移。",
+    "advantages": {
+      "title": "接入优势",
+      "items": [
+        {
+          "title": "统一接口",
+          "description": "一套配置支持多个AI服务"
+        },
+        {
+          "title": "负载均衡",
+          "description": "自动分配请求，提高可用性"
+        },
+        {
+          "title": "故障转移",
+          "description": "服务异常时自动切换备用"
+        }
+      ]
+    },
+    "integrations": [
+      {
+        "name": "Roo Code",
+        "description": "智能代码助手，支持多种AI模型",
+        "status": "available",
+        "icon": "Code2",
+        "href": "/docs/integrations/roo-code",
+        "category": "开发工具"
+      },
+      {
+        "name": "New API",
+        "description": "现代化的API开发平台，支持多种AI模型",
+        "status": "available",
+        "icon": "Globe",
+        "href": "/docs/integrations/new-api",
+        "category": "API工具"
+      },
+      {
+        "name": "Cherry Studio",
+        "description": "桌面端AI对话应用，支持多种AI模型",
+        "status": "available",
+        "icon": "Sparkles",
+        "href": "/docs/integrations/cherry-studio",
+        "category": "桌面应用"
+      },
+      {
+        "name": "Claude Code Router",
+        "description": "智能代码路由工具，支持多模型切换",
+        "status": "available",
+        "icon": "Terminal",
+        "href": "/docs/integrations/claude-code-router",
+        "category": "开发工具"
+      }
+    ],
+    "categories": [
+      {
+        "title": "开发工具",
+        "description": "集成到各种开发工具和IDE中",
+        "items": []
+      },
+      {
+        "title": "API工具",
+        "description": "API开发和测试平台的集成",
+        "items": []
+      },
+      {
+        "title": "桌面应用",
+        "description": "桌面端AI应用的接入配置",
+        "items": []
+      }
+    ],
+    "status": {
+      "available": "可用",
+      "comingSoon": "即将推出"
+    },
+    "viewGuide": "查看接入指南",
+    "comingSoon": "敬请期待",
+    "contribution": {
+      "title": "贡献接入指南",
+      "description": "如果您成功将 GPT-Load 接入到其他应用中，欢迎贡献您的接入指南。这将帮助更多用户受益。",
+      "githubLink": "在 GitHub 上贡献"
+    }
   }
 }
