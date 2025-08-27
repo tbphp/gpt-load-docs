@@ -2687,5 +2687,144 @@
         ]
       }
     }
+  },
+  "deployment": {
+    "source": {
+      "title": "Source Code Deployment",
+      "subtitle": "Build and deploy GPT-Load from source code, suitable for developers to customize and debug features. Provides complete control and flexibility.",
+      "prerequisites": {
+        "title": "Environment Requirements",
+        "development": {
+          "title": "Development Environment",
+          "description": "Requires local installation of Go development environment and related toolchain"
+        },
+        "required": {
+          "title": "Required Software",
+          "go": "Go 1.23+ development environment",
+          "git": "Git version control tool",
+          "make": "Make build tool",
+          "database": "Database service (MySQL/PostgreSQL/SQLite)"
+        },
+        "optional": {
+          "title": "Optional Software",
+          "redis": "Redis cache service",
+          "nodejs": "Node.js and npm (for frontend development)",
+          "docker": "Docker (for containerized testing)",
+          "ide": "IDE or editor (VS Code/GoLand)"
+        }
+      },
+      "installation": {
+        "title": "Installation Steps",
+        "tip": "Tip",
+        "note": "Note",
+        "step1": {
+          "title": "Clone Source Code",
+          "description": "Clone GPT-Load source code repository from GitHub:",
+          "tip": "If you need a specific version, use git checkout v1.x.x to switch to the corresponding version tag"
+        },
+        "step2": {
+          "title": "Install Dependencies",
+          "description": "Download and install Go module dependencies:",
+          "code": "go mod tidy",
+          "warning": "Ensure network connection is stable, some dependencies may need to be downloaded from overseas servers"
+        },
+        "step3": {
+          "title": "Database Configuration",
+          "config": {
+            "title": "Create Configuration File",
+            "code": "cp .env.example .env",
+            "description": "Copy example configuration file and modify according to your environment"
+          },
+          "database": {
+            "title": "Database Connection Configuration",
+            "sqlite": "SQLite (recommended for development)",
+            "sqliteCode": "DATABASE_DSN=./data/gpt-load.db",
+            "mysql": "MySQL",
+            "mysqlCode": "DATABASE_DSN=root:123456@tcp(mysql:3306)/gpt-load?charset=utf8mb4&parseTime=True&loc=Local",
+            "postgresql": "PostgreSQL",
+            "postgresqlCode": "DATABASE_DSN=postgres://postgres:123456@postgres:5432/gpt-load?sslmode=disable"
+          }
+        },
+        "step4": {
+          "title": "Build and Run",
+          "frontend": {
+            "title": "Build Frontend",
+            "code": "cd web && npm install && npm run build"
+          },
+          "backend": {
+            "title": "Run Backend Development Service",
+            "code": "go run main.go"
+          },
+          "dev": {
+            "title": "Run Frontend Development Service",
+            "code": "cd web && npm run dev"
+          }
+        }
+      },
+      "development": {
+        "title": "Development Guide",
+        "structure": {
+          "title": "Project Structure",
+          "root": "gpt-load/",
+          "internal": "internal/ # Internal business logic",
+          "app": "app/ # Application initialization",
+          "channel": "channel/ # Channel type management",
+          "config": "config/ # Configuration management",
+          "container": "container/ # Dig container service management",
+          "db": "db/ # DB initialization and migration scripts",
+          "errors": "errors/ # Error messages",
+          "handler": "handler/ # Management API interfaces",
+          "httpclient": "httpclient/ # HTTP client wrapper",
+          "keypool": "keypool/ # Key pool management",
+          "middleware": "middleware/ # Middleware",
+          "models": "models/ # Data models",
+          "proxy": "proxy/ # Proxy service",
+          "response": "response/ # Response wrapper",
+          "router": "router/ # Routing",
+          "services": "services/ # Business logic layer",
+          "store": "store/ # Unified memory",
+          "syncer": "syncer/ # Cluster synchronizer",
+          "types": "types/ # Type definitions",
+          "utils": "utils/ # Utility functions",
+          "version": "version/ # Version constants",
+          "web": "web/ # Frontend resources",
+          "gomod": "go.mod # Go module definition",
+          "envexample": ".env.example # Configuration example",
+          "dockercompose": "docker-compose.yml # Configuration example",
+          "dockerfile": "Dockerfile # Configuration example",
+          "makefile": "Makefile # Build rules",
+          "maingo": "main.go # Entry program"
+        }
+      },
+      "troubleshooting": {
+        "title": "Troubleshooting",
+        "error": "Error message",
+        "solution": "Solution",
+        "common": {
+          "title": "Common Issues",
+          "goVersion": {
+            "title": "Go version too low",
+            "error": "go version go1.xx.x: minimum supported version is go1.23",
+            "solution": "Upgrade Go version to 1.23 or higher"
+          },
+          "dependency": {
+            "title": "Dependency download failed",
+            "cause": "Possible causes: network connection issues or proxy settings",
+            "codeComment": "# Set Go proxy",
+            "code": "go env -w GOPROXY=https://goproxy.cn,direct"
+          }
+        }
+      },
+      "nextSteps": {
+        "title": "Next Steps",
+        "description": "After source code deployment is complete, you can:",
+        "customize": "Deeply understand code structure and customize features",
+        "contribute": "Participate in open source projects and submit Pull Requests",
+        "docker": "Build custom Docker images",
+        "cicd": "Integrate into CI/CD pipelines",
+        "configurationGuide": "Configuration Guide",
+        "systemArchitecture": "System Architecture"
+      }
+    }
   }
 }

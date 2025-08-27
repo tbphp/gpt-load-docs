@@ -2687,5 +2687,144 @@
         ]
       }
     }
+  },
+  "deployment": {
+    "source": {
+      "title": "ソースコードデプロイメント",
+      "subtitle": "ソースコードからGPT-Loadをビルドしてデプロイ。開発者が機能をカスタマイズしてデバッグするのに適しています。完全な制御と柔軟性を提供します。",
+      "prerequisites": {
+        "title": "環境要件",
+        "development": {
+          "title": "開発環境",
+          "description": "Go開発環境と関連ツールチェーンのローカルインストールが必要"
+        },
+        "required": {
+          "title": "必須ソフトウェア",
+          "go": "Go 1.23+ 開発環境",
+          "git": "Git バージョン管理ツール",
+          "make": "Make ビルドツール",
+          "database": "データベースサービス（MySQL/PostgreSQL/SQLite）"
+        },
+        "optional": {
+          "title": "オプションソフトウェア",
+          "redis": "Redis キャッシュサービス",
+          "nodejs": "Node.js と npm（フロントエンド開発用）",
+          "docker": "Docker（コンテナ化テスト用）",
+          "ide": "IDE またはエディタ（VS Code/GoLand）"
+        }
+      },
+      "installation": {
+        "title": "インストール手順",
+        "tip": "ヒント",
+        "note": "注意",
+        "step1": {
+          "title": "ソースコードのクローン",
+          "description": "GitHubからGPT-Loadソースコードリポジトリをクローン：",
+          "tip": "特定のバージョンが必要な場合は、git checkout v1.x.x を使用して対応するバージョンタグに切り替えてください"
+        },
+        "step2": {
+          "title": "依存関係のインストール",
+          "description": "Goモジュールの依存関係をダウンロードしてインストール：",
+          "code": "go mod tidy",
+          "warning": "ネットワーク接続が安定していることを確認してください。一部の依存関係は海外サーバーからダウンロードする必要がある場合があります"
+        },
+        "step3": {
+          "title": "データベース設定",
+          "config": {
+            "title": "設定ファイルの作成",
+            "code": "cp .env.example .env",
+            "description": "サンプル設定ファイルをコピーして環境に応じて変更"
+          },
+          "database": {
+            "title": "データベース接続設定",
+            "sqlite": "SQLite（開発用推奨）",
+            "sqliteCode": "DATABASE_DSN=./data/gpt-load.db",
+            "mysql": "MySQL",
+            "mysqlCode": "DATABASE_DSN=root:123456@tcp(mysql:3306)/gpt-load?charset=utf8mb4&parseTime=True&loc=Local",
+            "postgresql": "PostgreSQL",
+            "postgresqlCode": "DATABASE_DSN=postgres://postgres:123456@postgres:5432/gpt-load?sslmode=disable"
+          }
+        },
+        "step4": {
+          "title": "ビルドと実行",
+          "frontend": {
+            "title": "フロントエンドのビルド",
+            "code": "cd web && npm install && npm run build"
+          },
+          "backend": {
+            "title": "バックエンド開発サービスの実行",
+            "code": "go run main.go"
+          },
+          "dev": {
+            "title": "フロントエンド開発サービスの実行",
+            "code": "cd web && npm run dev"
+          }
+        }
+      },
+      "development": {
+        "title": "開発ガイド",
+        "structure": {
+          "title": "プロジェクト構造",
+          "root": "gpt-load/",
+          "internal": "internal/ # 内部ビジネスロジック",
+          "app": "app/ # アプリケーション初期化",
+          "channel": "channel/ # チャネルタイプ管理",
+          "config": "config/ # 設定管理",
+          "container": "container/ # Digコンテナサービス管理",
+          "db": "db/ # DB初期化とマイグレーションスクリプト",
+          "errors": "errors/ # エラーメッセージ",
+          "handler": "handler/ # 管理APIインターフェース",
+          "httpclient": "httpclient/ # HTTPクライアントラッパー",
+          "keypool": "keypool/ # キープール管理",
+          "middleware": "middleware/ # ミドルウェア",
+          "models": "models/ # データモデル",
+          "proxy": "proxy/ # プロキシサービス",
+          "response": "response/ # レスポンスラッパー",
+          "router": "router/ # ルーティング",
+          "services": "services/ # ビジネスロジック層",
+          "store": "store/ # 統一メモリ",
+          "syncer": "syncer/ # クラスター同期器",
+          "types": "types/ # 型定義",
+          "utils": "utils/ # ユーティリティ関数",
+          "version": "version/ # バージョン定数",
+          "web": "web/ # フロントエンドリソース",
+          "gomod": "go.mod # Goモジュール定義",
+          "envexample": ".env.example # 設定例",
+          "dockercompose": "docker-compose.yml # 設定例",
+          "dockerfile": "Dockerfile # 設定例",
+          "makefile": "Makefile # ビルドルール",
+          "maingo": "main.go # エントリープログラム"
+        }
+      },
+      "troubleshooting": {
+        "title": "トラブルシューティング",
+        "error": "エラーメッセージ",
+        "solution": "解決方法",
+        "common": {
+          "title": "よくある問題",
+          "goVersion": {
+            "title": "Goバージョンが低すぎる",
+            "error": "go version go1.xx.x: minimum supported version is go1.23",
+            "solution": "Goバージョンを1.23以上にアップグレード"
+          },
+          "dependency": {
+            "title": "依存関係のダウンロード失敗",
+            "cause": "考えられる原因：ネットワーク接続の問題またはプロキシ設定",
+            "codeComment": "# Goプロキシを設定",
+            "code": "go env -w GOPROXY=https://goproxy.cn,direct"
+          }
+        }
+      },
+      "nextSteps": {
+        "title": "次のステップ",
+        "description": "ソースコードデプロイメントが完了したら、以下のことができます：",
+        "customize": "コード構造を深く理解し、機能をカスタマイズ",
+        "contribute": "オープンソースプロジェクトに参加し、プルリクエストを提出",
+        "docker": "カスタムDockerイメージをビルド",
+        "cicd": "CI/CDパイプラインに統合",
+        "configurationGuide": "設定ガイド",
+        "systemArchitecture": "システムアーキテクチャ"
+      }
+    }
   }
 }

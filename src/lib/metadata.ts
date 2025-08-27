@@ -356,6 +356,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       keywords: "クラスターデプロイメント, 高可用性デプロイメント, マスタースレーブアーキテクチャ, 分散デプロイメント, Dockerクラスター, MySQLクラスター, Redisクラスター, ロードバランシング, 水平スケーリング, エンタープライズデプロイメント",
       type: 'article'
     }
+  },
+  '/docs/deployment/source': {
+    zh: {
+      title: "源码部署 - GPT-Load",
+      description: "GPT-Load源码部署完整指南。通过源码构建和部署，适合开发者进行功能定制和调试。包含环境要求、安装步骤、项目结构、故障排除等详细说明。",
+      keywords: "源码部署, Go开发环境, 源码编译, 开发者部署, 功能定制, 项目结构, 故障排除, GPT-Load源码",
+      type: 'article'
+    },
+    en: {
+      title: "Source Code Deployment - GPT-Load",
+      description: "Complete guide for GPT-Load source code deployment. Build and deploy from source code, suitable for developers to customize and debug features. Includes environment requirements, installation steps, project structure, troubleshooting.",
+      keywords: "source code deployment, Go development environment, source compilation, developer deployment, feature customization, project structure, troubleshooting, GPT-Load source",
+      type: 'article'
+    },
+    ja: {
+      title: "ソースコードデプロイメント - GPT-Load",
+      description: "GPT-Loadソースコードデプロイメントの完全ガイド。ソースコードからビルドとデプロイ、開発者による機能カスタマイズとデバッグに適している。環境要件、インストール手順、プロジェクト構造、トラブルシューティングを含む。",
+      keywords: "ソースコードデプロイメント, Go開発環境, ソースコンパイル, 開発者デプロイメント, 機能カスタマイズ, プロジェクト構造, トラブルシューティング, GPT-Loadソース",
+      type: 'article'
+    }
   }
   // 架构预留：后续可继续添加其他页面的SEO配置
 };

@@ -2687,5 +2687,144 @@
         ]
       }
     }
+  },
+  "deployment": {
+    "source": {
+      "title": "源码部署",
+      "subtitle": "通过源码构建和部署 GPT-Load，适合开发者进行功能定制和调试。提供完全的控制权和灵活性。",
+      "prerequisites": {
+        "title": "环境要求",
+        "development": {
+          "title": "开发环境",
+          "description": "需要本地安装 Go 开发环境和相关工具链"
+        },
+        "required": {
+          "title": "必需软件",
+          "go": "Go 1.23+ 开发环境",
+          "git": "Git 版本控制工具",
+          "make": "Make 构建工具",
+          "database": "数据库服务（MySQL/PostgreSQL/SQLite）"
+        },
+        "optional": {
+          "title": "可选软件",
+          "redis": "Redis 缓存服务",
+          "nodejs": "Node.js 和 npm（前端开发）",
+          "docker": "Docker（容器化测试）",
+          "ide": "IDE 或编辑器（VS Code/GoLand）"
+        }
+      },
+      "installation": {
+        "title": "安装步骤",
+        "tip": "提示",
+        "note": "注意",
+        "step1": {
+          "title": "克隆源码",
+          "description": "从 GitHub 克隆 GPT-Load 源码仓库：",
+          "tip": "如果需要特定版本，可以使用 git checkout v1.x.x 切换到对应版本标签"
+        },
+        "step2": {
+          "title": "安装依赖",
+          "description": "下载并安装 Go 模块依赖：",
+          "code": "go mod tidy",
+          "warning": "确保网络连接正常，某些依赖可能需要从海外服务器下载"
+        },
+        "step3": {
+          "title": "数据库配置",
+          "config": {
+            "title": "创建配置文件",
+            "code": "cp .env.example .env",
+            "description": "复制示例配置文件并根据你的环境进行修改"
+          },
+          "database": {
+            "title": "数据库连接配置",
+            "sqlite": "SQLite（推荐用于开发）",
+            "sqliteCode": "DATABASE_DSN=./data/gpt-load.db",
+            "mysql": "MySQL",
+            "mysqlCode": "DATABASE_DSN=root:123456@tcp(mysql:3306)/gpt-load?charset=utf8mb4&parseTime=True&loc=Local",
+            "postgresql": "PostgreSQL",
+            "postgresqlCode": "DATABASE_DSN=postgres://postgres:123456@postgres:5432/gpt-load?sslmode=disable"
+          }
+        },
+        "step4": {
+          "title": "构建运行",
+          "frontend": {
+            "title": "构建前端",
+            "code": "cd web && npm install && npm run build"
+          },
+          "backend": {
+            "title": "运行后端开发服务",
+            "code": "go run main.go"
+          },
+          "dev": {
+            "title": "运行前端开发服务",
+            "code": "cd web && npm run dev"
+          }
+        }
+      },
+      "development": {
+        "title": "开发指南",
+        "structure": {
+          "title": "项目结构",
+          "root": "gpt-load/",
+          "internal": "internal/ # 内部业务逻辑",
+          "app": "app/ # 应用初始化",
+          "channel": "channel/ # 渠道类型管理",
+          "config": "config/ # 配置管理",
+          "container": "container/ # dig容器服务管理",
+          "db": "db/ # DB初始化及迁移脚本",
+          "errors": "errors/ # 错误信息",
+          "handler": "handler/ # 管理端API接口",
+          "httpclient": "httpclient/ # HTTP客户端封装",
+          "keypool": "keypool/ # 密钥池管理",
+          "middleware": "middleware/ # 中间件",
+          "models": "models/ # 数据模型",
+          "proxy": "proxy/ # 代理服务",
+          "response": "response/ # 响应封装",
+          "router": "router/ # 路由",
+          "services": "services/ # 逻辑服务层",
+          "store": "store/ # 统一内存",
+          "syncer": "syncer/ # 集群同步器",
+          "types": "types/ # 类型定义",
+          "utils": "utils/ # 工具函数",
+          "version": "version/ # 版本常量",
+          "web": "web/ # 前端资源",
+          "gomod": "go.mod # Go 模块定义",
+          "envexample": ".env.example # 配置示例",
+          "dockercompose": "docker-compose.yml # 配置示例",
+          "dockerfile": "Dockerfile # 配置示例",
+          "makefile": "Makefile # 构建规则",
+          "maingo": "main.go # 入口程序"
+        }
+      },
+      "troubleshooting": {
+        "title": "故障排除",
+        "error": "错误信息",
+        "solution": "解决方案",
+        "common": {
+          "title": "常见问题",
+          "goVersion": {
+            "title": "Go 版本过低",
+            "error": "go version go1.xx.x: minimum supported version is go1.23",
+            "solution": "升级 Go 版本到 1.23 或更高版本"
+          },
+          "dependency": {
+            "title": "依赖下载失败",
+            "cause": "可能的原因：网络连接问题或代理设置",
+            "codeComment": "# 设置 Go 代理",
+            "code": "go env -w GOPROXY=https://goproxy.cn,direct"
+          }
+        }
+      },
+      "nextSteps": {
+        "title": "下一步",
+        "description": "源码部署完成后，您可以：",
+        "customize": "深入了解代码结构，进行功能定制",
+        "contribute": "参与开源项目，提交 Pull Request",
+        "docker": "构建自定义 Docker 镜像",
+        "cicd": "集成到 CI/CD 流程中",
+        "configurationGuide": "配置说明",
+        "systemArchitecture": "系统架构"
+      }
+    }
   }
 }
