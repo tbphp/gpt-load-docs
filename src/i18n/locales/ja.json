@@ -3174,5 +3174,190 @@
       "description": "GPT-Loadを他のアプリケーションに統合できた場合は、ぜひ統合ガイドに貢献してください。これにより、より多くのユーザーが恩恵を受けることができます。",
       "githubLink": "GitHubで貢献"
     }
+  },
+  "cherryStudio": {
+    "title": "Cherry Studio 統合ガイド",
+    "description": "このガイドは、GPT-LoadプロキシサービスをCherry Studio AIクライアントと統合する方法を説明します。OpenAI、Gemini、Gemini OpenAI互換、Anthropicの4つのチャネルタイプの完全な設定をサポートします。",
+    "prerequisites": {
+      "title": "前提条件",
+      "description": "GPT-Loadサービスが正常にデプロイされ、起動していることを確認してください。デフォルトでは http://localhost:3001 で実行されます"
+    },
+    "generalSteps": {
+      "title": "一般的なセットアップ手順",
+      "serviceLocation": {
+        "title": "サービス設定場所",
+        "step1": {
+          "title": "設定ページにアクセス",
+          "description": "Cherry Studioの左下角の「設定」→「モデルサービス」をクリック"
+        },
+        "step2": {
+          "title": "新しいサービスを追加",
+          "description": "ページ下部の「追加」ボタンをクリック（リストの既存サービスは使用しないでください）"
+        },
+        "step3": {
+          "title": "設定後にモデルを取得",
+          "description": "「管理」ボタンをクリックして、モデルリストを取得し、必要なモデルを選択"
+        }
+      },
+      "reminder": {
+        "title": "重要な注意事項",
+        "description": "すべてのチャネルタイプは同じセットアッププロセスに従います：プロバイダータイプの選択 → APIアドレスとキーの設定 → モデルリストの取得。プロバイダータイプとAPIアドレス設定のみが異なります。"
+      }
+    },
+    "openai": {
+      "title": "OpenAI チャネル設定",
+      "create": {
+        "title": "ステップ1：サービス作成",
+        "stepsTitle": "作成手順",
+        "step1": {
+          "title": "サービス名を入力",
+          "description": "サービスに識別しやすい名前を設定"
+        },
+        "step2": {
+          "title": "プロバイダータイプを選択",
+          "description": "プロバイダータイプドロップダウンからOpenAIを選択"
+        },
+        "imageAlt": "Cherry Studio OpenAIサービス作成スクリーンショット"
+      },
+      "config": {
+        "title": "ステップ2：サービス設定",
+        "parametersTitle": "設定パラメータ",
+        "apiKey": {
+          "title": "APIキーを設定",
+          "description": "GPT-Loadで設定したプロキシキーを使用"
+        },
+        "apiUrl": {
+          "title": "APIアドレスを設定",
+          "description": "ここで「openai」はGPT-Loadで設定したグループ名です"
+        },
+        "models": {
+          "title": "モデルリストを取得",
+          "description": "設定完了後、「管理」ボタンをクリックして必要なモデルを取得・選択"
+        },
+        "imageAlt": "Cherry Studio OpenAIサービス設定スクリーンショット"
+      }
+    },
+    "gemini": {
+      "title": "Gemini チャネル設定",
+      "create": {
+        "title": "ステップ1：サービス作成",
+        "stepsTitle": "作成手順",
+        "step1": {
+          "title": "サービス名を入力",
+          "description": "Geminiサービスに識別しやすい名前を設定"
+        },
+        "step2": {
+          "title": "プロバイダータイプを選択",
+          "description": "プロバイダータイプドロップダウンからGeminiを選択"
+        },
+        "imageAlt": "Cherry Studio Geminiサービス作成スクリーンショット"
+      },
+      "config": {
+        "title": "ステップ2：サービス設定",
+        "parametersTitle": "設定パラメータ",
+        "apiKey": {
+          "title": "APIキーを設定",
+          "description": "GPT-Loadで設定したプロキシキーを使用"
+        },
+        "apiUrl": {
+          "title": "APIアドレスを設定",
+          "description": "ここで「gemini」はGPT-Loadで設定したグループ名です"
+        },
+        "models": {
+          "title": "モデルリストを取得",
+          "description": "設定完了後、「管理」ボタンをクリックして必要なモデルを取得・選択"
+        },
+        "imageAlt": "Cherry Studio Geminiサービス設定スクリーンショット"
+      }
+    },
+    "geminiOpenai": {
+      "title": "Gemini OpenAI 互換フォーマット",
+      "create": {
+        "title": "ステップ1：サービス作成",
+        "subtitle": "GeminiチャネルのOpenAI互換インターフェースフォーマットを使用",
+        "stepsTitle": "作成手順",
+        "step1": {
+          "title": "サービス名を入力",
+          "description": "Gemini OpenAI互換サービスの名前を設定"
+        },
+        "step2": {
+          "title": "プロバイダータイプを選択",
+          "description": "互換インターフェースをサポートするためOpenAIタイプを使用"
+        },
+        "imageAlt": "Cherry Studio Gemini OpenAI互換サービス作成スクリーンショット"
+      },
+      "config": {
+        "title": "ステップ2：サービス設定",
+        "parametersTitle": "設定パラメータ",
+        "apiKey": {
+          "title": "APIキーを設定",
+          "description": "GPT-Loadで設定したプロキシキーを使用"
+        },
+        "apiUrl": {
+          "title": "APIアドレスを設定",
+          "description": "注意：Cherry Studioがv1パスを自動追加しないよう、アドレスは「/」で終わる必要があります"
+        },
+        "models": {
+          "title": "モデルリストを取得",
+          "description": "設定完了後、「管理」ボタンをクリックして必要なモデルを取得・選択"
+        },
+        "imageAlt": "Cherry Studio Gemini OpenAI互換サービス設定スクリーンショット"
+      },
+      "warning": {
+        "title": "重要な設定注意",
+        "description": "APIアドレスは「/」で終わる必要があります！これはCherry Studioの規則要件で、v1パスが自動追加されないようにし、互換インターフェースが正常に動作することを保証します。"
+      }
+    },
+    "anthropic": {
+      "title": "Anthropic (Claude) チャネル設定",
+      "create": {
+        "title": "ステップ1：サービス作成",
+        "stepsTitle": "作成手順",
+        "step1": {
+          "title": "サービス名を入力",
+          "description": "Anthropicサービスに識別しやすい名前を設定"
+        },
+        "step2": {
+          "title": "プロバイダータイプを選択",
+          "description": "プロバイダータイプドロップダウンからAnthropicを選択"
+        },
+        "imageAlt": "Cherry Studio Anthropicサービス作成スクリーンショット"
+      },
+      "config": {
+        "title": "ステップ2：サービス設定",
+        "parametersTitle": "設定パラメータ",
+        "apiKey": {
+          "title": "APIキーを設定",
+          "description": "GPT-Loadで設定したプロキシキーを使用"
+        },
+        "apiUrl": {
+          "title": "APIアドレスを設定",
+          "description": "ここで「anthropic」はGPT-Loadで設定したグループ名です"
+        },
+        "models": {
+          "title": "モデルリストを取得",
+          "description": "設定完了後、「管理」ボタンをクリックして必要なモデルを取得・選択"
+        },
+        "imageAlt": "Cherry Studio Anthropicサービス設定スクリーンショット"
+      }
+    },
+    "importantNotes": {
+      "title": "重要な注意事項",
+      "configurationNotes": {
+        "title": "設定に関する考慮事項",
+        "items": [
+          "例のGPT-Loadアクセスアドレスを実際のサービスアドレスに置き換えてください",
+          "パス内のグループ名（openai、gemini、anthropicなど）は、GPT-Loadの実際の設定と一致する必要があります",
+          "GPT-Loadで設定した実際のプロキシキーを使用し、例のsk-123456は使用しないでください",
+          "設定完了後、チャットインターフェースで新しく追加したモデルを選択してテストすることを忘れずに"
+        ]
+      }
+    },
+    "relatedResources": {
+      "title": "関連リソース",
+      "cherryStudioDocs": "Cherry Studio 公式ドキュメント",
+      "gptLoadConfig": "GPT-Load 設定ガイド",
+      "channelTypes": "チャネルタイプドキュメント"
+    }
   }
 }

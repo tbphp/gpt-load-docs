@@ -436,6 +436,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       keywords: "GPT-Load統合, AIアプリケーション統合, 開発ツール, APIツール, デスクトップアプリケーション, Roo Code, New API, Cherry Studio, Claude Code Router",
       type: 'article'
     }
+  },
+  '/docs/integrations/cherry-studio': {
+    zh: {
+      title: "Cherry Studio 接入指南 - GPT-Load",
+      description: "详细指南教您将GPT-Load代理服务接入Cherry Studio AI客户端，支持OpenAI、Gemini、Gemini OpenAI兼容和Anthropic四种渠道类型的完整配置。",
+      keywords: "Cherry Studio接入, GPT-Load集成, AI客户端配置, OpenAI代理, Gemini代理, Claude代理, 多渠道配置, Cherry Studio设置",
+      type: 'article'
+    },
+    en: {
+      title: "Cherry Studio Integration Guide - GPT-Load",
+      description: "Comprehensive guide to integrate GPT-Load proxy service with Cherry Studio AI client, supporting complete configuration for OpenAI, Gemini, Gemini OpenAI compatible, and Anthropic channel types.",
+      keywords: "Cherry Studio integration, GPT-Load integration, AI client configuration, OpenAI proxy, Gemini proxy, Claude proxy, multi-channel configuration, Cherry Studio setup",
+      type: 'article'
+    },
+    ja: {
+      title: "Cherry Studio 統合ガイド - GPT-Load",
+      description: "GPT-LoadプロキシサービスをCherry Studio AIクライアントと統合する包括的ガイド。OpenAI、Gemini、Gemini OpenAI互換、Anthropicの4つのチャネルタイプの完全な設定をサポート。",
+      keywords: "Cherry Studio統合, GPT-Load統合, AIクライアント設定, OpenAIプロキシ, Geminiプロキシ, Claudeプロキシ, マルチチャネル設定, Cherry Studioセットアップ",
+      type: 'article'
+    }
   }
   // 架构预留：后续可继续添加其他页面的SEO配置
 };

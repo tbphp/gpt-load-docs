@@ -3174,5 +3174,190 @@
       "description": "If you have successfully integrated GPT-Load into other applications, welcome to contribute your integration guide. This will help more users benefit.",
       "githubLink": "Contribute on GitHub"
     }
+  },
+  "cherryStudio": {
+    "title": "Cherry Studio Integration Guide",
+    "description": "This guide will help you integrate GPT-Load proxy service with Cherry Studio AI client, supporting complete configuration for OpenAI, Gemini, Gemini OpenAI compatible, and Anthropic channel types.",
+    "prerequisites": {
+      "title": "Prerequisites",
+      "description": "Ensure you have successfully deployed and started the GPT-Load service, running on http://localhost:3001 by default"
+    },
+    "generalSteps": {
+      "title": "General Setup Steps",
+      "serviceLocation": {
+        "title": "Service Setup Location",
+        "step1": {
+          "title": "Access Settings Page",
+          "description": "Click \"Settings\" → \"Model Services\" in the bottom left corner of Cherry Studio"
+        },
+        "step2": {
+          "title": "Add New Service",
+          "description": "Click the \"Add\" button at the bottom of the page (do not use existing services from the list)"
+        },
+        "step3": {
+          "title": "Get Models After Configuration",
+          "description": "Click the \"Manage\" button to get the model list and select the desired models"
+        }
+      },
+      "reminder": {
+        "title": "Important Reminder",
+        "description": "All channel types follow the same setup process: Select provider type → Configure API address and key → Get model list. Only the provider type and API address configuration differ."
+      }
+    },
+    "openai": {
+      "title": "OpenAI Channel Configuration",
+      "create": {
+        "title": "Step 1: Create Service",
+        "stepsTitle": "Creation Steps",
+        "step1": {
+          "title": "Enter Service Name",
+          "description": "Set an easily recognizable name for your service"
+        },
+        "step2": {
+          "title": "Select Provider Type",
+          "description": "Select OpenAI from the provider type dropdown"
+        },
+        "imageAlt": "Cherry Studio OpenAI service creation screenshot"
+      },
+      "config": {
+        "title": "Step 2: Configure Service",
+        "parametersTitle": "Configuration Parameters",
+        "apiKey": {
+          "title": "Configure API Key",
+          "description": "Use the proxy key configured in your GPT-Load"
+        },
+        "apiUrl": {
+          "title": "Set API Address",
+          "description": "Where \"openai\" is the group name configured in your GPT-Load"
+        },
+        "models": {
+          "title": "Get Model List",
+          "description": "After configuration, click the \"Manage\" button to get and select the required models"
+        },
+        "imageAlt": "Cherry Studio OpenAI service configuration screenshot"
+      }
+    },
+    "gemini": {
+      "title": "Gemini Channel Configuration",
+      "create": {
+        "title": "Step 1: Create Service",
+        "stepsTitle": "Creation Steps",
+        "step1": {
+          "title": "Enter Service Name",
+          "description": "Set an easily recognizable name for your Gemini service"
+        },
+        "step2": {
+          "title": "Select Provider Type",
+          "description": "Select Gemini from the provider type dropdown"
+        },
+        "imageAlt": "Cherry Studio Gemini service creation screenshot"
+      },
+      "config": {
+        "title": "Step 2: Configure Service",
+        "parametersTitle": "Configuration Parameters",
+        "apiKey": {
+          "title": "Configure API Key",
+          "description": "Use the proxy key configured in your GPT-Load"
+        },
+        "apiUrl": {
+          "title": "Set API Address",
+          "description": "Where \"gemini\" is the group name configured in your GPT-Load"
+        },
+        "models": {
+          "title": "Get Model List",
+          "description": "After configuration, click the \"Manage\" button to get and select the required models"
+        },
+        "imageAlt": "Cherry Studio Gemini service configuration screenshot"
+      }
+    },
+    "geminiOpenai": {
+      "title": "Gemini OpenAI Compatible Format",
+      "create": {
+        "title": "Step 1: Create Service",
+        "subtitle": "Using Gemini channel's OpenAI compatible interface format",
+        "stepsTitle": "Creation Steps",
+        "step1": {
+          "title": "Enter Service Name",
+          "description": "Set a name for your Gemini OpenAI compatible service"
+        },
+        "step2": {
+          "title": "Select Provider Type",
+          "description": "Use OpenAI type to support compatible interface"
+        },
+        "imageAlt": "Cherry Studio Gemini OpenAI compatible service creation screenshot"
+      },
+      "config": {
+        "title": "Step 2: Configure Service",
+        "parametersTitle": "Configuration Parameters",
+        "apiKey": {
+          "title": "Configure API Key",
+          "description": "Use the proxy key configured in your GPT-Load"
+        },
+        "apiUrl": {
+          "title": "Set API Address",
+          "description": "Note: The address must end with \"/\" to prevent Cherry Studio from automatically adding v1 path"
+        },
+        "models": {
+          "title": "Get Model List",
+          "description": "After configuration, click the \"Manage\" button to get and select the required models"
+        },
+        "imageAlt": "Cherry Studio Gemini OpenAI compatible service configuration screenshot"
+      },
+      "warning": {
+        "title": "Critical Configuration Note",
+        "description": "The API address must end with \"/\"! This is a Cherry Studio rule requirement to ensure v1 path is not automatically added, guaranteeing the compatible interface works properly."
+      }
+    },
+    "anthropic": {
+      "title": "Anthropic (Claude) Channel Configuration",
+      "create": {
+        "title": "Step 1: Create Service",
+        "stepsTitle": "Creation Steps",
+        "step1": {
+          "title": "Enter Service Name",
+          "description": "Set an easily recognizable name for your Anthropic service"
+        },
+        "step2": {
+          "title": "Select Provider Type",
+          "description": "Select Anthropic from the provider type dropdown"
+        },
+        "imageAlt": "Cherry Studio Anthropic service creation screenshot"
+      },
+      "config": {
+        "title": "Step 2: Configure Service",
+        "parametersTitle": "Configuration Parameters",
+        "apiKey": {
+          "title": "Configure API Key",
+          "description": "Use the proxy key configured in your GPT-Load"
+        },
+        "apiUrl": {
+          "title": "Set API Address",
+          "description": "Where \"anthropic\" is the group name configured in your GPT-Load"
+        },
+        "models": {
+          "title": "Get Model List",
+          "description": "After configuration, click the \"Manage\" button to get and select the required models"
+        },
+        "imageAlt": "Cherry Studio Anthropic service configuration screenshot"
+      }
+    },
+    "importantNotes": {
+      "title": "Important Notes",
+      "configurationNotes": {
+        "title": "Configuration Considerations",
+        "items": [
+          "Please replace the GPT-Load access address in the examples with your actual service address",
+          "The group names in the path (such as openai, gemini, anthropic) need to match your actual configuration in GPT-Load",
+          "Use your actual proxy key configured in GPT-Load, do not use the example sk-123456",
+          "After configuration, remember to select the newly added model in the chat interface for testing"
+        ]
+      }
+    },
+    "relatedResources": {
+      "title": "Related Resources",
+      "cherryStudioDocs": "Cherry Studio Official Documentation",
+      "gptLoadConfig": "GPT-Load Configuration Guide",
+      "channelTypes": "Channel Types Documentation"
+    }
   }
 }

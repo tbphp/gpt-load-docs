@@ -3174,5 +3174,190 @@
       "description": "如果您成功将 GPT-Load 接入到其他应用中，欢迎贡献您的接入指南。这将帮助更多用户受益。",
       "githubLink": "在 GitHub 上贡献"
     }
+  },
+  "cherryStudio": {
+    "title": "Cherry Studio 接入指南",
+    "description": "本指南将帮助您将 GPT-Load 代理服务接入到 Cherry Studio AI 客户端中，支持 OpenAI、Gemini、Gemini OpenAI 兼容和 Anthropic 四种渠道类型。",
+    "prerequisites": {
+      "title": "前置条件",
+      "description": "确保您已经成功部署并启动了 GPT-Load 服务，默认运行在 http://localhost:3001"
+    },
+    "generalSteps": {
+      "title": "通用添加步骤",
+      "serviceLocation": {
+        "title": "服务添加位置",
+        "step1": {
+          "title": "访问设置页面",
+          "description": "在 Cherry Studio 左下角点击\"设置\" → \"模型服务\""
+        },
+        "step2": {
+          "title": "添加新服务",
+          "description": "在页面底部点击\"添加\"按钮（请勿使用列表中现有的服务）"
+        },
+        "step3": {
+          "title": "配置完成后获取模型",
+          "description": "点击\"管理\"按钮，获取模型列表并选择需要的模型"
+        }
+      },
+      "reminder": {
+        "title": "重要提醒",
+        "description": "所有渠道类型都遵循相同的添加流程：选择供应商类型 → 配置 API 地址和密钥 → 获取模型列表。 只是供应商类型和 API 地址配置有所不同。"
+      }
+    },
+    "openai": {
+      "title": "OpenAI 渠道配置",
+      "create": {
+        "title": "步骤一：创建服务",
+        "stepsTitle": "创建步骤",
+        "step1": {
+          "title": "输入服务名称",
+          "description": "为您的服务设置一个易于识别的名称"
+        },
+        "step2": {
+          "title": "选择供应商类型",
+          "description": "在供应商类型下拉列表中选择 OpenAI"
+        },
+        "imageAlt": "Cherry Studio OpenAI 服务创建截图"
+      },
+      "config": {
+        "title": "步骤二：配置服务",
+        "parametersTitle": "配置参数",
+        "apiKey": {
+          "title": "配置 API 密钥",
+          "description": "使用您在 GPT-Load 中配置的代理密钥"
+        },
+        "apiUrl": {
+          "title": "设置 API 地址",
+          "description": "其中\"openai\"是您在 GPT-Load 中配置的分组名称"
+        },
+        "models": {
+          "title": "获取模型列表",
+          "description": "配置完成后点击\"管理\"按钮，获取并选择所需模型"
+        },
+        "imageAlt": "Cherry Studio OpenAI 服务配置截图"
+      }
+    },
+    "gemini": {
+      "title": "Gemini 渠道配置",
+      "create": {
+        "title": "步骤一：创建服务",
+        "stepsTitle": "创建步骤",
+        "step1": {
+          "title": "输入服务名称",
+          "description": "为您的 Gemini 服务设置一个易于识别的名称"
+        },
+        "step2": {
+          "title": "选择供应商类型",
+          "description": "在供应商类型下拉列表中选择 Gemini"
+        },
+        "imageAlt": "Cherry Studio Gemini 服务创建截图"
+      },
+      "config": {
+        "title": "步骤二：配置服务",
+        "parametersTitle": "配置参数",
+        "apiKey": {
+          "title": "配置 API 密钥",
+          "description": "使用您在 GPT-Load 中配置的代理密钥"
+        },
+        "apiUrl": {
+          "title": "设置 API 地址",
+          "description": "其中\"gemini\"是您在 GPT-Load 中配置的分组名称"
+        },
+        "models": {
+          "title": "获取模型列表",
+          "description": "配置完成后点击\"管理\"按钮，获取并选择所需模型"
+        },
+        "imageAlt": "Cherry Studio Gemini 服务配置截图"
+      }
+    },
+    "geminiOpenai": {
+      "title": "Gemini OpenAI 兼容格式",
+      "create": {
+        "title": "步骤一：创建服务",
+        "subtitle": "使用 Gemini 渠道的 OpenAI 兼容接口格式",
+        "stepsTitle": "创建步骤",
+        "step1": {
+          "title": "输入服务名称",
+          "description": "为您的 Gemini OpenAI 兼容服务设置名称"
+        },
+        "step2": {
+          "title": "选择供应商类型",
+          "description": "使用 OpenAI 类型以支持兼容接口"
+        },
+        "imageAlt": "Cherry Studio Gemini OpenAI 兼容服务创建截图"
+      },
+      "config": {
+        "title": "步骤二：配置服务",
+        "parametersTitle": "配置参数",
+        "apiKey": {
+          "title": "配置 API 密钥",
+          "description": "使用您在 GPT-Load 中配置的代理密钥"
+        },
+        "apiUrl": {
+          "title": "设置 API 地址",
+          "description": "注意：地址必须以\"/\"结尾，避免 Cherry Studio 自动添加 v1 路径"
+        },
+        "models": {
+          "title": "获取模型列表",
+          "description": "配置完成后点击\"管理\"按钮，获取并选择所需模型"
+        },
+        "imageAlt": "Cherry Studio Gemini OpenAI 兼容服务配置截图"
+      },
+      "warning": {
+        "title": "关键配置注意",
+        "description": "API 地址必须以\"/\"结尾！这是 Cherry Studio 的规则要求， 确保不会自动添加 v1 路径，从而保证兼容性接口正常工作。"
+      }
+    },
+    "anthropic": {
+      "title": "Anthropic (Claude) 渠道配置",
+      "create": {
+        "title": "步骤一：创建服务",
+        "stepsTitle": "创建步骤",
+        "step1": {
+          "title": "输入服务名称",
+          "description": "为您的 Anthropic 服务设置一个易于识别的名称"
+        },
+        "step2": {
+          "title": "选择供应商类型",
+          "description": "在供应商类型下拉列表中选择 Anthropic"
+        },
+        "imageAlt": "Cherry Studio Anthropic 服务创建截图"
+      },
+      "config": {
+        "title": "步骤二：配置服务",
+        "parametersTitle": "配置参数",
+        "apiKey": {
+          "title": "配置 API 密钥",
+          "description": "使用您在 GPT-Load 中配置的代理密钥"
+        },
+        "apiUrl": {
+          "title": "设置 API 地址",
+          "description": "其中\"anthropic\"是您在 GPT-Load 中配置的分组名称"
+        },
+        "models": {
+          "title": "获取模型列表",
+          "description": "配置完成后点击\"管理\"按钮，获取并选择所需模型"
+        },
+        "imageAlt": "Cherry Studio Anthropic 服务配置截图"
+      }
+    },
+    "importantNotes": {
+      "title": "重要说明",
+      "configurationNotes": {
+        "title": "配置注意事项",
+        "items": [
+          "请将示例中的 GPT-Load 访问地址替换为您实际的服务地址",
+          "路径中的分组名称（如 openai、gemini、anthropic）需要与您在 GPT-Load 中的实际配置保持一致",
+          "使用您在 GPT-Load 中配置的实际代理密钥，不要使用示例中的 sk-123456",
+          "配置完成后，记得在对话界面选择刚才添加的模型进行测试"
+        ]
+      }
+    },
+    "relatedResources": {
+      "title": "相关资源",
+      "cherryStudioDocs": "Cherry Studio 官方文档",
+      "gptLoadConfig": "GPT-Load 配置说明",
+      "channelTypes": "渠道类型说明"
+    }
   }
 }
