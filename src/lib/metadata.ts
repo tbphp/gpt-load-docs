@@ -456,6 +456,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       keywords: "Cherry Studio統合, GPT-Load統合, AIクライアント設定, OpenAIプロキシ, Geminiプロキシ, Claudeプロキシ, マルチチャネル設定, Cherry Studioセットアップ",
       type: 'article'
     }
+  },
+  '/docs/integrations/claude-code-router': {
+    zh: {
+      title: "Claude Code Router 接入指南 - GPT-Load",
+      description: "详细指南教您将GPT-Load代理服务接入Claude Code Router工具中，支持多模型智能路由和代码辅助功能，包含完整的安装、配置和使用步骤。",
+      keywords: "Claude Code Router接入, GPT-Load集成, 代码辅助工具, 多模型路由, 智能代码助手, AI开发工具, Claude Code配置, 代码路由器",
+      type: 'article'
+    },
+    en: {
+      title: "Claude Code Router Integration Guide - GPT-Load",
+      description: "Comprehensive guide to integrate GPT-Load proxy service with Claude Code Router tool, supporting multi-model intelligent routing and code assistance features with complete installation, configuration, and usage steps.",
+      keywords: "Claude Code Router integration, GPT-Load integration, code assistance tool, multi-model routing, intelligent code assistant, AI development tools, Claude Code configuration, code router",
+      type: 'article'
+    },
+    ja: {
+      title: "Claude Code Router 統合ガイド - GPT-Load",
+      description: "GPT-LoadプロキシサービスをClaude Code Routerツールと統合する包括的ガイド。マルチモデルインテリジェントルーティングとコードアシスタンス機能をサポートし、完全なインストール、設定、使用手順を含みます。",
+      keywords: "Claude Code Router統合, GPT-Load統合, コードアシスタンスツール, マルチモデルルーティング, インテリジェントコードアシスタント, AI開発ツール, Claude Code設定, コードルーター",
+      type: 'article'
+    }
   }
   // 架构预留：后续可继续添加其他页面的SEO配置
 };

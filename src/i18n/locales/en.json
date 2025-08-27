@@ -3175,6 +3175,143 @@
       "githubLink": "Contribute on GitHub"
     }
   },
+  "claudeCodeRouter": {
+    "title": "Claude Code Router Integration Guide",
+    "description": "This guide will help you integrate GPT-Load proxy service with Claude Code Router tool, enabling multi-model intelligent routing and code assistance features.",
+    "prerequisites": {
+      "title": "Prerequisites",
+      "items": [
+        "Ensure you have successfully deployed and started the GPT-Load service, running on http://localhost:3001 by default",
+        "Node.js and npm environment installed"
+      ]
+    },
+    "installation": {
+      "title": "Tool Installation",
+      "globalInstall": {
+        "title": "Global Installation of Required Components"
+      },
+      "claudeCode": {
+        "title": "Install Claude Code",
+        "command": "npm install -g @anthropic-ai/claude-code"
+      },
+      "claudeCodeRouter": {
+        "title": "Install Claude Code Router",
+        "command": "npm install -g @musistudio/claude-code-router"
+      },
+      "reference": {
+        "title": "Reference Documentation:",
+        "url": "https://github.com/musistudio/claude-code-router/blob/main/README_zh.md",
+        "text": "Claude Code Router Official Documentation"
+      }
+    },
+    "configuration": {
+      "title": "Configuration File Setup",
+      "createConfig": {
+        "title": "Create Configuration File"
+      },
+      "configPath": {
+        "title": "Configuration File Path",
+        "path": "~/.claude-code-router/config.json",
+        "note": "If the directory doesn't exist, please create the directory structure first"
+      },
+      "configExample": {
+        "title": "Configuration Example",
+        "content": "{\n  \"Providers\": [\n    {\n      \"name\": \"gpt-load-openai\",\n      \"api_base_url\": \"http://localhost:3001/proxy/openai/v1/chat/completions\",\n      \"api_key\": \"sk-123456\",\n      \"models\": [\n        \"gpt-4.1-mini\",\n        \"gpt-4.1-nano\"\n      ]\n    },\n    {\n      \"name\": \"gpt-load-gemini\",\n      \"api_base_url\": \"http://localhost:3001/proxy/gemini/v1beta/models/\",\n      \"api_key\": \"sk-123456\",\n      \"models\": [\n        \"gemini-2.5-pro\",\n        \"gemini-2.5-flash\"\n      ],\n      \"transformer\": {\n        \"use\": [\n          \"gemini\"\n        ]\n      }\n    },\n    {\n      \"name\": \"gpt-load-gemini-openai\",\n      \"api_base_url\": \"http://localhost:3001/proxy/gemini/v1beta/openai/chat/completions\",\n      \"api_key\": \"sk-123456\",\n      \"models\": [\n        \"gemini-2.5-pro\",\n        \"gemini-2.5-flash\"\n      ]\n    },\n    {\n      \"name\": \"gpt-load-anthropic\",\n      \"api_base_url\": \"http://localhost:3001/proxy/anthropic/v1/messages\",\n      \"api_key\": \"sk-123456\",\n      \"models\": [\n        \"claude-sonnet-4-20250514\",\n        \"claude-3-haiku-20240307\"\n      ],\n      \"transformer\": {\n        \"use\": [\n          \"Anthropic\"\n        ]\n      }\n    }\n  ],\n  \"Router\": {\n    \"default\": \"gpt-load-gemini,gemini-2.5-pro\",\n    \"background\": \"gpt-load-gemini,gemini-2.5-flash\",\n    \"think\": \"gpt-load-gemini,gemini-2.5-pro\",\n    \"longContext\": \"gpt-load-gemini,gemini-2.5-pro\",\n    \"longContextThreshold\": 60000,\n    \"webSearch\": \"gpt-load-gemini,gemini-2.5-flash\"\n  }\n}"
+      }
+    },
+    "explanation": {
+      "title": "Configuration Explanation",
+      "providers": {
+        "title": "Providers Configuration Details",
+        "items": [
+          {
+            "name": "gpt-load-openai",
+            "description": "OpenAI Channel Type",
+            "type": "green"
+          },
+          {
+            "name": "gpt-load-gemini",
+            "description": "Gemini Native Format",
+            "type": "blue"
+          },
+          {
+            "name": "gpt-load-gemini-openai",
+            "description": "Gemini OpenAI Compatible Format",
+            "type": "cyan"
+          },
+          {
+            "name": "gpt-load-anthropic",
+            "description": "Anthropic Claude Channel",
+            "type": "purple"
+          }
+        ],
+        "important": {
+          "title": "Important Configuration Notes",
+          "items": [
+            "Replace localhost:3001 with your actual GPT-Load access address",
+            "Adjust providers in Providers section according to your actual channel types configured in GPT-Load",
+            "Path components like openai, gemini are the group names you configured in GPT-Load",
+            "Model list should be adjusted according to the models actually supported by your channels",
+            "In Anthropic configuration, transformer.use value should be Anthropic (capitalized)"
+          ]
+        }
+      },
+      "router": {
+        "title": "Router Configuration",
+        "items": [
+          {
+            "key": "default",
+            "description": "Default Model"
+          },
+          {
+            "key": "background",
+            "description": "Background Tasks"
+          },
+          {
+            "key": "think",
+            "description": "Think Mode"
+          },
+          {
+            "key": "longContext",
+            "description": "Long Context"
+          },
+          {
+            "key": "webSearch",
+            "description": "Web Search"
+          }
+        ],
+        "note": {
+          "title": "Example Configuration Note:",
+          "description": "The above example mainly configures Gemini models. You can configure other model combinations as needed, such as OpenAI or Anthropic models."
+        }
+      }
+    },
+    "usage": {
+      "title": "Launch and Usage",
+      "launch": {
+        "title": "Launch Command",
+        "commandTitle": "Start Claude Code Router",
+        "command": "ccr code",
+        "description": "After configuration is complete, use this command to start the Claude Code Router tool"
+      }
+    },
+    "verification": {
+      "title": "Verify Configuration",
+      "test": {
+        "title": "Test Connection",
+        "description": "After successful startup, try executing some basic code-related tasks to confirm that all models can respond normally. If you encounter issues, please check GPT-Load service status, configuration file syntax, and network connection."
+      }
+    },
+    "relatedResources": {
+      "title": "Related Resources",
+      "officialDocs": {
+        "url": "https://github.com/musistudio/claude-code-router/blob/main/README_zh.md",
+        "text": "Claude Code Router Official Documentation"
+      },
+      "gptLoadConfig": "GPT-Load Configuration Guide",
+      "channelTypes": "Channel Types Guide"
+    }
+  },
   "cherryStudio": {
     "title": "Cherry Studio Integration Guide",
     "description": "This guide will help you integrate GPT-Load proxy service with Cherry Studio AI client, supporting complete configuration for OpenAI, Gemini, Gemini OpenAI compatible, and Anthropic channel types.",

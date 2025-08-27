@@ -3175,6 +3175,143 @@
       "githubLink": "GitHubで貢献"
     }
   },
+  "claudeCodeRouter": {
+    "title": "Claude Code Router 統合ガイド",
+    "description": "このガイドは、GPT-LoadプロキシサービスをClaude Code Routerツールと統合する方法を説明します。マルチモデルインテリジェントルーティングとコードアシスタンス機能を有効にします。",
+    "prerequisites": {
+      "title": "前提条件",
+      "items": [
+        "GPT-Loadサービスが正常にデプロイされ、起動していることを確認してください。デフォルトでは http://localhost:3001 で実行されます",
+        "Node.jsとnpm環境がインストールされていること"
+      ]
+    },
+    "installation": {
+      "title": "ツールのインストール",
+      "globalInstall": {
+        "title": "必要なコンポーネントのグローバルインストール"
+      },
+      "claudeCode": {
+        "title": "Claude Code のインストール",
+        "command": "npm install -g @anthropic-ai/claude-code"
+      },
+      "claudeCodeRouter": {
+        "title": "Claude Code Router のインストール",
+        "command": "npm install -g @musistudio/claude-code-router"
+      },
+      "reference": {
+        "title": "参考ドキュメント：",
+        "url": "https://github.com/musistudio/claude-code-router/blob/main/README_zh.md",
+        "text": "Claude Code Router 公式ドキュメント"
+      }
+    },
+    "configuration": {
+      "title": "設定ファイルのセットアップ",
+      "createConfig": {
+        "title": "設定ファイルの作成"
+      },
+      "configPath": {
+        "title": "設定ファイルのパス",
+        "path": "~/.claude-code-router/config.json",
+        "note": "ディレクトリが存在しない場合は、まずディレクトリ構造を作成してください"
+      },
+      "configExample": {
+        "title": "設定例",
+        "content": "{\n  \"Providers\": [\n    {\n      \"name\": \"gpt-load-openai\",\n      \"api_base_url\": \"http://localhost:3001/proxy/openai/v1/chat/completions\",\n      \"api_key\": \"sk-123456\",\n      \"models\": [\n        \"gpt-4.1-mini\",\n        \"gpt-4.1-nano\"\n      ]\n    },\n    {\n      \"name\": \"gpt-load-gemini\",\n      \"api_base_url\": \"http://localhost:3001/proxy/gemini/v1beta/models/\",\n      \"api_key\": \"sk-123456\",\n      \"models\": [\n        \"gemini-2.5-pro\",\n        \"gemini-2.5-flash\"\n      ],\n      \"transformer\": {\n        \"use\": [\n          \"gemini\"\n        ]\n      }\n    },\n    {\n      \"name\": \"gpt-load-gemini-openai\",\n      \"api_base_url\": \"http://localhost:3001/proxy/gemini/v1beta/openai/chat/completions\",\n      \"api_key\": \"sk-123456\",\n      \"models\": [\n        \"gemini-2.5-pro\",\n        \"gemini-2.5-flash\"\n      ]\n    },\n    {\n      \"name\": \"gpt-load-anthropic\",\n      \"api_base_url\": \"http://localhost:3001/proxy/anthropic/v1/messages\",\n      \"api_key\": \"sk-123456\",\n      \"models\": [\n        \"claude-sonnet-4-20250514\",\n        \"claude-3-haiku-20240307\"\n      ],\n      \"transformer\": {\n        \"use\": [\n          \"Anthropic\"\n        ]\n      }\n    }\n  ],\n  \"Router\": {\n    \"default\": \"gpt-load-gemini,gemini-2.5-pro\",\n    \"background\": \"gpt-load-gemini,gemini-2.5-flash\",\n    \"think\": \"gpt-load-gemini,gemini-2.5-pro\",\n    \"longContext\": \"gpt-load-gemini,gemini-2.5-pro\",\n    \"longContextThreshold\": 60000,\n    \"webSearch\": \"gpt-load-gemini,gemini-2.5-flash\"\n  }\n}"
+      }
+    },
+    "explanation": {
+      "title": "設定の説明",
+      "providers": {
+        "title": "Providers 設定詳細",
+        "items": [
+          {
+            "name": "gpt-load-openai",
+            "description": "OpenAI チャネルタイプ",
+            "type": "green"
+          },
+          {
+            "name": "gpt-load-gemini",
+            "description": "Gemini ネイティブフォーマット",
+            "type": "blue"
+          },
+          {
+            "name": "gpt-load-gemini-openai",
+            "description": "Gemini OpenAI 互換フォーマット",
+            "type": "cyan"
+          },
+          {
+            "name": "gpt-load-anthropic",
+            "description": "Anthropic Claude チャネル",
+            "type": "purple"
+          }
+        ],
+        "important": {
+          "title": "重要な設定注意事項",
+          "items": [
+            "localhost:3001 を実際の GPT-Load アクセスアドレスに置き換えてください",
+            "Providers セクションのプロバイダーを、GPT-Loadで実際に設定したチャネルタイプに合わせて調整してください",
+            "パス内の openai、gemini などは、GPT-Loadで設定したグループ名です",
+            "モデルリストは、チャネルが実際にサポートするモデルに合わせて調整する必要があります",
+            "Anthropic 設定では、transformer.use の値は Anthropic（大文字）にする必要があります"
+          ]
+        }
+      },
+      "router": {
+        "title": "Router 設定",
+        "items": [
+          {
+            "key": "default",
+            "description": "デフォルトモデル"
+          },
+          {
+            "key": "background",
+            "description": "バックグラウンドタスク"
+          },
+          {
+            "key": "think",
+            "description": "思考モード"
+          },
+          {
+            "key": "longContext",
+            "description": "長コンテキスト"
+          },
+          {
+            "key": "webSearch",
+            "description": "ウェブ検索"
+          }
+        ],
+        "note": {
+          "title": "設定例の説明：",
+          "description": "上記の例は主にGeminiモデルを設定しています。必要に応じて、OpenAIやAnthropicモデルなど、他のモデル組み合わせを設定できます。"
+        }
+      }
+    },
+    "usage": {
+      "title": "起動と使用",
+      "launch": {
+        "title": "起動コマンド",
+        "commandTitle": "Claude Code Router の起動",
+        "command": "ccr code",
+        "description": "設定が完了したら、このコマンドを使用してClaude Code Routerツールを起動します"
+      }
+    },
+    "verification": {
+      "title": "設定の確認",
+      "test": {
+        "title": "接続テスト",
+        "description": "起動が成功したら、基本的なコード関連タスクを実行して、すべてのモデルが正常に応答することを確認してください。問題が発生した場合は、GPT-Loadサービスの状態、設定ファイルの構文、ネットワーク接続を確認してください。"
+      }
+    },
+    "relatedResources": {
+      "title": "関連リソース",
+      "officialDocs": {
+        "url": "https://github.com/musistudio/claude-code-router/blob/main/README_zh.md",
+        "text": "Claude Code Router 公式ドキュメント"
+      },
+      "gptLoadConfig": "GPT-Load 設定ガイド",
+      "channelTypes": "チャネルタイプガイド"
+    }
+  },
   "cherryStudio": {
     "title": "Cherry Studio 統合ガイド",
     "description": "このガイドは、GPT-LoadプロキシサービスをCherry Studio AIクライアントと統合する方法を説明します。OpenAI、Gemini、Gemini OpenAI互換、Anthropicの4つのチャネルタイプの完全な設定をサポートします。",
