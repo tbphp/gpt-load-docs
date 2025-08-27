@@ -24,7 +24,6 @@ export async function generateMetadata(): Promise<Metadata> {
     description: config.description,
     keywords: config.keywords,
     authors: [{ name: "tbphp" }],
-    viewport: "width=device-width, initial-scale=1, shrink-to-fit=no",
     icons: {
       icon: [
         { url: "/logo.png", sizes: "32x32", type: "image/png" },
@@ -53,6 +52,14 @@ export async function generateMetadata(): Promise<Metadata> {
       description: ogConfig.description,
       images: ["/logo.png"],
     },
+  };
+}
+
+export function generateViewport() {
+  return {
+    width: 'device-width',
+    initialScale: 1,
+    shrinkToFit: 'no',
   };
 }
 

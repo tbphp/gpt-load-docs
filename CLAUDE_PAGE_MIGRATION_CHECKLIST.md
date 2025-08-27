@@ -32,11 +32,13 @@ export async function generateMetadata() {
 }
 
 // Viewport 配置
-export const viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  shrinkToFit: 'no',
-};
+export function generateViewport() {
+  return {
+    width: 'device-width',
+    initialScale: 1,
+    shrinkToFit: 'no',
+  };
+}
 
 export default function [PageName]Page() {
   return <[PageName]Content />;

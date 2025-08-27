@@ -6,12 +6,13 @@ export async function generateMetadata() {
   return generatePageMetadata('/docs/channels');
 }
 
-// Viewport 配置
-export const viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  shrinkToFit: 'no',
-};
+export function generateViewport() {
+  return {
+    width: 'device-width',
+    initialScale: 1,
+    shrinkToFit: 'no',
+  };
+}
 
 export default function ChannelsPage() {
   return <ChannelsPageContent />;
