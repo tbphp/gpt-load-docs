@@ -86,12 +86,12 @@ export function getDefaultConfigByPageType(pageType: 'website' | 'article' | 'pr
 /**
  * 生成hreflang链接
  * @param pathname 页面路径
- * @param baseUrl 基础URL，默认为 'https://gpt-load.com'
+ * @param baseUrl 基础URL，默认为 'https://www.gpt-load.com'
  * @returns hreflang链接对象
  */
 export function generateHreflangLinks(
   pathname: string,
-  baseUrl: string = 'https://gpt-load.com'
+  baseUrl: string = 'https://www.gpt-load.com'
 ) {
   const normalizedPath = normalizePath(pathname);
   

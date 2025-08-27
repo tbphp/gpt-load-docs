@@ -37,7 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: ogConfig.title,
       description: ogConfig.description,
       type: "website",
-      url: "https://gpt-load.com",
+      url: "https://www.gpt-load.com",
       images: [
         {
           url: "/logo.png",

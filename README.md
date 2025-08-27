@@ -104,6 +104,6 @@ npm run build
 ## 相关链接
 
 - [GPT-Load 主项目](https://github.com/tbphp/gpt-load)
-- [在线演示](https://gpt-load.com)
-- [文档](https://gpt-load.com/docs)
+- [在线演示](https://www.gpt-load.com)
+- [文档](https://www.gpt-load.com/docs)
 - [问题反馈](https://github.com/tbphp/gpt-load/issues)

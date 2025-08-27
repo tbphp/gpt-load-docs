@@ -44,7 +44,7 @@ export async function generatePageMetadata(
       description: pageConfig.description,
       keywords: pageConfig.keywords,
       authors: [{ name: "tbphp" }],
-      metadataBase: new URL('https://gpt-load.com'),
+      metadataBase: new URL('https://www.gpt-load.com'),
       icons: {
         icon: [
           { url: "/logo.png", sizes: "32x32", type: "image/png" },
@@ -57,7 +57,7 @@ export async function generatePageMetadata(
         title: ogConfig.title,
         description: ogConfig.description,
         type: getOpenGraphType(pageConfig.type),
-        url: `https://gpt-load.com${normalizedPath}`,
+        url: `https://www.gpt-load.com${normalizedPath}`,
         locale: getLocaleFromLang(detectedLang),
         images: [
           {
@@ -75,11 +75,11 @@ export async function generatePageMetadata(
         images: ["/logo.png"],
       },
       alternates: {
-        canonical: `https://gpt-load.com${normalizedPath}`,
+        canonical: `https://www.gpt-load.com${normalizedPath}`,
         languages: {
-          'zh-CN': `https://gpt-load.com${normalizedPath}?lang=zh`,
-          'en': `https://gpt-load.com${normalizedPath}?lang=en`,
-          'ja': `https://gpt-load.com${normalizedPath}?lang=ja`,
+          'zh-CN': `https://www.gpt-load.com${normalizedPath}?lang=zh`,
+          'en': `https://www.gpt-load.com${normalizedPath}?lang=en`,
+          'ja': `https://www.gpt-load.com${normalizedPath}?lang=ja`,
         }
       }
     };
@@ -142,7 +142,7 @@ async function generateFallbackMetadata(): Promise<Metadata> {
       title: config.title,
       description: config.description,
       keywords: config.keywords,
-      metadataBase: new URL('https://gpt-load.com'),
+      metadataBase: new URL('https://www.gpt-load.com'),
     };
   } catch {
     // 最后的降级方案
@@ -150,7 +150,7 @@ async function generateFallbackMetadata(): Promise<Metadata> {
       title: "GPT-Load - 高性能 AI 接口透明代理服务",
       description: "企业级 AI 接口透明代理服务",
       keywords: "GPT-Load, AI, 代理",
-      metadataBase: new URL('https://gpt-load.com'),
+      metadataBase: new URL('https://www.gpt-load.com'),
     };
   }
 }
