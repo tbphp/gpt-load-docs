@@ -346,6 +346,320 @@
     "cherryStudio": "Cherry Studio",
     "sponsor": "支持赞助"
   },
+  "clawCloud": {
+    "title": "Claw Cloud 部署",
+    "subtitle": "使用 Claw Cloud 免费云端部署 GPT-Load，无需服务器，一键部署，快速体验",
+    "warning": {
+      "title": "⚠️ 重要提醒：请务必备份您的数据！",
+      "description": "Claw Cloud 是实验性免费服务，服务稳定性无法保证，存在以下风险：",
+      "risks": [
+        "服务可能出现不稳定或临时不可用的情况",
+        "数据可能因服务故障而丢失",
+        "免费服务没有 SLA 保障",
+        "实例可能会被重启或重新分配"
+      ],
+      "recommendation": {
+        "title": "🔄 强烈建议：",
+        "items": [
+          "定期导出和备份您的配置数据",
+          "保存好所有重要的 API 密钥和配置信息",
+          "对于生产环境，请考虑使用稳定的付费云服务",
+          "将 Claw Cloud 仅用于测试和学习目的"
+        ]
+      }
+    },
+    "overview": {
+      "title": "服务概览",
+      "service": {
+        "title": "Claw Cloud 免费部署",
+        "description": "轻量级云端部署方案，使用 SQLite 数据库和内存存储，完全免费的 5 美元月度额度"
+      },
+      "features": {
+        "freeQuota": {
+          "title": "免费额度",
+          "description": "每月 5 美元免费使用额度"
+        },
+        "globalDeploy": {
+          "title": "全球部署",
+          "description": "支持多个地区部署，优化访问速度"
+        },
+        "simpleAuth": {
+          "title": "简单认证",
+          "description": "仅需 GitHub 账号即可开始使用"
+        }
+      }
+    },
+    "prerequisites": {
+      "title": "前提条件",
+      "accountRequirement": {
+        "title": "账号要求",
+        "description": "需要拥有半年以上的 GitHub 账号才能使用 Claw Cloud 服务"
+      },
+      "serviceFeatures": {
+        "title": "服务特性",
+        "freeQuota": {
+          "title": "免费额度",
+          "items": [
+            "• 每月 5 美元免费使用额度",
+            "• 适合个人用户和小规模测试",
+            "• 无需信用卡验证",
+            "• 超额后可选择付费继续使用"
+          ]
+        },
+        "techSpecs": {
+          "title": "技术规格",
+          "items": [
+            "• 使用 SQLite 数据库",
+            "• 内存存储（无 Redis）",
+            "• 自动备份和恢复",
+            "• 内置监控和日志"
+          ]
+        }
+      }
+    },
+    "deploymentSteps": {
+      "title": "部署步骤",
+      "step1": {
+        "title": "注册并登录",
+        "githubLogin": {
+          "title": "使用 GitHub 登录 Claw Cloud",
+          "description": "访问 Claw Cloud 官网并点击 Get started for free ，使用 GitHub 账号进行登录。"
+        },
+        "regionSelection": {
+          "title": "选择部署区域",
+          "description": "登录后在左上角选择合适的部署区域：",
+          "recommended": "推荐区域：",
+          "regions": [
+            "• Singapore - 新加坡",
+            "• Japan - 日本"
+          ]
+        },
+        "image": {
+          "alt": "Claw Cloud 区域选择界面",
+          "caption": "Claw Cloud 区域选择界面"
+        }
+      },
+      "step2": {
+        "title": "创建应用",
+        "launchApp": {
+          "title": "启动应用创建",
+          "description": "点击中间的 \"App Launchpad\"，然后点击右上角的 \"Create App\" 开始创建应用"
+        },
+        "image": {
+          "alt": "Claw Cloud 创建应用界面",
+          "caption": "App Launchpad - 创建应用"
+        }
+      },
+      "step3": {
+        "title": "配置应用",
+        "form": {
+          "title": "填写应用配置表单",
+          "basic": {
+            "title": "Basic（基础信息）",
+            "appName": {
+              "label": "Application Name",
+              "value": "gpt-load"
+            },
+            "image": {
+              "label": "Image",
+              "value": "选择 Public"
+            },
+            "imageName": {
+              "label": "Image Name",
+              "value": "ghcr.io/tbphp/gpt-load:latest"
+            }
+          },
+          "usage": {
+            "title": "Usage（资源配置）",
+            "usage": {
+              "label": "Usage",
+              "value": "Fixed"
+            },
+            "replicas": {
+              "label": "Replicas",
+              "value": "1"
+            },
+            "cpu": {
+              "label": "CPU",
+              "value": "1 (可根据需要调整)"
+            },
+            "memory": {
+              "label": "Memory",
+              "value": "512M (可根据需要调整)"
+            }
+          },
+          "resourceTip": {
+            "title": "资源配置建议",
+            "description": "按照 5 美元额度计算，建议配置为 CPU: 1, Memory: 512M。如果个人使用且网络流量较小，可以降低配置以节省费用。"
+          }
+        },
+        "network": {
+          "title": "Network（网络配置）",
+          "containerPort": {
+            "label": "Container Port",
+            "value": "3001"
+          },
+          "publicAccess": {
+            "label": "Public Access",
+            "value": "✅ 开启"
+          }
+        },
+        "environment": {
+          "title": "Environment Variables（环境变量）",
+          "description": "点击 \"Environment Variables\" 添加以下配置：",
+          "authKey": {
+            "label": "AUTH_KEY",
+            "value": "sk-your-custom-key"
+          },
+          "warning": "⚠️ 请将 sk-your-custom-key 替换为您自己的密码，不要使用默认值或公开分享"
+        },
+        "storage": {
+          "title": "Local Storage（存储配置）",
+          "localStorage": {
+            "label": "Local Storage",
+            "value": "点击 \"Add\" 添加存储"
+          },
+          "capacity": {
+            "label": "Capacity",
+            "value": "1G"
+          },
+          "mountPath": {
+            "label": "Mount Path",
+            "value": "/app/data"
+          },
+          "note": "配置完成后点击 \"Confirm\" 保存存储配置"
+        },
+        "image": {
+          "alt": "Claw Cloud 应用配置界面",
+          "caption": "应用配置表单"
+        }
+      },
+      "step4": {
+        "title": "部署应用",
+        "startDeploy": {
+          "title": "启动部署",
+          "description": "配置完成后，点击右上角的 \"Deploy Application\" 按钮开始部署应用"
+        },
+        "completed": {
+          "title": "部署完成",
+          "description": "整个创建流程非常简单方便！部署完成后，需要等待公网地址生效，过程可能需要几分钟。"
+        },
+        "waitService": {
+          "title": "等待服务启动",
+          "description": "耐心等待 \"Public Address\" 的状态变为绿色的 \"Available\"，就可以访问您的 GPT-Load 服务了"
+        }
+      }
+    },
+    "accessUsage": {
+      "title": "访问和使用",
+      "firstAccess": {
+        "title": "首次访问",
+        "getAddress": {
+          "title": "获取访问地址",
+          "description": "部署完成后，在 Claw Cloud 控制台中可以看到您的应用公网地址",
+          "example": {
+            "label": "访问地址类似",
+            "value": "https://ax***fta.region.clawcloudrun.com"
+          }
+        },
+        "login": {
+          "title": "登录管理界面",
+          "description": "访问您的应用地址，使用配置的 AUTH_KEY 登录管理界面",
+          "securityTip": {
+            "title": "安全提示",
+            "description": "请确保您的 AUTH_KEY 是安全的，不要在公共场所或文档中分享"
+          }
+        }
+      },
+      "apiUsage": {
+        "title": "API 使用",
+        "proxyAddress": {
+          "title": "API 代理地址",
+          "label": "API 代理端点：",
+          "value": "https://ax***fta.region.clawcloudrun.com/proxy/{group_name}"
+        },
+        "example": {
+          "title": "使用示例",
+          "code": "curl -X POST https://ax***fta.region.clawcloudrun.com/proxy/openai/v1/chat/completions \\\n  -H \"Authorization: Bearer your-auth-key\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\": \"gpt-4o-mini\", \"messages\": [{\"role\": \"user\", \"content\": \"Hello\"}]}'"
+        }
+      }
+    },
+    "updateMaintenance": {
+      "title": "更新和维护",
+      "versionUpdate": {
+        "title": "版本更新",
+        "steps": {
+          "title": "更新步骤",
+          "items": [
+            "进入 App Launchpad，选择您创建的应用",
+            "点击右上角的 \"Update\" 按钮",
+            "在更新页面，无需修改任何配置，直接点击 \"Update\" 按钮",
+            "等待更新和重启完成"
+          ]
+        },
+        "autoUpdate": {
+          "title": "自动更新",
+          "description": "更新过程会自动拉取最新版本的镜像，无需手动配置"
+        }
+      },
+      "monitoring": {
+        "title": "监控和日志",
+        "appMonitoring": {
+          "title": "应用监控",
+          "items": [
+            "• 在 Claw Cloud 控制台查看应用状态",
+            "• 监控资源使用情况和费用",
+            "• 查看应用运行日志",
+            "• 设置告警和通知"
+          ]
+        },
+        "costControl": {
+          "title": "费用控制",
+          "items": [
+            "• 定期查看月度用量和费用",
+            "• 根据实际使用情况调整资源配置",
+            "• 设置费用预算和告警",
+            "• 考虑在低峰期暂停服务"
+          ]
+        }
+      }
+    },
+    "troubleshooting": {
+      "title": "故障排除",
+      "commonIssues": {
+        "title": "常见问题",
+        "appNotStart": {
+          "title": "应用无法启动",
+          "cause": "可能的原因：镜像拉取失败、配置错误或资源不足",
+          "solution": "解决方案：检查应用日志，确认镜像地址和配置正确"
+        },
+        "accessFailed": {
+          "title": "无法访问公网地址",
+          "cause": "可能的原因：DNS 传播延迟或网络问题",
+          "solution": "解决方案：等待几分钟后重试，检查网络连接"
+        },
+        "authFailed": {
+          "title": "认证失败",
+          "cause": "可能的原因：AUTH_KEY 配置错误或未设置",
+          "solution": "解决方案：检查环境变量配置，确保 AUTH_KEY 正确"
+        }
+      }
+    },
+    "nextSteps": {
+      "title": "下一步",
+      "description": "Claw Cloud 部署完成后，您可以：",
+      "tasks": [
+        "通过 Web 管理界面配置 AI 服务",
+        "添加 API 密钥开始使用代理服务",
+        "监控使用情况和费用",
+        "根据需要升级到更高配置"
+      ],
+      "buttons": {
+        "configuration": "配置说明",
+        "management": "管理端配置"
+      }
+    }
+  },
   "imageViewer": {
     "closeButton": "关闭 (Esc)",
     "instructions": "按 Esc 键或点击背景关闭",
@@ -2142,18 +2456,6 @@
       "highAvailability": {
         "title": "高可用",
         "description": "故障转移和负载均衡"
-      }
-    },
-    "clawCloud": {
-      "title": "Claw Cloud",
-      "subtitle": "免费云端部署方案",
-      "cloudDeploy": {
-        "title": "云端部署",
-        "description": "无需服务器，一键部署到云端"
-      },
-      "freeQuota": {
-        "title": "免费额度",
-        "description": "每月 5 美元免费额度"
       }
     },
     "comparison": {

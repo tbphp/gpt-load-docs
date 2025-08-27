@@ -346,6 +346,320 @@
     "cherryStudio": "Cherry Studio",
     "sponsor": "Sponsor"
   },
+  "clawCloud": {
+    "title": "Claw Cloud Deployment",
+    "subtitle": "Deploy GPT-Load to Claw Cloud for free. No server required, one-click deployment for quick experience.",
+    "warning": {
+      "title": "⚠️ Important Notice: Please Back Up Your Data!",
+      "description": "Claw Cloud is an experimental free service with no stability guarantee. The following risks exist:",
+      "risks": [
+        "Service may become unstable or temporarily unavailable",
+        "Data may be lost due to service failures", 
+        "Free service has no SLA guarantee",
+        "Instances may be restarted or reassigned"
+      ],
+      "recommendation": {
+        "title": "🔄 Strong Recommendations:",
+        "items": [
+          "Regularly export and backup your configuration data",
+          "Save all important API keys and configuration information",
+          "Consider stable paid cloud services for production environments",
+          "Use Claw Cloud only for testing and learning purposes"
+        ]
+      }
+    },
+    "overview": {
+      "title": "Service Overview",
+      "service": {
+        "title": "Claw Cloud Free Deployment",
+        "description": "Lightweight cloud deployment solution using SQLite database and memory storage, with completely free $5 monthly quota"
+      },
+      "features": {
+        "freeQuota": {
+          "title": "Free Quota",
+          "description": "$5 free usage quota per month"
+        },
+        "globalDeploy": {
+          "title": "Global Deployment",
+          "description": "Support multiple region deployment to optimize access speed"
+        },
+        "simpleAuth": {
+          "title": "Simple Authentication",
+          "description": "Only requires GitHub account to get started"
+        }
+      }
+    },
+    "prerequisites": {
+      "title": "Prerequisites",
+      "accountRequirement": {
+        "title": "Account Requirements",
+        "description": "Requires a GitHub account with more than 6 months of history to use Claw Cloud service"
+      },
+      "serviceFeatures": {
+        "title": "Service Features",
+        "freeQuota": {
+          "title": "Free Quota",
+          "items": [
+            "• $5 free usage quota per month",
+            "• Suitable for personal users and small-scale testing",
+            "• No credit card verification required",
+            "• Option to pay for continued use after exceeding quota"
+          ]
+        },
+        "techSpecs": {
+          "title": "Technical Specifications",
+          "items": [
+            "• Uses SQLite database",
+            "• Memory storage (no Redis)",
+            "• Automatic backup and recovery",
+            "• Built-in monitoring and logging"
+          ]
+        }
+      }
+    },
+    "deploymentSteps": {
+      "title": "Deployment Steps",
+      "step1": {
+        "title": "Register and Login",
+        "githubLogin": {
+          "title": "Login to Claw Cloud with GitHub",
+          "description": "Visit the Claw Cloud website and click 'Get started for free', then login with your GitHub account."
+        },
+        "regionSelection": {
+          "title": "Select Deployment Region",
+          "description": "After login, select an appropriate deployment region in the top-left corner:",
+          "recommended": "Recommended regions:",
+          "regions": [
+            "• Singapore - Singapore",
+            "• Japan - Japan"
+          ]
+        },
+        "image": {
+          "alt": "Claw Cloud region selection interface",
+          "caption": "Claw Cloud region selection interface"
+        }
+      },
+      "step2": {
+        "title": "Create Application",
+        "launchApp": {
+          "title": "Launch Application Creation",
+          "description": "Click \"App Launchpad\" in the center, then click \"Create App\" in the top-right corner to start creating the application"
+        },
+        "image": {
+          "alt": "Claw Cloud create application interface",
+          "caption": "App Launchpad - Create Application"
+        }
+      },
+      "step3": {
+        "title": "Configure Application",
+        "form": {
+          "title": "Fill Application Configuration Form",
+          "basic": {
+            "title": "Basic (Basic Information)",
+            "appName": {
+              "label": "Application Name",
+              "value": "gpt-load"
+            },
+            "image": {
+              "label": "Image",
+              "value": "Select Public"
+            },
+            "imageName": {
+              "label": "Image Name",
+              "value": "ghcr.io/tbphp/gpt-load:latest"
+            }
+          },
+          "usage": {
+            "title": "Usage (Resource Configuration)",
+            "usage": {
+              "label": "Usage",
+              "value": "Fixed"
+            },
+            "replicas": {
+              "label": "Replicas",
+              "value": "1"
+            },
+            "cpu": {
+              "label": "CPU",
+              "value": "1 (adjustable as needed)"
+            },
+            "memory": {
+              "label": "Memory",
+              "value": "512M (adjustable as needed)"
+            }
+          },
+          "resourceTip": {
+            "title": "Resource Configuration Recommendations",
+            "description": "Based on the $5 quota calculation, recommended configuration is CPU: 1, Memory: 512M. For personal use with low network traffic, you can reduce configuration to save costs."
+          }
+        },
+        "network": {
+          "title": "Network (Network Configuration)",
+          "containerPort": {
+            "label": "Container Port",
+            "value": "3001"
+          },
+          "publicAccess": {
+            "label": "Public Access",
+            "value": "✅ Enable"
+          }
+        },
+        "environment": {
+          "title": "Environment Variables (Environment Variables)",
+          "description": "Click \"Environment Variables\" to add the following configuration:",
+          "authKey": {
+            "label": "AUTH_KEY",
+            "value": "sk-your-custom-key"
+          },
+          "warning": "⚠️ Please replace sk-your-custom-key with your own password, do not use default values or share publicly"
+        },
+        "storage": {
+          "title": "Local Storage (Storage Configuration)",
+          "localStorage": {
+            "label": "Local Storage",
+            "value": "Click \"Add\" to add storage"
+          },
+          "capacity": {
+            "label": "Capacity",
+            "value": "1G"
+          },
+          "mountPath": {
+            "label": "Mount Path",
+            "value": "/app/data"
+          },
+          "note": "After configuration, click \"Confirm\" to save storage configuration"
+        },
+        "image": {
+          "alt": "Claw Cloud application configuration interface",
+          "caption": "Application configuration form"
+        }
+      },
+      "step4": {
+        "title": "Deploy Application",
+        "startDeploy": {
+          "title": "Start Deployment",
+          "description": "After configuration is complete, click the \"Deploy Application\" button in the top-right corner to start deploying the application"
+        },
+        "completed": {
+          "title": "Deployment Complete",
+          "description": "The entire creation process is very simple and convenient! After deployment is complete, wait for the public address to take effect, which may take a few minutes."
+        },
+        "waitService": {
+          "title": "Wait for Service to Start",
+          "description": "Patiently wait for the \"Public Address\" status to turn green \"Available\", then you can access your GPT-Load service"
+        }
+      }
+    },
+    "accessUsage": {
+      "title": "Access and Usage",
+      "firstAccess": {
+        "title": "First Access",
+        "getAddress": {
+          "title": "Get Access Address",
+          "description": "After deployment is complete, you can see your application's public address in the Claw Cloud console",
+          "example": {
+            "label": "Access address similar to",
+            "value": "https://ax***fta.region.clawcloudrun.com"
+          }
+        },
+        "login": {
+          "title": "Login to Management Interface",
+          "description": "Visit your application address and use the configured AUTH_KEY to login to the management interface",
+          "securityTip": {
+            "title": "Security Tip",
+            "description": "Please ensure your AUTH_KEY is secure and do not share it in public places or documents"
+          }
+        }
+      },
+      "apiUsage": {
+        "title": "API Usage",
+        "proxyAddress": {
+          "title": "API Proxy Address",
+          "label": "API proxy endpoint:",
+          "value": "https://ax***fta.region.clawcloudrun.com/proxy/{group_name}"
+        },
+        "example": {
+          "title": "Usage Example",
+          "code": "curl -X POST https://ax***fta.region.clawcloudrun.com/proxy/openai/v1/chat/completions \\\n  -H \"Authorization: Bearer your-auth-key\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\": \"gpt-4o-mini\", \"messages\": [{\"role\": \"user\", \"content\": \"Hello\"}]}'"
+        }
+      }
+    },
+    "updateMaintenance": {
+      "title": "Updates and Maintenance",
+      "versionUpdate": {
+        "title": "Version Updates",
+        "steps": {
+          "title": "Update Steps",
+          "items": [
+            "Enter App Launchpad and select your created application",
+            "Click the \"Update\" button in the top-right corner",
+            "On the update page, no need to modify any configuration, directly click the \"Update\" button",
+            "Wait for update and restart to complete"
+          ]
+        },
+        "autoUpdate": {
+          "title": "Automatic Updates",
+          "description": "The update process will automatically pull the latest version of the image, no manual configuration required"
+        }
+      },
+      "monitoring": {
+        "title": "Monitoring and Logs",
+        "appMonitoring": {
+          "title": "Application Monitoring",
+          "items": [
+            "• View application status in Claw Cloud console",
+            "• Monitor resource usage and costs",
+            "• View application runtime logs",
+            "• Set alerts and notifications"
+          ]
+        },
+        "costControl": {
+          "title": "Cost Control",
+          "items": [
+            "• Regularly check monthly usage and costs",
+            "• Adjust resource configuration based on actual usage",
+            "• Set budget and cost alerts",
+            "• Consider pausing service during low-traffic periods"
+          ]
+        }
+      }
+    },
+    "troubleshooting": {
+      "title": "Troubleshooting",
+      "commonIssues": {
+        "title": "Common Issues",
+        "appNotStart": {
+          "title": "Application Failed to Start",
+          "cause": "Possible causes: Image pull failure, configuration errors, or insufficient resources",
+          "solution": "Solution: Check application logs, confirm image address and configuration are correct"
+        },
+        "accessFailed": {
+          "title": "Cannot Access Public Address",
+          "cause": "Possible causes: DNS propagation delay or network issues",
+          "solution": "Solution: Wait a few minutes and retry, check network connection"
+        },
+        "authFailed": {
+          "title": "Authentication Failed",
+          "cause": "Possible causes: AUTH_KEY configuration error or not set",
+          "solution": "Solution: Check environment variable configuration, ensure AUTH_KEY is correct"
+        }
+      }
+    },
+    "nextSteps": {
+      "title": "Next Steps",
+      "description": "After Claw Cloud deployment is complete, you can:",
+      "tasks": [
+        "Configure AI services through the Web management interface",
+        "Add API keys to start using proxy services",
+        "Monitor usage and costs",
+        "Upgrade to higher configurations as needed"
+      ],
+      "buttons": {
+        "configuration": "Configuration Guide",
+        "management": "Management Configuration"
+      }
+    }
+  },
   "imageViewer": {
     "closeButton": "Close (Esc)",
     "instructions": "Press Esc or click background to close",
@@ -2142,18 +2456,6 @@
       "highAvailability": {
         "title": "High Availability",
         "description": "Failover and load balancing"
-      }
-    },
-    "clawCloud": {
-      "title": "Claw Cloud",
-      "subtitle": "Free cloud deployment solution",
-      "cloudDeploy": {
-        "title": "Cloud Deployment",
-        "description": "No server required, one-click deployment to cloud"
-      },
-      "freeQuota": {
-        "title": "Free Quota",
-        "description": "$5 free quota per month"
       }
     },
     "comparison": {

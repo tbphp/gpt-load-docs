@@ -316,6 +316,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       keywords: "プロジェクト設定, システム設定, グループ設定, 設定管理, パラメーター設定, ホットリロード, 動的設定, GPT-Load設定",
       type: 'article'
     }
+  },
+  '/docs/deployment/claw-cloud': {
+    zh: {
+      title: "Claw Cloud 部署 - GPT-Load",
+      description: "使用 Claw Cloud 免费云端部署 GPT-Load 的完整指南。提供每月5美元免费额度，支持一键部署、全球区域选择、GitHub认证等便捷功能。",
+      keywords: "Claw Cloud部署, 免费云端部署, GPT-Load云部署, GitHub部署, 一键部署, 云端代理, 免费额度",
+      type: 'article'
+    },
+    en: {
+      title: "Claw Cloud Deployment - GPT-Load",
+      description: "Complete guide for deploying GPT-Load using Claw Cloud's free cloud service. Offers $5 monthly free quota with one-click deployment, global region selection, and GitHub authentication.",
+      keywords: "Claw Cloud deployment, free cloud deployment, GPT-Load cloud deployment, GitHub deployment, one-click deployment, cloud proxy, free quota",
+      type: 'article'
+    },
+    ja: {
+      title: "Claw Cloud デプロイメント - GPT-Load",
+      description: "Claw Cloudの無料クラウドサービスを使用してGPT-Loadをデプロイするための完全ガイド。月額5ドルの無料クォータ、ワンクリックデプロイメント、グローバル地域選択、GitHub認証を提供。",
+      keywords: "Claw Cloudデプロイメント, 無料クラウドデプロイメント, GPT-Loadクラウドデプロイメント, GitHubデプロイメント, ワンクリックデプロイメント, クラウドプロキシ, 無料クォータ",
+      type: 'article'
+    }
   }
   // 架构预留：后续可继续添加其他页面的SEO配置
 };

@@ -346,6 +346,320 @@
     "cherryStudio": "Cherry Studio",
     "sponsor": "スポンサー"
   },
+  "clawCloud": {
+    "title": "Claw Cloud デプロイメント",
+    "subtitle": "Claw Cloudを使用してGPT-Loadを無料でデプロイ。サーバー不要、ワンクリックデプロイメントで素早い体験。",
+    "warning": {
+      "title": "⚠️ 重要なお知らせ：データのバックアップを必ず行ってください！",
+      "description": "Claw Cloudは実験的な無料サービスで、安定性の保証はありません。以下のリスクがあります：",
+      "risks": [
+        "サービスが不安定になったり一時的に利用できなくなる可能性があります",
+        "サービス障害によりデータが失われる可能性があります",
+        "無料サービスにはSLA保証がありません",
+        "インスタンスが再起動または再割り当てされる可能性があります"
+      ],
+      "recommendation": {
+        "title": "🔄 強く推奨いたします：",
+        "items": [
+          "設定データを定期的にエクスポートしてバックアップしてください",
+          "すべての重要なAPIキーと設定情報を保存してください",
+          "本番環境では安定した有料クラウドサービスの使用をご検討ください",
+          "Claw Cloudはテストと学習目的にのみご使用ください"
+        ]
+      }
+    },
+    "overview": {
+      "title": "サービス概要",
+      "service": {
+        "title": "Claw Cloud 無料デプロイメント",
+        "description": "SQLiteデータベースとメモリストレージを使用した軽量クラウドデプロイメントソリューション、完全無料の月額5ドルクォータ"
+      },
+      "features": {
+        "freeQuota": {
+          "title": "無料クォータ",
+          "description": "月額5ドルの無料使用クォータ"
+        },
+        "globalDeploy": {
+          "title": "グローバルデプロイメント",
+          "description": "複数の地域へのデプロイメントをサポートし、アクセス速度を最適化"
+        },
+        "simpleAuth": {
+          "title": "シンプル認証",
+          "description": "GitHubアカウントのみで開始可能"
+        }
+      }
+    },
+    "prerequisites": {
+      "title": "前提条件",
+      "accountRequirement": {
+        "title": "アカウント要件",
+        "description": "Claw Cloudサービスを使用するには、6か月以上の履歴があるGitHubアカウントが必要です"
+      },
+      "serviceFeatures": {
+        "title": "サービス機能",
+        "freeQuota": {
+          "title": "無料クォータ",
+          "items": [
+            "• 月額5ドルの無料使用クォータ",
+            "• 個人ユーザーや小規模テストに適しています",
+            "• クレジットカード認証不要",
+            "• クォータ超過後は有料で継続使用可能"
+          ]
+        },
+        "techSpecs": {
+          "title": "技術仕様",
+          "items": [
+            "• SQLiteデータベースを使用",
+            "• メモリストレージ（Redisなし）",
+            "• 自動バックアップと復旧",
+            "• 内蔵監視とログ機能"
+          ]
+        }
+      }
+    },
+    "deploymentSteps": {
+      "title": "デプロイメント手順",
+      "step1": {
+        "title": "登録とログイン",
+        "githubLogin": {
+          "title": "GitHubでClaw Cloudにログイン",
+          "description": "Claw CloudのWebサイトにアクセスし、'Get started for free'をクリックして、GitHubアカウントでログインしてください。"
+        },
+        "regionSelection": {
+          "title": "デプロイメント地域の選択",
+          "description": "ログイン後、左上角で適切なデプロイメント地域を選択してください：",
+          "recommended": "推奨地域：",
+          "regions": [
+            "• Singapore - シンガポール",
+            "• Japan - 日本"
+          ]
+        },
+        "image": {
+          "alt": "Claw Cloud 地域選択インターフェース",
+          "caption": "Claw Cloud 地域選択インターフェース"
+        }
+      },
+      "step2": {
+        "title": "アプリケーション作成",
+        "launchApp": {
+          "title": "アプリケーション作成の開始",
+          "description": "中央の「App Launchpad」をクリックし、右上角の「Create App」をクリックしてアプリケーション作成を開始します"
+        },
+        "image": {
+          "alt": "Claw Cloud アプリケーション作成インターフェース",
+          "caption": "App Launchpad - アプリケーション作成"
+        }
+      },
+      "step3": {
+        "title": "アプリケーション設定",
+        "form": {
+          "title": "アプリケーション設定フォームの入力",
+          "basic": {
+            "title": "Basic（基本情報）",
+            "appName": {
+              "label": "Application Name",
+              "value": "gpt-load"
+            },
+            "image": {
+              "label": "Image",
+              "value": "Publicを選択"
+            },
+            "imageName": {
+              "label": "Image Name",
+              "value": "ghcr.io/tbphp/gpt-load:latest"
+            }
+          },
+          "usage": {
+            "title": "Usage（リソース設定）",
+            "usage": {
+              "label": "Usage",
+              "value": "Fixed"
+            },
+            "replicas": {
+              "label": "Replicas",
+              "value": "1"
+            },
+            "cpu": {
+              "label": "CPU",
+              "value": "1（必要に応じて調整可能）"
+            },
+            "memory": {
+              "label": "Memory",
+              "value": "512M（必要に応じて調整可能）"
+            }
+          },
+          "resourceTip": {
+            "title": "リソース設定の推奨事項",
+            "description": "5ドルクォータの計算に基づいて、推奨設定はCPU: 1、Memory: 512Mです。個人使用でネットワークトラフィックが少ない場合は、コスト削減のため設定を下げることができます。"
+          }
+        },
+        "network": {
+          "title": "Network（ネットワーク設定）",
+          "containerPort": {
+            "label": "Container Port",
+            "value": "3001"
+          },
+          "publicAccess": {
+            "label": "Public Access",
+            "value": "✅ 有効"
+          }
+        },
+        "environment": {
+          "title": "Environment Variables（環境変数）",
+          "description": "「Environment Variables」をクリックして以下の設定を追加してください：",
+          "authKey": {
+            "label": "AUTH_KEY",
+            "value": "sk-your-custom-key"
+          },
+          "warning": "⚠️ sk-your-custom-keyを独自のパスワードに置き換えてください。デフォルト値を使用したり、公開で共有したりしないでください"
+        },
+        "storage": {
+          "title": "Local Storage（ストレージ設定）",
+          "localStorage": {
+            "label": "Local Storage",
+            "value": "「Add」をクリックしてストレージを追加"
+          },
+          "capacity": {
+            "label": "Capacity",
+            "value": "1G"
+          },
+          "mountPath": {
+            "label": "Mount Path",
+            "value": "/app/data"
+          },
+          "note": "設定完了後、「Confirm」をクリックしてストレージ設定を保存してください"
+        },
+        "image": {
+          "alt": "Claw Cloud アプリケーション設定インターフェース",
+          "caption": "アプリケーション設定フォーム"
+        }
+      },
+      "step4": {
+        "title": "アプリケーションデプロイ",
+        "startDeploy": {
+          "title": "デプロイメント開始",
+          "description": "設定完了後、右上角の「Deploy Application」ボタンをクリックしてアプリケーションのデプロイメントを開始します"
+        },
+        "completed": {
+          "title": "デプロイメント完了",
+          "description": "全体の作成プロセスは非常にシンプルで便利です！デプロイメント完了後、パブリックアドレスが有効になるまで数分間お待ちください。"
+        },
+        "waitService": {
+          "title": "サービス開始を待機",
+          "description": "「Public Address」のステータスが緑色の「Available」になるまで辛抱強くお待ちください。その後、GPT-Loadサービスにアクセスできます"
+        }
+      }
+    },
+    "accessUsage": {
+      "title": "アクセスと使用",
+      "firstAccess": {
+        "title": "初回アクセス",
+        "getAddress": {
+          "title": "アクセスアドレス取得",
+          "description": "デプロイメント完了後、Claw Cloudコンソールでアプリケーションのパブリックアドレスを確認できます",
+          "example": {
+            "label": "アクセスアドレスの例",
+            "value": "https://ax***fta.region.clawcloudrun.com"
+          }
+        },
+        "login": {
+          "title": "管理インターフェースへのログイン",
+          "description": "アプリケーションアドレスにアクセスし、設定したAUTH_KEYを使用して管理インターフェースにログインしてください",
+          "securityTip": {
+            "title": "セキュリティのヒント",
+            "description": "AUTH_KEYが安全であることを確認し、公共の場所や文書で共有しないでください"
+          }
+        }
+      },
+      "apiUsage": {
+        "title": "API使用",
+        "proxyAddress": {
+          "title": "APIプロキシアドレス",
+          "label": "APIプロキシエンドポイント：",
+          "value": "https://ax***fta.region.clawcloudrun.com/proxy/{group_name}"
+        },
+        "example": {
+          "title": "使用例",
+          "code": "curl -X POST https://ax***fta.region.clawcloudrun.com/proxy/openai/v1/chat/completions \\\n  -H \"Authorization: Bearer your-auth-key\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"model\": \"gpt-4o-mini\", \"messages\": [{\"role\": \"user\", \"content\": \"Hello\"}]}'"
+        }
+      }
+    },
+    "updateMaintenance": {
+      "title": "更新とメンテナンス",
+      "versionUpdate": {
+        "title": "バージョン更新",
+        "steps": {
+          "title": "更新手順",
+          "items": [
+            "App Launchpadに入り、作成したアプリケーションを選択します",
+            "右上角の「Update」ボタンをクリックします",
+            "更新ページで、設定を変更する必要はありません。直接「Update」ボタンをクリックしてください",
+            "更新と再起動の完了をお待ちください"
+          ]
+        },
+        "autoUpdate": {
+          "title": "自動更新",
+          "description": "更新プロセスは自動的に最新バージョンのイメージをプルします。手動設定は不要です"
+        }
+      },
+      "monitoring": {
+        "title": "監視とログ",
+        "appMonitoring": {
+          "title": "アプリケーション監視",
+          "items": [
+            "• Claw Cloudコンソールでアプリケーションステータスを確認",
+            "• リソース使用量とコストを監視",
+            "• アプリケーション実行ログを表示",
+            "• アラートと通知を設定"
+          ]
+        },
+        "costControl": {
+          "title": "コスト管理",
+          "items": [
+            "• 月次使用量とコストを定期的に確認",
+            "• 実際の使用状況に基づいてリソース設定を調整",
+            "• 予算とコストアラートを設定",
+            "• トラフィック低下時のサービス一時停止を検討"
+          ]
+        }
+      }
+    },
+    "troubleshooting": {
+      "title": "トラブルシューティング",
+      "commonIssues": {
+        "title": "よくある問題",
+        "appNotStart": {
+          "title": "アプリケーションが起動しない",
+          "cause": "考えられる原因：イメージプルの失敗、設定エラー、またはリソース不足",
+          "solution": "解決策：アプリケーションログを確認し、イメージアドレスと設定が正しいことを確認してください"
+        },
+        "accessFailed": {
+          "title": "パブリックアドレスにアクセスできない",
+          "cause": "考えられる原因：DNS伝播の遅延またはネットワーク問題",
+          "solution": "解決策：数分間待ってから再試行し、ネットワーク接続を確認してください"
+        },
+        "authFailed": {
+          "title": "認証失敗",
+          "cause": "考えられる原因：AUTH_KEYの設定エラーまたは未設定",
+          "solution": "解決策：環境変数の設定を確認し、AUTH_KEYが正しいことを確認してください"
+        }
+      }
+    },
+    "nextSteps": {
+      "title": "次のステップ",
+      "description": "Claw Cloudデプロイメント完了後、以下のことができます：",
+      "tasks": [
+        "Web管理インターフェースを通じてAIサービスを設定",
+        "APIキーを追加してプロキシサービスの使用を開始",
+        "使用状況とコストを監視",
+        "必要に応じてより高い設定にアップグレード"
+      ],
+      "buttons": {
+        "configuration": "設定ガイド",
+        "management": "管理設定"
+      }
+    }
+  },
   "imageViewer": {
     "closeButton": "閉じる (Esc)",
     "instructions": "Escキーまたは背景をクリックして閉じる",
@@ -2142,18 +2456,6 @@
       "highAvailability": {
         "title": "高可用性",
         "description": "フェイルオーバーとロードバランシング"
-      }
-    },
-    "clawCloud": {
-      "title": "Claw Cloud",
-      "subtitle": "無料クラウドデプロイメントソリューション",
-      "cloudDeploy": {
-        "title": "クラウドデプロイ",
-        "description": "サーバー不要、ワンクリックでクラウドにデプロイ"
-      },
-      "freeQuota": {
-        "title": "無料枠",
-        "description": "月額5ドルの無料枠"
       }
     },
     "comparison": {
