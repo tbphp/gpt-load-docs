@@ -476,6 +476,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       keywords: "Claude Code Router統合, GPT-Load統合, コードアシスタンスツール, マルチモデルルーティング, インテリジェントコードアシスタント, AI開発ツール, Claude Code設定, コードルーター",
       type: 'article'
     }
+  },
+  '/docs/integrations/new-api': {
+    zh: {
+      title: "New API 接入指南 - GPT-Load",
+      description: "详细指南教您将GPT-Load代理服务接入New API平台中，支持OpenAI、Gemini、Gemini OpenAI兼容和Anthropic四种渠道类型，包含完整的配置步骤和高级功能设置。",
+      keywords: "New API接入, GPT-Load集成, OpenAI渠道, Gemini配置, Anthropic接入, 渠道管理, AI模型代理, New API平台, 思考功能, 搜索工具",
+      type: 'article'
+    },
+    en: {
+      title: "New API Integration Guide - GPT-Load",
+      description: "Comprehensive guide to integrate GPT-Load proxy service with New API platform, supporting OpenAI, Gemini, Gemini OpenAI compatibility, and Anthropic channel types with complete configuration steps and advanced features.",
+      keywords: "New API integration, GPT-Load integration, OpenAI channel, Gemini configuration, Anthropic integration, channel management, AI model proxy, New API platform, thinking features, search tools",
+      type: 'article'
+    },
+    ja: {
+      title: "New API 統合ガイド - GPT-Load",
+      description: "GPT-LoadプロキシサービスをNew APIプラットフォームと統合する包括的ガイド。OpenAI、Gemini、Gemini OpenAI互換、Anthropicの4つのチャンネルタイプをサポートし、完全な設定手順と高度な機能設定を含みます。",
+      keywords: "New API統合, GPT-Load統合, OpenAIチャンネル, Gemini設定, Anthropic統合, チャンネル管理, AIモデルプロキシ, New APIプラットフォーム, 思考機能, 検索ツール",
+      type: 'article'
+    }
   }
   // 架构预留：后续可继续添加其他页面的SEO配置
 };

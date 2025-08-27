@@ -3312,6 +3312,177 @@
       "channelTypes": "渠道类型说明"
     }
   },
+  "newApi": {
+    "title": "New API 接入指南",
+    "description": "本指南将帮助您将 GPT-Load 代理服务接入到 New API 平台中，支持 OpenAI、Gemini、Gemini OpenAI 兼容和 Anthropic 四种渠道类型。",
+    "prerequisites": {
+      "title": "前置条件",
+      "description": "确保您已经成功部署并启动了 GPT-Load 服务，默认运行在 http://localhost:3001"
+    },
+    "openai": {
+      "title": "OpenAI 渠道配置",
+      "imageAlt": "New API OpenAI 配置截图",
+      "configSteps": {
+        "title": "配置步骤",
+        "selectType": {
+          "title": "选择类型",
+          "description": "在 New API 中选择\"OpenAI\"类型"
+        },
+        "configKey": {
+          "title": "配置密钥",
+          "example": "sk-123456",
+          "note": "使用您在 GPT-Load 中配置的代理密钥"
+        },
+        "apiAddress": {
+          "title": "设置 API 地址",
+          "example": "http://localhost:3001/proxy/openai",
+          "note": "其中\"openai\"是您在 GPT-Load 中配置的分组名称"
+        },
+        "addModel": {
+          "title": "添加模型并测试",
+          "description": "添加好模型列表并进行测试验证"
+        }
+      }
+    },
+    "gemini": {
+      "title": "Gemini 渠道配置",
+      "imageAlt": "New API Gemini 配置截图",
+      "configSteps": {
+        "title": "配置步骤",
+        "selectType": {
+          "title": "选择类型",
+          "description": "在 New API 中选择\"Google Gemini\"类型"
+        },
+        "configKey": {
+          "title": "配置密钥",
+          "example": "sk-123456",
+          "note": "使用您在 GPT-Load 中配置的代理密钥"
+        },
+        "apiAddress": {
+          "title": "设置 API 地址",
+          "example": "http://localhost:3001/proxy/gemini",
+          "note": "其中\"gemini\"是您在 GPT-Load 中配置的分组名称"
+        },
+        "modelList": {
+          "title": "模型列表配置",
+          "description": "由于 New API 的 Gemini 类型获取模型列表存在 bug，新建时可能无法获取，建议手动填写模型名称"
+        }
+      },
+      "modelListNotice": {
+        "title": "模型列表获取说明",
+        "description": "New API 的 Gemini 类型在新建渠道时可能无法自动获取模型列表，建议先手动填写模型名称。创建完成后，在编辑模式下通常可以正常获取模型列表。"
+      }
+    },
+    "geminiThinking": {
+      "title": "Gemini 思考配置",
+      "imageAlt": "New API Gemini 思考配置截图",
+      "config": {
+        "title": "思考功能设置",
+        "enableAdaptation": {
+          "title": "启用思考适配",
+          "description": "在 New API 的系统设置 → 模型相关设置中选择\"启用 Gemini 思考后缀适配\""
+        },
+        "useSuffix": {
+          "title": "使用思考后缀",
+          "enableSuffix": "-thinking",
+          "enableDescription": "启用思考模式",
+          "disableSuffix": "-nothinking",
+          "disableDescription": "禁用思考模式",
+          "note": "注意：gemini-2.5-pro 模型无法关闭思考功能"
+        }
+      },
+      "warning": {
+        "title": "重要提醒",
+        "description": "在 New API 中配置了思考功能后，请不要在 GPT-Load 的参数覆盖中再次配置思考相关参数，避免重复配置导致冲突。"
+      }
+    },
+    "geminiSearch": {
+      "title": "Gemini 搜索功能配置",
+      "config": {
+        "title": "启用官方搜索工具",
+        "configChoice": {
+          "title": "配置选择",
+          "description": "可以在 New API 或 GPT-Load 中配置搜索模型（只能在一侧配置）"
+        },
+        "parameterConfig": {
+          "title": "参数配置",
+          "description": "在参数覆盖中添加以下配置：",
+          "example": "{\n  \"tools\": [\n    {\n      \"google_search\": {}\n    }\n  ]\n}",
+          "note": "配置完成后即可启用官方的搜索工具功能"
+        }
+      }
+    },
+    "geminiOpenAI": {
+      "title": "Gemini OpenAI 兼容格式",
+      "imageAlt": "New API Gemini OpenAI 兼容格式配置截图",
+      "configSteps": {
+        "title": "配置步骤",
+        "selectType": {
+          "title": "选择类型",
+          "description": "在 New API 中选择\"自定义渠道\"类型"
+        },
+        "configKey": {
+          "title": "配置密钥",
+          "example": "sk-123456",
+          "note": "使用您在 GPT-Load 中配置的代理密钥"
+        },
+        "fullAddress": {
+          "title": "设置完整地址",
+          "example": "http://localhost:3001/proxy/gemini/v1beta/openai/chat/completions",
+          "note": "其中\"gemini\"是您在 GPT-Load 中配置的分组名称"
+        },
+        "manualModel": {
+          "title": "手动添加模型",
+          "description": "兼容格式无法自动获取模型列表，需要手动填入模型名称"
+        }
+      },
+      "limitation": {
+        "title": "兼容模式限制",
+        "description": "使用 OpenAI 兼容模式时，无法配置思考和搜索参数，如需使用这些高级功能，建议使用原生 Gemini 类型。"
+      }
+    },
+    "anthropic": {
+      "title": "Anthropic (Claude) 渠道配置",
+      "imageAlt": "New API Anthropic 配置截图",
+      "configSteps": {
+        "title": "配置步骤",
+        "selectType": {
+          "title": "选择类型",
+          "description": "在 New API 中选择\"Anthropic Claude\"类型"
+        },
+        "configKey": {
+          "title": "配置密钥",
+          "example": "sk-123456",
+          "note": "使用您在 GPT-Load 中配置的代理密钥"
+        },
+        "apiAddress": {
+          "title": "设置 API 地址",
+          "example": "http://localhost:3001/proxy/anthropic",
+          "note": "其中\"anthropic\"是您在 GPT-Load 中配置的分组名称"
+        }
+      }
+    },
+    "importantNotes": {
+      "title": "重要说明",
+      "configuration": {
+        "title": "配置注意事项",
+        "items": [
+          "请将示例中的 GPT-Load 访问地址替换为您实际的服务地址",
+          "路径中的分组名称（如 openai、gemini、anthropic）需要与您在 GPT-Load 中的实际配置保持一致",
+          "建议先在小范围内测试配置，确认无误后再正式使用"
+        ]
+      }
+    },
+    "relatedResources": {
+      "title": "相关资源",
+      "newApiDocs": {
+        "url": "https://www.newapi.ai/getting-started/",
+        "text": "New API 官方文档"
+      },
+      "gptLoadConfig": "GPT-Load 配置说明",
+      "channelTypes": "渠道类型说明"
+    }
+  },
   "cherryStudio": {
     "title": "Cherry Studio 接入指南",
     "description": "本指南将帮助您将 GPT-Load 代理服务接入到 Cherry Studio AI 客户端中，支持 OpenAI、Gemini、Gemini OpenAI 兼容和 Anthropic 四种渠道类型。",

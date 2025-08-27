@@ -3312,6 +3312,177 @@
       "channelTypes": "Channel Types Guide"
     }
   },
+  "newApi": {
+    "title": "New API Integration Guide",
+    "description": "This guide will help you integrate GPT-Load proxy service with New API platform, supporting OpenAI, Gemini, Gemini OpenAI compatible, and Anthropic channel types.",
+    "prerequisites": {
+      "title": "Prerequisites",
+      "description": "Ensure you have successfully deployed and started the GPT-Load service, running on http://localhost:3001 by default"
+    },
+    "openai": {
+      "title": "OpenAI Channel Configuration",
+      "imageAlt": "New API OpenAI Configuration Screenshot",
+      "configSteps": {
+        "title": "Configuration Steps",
+        "selectType": {
+          "title": "Select Type",
+          "description": "Select \"OpenAI\" type in New API"
+        },
+        "configKey": {
+          "title": "Configure Key",
+          "example": "sk-123456",
+          "note": "Use the proxy key you configured in GPT-Load"
+        },
+        "apiAddress": {
+          "title": "Set API Address",
+          "example": "http://localhost:3001/proxy/openai",
+          "note": "Where \"openai\" is the group name you configured in GPT-Load"
+        },
+        "addModel": {
+          "title": "Add Models and Test",
+          "description": "Add model list and perform testing verification"
+        }
+      }
+    },
+    "gemini": {
+      "title": "Gemini Channel Configuration",
+      "imageAlt": "New API Gemini Configuration Screenshot",
+      "configSteps": {
+        "title": "Configuration Steps",
+        "selectType": {
+          "title": "Select Type",
+          "description": "Select \"Google Gemini\" type in New API"
+        },
+        "configKey": {
+          "title": "Configure Key",
+          "example": "sk-123456",
+          "note": "Use the proxy key you configured in GPT-Load"
+        },
+        "apiAddress": {
+          "title": "Set API Address",
+          "example": "http://localhost:3001/proxy/gemini",
+          "note": "Where \"gemini\" is the group name you configured in GPT-Load"
+        },
+        "modelList": {
+          "title": "Model List Configuration",
+          "description": "Due to a bug in New API's Gemini type model list retrieval, manual model name entry is recommended when creating new channels"
+        }
+      },
+      "modelListNotice": {
+        "title": "Model List Retrieval Notice",
+        "description": "New API's Gemini type may not automatically retrieve model lists when creating new channels. It's recommended to manually enter model names first. After creation, model lists can usually be retrieved normally in edit mode."
+      }
+    },
+    "geminiThinking": {
+      "title": "Gemini Thinking Configuration",
+      "imageAlt": "New API Gemini Thinking Configuration Screenshot",
+      "config": {
+        "title": "Thinking Feature Setup",
+        "enableAdaptation": {
+          "title": "Enable Thinking Adaptation",
+          "description": "In New API's System Settings → Model Related Settings, select \"Enable Gemini Thinking Suffix Adaptation\""
+        },
+        "useSuffix": {
+          "title": "Use Thinking Suffix",
+          "enableSuffix": "-thinking",
+          "enableDescription": "Enable thinking mode",
+          "disableSuffix": "-nothinking",
+          "disableDescription": "Disable thinking mode",
+          "note": "Note: gemini-2.5-pro model cannot disable thinking functionality"
+        }
+      },
+      "warning": {
+        "title": "Important Warning",
+        "description": "After configuring thinking functionality in New API, do not configure thinking-related parameters again in GPT-Load's parameter override to avoid conflicts from duplicate configuration."
+      }
+    },
+    "geminiSearch": {
+      "title": "Gemini Search Feature Configuration",
+      "config": {
+        "title": "Enable Official Search Tools",
+        "configChoice": {
+          "title": "Configuration Choice",
+          "description": "Search models can be configured in either New API or GPT-Load (only configure in one place)"
+        },
+        "parameterConfig": {
+          "title": "Parameter Configuration",
+          "description": "Add the following configuration to parameter override:",
+          "example": "{\n  \"tools\": [\n    {\n      \"google_search\": {}\n    }\n  ]\n}",
+          "note": "After configuration, the official search tool functionality will be enabled"
+        }
+      }
+    },
+    "geminiOpenAI": {
+      "title": "Gemini OpenAI Compatible Format",
+      "imageAlt": "New API Gemini OpenAI Compatible Format Configuration Screenshot",
+      "configSteps": {
+        "title": "Configuration Steps",
+        "selectType": {
+          "title": "Select Type",
+          "description": "Select \"Custom Channel\" type in New API"
+        },
+        "configKey": {
+          "title": "Configure Key",
+          "example": "sk-123456",
+          "note": "Use the proxy key you configured in GPT-Load"
+        },
+        "fullAddress": {
+          "title": "Set Full Address",
+          "example": "http://localhost:3001/proxy/gemini/v1beta/openai/chat/completions",
+          "note": "Where \"gemini\" is the group name you configured in GPT-Load"
+        },
+        "manualModel": {
+          "title": "Manually Add Models",
+          "description": "Compatible format cannot automatically retrieve model lists, manual model name entry is required"
+        }
+      },
+      "limitation": {
+        "title": "Compatible Mode Limitations",
+        "description": "When using OpenAI compatible mode, thinking and search parameters cannot be configured. For these advanced features, use native Gemini type instead."
+      }
+    },
+    "anthropic": {
+      "title": "Anthropic (Claude) Channel Configuration",
+      "imageAlt": "New API Anthropic Configuration Screenshot",
+      "configSteps": {
+        "title": "Configuration Steps",
+        "selectType": {
+          "title": "Select Type",
+          "description": "Select \"Anthropic Claude\" type in New API"
+        },
+        "configKey": {
+          "title": "Configure Key",
+          "example": "sk-123456",
+          "note": "Use the proxy key you configured in GPT-Load"
+        },
+        "apiAddress": {
+          "title": "Set API Address",
+          "example": "http://localhost:3001/proxy/anthropic",
+          "note": "Where \"anthropic\" is the group name you configured in GPT-Load"
+        }
+      }
+    },
+    "importantNotes": {
+      "title": "Important Notes",
+      "configuration": {
+        "title": "Configuration Notes",
+        "items": [
+          "Replace the GPT-Load access address in examples with your actual service address",
+          "Group names in paths (like openai, gemini, anthropic) must match your actual configuration in GPT-Load",
+          "Test configuration in a small scope first, then use officially after confirmation"
+        ]
+      }
+    },
+    "relatedResources": {
+      "title": "Related Resources",
+      "newApiDocs": {
+        "url": "https://www.newapi.ai/getting-started/",
+        "text": "New API Official Documentation"
+      },
+      "gptLoadConfig": "GPT-Load Configuration Guide",
+      "channelTypes": "Channel Types Guide"
+    }
+  },
   "cherryStudio": {
     "title": "Cherry Studio Integration Guide",
     "description": "This guide will help you integrate GPT-Load proxy service with Cherry Studio AI client, supporting complete configuration for OpenAI, Gemini, Gemini OpenAI compatible, and Anthropic channel types.",
