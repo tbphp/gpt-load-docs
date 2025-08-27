@@ -1428,5 +1428,130 @@
         "description": "Configure Cloudflare AI Gateway as upstream proxy to optimize AI service performance."
       }
     }
+  },
+  "cloudflareAIGateway": {
+    "title": "Cloudflare AI Gateway Upstream Configuration",
+    "subtitle": "This guide will help you configure Cloudflare AI Gateway as GPT-Load's upstream proxy, optimizing AI service request performance and stability through Cloudflare's global network.",
+    "importantNotice": {
+      "title": "Important Notice",
+      "description": "Cloudflare AI Gateway only supports certain AI service providers. Before configuration, please confirm that your required AI service channels are in Cloudflare's support list. If your channel is not available in the API platform dropdown list, then that channel is not available."
+    },
+    "step1": {
+      "title": "Register and Login to Cloudflare",
+      "dashboard": {
+        "title": "Access Cloudflare Dashboard",
+        "description": "Go to Cloudflare official website to register an account and login to the console"
+      }
+    },
+    "step2": {
+      "title": "Enter AI Gateway Management Page",
+      "navigation": {
+        "title": "Navigate to AI Gateway",
+        "selectMenu": {
+          "title": "Select Menu",
+          "description": "In the left navigation bar, select in order: <strong>AI → AI Gateway</strong>"
+        },
+        "accessPage": {
+          "title": "Access Management Page",
+          "description": "Enter the AI Gateway management page, where you can see the current gateway list"
+        }
+      },
+      "screenshot": {
+        "alt": "Cloudflare AI Gateway menu navigation screenshot"
+      }
+    },
+    "step3": {
+      "title": "Create AI Gateway",
+      "createButton": {
+        "title": "Click Create Gateway",
+        "description": "On the AI Gateway page, click the <strong>&ldquo;Create Gateway&rdquo;</strong> button to start configuring a new gateway"
+      },
+      "configuration": {
+        "title": "Configure Gateway Parameters",
+        "gatewayName": {
+          "title": "Set Gateway Name",
+          "note": "The name can be set arbitrarily, here using &ldquo;gpt-load&rdquo; as an example"
+        },
+        "defaultSettings": {
+          "title": "Keep Default Settings",
+          "description": "Other configuration items can keep their default values"
+        },
+        "important": {
+          "title": "Important Configuration Items",
+          "items": [
+            "• <strong>Do not enable caching</strong> - CF's cache has bugs in some channels",
+            "• <strong>Do not enable gateway authentication</strong> - Keep authentication function disabled"
+          ]
+        }
+      },
+      "screenshot": {
+        "alt": "Cloudflare AI Gateway creation form screenshot"
+      }
+    },
+    "step4": {
+      "title": "Get Channel Proxy Address",
+      "endpoint": {
+        "title": "View API Endpoints",
+        "clickAPI": {
+          "title": "Click API Button",
+          "description": "After creation is complete, click the <strong>&ldquo;API&rdquo;</strong> button in the upper right corner"
+        },
+        "selectChannel": {
+          "title": "Select Target Channel",
+          "description": "Find your required AI service provider in the API platform dropdown list and copy the corresponding proxy address"
+        },
+        "note": "Each AI service provider has a corresponding proxy address, make sure to select the correct channel"
+      },
+      "screenshot": {
+        "alt": "Cloudflare AI Gateway API endpoint list screenshot"
+      }
+    },
+    "step5": {
+      "title": "Configure to GPT-Load",
+      "configuration": {
+        "title": "Add Upstream Address",
+        "copyAddress": {
+          "title": "Copy Proxy Address",
+          "description": "Copy the proxy address obtained from Cloudflare AI Gateway to the upstream address configuration of the corresponding group in GPT-Load"
+        },
+        "example": {
+          "title": "Example Address:",
+          "explanation": "Where <code className=\"bg-gray-100 px-1 rounded\">b7fbxxxxxfdba</code> is your account ID, <code className=\"bg-gray-100 px-1 rounded\">gpt-load</code> is the gateway name, <code className=\"bg-gray-100 px-1 rounded\">google-ai-studio</code> is the specific AI service provider"
+        }
+      },
+      "screenshot": {
+        "title": "GPT-Load Configuration Example",
+        "alt": "GPT-Load configuring Cloudflare AI Gateway upstream address example screenshot"
+      }
+    },
+    "geminiNotice": {
+      "title": "Gemini Channel Special Notice",
+      "reminder": "Important Reminder",
+      "description": "When using Gemini channel type with Cloudflare AI Gateway:",
+      "items": [
+        "<strong>Recommended:</strong> Use Gemini native format calls, works normally",
+        "<strong>Not recommended:</strong> Use Gemini official OpenAI format calls, may cause garbled output issues"
+      ],
+      "recommendation": "This is a known issue with Cloudflare AI Gateway, it is recommended to always use Gemini native format to ensure optimal compatibility."
+    },
+    "networkNotice": {
+      "title": "Network Routing Issue Reminder",
+      "regionalBlock": "About Regional Blocking Reminder",
+      "description1": "If your GPT-Load server is located in mainland China or Hong Kong, Cloudflare may route requests to Hong Kong nodes.",
+      "description2": "Since many AI service providers (such as OpenAI) do not support this region, this may cause",
+      "description3": "errors.",
+      "solution": "If you encounter this issue, please adjust your server's network environment and retry."
+    },
+    "verification": {
+      "title": "Verify Configuration",
+      "testConnection": "Test Connection",
+      "description": "After configuration is complete, send a test request to confirm the proxy is working properly. If you encounter problems, please check the Cloudflare AI Gateway status and GPT-Load configuration for correctness."
+    },
+    "relatedResources": {
+      "title": "Related Resources",
+      "officialDocs": "Cloudflare AI Gateway Official Documentation",
+      "gptLoadConfig": "GPT-Load Configuration Guide",
+      "channelTypes": "Channel Types Guide"
+    }
   }
 }

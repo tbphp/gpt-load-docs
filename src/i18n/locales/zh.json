@@ -1428,5 +1428,130 @@
         "description": "配置 Cloudflare AI Gateway 作为上游代理，优化 AI 服务性能。"
       }
     }
+  },
+  "cloudflareAIGateway": {
+    "title": "Cloudflare AI Gateway 上游配置",
+    "subtitle": "本指南将帮助您配置 Cloudflare AI Gateway 作为 GPT-Load 的上游代理，通过 Cloudflare 的全球网络优化 AI 服务请求的性能和稳定性。",
+    "importantNotice": {
+      "title": "重要提示",
+      "description": "Cloudflare AI Gateway 仅支持部分 AI 服务提供商。在配置前请确认您需要的 AI 服务渠道是否在 Cloudflare 支持列表中。如果 API 的平台下拉列表里面没有您的渠道，则该渠道不可用。"
+    },
+    "step1": {
+      "title": "注册并登录 Cloudflare",
+      "dashboard": {
+        "title": "访问 Cloudflare Dashboard",
+        "description": "前往 Cloudflare 官网注册账号并登录到控制台"
+      }
+    },
+    "step2": {
+      "title": "进入 AI Gateway 管理页面",
+      "navigation": {
+        "title": "导航到 AI Gateway",
+        "selectMenu": {
+          "title": "选择菜单",
+          "description": "在左侧导航栏中依次选择：<strong>AI → AI Gateway</strong>"
+        },
+        "accessPage": {
+          "title": "访问管理页面",
+          "description": "进入 AI Gateway 管理页面，可以看到当前的网关列表"
+        }
+      },
+      "screenshot": {
+        "alt": "Cloudflare AI Gateway 菜单导航截图"
+      }
+    },
+    "step3": {
+      "title": "创建 AI Gateway",
+      "createButton": {
+        "title": "点击创建网关",
+        "description": "在 AI Gateway 页面中点击 <strong>&ldquo;创建网关&rdquo;</strong> 按钮开始配置新的网关"
+      },
+      "configuration": {
+        "title": "配置网关参数",
+        "gatewayName": {
+          "title": "设置网关名称",
+          "note": "名称可以随意设置，此处以 &ldquo;gpt-load&rdquo; 为例"
+        },
+        "defaultSettings": {
+          "title": "保持默认配置",
+          "description": "其他配置项保持默认值即可"
+        },
+        "important": {
+          "title": "重要配置项",
+          "items": [
+            "• <strong>不要开启缓存</strong> - CF 的缓存在某些渠道有 bug",
+            "• <strong>不要开启网关验证</strong> - 保持验证功能关闭"
+          ]
+        }
+      },
+      "screenshot": {
+        "alt": "Cloudflare AI Gateway 创建表单截图"
+      }
+    },
+    "step4": {
+      "title": "获取渠道代理地址",
+      "endpoint": {
+        "title": "查看 API 端点",
+        "clickAPI": {
+          "title": "点击 API 按钮",
+          "description": "创建完成后，点击右上角的 <strong>&ldquo;API&rdquo;</strong> 按钮"
+        },
+        "selectChannel": {
+          "title": "选择目标渠道",
+          "description": "在 API 的平台下拉列表中找到您需要的 AI 服务提供商，复制对应的代理地址"
+        },
+        "note": "每个 AI 服务提供商都有对应的代理地址，确保选择正确的渠道"
+      },
+      "screenshot": {
+        "alt": "Cloudflare AI Gateway API 端点列表截图"
+      }
+    },
+    "step5": {
+      "title": "配置到 GPT-Load",
+      "configuration": {
+        "title": "添加上游地址",
+        "copyAddress": {
+          "title": "复制代理地址",
+          "description": "将从 Cloudflare AI Gateway 获取的代理地址复制到 GPT-Load 对应分组的上游地址配置中"
+        },
+        "example": {
+          "title": "示例地址：",
+          "explanation": "其中 <code className=\"bg-gray-100 px-1 rounded\">b7fbxxxxxfdba</code> 是您的账户 ID，<code className=\"bg-gray-100 px-1 rounded\">gpt-load</code> 是网关名称，<code className=\"bg-gray-100 px-1 rounded\">google-ai-studio</code> 是具体的 AI 服务提供商"
+        }
+      },
+      "screenshot": {
+        "title": "GPT-Load 配置示例",
+        "alt": "GPT-Load 配置 Cloudflare AI Gateway 上游地址示例截图"
+      }
+    },
+    "geminiNotice": {
+      "title": "Gemini 渠道特别说明",
+      "reminder": "重要提醒",
+      "description": "当使用 Gemini 渠道类型配合 Cloudflare AI Gateway 时：",
+      "items": [
+        "<strong>推荐：</strong>使用 Gemini 原生格式调用，工作正常",
+        "<strong>不推荐：</strong>使用 Gemini 官方的 OpenAI 格式调用，可能出现输出乱码问题"
+      ],
+      "recommendation": "这是 Cloudflare AI Gateway 的已知问题，建议始终使用 Gemini 原生格式以确保最佳兼容性。"
+    },
+    "networkNotice": {
+      "title": "网络路由问题提醒",
+      "regionalBlock": "关于区域封锁的提醒",
+      "description1": "如果您的 GPT-Load 服务器位于中国大陆或香港，Cloudflare 可能会将请求路由至香港节点。",
+      "description2": "由于许多 AI 服务商（如 OpenAI）不支持该区域，这可能导致",
+      "description3": "错误。",
+      "solution": "如遇此问题，请调整服务器的网络环境后重试。"
+    },
+    "verification": {
+      "title": "验证配置",
+      "testConnection": "测试连接",
+      "description": "配置完成后，发送一个测试请求确认代理工作正常。如果遇到问题，请检查 Cloudflare AI Gateway 状态和 GPT-Load 配置是否正确。"
+    },
+    "relatedResources": {
+      "title": "相关资源",
+      "officialDocs": "Cloudflare AI Gateway 官方文档",
+      "gptLoadConfig": "GPT-Load 配置说明",
+      "channelTypes": "渠道类型说明"
+    }
   }
 }

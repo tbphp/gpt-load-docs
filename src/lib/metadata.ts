@@ -197,6 +197,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
+  '/docs/configuration/cloudflare-aigateway': {
+    zh: {
+      title: "Cloudflare AI Gateway 上游配置 - GPT-Load",
+      description: "详细指南教您配置Cloudflare AI Gateway作为GPT-Load的上游代理，通过全球网络优化AI服务请求性能和稳定性，包含完整配置步骤。",
+      keywords: "Cloudflare AI Gateway, 上游代理, 代理配置, AI网关, 性能优化, 网络加速, GPT-Load配置, AI服务代理",
+      type: 'article'
+    },
+    en: {
+      title: "Cloudflare AI Gateway Upstream Configuration - GPT-Load",
+      description: "Comprehensive guide to configure Cloudflare AI Gateway as GPT-Load's upstream proxy, optimizing AI service request performance and stability through global network with complete setup steps.",
+      keywords: "Cloudflare AI Gateway, upstream proxy, proxy configuration, AI gateway, performance optimization, network acceleration, GPT-Load configuration, AI service proxy",
+      type: 'article'
+    },
+    ja: {
+      title: "Cloudflare AI Gateway アップストリーム設定 - GPT-Load",
+      description: "GPT-LoadのアップストリームプロキシとしてCloudflare AI Gatewayを設定する包括的ガイド。グローバルネットワークを通じてAIサービスリクエストのパフォーマンスと安定性を最適化する完全な設定手順を含む。",
+      keywords: "Cloudflare AI Gateway, アップストリームプロキシ, プロキシ設定, AIゲートウェイ, パフォーマンス最適化, ネットワーク高速化, GPT-Load設定, AIサービスプロキシ",
+      type: 'article'
+    }
+  },
   '/docs/channels': {
     zh: {
       title: "渠道类型 - GPT-Load",
