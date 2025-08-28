@@ -110,11 +110,11 @@ const TopLoading = ({ isLoading }: TopLoadingProps) => {
       {isVisible && (
         <motion.div
           key={`loading-${loadingId}`}
-          className="fixed top-0 left-0 right-0 z-[9999] h-1 bg-gray-100/80 backdrop-blur-sm"
-          initial={{ opacity: 0, y: -4 }}
+          className="fixed top-0 left-0 right-0 z-[9999] h-[2px] bg-gray-50/90"
+          initial={{ opacity: 0, y: -2 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -4 }}
-          transition={{ duration: 0.15, ease: "easeOut" }}
+          exit={{ opacity: 0, y: -2 }}
+          transition={{ duration: 0.12, ease: "easeOut" }}
         >
           <motion.div
             key={`progress-${loadingId}`}
@@ -126,39 +126,39 @@ const TopLoading = ({ isLoading }: TopLoadingProps) => {
               ease: progress === 100 ? [0.4, 0, 0.2, 1] : [0.25, 0.1, 0.25, 1]
             }}
             style={{
-              borderRadius: "0 2px 2px 0",
-              boxShadow: "0 0 20px rgba(59, 130, 246, 0.4), 0 0 40px rgba(59, 130, 246, 0.1)"
+              borderRadius: "0 1px 1px 0",
+              boxShadow: "0 0 12px rgba(59, 130, 246, 0.35), 0 0 24px rgba(59, 130, 246, 0.08)"
             }}
           />
           
-          {/* 增强的发光效果 */}
+          {/* 优化的发光效果 */}
           <motion.div
             key={`glow-${loadingId}`}
-            className="absolute top-0 right-0 h-full w-16 bg-gradient-to-l from-white/60 via-white/30 to-transparent"
+            className="absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-white/50 via-white/20 to-transparent"
             initial={{ x: "-100%" }}
             animate={{ x: `${progress - 100}%` }}
             transition={{
-              duration: progress === 100 ? 0.2 : 0.6,
+              duration: progress === 100 ? 0.2 : 0.65,
               ease: [0.25, 0.1, 0.25, 1]
             }}
             style={{
-              borderRadius: "0 2px 2px 0"
+              borderRadius: "0 1px 1px 0"
             }}
           />
 
-          {/* 脉冲光晕效果 */}
+          {/* 简化的脉冲效果 */}
           <motion.div
             key={`pulse-${loadingId}`}
-            className="absolute top-0 left-0 h-full w-full bg-gradient-to-r from-blue-400/20 to-cyan-400/20"
+            className="absolute top-0 left-0 h-full w-full bg-gradient-to-r from-blue-400/15 to-cyan-400/15"
             initial={{ opacity: 0 }}
-            animate={{ opacity: [0, 0.6, 0] }}
+            animate={{ opacity: [0, 0.4, 0] }}
             transition={{
-              duration: 1.5,
+              duration: 2,
               repeat: Infinity,
               ease: "easeInOut"
             }}
             style={{
-              borderRadius: "0 2px 2px 0"
+              borderRadius: "0 1px 1px 0"
             }}
           />
         </motion.div>
