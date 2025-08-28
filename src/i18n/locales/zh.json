@@ -2590,6 +2590,18 @@
         "description": "故障转移和负载均衡"
       }
     },
+    "clawCloud": {
+      "title": "Claw Cloud",
+      "subtitle": "免费云端部署方案",
+      "cloudDeploy": {
+        "title": "云端部署",
+        "description": "无需服务器，一键部署到云端"
+      },
+      "freeQuota": {
+        "title": "免费额度",
+        "description": "每月 5 美元免费额度"
+      }
+    },
     "comparison": {
       "title": "方案对比",
       "headers": {

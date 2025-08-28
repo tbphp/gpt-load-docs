@@ -2590,6 +2590,18 @@
         "description": "フェイルオーバーとロードバランシング"
       }
     },
+    "clawCloud": {
+      "title": "Claw Cloud",
+      "subtitle": "無料クラウドデプロイソリューション",
+      "cloudDeploy": {
+        "title": "クラウドデプロイ",
+        "description": "サーバー不要、ワンクリックでクラウドにデプロイ"
+      },
+      "freeQuota": {
+        "title": "無料クォータ",
+        "description": "月額5ドルの無料クォータ"
+      }
+    },
     "comparison": {
       "title": "ソリューション比較",
       "headers": {
