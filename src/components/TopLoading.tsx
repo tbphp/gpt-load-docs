@@ -10,9 +10,29 @@ interface TopLoadingProps {
 const TopLoading = ({ isLoading }: TopLoadingProps) => {
   const [progress, setProgress] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-  const [loadingId, setLoadingId] = useState(0); // 用于强制重置动画
+  const [loadingId, setLoadingId] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const startTimeRef = useRef<number>(0);
+
+  // 平滑的进度曲线函数
+  const calculateProgress = (elapsed: number): number => {
+    // 使用分段函数创建更自然的进度曲线
+    if (elapsed < 200) {
+      // 前200ms快速到30%
+      return Math.min(30, (elapsed / 200) * 30);
+    } else if (elapsed < 800) {
+      // 200-800ms缓慢增长到80%
+      const t = (elapsed - 200) / 600;
+      const easeOut = 1 - Math.pow(1 - t, 3); // ease-out cubic
+      return 30 + easeOut * 50;
+    } else {
+      // 800ms后非常缓慢增长到90%
+      const t = Math.min((elapsed - 800) / 2000, 1);
+      const easeOut = 1 - Math.pow(1 - t, 4); // 更缓慢的增长
+      return 80 + easeOut * 10;
+    }
+  };
 
   useEffect(() => {
     // 清理之前的定时器
@@ -27,28 +47,30 @@ const TopLoading = ({ isLoading }: TopLoadingProps) => {
 
     if (isLoading) {
       // 新的loading开始，强制重置
-      setLoadingId(prev => prev + 1); // 改变key强制重新渲染
+      setLoadingId(prev => prev + 1);
       setIsVisible(true);
       setProgress(0);
+      startTimeRef.current = Date.now();
       
-      // 立即设置为1%，避免0的闪烁
+      // 立即开始进度更新
       setProgress(1);
       
-      // 快速到达30%
-      const quickStart = setTimeout(() => {
-        setProgress(30);
-      }, 100);
-      
-      // 缓慢增长到70%
+      // 使用平滑更新机制
       intervalRef.current = setInterval(() => {
-        setProgress(prev => {
-          if (prev >= 70) return prev;
-          return prev + Math.random() * 8 + 2; // 2-10的随机增长
-        });
-      }, 200);
+        const elapsed = Date.now() - startTimeRef.current;
+        const newProgress = calculateProgress(elapsed);
+        setProgress(newProgress);
+        
+        // 如果达到90%停止自动增长,等待完成信号
+        if (newProgress >= 90) {
+          if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
+          }
+        }
+      }, 50); // 更频繁的更新，更平滑
 
       return () => {
-        clearTimeout(quickStart);
         if (intervalRef.current) {
           clearInterval(intervalRef.current);
           intervalRef.current = null;
@@ -66,8 +88,8 @@ const TopLoading = ({ isLoading }: TopLoadingProps) => {
       // 延迟隐藏，确保用户能看到完成状态
       timeoutRef.current = setTimeout(() => {
         setIsVisible(false);
-        setProgress(0); // 隐藏后重置进度
-      }, 500);
+        setProgress(0);
+      }, 400); // 稍微缩短完成显示时间
     }
   }, [isLoading]);
 
@@ -87,36 +109,56 @@ const TopLoading = ({ isLoading }: TopLoadingProps) => {
     <AnimatePresence mode="wait">
       {isVisible && (
         <motion.div
-          key={`loading-${loadingId}`} // 使用key强制重新渲染
-          className="fixed top-0 left-0 right-0 z-[9999] h-0.5 bg-gray-200"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
+          key={`loading-${loadingId}`}
+          className="fixed top-0 left-0 right-0 z-[9999] h-1 bg-gray-100/80 backdrop-blur-sm"
+          initial={{ opacity: 0, y: -4 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -4 }}
+          transition={{ duration: 0.15, ease: "easeOut" }}
         >
           <motion.div
-            key={`progress-${loadingId}`} // 进度条也使用独立key
-            className="h-full bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 origin-left"
+            key={`progress-${loadingId}`}
+            className="h-full bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 origin-left relative overflow-hidden"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: progress / 100 }}
             transition={{
-              duration: progress === 100 ? 0.3 : 0.5,
-              ease: progress === 100 ? "easeOut" : "easeInOut"
+              duration: progress === 100 ? 0.2 : 0.3,
+              ease: progress === 100 ? [0.4, 0, 0.2, 1] : [0.25, 0.1, 0.25, 1]
             }}
             style={{
-              boxShadow: "0 0 10px rgba(59, 130, 246, 0.5)"
+              borderRadius: "0 2px 2px 0",
+              boxShadow: "0 0 20px rgba(59, 130, 246, 0.4), 0 0 40px rgba(59, 130, 246, 0.1)"
             }}
           />
           
-          {/* 发光效果 */}
+          {/* 增强的发光效果 */}
           <motion.div
-            key={`glow-${loadingId}`} // 发光效果也使用独立key
-            className="absolute top-0 right-0 h-full w-20 bg-gradient-to-l from-white/50 to-transparent"
+            key={`glow-${loadingId}`}
+            className="absolute top-0 right-0 h-full w-16 bg-gradient-to-l from-white/60 via-white/30 to-transparent"
             initial={{ x: "-100%" }}
             animate={{ x: `${progress - 100}%` }}
             transition={{
-              duration: progress === 100 ? 0.3 : 0.8,
+              duration: progress === 100 ? 0.2 : 0.6,
+              ease: [0.25, 0.1, 0.25, 1]
+            }}
+            style={{
+              borderRadius: "0 2px 2px 0"
+            }}
+          />
+
+          {/* 脉冲光晕效果 */}
+          <motion.div
+            key={`pulse-${loadingId}`}
+            className="absolute top-0 left-0 h-full w-full bg-gradient-to-r from-blue-400/20 to-cyan-400/20"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 0.6, 0] }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
               ease: "easeInOut"
+            }}
+            style={{
+              borderRadius: "0 2px 2px 0"
             }}
           />
         </motion.div>
