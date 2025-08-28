@@ -15,7 +15,10 @@ type TranslationValue =
   | string[] 
   | { [key: string]: TranslationValue }
   | Array<{ [key: string]: TranslationValue }>
-  | Array<{ [key: string]: string | string[] | undefined }>;
+  | Array<{ [key: string]: string | string[] | undefined }>
+  | Array<{ [key: string]: unknown }>  // 添加支持更复杂的对象结构
+  | { [key: string]: unknown }         // 添加支持任意对象结构
+  | null;
 
 export interface Translations {
   [key: string]: TranslationValue;

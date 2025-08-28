@@ -10,8 +10,8 @@ export default function StandalonePageContent() {
 
   const requirements = tArray("standalone.requirements.items");
   const commonCommands = tObjectArray<{title: string; code: string}>("standalone.commonCommands.items");
-  const databaseConfigs = tObjectArray<{name: string; steps: string[]}>("standalone.optional.database.configs");
-  const troubleshootingItems = tObjectArray<{title: string; description: string; solution: string}>("standalone.troubleshooting.items");
+  const databaseConfigs = tObjectArray<{name: string; steps: {description: string; file: string; code: string}[]}>("standalone.optional.database.configs");
+  const troubleshootingItems = tObjectArray<{title: string; description: string; solution: {type: string; items?: string[]; content?: string} | null}>("standalone.troubleshooting.items");
   const nextSteps = tArray("standalone.nextSteps.items");
 
   return (
@@ -292,18 +292,31 @@ export default function StandalonePageContent() {
           </h3>
 
           <div className="space-y-6">
-            {databaseConfigs.map((config, index) => (
+            {databaseConfigs && databaseConfigs.length > 0 ? databaseConfigs.map((config, index) => (
               <div key={index} className="border border-gray-200 rounded-lg p-6">
                 <h4 className="text-lg font-semibold text-gray-900 mb-4">
                   {config.name}
                 </h4>
-                {config.steps.map((step, stepIndex) => (
+                {config.steps && config.steps.map((step, stepIndex) => (
                   <div key={stepIndex} className="mb-4">
-                    <p className="text-gray-700 mb-2" dangerouslySetInnerHTML={{ __html: step }} />
+                    <p className="text-gray-700 mb-2">
+                      {step.description ? (
+                        <>
+                          {step.description.split('{file}')[0]}
+                          <code className="bg-gray-100 px-1 rounded">{step.file || ''}</code>
+                          {step.description.split('{file}')[1]}
+                        </>
+                      ) : ''}
+                    </p>
+                    <div className="bg-gray-900 text-gray-100 p-4 rounded-lg text-sm">
+                      <code className="whitespace-pre-wrap">{step.code || ''}</code>
+                    </div>
                   </div>
                 ))}
               </div>
-            ))}
+            )) : (
+              <div className="text-gray-500">加载中...</div>
+            )}
           </div>
         </div>
 
@@ -318,17 +331,18 @@ export default function StandalonePageContent() {
               <p className="text-gray-700 mb-2">
                 {t("standalone.optional.redis.step1.description")}
                 <code className="bg-gray-100 px-1 rounded">
-                  docker-compose.yml
+                  {t("standalone.optional.redis.step1.file")}
                 </code>
                 {t("standalone.optional.redis.step1.action")}
               </p>
               <div className="bg-gray-900 text-gray-100 p-4 rounded-lg text-sm">
-                <code dangerouslySetInnerHTML={{ __html: t("standalone.optional.redis.step1.code") }} />
+                <code className="whitespace-pre-wrap">{t("standalone.optional.redis.step1.code")}</code>
               </div>
             </div>
             <div className="mb-4">
               <p className="text-gray-700 mb-2">
-                {t("standalone.optional.redis.step2.description")} <code className="bg-gray-100 px-1 rounded">.env</code>{" "}
+                {t("standalone.optional.redis.step2.description")}{" "}
+                <code className="bg-gray-100 px-1 rounded">{t("standalone.optional.redis.step2.file")}</code>{" "}
                 {t("standalone.optional.redis.step2.action")}
               </p>
               <div className="bg-gray-900 text-gray-100 p-4 rounded-lg text-sm">
@@ -379,7 +393,20 @@ export default function StandalonePageContent() {
                   <h4 className="font-semibold text-gray-800">{item.title}</h4>
                   <p className="text-gray-600 text-sm mb-2">{item.description}</p>
                   {item.solution && (
-                    <div className="text-gray-600 text-sm" dangerouslySetInnerHTML={{ __html: item.solution }} />
+                    <div className="text-gray-600 text-sm">
+                      {item.solution.type === 'list' && item.solution.items && (
+                        <ul className="text-gray-600 text-sm space-y-1 ml-4">
+                          {item.solution.items.map((listItem, listIndex) => (
+                            <li key={listIndex}>• {listItem}</li>
+                          ))}
+                        </ul>
+                      )}
+                      {item.solution.type === 'code' && item.solution.content && (
+                        <div className="bg-gray-100 p-2 rounded text-sm">
+                          <code>{item.solution.content}</code>
+                        </div>
+                      )}
+                    </div>
                   )}
                 </div>
               ))}

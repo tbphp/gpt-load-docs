@@ -537,15 +537,31 @@
           {
             "name": "MySQL 配置",
             "steps": [
-              "1. 编辑 <code class=\"bg-gray-100 px-1 rounded\">docker-compose.yml</code>，取消 MySQL 服务的注释：<div class=\"bg-gray-900 text-gray-100 p-4 rounded-lg text-sm\"><code>&nbsp;&nbsp;depends_on:<br />&nbsp;&nbsp;&nbsp;&nbsp;mysql:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;condition: service_healthy<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;restart: true<br /><br />mysql:<br />&nbsp;&nbsp;image: mysql:8.2<br />&nbsp;&nbsp;container_name: gpt-load-mysql<br />&nbsp;&nbsp;restart: always<br />&nbsp;&nbsp;environment:<br />&nbsp;&nbsp;&nbsp;&nbsp;MYSQL_ROOT_PASSWORD: 123456<br />&nbsp;&nbsp;&nbsp;&nbsp;MYSQL_DATABASE: gpt-load<br />&nbsp;&nbsp;volumes:<br />&nbsp;&nbsp;&nbsp;&nbsp;- ./data/mysql:/var/lib/mysql<br />&nbsp;&nbsp;healthcheck:<br />&nbsp;&nbsp;&nbsp;&nbsp;test: [\"CMD\", \"mysqladmin\", \"ping\", \"-h\", \"localhost\"]<br />&nbsp;&nbsp;&nbsp;&nbsp;interval: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;timeout: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;retries: 10</code></div>",
-              "2. 在 <code class=\"bg-gray-100 px-1 rounded\">.env</code> 文件中配置数据库连接：<div class=\"bg-gray-900 text-gray-100 p-4 rounded-lg text-sm\"><code>DATABASE_DSN=root:123456@tcp(mysql:3306)/gpt-load?charset=utf8mb4&parseTime=True&loc=Local</code></div>"
+              {
+                "description": "1. 编辑 {file} ，取消 MySQL 服务的注释：",
+                "file": "docker-compose.yml",
+                "code": "  depends_on:\n    mysql:\n      condition: service_healthy\n      restart: true\n\nmysql:\n  image: mysql:8.2\n  container_name: gpt-load-mysql\n  restart: always\n  environment:\n    MYSQL_ROOT_PASSWORD: 123456\n    MYSQL_DATABASE: gpt-load\n  volumes:\n    - ./data/mysql:/var/lib/mysql\n  healthcheck:\n    test: [\"CMD\", \"mysqladmin\", \"ping\", \"-h\", \"localhost\"]\n    interval: 5s\n    timeout: 5s\n    retries: 10"
+              },
+              {
+                "description": "2. 在 {file} 文件中配置数据库连接：",
+                "file": ".env",
+                "code": "DATABASE_DSN=root:123456@tcp(mysql:3306)/gpt-load?charset=utf8mb4&parseTime=True&loc=Local"
+              }
             ]
           },
           {
             "name": "PostgreSQL 配置",
             "steps": [
-              "1. 编辑 <code class=\"bg-gray-100 px-1 rounded\">docker-compose.yml</code>，取消 PostgreSQL 服务的注释：<div class=\"bg-gray-900 text-gray-100 p-4 rounded-lg text-sm\"><code>&nbsp;&nbsp;depends_on:<br />&nbsp;&nbsp;&nbsp;&nbsp;postgres:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;condition: service_healthy<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;restart: true<br /><br />postgres:<br />&nbsp;&nbsp;image: \"postgres:16\"<br />&nbsp;&nbsp;container_name: gpt-load-postgres<br />&nbsp;&nbsp;environment:<br />&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_USER: postgres<br />&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_PASSWORD: 123456<br />&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_DB: gpt-load<br />&nbsp;&nbsp;volumes:<br />&nbsp;&nbsp;&nbsp;&nbsp;- ./data/postgres:/var/lib/postgresql/data<br />&nbsp;&nbsp;healthcheck:<br />&nbsp;&nbsp;&nbsp;&nbsp;test: [\"CMD-SHELL\", \"pg_isready -U postgres -d \"]<br />&nbsp;&nbsp;&nbsp;&nbsp;interval: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;timeout: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;retries: 10</code></div>",
-              "2. 在 <code class=\"bg-gray-100 px-1 rounded\">.env</code> 文件中配置数据库连接：<div class=\"bg-gray-900 text-gray-100 p-4 rounded-lg text-sm\"><code>DATABASE_DSN=postgres://postgres:123456@postgres:5432/gpt-load?sslmode=disable</code></div>"
+              {
+                "description": "1. 编辑 {file} ，取消 PostgreSQL 服务的注释：",
+                "file": "docker-compose.yml",
+                "code": "  depends_on:\n    postgres:\n      condition: service_healthy\n      restart: true\n\npostgres:\n  image: \"postgres:16\"\n  container_name: gpt-load-postgres\n  environment:\n    POSTGRES_USER: postgres\n    POSTGRES_PASSWORD: 123456\n    POSTGRES_DB: gpt-load\n  volumes:\n    - ./data/postgres:/var/lib/postgresql/data\n  healthcheck:\n    test: [\"CMD-SHELL\", \"pg_isready -U postgres -d \"]\n    interval: 5s\n    timeout: 5s\n    retries: 10"
+              },
+              {
+                "description": "2. 在 {file} 文件中配置数据库连接：",
+                "file": ".env",
+                "code": "DATABASE_DSN=postgres://postgres:123456@postgres:5432/gpt-load?sslmode=disable"
+              }
             ]
           }
         ]
@@ -554,11 +570,13 @@
         "title": "Redis 配置",
         "step1": {
           "description": "1. 编辑",
+          "file": "docker-compose.yml",
           "action": "，取消 Redis 服务的注释：",
-          "code": "&nbsp;&nbsp;depends_on:<br />&nbsp;&nbsp;&nbsp;&nbsp;redis:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;condition: service_healthy<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;restart: true<br /><br />redis:<br />&nbsp;&nbsp;image: redis:latest<br />&nbsp;&nbsp;container_name: gpt-load-redis<br />&nbsp;&nbsp;restart: always<br />&nbsp;&nbsp;healthcheck:<br />&nbsp;&nbsp;&nbsp;&nbsp;test: [\"CMD\", \"redis-cli\", \"ping\"]<br />&nbsp;&nbsp;&nbsp;&nbsp;interval: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;timeout: 3s<br />&nbsp;&nbsp;&nbsp;&nbsp;retries: 3"
+          "code": "  depends_on:\n    redis:\n      condition: service_healthy\n      restart: true\n\nredis:\n  image: redis:latest\n  container_name: gpt-load-redis\n  restart: always\n  healthcheck:\n    test: [\"CMD\", \"redis-cli\", \"ping\"]\n    interval: 5s\n    timeout: 3s\n    retries: 3"
         },
         "step2": {
           "description": "2. 在",
+          "file": ".env",
           "action": "文件中配置 Redis 连接："
         }
       },
@@ -578,22 +596,35 @@
         {
           "title": "无法登录管理界面",
           "description": "请检查您是否使用了正确的管理密钥：",
-          "solution": "<ul class=\"text-gray-600 text-sm space-y-1 ml-4\"><li>• 确认 <code class=\"bg-gray-100 px-1 rounded\">.env</code> 文件中的 AUTH_KEY 已修改</li><li>• 重启服务后新密钥才会生效：<code class=\"bg-gray-100 px-1 rounded\">docker compose restart</code></li><li>• 密钥区分大小写，请确保输入正确</li></ul>"
+          "solution": {
+            "type": "list",
+            "items": [
+              "确认 .env 文件中的 AUTH_KEY 已修改",
+              "重启服务后新密钥才会生效：docker compose restart",
+              "密钥区分大小写，请确保输入正确"
+            ]
+          }
         },
         {
           "title": "端口冲突",
-          "description": "如果 3001 端口被占用，可以在 <code class=\"bg-gray-100 px-1 rounded\">.env</code> 文件中修改：",
-          "solution": "<div class=\"bg-gray-100 p-2 rounded text-sm\"><code>PORT=3002</code></div>"
+          "description": "如果 3001 端口被占用，可以在 .env 文件中修改：",
+          "solution": {
+            "type": "code",
+            "content": "PORT=3002"
+          }
         },
         {
           "title": "数据库连接失败",
           "description": "检查数据库服务是否正常启动：",
-          "solution": "<div class=\"bg-gray-100 p-2 rounded text-sm\"><code>docker compose logs mysql</code></div>"
+          "solution": {
+            "type": "code",
+            "content": "docker compose logs mysql"
+          }
         },
         {
           "title": "内存不足",
           "description": "确保系统有足够的内存资源，开发数据库服务后，建议至少 1GB 可用内存",
-          "solution": ""
+          "solution": null
         }
       ]
     },
