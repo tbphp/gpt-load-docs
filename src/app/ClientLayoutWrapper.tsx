@@ -2,6 +2,8 @@
 
 import { useEffect, ReactNode } from 'react';
 import { useLanguage } from '@/i18n/context';
+import TopLoading from '@/components/TopLoading';
+import { useRouterLoading } from '@/hooks/useRouterLoading';
 
 interface ClientLayoutWrapperProps {
   children: ReactNode;
@@ -9,6 +11,7 @@ interface ClientLayoutWrapperProps {
 
 const ClientLayoutWrapper = ({ children }: ClientLayoutWrapperProps) => {
   const { currentLanguage, isLoading } = useLanguage();
+  const { isLoading: isRouterLoading } = useRouterLoading();
 
   useEffect(() => {
     if (!isLoading && typeof document !== 'undefined') {
@@ -23,7 +26,12 @@ const ClientLayoutWrapper = ({ children }: ClientLayoutWrapperProps) => {
     }
   }, [currentLanguage, isLoading]);
 
-  return <>{children}</>;
+  return (
+    <>
+      <TopLoading isLoading={isRouterLoading} />
+      {children}
+    </>
+  );
 };
 
 export default ClientLayoutWrapper;
