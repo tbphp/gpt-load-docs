@@ -345,7 +345,8 @@
     "newApi": "New API",
     "cherryStudio": "Cherry Studio",
     "sponsor": "Sponsor",
-    "contributors": "Contributors"
+    "contributors": "Contributors",
+    "faq": "FAQ"
   },
   "geminiOpenai": {
     "title": "Gemini Official OpenAI Compatible Format",
@@ -3944,5 +3945,86 @@
       "github": "Visit GitHub",
       "issues": "Submit Issues"
     }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Quickly find the answers you need and solve common issues encountered when using GPT-Load",
+    "searchPlaceholder": "Search questions...",
+    "allCategories": "All Categories",
+    "noResults": "No related questions found",
+    "noResultsDescription": "Please try searching with different keywords",
+    "needMoreHelp": "Need More Help?",
+    "needMoreHelpDescription": "If you didn't find the answer, feel free to contact us through GitHub Issues",
+    "contactSupport": "Contact Technical Support",
+    "categories": [
+      {
+        "id": "system",
+        "title": "System Settings",
+        "icon": "Settings",
+        "description": "System configuration and basic parameter related issues"
+      },
+      {
+        "id": "keys",
+        "title": "Key Management",
+        "icon": "Shield",
+        "description": "Key configuration, rotation, and failure handling"
+      },
+      {
+        "id": "config",
+        "title": "Configuration Management",
+        "icon": "Users",
+        "description": "Group configuration and upstream address settings"
+      },
+      {
+        "id": "troubleshoot",
+        "title": "Troubleshooting",
+        "icon": "AlertCircle",
+        "description": "Common errors and solutions"
+      }
+    ],
+    "items": [
+      {
+        "id": "blacklist-threshold",
+        "category": "system",
+        "question": "How to prevent keys from being blacklisted?",
+        "answer": "<p>You can prevent keys from being blacklisted in the following ways:</p><ol><li><strong>Adjust blacklist threshold</strong>: Set the <code>Blacklist Threshold</code> to 0 in <code>System Settings</code>, so keys won't be automatically blacklisted</li><li><strong>Monitor key status</strong>: Regularly check key error rates and handle abnormal keys promptly</li><li><strong>Configure retry attempts reasonably</strong>: Adjust the maximum retry count according to actual needs</li></ol><p><strong>Note</strong>: Setting the threshold to 0 disables automatic blacklisting, requiring manual management of invalid keys.</p>",
+        "tags": ["Blacklist", "Key Management", "System Settings"]
+      },
+      {
+        "id": "group-upstream",
+        "category": "config",
+        "question": "How do multiple upstream addresses work in a group?",
+        "answer": "<p>Configuration rules for groups and upstream addresses:</p><h4>Basic Principles</h4><ul><li><strong>Same Channel</strong>: One group can only correspond to one upstream channel type</li><li><strong>Load Balancing</strong>: Multiple upstream addresses should be different access points or load addresses for the same channel</li><li><strong>Key Compatibility</strong>: All keys in a group must be able to request any configured upstream address</li></ul><h4>Configuration Example</h4><p><strong>✅ Correct Configuration</strong>: Gemini group configured with multiple Cloudflare AI Gateway addresses</p><ul><li>Address 1: https://gateway.ai.cloudflare.com/account1/gateway1/google-ai-studio</li><li>Address 2: https://gateway.ai.cloudflare.com/account2/gateway2/google-ai-studio</li></ul><p><strong>❌ Incorrect Configuration</strong>: Mixing different service providers in the same group</p><p>If you need to use different upstream channels, you should create different groups for management.</p>",
+        "tags": ["Group Management", "Upstream Configuration", "Load Balancing"]
+      },
+      {
+        "id": "delete-error-keys",
+        "category": "keys",
+        "question": "How to delete keys with specific error codes?",
+        "answer": "<p>Follow these steps to filter and delete problematic keys:</p><ol><li><strong>Filter error logs</strong><ul><li>Access the GPT-Load admin interface</li><li>Go to the <code>Log Management</code> page</li><li>Use the filter function to filter logs by error code or error message</li></ul></li><li><strong>Export key list</strong><ul><li>Click the <code>Export Keys</code> button on the filtered results page</li><li>The system will export all keys that appear in the filtered logs</li></ul></li><li><strong>Batch delete keys</strong><ul><li>Go to the <code>Key Management</code> page</li><li>Select the problematic keys exported from logs</li><li>Perform batch deletion</li></ul></li></ol><p>This method allows precise identification and cleanup of problematic keys while avoiding accidental deletion of normally working keys.</p>",
+        "tags": ["Key Deletion", "Error Handling", "Log Filtering"]
+      },
+      {
+        "id": "config-priority",
+        "category": "config",
+        "question": "What is the priority order of configurations?",
+        "answer": "<p>GPT-Load uses a three-tier configuration system, with priority from high to low:</p><h4>Priority Order</h4><ol><li><strong>Group Configuration</strong> (Highest Priority)<ul><li>Custom configuration for specific groups</li><li>Can override any parameter in system settings</li><li>Supports JSON format parameter override</li></ul></li><li><strong>System Settings</strong> (Medium Priority)<ul><li>Global system-level configuration parameters</li><li>Dynamically modified through admin interface or API</li><li>Supports hot reload without service restart</li></ul></li><li><strong>Environment Configuration</strong> (Basic Priority)<ul><li>Set through environment variables or .env file</li><li>Loaded at service startup, not modifiable at runtime</li><li>Provides basic default values and infrastructure configuration</li></ul></li></ol><p><strong>Configuration Merge Rules</strong>: Upper-level configuration overrides lower-level configuration, and unconfigured parameters inherit values from lower levels.</p>",
+        "tags": ["Configuration Priority", "System Configuration", "Group Settings"]
+      },
+      {
+        "id": "service-not-starting",
+        "category": "troubleshoot",
+        "question": "What to do when service fails to start?",
+        "answer": "<p>Common causes and solutions for service startup failures:</p><h4>Check Steps</h4><ol><li><strong>Check port occupation</strong><ul><li>Ensure port 3001 is not occupied by other services</li><li>You can use other ports by modifying the <code>PORT</code> environment variable</li></ul></li><li><strong>Check database connection</strong><ul><li>Verify that <code>DATABASE_DSN</code> configuration is correct</li><li>Ensure database service is started and accessible</li></ul></li><li><strong>Check permission issues</strong><ul><li>Ensure Docker has sufficient permissions to access data directory</li><li>Check permissions for <code>./data</code> directory</li></ul></li><li><strong>View detailed logs</strong><ul><li>Use <code>docker compose logs -f</code> to view detailed error information</li><li>Locate problems based on specific error messages</li></ul></li></ol><h4>Common Solutions</h4><ul><li>Recreate containers: <code>docker compose down && docker compose up -d</code></li><li>Clean data and reinitialize: delete <code>./data</code> directory and restart</li><li>Check network connection: ensure upstream API services are accessible</li></ul>",
+        "tags": ["Startup Failure", "Troubleshooting", "Docker", "Port Occupation"]
+      },
+      {
+        "id": "api-requests-failing",
+        "category": "troubleshoot",
+        "question": "Why do API requests keep failing?",
+        "answer": "<p>Steps to troubleshoot API request failures:</p><h4>Basic Checks</h4><ol><li><strong>Verify proxy key</strong><ul><li>Ensure the API key used matches what's configured in GPT-Load</li><li>Check if the key format is correct</li></ul></li><li><strong>Check group configuration</strong><ul><li>Verify group name and upstream address configuration</li><li>Ensure the group is enabled</li></ul></li><li><strong>Test upstream connection</strong><ul><li>Use the \"Test Connection\" function on the group configuration page</li><li>Test if upstream API is reachable directly</li></ul></li></ol><h4>Network Issue Troubleshooting</h4><ul><li><strong>Proxy settings</strong>: Check if correct HTTP_PROXY or HTTPS_PROXY is configured</li><li><strong>DNS resolution</strong>: Ensure upstream service domain names can be resolved correctly</li><li><strong>Firewall</strong>: Check if network firewall blocks outbound connections</li></ul><h4>View detailed logs</h4><p>Check detailed request logs in \"Log Management\" of admin interface, and locate issues based on specific error codes and messages:</p><ul><li><strong>401/403</strong>: Key authentication issues</li><li><strong>404</strong>: Path or model configuration errors</li><li><strong>429</strong>: Request rate limiting</li><li><strong>502/504</strong>: Upstream service unreachable</li></ul>",
+        "tags": ["API Failure", "Network Issues", "Authentication Error", "Log Analysis"]
+      }
+    ]
   }
 }

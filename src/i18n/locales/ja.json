@@ -345,7 +345,8 @@
     "newApi": "New API",
     "cherryStudio": "Cherry Studio",
     "sponsor": "スポンサー",
-    "contributors": "貢献者"
+    "contributors": "貢献者",
+    "faq": "よくある質問"
   },
   "geminiOpenai": {
     "title": "Gemini 公式 OpenAI 互換フォーマット",
@@ -3913,5 +3914,86 @@
       "github": "GitHubにアクセス",
       "issues": "問題を提出"
     }
+  },
+  "faq": {
+    "title": "よくある質問",
+    "subtitle": "GPT-Loadの使用中に遭遇する一般的な問題を素早く解決",
+    "searchPlaceholder": "質問を検索...",
+    "allCategories": "すべてのカテゴリ",
+    "noResults": "関連する質問が見つかりません",
+    "noResultsDescription": "別のキーワードで検索してみてください",
+    "needMoreHelp": "さらなるサポートが必要ですか？",
+    "needMoreHelpDescription": "回答が見つからない場合は、GitHub Issuesでお問い合わせください",
+    "contactSupport": "技術サポートに連絡",
+    "categories": [
+      {
+        "id": "system",
+        "title": "システム設定",
+        "icon": "Settings",
+        "description": "システム構成と基本パラメータ関連の問題"
+      },
+      {
+        "id": "keys",
+        "title": "キー管理",
+        "icon": "Shield",
+        "description": "キーの設定、ローテーション、障害処理"
+      },
+      {
+        "id": "config",
+        "title": "構成管理",
+        "icon": "Users",
+        "description": "グループ構成とアップストリームアドレスの設定"
+      },
+      {
+        "id": "troubleshoot",
+        "title": "トラブルシューティング",
+        "icon": "AlertCircle",
+        "description": "一般的なエラーと解決策"
+      }
+    ],
+    "items": [
+      {
+        "id": "blacklist-threshold",
+        "category": "system",
+        "question": "キーがブラックリストに入るのを防ぐには？",
+        "answer": "<p>以下の方法でキーがブラックリストに入るのを防げます：</p><ol><li><strong>ブラックリスト閾値の調整</strong>：<code>システム設定</code>で<code>ブラックリスト閾値</code>を0に設定すると、キーが自動的にブラックリスト化されません</li><li><strong>キーステータスの監視</strong>：定期的にキーのエラー率をチェックし、異常なキーを適時処理</li><li><strong>リトライ回数の適切な設定</strong>：実際のニーズに応じて最大リトライ回数を調整</li></ol><p><strong>注意</strong>：閾値を0に設定すると自動ブラックリスト機能が無効になり、無効なキーを手動で管理する必要があります。</p>",
+        "tags": ["ブラックリスト", "キー管理", "システム設定"]
+      },
+      {
+        "id": "group-upstream",
+        "category": "config",
+        "question": "グループ内の複数のアップストリームアドレスはどのように機能しますか？",
+        "answer": "<p>グループとアップストリームアドレスの構成ルール：</p><h4>基本原則</h4><ul><li><strong>同一チャネル</strong>：1つのグループは1つのアップストリームチャネルタイプにのみ対応</li><li><strong>ロードバランシング</strong>：複数のアップストリームアドレスは同じチャネルの異なるアクセスポイントまたはロードアドレス</li><li><strong>キーの互換性</strong>：グループ内のすべてのキーは、構成されたすべてのアップストリームアドレスにリクエスト可能</li></ul><h4>構成例</h4><p><strong>✅ 正しい構成</strong>：Geminiグループに複数のCloudflare AI Gatewayアドレスを構成</p><ul><li>アドレス1：https://gateway.ai.cloudflare.com/account1/gateway1/google-ai-studio</li><li>アドレス2：https://gateway.ai.cloudflare.com/account2/gateway2/google-ai-studio</li></ul><p><strong>❌ 間違った構成</strong>：同じグループに異なるサービスプロバイダーを混在</p><p>異なるアップストリームチャネルを使用する場合は、異なるグループを作成して管理してください。</p>",
+        "tags": ["グループ管理", "アップストリーム構成", "ロードバランシング"]
+      },
+      {
+        "id": "delete-error-keys",
+        "category": "keys",
+        "question": "特定のエラーコードのキーを削除するには？",
+        "answer": "<p>以下の手順で問題のあるキーをフィルタリングして削除：</p><ol><li><strong>エラーログのフィルタリング</strong><ul><li>GPT-Load管理インターフェースにアクセス</li><li><code>ログ管理</code>ページに移動</li><li>フィルター機能を使用してエラーコードまたはエラーメッセージでログをフィルタリング</li></ul></li><li><strong>キーリストのエクスポート</strong><ul><li>フィルタリング結果ページで<code>キーをエクスポート</code>ボタンをクリック</li><li>システムはフィルタリングされたログに表示されるすべてのキーをエクスポート</li></ul></li><li><strong>キーの一括削除</strong><ul><li><code>キー管理</code>ページに移動</li><li>ログからエクスポートされた問題のあるキーを選択</li><li>一括削除を実行</li></ul></li></ol><p>この方法により、正常に動作するキーの誤削除を避けながら、問題のあるキーを正確に特定してクリーンアップできます。</p>",
+        "tags": ["キー削除", "エラー処理", "ログフィルタリング"]
+      },
+      {
+        "id": "config-priority",
+        "category": "config",
+        "question": "構成の優先順位は？",
+        "answer": "<p>GPT-Loadは3層構成システムを使用し、優先順位は高から低へ：</p><h4>優先順位</h4><ol><li><strong>グループ構成</strong>（最高優先度）<ul><li>特定グループのカスタム構成</li><li>システム設定の任意のパラメータを上書き可能</li><li>JSONフォーマットのパラメータ上書きをサポート</li></ul></li><li><strong>システム設定</strong>（中優先度）<ul><li>グローバルシステムレベルの構成パラメータ</li><li>管理インターフェースまたはAPIを通じて動的に変更</li><li>サービス再起動なしでホットリロードをサポート</li></ul></li><li><strong>環境構成</strong>（基本優先度）<ul><li>環境変数または.envファイルで設定</li><li>サービス起動時にロード、実行時に変更不可</li><li>基本的なデフォルト値とインフラストラクチャ構成を提供</li></ul></li></ol><p><strong>構成マージルール</strong>：上位レベルの構成が下位レベルの構成を上書きし、未構成のパラメータは下位レベルの値を継承。</p>",
+        "tags": ["構成優先度", "システム構成", "グループ設定"]
+      },
+      {
+        "id": "service-not-starting",
+        "category": "troubleshoot",
+        "question": "サービスが起動しない場合の対処法は？",
+        "answer": "<p>サービス起動失敗の一般的な原因と解決策：</p><h4>チェック手順</h4><ol><li><strong>ポート占有の確認</strong><ul><li>ポート3001が他のサービスに占有されていないことを確認</li><li><code>PORT</code>環境変数を変更して他のポートを使用可能</li></ul></li><li><strong>データベース接続の確認</strong><ul><li><code>DATABASE_DSN</code>構成が正しいことを確認</li><li>データベースサービスが起動しアクセス可能であることを確認</li></ul></li><li><strong>権限問題の確認</strong><ul><li>Dockerがデータディレクトリにアクセスする十分な権限があることを確認</li><li><code>./data</code>ディレクトリの権限を確認</li></ul></li><li><strong>詳細ログの表示</strong><ul><li><code>docker compose logs -f</code>を使用して詳細なエラー情報を表示</li><li>特定のエラーメッセージに基づいて問題を特定</li></ul></li></ol><h4>一般的な解決策</h4><ul><li>コンテナの再作成：<code>docker compose down && docker compose up -d</code></li><li>データをクリーンして再初期化：<code>./data</code>ディレクトリを削除して再起動</li><li>ネットワーク接続の確認：アップストリームAPIサービスにアクセス可能であることを確認</li></ul>",
+        "tags": ["起動失敗", "トラブルシューティング", "Docker", "ポート占有"]
+      },
+      {
+        "id": "api-requests-failing",
+        "category": "troubleshoot",
+        "question": "APIリクエストが失敗し続ける理由は？",
+        "answer": "<p>APIリクエスト失敗のトラブルシューティング手順：</p><h4>基本チェック</h4><ol><li><strong>プロキシキーの確認</strong><ul><li>使用されているAPIキーがGPT-Loadで構成されているものと一致することを確認</li><li>キーフォーマットが正しいか確認</li></ul></li><li><strong>グループ構成の確認</strong><ul><li>グループ名とアップストリームアドレス構成を確認</li><li>グループが有効になっていることを確認</li></ul></li><li><strong>アップストリーム接続のテスト</strong><ul><li>グループ構成ページの「接続テスト」機能を使用</li><li>アップストリームAPIに直接アクセス可能かテスト</li></ul></li></ol><h4>ネットワーク問題のトラブルシューティング</h4><ul><li><strong>プロキシ設定</strong>：正しいHTTP_PROXYまたはHTTPS_PROXYが構成されているか確認</li><li><strong>DNS解決</strong>：アップストリームサービスのドメイン名が正しく解決できることを確認</li><li><strong>ファイアウォール</strong>：ネットワークファイアウォールがアウトバウンド接続をブロックしていないか確認</li></ul><h4>詳細ログの表示</h4><p>管理インターフェースの「ログ管理」で詳細なリクエストログを確認し、特定のエラーコードとメッセージに基づいて問題を特定：</p><ul><li><strong>401/403</strong>：キー認証の問題</li><li><strong>404</strong>：パスまたはモデル構成エラー</li><li><strong>429</strong>：リクエストレート制限</li><li><strong>502/504</strong>：アップストリームサービスに到達不可</li></ul>",
+        "tags": ["API失敗", "ネットワーク問題", "認証エラー", "ログ分析"]
+      }
+    ]
   }
 }

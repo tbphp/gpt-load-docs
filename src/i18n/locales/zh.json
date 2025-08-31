@@ -345,7 +345,8 @@
     "newApi": "New API",
     "cherryStudio": "Cherry Studio",
     "sponsor": "支持赞助",
-    "contributors": "贡献者"
+    "contributors": "贡献者",
+    "faq": "常见问题"
   },
   "geminiOpenai": {
     "title": "Gemini 官方支持的 OpenAI 兼容格式",
@@ -3944,5 +3945,86 @@
       "github": "访问 GitHub",
       "issues": "提交问题"
     }
+  },
+  "faq": {
+    "title": "常见问题",
+    "subtitle": "快速找到您需要的答案，解决使用 GPT-Load 过程中遇到的常见问题",
+    "searchPlaceholder": "搜索问题...",
+    "allCategories": "全部分类",
+    "noResults": "未找到相关问题",
+    "noResultsDescription": "请尝试使用不同的关键词搜索",
+    "needMoreHelp": "需要更多帮助？",
+    "needMoreHelpDescription": "如果您没有找到答案，欢迎通过 GitHub Issues 联系我们",
+    "contactSupport": "联系技术支持",
+    "categories": [
+      {
+        "id": "system",
+        "title": "系统设置",
+        "icon": "Settings",
+        "description": "系统配置和基础参数相关问题"
+      },
+      {
+        "id": "keys",
+        "title": "密钥管理",
+        "icon": "Shield",
+        "description": "密钥配置、轮换和故障处理"
+      },
+      {
+        "id": "config",
+        "title": "配置管理",
+        "icon": "Users",
+        "description": "分组配置和上游地址设置"
+      },
+      {
+        "id": "troubleshoot",
+        "title": "故障排除",
+        "icon": "AlertCircle",
+        "description": "常见错误和解决方案"
+      }
+    ],
+    "items": [
+      {
+        "id": "blacklist-threshold",
+        "category": "system",
+        "question": "如何避免密钥被拉黑？",
+        "answer": "<p>可以通过以下方式避免密钥被拉入黑名单：</p><ol><li><strong>调整黑名单阈值</strong>：在 <code>系统设置</code> 中将 <code>黑名单阈值</code> 设置为 0，这样密钥就不会被自动拉黑</li><li><strong>监控密钥状态</strong>：定期检查密钥的错误率，及时处理异常密钥</li><li><strong>合理配置重试次数</strong>：根据实际需求调整最大重试次数</li></ol><p><strong>注意</strong>：将阈值设为 0 会禁用自动黑名单功能，需要手动管理无效密钥。</p>",
+        "tags": ["黑名单", "密钥管理", "系统设置"]
+      },
+      {
+        "id": "group-upstream",
+        "category": "config",
+        "question": "分组中多个上游地址如何工作？",
+        "answer": "<p>关于分组和上游地址的配置规则：</p><h4>基本原则</h4><ul><li><strong>同一渠道</strong>：一个分组只能对应一个上游渠道类型</li><li><strong>负载均衡</strong>：多个上游地址应为同一渠道的不同接入点或负载地址</li><li><strong>密钥兼容</strong>：分组内所有密钥必须能够请求任意配置的上游地址</li></ul><h4>配置示例</h4><p><strong>✅ 正确配置</strong>：Gemini 分组配置多个 Cloudflare AI Gateway 地址</p><ul><li>地址 1：https://gateway.ai.cloudflare.com/account1/gateway1/google-ai-studio</li><li>地址 2：https://gateway.ai.cloudflare.com/account2/gateway2/google-ai-studio</li></ul><p><strong>❌ 错误配置</strong>：在同一分组中混合不同的服务提供商</p><p>如需使用不同的上游渠道，应创建不同的分组进行管理。</p>",
+        "tags": ["分组管理", "上游配置", "负载均衡"]
+      },
+      {
+        "id": "delete-error-keys",
+        "category": "keys",
+        "question": "如何删除出现特定错误码的密钥？",
+        "answer": "<p>按照以下步骤筛选并删除有问题的密钥：</p><ol><li><strong>筛选错误日志</strong><ul><li>进入 GPT-Load 后台管理界面</li><li>访问 <code>日志管理</code> 页面</li><li>使用筛选功能，按错误码或错误信息筛选相关日志</li></ul></li><li><strong>导出密钥列表</strong><ul><li>在筛选结果页面点击 <code>导出密钥</code> 按钮</li><li>系统会导出所有在筛选日志中出现的密钥列表</li></ul></li><li><strong>批量删除密钥</strong><ul><li>进入 <code>密钥管理</code> 页面</li><li>选中从日志导出的问题密钥</li><li>执行批量删除操作</li></ul></li></ol><p>这种方式可以精确定位和清理有问题的密钥，避免误删正常工作的密钥。</p>",
+        "tags": ["密钥删除", "错误处理", "日志筛选"]
+      },
+      {
+        "id": "config-priority",
+        "category": "config",
+        "question": "配置的优先级顺序是什么？",
+        "answer": "<p>GPT-Load 采用三层配置系统，优先级从高到低为：</p><h4>优先级顺序</h4><ol><li><strong>分组配置</strong>（最高优先级）<ul><li>针对特定分组的自定义配置</li><li>可覆盖系统设置中的任意参数</li><li>支持 JSON 格式的参数覆盖</li></ul></li><li><strong>系统设置</strong>（中等优先级）<ul><li>全局系统级别的配置参数</li><li>通过管理界面或 API 动态修改</li><li>支持热重载，无需重启服务</li></ul></li><li><strong>环境配置</strong>（基础优先级）<ul><li>通过环境变量或 .env 文件设置</li><li>服务启动时加载，运行时不可修改</li><li>提供基础的默认值和基础设施配置</li></ul></li></ol><p><strong>配置合并规则</strong>：上层配置会覆盖下层配置，未配置的参数会继承下层的值。</p>",
+        "tags": ["配置优先级", "系统配置", "分组设置"]
+      },
+      {
+        "id": "service-not-starting",
+        "category": "troubleshoot",
+        "question": "服务无法启动怎么办？",
+        "answer": "<p>服务启动失败的常见原因和解决方案：</p><h4>检查步骤</h4><ol><li><strong>检查端口占用</strong><ul><li>确认 3001 端口没有被其他服务占用</li><li>可以通过修改 <code>PORT</code> 环境变量使用其他端口</li></ul></li><li><strong>检查数据库连接</strong><ul><li>验证 <code>DATABASE_DSN</code> 配置是否正确</li><li>确保数据库服务已启动并可访问</li></ul></li><li><strong>检查权限问题</strong><ul><li>确保 Docker 有足够权限访问数据目录</li><li>检查 <code>./data</code> 目录权限设置</li></ul></li><li><strong>查看详细日志</strong><ul><li>使用 <code>docker compose logs -f</code> 查看详细错误信息</li><li>根据具体错误信息进行问题定位</li></ul></li></ol><h4>常见解决方案</h4><ul><li>重新创建容器：<code>docker compose down && docker compose up -d</code></li><li>清理数据重新初始化：删除 <code>./data</code> 目录后重启</li><li>检查网络连接：确保可以访问上游 API 服务</li></ul>",
+        "tags": ["启动失败", "故障排除", "Docker", "端口占用"]
+      },
+      {
+        "id": "api-requests-failing",
+        "category": "troubleshoot", 
+        "question": "API 请求一直失败是什么原因？",
+        "answer": "<p>API 请求失败的排查步骤：</p><h4>基础检查</h4><ol><li><strong>验证代理密钥</strong><ul><li>确保使用的 API 密钥与 GPT-Load 中配置的一致</li><li>检查密钥格式是否正确</li></ul></li><li><strong>检查分组配置</strong><ul><li>验证分组名称和上游地址配置</li><li>确保分组处于启用状态</li></ul></li><li><strong>测试上游连接</strong><ul><li>在分组配置页面使用\"测试连接\"功能</li><li>直接测试上游 API 是否可达</li></ul></li></ol><h4>网络问题排查</h4><ul><li><strong>代理设置</strong>：检查是否配置了正确的 HTTP_PROXY 或 HTTPS_PROXY</li><li><strong>DNS 解析</strong>：确保可以正确解析上游服务域名</li><li><strong>防火墙</strong>：检查网络防火墙是否阻止了出站连接</li></ul><h4>查看详细日志</h4><p>在管理界面的\"日志管理\"中查看详细的请求日志，根据具体错误码和错误信息进行定位：</p><ul><li><strong>401/403</strong>：密钥认证问题</li><li><strong>404</strong>：路径或模型配置错误</li><li><strong>429</strong>：请求频率限制</li><li><strong>502/504</strong>：上游服务不可达</li></ul>",
+        "tags": ["API失败", "网络问题", "认证错误", "日志分析"]
+      }
+    ]
   }
 }

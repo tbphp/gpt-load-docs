@@ -23,6 +23,7 @@ import {
   Shield,
   Rocket,
   BookUser,
+  HelpCircle,
 } from "lucide-react";
 
 const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
@@ -139,6 +140,7 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
         },
       ],
     },
+    { title: t("docs.faq"), href: "/docs/faq", icon: HelpCircle },
     { title: t("docs.sponsor"), href: "/docs/sponsor", icon: Heart },
     { title: t("docs.contributors"), href: "/docs/contributors", icon: Users },
   ];

@@ -556,6 +556,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       keywords: "GPT-Load貢献者, オープンソース貢献, プロジェクト貢献者, GitHub貢献, コード貢献, コミュニティ参加, オープンソース協働",
       type: 'article'
     }
+  },
+  '/docs/faq': {
+    zh: {
+      title: "常见问题 - GPT-Load",
+      description: "快速解决GPT-Load使用中的常见问题。涵盖系统设置、密钥管理、配置优先级、故障排除等常见技术问题的详细解答。",
+      keywords: "GPT-Load FAQ, 常见问题, 技术支持, 密钥管理, 系统配置, 故障排除, 黑名单设置, 分组配置",
+      type: 'article'
+    },
+    en: {
+      title: "FAQ - GPT-Load",
+      description: "Quickly solve common issues when using GPT-Load. Covers detailed answers to common technical questions about system settings, key management, configuration priority, troubleshooting and more.",
+      keywords: "GPT-Load FAQ, frequently asked questions, technical support, key management, system configuration, troubleshooting, blacklist settings, group configuration",
+      type: 'article'
+    },
+    ja: {
+      title: "よくある質問 - GPT-Load",
+      description: "GPT-Load使用時の一般的な問題を素早く解決。システム設定、キー管理、構成優先度、トラブルシューティングなどの技術的な質問に対する詳細な回答を提供。",
+      keywords: "GPT-Load FAQ, よくある質問, 技術サポート, キー管理, システム構成, トラブルシューティング, ブラックリスト設定, グループ構成",
+      type: 'article'
+    }
   }
   // 架构预留：后续可继续添加其他页面的SEO配置
 };
