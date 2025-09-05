@@ -195,14 +195,14 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
               className={cn(
                 "flex items-center space-x-3 px-3 py-2 text-sm rounded-md transition-colors duration-200",
                 isActive
-                  ? "bg-blue-50 text-blue-700 font-medium"
-                  : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                  ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 font-medium"
+                  : "text-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-200"
               )}
             >
               <IconComponent
                 className={cn(
                   "h-4 w-4",
-                  isActive ? "text-blue-700" : "text-gray-500"
+                  isActive ? "text-blue-700 dark:text-blue-300" : "text-gray-500 dark:text-gray-500"
                 )}
               />
               <span>{item.title}</span>
@@ -223,8 +223,8 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
               className={cn(
                 "flex items-center justify-between space-x-3 px-3 py-2 text-sm rounded-md transition-colors duration-200",
                 isActive || isChildActive
-                  ? "bg-blue-50 text-blue-700 font-medium"
-                  : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                  ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 font-medium"
+                  : "text-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-200"
               )}
             >
               <div className="flex items-center space-x-3">
@@ -232,8 +232,8 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
                   className={cn(
                     "h-4 w-4",
                     isActive || isChildActive
-                      ? "text-blue-700"
-                      : "text-gray-500"
+                      ? "text-blue-700 dark:text-blue-300"
+                      : "text-gray-500 dark:text-gray-500"
                   )}
                 />
                 <span>{item.title}</span>
@@ -259,14 +259,14 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
                       className={cn(
                         "flex items-center space-x-3 px-3 py-2 text-sm rounded-md transition-colors duration-200 ml-3",
                         isChildActiveLink
-                          ? "bg-blue-50 text-blue-700 font-medium"
-                          : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                          ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 font-medium"
+                          : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-200"
                       )}
                     >
                       <ChildIconComponent
                         className={cn(
                           "h-4 w-4",
-                          isChildActiveLink ? "text-blue-700" : "text-gray-400"
+                          isChildActiveLink ? "text-blue-700 dark:text-blue-300" : "text-gray-400 dark:text-gray-500"
                         )}
                       />
                       <span>{child.title}</span>

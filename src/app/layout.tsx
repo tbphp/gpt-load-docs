@@ -8,6 +8,7 @@ import { LanguageProvider } from "@/i18n/context";
 import ClientLayoutWrapper from "./ClientLayoutWrapper";
 import { META_CONFIGS, OG_CONFIGS } from "@/lib/metadata";
 import { getServerLanguage, getServerHtmlLang } from "@/lib/serverLanguage";
+import ThemeProvider from "@/components/ThemeProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -74,15 +75,17 @@ export default async function RootLayout({
   return (
     <html lang={htmlLang} suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
-        <LanguageProvider initialLanguage={serverLang}>
-          <GitHubStarsProvider>
-            <ClientLayoutWrapper>
-              <Navigation />
-              {children}
-              <Footer />
-            </ClientLayoutWrapper>
-          </GitHubStarsProvider>
-        </LanguageProvider>
+        <ThemeProvider>
+          <LanguageProvider initialLanguage={serverLang}>
+            <GitHubStarsProvider>
+              <ClientLayoutWrapper>
+                <Navigation />
+                {children}
+                <Footer />
+              </ClientLayoutWrapper>
+            </GitHubStarsProvider>
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

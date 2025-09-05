@@ -35,7 +35,7 @@ const Navigation = () => {
   // 在挂载前始终显示有背景的状态，避免闪烁
   if (!mounted) {
     return (
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
         <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link href="/" className="flex items-center space-x-2">
@@ -46,7 +46,7 @@ const Navigation = () => {
                 height={32}
                 className="w-8 h-8"
               />
-              <span className="text-xl font-bold text-gray-900">GPT-Load</span>
+              <span className="text-xl font-bold text-gray-900 dark:text-white">GPT-Load</span>
             </Link>
           </div>
         </nav>
@@ -65,7 +65,7 @@ const Navigation = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled
-          ? "bg-white/80 backdrop-blur-md border-b border-gray-200"
+          ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700"
           : "bg-transparent"
       )}
       initial={{ y: -100 }}
@@ -102,8 +102,8 @@ const Navigation = () => {
                 className={cn(
                   "transition-colors duration-200 font-medium flex items-center space-x-1",
                   item.label === t("nav.sponsor")
-                    ? "text-red-600 hover:text-red-700"
-                    : "text-gray-700 hover:text-blue-600"
+                    ? "text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
+                    : "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
                 )}
               >
                 {item.icon && <item.icon className="h-4 w-4" />}
@@ -118,12 +118,12 @@ const Navigation = () => {
               href="https://github.com/tbphp/gpt-load"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-x-2 bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors duration-200"
+              className="flex items-center space-x-2 bg-gray-900 dark:bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-600 transition-colors duration-200"
             >
               <Github className="h-4 w-4" />
               <span>{t("nav.github")}</span>
               {stars !== null && (
-                <div className="ml-2 flex items-center space-x-1 rounded-md bg-gray-700 px-2 py-1 text-xs">
+                <div className="ml-2 flex items-center space-x-1 rounded-md bg-gray-700 dark:bg-gray-600 px-2 py-1 text-xs">
                   <span>⭐</span>
                   <span>{formatStars(stars)}</span>
                 </div>
@@ -133,14 +133,14 @@ const Navigation = () => {
 
           {/* Mobile menu button */}
           <button
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+            className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle mobile menu"
           >
             {isMobileMenuOpen ? (
-              <X className="h-6 w-6 text-gray-700" />
+              <X className="h-6 w-6 text-gray-700 dark:text-gray-300" />
             ) : (
-              <Menu className="h-6 w-6 text-gray-700" />
+              <Menu className="h-6 w-6 text-gray-700 dark:text-gray-300" />
             )}
           </button>
         </div>
@@ -155,7 +155,7 @@ const Navigation = () => {
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="py-4 space-y-3 border-t border-gray-200">
+              <div className="py-4 space-y-3 border-t border-gray-200 dark:border-gray-700">
                 {navItems.map((item) => (
                   <Link
                     key={item.href}
@@ -163,8 +163,8 @@ const Navigation = () => {
                     className={cn(
                       "flex items-center space-x-2 transition-colors duration-200 font-medium py-2 px-2",
                       item.label === t("nav.sponsor")
-                        ? "text-red-600 hover:text-red-700"
-                        : "text-gray-700 hover:text-blue-600"
+                        ? "text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
+                        : "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
                     )}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
@@ -183,13 +183,13 @@ const Navigation = () => {
                     href="https://github.com/tbphp/gpt-load"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center space-x-2 bg-gray-900 text-white px-4 py-3 rounded-lg hover:bg-gray-800 transition-colors duration-200 w-full justify-center"
+                    className="flex items-center space-x-2 bg-gray-900 dark:bg-gray-700 text-white px-4 py-3 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-600 transition-colors duration-200 w-full justify-center"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     <Github className="h-4 w-4" />
                     <span>{t("nav.github")}</span>
                     {stars !== null && (
-                      <div className="ml-2 flex items-center space-x-1 rounded-md bg-gray-700 px-2 py-1 text-xs">
+                      <div className="ml-2 flex items-center space-x-1 rounded-md bg-gray-700 dark:bg-gray-600 px-2 py-1 text-xs">
                         <span>⭐</span>
                         <span>{formatStars(stars)}</span>
                       </div>

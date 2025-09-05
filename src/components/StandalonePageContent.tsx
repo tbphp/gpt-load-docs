@@ -18,28 +18,28 @@ export default function StandalonePageContent() {
     <div className="max-w-4xl mx-auto">
       {/* Header */}
       <div className="mb-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-6">
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">
           {t("standalone.title")}
         </h1>
-        <p className="text-xl text-gray-600">
+        <p className="text-xl text-gray-600 dark:text-gray-400">
           {t("standalone.subtitle")}
         </p>
       </div>
 
       {/* Quick Start Section */}
       <div className="mb-12">
-        <h2 className="text-3xl font-semibold text-gray-900 mb-6">
+        <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-6">
           {t("standalone.quickStart.title")}
         </h2>
 
-        <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+        <div className="bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded-lg p-4 mb-6">
           <div className="flex items-start space-x-2">
-            <Zap className="h-5 w-5 text-green-600 mt-0.5" />
+            <Zap className="h-5 w-5 text-green-600 dark:text-green-400 mt-0.5" />
             <div>
-              <h4 className="font-semibold text-green-900">
+              <h4 className="font-semibold text-green-900 dark:text-green-200">
                 {t("standalone.quickStart.lightweight.title")}
               </h4>
-              <p className="text-green-800 text-sm">
+              <p className="text-green-800 dark:text-green-300 text-sm">
                 {t("standalone.quickStart.lightweight.description")}
               </p>
             </div>
@@ -48,14 +48,14 @@ export default function StandalonePageContent() {
 
         {/* Prerequisites */}
         <div className="mb-8">
-          <h3 className="text-xl font-semibold text-gray-900 mb-4">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
             {t("standalone.requirements.title")}
           </h3>
-          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-            <ul className="space-y-2 text-gray-700">
+          <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+            <ul className="space-y-2 text-gray-700 dark:text-gray-300">
               {requirements.map((requirement, index) => (
                 <li key={index} className="flex items-center space-x-2">
-                  <CheckCircle className="h-4 w-4 text-green-600" />
+                  <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
                   <span>{requirement}</span>
                 </li>
               ))}
@@ -65,24 +65,24 @@ export default function StandalonePageContent() {
 
         {/* Installation Steps */}
         <div className="mb-8">
-          <h3 className="text-xl font-semibold text-gray-900 mb-4">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
             {t("standalone.installation.title")}
           </h3>
 
           {/* Critical Security Warning */}
-          <div className="bg-red-50 border-2 border-red-500 rounded-lg p-6 mb-8">
+          <div className="bg-red-50 dark:bg-red-900/30 border-2 border-red-500 dark:border-red-700 rounded-lg p-6 mb-8">
             <div className="flex items-start space-x-3">
               <div className="text-red-600 text-2xl">🚨</div>
               <div>
-                <h4 className="text-lg font-bold text-red-800 mb-2">
+                <h4 className="text-lg font-bold text-red-800 dark:text-red-200 mb-2">
                   {t("standalone.security.warning.title")}
                 </h4>
-                <div className="text-red-700 space-y-2">
+                <div className="text-red-700 dark:text-red-300 space-y-2">
                   <p className="font-semibold">
                     {t("standalone.security.warning.message")}
                   </p>
-                  <div className="bg-red-100 p-3 rounded-lg">
-                    <p className="font-medium text-red-800 mb-1">
+                  <div className="bg-red-100 dark:bg-red-900/40 p-3 rounded-lg">
+                    <p className="font-medium text-red-800 dark:text-red-200 mb-1">
                       {t("standalone.security.requirements.title")}
                     </p>
                     <ul className="text-sm space-y-1 ml-4">
@@ -91,7 +91,7 @@ export default function StandalonePageContent() {
                       ))}
                     </ul>
                   </div>
-                  <p className="text-sm font-medium text-red-800">
+                  <p className="text-sm font-medium text-red-800 dark:text-red-200">
                     {t("standalone.security.risk")}
                   </p>
                 </div>
@@ -100,16 +100,16 @@ export default function StandalonePageContent() {
           </div>
 
           <div className="space-y-6">
-            <div className="border border-gray-200 rounded-lg p-6">
+            <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
               <div className="flex items-center space-x-3 mb-4">
-                <div className="bg-blue-100 p-2 rounded-lg">
-                  <span className="text-blue-600 font-semibold">1</span>
+                <div className="bg-blue-100 dark:bg-blue-900/30 p-2 rounded-lg">
+                  <span className="text-blue-600 dark:text-blue-400 font-semibold">1</span>
                 </div>
-                <h4 className="text-lg font-semibold text-gray-900">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
                   {t("standalone.installation.step1.title")}
                 </h4>
               </div>
-              <div className="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+              <div className="bg-gray-950 dark:bg-black border border-gray-700 dark:border-gray-600 text-gray-100 p-4 rounded-lg mb-4">
                 <code className="text-sm">
                   {t("standalone.installation.step1.comment")}
                   <br />
@@ -118,16 +118,16 @@ export default function StandalonePageContent() {
               </div>
             </div>
 
-            <div className="border border-gray-200 rounded-lg p-6">
+            <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
               <div className="flex items-center space-x-3 mb-4">
-                <div className="bg-blue-100 p-2 rounded-lg">
-                  <span className="text-blue-600 font-semibold">2</span>
+                <div className="bg-blue-100 dark:bg-blue-900/30 p-2 rounded-lg">
+                  <span className="text-blue-600 dark:text-blue-400 font-semibold">2</span>
                 </div>
-                <h4 className="text-lg font-semibold text-gray-900">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
                   {t("standalone.installation.step2.title")}
                 </h4>
               </div>
-              <div className="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+              <div className="bg-gray-950 dark:bg-black border border-gray-700 dark:border-gray-600 text-gray-100 p-4 rounded-lg mb-4">
                 <code className="text-sm">
                   {t("standalone.installation.step2.dockerComment")}
                   <br />
@@ -143,30 +143,30 @@ export default function StandalonePageContent() {
               </div>
 
               {/* Mandatory Security Configuration */}
-              <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-4">
+              <div className="bg-red-50 dark:bg-red-900/30 border-l-4 border-red-500 dark:border-red-700 p-4 mb-4">
                 <div className="flex items-start space-x-2">
                   <div className="text-red-600 text-lg">⚠️</div>
                   <div>
-                    <h5 className="font-bold text-red-800 mb-2">
+                    <h5 className="font-bold text-red-800 dark:text-red-200 mb-2">
                       {t("standalone.installation.step2.securityConfig.title")}
                     </h5>
-                    <p className="text-red-700 text-sm mb-3">
+                    <p className="text-red-700 dark:text-red-300 text-sm mb-3">
                       {t("standalone.installation.step2.securityConfig.editFile")}{" "}
-                      <code className="bg-red-200 px-1 rounded">.env</code>{" "}
+                      <code className="bg-red-200 dark:bg-red-800/40 px-1 rounded">.env</code>{" "}
                       {t("standalone.installation.step2.securityConfig.changeFrom")}
                     </p>
-                    <div className="bg-gray-800 text-gray-100 p-2 rounded text-xs mb-2">
+                    <div className="bg-gray-900 dark:bg-black border border-gray-700 dark:border-gray-600 text-gray-100 p-2 rounded text-xs mb-2">
                       <code>AUTH_KEY=sk-123456</code>
                     </div>
-                    <p className="text-red-700 text-sm mb-2">
+                    <p className="text-red-700 dark:text-red-300 text-sm mb-2">
                       {t("standalone.installation.step2.securityConfig.changeTo")}
                     </p>
-                    <div className="bg-gray-800 text-gray-100 p-2 rounded text-xs mb-3">
+                    <div className="bg-gray-900 dark:bg-black border border-gray-700 dark:border-gray-600 text-gray-100 p-2 rounded text-xs mb-3">
                       <code>
                         AUTH_KEY=sk-prod-AbCdEfGh123456$#@!XyZabc789012
                       </code>
                     </div>
-                    <div className="text-xs text-red-600 bg-red-100 p-2 rounded">
+                    <div className="text-xs text-red-600 dark:text-red-400 bg-red-100 dark:bg-red-900/40 p-2 rounded">
                       <strong>{t("standalone.installation.step2.securityConfig.reminder.title")}</strong>
                       {t("standalone.installation.step2.securityConfig.reminder.message")}
                     </div>
@@ -175,16 +175,16 @@ export default function StandalonePageContent() {
               </div>
             </div>
 
-            <div className="border border-gray-200 rounded-lg p-6">
+            <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
               <div className="flex items-center space-x-3 mb-4">
-                <div className="bg-blue-100 p-2 rounded-lg">
-                  <span className="text-blue-600 font-semibold">3</span>
+                <div className="bg-blue-100 dark:bg-blue-900/30 p-2 rounded-lg">
+                  <span className="text-blue-600 dark:text-blue-400 font-semibold">3</span>
                 </div>
-                <h4 className="text-lg font-semibold text-gray-900">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
                   {t("standalone.installation.step3.title")}
                 </h4>
               </div>
-              <div className="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+              <div className="bg-gray-950 dark:bg-black border border-gray-700 dark:border-gray-600 text-gray-100 p-4 rounded-lg mb-4">
                 <code className="text-sm">
                   {t("standalone.installation.step3.comment")}
                   <br />
@@ -193,39 +193,39 @@ export default function StandalonePageContent() {
               </div>
             </div>
 
-            <div className="border border-gray-200 rounded-lg p-6">
+            <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
               <div className="flex items-center space-x-3 mb-4">
-                <div className="bg-green-100 p-2 rounded-lg">
-                  <span className="text-green-600 font-semibold">4</span>
+                <div className="bg-green-100 dark:bg-green-900/30 p-2 rounded-lg">
+                  <span className="text-green-600 dark:text-green-400 font-semibold">4</span>
                 </div>
-                <h4 className="text-lg font-semibold text-gray-900">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
                   {t("standalone.installation.step4.title")}
                 </h4>
               </div>
               <div className="space-y-4">
-                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                  <p className="text-gray-700 mb-2">{t("standalone.installation.step4.accessAdmin")}</p>
+                <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                  <p className="text-gray-700 dark:text-gray-300 mb-2">{t("standalone.installation.step4.accessAdmin")}</p>
                   <a
                     href="http://localhost:3001"
-                    className="text-blue-600 hover:text-blue-800 underline"
+                    className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     http://localhost:3001
                   </a>
                 </div>
-                <div className="bg-green-50 border border-green-300 rounded-lg p-4">
+                <div className="bg-green-50 dark:bg-green-900/30 border border-green-300 dark:border-green-800 rounded-lg p-4">
                   <div className="flex items-start space-x-2">
                     <div className="text-green-600 text-lg">🔐</div>
                     <div>
-                      <p className="text-green-800 text-sm font-medium mb-1">
+                      <p className="text-green-800 dark:text-green-300 text-sm font-medium mb-1">
                         {t("standalone.installation.step4.useAuthKey")}
                       </p>
-                      <p className="text-green-700 text-xs">
+                      <p className="text-green-700 dark:text-green-400 text-xs">
                         {t("standalone.installation.step4.fileSet")}{" "}
-                        <code className="bg-green-200 px-1 rounded">.env</code>{" "}
+                        <code className="bg-green-200 dark:bg-green-800/40 px-1 rounded">.env</code>{" "}
                         {t("standalone.installation.step4.login")}
-                        <code className="bg-green-200 px-1 rounded">
+                        <code className="bg-green-200 dark:bg-green-800/40 px-1 rounded">
                           AUTH_KEY
                         </code>{" "}
                         {t("standalone.installation.step4.value")}
@@ -233,11 +233,11 @@ export default function StandalonePageContent() {
                     </div>
                   </div>
                 </div>
-                <div className="bg-amber-50 border border-amber-300 rounded-lg p-4">
+                <div className="bg-amber-50 dark:bg-amber-900/30 border border-amber-300 dark:border-amber-800 rounded-lg p-4">
                   <div className="flex items-start space-x-2">
                     <div className="text-amber-600 text-lg">💡</div>
                     <div>
-                      <p className="text-amber-800 text-sm">
+                      <p className="text-amber-800 dark:text-amber-300 text-sm">
                         <strong>{t("standalone.installation.step4.securityTip.title")}</strong>
                         {t("standalone.installation.step4.securityTip.message")}
                       </p>
@@ -251,14 +251,14 @@ export default function StandalonePageContent() {
 
         {/* Common Commands */}
         <div className="mb-8">
-          <h3 className="text-xl font-semibold text-gray-900 mb-4">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
             {t("standalone.commonCommands.title")}
           </h3>
           <div className="grid md:grid-cols-2 gap-4">
             {commonCommands.map((command, index) => (
-              <div key={index} className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                <h4 className="font-semibold text-gray-900 mb-2">{command.title}</h4>
-                <code className="text-sm text-gray-700">{command.code}</code>
+              <div key={index} className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{command.title}</h4>
+                <code className="text-sm text-gray-700 dark:text-gray-300">{command.code}</code>
               </div>
             ))}
           </div>
@@ -267,18 +267,18 @@ export default function StandalonePageContent() {
 
       {/* Optional Deployment Section */}
       <div className="mb-12">
-        <h2 className="text-3xl font-semibold text-gray-900 mb-6">
+        <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-6">
           {t("standalone.optional.title")}
         </h2>
 
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+        <div className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6">
           <div className="flex items-start space-x-2">
-            <Database className="h-5 w-5 text-blue-600 mt-0.5" />
+            <Database className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5" />
             <div>
-              <h4 className="font-semibold text-blue-900">
+              <h4 className="font-semibold text-blue-900 dark:text-blue-200">
                 {t("standalone.optional.performance.title")}
               </h4>
-              <p className="text-blue-800 text-sm">
+              <p className="text-blue-800 dark:text-blue-300 text-sm">
                 {t("standalone.optional.performance.description")}
               </p>
             </div>
@@ -287,50 +287,50 @@ export default function StandalonePageContent() {
 
         {/* Database Configuration */}
         <div className="mb-8">
-          <h3 className="text-xl font-semibold text-gray-900 mb-4">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
             {t("standalone.optional.database.title")}
           </h3>
 
           <div className="space-y-6">
             {databaseConfigs && databaseConfigs.length > 0 ? databaseConfigs.map((config, index) => (
-              <div key={index} className="border border-gray-200 rounded-lg p-6">
-                <h4 className="text-lg font-semibold text-gray-900 mb-4">
+              <div key={index} className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                   {config.name}
                 </h4>
                 {config.steps && config.steps.map((step, stepIndex) => (
                   <div key={stepIndex} className="mb-4">
-                    <p className="text-gray-700 mb-2">
+                    <p className="text-gray-700 dark:text-gray-300 mb-2">
                       {step.description ? (
                         <>
                           {step.description.split('{file}')[0]}
-                          <code className="bg-gray-100 px-1 rounded">{step.file || ''}</code>
+                          <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">{step.file || ''}</code>
                           {step.description.split('{file}')[1]}
                         </>
                       ) : ''}
                     </p>
-                    <div className="bg-gray-900 text-gray-100 p-4 rounded-lg text-sm">
+                    <div className="bg-gray-950 dark:bg-black border border-gray-700 dark:border-gray-600 text-gray-100 p-4 rounded-lg text-sm">
                       <code className="whitespace-pre-wrap">{step.code || ''}</code>
                     </div>
                   </div>
                 ))}
               </div>
             )) : (
-              <div className="text-gray-500">加载中...</div>
+              <div className="text-gray-500 dark:text-gray-400">{t("loading")}</div>
             )}
           </div>
         </div>
 
         {/* Redis Configuration */}
         <div className="mb-8">
-          <h3 className="text-xl font-semibold text-gray-900 mb-4">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
             {t("standalone.optional.redis.title")}
           </h3>
 
-          <div className="border border-gray-200 rounded-lg p-6">
+          <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
             <div className="mb-4">
-              <p className="text-gray-700 mb-2">
+              <p className="text-gray-700 dark:text-gray-300 mb-2">
                 {t("standalone.optional.redis.step1.description")}
-                <code className="bg-gray-100 px-1 rounded">
+                <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">
                   {t("standalone.optional.redis.step1.file")}
                 </code>
                 {t("standalone.optional.redis.step1.action")}
@@ -340,9 +340,9 @@ export default function StandalonePageContent() {
               </div>
             </div>
             <div className="mb-4">
-              <p className="text-gray-700 mb-2">
+              <p className="text-gray-700 dark:text-gray-300 mb-2">
                 {t("standalone.optional.redis.step2.description")}{" "}
-                <code className="bg-gray-100 px-1 rounded">{t("standalone.optional.redis.step2.file")}</code>{" "}
+                <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">{t("standalone.optional.redis.step2.file")}</code>{" "}
                 {t("standalone.optional.redis.step2.action")}
               </p>
               <div className="bg-gray-900 text-gray-100 p-4 rounded-lg text-sm">
@@ -354,12 +354,12 @@ export default function StandalonePageContent() {
 
         {/* Restart Services */}
         <div className="mb-8">
-          <h3 className="text-xl font-semibold text-gray-900 mb-4">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
             {t("standalone.optional.restart.title")}
           </h3>
 
-          <div className="border border-gray-200 rounded-lg p-6">
-            <p className="text-gray-700 mb-4">{t("standalone.optional.restart.description")}</p>
+          <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+            <p className="text-gray-700 dark:text-gray-300 mb-4">{t("standalone.optional.restart.description")}</p>
             <div className="bg-gray-900 text-gray-100 p-4 rounded-lg text-sm">
               <code>
                 {t("standalone.optional.restart.stopComment")}
@@ -378,31 +378,31 @@ export default function StandalonePageContent() {
 
       {/* Troubleshooting */}
       <div className="mb-12">
-        <h2 className="text-3xl font-semibold text-gray-900 mb-6">
+        <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-6">
           {t("standalone.troubleshooting.title")}
         </h2>
 
         <div className="space-y-6">
-          <div className="border border-gray-200 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+          <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
               {t("standalone.troubleshooting.commonIssues.title")}
             </h3>
             <div className="space-y-4">
               {troubleshootingItems.map((item, index) => (
                 <div key={index}>
-                  <h4 className="font-semibold text-gray-800">{item.title}</h4>
-                  <p className="text-gray-600 text-sm mb-2">{item.description}</p>
+                  <h4 className="font-semibold text-gray-800 dark:text-gray-200">{item.title}</h4>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">{item.description}</p>
                   {item.solution && (
-                    <div className="text-gray-600 text-sm">
+                    <div className="text-gray-600 dark:text-gray-400 text-sm">
                       {item.solution.type === 'list' && item.solution.items && (
-                        <ul className="text-gray-600 text-sm space-y-1 ml-4">
+                        <ul className="text-gray-600 dark:text-gray-400 text-sm space-y-1 ml-4">
                           {item.solution.items.map((listItem, listIndex) => (
                             <li key={listIndex}>• {listItem}</li>
                           ))}
                         </ul>
                       )}
                       {item.solution.type === 'code' && item.solution.content && (
-                        <div className="bg-gray-100 p-2 rounded text-sm">
+                        <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded text-sm">
                           <code>{item.solution.content}</code>
                         </div>
                       )}
@@ -416,15 +416,15 @@ export default function StandalonePageContent() {
       </div>
 
       {/* Next Steps */}
-      <div className="bg-gradient-to-br from-blue-50 to-violet-50 border border-blue-200 rounded-xl p-8">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+      <div className="bg-gradient-to-br from-blue-50 to-violet-50 dark:from-blue-900/30 dark:to-violet-900/30 border border-blue-200 dark:border-blue-800 rounded-xl p-8">
+        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
           {t("standalone.nextSteps.title")}
         </h2>
-        <p className="text-gray-700 mb-6">{t("standalone.nextSteps.description")}</p>
-        <ul className="space-y-2 text-gray-700 mb-6">
+        <p className="text-gray-700 dark:text-gray-300 mb-6">{t("standalone.nextSteps.description")}</p>
+        <ul className="space-y-2 text-gray-700 dark:text-gray-300 mb-6">
           {nextSteps.map((step, index) => (
             <li key={index} className="flex items-center space-x-2">
-              <CheckCircle className="h-4 w-4 text-green-600" />
+              <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
               <span>{step}</span>
             </li>
           ))}

@@ -39,7 +39,7 @@ const LanguageSwitcher = ({ className }: LanguageSwitcherProps) => {
     <div className={cn("relative", className)} ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors duration-200 text-sm font-medium text-gray-700"
+        className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 text-sm font-medium text-gray-700 dark:text-gray-300"
       >
         <Globe className="h-4 w-4" />
         <span>{LANGUAGE_NAMES[currentLanguage]}</span>
@@ -58,7 +58,7 @@ const LanguageSwitcher = ({ className }: LanguageSwitcherProps) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="absolute right-0 mt-2 w-36 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50"
+            className="absolute right-0 mt-2 w-36 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50"
           >
             {Object.entries(LANGUAGE_NAMES).map(([lang, name]) => (
               <button
@@ -67,8 +67,8 @@ const LanguageSwitcher = ({ className }: LanguageSwitcherProps) => {
                 className={cn(
                   "w-full text-left px-4 py-2 text-sm transition-colors duration-200",
                   currentLanguage === lang
-                    ? "bg-blue-50 text-blue-700 font-medium"
-                    : "text-gray-700 hover:bg-gray-50"
+                    ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 font-medium"
+                    : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
                 )}
               >
                 {name}

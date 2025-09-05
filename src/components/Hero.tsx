@@ -10,10 +10,10 @@ const Hero = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-950">
       {/* Simple background pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0 bg-gray-100"></div>
+      <div className="absolute inset-0 opacity-5 dark:opacity-10">
+        <div className="absolute inset-0 bg-gray-100 dark:bg-gray-800"></div>
       </div>
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
@@ -39,7 +39,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 px-4"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 px-4"
           >
             <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
               {t("hero.title")}
@@ -51,7 +51,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg sm:text-xl md:text-2xl text-gray-700 mb-4 font-medium px-4"
+            className="text-lg sm:text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-4 font-medium px-4"
           >
             {t("hero.subtitle")}
           </motion.p>
@@ -61,7 +61,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-base sm:text-lg text-gray-600 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-4"
+            className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-4"
           >
             {t("hero.description")}
           </motion.p>
@@ -75,7 +75,7 @@ const Hero = () => {
           >
             <Link
               href="/docs"
-              className="group bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-xl w-full sm:w-auto justify-center"
+              className="group bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-xl dark:shadow-blue-500/20 w-full sm:w-auto justify-center"
             >
               <FileText className="h-5 w-5" />
               {t("hero.buttons.docs")}
@@ -84,7 +84,7 @@ const Hero = () => {
 
             <Link
               href="/docs/deployment"
-              className="group border-2 border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 hover:shadow-md w-full sm:w-auto justify-center"
+              className="group border-2 border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 hover:shadow-md dark:hover:bg-gray-800 w-full sm:w-auto justify-center"
             >
               <Download className="h-5 w-5" />
               {t("hero.buttons.install")}
@@ -94,7 +94,7 @@ const Hero = () => {
               href="https://github.com/tbphp/gpt-load"
               target="_blank"
               rel="noopener noreferrer"
-              className="group border-2 border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 hover:shadow-md w-full sm:w-auto justify-center"
+              className="group border-2 border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 hover:shadow-md dark:hover:bg-gray-800 w-full sm:w-auto justify-center"
             >
               <Github className="h-5 w-5" />
               {t("hero.buttons.github")}
@@ -108,29 +108,29 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 max-w-3xl mx-auto mb-12 sm:mb-16 px-4"
           >
-            <div className="text-center p-3 sm:p-4 bg-white rounded-lg shadow-sm border border-gray-200">
-              <div className="text-base sm:text-lg font-bold text-blue-600 mb-1 sm:mb-2">
+            <div className="text-center p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+              <div className="text-base sm:text-lg font-bold text-blue-600 dark:text-blue-400 mb-1 sm:mb-2">
                 Go 1.23+
               </div>
-              <div className="text-xs sm:text-sm text-gray-600">{t("hero.tech.backend")}</div>
+              <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">{t("hero.tech.backend")}</div>
             </div>
-            <div className="text-center p-3 sm:p-4 bg-white rounded-lg shadow-sm border border-gray-200">
-              <div className="text-base sm:text-lg font-bold text-blue-600 mb-1 sm:mb-2">
+            <div className="text-center p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+              <div className="text-base sm:text-lg font-bold text-blue-600 dark:text-blue-400 mb-1 sm:mb-2">
                 MySQL
               </div>
-              <div className="text-xs sm:text-sm text-gray-600">{t("hero.tech.database")}</div>
+              <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">{t("hero.tech.database")}</div>
             </div>
-            <div className="text-center p-3 sm:p-4 bg-white rounded-lg shadow-sm border border-gray-200">
-              <div className="text-base sm:text-lg font-bold text-blue-600 mb-1 sm:mb-2">
+            <div className="text-center p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+              <div className="text-base sm:text-lg font-bold text-blue-600 dark:text-blue-400 mb-1 sm:mb-2">
                 Redis
               </div>
-              <div className="text-xs sm:text-sm text-gray-600">{t("hero.tech.cache")}</div>
+              <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">{t("hero.tech.cache")}</div>
             </div>
-            <div className="text-center p-3 sm:p-4 bg-white rounded-lg shadow-sm border border-gray-200">
-              <div className="text-base sm:text-lg font-bold text-blue-600 mb-1 sm:mb-2">
+            <div className="text-center p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+              <div className="text-base sm:text-lg font-bold text-blue-600 dark:text-blue-400 mb-1 sm:mb-2">
                 Vue 3
               </div>
-              <div className="text-xs sm:text-sm text-gray-600">{t("hero.tech.frontend")}</div>
+              <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">{t("hero.tech.frontend")}</div>
             </div>
           </motion.div>
 
@@ -141,7 +141,7 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="max-w-2xl mx-auto px-4"
           >
-            <div className="bg-gray-900 rounded-lg p-4 sm:p-6 text-left shadow-xl overflow-hidden">
+            <div className="bg-gray-900 dark:bg-black dark:border dark:border-gray-700 rounded-lg p-4 sm:p-6 text-left shadow-xl overflow-hidden">
               <div className="flex items-center space-x-2 mb-4">
                 <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                 <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>

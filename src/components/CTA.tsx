@@ -9,7 +9,7 @@ const CTA = () => {
   const { t } = useTranslation();
   
   return (
-    <section className="py-16 sm:py-20 bg-gradient-to-br from-blue-600 to-violet-700">
+    <section className="py-16 sm:py-20 bg-gradient-to-br from-blue-600 to-violet-700 dark:from-blue-700 dark:to-violet-800">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
@@ -21,14 +21,14 @@ const CTA = () => {
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6 px-4">
               {t("cta.title")}
             </h2>
-            <p className="text-lg sm:text-xl text-blue-100 mb-6 sm:mb-8 max-w-2xl mx-auto px-4">
+            <p className="text-lg sm:text-xl text-blue-100 dark:text-blue-200 mb-6 sm:mb-8 max-w-2xl mx-auto px-4">
               {t("cta.subtitle")}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-12 px-4">
               <Link
                 href="/docs/deployment/standalone"
-                className="inline-flex items-center space-x-2 bg-white text-blue-600 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-200 shadow-lg w-full sm:w-auto justify-center"
+                className="inline-flex items-center space-x-2 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200 shadow-lg w-full sm:w-auto justify-center"
               >
                 <Download className="h-4 w-4 sm:h-5 sm:w-5" />
                 <span>{t("cta.buttons.quickDeploy")}</span>
@@ -37,7 +37,7 @@ const CTA = () => {
 
               <Link
                 href="/docs"
-                className="inline-flex items-center space-x-2 border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-all duration-200 w-full sm:w-auto justify-center"
+                className="inline-flex items-center space-x-2 border-2 border-white dark:border-white/80 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-white dark:hover:bg-gray-800 hover:text-blue-600 dark:hover:text-white transition-all duration-200 w-full sm:w-auto justify-center"
               >
                 <BookOpen className="h-4 w-4 sm:h-5 sm:w-5" />
                 <span>{t("cta.buttons.viewDocs")}</span>
@@ -47,7 +47,7 @@ const CTA = () => {
                 href="https://github.com/tbphp/gpt-load"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center space-x-2 border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-all duration-200 w-full sm:w-auto justify-center"
+                className="inline-flex items-center space-x-2 border-2 border-white dark:border-white/80 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-white dark:hover:bg-gray-800 hover:text-blue-600 dark:hover:text-white transition-all duration-200 w-full sm:w-auto justify-center"
               >
                 <Github className="h-4 w-4 sm:h-5 sm:w-5" />
                 <span>{t("cta.buttons.github")}</span>
@@ -55,7 +55,7 @@ const CTA = () => {
 
               <Link
                 href="/docs/sponsor"
-                className="inline-flex items-center space-x-2 bg-red-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-red-600 transition-all duration-200 shadow-lg w-full sm:w-auto justify-center"
+                className="inline-flex items-center space-x-2 bg-red-500 dark:bg-red-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-red-600 dark:hover:bg-red-700 transition-all duration-200 shadow-lg w-full sm:w-auto justify-center"
               >
                 <Heart className="h-4 w-4 sm:h-5 sm:w-5" />
                 <span>{t("cta.buttons.sponsor")}</span>

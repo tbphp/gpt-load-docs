@@ -25,24 +25,24 @@ export default function IntroductionPageContent() {
     <div className="max-w-4xl mx-auto">
       {/* Header */}
       <div className="mb-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-6">
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">
           {t("introduction.title")}
         </h1>
-        <p className="text-xl text-gray-600 leading-relaxed">
+        <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
           {t("introduction.subtitle")}
         </p>
       </div>
 
       {/* Core Concept */}
       <div className="mb-12">
-        <h2 className="text-3xl font-semibold text-gray-900 mb-6">
+        <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-6">
           {t("introduction.coreConcept.title")}
         </h2>
-        <div className="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
-          <h3 className="text-lg font-semibold text-blue-900 mb-2">
+        <div className="bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-500 dark:border-blue-400 p-6 mb-6">
+          <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-200 mb-2">
             {t("introduction.coreConcept.transparentProxy.title")}
           </h3>
-          <p className="text-blue-800">
+          <p className="text-blue-800 dark:text-blue-300 dark:text-blue-400">
             {t("introduction.coreConcept.transparentProxy.description")}
           </p>
         </div>
@@ -50,42 +50,42 @@ export default function IntroductionPageContent() {
 
       {/* Supported Services */}
       <div className="mb-12">
-        <h2 className="text-3xl font-semibold text-gray-900 mb-6">
+        <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-6">
           {t("introduction.supportedServices.title")}
         </h2>
         <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6">
-          <div className="border border-gray-200 rounded-lg p-6">
+          <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
             <div className="flex items-center mb-4">
               <Globe className="h-6 w-6 text-blue-600 mr-3" />
-              <h3 className="text-xl font-semibold text-gray-900">OpenAI</h3>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">OpenAI</h3>
             </div>
-            <ul className="text-gray-600 space-y-2">
+            <ul className="text-gray-600 dark:text-gray-400 space-y-2">
               {tArray("introduction.supportedServices.openai.features").map((feature: string, index: number) => (
                 <li key={index}>{feature}</li>
               ))}
             </ul>
           </div>
-          <div className="border border-gray-200 rounded-lg p-6">
+          <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
             <div className="flex items-center mb-4">
               <Server className="h-6 w-6 text-green-600 mr-3" />
-              <h3 className="text-xl font-semibold text-gray-900">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
                 Google Gemini
               </h3>
             </div>
-            <ul className="text-gray-600 space-y-2">
+            <ul className="text-gray-600 dark:text-gray-400 space-y-2">
               {tArray("introduction.supportedServices.gemini.features").map((feature: string, index: number) => (
                 <li key={index}>{feature}</li>
               ))}
             </ul>
           </div>
-          <div className="border border-gray-200 rounded-lg p-6">
+          <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
             <div className="flex items-center mb-4">
               <Shield className="h-6 w-6 text-orange-600 mr-3" />
-              <h3 className="text-xl font-semibold text-gray-900">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
                 Anthropic Claude
               </h3>
             </div>
-            <ul className="text-gray-600 space-y-2">
+            <ul className="text-gray-600 dark:text-gray-400 space-y-2">
               {tArray("introduction.supportedServices.claude.features").map((feature: string, index: number) => (
                 <li key={index}>{feature}</li>
               ))}
@@ -96,61 +96,61 @@ export default function IntroductionPageContent() {
 
       {/* Core Features */}
       <div className="mb-12">
-        <h2 className="text-3xl font-semibold text-gray-900 mb-6">
+        <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-6">
           {t("introduction.coreFeatures.title")}
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="bg-white border border-gray-200 rounded-lg p-6">
+          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
             <Cpu className="h-8 w-8 text-blue-600 mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
               {t("introduction.coreFeatures.highPerformance.title")}
             </h3>
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-600 dark:text-gray-400 text-sm">
               {t("introduction.coreFeatures.highPerformance.description")}
             </p>
           </div>
-          <div className="bg-white border border-gray-200 rounded-lg p-6">
+          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
             <RotateCcw className="h-8 w-8 text-green-600 mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
               {t("introduction.coreFeatures.keyManagement.title")}
             </h3>
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-600 dark:text-gray-400 text-sm">
               {t("introduction.coreFeatures.keyManagement.description")}
             </p>
           </div>
-          <div className="bg-white border border-gray-200 rounded-lg p-6">
-            <Shield className="h-8 w-8 text-purple-600 mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+            <Shield className="h-8 w-8 text-purple-600 dark:text-purple-400 mb-4" />
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
               {t("introduction.coreFeatures.loadBalancing.title")}
             </h3>
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-600 dark:text-gray-400 text-sm">
               {t("introduction.coreFeatures.loadBalancing.description")}
             </p>
           </div>
-          <div className="bg-white border border-gray-200 rounded-lg p-6">
+          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
             <Database className="h-8 w-8 text-orange-600 mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
               {t("introduction.coreFeatures.clusterSupport.title")}
             </h3>
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-600 dark:text-gray-400 text-sm">
               {t("introduction.coreFeatures.clusterSupport.description")}
             </p>
           </div>
-          <div className="bg-white border border-gray-200 rounded-lg p-6">
+          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
             <Server className="h-8 w-8 text-indigo-600 mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
               {t("introduction.coreFeatures.hotReload.title")}
             </h3>
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-600 dark:text-gray-400 text-sm">
               {t("introduction.coreFeatures.hotReload.description")}
             </p>
           </div>
-          <div className="bg-white border border-gray-200 rounded-lg p-6">
+          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
             <Globe className="h-8 w-8 text-cyan-600 mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
               {t("introduction.coreFeatures.adminPanel.title")}
             </h3>
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-600 dark:text-gray-400 text-sm">
               {t("introduction.coreFeatures.adminPanel.description")}
             </p>
           </div>
@@ -159,15 +159,15 @@ export default function IntroductionPageContent() {
 
       {/* Technology Stack */}
       <div className="mb-12">
-        <h2 className="text-3xl font-semibold text-gray-900 mb-6">
+        <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-6">
           {t("introduction.techStack.title")}
         </h2>
         <div className="grid md:grid-cols-2 gap-8">
           <div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
               {t("introduction.techStack.backend.title")}
             </h3>
-            <ul className="space-y-2 text-gray-600">
+            <ul className="space-y-2 text-gray-600 dark:text-gray-400">
               {tObjectArray<{name: string, desc: string}>("introduction.techStack.backend.items").map((item, index) => (
                 <li key={index}>
                   • <strong>{item.name}</strong> - {item.desc}
@@ -176,10 +176,10 @@ export default function IntroductionPageContent() {
             </ul>
           </div>
           <div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
               {t("introduction.techStack.frontend.title")}
             </h3>
-            <ul className="space-y-2 text-gray-600">
+            <ul className="space-y-2 text-gray-600 dark:text-gray-400">
               {tObjectArray<{name: string, desc: string}>("introduction.techStack.frontend.items").map((item, index) => (
                 <li key={index}>
                   • <strong>{item.name}</strong> - {item.desc}
@@ -192,35 +192,35 @@ export default function IntroductionPageContent() {
 
       {/* Architecture Advantages */}
       <div className="mb-12">
-        <h2 className="text-3xl font-semibold text-gray-900 mb-6">
+        <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-6">
           {t("introduction.architectureAdvantages.title")}
         </h2>
         <div className="grid md:grid-cols-3 gap-6">
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
               {t("introduction.architectureAdvantages.microservices.title")}
             </h3>
-            <ul className="text-gray-600 space-y-1 text-sm">
+            <ul className="text-gray-600 dark:text-gray-400 space-y-1 text-sm">
               {tArray("introduction.architectureAdvantages.microservices.items").map((item: string, index: number) => (
                 <li key={index}>{item}</li>
               ))}
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
               {t("introduction.architectureAdvantages.distributed.title")}
             </h3>
-            <ul className="text-gray-600 space-y-1 text-sm">
+            <ul className="text-gray-600 dark:text-gray-400 space-y-1 text-sm">
               {tArray("introduction.architectureAdvantages.distributed.items").map((item: string, index: number) => (
                 <li key={index}>{item}</li>
               ))}
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
               {t("introduction.architectureAdvantages.highAvailability.title")}
             </h3>
-            <ul className="text-gray-600 space-y-1 text-sm">
+            <ul className="text-gray-600 dark:text-gray-400 space-y-1 text-sm">
               {tArray("introduction.architectureAdvantages.highAvailability.items").map((item: string, index: number) => (
                 <li key={index}>{item}</li>
               ))}
@@ -231,35 +231,35 @@ export default function IntroductionPageContent() {
 
       {/* Use Cases */}
       <div className="mb-12">
-        <h2 className="text-3xl font-semibold text-gray-900 mb-6">
+        <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-6">
           {t("introduction.useCases.title")}
         </h2>
         <div className="grid md:grid-cols-3 gap-6">
-          <div className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-blue-900 mb-3">
+          <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 border border-blue-200 dark:border-blue-700 rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-300 mb-3">
               {t("introduction.useCases.enterprise.title")}
             </h3>
-            <ul className="text-blue-800 space-y-1 text-sm">
+            <ul className="text-blue-800 dark:text-blue-400 space-y-1 text-sm">
               {tArray("introduction.useCases.enterprise.items").map((item: string, index: number) => (
                 <li key={index}>{item}</li>
               ))}
             </ul>
           </div>
-          <div className="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-green-900 mb-3">
+          <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 border border-green-200 dark:border-green-700 rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-green-900 dark:text-green-300 mb-3">
               {t("introduction.useCases.developer.title")}
             </h3>
-            <ul className="text-green-800 space-y-1 text-sm">
+            <ul className="text-green-800 dark:text-green-400 space-y-1 text-sm">
               {tArray("introduction.useCases.developer.items").map((item: string, index: number) => (
                 <li key={index}>{item}</li>
               ))}
             </ul>
           </div>
-          <div className="bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-purple-900 mb-3">
+          <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 border border-purple-200 dark:border-purple-700 rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-purple-900 dark:text-purple-300 mb-3">
               {t("introduction.useCases.multiTenant.title")}
             </h3>
-            <ul className="text-purple-800 space-y-1 text-sm">
+            <ul className="text-purple-800 dark:text-purple-400 space-y-1 text-sm">
               {tArray("introduction.useCases.multiTenant.items").map((item: string, index: number) => (
                 <li key={index}>{item}</li>
               ))}
@@ -270,30 +270,30 @@ export default function IntroductionPageContent() {
 
       {/* 深入了解 */}
       <div className="mb-12">
-        <h2 className="text-3xl font-semibold text-gray-900 mb-6 text-center">
+        <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-6 text-center">
           {t("introduction.deepDive.title")}
         </h2>
-        <p className="text-lg text-gray-600 text-center mb-8 max-w-3xl mx-auto">
+        <p className="text-lg text-gray-600 dark:text-gray-400 text-center mb-8 max-w-3xl mx-auto">
           {t("introduction.deepDive.subtitle")}
         </p>
 
         <div className="grid md:grid-cols-2 gap-6">
           <Link
             href="/docs/architecture-design/performance"
-            className="group bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300"
+            className="group bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 dark:from-blue-900/20 dark:to-cyan-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-6 hover:shadow-lg dark:hover:shadow-blue-900/50 transition-all duration-300"
           >
             <div className="flex items-center mb-4">
               <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center mr-4">
                 <Zap className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-blue-900 group-hover:text-blue-700">
+                <h3 className="text-xl font-semibold text-blue-900 dark:text-blue-200 group-hover:text-blue-700 dark:text-blue-300">
                   {t("introduction.deepDive.performance.title")}
                 </h3>
                 <p className="text-blue-600 text-sm">{t("introduction.deepDive.performance.subtitle")}</p>
               </div>
             </div>
-            <div className="space-y-2 text-sm text-blue-800">
+            <div className="space-y-2 text-sm text-blue-800 dark:text-blue-300 dark:text-blue-400">
               {tArray("introduction.deepDive.performance.features").map((feature: string, index: number) => (
                 <div key={index} className="flex items-center">
                   <CheckCircle className="h-4 w-4 text-blue-600 mr-2" />
@@ -305,23 +305,23 @@ export default function IntroductionPageContent() {
 
           <Link
             href="/docs/architecture-design"
-            className="group bg-gradient-to-br from-purple-50 to-violet-50 border border-purple-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300"
+            className="group bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-900/20 dark:to-violet-900/20 dark:from-purple-900/20 dark:to-violet-900/20 border border-purple-200 dark:border-purple-800 rounded-xl p-6 hover:shadow-lg dark:hover:shadow-purple-900/50 transition-all duration-300"
           >
             <div className="flex items-center mb-4">
               <div className="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center mr-4">
                 <Layers className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-purple-900 group-hover:text-purple-700">
+                <h3 className="text-xl font-semibold text-purple-900 dark:text-purple-200 group-hover:text-purple-700 dark:text-purple-300 dark:text-purple-300">
                   {t("introduction.deepDive.architecture.title")}
                 </h3>
-                <p className="text-purple-600 text-sm">{t("introduction.deepDive.architecture.subtitle")}</p>
+                <p className="text-purple-600 dark:text-purple-400 text-sm">{t("introduction.deepDive.architecture.subtitle")}</p>
               </div>
             </div>
-            <div className="space-y-2 text-sm text-purple-800">
+            <div className="space-y-2 text-sm text-purple-800 dark:text-purple-300">
               {tArray("introduction.deepDive.architecture.features").map((feature: string, index: number) => (
                 <div key={index} className="flex items-center">
-                  <CheckCircle className="h-4 w-4 text-purple-600 mr-2" />
+                  <CheckCircle className="h-4 w-4 text-purple-600 dark:text-purple-400 mr-2" />
                   <span>{feature}</span>
                 </div>
               ))}
@@ -338,7 +338,7 @@ export default function IntroductionPageContent() {
         </p>
         <Link
           href="/docs/deployment"
-          className="inline-flex items-center bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+          className="inline-flex items-center bg-white dark:bg-gray-800 text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 dark:bg-gray-800 transition-colors"
         >
           {t("introduction.gettingStarted.button")}
         </Link>

@@ -73,7 +73,7 @@ const Features = () => {
     },
   ];
   return (
-    <section className="py-16 sm:py-20 bg-gray-50">
+    <section className="py-16 sm:py-20 bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
@@ -84,10 +84,10 @@ const Features = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 px-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 px-4">
               {t("features.title")}
             </h2>
-            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
+            <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto px-4">
               {t("features.subtitle")}
             </p>
           </motion.div>
@@ -98,27 +98,27 @@ const Features = () => {
               return (
                 <motion.div
                   key={index}
-                  className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200"
+                  className="bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md dark:hover:shadow-lg dark:hover:shadow-gray-900/50 transition-shadow duration-200"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
                   {/* Icon */}
-                  <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-lg mb-3 sm:mb-4">
-                    <IconComponent className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
+                  <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg mb-3 sm:mb-4">
+                    <IconComponent className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 dark:text-blue-400" />
                   </div>
                   {/* Title */}
-                  <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3">
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-2 sm:mb-3">
                     {feature.title}
                   </h3>
                   {/* Description */}
-                  <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4 leading-relaxed">
+                  <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-3 sm:mb-4 leading-relaxed">
                     {feature.description}
                   </p>
                   {/* Technical Details */}
-                  <div className="bg-gray-50 rounded-lg p-2 sm:p-3">
-                    <div className="text-xs sm:text-sm text-gray-500 font-mono">
+                  <div className="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-2 sm:p-3">
+                    <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-500 font-mono">
                       {feature.technical}
                     </div>
                   </div>
@@ -128,7 +128,7 @@ const Features = () => {
           </div>{" "}
           {/* Architecture Highlight */}
           <motion.div
-            className="mt-12 sm:mt-16 bg-gradient-to-r from-blue-600 to-violet-600 rounded-xl p-6 sm:p-8 text-white text-center"
+            className="mt-12 sm:mt-16 bg-gradient-to-r from-blue-600 to-violet-600 dark:from-blue-500 dark:to-violet-500 rounded-xl p-6 sm:p-8 text-white text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
@@ -137,7 +137,7 @@ const Features = () => {
             <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
               {t("productionReady.title")}
             </h3>
-            <p className="text-blue-100 mb-4 sm:mb-6 max-w-2xl mx-auto text-sm sm:text-base">
+            <p className="text-blue-100 dark:text-blue-100 mb-4 sm:mb-6 max-w-2xl mx-auto text-sm sm:text-base">
               {t("productionReady.description")}
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
@@ -145,7 +145,7 @@ const Features = () => {
                 <div className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">
                   Go 1.23+
                 </div>
-                <div className="text-blue-200 text-xs sm:text-sm">
+                <div className="text-blue-200 dark:text-blue-200 text-xs sm:text-sm">
                   {t("productionReady.runtime")}
                 </div>
               </div>
@@ -153,7 +153,7 @@ const Features = () => {
                 <div className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">
                   MySQL 8.2+
                 </div>
-                <div className="text-blue-200 text-xs sm:text-sm">
+                <div className="text-blue-200 dark:text-blue-200 text-xs sm:text-sm">
                   {t("productionReady.persistence")}
                 </div>
               </div>
@@ -161,7 +161,7 @@ const Features = () => {
                 <div className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">
                   Redis
                 </div>
-                <div className="text-blue-200 text-xs sm:text-sm">
+                <div className="text-blue-200 dark:text-blue-200 text-xs sm:text-sm">
                   {t("productionReady.cacheAndLock")}
                 </div>
               </div>
@@ -169,7 +169,7 @@ const Features = () => {
                 <div className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">
                   Vue 3
                 </div>
-                <div className="text-blue-200 text-xs sm:text-sm">
+                <div className="text-blue-200 dark:text-blue-200 text-xs sm:text-sm">
                   {t("productionReady.adminUI")}
                 </div>
               </div>

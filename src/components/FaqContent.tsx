@@ -69,19 +69,19 @@ export default function FaqContent() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50/30">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50/30 dark:from-gray-900 dark:to-blue-900/20">
       <div className="max-w-4xl mx-auto px-4 py-12">
         {/* 页面标题 */}
         <div className="text-center mb-12">
           <div className="flex justify-center mb-4">
-            <div className="p-3 bg-blue-100 rounded-full">
-              <HelpCircle className="w-8 h-8 text-blue-600" />
+            <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full">
+              <HelpCircle className="w-8 h-8 text-blue-600 dark:text-blue-400" />
             </div>
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
             {t("faq.title")}
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             {t("faq.subtitle")}
           </p>
         </div>
@@ -89,13 +89,13 @@ export default function FaqContent() {
         {/* 搜索框 */}
         <div className="mb-8">
           <div className="relative max-w-md mx-auto">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500 dark:text-gray-400" />
             <input
               type="text"
               placeholder={t("faq.searchPlaceholder")}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-3 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
         </div>
@@ -109,7 +109,7 @@ export default function FaqContent() {
                 "px-4 py-2 rounded-full text-sm font-medium transition-colors",
                 !activeCategory
                   ? "bg-blue-600 text-white"
-                  : "bg-white text-gray-600 hover:bg-gray-50 border border-gray-200"
+                  : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700"
               )}
             >
               {t("faq.allCategories")}
@@ -124,7 +124,7 @@ export default function FaqContent() {
                     "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-colors",
                     activeCategory === category.id
                       ? "bg-blue-600 text-white"
-                      : "bg-white text-gray-600 hover:bg-gray-50 border border-gray-200"
+                      : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700"
                   )}
                 >
                   <IconComponent className="w-4 h-4" />
@@ -139,11 +139,11 @@ export default function FaqContent() {
         <div className="space-y-4">
           {filteredFaqs.length === 0 ? (
             <div className="text-center py-12">
-              <HelpCircle className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">
+              <HelpCircle className="w-16 h-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
+              <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
                 {t("faq.noResults")}
               </h3>
-              <p className="text-gray-500">
+              <p className="text-gray-500 dark:text-gray-400">
                 {t("faq.noResultsDescription")}
               </p>
             </div>
@@ -156,18 +156,18 @@ export default function FaqContent() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.05 }}
-                  className="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow"
+                  className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow"
                 >
                   <button
                     onClick={() => toggleFaq(index)}
                     className="w-full px-6 py-4 text-left flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset rounded-lg"
                   >
-                    <h3 className="text-lg font-medium text-gray-900 pr-4">
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white pr-4">
                       {faq.question}
                     </h3>
                     <ChevronDown
                       className={cn(
-                        "w-5 h-5 text-gray-500 transition-transform flex-shrink-0",
+                        "w-5 h-5 text-gray-500 dark:text-gray-400 transition-transform flex-shrink-0",
                         isOpen ? "transform rotate-180" : ""
                       )}
                     />
@@ -183,7 +183,7 @@ export default function FaqContent() {
                         className="overflow-hidden"
                       >
                         <div className="px-6 pb-4 pt-0">
-                          <div className="prose prose-sm max-w-none text-gray-600">
+                          <div className="prose prose-sm max-w-none text-gray-600 dark:text-gray-300">
                             <div dangerouslySetInnerHTML={{ __html: faq.answer }} />
                           </div>
                           {faq.tags.length > 0 && (
@@ -191,7 +191,7 @@ export default function FaqContent() {
                               {faq.tags.map((tag, tagIndex) => (
                                 <span
                                   key={tagIndex}
-                                  className="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-600 rounded-md"
+                                  className="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-md"
                                 >
                                   {tag}
                                 </span>
@@ -210,12 +210,12 @@ export default function FaqContent() {
 
         {/* 底部联系信息 */}
         <div className="mt-12 text-center">
-          <div className="bg-blue-50 rounded-lg p-8">
-            <HelpCircle className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">
+          <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-8">
+            <HelpCircle className="w-12 h-12 text-blue-600 dark:text-blue-400 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
               {t("faq.needMoreHelp")}
             </h3>
-            <p className="text-gray-600 mb-4">
+            <p className="text-gray-600 dark:text-gray-400 mb-4">
               {t("faq.needMoreHelpDescription")}
             </p>
             <div className="flex justify-center gap-4">

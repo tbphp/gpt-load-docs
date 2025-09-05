@@ -14,63 +14,63 @@ export default function ChannelsPageContent() {
     <div className="max-w-4xl mx-auto">
       {/* Header */}
       <div className="mb-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-6">
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">
           {t("channels.title")}
         </h1>
-        <p className="text-xl text-gray-600">
+        <p className="text-xl text-gray-600 dark:text-gray-400">
           {t("channels.subtitle")}
         </p>
       </div>
 
       {/* Supported Services */}
       <div className="mb-12">
-        <h2 className="text-3xl font-semibold text-gray-900 mb-6">
+        <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-6">
           {t("channels.supportedServices.title")}
         </h2>
 
         <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6 mb-8">
-          <div className="border border-blue-200 rounded-lg p-6 bg-blue-50">
+          <div className="border border-blue-200 dark:border-blue-700 rounded-lg p-6 bg-blue-50 dark:bg-blue-900/30">
             <div className="flex items-center space-x-3 mb-4">
-              <div className="bg-blue-100 p-2 rounded-lg">
-                <Globe className="h-6 w-6 text-blue-600" />
+              <div className="bg-blue-100 dark:bg-blue-900/30 p-2 rounded-lg">
+                <Globe className="h-6 w-6 text-blue-600 dark:text-blue-400" />
               </div>
-              <h3 className="text-xl font-semibold text-blue-900">
+              <h3 className="text-xl font-semibold text-blue-900 dark:text-blue-200">
                 {t("channels.supportedServices.openai.title")}
               </h3>
             </div>
-            <ul className="text-blue-800 space-y-2 text-sm">
+            <ul className="text-blue-800 dark:text-blue-300 space-y-2 text-sm">
               {tArray("channels.supportedServices.openai.features").map((feature: string, index: number) => (
                 <li key={index}>{feature}</li>
               ))}
             </ul>
           </div>
 
-          <div className="border border-green-200 rounded-lg p-6 bg-green-50">
+          <div className="border border-green-200 dark:border-green-700 rounded-lg p-6 bg-green-50 dark:bg-green-900/30">
             <div className="flex items-center space-x-3 mb-4">
-              <div className="bg-green-100 p-2 rounded-lg">
-                <Globe className="h-6 w-6 text-green-600" />
+              <div className="bg-green-100 dark:bg-green-900/30 p-2 rounded-lg">
+                <Globe className="h-6 w-6 text-green-600 dark:text-green-400" />
               </div>
-              <h3 className="text-xl font-semibold text-green-900">
+              <h3 className="text-xl font-semibold text-green-900 dark:text-green-200">
                 {t("channels.supportedServices.gemini.title")}
               </h3>
             </div>
-            <ul className="text-green-800 space-y-2 text-sm">
+            <ul className="text-green-800 dark:text-green-300 space-y-2 text-sm">
               {tArray("channels.supportedServices.gemini.features").map((feature: string, index: number) => (
                 <li key={index}>{feature}</li>
               ))}
             </ul>
           </div>
 
-          <div className="border border-orange-200 rounded-lg p-6 bg-orange-50">
+          <div className="border border-orange-200 dark:border-orange-700 rounded-lg p-6 bg-orange-50 dark:bg-orange-900/30">
             <div className="flex items-center space-x-3 mb-4">
-              <div className="bg-orange-100 p-2 rounded-lg">
-                <Globe className="h-6 w-6 text-orange-600" />
+              <div className="bg-orange-100 dark:bg-orange-900/30 p-2 rounded-lg">
+                <Globe className="h-6 w-6 text-orange-600 dark:text-orange-400" />
               </div>
-              <h3 className="text-xl font-semibold text-orange-900">
+              <h3 className="text-xl font-semibold text-orange-900 dark:text-orange-200">
                 {t("channels.supportedServices.claude.title")}
               </h3>
             </div>
-            <ul className="text-orange-800 space-y-2 text-sm">
+            <ul className="text-orange-800 dark:text-orange-300 space-y-2 text-sm">
               {tArray("channels.supportedServices.claude.features").map((feature: string, index: number) => (
                 <li key={index}>{feature}</li>
               ))}
@@ -78,11 +78,11 @@ export default function ChannelsPageContent() {
           </div>
         </div>
 
-        <div className="bg-purple-50 border border-purple-200 rounded-lg p-6">
-          <h3 className="font-semibold text-purple-900 mb-2">
+        <div className="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-lg p-6">
+          <h3 className="font-semibold text-purple-900 dark:text-purple-200 mb-2">
             {t("channels.supportedServices.extensibility.title")}
           </h3>
-          <p className="text-purple-800 text-sm">
+          <p className="text-purple-800 dark:text-purple-300 text-sm">
             {t("channels.supportedServices.extensibility.description")}
           </p>
         </div>
@@ -90,35 +90,35 @@ export default function ChannelsPageContent() {
 
       {/* Proxy Format */}
       <div className="mb-12">
-        <h2 className="text-3xl font-semibold text-gray-900 mb-6">
+        <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-6">
           {t("channels.proxyFormat.title")}
         </h2>
 
-        <div className="bg-gradient-to-br from-blue-50 to-violet-50 border border-blue-200 rounded-xl p-8 mb-8">
-          <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">
+        <div className="bg-gradient-to-br from-blue-50 to-violet-50 dark:from-blue-900/20 dark:to-violet-900/20 border border-blue-200 dark:border-blue-700 rounded-xl p-8 mb-8">
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 text-center">
             {t("channels.proxyFormat.unifiedEndpoint.title")}
           </h3>
           <div className="text-center">
-            <code className="bg-white px-4 py-2 rounded-lg font-mono border text-gray-600">
+            <code className="bg-white dark:bg-gray-800 px-4 py-2 rounded-lg font-mono border text-gray-600 dark:text-gray-400">
               {t("channels.proxyFormat.unifiedEndpoint.format")}
             </code>
           </div>
           <div className="grid md:grid-cols-2 gap-6 mt-6">
             <div>
-              <h4 className="font-semibold text-gray-800 mb-2">
+              <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
                 {t("channels.proxyFormat.parameters.title")}
               </h4>
-              <ul className="text-gray-600 space-y-1 text-sm">
+              <ul className="text-gray-600 dark:text-gray-400 space-y-1 text-sm">
                 {tArray("channels.proxyFormat.parameters.items").map((item: string, index: number) => (
                   <li key={index}>{item}</li>
                 ))}
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-gray-800 mb-2">
+              <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
                 {t("channels.proxyFormat.authentication.title")}
               </h4>
-              <ul className="text-gray-600 space-y-1 text-sm">
+              <ul className="text-gray-600 dark:text-gray-400 space-y-1 text-sm">
                 {tArray("channels.proxyFormat.authentication.items").map((item: string, index: number) => (
                   <li key={index}>{item}</li>
                 ))}
@@ -130,29 +130,29 @@ export default function ChannelsPageContent() {
 
       {/* OpenAI Format */}
       <div className="mb-12">
-        <h2 className="text-3xl font-semibold text-gray-900 mb-6">
-          <Globe className="inline h-6 w-6 mr-2 text-blue-600" />
+        <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-6">
+          <Globe className="inline h-6 w-6 mr-2 text-blue-600 dark:text-blue-400" />
           {t("channels.openaiFormat.title")}
         </h2>
 
         <div className="space-y-8">
           {/* Authentication */}
-          <div className="border border-gray-200 rounded-lg p-6">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+          <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
               {t("channels.openaiFormat.authentication.title")}
             </h3>
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
-              <p className="text-blue-800 text-sm">
+            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-lg p-4 mb-4">
+              <p className="text-blue-800 dark:text-blue-300 text-sm">
                 {t("channels.openaiFormat.authentication.description")}
               </p>
             </div>
 
             <div className="grid md:grid-cols-1 gap-6">
               <div>
-                <h4 className="font-semibold text-gray-800 mb-2">
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
                   {t("channels.openaiFormat.examples.original.title")}
                 </h4>
-                <div className="bg-gray-900 rounded-lg p-4">
+                <div className="bg-gray-900 dark:bg-black dark:border dark:border-gray-700 rounded-lg p-4">
                   <pre className="text-green-400 text-sm whitespace-pre-wrap break-words">
                     <code>{t("channels.openaiFormat.examples.original.code")}</code>
                   </pre>
@@ -160,10 +160,10 @@ export default function ChannelsPageContent() {
               </div>
 
               <div>
-                <h4 className="font-semibold text-gray-800 mb-2">
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
                   {t("channels.openaiFormat.examples.proxy.title")}
                 </h4>
-                <div className="bg-gray-900 rounded-lg p-4">
+                <div className="bg-gray-900 dark:bg-black dark:border dark:border-gray-700 rounded-lg p-4">
                   <pre className="text-green-400 text-sm whitespace-pre-wrap break-words">
                     <code>{t("channels.openaiFormat.examples.proxy.code")}</code>
                   </pre>
@@ -172,40 +172,40 @@ export default function ChannelsPageContent() {
             </div>
 
             <div className="mt-4 flex items-center space-x-2 text-sm">
-              <CheckCircle className="h-4 w-4 text-green-600" />
-              <span className="text-gray-600">
+              <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
+              <span className="text-gray-600 dark:text-gray-400">
                 {t("channels.openaiFormat.migration.step1")}
               </span>
             </div>
             <div className="mt-4 flex items-center space-x-2 text-sm">
-              <CheckCircle className="h-4 w-4 text-green-600" />
-              <span className="text-gray-600">
+              <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
+              <span className="text-gray-600 dark:text-gray-400">
                 {t("channels.openaiFormat.migration.step2")}
               </span>
             </div>
           </div>
 
           {/* Supported Endpoints */}
-          <div className="border border-gray-200 rounded-lg p-6">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+          <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
               {t("channels.openaiFormat.endpoints.title")}
             </h3>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <h4 className="font-semibold text-gray-800 mb-2">
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
                   {t("channels.openaiFormat.endpoints.main.title")}
                 </h4>
-                <ul className="text-gray-600 space-y-2 text-sm">
+                <ul className="text-gray-600 dark:text-gray-400 space-y-2 text-sm">
                   {tArray("channels.openaiFormat.endpoints.main.items").map((item: string, index: number) => (
                     <li key={index}>{item}</li>
                   ))}
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold text-gray-800 mb-2">
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
                   {t("channels.openaiFormat.endpoints.other.title")}
                 </h4>
-                <ul className="text-gray-600 space-y-2 text-sm">
+                <ul className="text-gray-600 dark:text-gray-400 space-y-2 text-sm">
                   {tArray("channels.openaiFormat.endpoints.other.items").map((item: string, index: number) => (
                     <li key={index}>{item}</li>
                   ))}
@@ -215,17 +215,17 @@ export default function ChannelsPageContent() {
           </div>
 
           {/* SDK Configuration */}
-          <div className="border border-gray-200 rounded-lg p-6">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+          <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
               {t("channels.openaiFormat.sdk.title")}
             </h3>
 
             <div className="space-y-6">
               <div>
-                <h4 className="font-semibold text-gray-800 mb-2">
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
                   {t("channels.openaiFormat.sdk.python.title")}
                 </h4>
-                <div className="bg-gray-900 rounded-lg p-4">
+                <div className="bg-gray-900 dark:bg-black dark:border dark:border-gray-700 rounded-lg p-4">
                   <pre className="text-green-400 text-sm whitespace-pre-wrap break-words">
                     <code>{t("channels.openaiFormat.sdk.python.code")}</code>
                   </pre>
@@ -233,10 +233,10 @@ export default function ChannelsPageContent() {
               </div>
 
               <div>
-                <h4 className="font-semibold text-gray-800 mb-2">
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
                   {t("channels.openaiFormat.sdk.nodejs.title")}
                 </h4>
-                <div className="bg-gray-900 rounded-lg p-4">
+                <div className="bg-gray-900 dark:bg-black dark:border dark:border-gray-700 rounded-lg p-4">
                   <pre className="text-green-400 text-sm whitespace-pre-wrap break-words">
                     <code>{t("channels.openaiFormat.sdk.nodejs.code")}</code>
                   </pre>
@@ -249,29 +249,29 @@ export default function ChannelsPageContent() {
 
       {/* Gemini Format */}
       <div className="mb-12">
-        <h2 className="text-3xl font-semibold text-gray-900 mb-6">
-          <Globe className="inline h-6 w-6 mr-2 text-green-600" />
+        <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-6">
+          <Globe className="inline h-6 w-6 mr-2 text-green-600 dark:text-green-400" />
           {t("channels.geminiFormat.title")}
         </h2>
 
         <div className="space-y-8">
           {/* Authentication */}
-          <div className="border border-gray-200 rounded-lg p-6">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+          <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
               {t("channels.geminiFormat.authentication.title")}
             </h3>
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
-              <p className="text-green-800 text-sm">
+            <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-lg p-4 mb-4">
+              <p className="text-green-800 dark:text-green-300 text-sm">
                 {t("channels.geminiFormat.authentication.description")}
               </p>
             </div>
 
             <div className="grid md:grid-cols-1 gap-6">
               <div>
-                <h4 className="font-semibold text-gray-800 mb-2">
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
                   {t("channels.geminiFormat.examples.original.title")}
                 </h4>
-                <div className="bg-gray-900 rounded-lg p-4">
+                <div className="bg-gray-900 dark:bg-black dark:border dark:border-gray-700 rounded-lg p-4">
                   <pre className="text-green-400 text-sm whitespace-pre-wrap break-words">
                     <code>{t("channels.geminiFormat.examples.original.code")}</code>
                   </pre>
@@ -279,10 +279,10 @@ export default function ChannelsPageContent() {
               </div>
 
               <div>
-                <h4 className="font-semibold text-gray-800 mb-2">
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
                   {t("channels.geminiFormat.examples.proxy.title")}
                 </h4>
-                <div className="bg-gray-900 rounded-lg p-4">
+                <div className="bg-gray-900 dark:bg-black dark:border dark:border-gray-700 rounded-lg p-4">
                   <pre className="text-green-400 text-sm whitespace-pre-wrap break-words">
                     <code>{t("channels.geminiFormat.examples.proxy.code")}</code>
                   </pre>
@@ -291,40 +291,40 @@ export default function ChannelsPageContent() {
             </div>
 
             <div className="mt-4 flex items-center space-x-2 text-sm">
-              <CheckCircle className="h-4 w-4 text-green-600" />
-              <span className="text-gray-600">
+              <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
+              <span className="text-gray-600 dark:text-gray-400">
                 {t("channels.geminiFormat.migration.step1")}
               </span>
             </div>
             <div className="mt-4 flex items-center space-x-2 text-sm">
-              <CheckCircle className="h-4 w-4 text-green-600" />
-              <span className="text-gray-600">
+              <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
+              <span className="text-gray-600 dark:text-gray-400">
                 {t("channels.geminiFormat.migration.step2")}
               </span>
             </div>
           </div>
 
           {/* Supported Endpoints */}
-          <div className="border border-gray-200 rounded-lg p-6">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+          <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
               {t("channels.geminiFormat.endpoints.title")}
             </h3>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <h4 className="font-semibold text-gray-800 mb-2">
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
                   {t("channels.geminiFormat.endpoints.content.title")}
                 </h4>
-                <ul className="text-gray-600 space-y-2 text-sm">
+                <ul className="text-gray-600 dark:text-gray-400 space-y-2 text-sm">
                   {tArray("channels.geminiFormat.endpoints.content.items").map((item: string, index: number) => (
                     <li key={index}>{item}</li>
                   ))}
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold text-gray-800 mb-2">
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
                   {t("channels.geminiFormat.endpoints.models.title")}
                 </h4>
-                <ul className="text-gray-600 space-y-2 text-sm">
+                <ul className="text-gray-600 dark:text-gray-400 space-y-2 text-sm">
                   {tArray("channels.geminiFormat.endpoints.models.items").map((item: string, index: number) => (
                     <li key={index}>{item}</li>
                   ))}
@@ -334,17 +334,17 @@ export default function ChannelsPageContent() {
           </div>
 
           {/* SDK Configuration */}
-          <div className="border border-gray-200 rounded-lg p-6">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+          <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
               {t("channels.geminiFormat.sdk.title")}
             </h3>
 
             <div className="space-y-6">
               <div>
-                <h4 className="font-semibold text-gray-800 mb-2">
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
                   {t("channels.geminiFormat.sdk.python.title")}
                 </h4>
-                <div className="bg-gray-900 rounded-lg p-4">
+                <div className="bg-gray-900 dark:bg-black dark:border dark:border-gray-700 rounded-lg p-4">
                   <pre className="text-green-400 text-sm whitespace-pre-wrap break-words">
                     <code>{t("channels.geminiFormat.sdk.python.code")}</code>
                   </pre>
@@ -352,10 +352,10 @@ export default function ChannelsPageContent() {
               </div>
 
               <div>
-                <h4 className="font-semibold text-gray-800 mb-2">
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
                   {t("channels.geminiFormat.sdk.http.title")}
                 </h4>
-                <div className="bg-gray-900 rounded-lg p-4">
+                <div className="bg-gray-900 dark:bg-black dark:border dark:border-gray-700 rounded-lg p-4">
                   <pre className="text-green-400 text-sm whitespace-pre-wrap break-words">
                     <code>{t("channels.geminiFormat.sdk.http.code")}</code>
                   </pre>
@@ -368,29 +368,29 @@ export default function ChannelsPageContent() {
 
       {/* Anthropic Format */}
       <div className="mb-12">
-        <h2 className="text-3xl font-semibold text-gray-900 mb-6">
-          <Globe className="inline h-6 w-6 mr-2 text-orange-600" />
+        <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-6">
+          <Globe className="inline h-6 w-6 mr-2 text-orange-600 dark:text-orange-400" />
           {t("channels.claudeFormat.title")}
         </h2>
 
         <div className="space-y-8">
           {/* Authentication */}
-          <div className="border border-gray-200 rounded-lg p-6">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+          <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
               {t("channels.claudeFormat.authentication.title")}
             </h3>
-            <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-4">
-              <p className="text-orange-800 text-sm">
+            <div className="bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-700 rounded-lg p-4 mb-4">
+              <p className="text-orange-800 dark:text-orange-300 text-sm">
                 {t("channels.claudeFormat.authentication.description")}
               </p>
             </div>
 
             <div className="grid md:grid-cols-1 gap-6">
               <div>
-                <h4 className="font-semibold text-gray-800 mb-2">
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
                   {t("channels.claudeFormat.examples.original.title")}
                 </h4>
-                <div className="bg-gray-900 rounded-lg p-4">
+                <div className="bg-gray-900 dark:bg-black dark:border dark:border-gray-700 rounded-lg p-4">
                   <pre className="text-green-400 text-sm whitespace-pre-wrap break-words">
                     <code>{t("channels.claudeFormat.examples.original.code")}</code>
                   </pre>
@@ -398,10 +398,10 @@ export default function ChannelsPageContent() {
               </div>
 
               <div>
-                <h4 className="font-semibold text-gray-800 mb-2">
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
                   {t("channels.claudeFormat.examples.proxy.title")}
                 </h4>
-                <div className="bg-gray-900 rounded-lg p-4">
+                <div className="bg-gray-900 dark:bg-black dark:border dark:border-gray-700 rounded-lg p-4">
                   <pre className="text-green-400 text-sm whitespace-pre-wrap break-words">
                     <code>{t("channels.claudeFormat.examples.proxy.code")}</code>
                   </pre>
@@ -410,40 +410,40 @@ export default function ChannelsPageContent() {
             </div>
 
             <div className="mt-4 flex items-center space-x-2 text-sm">
-              <CheckCircle className="h-4 w-4 text-green-600" />
-              <span className="text-gray-600">
+              <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
+              <span className="text-gray-600 dark:text-gray-400">
                 {t("channels.claudeFormat.migration.step1")}
               </span>
             </div>
             <div className="mt-4 flex items-center space-x-2 text-sm">
-              <CheckCircle className="h-4 w-4 text-green-600" />
-              <span className="text-gray-600">
+              <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
+              <span className="text-gray-600 dark:text-gray-400">
                 {t("channels.claudeFormat.migration.step2")}
               </span>
             </div>
           </div>
 
           {/* Supported Endpoints */}
-          <div className="border border-gray-200 rounded-lg p-6">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+          <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
               {t("channels.claudeFormat.endpoints.title")}
             </h3>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <h4 className="font-semibold text-gray-800 mb-2">
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
                   {t("channels.claudeFormat.endpoints.main.title")}
                 </h4>
-                <ul className="text-gray-600 space-y-2 text-sm">
+                <ul className="text-gray-600 dark:text-gray-400 space-y-2 text-sm">
                   {tArray("channels.claudeFormat.endpoints.main.items").map((item: string, index: number) => (
                     <li key={index}>{item}</li>
                   ))}
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold text-gray-800 mb-2">
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
                   {t("channels.claudeFormat.endpoints.models.title")}
                 </h4>
-                <ul className="text-gray-600 space-y-2 text-sm">
+                <ul className="text-gray-600 dark:text-gray-400 space-y-2 text-sm">
                   {tArray("channels.claudeFormat.endpoints.models.items").map((item: string, index: number) => (
                     <li key={index}>{item}</li>
                   ))}
@@ -453,17 +453,17 @@ export default function ChannelsPageContent() {
           </div>
 
           {/* SDK Configuration */}
-          <div className="border border-gray-200 rounded-lg p-6">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+          <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
               {t("channels.claudeFormat.sdk.title")}
             </h3>
 
             <div className="space-y-6">
               <div>
-                <h4 className="font-semibold text-gray-800 mb-2">
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
                   {t("channels.claudeFormat.sdk.python.title")}
                 </h4>
-                <div className="bg-gray-900 rounded-lg p-4">
+                <div className="bg-gray-900 dark:bg-black dark:border dark:border-gray-700 rounded-lg p-4">
                   <pre className="text-green-400 text-sm whitespace-pre-wrap break-words">
                     <code>{t("channels.claudeFormat.sdk.python.code")}</code>
                   </pre>
@@ -471,10 +471,10 @@ export default function ChannelsPageContent() {
               </div>
 
               <div>
-                <h4 className="font-semibold text-gray-800 mb-2">
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
                   {t("channels.claudeFormat.sdk.http.title")}
                 </h4>
-                <div className="bg-gray-900 rounded-lg p-4">
+                <div className="bg-gray-900 dark:bg-black dark:border dark:border-gray-700 rounded-lg p-4">
                   <pre className="text-green-400 text-sm whitespace-pre-wrap break-words">
                     <code>{t("channels.claudeFormat.sdk.http.code")}</code>
                   </pre>
@@ -487,27 +487,27 @@ export default function ChannelsPageContent() {
 
       {/* Group Management */}
       <div className="mb-12">
-        <h2 className="text-3xl font-semibold text-gray-900 mb-6">
+        <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-6">
           {t("channels.groupManagement.title")}
         </h2>
 
         <div className="grid md:grid-cols-2 gap-6">
-          <div className="border border-gray-200 rounded-lg p-6">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+          <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
               {t("channels.groupManagement.creation.title")}
             </h3>
-            <ol className="text-gray-600 space-y-2 text-sm">
+            <ol className="text-gray-600 dark:text-gray-400 space-y-2 text-sm">
               {tArray("channels.groupManagement.creation.steps").map((step: string, index: number) => (
                 <li key={index}>{index + 1}. {step}</li>
               ))}
             </ol>
           </div>
 
-          <div className="border border-gray-200 rounded-lg p-6">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+          <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
               {t("channels.groupManagement.configuration.title")}
             </h3>
-            <ul className="text-gray-600 space-y-2 text-sm">
+            <ul className="text-gray-600 dark:text-gray-400 space-y-2 text-sm">
               {tArray("channels.groupManagement.configuration.items").map((item: string, index: number) => (
                 <li key={index}>{item}</li>
               ))}
@@ -518,13 +518,13 @@ export default function ChannelsPageContent() {
 
       {/* Migration Guide */}
       <div className="mb-12">
-        <h2 className="text-3xl font-semibold text-gray-900 mb-6">
+        <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-6">
           {t("channels.migration.title")}
         </h2>
 
         <div className="space-y-6">
-          <div className="border border-gray-200 rounded-lg p-6">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+          <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
               {t("channels.migration.guide.title")}
             </h3>
 
@@ -532,28 +532,28 @@ export default function ChannelsPageContent() {
               {tObjectArray<{title: string, description: string}>("channels.migration.guide.steps").map((step, index) => (
                 <div key={index} className="text-center">
                   <div className={`${
-                    index === 0 ? 'bg-blue-100' : 
-                    index === 1 ? 'bg-green-100' : 'bg-purple-100'
+                    index === 0 ? 'bg-blue-100 dark:bg-blue-900/30' : 
+                    index === 1 ? 'bg-green-100 dark:bg-green-900/30' : 'bg-purple-100 dark:bg-purple-900/30'
                   } p-3 rounded-lg mb-3 mx-auto w-12 h-12 flex items-center justify-center`}>
                     <span className={`${
-                      index === 0 ? 'text-blue-600' : 
-                      index === 1 ? 'text-green-600' : 'text-purple-600'
+                      index === 0 ? 'text-blue-600 dark:text-blue-400' : 
+                      index === 1 ? 'text-green-600 dark:text-green-400' : 'text-purple-600 dark:text-purple-400'
                     } font-bold`}>
                       {index + 1}
                     </span>
                   </div>
-                  <h4 className="font-semibold text-gray-800 mb-2">{step.title}</h4>
-                  <p className="text-gray-600 text-sm">{step.description}</p>
+                  <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">{step.title}</h4>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">{step.description}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
-            <h3 className="font-semibold text-yellow-900 mb-2">
+          <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 rounded-lg p-6">
+            <h3 className="font-semibold text-yellow-900 dark:text-yellow-200 mb-2">
               {t("channels.migration.seamless.title")}
             </h3>
-            <p className="text-yellow-800 text-sm">
+            <p className="text-yellow-800 dark:text-yellow-300 text-sm">
               {t("channels.migration.seamless.description")}
             </p>
           </div>

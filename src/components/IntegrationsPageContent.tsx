@@ -45,30 +45,30 @@ export default function IntegrationsPageContent() {
     <div className="max-w-4xl mx-auto">
       {/* 页面标题 */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
           {t("integrations.title")}
         </h1>
-        <p className="text-lg text-gray-600 leading-relaxed">
+        <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
           {t("integrations.description")}
         </p>
       </div>
 
       {/* 核心优势 */}
-      <div className="bg-gradient-to-r from-blue-50 to-violet-50 rounded-lg p-6 mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-          <Zap className="h-5 w-5 text-blue-600 mr-2" />
+      <div className="bg-gradient-to-r from-blue-50 to-violet-50 dark:from-blue-900/20 dark:to-violet-900/20 rounded-lg p-6 mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+          <Zap className="h-5 w-5 text-blue-600 dark:text-blue-400 mr-2" />
           {t("integrations.advantages.title")}
         </h2>
         <div className="grid md:grid-cols-3 gap-4">
           {tObjectArray<{title: string; description: string}>("integrations.advantages.items").map((advantage, index) => (
             <div key={index} className="flex items-start space-x-3">
               <div className={`flex-shrink-0 w-2 h-2 rounded-full mt-2 ${
-                index === 0 ? 'bg-blue-500' :
-                index === 1 ? 'bg-violet-500' : 'bg-cyan-500'
+                index === 0 ? 'bg-blue-500 dark:bg-blue-400' :
+                index === 1 ? 'bg-violet-500 dark:bg-violet-400' : 'bg-cyan-500 dark:bg-cyan-400'
               }`}></div>
               <div>
-                <h3 className="font-medium text-gray-900">{advantage.title}</h3>
-                <p className="text-sm text-gray-600">{advantage.description}</p>
+                <h3 className="font-medium text-gray-900 dark:text-white">{advantage.title}</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{advantage.description}</p>
               </div>
             </div>
           ))}
@@ -84,10 +84,10 @@ export default function IntegrationsPageContent() {
           return (
             <div key={index} className="space-y-4">
               <div>
-                <h2 className="text-xl font-semibold text-gray-900">
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
                   {category.title}
                 </h2>
-                <p className="text-gray-600">{category.description}</p>
+                <p className="text-gray-600 dark:text-gray-400">{category.description}</p>
               </div>
 
               <div className="grid md:grid-cols-2 gap-4">
@@ -96,22 +96,22 @@ export default function IntegrationsPageContent() {
                   return (
                     <div
                       key={itemIndex}
-                      className="bg-white border border-gray-200 rounded-lg p-6 hover:border-blue-300 hover:shadow-md transition-all duration-200"
+                      className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:border-blue-300 hover:shadow-md transition-all duration-200"
                     >
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex items-center space-x-3">
-                          <div className="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                            <IconComponent className="h-5 w-5 text-blue-600" />
+                          <div className="flex-shrink-0 w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                            <IconComponent className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                           </div>
                           <div>
-                            <h3 className="font-semibold text-gray-900">
+                            <h3 className="font-semibold text-gray-900 dark:text-white">
                               {integration.name}
                             </h3>
                             <span
                               className={`inline-flex items-center px-2 py-1 rounded text-xs font-medium ${
                                 integration.status === "available"
-                                  ? "bg-green-100 text-green-800"
-                                  : "bg-yellow-100 text-yellow-800"
+                                  ? "bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300"
+                                  : "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300"
                               }`}
                             >
                               {integration.status === "available"
@@ -122,20 +122,20 @@ export default function IntegrationsPageContent() {
                         </div>
                       </div>
 
-                      <p className="text-gray-600 text-sm mb-4">
+                      <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
                         {integration.description}
                       </p>
 
                       {integration.status === "available" ? (
                         <Link
                           href={integration.href}
-                          className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors duration-200"
+                          className="inline-flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-300 font-medium text-sm transition-colors duration-200"
                         >
                           {t("integrations.viewGuide")}
                           <ArrowRight className="h-4 w-4 ml-1" />
                         </Link>
                       ) : (
-                        <span className="inline-flex items-center text-gray-400 text-sm">
+                        <span className="inline-flex items-center text-gray-600 dark:text-gray-400 text-sm">
                           {t("integrations.comingSoon")}
                         </span>
                       )}
@@ -149,16 +149,16 @@ export default function IntegrationsPageContent() {
       </div>
 
       {/* 贡献说明 */}
-      <div className="mt-12 bg-gray-50 rounded-lg p-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-3">
+      <div className="mt-12 bg-gray-50 dark:bg-gray-900 rounded-lg p-6">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
           {t("integrations.contribution.title")}
         </h2>
-        <p className="text-gray-600 mb-4">
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
           {t("integrations.contribution.description")}
         </p>
         <Link
           href="https://github.com/tbphp/gpt-load-docs"
-          className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200"
+          className="inline-flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-300 font-medium transition-colors duration-200"
         >
           {t("integrations.contribution.githubLink")}
           <ArrowRight className="h-4 w-4 ml-1" />
