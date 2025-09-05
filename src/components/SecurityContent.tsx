@@ -45,19 +45,6 @@ export default function SecurityContent() {
     return icons[iconName] || <CheckCircle className="w-5 h-5" />;
   };
 
-  const getSeverityColor = (severity: string) => {
-    switch (severity) {
-      case "high":
-        return "text-red-600 bg-red-50 border-red-200";
-      case "medium":
-        return "text-yellow-600 bg-yellow-50 border-yellow-200";
-      case "low":
-        return "text-blue-600 bg-blue-50 border-blue-200";
-      default:
-        return "text-gray-600 bg-gray-50 border-gray-200";
-    }
-  };
-
   return (
     <article className="container mx-auto px-4 py-12 max-w-5xl">
       {/* Header */}
