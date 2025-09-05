@@ -576,6 +576,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       keywords: "GPT-Load FAQ, よくある質問, 技術サポート, キー管理, システム構成, トラブルシューティング, ブラックリスト設定, グループ構成",
       type: 'article'
     }
+  },
+  '/docs/configuration/security': {
+    zh: {
+      title: "安全性配置 - GPT-Load",
+      description: "深入了解GPT-Load的安全配置最佳实践，包括AUTH_KEY复杂度要求、ENCRYPTION_KEY加密设置、数据迁移、密钥管理等企业级安全方案。",
+      keywords: "GPT-Load安全性, AUTH_KEY配置, ENCRYPTION_KEY加密, 密钥安全, 数据加密, 安全最佳实践, 密钥管理, 安全配置",
+      type: 'article'
+    },
+    en: {
+      title: "Security Configuration - GPT-Load",
+      description: "In-depth understanding of GPT-Load security configuration best practices, including AUTH_KEY complexity requirements, ENCRYPTION_KEY encryption settings, data migration, key management and enterprise-grade security solutions.",
+      keywords: "GPT-Load security, AUTH_KEY configuration, ENCRYPTION_KEY encryption, key security, data encryption, security best practices, key management, security configuration",
+      type: 'article'
+    },
+    ja: {
+      title: "セキュリティ設定 - GPT-Load",
+      description: "GPT-Loadのセキュリティ設定ベストプラクティスの詳細理解。AUTH_KEY複雑性要件、ENCRYPTION_KEY暗号化設定、データ移行、キー管理などのエンタープライズグレードセキュリティソリューションを含む。",
+      keywords: "GPT-Loadセキュリティ, AUTH_KEY設定, ENCRYPTION_KEY暗号化, キーセキュリティ, データ暗号化, セキュリティベストプラクティス, キー管理, セキュリティ設定",
+      type: 'article'
+    }
   }
   // 架构预留：后续可继续添加其他页面的SEO配置
 };

@@ -332,6 +332,7 @@
     "environment": "环境配置",
     "project": "项目配置",
     "management": "管理端配置",
+    "security": "安全性配置",
     "cloudflareAigateway": "Cloudflare AI Gateway",
     "architectureDesign": "架构与设计",
     "performance": "性能详解",
@@ -4026,5 +4027,164 @@
         "tags": ["API失败", "网络问题", "认证错误", "日志分析"]
       }
     ]
+  },
+  "security": {
+    "title": "安全性配置",
+    "description": "确保您的 GPT-Load 部署安全可靠，遵循最佳安全实践",
+    "overview": {
+      "title": "安全概述",
+      "content": "GPT-Load 提供多层安全防护机制，包括身份验证、数据加密、访问控制等功能。正确配置这些安全设置对保护您的 AI 服务至关重要。"
+    },
+    "severity": {
+      "high": "高风险",
+      "medium": "中风险",
+      "low": "低风险"
+    },
+    "examples": {
+      "good": "推荐示例",
+      "bad": "错误示例"
+    },
+    "authKey": {
+      "title": "AUTH_KEY 认证密钥",
+      "description": "AUTH_KEY 是访问 GPT-Load 管理界面的身份验证密钥。它必须设置为强密码以保护您的系统。",
+      "rules": [
+        {
+          "title": "密钥长度要求",
+          "description": "密钥长度直接影响安全性。短密钥容易被暴力破解。建议使用至少 32 个字符的密钥，最低要求 16 个字符。",
+          "severity": "high",
+          "examples": {
+            "bad": ["12345678", "password123", "sk-123456"],
+            "good": ["xK9mN2pL5qR8wT3vY6zB1cF4gH7jM0nA", "a7B9c2D5e8F1g4H7j0K3m6N9p2Q5s8T1v4W7x0Z3"]
+          }
+        },
+        {
+          "title": "避免常见弱密码",
+          "description": "系统会检测并警告包含常见弱密码模式的密钥，如 'password'、'123456'、'admin'、'secret' 等。这些模式极易被攻击者猜测。",
+          "severity": "high",
+          "examples": {
+            "bad": ["password@2024", "admin123456", "secret-key-here", "test-token-123"],
+            "good": ["7kP9mX2nL5qR8wT3vY6", "使用密钥生成器生成的随机字符串"]
+          }
+        },
+        {
+          "title": "字符复杂度",
+          "description": "强密钥应包含大小写字母、数字和特殊字符的组合（至少3种类型）。单一类型的字符组合安全性较低。",
+          "severity": "medium",
+          "examples": {
+            "bad": ["abcdefghijklmnop", "1234567890123456", "ABCDEFGHIJKLMNOP"],
+            "good": ["Kx9@mN2pL5#qR8wT", "aB3$dE6&fG9!hJ2@"]
+          }
+        }
+      ],
+      "generate": {
+        "title": "生成安全密钥",
+        "description": "使用以下命令生成强随机密钥："
+      }
+    },
+    "encryption": {
+      "title": "ENCRYPTION_KEY 数据加密",
+      "description": "ENCRYPTION_KEY 用于加密存储敏感数据（如 API 密钥）。启用加密可以防止数据库泄露时密钥被直接获取。",
+      "benefits": {
+        "title": "启用加密的好处",
+        "items": [
+          "API 密钥在数据库中加密存储，即使数据库泄露也无法直接使用",
+          "符合企业安全合规要求",
+          "支持密钥轮换和重新加密",
+          "零性能影响的透明加解密"
+        ]
+      },
+      "migration": {
+        "title": "数据加密迁移步骤"
+      },
+      "steps": [
+        {
+          "title": "停止服务",
+          "description": "执行迁移前必须停止 GPT-Load 服务",
+          "command": "docker compose down"
+        },
+        {
+          "title": "备份数据",
+          "description": "强烈建议备份数据库，避免操作失误导致数据丢失",
+          "command": "cp -r ./data ./data-backup"
+        },
+        {
+          "title": "启用加密",
+          "description": "使用 --to 参数指定新的加密密钥",
+          "command": "docker compose run --rm gpt-load migrate-keys --to \"your-32-char-secret-key\""
+        },
+        {
+          "title": "更新配置",
+          "description": "在 .env 文件中设置 ENCRYPTION_KEY",
+          "command": "echo \"ENCRYPTION_KEY=your-32-char-secret-key\" >> .env"
+        },
+        {
+          "title": "重启服务",
+          "description": "启动服务并验证加密功能",
+          "command": "docker compose up -d"
+        }
+      ],
+      "warning": {
+        "title": "重要提醒",
+        "items": [
+          "迁移前必须停止服务，避免数据不一致",
+          "务必备份数据库以防迁移失败",
+          "确保 ENCRYPTION_KEY 与迁移命令中的密钥一致",
+          "密钥丢失将无法恢复加密数据"
+        ]
+      }
+    },
+    "bestPractices": {
+      "title": "安全最佳实践",
+      "items": [
+        {
+          "title": "定期更换密钥",
+          "description": "建议每3-6个月更换一次 AUTH_KEY，确保系统安全",
+          "icon": "refresh"
+        },
+        {
+          "title": "使用环境变量",
+          "description": "避免在代码或配置文件中硬编码密钥，使用环境变量管理",
+          "icon": "shield"
+        },
+        {
+          "title": "启用 HTTPS",
+          "description": "生产环境务必使用 HTTPS 协议，防止中间人攻击",
+          "icon": "lock"
+        },
+        {
+          "title": "限制访问 IP",
+          "description": "通过防火墙或反向代理限制管理界面的访问 IP",
+          "icon": "shield"
+        },
+        {
+          "title": "监控异常登录",
+          "description": "定期查看登录日志，及时发现异常访问行为",
+          "icon": "key"
+        },
+        {
+          "title": "备份加密密钥",
+          "description": "安全地备份 ENCRYPTION_KEY，避免密钥丢失导致数据无法恢复",
+          "icon": "key"
+        }
+      ]
+    },
+    "resources": {
+      "title": "更多资源",
+      "description": "了解更多关于 GPT-Load 安全配置的信息",
+      "links": [
+        {
+          "text": "环境配置指南",
+          "url": "/docs/configuration/environment"
+        },
+        {
+          "text": "部署最佳实践",
+          "url": "/docs/deployment"
+        },
+        {
+          "text": "常见问题",
+          "url": "/docs/faq"
+        }
+      ]
+    }
   }
 }

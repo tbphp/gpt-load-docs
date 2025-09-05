@@ -332,6 +332,7 @@
     "environment": "環境設定",
     "project": "プロジェクト設定",
     "management": "管理設定",
+    "security": "セキュリティ設定",
     "cloudflareAigateway": "Cloudflare AI Gateway",
     "architectureDesign": "アーキテクチャ設計",
     "performance": "パフォーマンス",
@@ -538,15 +539,31 @@
           {
             "name": "MySQL設定",
             "steps": [
-              "1. <code class=\"bg-gray-100 px-1 rounded\">docker-compose.yml</code>を編集し、MySQLサービスのコメントアウトを解除：<div class=\"bg-gray-900 text-gray-100 p-4 rounded-lg text-sm\"><code>&nbsp;&nbsp;depends_on:<br />&nbsp;&nbsp;&nbsp;&nbsp;mysql:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;condition: service_healthy<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;restart: true<br /><br />mysql:<br />&nbsp;&nbsp;image: mysql:8.2<br />&nbsp;&nbsp;container_name: gpt-load-mysql<br />&nbsp;&nbsp;restart: always<br />&nbsp;&nbsp;environment:<br />&nbsp;&nbsp;&nbsp;&nbsp;MYSQL_ROOT_PASSWORD: 123456<br />&nbsp;&nbsp;&nbsp;&nbsp;MYSQL_DATABASE: gpt-load<br />&nbsp;&nbsp;volumes:<br />&nbsp;&nbsp;&nbsp;&nbsp;- ./data/mysql:/var/lib/mysql<br />&nbsp;&nbsp;healthcheck:<br />&nbsp;&nbsp;&nbsp;&nbsp;test: [\"CMD\", \"mysqladmin\", \"ping\", \"-h\", \"localhost\"]<br />&nbsp;&nbsp;&nbsp;&nbsp;interval: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;timeout: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;retries: 10</code></div>",
-              "2. <code class=\"bg-gray-100 px-1 rounded\">.env</code>ファイルでデータベース接続を設定：<div class=\"bg-gray-900 text-gray-100 p-4 rounded-lg text-sm\"><code>DATABASE_DSN=root:123456@tcp(mysql:3306)/gpt-load?charset=utf8mb4&parseTime=True&loc=Local</code></div>"
+              {
+                "description": "1. {file} を編集し、MySQLサービスのコメントアウトを解除：",
+                "file": "docker-compose.yml",
+                "code": "  depends_on:\n    mysql:\n      condition: service_healthy\n      restart: true\n\nmysql:\n  image: mysql:8.2\n  container_name: gpt-load-mysql\n  restart: always\n  environment:\n    MYSQL_ROOT_PASSWORD: 123456\n    MYSQL_DATABASE: gpt-load\n  volumes:\n    - ./data/mysql:/var/lib/mysql\n  healthcheck:\n    test: [\"CMD\", \"mysqladmin\", \"ping\", \"-h\", \"localhost\"]\n    interval: 5s\n    timeout: 5s\n    retries: 10"
+              },
+              {
+                "description": "2. {file} ファイルでデータベース接続を設定：",
+                "file": ".env",
+                "code": "DATABASE_DSN=root:123456@tcp(mysql:3306)/gpt-load?charset=utf8mb4&parseTime=True&loc=Local"
+              }
             ]
           },
           {
             "name": "PostgreSQL設定",
             "steps": [
-              "1. <code class=\"bg-gray-100 px-1 rounded\">docker-compose.yml</code>を編集し、PostgreSQLサービスのコメントアウトを解除：<div class=\"bg-gray-900 text-gray-100 p-4 rounded-lg text-sm\"><code>&nbsp;&nbsp;depends_on:<br />&nbsp;&nbsp;&nbsp;&nbsp;postgres:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;condition: service_healthy<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;restart: true<br /><br />postgres:<br />&nbsp;&nbsp;image: \"postgres:16\"<br />&nbsp;&nbsp;container_name: gpt-load-postgres<br />&nbsp;&nbsp;environment:<br />&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_USER: postgres<br />&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_PASSWORD: 123456<br />&nbsp;&nbsp;&nbsp;&nbsp;POSTGRES_DB: gpt-load<br />&nbsp;&nbsp;volumes:<br />&nbsp;&nbsp;&nbsp;&nbsp;- ./data/postgres:/var/lib/postgresql/data<br />&nbsp;&nbsp;healthcheck:<br />&nbsp;&nbsp;&nbsp;&nbsp;test: [\"CMD-SHELL\", \"pg_isready -U postgres -d \"]<br />&nbsp;&nbsp;&nbsp;&nbsp;interval: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;timeout: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;retries: 10</code></div>",
-              "2. <code class=\"bg-gray-100 px-1 rounded\">.env</code>ファイルでデータベース接続を設定：<div class=\"bg-gray-900 text-gray-100 p-4 rounded-lg text-sm\"><code>DATABASE_DSN=postgres://postgres:123456@postgres:5432/gpt-load?sslmode=disable</code></div>"
+              {
+                "description": "1. {file} を編集し、PostgreSQLサービスのコメントアウトを解除：",
+                "file": "docker-compose.yml",
+                "code": "  depends_on:\n    postgres:\n      condition: service_healthy\n      restart: true\n\npostgres:\n  image: \"postgres:16\"\n  container_name: gpt-load-postgres\n  environment:\n    POSTGRES_USER: postgres\n    POSTGRES_PASSWORD: 123456\n    POSTGRES_DB: gpt-load\n  volumes:\n    - ./data/postgres:/var/lib/postgresql/data\n  healthcheck:\n    test: [\"CMD-SHELL\", \"pg_isready -U postgres -d \"]\n    interval: 5s\n    timeout: 5s\n    retries: 10"
+              },
+              {
+                "description": "2. {file} ファイルでデータベース接続を設定：",
+                "file": ".env",
+                "code": "DATABASE_DSN=postgres://postgres:123456@postgres:5432/gpt-load?sslmode=disable"
+              }
             ]
           }
         ]
@@ -555,12 +572,14 @@
         "title": "Redis設定",
         "step1": {
           "description": "1. 編集",
+          "file": "docker-compose.yml",
           "action": "、Redisサービスのコメントアウトを解除：",
-          "code": "&nbsp;&nbsp;depends_on:<br />&nbsp;&nbsp;&nbsp;&nbsp;redis:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;condition: service_healthy<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;restart: true<br /><br />redis:<br />&nbsp;&nbsp;image: redis:latest<br />&nbsp;&nbsp;container_name: gpt-load-redis<br />&nbsp;&nbsp;restart: always<br />&nbsp;&nbsp;healthcheck:<br />&nbsp;&nbsp;&nbsp;&nbsp;test: [\"CMD\", \"redis-cli\", \"ping\"]<br />&nbsp;&nbsp;&nbsp;&nbsp;interval: 5s<br />&nbsp;&nbsp;&nbsp;&nbsp;timeout: 3s<br />&nbsp;&nbsp;&nbsp;&nbsp;retries: 3"
+          "code": "  depends_on:\n    redis:\n      condition: service_healthy\n      restart: true\n\nredis:\n  image: redis:latest\n  container_name: gpt-load-redis\n  restart: always\n  healthcheck:\n    test: [\"CMD\", \"redis-cli\", \"ping\"]\n    interval: 5s\n    timeout: 3s\n    retries: 3"
         },
         "step2": {
-          "description": "2. Redis接続を設定",
-          "action": "ファイル："
+          "description": "2. ",
+          "file": ".env",
+          "action": "ファイルでRedis接続を設定："
         }
       },
       "restart": {
@@ -579,22 +598,35 @@
         {
           "title": "管理インターフェースにログインできない",
           "description": "正しい管理キーを使用しているか確認してください：",
-          "solution": "<ul class=\"text-gray-600 text-sm space-y-1 ml-4\"><li>• <code class=\"bg-gray-100 px-1 rounded\">.env</code>ファイルのAUTH_KEYが変更されていることを確認</li><li>• サービス再起動後に新しいキーが有効になります：<code class=\"bg-gray-100 px-1 rounded\">docker compose restart</code></li><li>• キーは大文字小文字を区別します。正確な入力を確認してください</li></ul>"
+          "solution": {
+            "type": "list",
+            "items": [
+              ".envファイルのAUTH_KEYが変更されていることを確認",
+              "サービス再起動後に新しいキーが有効になります：docker compose restart",
+              "キーは大文字小文字を区別します、正確な入力を確認してください"
+            ]
+          }
         },
         {
           "title": "ポート競合",
-          "description": "ポート3001が使用されている場合、<code class=\"bg-gray-100 px-1 rounded\">.env</code>ファイルで変更できます：",
-          "solution": "<div class=\"bg-gray-100 p-2 rounded text-sm\"><code>PORT=3002</code></div>"
+          "description": "ポート3001が使用されている場合、.envファイルで変更できます：",
+          "solution": {
+            "type": "code",
+            "content": "PORT=3002"
+          }
         },
         {
           "title": "データベース接続失敗",
           "description": "データベースサービスが正常に動作しているか確認：",
-          "solution": "<div class=\"bg-gray-100 p-2 rounded text-sm\"><code>docker compose logs mysql</code></div>"
+          "solution": {
+            "type": "code",
+            "content": "docker compose logs mysql"
+          }
         },
         {
           "title": "メモリ不足",
           "description": "システムに十分なメモリリソースがあることを確認してください。データベースサービスを有効にした後、最低1GBの利用可能メモリを推奨",
-          "solution": ""
+          "solution": null
         }
       ]
     },
@@ -3995,5 +4027,164 @@
         "tags": ["API失敗", "ネットワーク問題", "認証エラー", "ログ分析"]
       }
     ]
+  },
+  "security": {
+    "title": "セキュリティ設定",
+    "description": "セキュリティベストプラクティスに従って、GPT-Loadデプロイメントの安全性と信頼性を確保する",
+    "overview": {
+      "title": "セキュリティ概要",
+      "content": "GPT-Loadは認証、データ暗号化、アクセス制御などを含む多層セキュリティ保護メカニズムを提供します。これらのセキュリティ設定を適切に構成することは、AIサービスを保護する上で極めて重要です。"
+    },
+    "severity": {
+      "high": "高リスク",
+      "medium": "中リスク",
+      "low": "低リスク"
+    },
+    "examples": {
+      "good": "推奨例",
+      "bad": "悪い例"
+    },
+    "authKey": {
+      "title": "AUTH_KEY 認証キー",
+      "description": "AUTH_KEYはGPT-Load管理インターフェースにアクセスするための認証キーです。システムを保護するために強力なパスワードに設定する必要があります。",
+      "rules": [
+        {
+          "title": "キー長の要件",
+          "description": "キーの長さはセキュリティに直接影響します。短いキーはブルートフォース攻撃に脆弱です。少なくとも32文字の使用を推奨、最低要件は16文字です。",
+          "severity": "high",
+          "examples": {
+            "bad": ["12345678", "password123", "sk-123456"],
+            "good": ["xK9mN2pL5qR8wT3vY6zB1cF4gH7jM0nA", "a7B9c2D5e8F1g4H7j0K3m6N9p2Q5s8T1v4W7x0Z3"]
+          }
+        },
+        {
+          "title": "一般的な弱いパスワードを避ける",
+          "description": "システムは'password'、'123456'、'admin'、'secret'などの一般的な弱いパスワードパターンを検出して警告します。これらのパターンは攻撃者に簡単に推測されます。",
+          "severity": "high",
+          "examples": {
+            "bad": ["password@2024", "admin123456", "secret-key-here", "test-token-123"],
+            "good": ["7kP9mX2nL5qR8wT3vY6", "キージェネレーターで生成されたランダム文字列"]
+          }
+        },
+        {
+          "title": "文字の複雑性",
+          "description": "強力なキーには大文字と小文字、数字、特殊文字の組み合わせ（少なくとも3種類）が含まれるべきです。単一タイプの文字の組み合わせはセキュリティが低くなります。",
+          "severity": "medium",
+          "examples": {
+            "bad": ["abcdefghijklmnop", "1234567890123456", "ABCDEFGHIJKLMNOP"],
+            "good": ["Kx9@mN2pL5#qR8wT", "aB3$dE6&fG9!hJ2@"]
+          }
+        }
+      ],
+      "generate": {
+        "title": "セキュアキーの生成",
+        "description": "次のコマンドを使用して強力なランダムキーを生成："
+      }
+    },
+    "encryption": {
+      "title": "ENCRYPTION_KEY データ暗号化",
+      "description": "ENCRYPTION_KEYは機密データ（APIキーなど）をストレージで暗号化するために使用されます。暗号化を有効にすると、データベースが侵害されてもキーが直接取得されることを防げます。",
+      "benefits": {
+        "title": "暗号化を有効にするメリット",
+        "items": [
+          "APIキーはデータベースで暗号化され、データベースが漏洩しても使用不可",
+          "エンタープライズセキュリティコンプライアンス要件を満たす",
+          "キーローテーションと再暗号化をサポート",
+          "ゼロパフォーマンス影響の透明な暗号化/復号化"
+        ]
+      },
+      "migration": {
+        "title": "データ暗号化移行手順"
+      },
+      "steps": [
+        {
+          "title": "サービスを停止",
+          "description": "移行前にGPT-Loadサービスを停止する必要があります",
+          "command": "docker compose down"
+        },
+        {
+          "title": "データバックアップ",
+          "description": "操作エラーによるデータ損失を避けるため、データベースのバックアップを強く推奨",
+          "command": "cp -r ./data ./data-backup"
+        },
+        {
+          "title": "暗号化を有効化",
+          "description": "--toパラメータを使用して新しい暗号化キーを指定",
+          "command": "docker compose run --rm gpt-load migrate-keys --to \"your-32-char-secret-key\""
+        },
+        {
+          "title": "設定を更新",
+          "description": ".envファイルにENCRYPTION_KEYを設定",
+          "command": "echo \"ENCRYPTION_KEY=your-32-char-secret-key\" >> .env"
+        },
+        {
+          "title": "サービスを再起動",
+          "description": "サービスを起動して暗号化機能を確認",
+          "command": "docker compose up -d"
+        }
+      ],
+      "warning": {
+        "title": "重要な注意事項",
+        "items": [
+          "データの不整合を避けるため、移行前にサービスを停止する必要があります",
+          "移行失敗に備えてデータベースをバックアップする必要があります",
+          "ENCRYPTION_KEYが移行コマンドのキーと一致することを確認",
+          "キーが失われると暗号化されたデータを回復できません"
+        ]
+      }
+    },
+    "bestPractices": {
+      "title": "セキュリティベストプラクティス",
+      "items": [
+        {
+          "title": "定期的なキーローテーション",
+          "description": "システムセキュリティを確保するため、3〜6ヶ月ごとにAUTH_KEYを変更することを推奨",
+          "icon": "refresh"
+        },
+        {
+          "title": "環境変数の使用",
+          "description": "コードや設定ファイルにキーをハードコーディングせず、環境変数を使用して管理",
+          "icon": "shield"
+        },
+        {
+          "title": "HTTPSを有効化",
+          "description": "本番環境では中間者攻撃を防ぐため、必ずHTTPSプロトコルを使用",
+          "icon": "lock"
+        },
+        {
+          "title": "アクセスIPを制限",
+          "description": "ファイアウォールまたはリバースプロキシを通じて管理インターフェースのアクセスIPを制限",
+          "icon": "shield"
+        },
+        {
+          "title": "異常なログインを監視",
+          "description": "ログインログを定期的に確認して、異常なアクセス動作を迅速に検出",
+          "icon": "key"
+        },
+        {
+          "title": "暗号化キーのバックアップ",
+          "description": "キーの紛失によるデータ損失を避けるため、ENCRYPTION_KEYを安全にバックアップ",
+          "icon": "key"
+        }
+      ]
+    },
+    "resources": {
+      "title": "その他のリソース",
+      "description": "GPT-Loadセキュリティ設定についてさらに詳しく",
+      "links": [
+        {
+          "text": "環境設定ガイド",
+          "url": "/docs/configuration/environment"
+        },
+        {
+          "text": "デプロイメントベストプラクティス",
+          "url": "/docs/deployment"
+        },
+        {
+          "text": "FAQ",
+          "url": "/docs/faq"
+        }
+      ]
+    }
   }
 }

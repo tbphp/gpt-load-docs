@@ -1,0 +1,288 @@
+"use client";
+
+import { useTranslation } from "@/hooks/useTranslation";
+import { useSeo } from "@/hooks/useSeo";
+import { useState } from "react";
+import { ChevronRight, Shield, Key, Lock, AlertTriangle, CheckCircle, Copy, RefreshCw } from "lucide-react";
+
+export default function SecurityContent() {
+  const { t, tArray, tObjectArray } = useTranslation();
+  useSeo("/docs/configuration/security");
+  
+  const [copiedCommand, setCopiedCommand] = useState<string | null>(null);
+
+  const copyToClipboard = (text: string, id: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedCommand(id);
+    setTimeout(() => setCopiedCommand(null), 2000);
+  };
+
+  const authKeyRules = tObjectArray<{
+    title: string;
+    description: string;
+    severity: "high" | "medium" | "low";
+    examples?: { good?: string[]; bad?: string[] };
+  }>("security.authKey.rules");
+
+  const encryptionSteps = tObjectArray<{
+    title: string;
+    command?: string;
+    description: string;
+  }>("security.encryption.steps");
+
+  const bestPractices = tObjectArray<{
+    title: string;
+    description: string;
+    icon: string;
+  }>("security.bestPractices.items");
+
+  const getIcon = (iconName: string) => {
+    const icons: Record<string, React.ReactNode> = {
+      shield: <Shield className="w-5 h-5" />,
+      key: <Key className="w-5 h-5" />,
+      lock: <Lock className="w-5 h-5" />,
+      refresh: <RefreshCw className="w-5 h-5" />,
+    };
+    return icons[iconName] || <CheckCircle className="w-5 h-5" />;
+  };
+
+  const getSeverityColor = (severity: string) => {
+    switch (severity) {
+      case "high":
+        return "text-red-600 bg-red-50 border-red-200";
+      case "medium":
+        return "text-yellow-600 bg-yellow-50 border-yellow-200";
+      case "low":
+        return "text-blue-600 bg-blue-50 border-blue-200";
+      default:
+        return "text-gray-600 bg-gray-50 border-gray-200";
+    }
+  };
+
+  return (
+    <article className="container mx-auto px-4 py-12 max-w-5xl">
+      {/* Header */}
+      <div className="mb-12">
+        <h1 className="text-4xl font-bold mb-4 text-gray-900">
+          {t("security.title")}
+        </h1>
+        <p className="text-xl text-gray-600 leading-relaxed">
+          {t("security.description")}
+        </p>
+      </div>
+
+      {/* Security Overview */}
+      <div className="mb-12 p-6 bg-blue-50 rounded-lg border border-blue-200">
+        <div className="flex items-start space-x-3">
+          <Shield className="w-6 h-6 text-blue-600 mt-1 flex-shrink-0" />
+          <div>
+            <h2 className="text-lg font-semibold mb-2 text-gray-900">
+              {t("security.overview.title")}
+            </h2>
+            <p className="text-gray-700 leading-relaxed">
+              {t("security.overview.content")}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* AUTH_KEY Configuration */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold mb-6 text-gray-900 flex items-center">
+          <Key className="w-6 h-6 mr-2 text-blue-600" />
+          {t("security.authKey.title")}
+        </h2>
+        <p className="text-gray-600 mb-6 leading-relaxed">
+          {t("security.authKey.description")}
+        </p>
+
+        <div className="space-y-4">
+          {authKeyRules.map((rule, index) => (
+            <div
+              key={index}
+              className={`p-4 rounded-lg border ${getSeverityColor(rule.severity)}`}
+            >
+              <div className="flex items-start justify-between mb-2">
+                <h3 className="font-semibold text-lg">{rule.title}</h3>
+                <span className={`text-xs font-medium px-2 py-1 rounded ${
+                  rule.severity === "high" ? "bg-red-100" : 
+                  rule.severity === "medium" ? "bg-yellow-100" : "bg-blue-100"
+                }`}>
+                  {t(`security.severity.${rule.severity}`)}
+                </span>
+              </div>
+              <p className="text-sm leading-relaxed mb-3">{rule.description}</p>
+              
+              {rule.examples && (
+                <div className="mt-3 space-y-2">
+                  {rule.examples.bad && (
+                    <div className="flex items-start space-x-2">
+                      <AlertTriangle className="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" />
+                      <div className="text-sm">
+                        <span className="font-medium text-red-700">{t("security.examples.bad")}:</span>
+                        <code className="ml-2 text-xs bg-red-50 px-2 py-1 rounded">
+                          {rule.examples.bad.join(", ")}
+                        </code>
+                      </div>
+                    </div>
+                  )}
+                  {rule.examples.good && (
+                    <div className="flex items-start space-x-2">
+                      <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                      <div className="text-sm">
+                        <span className="font-medium text-green-700">{t("security.examples.good")}:</span>
+                        <code className="ml-2 text-xs bg-green-50 px-2 py-1 rounded">
+                          {rule.examples.good.join(", ")}
+                        </code>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Generate Secure Key */}
+        <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+          <h4 className="font-semibold mb-2 text-gray-900">{t("security.authKey.generate.title")}</h4>
+          <p className="text-sm text-gray-600 mb-3">{t("security.authKey.generate.description")}</p>
+          <div className="bg-gray-900 text-gray-100 p-3 rounded-md font-mono text-sm relative">
+            <code>openssl rand -base64 32 | tr -d &quot;=+/&quot; | cut -c1-32</code>
+            <button
+              onClick={() => copyToClipboard('openssl rand -base64 32 | tr -d "=+/" | cut -c1-32', 'auth-gen')}
+              className="absolute right-2 top-2 p-1 hover:bg-gray-700 rounded transition-colors"
+            >
+              {copiedCommand === 'auth-gen' ? (
+                <CheckCircle className="w-4 h-4 text-green-400" />
+              ) : (
+                <Copy className="w-4 h-4" />
+              )}
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ENCRYPTION_KEY Configuration */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold mb-6 text-gray-900 flex items-center">
+          <Lock className="w-6 h-6 mr-2 text-blue-600" />
+          {t("security.encryption.title")}
+        </h2>
+        <p className="text-gray-600 mb-6 leading-relaxed">
+          {t("security.encryption.description")}
+        </p>
+
+        {/* Benefits */}
+        <div className="mb-6 p-4 bg-green-50 rounded-lg border border-green-200">
+          <h3 className="font-semibold mb-2 text-green-900">{t("security.encryption.benefits.title")}</h3>
+          <ul className="space-y-2">
+            {tArray("security.encryption.benefits.items").map((benefit, index) => (
+              <li key={index} className="flex items-start">
+                <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 mr-2 flex-shrink-0" />
+                <span className="text-sm text-green-800">{benefit}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Migration Steps */}
+        <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+          <h3 className="font-semibold text-lg mb-4 text-gray-900">{t("security.encryption.migration.title")}</h3>
+          
+          <div className="space-y-4">
+            {encryptionSteps.map((step, index) => (
+              <div key={index} className="border-l-2 border-blue-300 pl-4">
+                <div className="flex items-start">
+                  <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold mr-3 flex-shrink-0">
+                    {index + 1}
+                  </span>
+                  <div className="flex-1">
+                    <h4 className="font-medium text-gray-900 mb-1">{step.title}</h4>
+                    <p className="text-sm text-gray-600 mb-2">{step.description}</p>
+                    {step.command && (
+                      <div className="bg-gray-900 text-gray-100 p-2 rounded text-xs font-mono relative">
+                        <code>{step.command}</code>
+                        <button
+                          onClick={() => copyToClipboard(step.command!, `step-${index}`)}
+                          className="absolute right-2 top-2 p-1 hover:bg-gray-700 rounded transition-colors"
+                        >
+                          {copiedCommand === `step-${index}` ? (
+                            <CheckCircle className="w-3 h-3 text-green-400" />
+                          ) : (
+                            <Copy className="w-3 h-3" />
+                          )}
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Warning */}
+        <div className="mt-6 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+          <div className="flex items-start">
+            <AlertTriangle className="w-5 h-5 text-yellow-600 mr-2 flex-shrink-0 mt-0.5" />
+            <div>
+              <h4 className="font-semibold text-yellow-900 mb-1">{t("security.encryption.warning.title")}</h4>
+              <ul className="text-sm text-yellow-800 space-y-1">
+                {tArray("security.encryption.warning.items").map((item, index) => (
+                  <li key={index}>• {item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Security Best Practices */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold mb-6 text-gray-900 flex items-center">
+          <Shield className="w-6 h-6 mr-2 text-blue-600" />
+          {t("security.bestPractices.title")}
+        </h2>
+        
+        <div className="grid md:grid-cols-2 gap-4">
+          {bestPractices.map((practice, index) => (
+            <div key={index} className="p-4 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
+              <div className="flex items-start">
+                <div className="p-2 bg-blue-100 rounded-lg mr-3 flex-shrink-0">
+                  {getIcon(practice.icon)}
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-1">{practice.title}</h3>
+                  <p className="text-sm text-gray-600">{practice.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Additional Resources */}
+      <section className="mt-12 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
+        <h2 className="text-xl font-bold mb-4 text-gray-900">
+          {t("security.resources.title")}
+        </h2>
+        <p className="text-gray-700 mb-4">
+          {t("security.resources.description")}
+        </p>
+        <div className="flex flex-wrap gap-3">
+          {tObjectArray<{ text: string; url: string }>("security.resources.links").map((link, index) => (
+            <a
+              key={index}
+              href={link.url}
+              className="inline-flex items-center px-4 py-2 bg-white rounded-lg border border-gray-200 hover:border-blue-300 hover:shadow-sm transition-all text-sm font-medium text-gray-700"
+            >
+              {link.text}
+              <ChevronRight className="w-4 h-4 ml-1" />
+            </a>
+          ))}
+        </div>
+      </section>
+    </article>
+  );
+}

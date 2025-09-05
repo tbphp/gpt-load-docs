@@ -24,6 +24,7 @@ import {
   Rocket,
   BookUser,
   HelpCircle,
+  Lock,
 } from "lucide-react";
 
 const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
@@ -71,6 +72,11 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
           title: t("docs.management"),
           href: "/docs/configuration/management",
           icon: Users,
+        },
+        {
+          title: t("docs.security"),
+          href: "/docs/configuration/security",
+          icon: Lock,
         },
         {
           title: t("docs.cloudflareAigateway"),
