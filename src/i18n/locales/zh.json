@@ -4047,35 +4047,7 @@
     "authKey": {
       "title": "AUTH_KEY 认证密钥",
       "description": "AUTH_KEY 是访问 GPT-Load 管理界面的身份验证密钥。它必须设置为强密码以保护您的系统。",
-      "rules": [
-        {
-          "title": "密钥长度要求",
-          "description": "密钥长度直接影响安全性。短密钥容易被暴力破解。建议使用至少 32 个字符的密钥，最低要求 16 个字符。",
-          "severity": "high",
-          "examples": {
-            "bad": ["12345678", "password123", "sk-123456"],
-            "good": ["xK9mN2pL5qR8wT3vY6zB1cF4gH7jM0nA", "a7B9c2D5e8F1g4H7j0K3m6N9p2Q5s8T1v4W7x0Z3"]
-          }
-        },
-        {
-          "title": "避免常见弱密码",
-          "description": "系统会检测并警告包含常见弱密码模式的密钥，如 'password'、'123456'、'admin'、'secret' 等。这些模式极易被攻击者猜测。",
-          "severity": "high",
-          "examples": {
-            "bad": ["password@2024", "admin123456", "secret-key-here", "test-token-123"],
-            "good": ["7kP9mX2nL5qR8wT3vY6", "使用密钥生成器生成的随机字符串"]
-          }
-        },
-        {
-          "title": "字符复杂度",
-          "description": "强密钥应包含大小写字母、数字和特殊字符的组合（至少3种类型）。单一类型的字符组合安全性较低。",
-          "severity": "medium",
-          "examples": {
-            "bad": ["abcdefghijklmnop", "1234567890123456", "ABCDEFGHIJKLMNOP"],
-            "good": ["Kx9@mN2pL5#qR8wT", "aB3$dE6&fG9!hJ2@"]
-          }
-        }
-      ],
+      "recommendation": "建议使用至少 32 个字符的随机密钥，包含大小写字母、数字和特殊字符，避免使用常见词汇或简单模式。",
       "generate": {
         "title": "生成安全密钥",
         "description": "使用以下命令生成强随机密钥："
@@ -4104,13 +4076,11 @@
         },
         {
           "title": "备份数据",
-          "description": "强烈建议备份数据库，避免操作失误导致数据丢失",
-          "command": "cp -r ./data ./data-backup"
+          "description": "必须备份数据库！根据您使用的数据库类型（SQLite、MySQL、PostgreSQL）执行相应的备份操作。避免操作失误导致数据丢失。"
         },
         {
-          "title": "启用加密",
-          "description": "使用 --to 参数指定新的加密密钥",
-          "command": "docker compose run --rm gpt-load migrate-keys --to \"your-32-char-secret-key\""
+          "title": "执行迁移命令",
+          "description": "根据您的部署方式选择相应的命令（详见下方不同部署方式的迁移命令）"
         },
         {
           "title": "更新配置",
@@ -4123,6 +4093,41 @@
           "command": "docker compose up -d"
         }
       ],
+      "migrationMethods": {
+        "title": "不同部署方式的迁移命令",
+        "enable": "启用加密：",
+        "disable": "禁用加密：",
+        "change": "更换密钥：",
+        "items": [
+          {
+          "title": "Docker Compose 部署",
+          "description": "适用于使用 Docker Compose 部署的用户",
+          "commands": {
+            "enable": "docker compose run --rm gpt-load migrate-keys --to \"your-32-char-secret-key\"",
+            "disable": "docker compose run --rm gpt-load migrate-keys --from \"your-current-key\"",
+            "change": "docker compose run --rm gpt-load migrate-keys --from \"old-key\" --to \"new-key\""
+          }
+        },
+        {
+          "title": "源码部署（Make）",
+          "description": "适用于从源码编译部署的用户",
+          "commands": {
+            "enable": "make migrate-keys ARGS=\"--to your-32-char-secret-key\"",
+            "disable": "make migrate-keys ARGS=\"--from your-current-key\"",
+            "change": "make migrate-keys ARGS=\"--from old-key --to new-key\""
+          }
+        },
+        {
+          "title": "二进制部署",
+          "description": "适用于使用编译后二进制文件的用户",
+          "commands": {
+            "enable": "./gpt-load migrate-keys --to \"your-32-char-secret-key\"",
+            "disable": "./gpt-load migrate-keys --from \"your-current-key\"",
+            "change": "./gpt-load migrate-keys --from \"old-key\" --to \"new-key\""
+          }
+        }
+        ]
+      },
       "warning": {
         "title": "重要提醒",
         "items": [

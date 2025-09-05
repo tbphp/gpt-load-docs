@@ -4104,13 +4104,11 @@
         },
         {
           "title": "データバックアップ",
-          "description": "操作エラーによるデータ損失を避けるため、データベースのバックアップを強く推奨",
-          "command": "cp -r ./data ./data-backup"
+          "description": "必ずデータベースをバックアップしてください！使用しているデータベースタイプ（SQLite、MySQL、PostgreSQL）に応じて適切なバックアップ操作を実行してください。操作ミスによるデータ損失を回避します。"
         },
         {
-          "title": "暗号化を有効化",
-          "description": "--toパラメータを使用して新しい暗号化キーを指定",
-          "command": "docker compose run --rm gpt-load migrate-keys --to \"your-32-char-secret-key\""
+          "title": "移行コマンドを実行",
+          "description": "デプロイメント方法に応じて適切なコマンドを選択してください（下記の異なるデプロイメント方式の移行コマンドを参照）"
         },
         {
           "title": "設定を更新",
@@ -4123,6 +4121,41 @@
           "command": "docker compose up -d"
         }
       ],
+      "migrationMethods": {
+        "title": "異なるデプロイメント方式の移行コマンド",
+        "enable": "暗号化を有効化：",
+        "disable": "暗号化を無効化：",
+        "change": "キーを変更：",
+        "items": [
+          {
+            "title": "Docker Composeデプロイメント",
+            "description": "Docker Composeでデプロイしているユーザー向け",
+            "commands": {
+              "enable": "docker compose run --rm gpt-load migrate-keys --to \"your-32-char-secret-key\"",
+              "disable": "docker compose run --rm gpt-load migrate-keys --from \"your-current-key\"",
+              "change": "docker compose run --rm gpt-load migrate-keys --from \"old-key\" --to \"new-key\""
+            }
+          },
+          {
+            "title": "ソースデプロイメント（Make）",
+            "description": "ソースからビルドしているユーザー向け",
+            "commands": {
+              "enable": "make migrate-keys ARGS=\"--to your-32-char-secret-key\"",
+              "disable": "make migrate-keys ARGS=\"--from your-current-key\"",
+              "change": "make migrate-keys ARGS=\"--from old-key --to new-key\""
+            }
+          },
+          {
+            "title": "バイナリデプロイメント",
+            "description": "コンパイル済みバイナリを使用しているユーザー向け",
+            "commands": {
+              "enable": "./gpt-load migrate-keys --to \"your-32-char-secret-key\"",
+              "disable": "./gpt-load migrate-keys --from \"your-current-key\"",
+              "change": "./gpt-load migrate-keys --from \"old-key\" --to \"new-key\""
+            }
+          }
+        ]
+      },
       "warning": {
         "title": "重要な注意事項",
         "items": [

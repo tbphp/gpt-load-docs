@@ -17,18 +17,17 @@ export default function SecurityContent() {
     setTimeout(() => setCopiedCommand(null), 2000);
   };
 
-  const authKeyRules = tObjectArray<{
-    title: string;
-    description: string;
-    severity: "high" | "medium" | "low";
-    examples?: { good?: string[]; bad?: string[] };
-  }>("security.authKey.rules");
-
   const encryptionSteps = tObjectArray<{
     title: string;
     command?: string;
     description: string;
   }>("security.encryption.steps");
+
+  const migrationMethods = tObjectArray<{
+    title: string;
+    description: string;
+    commands: {enable: string; disable: string; change: string;}
+  }>("security.encryption.migrationMethods.items");
 
   const bestPractices = tObjectArray<{
     title: string;
@@ -96,55 +95,18 @@ export default function SecurityContent() {
           {t("security.authKey.description")}
         </p>
 
-        <div className="space-y-4">
-          {authKeyRules.map((rule, index) => (
-            <div
-              key={index}
-              className={`p-4 rounded-lg border ${getSeverityColor(rule.severity)}`}
-            >
-              <div className="flex items-start justify-between mb-2">
-                <h3 className="font-semibold text-lg">{rule.title}</h3>
-                <span className={`text-xs font-medium px-2 py-1 rounded ${
-                  rule.severity === "high" ? "bg-red-100" : 
-                  rule.severity === "medium" ? "bg-yellow-100" : "bg-blue-100"
-                }`}>
-                  {t(`security.severity.${rule.severity}`)}
-                </span>
-              </div>
-              <p className="text-sm leading-relaxed mb-3">{rule.description}</p>
-              
-              {rule.examples && (
-                <div className="mt-3 space-y-2">
-                  {rule.examples.bad && (
-                    <div className="flex items-start space-x-2">
-                      <AlertTriangle className="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" />
-                      <div className="text-sm">
-                        <span className="font-medium text-red-700">{t("security.examples.bad")}:</span>
-                        <code className="ml-2 text-xs bg-red-50 px-2 py-1 rounded">
-                          {rule.examples.bad.join(", ")}
-                        </code>
-                      </div>
-                    </div>
-                  )}
-                  {rule.examples.good && (
-                    <div className="flex items-start space-x-2">
-                      <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                      <div className="text-sm">
-                        <span className="font-medium text-green-700">{t("security.examples.good")}:</span>
-                        <code className="ml-2 text-xs bg-green-50 px-2 py-1 rounded">
-                          {rule.examples.good.join(", ")}
-                        </code>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          ))}
+        {/* Simple recommendation */}
+        <div className="p-4 bg-yellow-50 rounded-lg border border-yellow-200 mb-6">
+          <div className="flex items-start">
+            <AlertTriangle className="w-5 h-5 text-yellow-600 mr-2 flex-shrink-0 mt-0.5" />
+            <p className="text-yellow-800">
+              {t("security.authKey.recommendation")}
+            </p>
+          </div>
         </div>
 
         {/* Generate Secure Key */}
-        <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+        <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
           <h4 className="font-semibold mb-2 text-gray-900">{t("security.authKey.generate.title")}</h4>
           <p className="text-sm text-gray-600 mb-3">{t("security.authKey.generate.description")}</p>
           <div className="bg-gray-900 text-gray-100 p-3 rounded-md font-mono text-sm relative">
@@ -187,7 +149,7 @@ export default function SecurityContent() {
         </div>
 
         {/* Migration Steps */}
-        <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+        <div className="bg-gray-50 rounded-lg p-6 border border-gray-200 mb-6">
           <h3 className="font-semibold text-lg mb-4 text-gray-900">{t("security.encryption.migration.title")}</h3>
           
           <div className="space-y-4">
@@ -215,6 +177,33 @@ export default function SecurityContent() {
                         </button>
                       </div>
                     )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Migration Methods */}
+        <div className="mb-6">
+          <h3 className="font-semibold text-lg mb-4 text-gray-900">{t("security.encryption.migrationMethods.title")}</h3>
+          <div className="space-y-4">
+            {migrationMethods.map((method, index) => (
+              <div key={index} className="border border-gray-200 rounded-lg p-4">
+                <h4 className="font-medium text-gray-900 mb-2">{method.title}</h4>
+                <p className="text-sm text-gray-600 mb-3">{method.description}</p>
+                <div className="space-y-2">
+                  <div className="bg-gray-100 rounded p-3">
+                    <p className="text-xs text-gray-600 mb-1">{t("security.encryption.migrationMethods.enable")}</p>
+                    <code className="text-xs font-mono">{method.commands.enable}</code>
+                  </div>
+                  <div className="bg-gray-100 rounded p-3">
+                    <p className="text-xs text-gray-600 mb-1">{t("security.encryption.migrationMethods.disable")}</p>
+                    <code className="text-xs font-mono">{method.commands.disable}</code>
+                  </div>
+                  <div className="bg-gray-100 rounded p-3">
+                    <p className="text-xs text-gray-600 mb-1">{t("security.encryption.migrationMethods.change")}</p>
+                    <code className="text-xs font-mono">{method.commands.change}</code>
                   </div>
                 </div>
               </div>

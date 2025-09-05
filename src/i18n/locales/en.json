@@ -4104,13 +4104,11 @@
         },
         {
           "title": "Backup Data",
-          "description": "Strongly recommend backing up database to avoid data loss from operational errors",
-          "command": "cp -r ./data ./data-backup"
+          "description": "Must backup database! Perform backup operations according to the database type you use (SQLite, MySQL, PostgreSQL). Avoid data loss due to operational errors."
         },
         {
-          "title": "Enable Encryption",
-          "description": "Use --to parameter to specify new encryption key",
-          "command": "docker compose run --rm gpt-load migrate-keys --to \"your-32-char-secret-key\""
+          "title": "Execute Migration Command",
+          "description": "Choose the appropriate command based on your deployment method (see Migration Commands for Different Deployments below)"
         },
         {
           "title": "Update Configuration",
@@ -4123,6 +4121,41 @@
           "command": "docker compose up -d"
         }
       ],
+      "migrationMethods": {
+        "title": "Migration Commands for Different Deployments",
+        "enable": "Enable encryption:",
+        "disable": "Disable encryption:",
+        "change": "Change key:",
+        "items": [
+          {
+            "title": "Docker Compose Deployment",
+            "description": "For users deploying with Docker Compose",
+            "commands": {
+              "enable": "docker compose run --rm gpt-load migrate-keys --to \"your-32-char-secret-key\"",
+              "disable": "docker compose run --rm gpt-load migrate-keys --from \"your-current-key\"",
+              "change": "docker compose run --rm gpt-load migrate-keys --from \"old-key\" --to \"new-key\""
+            }
+          },
+          {
+            "title": "Source Deployment (Make)",
+            "description": "For users building from source",
+            "commands": {
+              "enable": "make migrate-keys ARGS=\"--to your-32-char-secret-key\"",
+              "disable": "make migrate-keys ARGS=\"--from your-current-key\"",
+              "change": "make migrate-keys ARGS=\"--from old-key --to new-key\""
+            }
+          },
+          {
+            "title": "Binary Deployment",
+            "description": "For users using compiled binaries",
+            "commands": {
+              "enable": "./gpt-load migrate-keys --to \"your-32-char-secret-key\"",
+              "disable": "./gpt-load migrate-keys --from \"your-current-key\"",
+              "change": "./gpt-load migrate-keys --from \"old-key\" --to \"new-key\""
+            }
+          }
+        ]
+      },
       "warning": {
         "title": "Important Reminders",
         "items": [
