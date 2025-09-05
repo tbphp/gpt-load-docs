@@ -4047,35 +4047,7 @@
     "authKey": {
       "title": "AUTH_KEY 認証キー",
       "description": "AUTH_KEYはGPT-Load管理インターフェースにアクセスするための認証キーです。システムを保護するために強力なパスワードに設定する必要があります。",
-      "rules": [
-        {
-          "title": "キー長の要件",
-          "description": "キーの長さはセキュリティに直接影響します。短いキーはブルートフォース攻撃に脆弱です。少なくとも32文字の使用を推奨、最低要件は16文字です。",
-          "severity": "high",
-          "examples": {
-            "bad": ["12345678", "password123", "sk-123456"],
-            "good": ["xK9mN2pL5qR8wT3vY6zB1cF4gH7jM0nA", "a7B9c2D5e8F1g4H7j0K3m6N9p2Q5s8T1v4W7x0Z3"]
-          }
-        },
-        {
-          "title": "一般的な弱いパスワードを避ける",
-          "description": "システムは'password'、'123456'、'admin'、'secret'などの一般的な弱いパスワードパターンを検出して警告します。これらのパターンは攻撃者に簡単に推測されます。",
-          "severity": "high",
-          "examples": {
-            "bad": ["password@2024", "admin123456", "secret-key-here", "test-token-123"],
-            "good": ["7kP9mX2nL5qR8wT3vY6", "キージェネレーターで生成されたランダム文字列"]
-          }
-        },
-        {
-          "title": "文字の複雑性",
-          "description": "強力なキーには大文字と小文字、数字、特殊文字の組み合わせ（少なくとも3種類）が含まれるべきです。単一タイプの文字の組み合わせはセキュリティが低くなります。",
-          "severity": "medium",
-          "examples": {
-            "bad": ["abcdefghijklmnop", "1234567890123456", "ABCDEFGHIJKLMNOP"],
-            "good": ["Kx9@mN2pL5#qR8wT", "aB3$dE6&fG9!hJ2@"]
-          }
-        }
-      ],
+      "recommendation": "少なくとも32文字のランダムキーを使用し、大文字・小文字・数字・特殊文字を含めることを推奨します。一般的な単語や単純なパターンの使用は避けてください。",
       "generate": {
         "title": "セキュアキーの生成",
         "description": "次のコマンドを使用して強力なランダムキーを生成："
