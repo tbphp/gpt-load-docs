@@ -4128,6 +4128,18 @@
         }
         ]
       },
+      "criticalWarning": {
+        "title": "⚠️ 极其重要的安全警告",
+        "mainWarning": "ENCRYPTION_KEY 一旦丢失，所有加密的 API 密钥数据将永久无法解密！",
+        "consequences": [
+          "所有存储的 API 密钥将无法使用",
+          "系统将完全不可用",
+          "加密数据无法恢复，即使有数据库备份也无法解密",
+          "必须重新添加所有 API 密钥",
+          "可能导致服务中断和业务损失"
+        ],
+        "backupReminder": "🔑 请务必将 ENCRYPTION_KEY 保存在多个安全的地方，定期检查备份的有效性！"
+      },
       "warning": {
         "title": "重要提醒",
         "items": [

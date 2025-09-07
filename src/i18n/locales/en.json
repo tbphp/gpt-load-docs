@@ -4128,6 +4128,18 @@
           }
         ]
       },
+      "criticalWarning": {
+        "title": "⚠️ CRITICAL SECURITY WARNING",
+        "mainWarning": "If ENCRYPTION_KEY is lost, all encrypted API key data will be permanently unrecoverable!",
+        "consequences": [
+          "All stored API keys will become unusable",
+          "The system will be completely non-functional",
+          "Encrypted data cannot be recovered, even with database backups",
+          "All API keys must be re-added manually",
+          "May cause service interruption and business losses"
+        ],
+        "backupReminder": "🔑 You MUST save ENCRYPTION_KEY in multiple secure locations and regularly verify backup validity!"
+      },
       "warning": {
         "title": "Important Reminders",
         "items": [
