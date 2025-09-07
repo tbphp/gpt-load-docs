@@ -2274,13 +2274,13 @@
         {
           "name": "Enable CORS",
           "envVar": "ENABLE_CORS",
-          "defaultValue": "true",
+          "defaultValue": "false",
           "description": "Whether to enable Cross-Origin Resource Sharing"
         },
         {
           "name": "Allowed Origins",
           "envVar": "ALLOWED_ORIGINS",
-          "defaultValue": "*",
+          "defaultValue": "-",
           "description": "Allowed origins, comma-separated"
         },
         {

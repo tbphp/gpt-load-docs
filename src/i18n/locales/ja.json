@@ -2274,13 +2274,13 @@
         {
           "name": "CORS 有効化",
           "envVar": "ENABLE_CORS",
-          "defaultValue": "true",
+          "defaultValue": "false",
           "description": "クロスオリジンリソース共有を有効にするかどうか"
         },
         {
           "name": "許可オリジン",
           "envVar": "ALLOWED_ORIGINS",
-          "defaultValue": "*",
+          "defaultValue": "-",
           "description": "許可されるオリジン、カンマ区切り"
         },
         {

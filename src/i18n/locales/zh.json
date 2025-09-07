@@ -2274,13 +2274,13 @@
         {
           "name": "启用 CORS",
           "envVar": "ENABLE_CORS",
-          "defaultValue": "true",
+          "defaultValue": "false",
           "description": "是否启用跨域资源共享"
         },
         {
           "name": "允许的来源",
           "envVar": "ALLOWED_ORIGINS",
-          "defaultValue": "*",
+          "defaultValue": "-",
           "description": "允许的来源，逗号分隔"
         },
         {
