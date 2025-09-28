@@ -23,13 +23,16 @@ const Footer = () => {
       { name: t("footer.links.standalone"), href: "/docs/deployment/standalone" },
       { name: t("footer.links.cluster"), href: "/docs/deployment/cluster" },
     ],
+    friendlyLinks: [
+      { name: "New API", href: "https://www.newapi.ai/" },
+    ],
   };
 
   return (
     <footer className="bg-gray-900 dark:bg-gray-950 text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         {/* Main footer content */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 sm:gap-8">
           {/* Brand section */}
           <div className="lg:col-span-2 sm:col-span-2">
             <Link href="/" className="flex items-center space-x-2 mb-3 sm:mb-4">
@@ -120,6 +123,27 @@ const Footer = () => {
                 <li key={link.name}>
                   <Link
                     href={link.href}
+                    className="text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-200 transition-colors duration-200 text-xs sm:text-sm"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Friendly links */}
+          <div>
+            <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">
+              {t("footer.friendlyLinks")}
+            </h3>
+            <ul className="space-y-2">
+              {links.friendlyLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-200 transition-colors duration-200 text-xs sm:text-sm"
                   >
                     {link.name}

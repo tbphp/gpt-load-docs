@@ -154,6 +154,7 @@
     "product": "Product",
     "community": "Community",
     "resources": "Deployment",
+    "friendlyLinks": "Friendly Links",
     "links": {
       "docs": "Documentation",
       "changelog": "Changelog",
