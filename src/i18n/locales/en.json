@@ -19,7 +19,7 @@
     "tech": {
       "backend": "Backend Language",
       "database": "Data Storage",
-      "cache": "Cache System", 
+      "cache": "Cache System",
       "frontend": "Admin Interface"
     },
     "quickStart": {
@@ -39,17 +39,31 @@
       "client": {
         "title": "Client Applications",
         "description": "Web/Mobile apps call through standard OpenAI API format",
-        "items": ["HTTP/HTTPS Requests", "Bearer Token Auth", "JSON Format Interaction"]
+        "items": [
+          "HTTP/HTTPS Requests",
+          "Bearer Token Auth",
+          "JSON Format Interaction"
+        ]
       },
       "proxy": {
         "title": "GPT-Load Proxy Layer",
         "description": "Core proxy service responsible for request forwarding and management",
-        "items": ["Transparent Proxy", "Key Management", "Load Balancing", "Request Logging"]
+        "items": [
+          "Transparent Proxy",
+          "Key Management",
+          "Load Balancing",
+          "Request Logging"
+        ]
       },
       "providers": {
         "title": "AI Service Providers",
         "description": "Unified access to multiple AI services",
-        "items": ["OpenAI API", "Google Gemini", "Anthropic Claude", "Other Compatible Services"]
+        "items": [
+          "OpenAI API",
+          "Google Gemini",
+          "Anthropic Claude",
+          "Other Compatible Services"
+        ]
       }
     },
     "infrastructure": {
@@ -338,7 +352,8 @@
     "architectureDesign": "Architecture & Design",
     "performance": "Performance",
     "routingStrategy": "Routing Strategy",
-    "keyManagement": "Key Management", 
+    "keyManagement": "Key Management",
+    "aggregateGroups": "Aggregate Groups",
     "channels": "Channels",
     "geminiOpenai": "Gemini Official OpenAI Compatible",
     "integrations": "Integrations",
@@ -562,7 +577,7 @@
               },
               {
                 "description": "2. Configure database connection in {file} file:",
-                "file": ".env", 
+                "file": ".env",
                 "code": "DATABASE_DSN=postgres://postgres:123456@postgres:5432/gpt-load?sslmode=disable"
               }
             ]
@@ -654,7 +669,7 @@
       "description": "Claw Cloud is an experimental free service with no stability guarantee. The following risks exist:",
       "risks": [
         "Service may become unstable or temporarily unavailable",
-        "Data may be lost due to service failures", 
+        "Data may be lost due to service failures",
         "Free service has no SLA guarantee",
         "Instances may be restarted or reassigned"
       ],
@@ -729,10 +744,7 @@
           "title": "Select Deployment Region",
           "description": "After login, select an appropriate deployment region in the top-left corner:",
           "recommended": "Recommended regions:",
-          "regions": [
-            "• Singapore - Singapore",
-            "• Japan - Japan"
-          ]
+          "regions": ["• Singapore - Singapore", "• Japan - Japan"]
         },
         "image": {
           "alt": "Claw Cloud region selection interface",
@@ -1071,33 +1083,63 @@
         "title": "Core Service Layer",
         "apiProxy": {
           "title": "API Proxy Service",
-          "features": ["HTTP/HTTPS transparent proxy", "Request routing and forwarding", "Streaming response processing", "Error handling and retry"]
+          "features": [
+            "HTTP/HTTPS transparent proxy",
+            "Request routing and forwarding",
+            "Streaming response processing",
+            "Error handling and retry"
+          ]
         },
         "loadBalancer": {
           "title": "Load Balancer",
-          "features": ["Round Robin algorithm", "Weight allocation strategy", "Health check mechanism", "Automatic failover"]
+          "features": [
+            "Round Robin algorithm",
+            "Weight allocation strategy",
+            "Health check mechanism",
+            "Automatic failover"
+          ]
         }
       },
       "managementLayer": {
         "title": "Management Service Layer",
         "webInterface": {
           "title": "Web Management Interface",
-          "features": ["Vue 3 + TypeScript", "Naive UI component library", "Real-time monitoring dashboard", "Configuration management interface"]
+          "features": [
+            "Vue 3 + TypeScript",
+            "Naive UI component library",
+            "Real-time monitoring dashboard",
+            "Configuration management interface"
+          ]
         },
         "restApi": {
           "title": "REST API",
-          "features": ["Key management interface", "Statistics data interface", "System configuration interface", "Monitoring metrics interface"]
+          "features": [
+            "Key management interface",
+            "Statistics data interface",
+            "System configuration interface",
+            "Monitoring metrics interface"
+          ]
         }
       },
       "dataLayer": {
         "title": "Data Storage Layer",
         "mysql": {
           "title": "MySQL Database",
-          "features": ["Key and configuration persistence", "User authentication data", "Historical statistics records", "System log storage"]
+          "features": [
+            "Key and configuration persistence",
+            "User authentication data",
+            "Historical statistics records",
+            "System log storage"
+          ]
         },
         "redis": {
           "title": "Redis Cache",
-          "features": ["Key status cache", "Rate limiting counters", "Distributed lock mechanism", "Session state management"]
+          "features": [
+            "Key status cache",
+            "Rate limiting counters",
+            "Distributed lock mechanism",
+            "Session state management"
+          ]
         }
       }
     },
@@ -1132,14 +1174,22 @@
         "title": "Standalone Deployment",
         "scenarios": {
           "title": "Applicable Scenarios",
-          "items": ["Small to medium-scale applications", "Development and testing environments", "Personal project usage"]
+          "items": [
+            "Small to medium-scale applications",
+            "Development and testing environments",
+            "Personal project usage"
+          ]
         }
       },
       "cluster": {
         "title": "Cluster Deployment",
         "scenarios": {
           "title": "Applicable Scenarios",
-          "items": ["Large-scale production environments", "High availability requirements", "Enterprise-grade applications"]
+          "items": [
+            "Large-scale production environments",
+            "High availability requirements",
+            "Enterprise-grade applications"
+          ]
         }
       }
     },
@@ -3647,23 +3697,23 @@
       "backend": {
         "title": "Backend Technologies",
         "items": [
-          {"name": "Go 1.23+", "desc": "Primary programming language"},
-          {"name": "Gin", "desc": "HTTP Web framework"},
-          {"name": "GORM", "desc": "ORM database operation framework"},
-          {"name": "MySQL 8.2+", "desc": "Primary database storage"},
-          {"name": "Redis", "desc": "Distributed cache and state management"},
-          {"name": "Uber Dig", "desc": "Dependency injection container"}
+          { "name": "Go 1.23+", "desc": "Primary programming language" },
+          { "name": "Gin", "desc": "HTTP Web framework" },
+          { "name": "GORM", "desc": "ORM database operation framework" },
+          { "name": "MySQL 8.2+", "desc": "Primary database storage" },
+          { "name": "Redis", "desc": "Distributed cache and state management" },
+          { "name": "Uber Dig", "desc": "Dependency injection container" }
         ]
       },
       "frontend": {
         "title": "Frontend & DevOps",
         "items": [
-          {"name": "Vue 3", "desc": "Frontend framework"},
-          {"name": "TypeScript", "desc": "Type safety"},
-          {"name": "Naive UI", "desc": "UI component library"},
-          {"name": "Docker", "desc": "Containerized deployment"},
-          {"name": "Docker Compose", "desc": "Container orchestration"},
-          {"name": "GitHub Actions", "desc": "CI/CD pipeline"}
+          { "name": "Vue 3", "desc": "Frontend framework" },
+          { "name": "TypeScript", "desc": "Type safety" },
+          { "name": "Naive UI", "desc": "UI component library" },
+          { "name": "Docker", "desc": "Containerized deployment" },
+          { "name": "Docker Compose", "desc": "Container orchestration" },
+          { "name": "GitHub Actions", "desc": "CI/CD pipeline" }
         ]
       }
     },
@@ -4011,21 +4061,35 @@
         "category": "config",
         "question": "What is the priority order of configurations?",
         "answer": "<p>GPT-Load uses a three-tier configuration system, with priority from high to low:</p><h4>Priority Order</h4><ol><li><strong>Group Configuration</strong> (Highest Priority)<ul><li>Custom configuration for specific groups</li><li>Can override any parameter in system settings</li><li>Supports JSON format parameter override</li></ul></li><li><strong>System Settings</strong> (Medium Priority)<ul><li>Global system-level configuration parameters</li><li>Dynamically modified through admin interface or API</li><li>Supports hot reload without service restart</li></ul></li><li><strong>Environment Configuration</strong> (Basic Priority)<ul><li>Set through environment variables or .env file</li><li>Loaded at service startup, not modifiable at runtime</li><li>Provides basic default values and infrastructure configuration</li></ul></li></ol><p><strong>Configuration Merge Rules</strong>: Upper-level configuration overrides lower-level configuration, and unconfigured parameters inherit values from lower levels.</p>",
-        "tags": ["Configuration Priority", "System Configuration", "Group Settings"]
+        "tags": [
+          "Configuration Priority",
+          "System Configuration",
+          "Group Settings"
+        ]
       },
       {
         "id": "service-not-starting",
         "category": "troubleshoot",
         "question": "What to do when service fails to start?",
         "answer": "<p>Common causes and solutions for service startup failures:</p><h4>Check Steps</h4><ol><li><strong>Check port occupation</strong><ul><li>Ensure port 3001 is not occupied by other services</li><li>You can use other ports by modifying the <code>PORT</code> environment variable</li></ul></li><li><strong>Check database connection</strong><ul><li>Verify that <code>DATABASE_DSN</code> configuration is correct</li><li>Ensure database service is started and accessible</li></ul></li><li><strong>Check permission issues</strong><ul><li>Ensure Docker has sufficient permissions to access data directory</li><li>Check permissions for <code>./data</code> directory</li></ul></li><li><strong>View detailed logs</strong><ul><li>Use <code>docker compose logs -f</code> to view detailed error information</li><li>Locate problems based on specific error messages</li></ul></li></ol><h4>Common Solutions</h4><ul><li>Recreate containers: <code>docker compose down && docker compose up -d</code></li><li>Clean data and reinitialize: delete <code>./data</code> directory and restart</li><li>Check network connection: ensure upstream API services are accessible</li></ul>",
-        "tags": ["Startup Failure", "Troubleshooting", "Docker", "Port Occupation"]
+        "tags": [
+          "Startup Failure",
+          "Troubleshooting",
+          "Docker",
+          "Port Occupation"
+        ]
       },
       {
         "id": "api-requests-failing",
         "category": "troubleshoot",
         "question": "Why do API requests keep failing?",
         "answer": "<p>Steps to troubleshoot API request failures:</p><h4>Basic Checks</h4><ol><li><strong>Verify proxy key</strong><ul><li>Ensure the API key used matches what's configured in GPT-Load</li><li>Check if the key format is correct</li></ul></li><li><strong>Check group configuration</strong><ul><li>Verify group name and upstream address configuration</li><li>Ensure the group is enabled</li></ul></li><li><strong>Test upstream connection</strong><ul><li>Use the \"Test Connection\" function on the group configuration page</li><li>Test if upstream API is reachable directly</li></ul></li></ol><h4>Network Issue Troubleshooting</h4><ul><li><strong>Proxy settings</strong>: Check if correct HTTP_PROXY or HTTPS_PROXY is configured</li><li><strong>DNS resolution</strong>: Ensure upstream service domain names can be resolved correctly</li><li><strong>Firewall</strong>: Check if network firewall blocks outbound connections</li></ul><h4>View detailed logs</h4><p>Check detailed request logs in \"Log Management\" of admin interface, and locate issues based on specific error codes and messages:</p><ul><li><strong>401/403</strong>: Key authentication issues</li><li><strong>404</strong>: Path or model configuration errors</li><li><strong>429</strong>: Request rate limiting</li><li><strong>502/504</strong>: Upstream service unreachable</li></ul>",
-        "tags": ["API Failure", "Network Issues", "Authentication Error", "Log Analysis"]
+        "tags": [
+          "API Failure",
+          "Network Issues",
+          "Authentication Error",
+          "Log Analysis"
+        ]
       }
     ]
   },
@@ -4201,6 +4265,270 @@
         {
           "text": "FAQ",
           "url": "/docs/faq"
+        }
+      ]
+    }
+  },
+  "aggregateGroups": {
+    "title": "Aggregate Groups",
+    "subtitle": "Multi-key pool integration and intelligent load balancing solution",
+    "overview": {
+      "title": "Overview",
+      "what": {
+        "title": "What are Aggregate Groups?",
+        "description": "Aggregate Groups are an advanced grouping type provided by GPT-Load, allowing you to combine multiple standard groups into a logical group. Through aggregate groups, you can unify management of multiple key pools and achieve intelligent load balancing and high availability.",
+        "features": [
+          {
+            "title": "Unified multi-key pool management",
+            "description": "Integrate different key pools into a single access point"
+          },
+          {
+            "title": "Intelligent load balancing",
+            "description": "Automatically distribute request traffic to sub-groups based on weight"
+          },
+          {
+            "title": "Improved availability",
+            "description": "Automatically switch to other sub-groups when one has no available keys"
+          },
+          {
+            "title": "Flexible traffic control",
+            "description": "Dynamically adjust traffic distribution among sub-groups"
+          }
+        ]
+      },
+      "useCases": {
+        "title": "Use Cases",
+        "items": [
+          {
+            "title": "Multi-key pool load balancing",
+            "description": "Aggregate key pools from multiple standard groups for balanced traffic distribution"
+          },
+          {
+            "title": "Resource isolation and aggregation",
+            "description": "Independent management of departmental key pools, unified service through aggregate groups"
+          },
+          {
+            "title": "Elastic scaling",
+            "description": "Quickly add new key pools to existing aggregate groups without modifying client configuration"
+          },
+          {
+            "title": "Canary deployment",
+            "description": "Control traffic percentage to new key pools through weight adjustment for gradual migration"
+          },
+          {
+            "title": "High availability architecture",
+            "description": "Automatically switch to backup key pools when primary pools are exhausted"
+          }
+        ]
+      }
+    },
+    "concepts": {
+      "title": "Core Concepts",
+      "items": [
+        {
+          "term": "Aggregate Group",
+          "definition": "A special group type that doesn't contain keys itself, but references other standard groups, implementing unified management and load balancing across multiple key pools through intelligent algorithms."
+        },
+        {
+          "term": "Sub-group",
+          "definition": "Standard groups referenced by aggregate groups that actually store and manage API keys. Each sub-group can be independently configured and maintained."
+        },
+        {
+          "term": "Weight",
+          "definition": "Determines the traffic percentage of a sub-group in load balancing, ranging from 0-1000. Higher weight means more traffic; weight of 0 means temporarily disabled."
+        },
+        {
+          "term": "Status",
+          "definition": "Sub-group operational status includes valid (weight > 0 and has available keys), disabled (weight = 0), and invalid (weight > 0 but no available keys)."
+        }
+      ]
+    },
+    "design": {
+      "title": "Design Principles",
+      "algorithm": {
+        "title": "Load Balancing Algorithm",
+        "description": "GPT-Load uses Smooth Weighted Round-Robin algorithm for sub-group selection, which features:",
+        "features": [
+          "Smooth distribution: More evenly distributed traffic, avoiding burst traffic",
+          "Accurate weighting: Strictly follows configured weight ratios for traffic distribution",
+          "High performance: O(n) time complexity, suitable for high concurrency scenarios"
+        ]
+      },
+      "selection": {
+        "title": "Sub-group Selection Logic",
+        "steps": [
+          {
+            "step": "Calculate candidate group",
+            "description": "Calculate next candidate sub-group based on weighted round-robin algorithm"
+          },
+          {
+            "step": "Check availability",
+            "description": "Check if this sub-group has available keys"
+          },
+          {
+            "step": "Select or skip",
+            "description": "Use sub-group if keys available, otherwise mark as tried and continue to next candidate"
+          },
+          {
+            "step": "Failure handling",
+            "description": "Return error if all sub-groups have no available keys"
+          }
+        ],
+        "features": {
+          "title": "Key Features",
+          "items": [
+            "Smart skip: Automatically skip sub-groups without available keys",
+            "Fast fail: Immediately return error after exhausting all sub-groups",
+            "Stateless: Each request makes independent decisions without external state dependency"
+          ]
+        }
+      }
+    },
+    "states": {
+      "title": "State Management",
+      "table": {
+        "headers": ["Weight", "Has Keys", "Status", "Description"],
+        "rows": [
+          {
+            "weight": "> 0",
+            "hasKeys": "Yes",
+            "status": "Valid",
+            "icon": "valid",
+            "description": "Participates normally in load balancing"
+          },
+          {
+            "weight": "= 0",
+            "hasKeys": "-",
+            "status": "Disabled",
+            "icon": "disabled",
+            "description": "Does not participate in load balancing (temporarily disabled)"
+          },
+          {
+            "weight": "> 0",
+            "hasKeys": "No",
+            "status": "Invalid",
+            "icon": "invalid",
+            "description": "Automatically skipped when selected"
+          }
+        ]
+      }
+    },
+    "rules": {
+      "title": "Usage Rules",
+      "restrictions": {
+        "title": "Sub-group Restrictions",
+        "items": [
+          {
+            "rule": "No nesting",
+            "allowed": "Aggregate group → Standard group",
+            "forbidden": "Aggregate group → Aggregate group"
+          },
+          {
+            "rule": "Consistent channel type",
+            "allowed": "All sub-groups are OpenAI",
+            "forbidden": "Mixed OpenAI and Gemini sub-groups"
+          },
+          {
+            "rule": "Consistent validation endpoint",
+            "allowed": "All sub-groups use /v1/chat/completions",
+            "forbidden": "Sub-group A uses /v1/chat/completions, sub-group B uses /v1/completions"
+          }
+        ]
+      },
+      "weights": {
+        "title": "Weight Configuration Rules",
+        "specs": [
+          {
+            "label": "Value range",
+            "value": "0-1000"
+          },
+          {
+            "label": "Special value 0",
+            "value": "Disable sub-group (does not participate in load balancing)"
+          },
+          {
+            "label": "Percentage calculation",
+            "value": "Sub-group percentage = Sub-group weight / Sum of all sub-group weights × 100%"
+          },
+          {
+            "label": "Recommended practice",
+            "value": "Use round hundred values (e.g., 100, 200, 500) for easy understanding and maintenance"
+          }
+        ]
+      }
+    },
+    "bestPractices": {
+      "title": "Best Practices",
+      "benefitsLabel": "Benefits",
+      "patterns": [
+        {
+          "title": "Equal Distribution",
+          "description": "Multiple key pools with similar capacity, aiming for even traffic distribution",
+          "config": "Sub-group A: 100\nSub-group B: 100\nSub-group C: 100",
+          "benefits": [
+            "Simple and intuitive, balanced traffic",
+            "Suitable for multiple equally important key pools"
+          ]
+        },
+        {
+          "title": "Capacity-based Distribution",
+          "description": "Key pools with significantly different capacities, distribute by capacity ratio",
+          "config": "Sub-group A (50 keys): 500  # 50%\nSub-group B (30 keys): 300  # 30%\nSub-group C (20 keys): 200  # 20%",
+          "benefits": [
+            "Balanced key utilization",
+            "Avoid overloading smaller pools"
+          ]
+        },
+        {
+          "title": "Primary-Backup Mode",
+          "description": "Prioritize primary key pool, backup pool as insurance",
+          "config": "Sub-group A (primary): 900  # 90%\nSub-group B (backup): 100  # 10%",
+          "benefits": [
+            "Prioritize consuming primary pool",
+            "Backup pool as buffer"
+          ]
+        },
+        {
+          "title": "Canary Deployment",
+          "description": "Test new key pool stability, gradually switch traffic",
+          "config": "Stage 1: Old(980) / New(20)\nStage 2: Old(800) / New(200)\nStage 3: Old(200) / New(800)",
+          "benefits": ["Controllable risk", "Limited impact scope for issues"]
+        }
+      ]
+    },
+    "troubleshooting": {
+      "title": "Troubleshooting",
+      "causeLabel": "Cause",
+      "solutionLabel": "Solution",
+      "issues": [
+        {
+          "problem": "Request returns \"No available sub-groups\"",
+          "cause": "All sub-groups have no available keys, all sub-groups are disabled (weight = 0), or aggregate group has no sub-groups added",
+          "solution": [
+            "Check sub-group list and view status",
+            "Enter \"invalid\" sub-groups, validate and replenish keys",
+            "Restore weight for disabled sub-groups",
+            "Ensure at least one sub-group is in \"valid\" status"
+          ]
+        },
+        {
+          "problem": "Traffic distribution doesn't match weight configuration",
+          "cause": "Some sub-groups without available keys are automatically skipped, weight configuration recently modified needs longer observation time, or too few requests for statistical significance",
+          "solution": [
+            "Check if all sub-groups have available keys",
+            "Analyze traffic distribution over longer period (e.g., 1 hour) in log page",
+            "Confirm weight configuration is saved and effective"
+          ]
+        },
+        {
+          "problem": "Cannot modify standard group's channel type",
+          "cause": "Standard group is referenced as sub-group by one or more aggregate groups",
+          "solution": [
+            "Check \"Referenced by aggregate groups\" list in standard group details page",
+            "Remove sub-group from each aggregate group in the list",
+            "Modify channel type",
+            "Re-add to aggregate groups if needed"
+          ]
         }
       ]
     }

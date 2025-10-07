@@ -596,6 +596,26 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       keywords: "GPT-Loadセキュリティ, AUTH_KEY設定, ENCRYPTION_KEY暗号化, キーセキュリティ, データ暗号化, セキュリティベストプラクティス, キー管理, セキュリティ設定",
       type: 'article'
     }
+  },
+  '/docs/architecture-design/aggregate-groups': {
+    zh: {
+      title: "聚合分组 - GPT-Load",
+      description: "深入了解GPT-Load聚合分组功能的设计与实现，掌握多密钥池整合、智能负载均衡、权重配置等高级特性，构建高可用API代理架构。",
+      keywords: "聚合分组, 多密钥池管理, 负载均衡, 权重配置, 平滑加权轮询, 高可用架构, 密钥池整合, GPT-Load",
+      type: 'article'
+    },
+    en: {
+      title: "Aggregate Groups - GPT-Load",
+      description: "In-depth understanding of GPT-Load aggregate group feature design and implementation, master multi-key pool integration, intelligent load balancing, weight configuration and advanced features to build high-availability API proxy architecture.",
+      keywords: "aggregate groups, multi-key pool management, load balancing, weight configuration, smooth weighted round-robin, high availability architecture, key pool integration, GPT-Load",
+      type: 'article'
+    },
+    ja: {
+      title: "集約グループ - GPT-Load",
+      description: "GPT-Load集約グループ機能の設計と実装の詳細理解。マルチキープール統合、インテリジェント負荷分散、重み設定などの高度な機能をマスターし、高可用性APIプロキシアーキテクチャを構築。",
+      keywords: "集約グループ, マルチキープール管理, 負荷分散, 重み設定, スムーズ重み付けラウンドロビン, 高可用性アーキテクチャ, キープール統合, GPT-Load",
+      type: 'article'
+    }
   }
   // 架构预留：后续可继续添加其他页面的SEO配置
 };

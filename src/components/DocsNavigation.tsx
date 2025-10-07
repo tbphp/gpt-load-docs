@@ -105,6 +105,11 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
           href: "/docs/architecture-design/key-management",
           icon: Shield,
         },
+        {
+          title: t("docs.aggregateGroups"),
+          href: "/docs/architecture-design/aggregate-groups",
+          icon: Layers,
+        },
       ],
     },
     {
