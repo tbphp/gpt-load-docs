@@ -2549,7 +2549,7 @@
         },
         "blacklistThreshold": {
           "name": "Blacklist Threshold",
-          "description": "Number of consecutive failures before a key enters blacklist"
+          "description": "After how many key accumulation failures does it enter the blacklist?"
         },
         "keyValidationInterval": {
           "name": "Key Validation Interval",

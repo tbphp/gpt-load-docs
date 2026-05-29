@@ -2549,7 +2549,7 @@
         },
         "blacklistThreshold": {
           "name": "ブラックリスト閾値",
-          "description": "キーが連続して失敗する回数でブラックリストに追加"
+          "description": "鍵が何回失敗するとブラックリストに入るか"
         },
         "keyValidationInterval": {
           "name": "キー検証間隔",
