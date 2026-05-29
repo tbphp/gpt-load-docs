@@ -2520,7 +2520,7 @@
         },
         "blacklistThreshold": {
           "name": "黑名单阈值",
-          "description": "密钥累积失败多少次后进入黑名单"
+          "description": "密钥累计失败多少次后进入黑名单"
         },
         "keyValidationInterval": {
           "name": "密钥验证间隔",
