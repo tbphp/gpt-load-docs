@@ -31,6 +31,14 @@
       "access": "Access admin panel:"
     }
   },
+  "projectSponsors": {
+    "title": "Project Sponsors",
+    "apimart": {
+      "logoAriaLabel": "Visit the APIMart website",
+      "summary": "Low-cost APIs for AI image and video generation — GPT-Image-2 from $0.006/image, 160+ images per dollar. One async API covers image and video, with task IDs, callbacks, batch processing, and model switching without code changes.",
+      "cta": "Get started"
+    }
+  },
   "architecture": {
     "title": "System Architecture",
     "subtitle": "High-Performance Transparent Proxy Architecture",

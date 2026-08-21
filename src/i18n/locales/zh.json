@@ -31,6 +31,14 @@
       "access": "访问管理界面："
     }
   },
+  "projectSponsors": {
+    "title": "项目赞助商",
+    "apimart": {
+      "logoAriaLabel": "访问 APIMart 官网",
+      "summary": "专注 AI 图片/视频生成的低价 API 平台，GPT-Image-2 低至 $0.006/张，1 美元可出图 160+ 张。图片、视频共用一套异步 API，支持任务 ID、回调取结果和批量处理，换模型无需改代码，注册即可开用。",
+      "cta": "注册使用"
+    }
+  },
   "architecture": {
     "title": "系统架构",
     "subtitle": "高性能透明代理架构设计",
