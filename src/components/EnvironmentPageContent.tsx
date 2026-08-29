@@ -47,7 +47,7 @@ export default function EnvironmentPageContent() {
   const { t, tArray, tObjectArray } = useTranslation();
   
   // 关键：添加 useSeo hook 用于语言切换时的SEO更新
-  useSeo("/docs/configuration/environment");
+  useSeo("/v1/docs/configuration/environment");
 
   return (
     <div className="max-w-4xl mx-auto">

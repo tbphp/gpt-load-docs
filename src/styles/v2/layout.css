@@ -1,0 +1,57 @@
+/* ============================================================================
+   布局层 — 容器、网格、章节骨架
+   ============================================================================ */
+
+/* 12 栏容器 */
+.shell { max-width: var(--max); margin: 0 auto; padding: 0 var(--edge); }
+.g12 { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gutter); }
+
+/* 常用跨栏，避免每个页面手写 grid-column */
+.col-2  { grid-column: span 2; }
+.col-3  { grid-column: span 3; }
+.col-4  { grid-column: span 4; }
+.col-5  { grid-column: span 5; }
+.col-6  { grid-column: span 6; }
+.col-7  { grid-column: span 7; }
+.col-8  { grid-column: span 8; }
+.col-12 { grid-column: span 12; }
+.col-r6 { grid-column: 7 / span 6; }  /* 右半区，与左 5 栏形成 1 栏留白 */
+.col-r5 { grid-column: 8 / span 5; }
+
+/* 页面顶部起始间距，各类页面保持一致；首页 hero 另有更大的呼吸空间 */
+.page-top { padding-top: 44px; }
+
+/* ---------- 章节 ---------- */
+.sec { padding: var(--sec-pad) 0 0; }
+.sec-tint { background: var(--tint); padding: var(--sec-pad) 0; margin-top: var(--sec-pad); }
+/* 浅底板块自带下内边距，紧随其后的白底板块不再重复留白 */
+.sec-tint + .sec { padding-top: 0; }
+/* tint 板块内的线要加深一档才看得见 */
+.sec-tint .chan li,
+.sec-tint .tbl td { border-bottom-color: var(--hair-on-tint); }
+.sec-tint .code { background: var(--wash-on-tint); }
+
+.sec-head {
+  border-top: 1px solid var(--ink);
+  padding-top: 14px;
+  display: flex; align-items: baseline; gap: 14px;
+}
+.sec-head .n { font-family: var(--f-mono); font-size: var(--t-label); letter-spacing: .16em; color: var(--blue); }
+.sec-head .t { font-family: var(--f-mono); font-size: var(--t-label); letter-spacing: .16em; text-transform: uppercase; color: var(--dim); }
+
+.sec-title {
+  font-size: var(--t-h2); line-height: 1.08; letter-spacing: -0.04em;
+  font-weight: 700; margin-top: 26px; max-width: 20ch;
+}
+.sec-lede { margin-top: 18px; font-size: var(--t-body); line-height: 1.62; color: var(--dim); max-width: 58ch; }
+.sec-body { margin-top: 46px; }
+
+/* 深色收束块 */
+.sec-tint + .sec-ink { margin-top: 0; }
+.sec-ink { background: var(--ink); color: var(--ink-inv); margin-top: var(--sec-pad); padding: 72px 0; }
+.sec-ink .label { color: rgba(255,255,255,.55); }
+
+@media (max-width: 720px) {
+  .sec { padding-top: var(--sec-pad-sm); }
+  .sec-tint, .sec-ink { padding: var(--sec-pad-sm) 0; margin-top: var(--sec-pad-sm); }
+}

@@ -27,7 +27,7 @@ const CTA = () => {
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-12 px-4">
               <Link
-                href="/docs/deployment/standalone"
+                href="/v1/docs/deployment/standalone"
                 className="inline-flex items-center space-x-2 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200 shadow-lg w-full sm:w-auto justify-center"
               >
                 <Download className="h-4 w-4 sm:h-5 sm:w-5" />
@@ -36,7 +36,7 @@ const CTA = () => {
               </Link>
 
               <Link
-                href="/docs"
+                href="/v1/docs"
                 className="inline-flex items-center space-x-2 border-2 border-white dark:border-white/80 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-white dark:hover:bg-gray-800 hover:text-blue-600 dark:hover:text-white transition-all duration-200 w-full sm:w-auto justify-center"
               >
                 <BookOpen className="h-4 w-4 sm:h-5 sm:w-5" />
@@ -54,7 +54,7 @@ const CTA = () => {
               </a>
 
               <Link
-                href="/docs/sponsor"
+                href="/v1/docs/sponsor"
                 className="inline-flex items-center space-x-2 bg-red-500 dark:bg-red-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-red-600 dark:hover:bg-red-700 transition-all duration-200 shadow-lg w-full sm:w-auto justify-center"
               >
                 <Heart className="h-4 w-4 sm:h-5 sm:w-5" />

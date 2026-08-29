@@ -1,0 +1,54 @@
+/* ============================================================================
+   基础层 — reset 与全局排版
+   所有 reset 用 :where() 把优先级归零，组件类永远能覆盖它，
+   避免出现「.v2 a 压过 .btn-p 导致黑底黑字」这类事故。
+   ============================================================================ */
+.v2 {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-sans);
+  font-size: var(--t-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+
+  /* 撑满视口：内容不足一屏时（比如骨架文档页），页脚也压在底部，
+     不会吊在屏幕中间。 */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+.v2 > main { flex: 1 0 auto; }
+
+:where(.v2) *,
+:where(.v2) *::before,
+:where(.v2) *::after { box-sizing: border-box; }
+
+:where(.v2) :is(h1, h2, h3, h4, p, ul, ol, figure, blockquote) { margin: 0; }
+:where(.v2) :is(ul, ol) { list-style: none; padding: 0; }
+:where(.v2) a { color: inherit; text-decoration: none; }
+:where(.v2) img { display: block; max-width: 100%; }
+:where(.v2) button { font: inherit; color: inherit; }
+
+.v2 :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+/* 工具类 */
+.mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.label {
+  font-family: var(--f-mono);
+  font-size: var(--t-label);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.label-blue { color: var(--blue); }
+.label-amber { color: var(--amber); }
+.label-green { color: var(--green); }
+
+@media (prefers-reduced-motion: reduce) {
+  .v2 *, .v2 *::before, .v2 *::after {
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

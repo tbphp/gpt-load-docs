@@ -159,7 +159,7 @@ docker compose up -d
 
             <div className="mt-6 sm:mt-8 text-center">
               <Link
-                href="/docs/deployment"
+                href="/v1/docs/deployment"
                 className="inline-flex items-center space-x-2 bg-blue-600 dark:bg-blue-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold hover:bg-blue-700 dark:hover:bg-blue-600 transition-all duration-200 text-sm sm:text-base"
               >
                 <span>{t("quickStartComponent.requirements.viewDocs")}</span>

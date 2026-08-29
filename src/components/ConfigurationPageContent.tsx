@@ -8,7 +8,7 @@ export default function ConfigurationPageContent() {
   const { t, tArray } = useTranslation();
 
   // 关键：添加 useSeo hook 用于语言切换时的SEO更新
-  useSeo("/docs/configuration");
+  useSeo("/v1/docs/configuration");
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -167,7 +167,7 @@ export default function ConfigurationPageContent() {
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <a
-            href="/docs/configuration/environment"
+            href="/v1/docs/configuration/environment"
             className="block bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 p-6 rounded-lg transition-colors"
           >
             <h3 className="text-xl font-semibold text-blue-900 dark:text-blue-200 mb-2">
@@ -178,7 +178,7 @@ export default function ConfigurationPageContent() {
             </p>
           </a>
           <a
-            href="/docs/configuration/project"
+            href="/v1/docs/configuration/project"
             className="block bg-orange-50 dark:bg-orange-900/20 hover:bg-orange-100 dark:hover:bg-orange-900/30 p-6 rounded-lg transition-colors"
           >
             <h3 className="text-xl font-semibold text-orange-900 dark:text-orange-200 mb-2">
@@ -189,7 +189,7 @@ export default function ConfigurationPageContent() {
             </p>
           </a>
           <a
-            href="/docs/configuration/cloudflare-aigateway"
+            href="/v1/docs/configuration/cloudflare-aigateway"
             className="block bg-cyan-50 dark:bg-cyan-900/20 hover:bg-cyan-100 dark:hover:bg-cyan-900/30 p-6 rounded-lg transition-colors"
           >
             <h3 className="text-xl font-semibold text-cyan-900 dark:text-cyan-200 mb-2">

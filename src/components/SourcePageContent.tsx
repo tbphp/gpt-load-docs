@@ -17,7 +17,7 @@ export default function SourcePageContent() {
   const { t } = useTranslation();
   
   // 关键：添加 useSeo hook 用于语言切换时的SEO更新
-  useSeo("/docs/deployment/source");
+  useSeo("/v1/docs/deployment/source");
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -429,14 +429,14 @@ export default function SourcePageContent() {
         </ul>
         <div className="flex flex-col sm:flex-row gap-4">
           <a
-            href="/docs/configuration"
+            href="/v1/docs/configuration"
             className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
             <Settings className="h-4 w-4 mr-2" />
             {t("deployment.source.nextSteps.configurationGuide")}
           </a>
           <a
-            href="/docs/architecture-design"
+            href="/v1/docs/architecture-design"
             className="inline-flex items-center justify-center px-6 py-3 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors"
           >
             <Wrench className="h-4 w-4 mr-2" />

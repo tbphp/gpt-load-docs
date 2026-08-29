@@ -33,133 +33,133 @@ const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
   const { t } = useTranslation();
 
   const navigation = [
-    { title: t("docs.quickStart"), href: "/docs", icon: Rocket },
-    { title: t("docs.introduction"), href: "/docs/introduction", icon: BookUser },
+    { title: t("docs.quickStart"), href: "/v1/docs", icon: Rocket },
+    { title: t("docs.introduction"), href: "/v1/docs/introduction", icon: BookUser },
     {
       title: t("docs.deployment"),
-      href: "/docs/deployment",
+      href: "/v1/docs/deployment",
       icon: Cloud,
       children: [
         {
           title: t("docs.standalone"),
-          href: "/docs/deployment/standalone",
+          href: "/v1/docs/deployment/standalone",
           icon: Server,
         },
-        { title: t("docs.source"), href: "/docs/deployment/source", icon: Code },
-        { title: t("docs.cluster"), href: "/docs/deployment/cluster", icon: Layers },
+        { title: t("docs.source"), href: "/v1/docs/deployment/source", icon: Code },
+        { title: t("docs.cluster"), href: "/v1/docs/deployment/cluster", icon: Layers },
         {
           title: t("docs.clawCloud"),
-          href: "/docs/deployment/claw-cloud",
+          href: "/v1/docs/deployment/claw-cloud",
           icon: Cloud,
         },
       ],
     },
     {
       title: t("docs.configuration"),
-      href: "/docs/configuration",
+      href: "/v1/docs/configuration",
       icon: Settings,
       children: [
         {
           title: t("docs.environment"),
-          href: "/docs/configuration/environment",
+          href: "/v1/docs/configuration/environment",
           icon: Server,
         },
         {
           title: t("docs.project"),
-          href: "/docs/configuration/project",
+          href: "/v1/docs/configuration/project",
           icon: Wrench,
         },
         {
           title: t("docs.management"),
-          href: "/docs/configuration/management",
+          href: "/v1/docs/configuration/management",
           icon: Users,
         },
         {
           title: t("docs.security"),
-          href: "/docs/configuration/security",
+          href: "/v1/docs/configuration/security",
           icon: Lock,
         },
         {
           title: t("docs.cloudflareAigateway"),
-          href: "/docs/configuration/cloudflare-aigateway",
+          href: "/v1/docs/configuration/cloudflare-aigateway",
           icon: Cloud,
         },
       ],
     },
     {
       title: t("docs.architectureDesign"),
-      href: "/docs/architecture-design",
+      href: "/v1/docs/architecture-design",
       icon: Wrench,
       children: [
         {
           title: t("docs.performance"),
-          href: "/docs/architecture-design/performance",
+          href: "/v1/docs/architecture-design/performance",
           icon: Sparkles,
         },
         {
           title: t("docs.routingStrategy"),
-          href: "/docs/architecture-design/routing-strategy",
+          href: "/v1/docs/architecture-design/routing-strategy",
           icon: GitBranch,
         },
         {
           title: t("docs.keyManagement"),
-          href: "/docs/architecture-design/key-management",
+          href: "/v1/docs/architecture-design/key-management",
           icon: Shield,
         },
         {
           title: t("docs.aggregateGroups"),
-          href: "/docs/architecture-design/aggregate-groups",
+          href: "/v1/docs/architecture-design/aggregate-groups",
           icon: Layers,
         },
         {
           title: t("docs.modelRedirect"),
-          href: "/docs/architecture-design/model-redirect",
+          href: "/v1/docs/architecture-design/model-redirect",
           icon: Repeat,
         },
       ],
     },
     {
       title: t("docs.channels"),
-      href: "/docs/channels",
+      href: "/v1/docs/channels",
       icon: Globe,
       children: [
         {
           title: t("docs.geminiOpenai"),
-          href: "/docs/gemini-openai",
+          href: "/v1/docs/gemini-openai",
           icon: Sparkles,
         },
       ],
     },
     {
       title: t("docs.integrations"),
-      href: "/docs/integrations",
+      href: "/v1/docs/integrations",
       icon: Plug,
       children: [
         {
           title: t("docs.rooCode"),
-          href: "/docs/integrations/roo-code",
+          href: "/v1/docs/integrations/roo-code",
           icon: Code,
         },
         {
           title: t("docs.claudeCodeRouter"),
-          href: "/docs/integrations/claude-code-router",
+          href: "/v1/docs/integrations/claude-code-router",
           icon: Terminal,
         },
         {
           title: t("docs.newApi"),
-          href: "/docs/integrations/new-api",
+          href: "/v1/docs/integrations/new-api",
           icon: Globe,
         },
         {
           title: t("docs.cherryStudio"),
-          href: "/docs/integrations/cherry-studio",
+          href: "/v1/docs/integrations/cherry-studio",
           icon: Sparkles,
         },
       ],
     },
-    { title: t("docs.faq"), href: "/docs/faq", icon: HelpCircle },
-    { title: t("docs.sponsor"), href: "/docs/sponsor", icon: Heart },
-    { title: t("docs.contributors"), href: "/docs/contributors", icon: Users },
+    { title: t("docs.faq"), href: "/v1/docs/faq", icon: HelpCircle },
+    { title: t("docs.sponsor"), href: "/v1/docs/sponsor", icon: Heart },
+    { title: t("docs.contributors"), href: "/v1/docs/contributors", icon: Users },
   ];
 
   const [openItems, setOpenItems] = useState<number[]>(() => {

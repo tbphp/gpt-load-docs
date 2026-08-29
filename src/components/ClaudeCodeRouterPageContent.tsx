@@ -16,7 +16,7 @@ export default function ClaudeCodeRouterPageContent() {
   const { t, tArray, tObjectArray } = useTranslation();
   
   // 关键：添加 useSeo hook 用于语言切换时的SEO更新
-  useSeo("/docs/integrations/claude-code-router");
+  useSeo("/v1/docs/integrations/claude-code-router");
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -362,7 +362,7 @@ export default function ClaudeCodeRouterPageContent() {
           </Link>
           <br />
           <Link
-            href="/docs/configuration"
+            href="/v1/docs/configuration"
             className="inline-flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-300 transition-colors duration-200"
           >
             {t("claudeCodeRouter.relatedResources.gptLoadConfig")}
@@ -370,7 +370,7 @@ export default function ClaudeCodeRouterPageContent() {
           </Link>
           <br />
           <Link
-            href="/docs/channels"
+            href="/v1/docs/channels"
             className="inline-flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-300 transition-colors duration-200"
           >
             {t("claudeCodeRouter.relatedResources.channelTypes")}

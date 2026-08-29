@@ -1,0 +1,242 @@
+/* ============================================================================
+   组件层 — 全站复用。新页面优先用这里的类，不要另写一套。
+   ============================================================================ */
+
+/* ---------- 按钮 ----------
+   注意：选择器要能压过 base.css 的 a 规则。base 用 :where() 归零了优先级，
+   所以这里单类名即可生效。 */
+.btn {
+  display: inline-block; font-size: 13px; font-weight: 500;
+  padding: 13px 24px; border: 1px solid transparent;
+  transition: background var(--dur), color var(--dur), border-color var(--dur), opacity var(--dur);
+  cursor: pointer;
+}
+.btn-p { background: var(--ink); color: var(--ink-inv); border-color: var(--ink); }
+/* 悬停转品牌色，让交互也带上颜色，而不是简单降透明度 */
+.btn-p:hover { background: var(--blue); border-color: var(--blue); }
+.btn-s { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn-s:hover { background: var(--blue); color: var(--ink-inv); border-color: var(--blue); }
+/* 深色板块上的反色按钮 */
+.sec-ink .btn-p { background: var(--ink-inv); color: var(--ink); border-color: var(--ink-inv); }
+.sec-ink .btn-s { color: var(--ink-inv); border-color: rgba(255,255,255,.45); }
+.sec-ink .btn-s:hover { background: var(--ink-inv); color: var(--ink); border-color: var(--ink-inv); }
+.btns { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* ---------- 内联链接 ---------- */
+.link { color: var(--blue); }
+.link:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- 代码块 ---------- */
+.code {
+  background: var(--wash); border-left: 2px solid var(--ink);
+  padding: 20px 22px; font-family: var(--f-mono); font-size: var(--t-code);
+  line-height: 1.9; overflow-x: auto; white-space: pre; color: var(--ink);
+}
+.code .c { color: var(--faint); }        /* 注释 */
+.code .s { color: var(--blue); }         /* 字符串 */
+.code .k { color: var(--cat-4); font-weight: 600; }  /* 关键字 */
+.code-cap { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 9px; }
+
+/* ---------- 表格 ---------- */
+.tbl-wrap { overflow-x: auto; }
+.tbl { width: 100%; border-collapse: collapse; min-width: 560px; }
+.tbl th {
+  text-align: left; font-family: var(--f-mono); font-size: var(--t-label);
+  letter-spacing: .16em; text-transform: uppercase; color: var(--dim); font-weight: 400;
+  padding: 0 16px 10px 0; border-bottom: 1px solid var(--ink);
+}
+.tbl td { padding: 15px 16px 15px 0; border-bottom: 1px solid var(--hair); font-size: 14px; vertical-align: baseline; }
+/* 表格里的路径 / 标识符按代码对待，与代码块中的字符串同色 */
+.tbl td.m { font-family: var(--f-mono); font-size: var(--t-code); color: var(--blue); }
+.tbl tr td:first-child { font-weight: 600; }
+
+/* ---------- 提示框 ---------- */
+.notice { border: 1px solid var(--ink); padding: 22px 24px; display: flex; gap: 20px; align-items: baseline; flex-wrap: wrap; }
+.notice > .t { font-family: var(--f-mono); font-size: var(--t-label); letter-spacing: .16em; text-transform: uppercase; color: var(--blue); flex: none; }
+.notice p { font-size: var(--t-xs); line-height: 1.6; color: var(--dim); flex: 1; min-width: 260px; }
+.notice b { color: var(--ink); font-weight: 600; }
+/* 语义变体：颜色在这里承担信息，不是装饰 */
+.notice-amber { border-color: var(--amber); background: var(--amber-soft); }
+.notice-amber > .t { color: var(--amber); }
+.notice-amber p { color: #6f4d10; }
+.notice-blue { border-color: var(--blue); background: var(--blue-soft); }
+
+/* ---------- 带上边线的条目（能力 / 边界 / 规格）---------- */
+.item { border-top: 1px solid var(--ink); padding-top: 14px; }
+.item h3 { font-size: var(--t-body); font-weight: 600; letter-spacing: -0.02em; margin-top: 10px; }
+.item p { margin-top: 8px; font-size: var(--t-xs); line-height: 1.6; color: var(--dim); }
+
+/* ---------- 编号条目（无上边线，靠 mono 编号领起）---------- */
+.note-item .n { font-family: var(--f-mono); font-size: var(--t-label); letter-spacing: .16em; color: var(--faint); }
+.note-item h3 { font-size: var(--t-h3); font-weight: 600; letter-spacing: -0.025em; margin-top: 10px; }
+.note-item p { margin-top: 9px; font-size: var(--t-xs); line-height: 1.6; color: var(--dim); }
+
+/* ---------- 数据 ---------- */
+.stat .n { font-size: clamp(30px, 3.4vw, 40px); font-weight: 700; letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+.stat .n small { font-size: .38em; font-weight: 500; color: var(--dim); margin-left: 5px; letter-spacing: 0; }
+.stat .l { margin-top: 8px; }
+.stat-blue .n { color: var(--blue); }
+.stat-green .n { color: var(--green); }
+.stat-amber .n { color: var(--amber); }
+.stat-rust .n { color: var(--rust); }
+
+/* ---------- 清单（渠道墙一类）---------- */
+/* 表头用分类色，与首屏路由图的四条支线一一对应，
+   让读者能把「图上那条线」和「这一组渠道」连起来。 */
+.chan-h {
+  display: flex; align-items: baseline; justify-content: space-between;
+  border-bottom: 2px solid var(--cat, var(--ink)); padding-bottom: 9px;
+}
+.chan-h .t { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; color: var(--cat, var(--ink)); }
+.chan-h .c { font-family: var(--f-mono); font-size: 11px; color: var(--cat, var(--dim)); opacity: .72; }
+.chan ul { margin-top: 12px; display: flex; flex-direction: column; }
+.chan li { font-size: var(--t-xs); padding: 7px 0; border-bottom: 1px solid var(--hair); }
+
+/* ---------- 图 ---------- */
+.fig figcaption { display: flex; justify-content: space-between; gap: 14px; padding-bottom: 9px; border-bottom: 1px solid var(--ink); margin-bottom: 14px; }
+.fig img { border: 1px solid var(--rule); width: 100%; height: auto; }
+.fig .d { margin-top: 12px; font-size: 13px; color: var(--dim); line-height: 1.55; }
+
+/* ---------- 顶栏 ---------- */
+.top { position: sticky; top: 0; z-index: 50; background: var(--paper); border-bottom: 1px solid var(--ink); }
+.top-in { height: 62px; display: flex; align-items: center; gap: 30px; }
+.brand { font-weight: 700; font-size: 16px; letter-spacing: -0.02em; display: flex; align-items: center; gap: 9px; }
+.brand svg { display: block; flex: none; }
+.nav { display: flex; gap: 24px; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--dim); }
+.nav a { transition: color var(--dur); }
+.nav a.on, .nav a:hover { color: var(--ink); }
+.top-r { margin-left: auto; display: flex; gap: 20px; align-items: center; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--dim); }
+.top-r a { transition: color var(--dur); }
+.top-r a:hover { color: var(--ink); }
+.top-r .b { color: var(--ink); font-weight: 500; }
+.top-r .b:hover { color: var(--blue); }
+.gh { display: inline-flex; align-items: baseline; gap: 7px; }
+.gh .k { font-family: var(--f-mono); color: var(--ink); font-weight: 500; font-variant-numeric: tabular-nums; }
+.burger { display: none; margin-left: auto; background: none; border: 1px solid var(--rule); padding: 8px 12px; font-family: var(--f-mono); font-size: 11px; cursor: pointer; }
+.top-drawer { display: none; border-top: 1px solid var(--hair); padding: 14px 0 18px; }
+.top-drawer.open { display: block; }
+.top-drawer ul { display: flex; flex-direction: column; gap: 12px; }
+.top-drawer a { font-size: 14px; }
+
+/* ---------- 页脚 ---------- */
+/* 与正文之间的统一留白。页面以深色块收尾时由 .dark-end 规则接管，见下。 */
+.foot { background: var(--ink); color: var(--ink-inv); padding: 52px 0 44px; margin-top: 104px; }
+.foot a { color: rgba(255,255,255,.82); transition: color var(--dur); }
+.foot a:hover { color: #fff; }
+.foot-top { row-gap: 30px; }
+/* 页脚是固定结构，栏位在组件内定义，不依赖页面的 .col-* */
+.foot-brand { grid-column: span 4; }
+.foot-col { grid-column: span 2; }
+.foot-brand .m { margin-top: 14px; font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; color: rgba(255,255,255,.5); line-height: 1.8; }
+.foot-col .h { font-family: var(--f-mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.45); }
+.foot-col ul { margin-top: 14px; display: flex; flex-direction: column; gap: 9px; }
+.foot-col a { font-size: 13px; }
+.foot-bot {
+  margin-top: 46px; border-top: 1px solid rgba(255,255,255,.16); padding-top: 20px;
+  display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap;
+  font-family: var(--f-mono); font-size: var(--t-label); letter-spacing: .1em; color: rgba(255,255,255,.5);
+}
+/* 页面以深色块收尾时，页脚与它连成一片黑，需要一条线划开。
+   由页面在 <main> 上标记 .dark-end —— 深色块在 main 内部，
+   和 .foot 并非相邻兄弟，选择器够不着。 */
+.dark-end + .foot { margin-top: 0; padding-top: 0; }
+.dark-end + .foot .foot-top { border-top: 1px solid rgba(255,255,255,.16); padding-top: 52px; }
+
+.v1link { border: 1px solid rgba(255,255,255,.3); padding: 5px 11px; transition: background var(--dur); }
+.v1link:hover { background: rgba(255,255,255,.1); }
+
+@media (max-width: 1080px) {
+  .col-5, .col-7, .col-r6, .col-r5 { grid-column: span 12; }
+  .col-6 { grid-column: span 12; }
+  .col-3, .col-4 { grid-column: span 6; }
+}
+@media (max-width: 720px) {
+  .nav, .top-r { display: none; }
+  .burger { display: block; }
+  .col-2, .col-3, .col-4 { grid-column: span 12; }
+}
+
+/* 页脚重排，须置于通用 .col-* 断点之后才能覆盖 */
+@media (max-width: 1080px) {
+  .foot-brand { grid-column: span 12; }
+  .foot-col { grid-column: span 3; }
+}
+@media (max-width: 720px) {
+  .foot-col { grid-column: span 6; }
+}
+
+/* ---------- 赞助 ----------
+   赞助方 logo 一律保持原色。灰度处理会削弱付费赞助方的品牌曝光，
+   彩色带来的跳脱靠白底方框和固定展示区来约束，而不是改动人家的品牌色。
+
+   用网格排布，赞助方增加时自动换行填格，不需要改结构。 */
+.spon-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1px; background: var(--ink); border: 1px solid var(--ink);
+}
+.spon {
+  background: var(--paper); display: grid; grid-template-columns: 148px 1fr;
+  transition: background var(--dur);
+}
+.spon:hover { background: var(--wash); }
+.spon-logo {
+  border-right: 1px solid var(--hair); padding: 16px 18px;
+  display: flex; align-items: center; justify-content: center;
+}
+.spon-logo img { width: 100%; height: auto; }
+.spon-body { padding: 16px 18px 15px; min-width: 0; }
+.spon-body h3 { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+.spon-body p { margin-top: 6px; font-size: 12.5px; line-height: 1.6; color: var(--dim); }
+.spon-cta { margin-top: 10px; display: inline-block; font-size: 12.5px; font-weight: 500; color: var(--blue); }
+.spon-cta:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.spon-more {
+  margin-top: 22px; border-top: 1px solid var(--rule); padding-top: 18px;
+  display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
+}
+.spon-more .who { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+.spon-more .who a { display: inline-flex; align-items: center; font-size: 13px; color: var(--dim); transition: color var(--dur); }
+.spon-more .who a:hover { color: var(--ink); }
+.spon-more .who img { display: block; }
+.spon-more .join { margin-left: auto; }
+
+@media (max-width: 520px) {
+  .spon { grid-template-columns: 1fr; }
+  .spon-logo { border-right: none; border-bottom: 1px solid var(--hair); padding: 18px; }
+  .spon-more .join { margin-left: 0; }
+}
+
+/* ---------- 语言切换 ---------- */
+.lang { position: relative; }
+.lang-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: none; border: none; padding: 0; cursor: pointer;
+  font-size: 12px; letter-spacing: .06em; color: var(--dim);
+  transition: color var(--dur);
+}
+.lang-btn:hover, .lang-btn[aria-expanded="true"] { color: var(--ink); }
+.lang-caret {
+  width: 0; height: 0; border-left: 3.5px solid transparent; border-right: 3.5px solid transparent;
+  border-top: 4px solid currentColor;
+}
+.lang-menu {
+  position: absolute; top: calc(100% + 12px); right: 0; z-index: 60;
+  min-width: 132px; background: var(--paper); border: 1px solid var(--ink);
+  display: flex; flex-direction: column;
+}
+.lang-menu li + li { border-top: 1px solid var(--hair); }
+.lang-menu button {
+  display: block; width: 100%; text-align: left; background: none; border: none;
+  padding: 10px 14px; cursor: pointer; font-size: 13px; color: var(--ink);
+  transition: background var(--dur), color var(--dur);
+}
+.lang-menu button:hover { background: var(--wash); }
+.lang-menu button.on { color: var(--blue); font-weight: 600; }
+
+/* 抽屉里的语言选择：横排按钮，不再套一层下拉 */
+.lang-inline { display: flex; gap: 10px; flex-wrap: wrap; }
+.lang-inline button {
+  background: none; border: 1px solid var(--rule); padding: 7px 13px; cursor: pointer;
+  font-size: 13px; color: var(--dim); transition: border-color var(--dur), color var(--dur);
+}
+.lang-inline button.on { border-color: var(--blue); color: var(--blue); }

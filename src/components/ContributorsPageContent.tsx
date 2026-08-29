@@ -12,7 +12,7 @@ export default function ContributorsPageContent() {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  useSeo("/contributors");
+  useSeo("/v1/contributors");
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">

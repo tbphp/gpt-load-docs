@@ -20,7 +20,7 @@ export default function DeploymentPageContent() {
   const { t } = useTranslation();
   
   // 关键：添加 useSeo hook 用于语言切换时的SEO更新
-  useSeo("/docs/deployment");
+  useSeo("/v1/docs/deployment");
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -78,7 +78,7 @@ export default function DeploymentPageContent() {
           </div>
 
           <Link
-            href="/docs/deployment/standalone"
+            href="/v1/docs/deployment/standalone"
             className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-800 dark:text-blue-300 font-medium"
           >
             <span>{t("deploymentPage.viewDetails")}</span>
@@ -128,7 +128,7 @@ export default function DeploymentPageContent() {
           </div>
 
           <Link
-            href="/docs/deployment/source"
+            href="/v1/docs/deployment/source"
             className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-800 dark:text-blue-300 font-medium"
           >
             <span>{t("deploymentPage.viewDetails")}</span>
@@ -178,7 +178,7 @@ export default function DeploymentPageContent() {
           </div>
 
           <Link
-            href="/docs/deployment/cluster"
+            href="/v1/docs/deployment/cluster"
             className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-800 dark:text-blue-300 font-medium"
           >
             <span>{t("deploymentPage.viewDetails")}</span>
@@ -228,7 +228,7 @@ export default function DeploymentPageContent() {
           </div>
 
           <Link
-            href="/docs/deployment/claw-cloud"
+            href="/v1/docs/deployment/claw-cloud"
             className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-800 dark:text-blue-300 font-medium"
           >
             <span>{t("deploymentPage.viewDetails")}</span>
@@ -347,14 +347,14 @@ export default function DeploymentPageContent() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4">
           <Link
-            href="/docs/deployment/standalone"
+            href="/v1/docs/deployment/standalone"
             className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
             <Server className="h-4 w-4 mr-2" />
             {t("deploymentPage.gettingStarted.buttons.standalone")}
           </Link>
           <Link
-            href="/docs/deployment/claw-cloud"
+            href="/v1/docs/deployment/claw-cloud"
             className="inline-flex items-center justify-center px-6 py-3 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 transition-colors"
           >
             <Cloud className="h-4 w-4 mr-2" />

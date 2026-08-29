@@ -16,7 +16,7 @@ export default function NewAPIPageContent() {
   const { t, tArray } = useTranslation();
   
   // 关键：添加 useSeo hook 用于语言切换时的SEO更新
-  useSeo("/docs/integrations/new-api");
+  useSeo("/v1/docs/integrations/new-api");
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -559,7 +559,7 @@ export default function NewAPIPageContent() {
           </Link>
           <br />
           <Link
-            href="/docs/configuration"
+            href="/v1/docs/configuration"
             className="inline-flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-300 transition-colors duration-200"
           >
             {t("newApi.relatedResources.gptLoadConfig")}
@@ -567,7 +567,7 @@ export default function NewAPIPageContent() {
           </Link>
           <br />
           <Link
-            href="/docs/channels"
+            href="/v1/docs/channels"
             className="inline-flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-300 transition-colors duration-200"
           >
             {t("newApi.relatedResources.channelTypes")}

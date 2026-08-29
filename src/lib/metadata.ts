@@ -52,12 +52,12 @@ export interface PageSeoConfig {
 
 // 页面级SEO配置映射架构
 export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoConfig>> = {
-  '/': {
+  '/v1': {
     zh: { ...META_CONFIGS.zh, type: 'website' },
     en: { ...META_CONFIGS.en, type: 'website' },
     ja: { ...META_CONFIGS.ja, type: 'website' }
   },
-  '/docs': {
+  '/v1/docs': {
     zh: {
       title: "快速开始 - GPT-Load",
       description: "5分钟快速部署GPT-Load，Docker一键启动，包含完整的数据库和缓存服务。支持多种AI服务的透明代理。",
@@ -77,7 +77,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/introduction': {
+  '/v1/docs/introduction': {
     zh: {
       title: "项目简介 - GPT-Load",
       description: "深入了解GPT-Load的核心概念、技术架构、支持的AI服务和企业级功能特性。基于Go语言的高性能设计。",
@@ -97,7 +97,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/architecture-design': {
+  '/v1/docs/architecture-design': {
     zh: {
       title: "系统架构 - GPT-Load",
       description: "深入了解GPT-Load的系统架构设计，包括核心服务层、管理服务层、数据存储层的详细组件和高性能透明代理的设计原则。",
@@ -117,7 +117,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/architecture-design/key-management': {
+  '/v1/docs/architecture-design/key-management': {
     zh: {
       title: "智能密钥管理 - GPT-Load",
       description: "详细了解GPT-Load智能密钥管理机制，包括轮询负载均衡、自动故障检测、密钥拉黑与恢复等核心功能。",
@@ -137,7 +137,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/architecture-design/performance': {
+  '/v1/docs/architecture-design/performance': {
     zh: {
       title: "性能详解 - GPT-Load",
       description: "深入了解GPT-Load的极致性能设计，包括零I/O操作、零拷贝流传输、无锁并发、异步任务等核心优化策略。",
@@ -157,7 +157,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/architecture-design/routing-strategy': {
+  '/v1/docs/architecture-design/routing-strategy': {
     zh: {
       title: "路径设计策略 - GPT-Load",
       description: "深入理解GPT-Load的路径处理机制和配置方法，掌握透明代理的路径替换原理，学习最佳配置实践。",
@@ -177,7 +177,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/configuration': {
+  '/v1/docs/configuration': {
     zh: {
       title: "配置说明 - GPT-Load",
       description: "掌握GPT-Load的三层配置系统架构，包括环境变量、系统设置、分组配置的优先级管理，以及热更新、配置验证等最佳实践。",
@@ -197,7 +197,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/configuration/cloudflare-aigateway': {
+  '/v1/docs/configuration/cloudflare-aigateway': {
     zh: {
       title: "Cloudflare AI Gateway 上游配置 - GPT-Load",
       description: "详细指南教您配置Cloudflare AI Gateway作为GPT-Load的上游代理，通过全球网络优化AI服务请求性能和稳定性，包含完整配置步骤。",
@@ -217,7 +217,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/configuration/environment': {
+  '/v1/docs/configuration/environment': {
     zh: {
       title: "环境配置 - GPT-Load",
       description: "详细了解GPT-Load的环境变量配置体系，包括服务器配置、数据库连接、安全认证、代理设置等核心环境参数的设置方法和最佳实践。",
@@ -237,7 +237,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/channels': {
+  '/v1/docs/channels': {
     zh: {
       title: "渠道类型 - GPT-Load",
       description: "全面了解GPT-Load支持的AI服务渠道，包括OpenAI、Gemini、Claude等主流服务的接入配置、认证方式、SDK使用和迁移指南。",
@@ -257,7 +257,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/configuration/management': {
+  '/v1/docs/configuration/management': {
     zh: {
       title: "分组配置管理 - GPT-Load",
       description: "分组创建和配置的完整指南，包括基础配置、上游地址、高级设置等功能的详细配置说明和最佳实践。",
@@ -277,7 +277,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/deployment': {
+  '/v1/docs/deployment': {
     zh: {
       title: "部署指南 - GPT-Load",
       description: "GPT-Load提供多种部署方案，从轻量化的单机部署到企业级的集群部署。包含完整的Docker、源码、集群和云端部署指南。",
@@ -297,7 +297,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/configuration/project': {
+  '/v1/docs/configuration/project': {
     zh: {
       title: "项目配置 - GPT-Load",
       description: "GPT-Load项目配置系统的完整指南，包括系统设置、分组配置的详细参数说明、配置优先级管理和最佳实践。",
@@ -317,7 +317,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/deployment/claw-cloud': {
+  '/v1/docs/deployment/claw-cloud': {
     zh: {
       title: "Claw Cloud 部署 - GPT-Load",
       description: "使用 Claw Cloud 免费云端部署 GPT-Load 的完整指南。提供每月5美元免费额度，支持一键部署、全球区域选择、GitHub认证等便捷功能。",
@@ -337,7 +337,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/deployment/cluster': {
+  '/v1/docs/deployment/cluster': {
     zh: {
       title: "集群部署 - GPT-Load",
       description: "GPT-Load高可用集群部署完整指南。支持主从架构、水平扩展、分布式部署，包含基础设施要求、部署步骤、配置管理、监控运维等企业级部署方案。",
@@ -357,7 +357,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/deployment/source': {
+  '/v1/docs/deployment/source': {
     zh: {
       title: "源码部署 - GPT-Load",
       description: "GPT-Load源码部署完整指南。通过源码构建和部署，适合开发者进行功能定制和调试。包含环境要求、安装步骤、项目结构、故障排除等详细说明。",
@@ -377,7 +377,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/deployment/standalone': {
+  '/v1/docs/deployment/standalone': {
     zh: {
       title: "单机部署 - GPT-Load",
       description: "GPT-Load单机部署完整指南，支持轻量化SQLite快速启动和MySQL/PostgreSQL/Redis增强配置，适合个人用户和小团队快速上手。",
@@ -397,7 +397,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/gemini-openai': {
+  '/v1/docs/gemini-openai': {
     zh: {
       title: "Gemini 官方 OpenAI 兼容格式 - GPT-Load",
       description: "GPT-Load支持Google Gemini官方OpenAI兼容格式，使用标准OpenAI SDK访问Gemini模型。包含完整的配置步骤和Cherry Studio集成指南。",
@@ -417,7 +417,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/integrations': {
+  '/v1/docs/integrations': {
     zh: {
       title: "接入指南 - GPT-Load",
       description: "GPT-Load支持接入各种AI应用和开发工具，包括Roo Code、New API、Cherry Studio、Claude Code Router等。通过统一代理接口实现负载均衡和故障转移。",
@@ -437,7 +437,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/integrations/cherry-studio': {
+  '/v1/docs/integrations/cherry-studio': {
     zh: {
       title: "Cherry Studio 接入指南 - GPT-Load",
       description: "详细指南教您将GPT-Load代理服务接入Cherry Studio AI客户端，支持OpenAI、Gemini、Gemini OpenAI兼容和Anthropic四种渠道类型的完整配置。",
@@ -457,7 +457,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/integrations/claude-code-router': {
+  '/v1/docs/integrations/claude-code-router': {
     zh: {
       title: "Claude Code Router 接入指南 - GPT-Load",
       description: "详细指南教您将GPT-Load代理服务接入Claude Code Router工具中，支持多模型智能路由和代码辅助功能，包含完整的安装、配置和使用步骤。",
@@ -477,7 +477,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/integrations/new-api': {
+  '/v1/docs/integrations/new-api': {
     zh: {
       title: "New API 接入指南 - GPT-Load",
       description: "详细指南教您将GPT-Load代理服务接入New API平台中，支持OpenAI、Gemini、Gemini OpenAI兼容和Anthropic四种渠道类型，包含完整的配置步骤和高级功能设置。",
@@ -497,7 +497,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/integrations/roo-code': {
+  '/v1/docs/integrations/roo-code': {
     zh: {
       title: "Roo Code 接入指南 - GPT-Load",
       description: "详细指南教您将GPT-Load代理服务接入Roo Code智能代码助手中，支持OpenAI、Gemini和Anthropic三种渠道类型，包含完整的配置步骤和方法说明。",
@@ -517,7 +517,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/sponsor': {
+  '/v1/docs/sponsor': {
     zh: {
       title: "支持赞助 - GPT-Load",
       description: "如果GPT-Load对您有帮助，欢迎通过微信、支付宝、爱发电等方式支持项目发展。您的每一份支持都是我们持续改进的动力。",
@@ -537,7 +537,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/contributors': {
+  '/v1/contributors': {
     zh: {
       title: "贡献者 - GPT-Load",
       description: "感谢所有为GPT-Load项目做出贡献的开发者们！查看项目贡献者列表，了解如何参与开源贡献，一起推动项目发展。",
@@ -557,7 +557,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/faq': {
+  '/v1/docs/faq': {
     zh: {
       title: "常见问题 - GPT-Load",
       description: "快速解决GPT-Load使用中的常见问题。涵盖系统设置、密钥管理、配置优先级、故障排除等常见技术问题的详细解答。",
@@ -577,7 +577,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/configuration/security': {
+  '/v1/docs/configuration/security': {
     zh: {
       title: "安全性配置 - GPT-Load",
       description: "深入了解GPT-Load的安全配置最佳实践，包括AUTH_KEY复杂度要求、ENCRYPTION_KEY加密设置、数据迁移、密钥管理等企业级安全方案。",
@@ -597,7 +597,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/architecture-design/aggregate-groups': {
+  '/v1/docs/architecture-design/aggregate-groups': {
     zh: {
       title: "聚合分组 - GPT-Load",
       description: "深入了解GPT-Load聚合分组功能的设计与实现，掌握多密钥池整合、智能负载均衡、权重配置等高级特性，构建高可用API代理架构。",
@@ -617,7 +617,7 @@ export const PAGE_SEO_CONFIGS: Record<string, Record<SupportedLanguage, PageSeoC
       type: 'article'
     }
   },
-  '/docs/architecture-design/model-redirect': {
+  '/v1/docs/architecture-design/model-redirect': {
     zh: {
       title: "模型重定向 - GPT-Load",
       description: "深入了解GPT-Load模型重定向功能的设计与实现，掌握模型映射配置、策略模式、版本管理和灵活切换等核心特性，实现透明的模型切换和访问控制。",

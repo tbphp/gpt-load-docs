@@ -8,7 +8,7 @@ export default function RoutingStrategyPageContent() {
   const { t, tArray } = useTranslation();
   
   // 关键：添加 useSeo hook 用于语言切换时的SEO更新
-  useSeo("/docs/architecture-design/routing-strategy");
+  useSeo("/v1/docs/architecture-design/routing-strategy");
 
   return (
     <div className="max-w-4xl mx-auto">

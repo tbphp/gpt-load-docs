@@ -1,0 +1,98 @@
+/* ============================================================================
+   首页专有 — 其余样式一律来自 layout.css / components.css
+   ============================================================================ */
+
+/* ---------- Hero ---------- */
+.hero { padding: 54px 0 0; }
+.hero-in { align-items: start; }
+.hero-fig { padding-top: 6px; }
+.h1 { font-size: var(--t-display); line-height: .98; letter-spacing: -0.045em; font-weight: 700; margin-top: 20px; }
+.h1 em { font-style: normal; color: var(--blue); }
+.hero-sub { margin-top: 26px; font-size: var(--t-sm); line-height: 1.62; color: var(--dim); max-width: 40ch; }
+.hero-btns { margin-top: 30px; }
+.hero-rule { border-top: 1px solid var(--ink); margin-top: 54px; }
+.hero-facts { padding-top: 16px; }
+.hero-foot { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding: 30px 0 0; }
+
+/* ---------- 路由图 ---------- */
+.route-svg { width: 100%; height: auto; display: block; }
+/* 主干与网关保持墨色（结构），四条支线各自着色（分类信息）。
+   线宽恒定 2px——命中与否只靠明度区分，不做加粗，
+   加粗会让线在切换时「胀」一下，破坏数据流本身的连贯感。 */
+.rt {
+  stroke: var(--rt-c, var(--ink)); stroke-width: 2; fill: none;
+  transition: opacity .22s ease;
+}
+.rt.dim { opacity: .2; }
+.rt.hot { opacity: 1; }
+
+.nd { transition: fill .22s ease, opacity .22s ease; }
+.nd.dim { opacity: .28; }
+/* 端点平时是空心描边，命中时用该类别的颜色填实 */
+.nd.hot { fill: var(--rt-c, var(--blue)); }
+
+.lb { transition: opacity .22s ease; }
+.lb.dim { opacity: .32; }
+.lb-name { transition: fill .22s ease; }
+.lb.hot .lb-name { fill: var(--rt-c, var(--ink)); }
+
+.gwbox { transition: stroke .22s ease; }
+.gwbox.pulse { stroke: var(--blue); }
+/* 请求方块：进入时是墨色（还没归属），出网关后染成该路由的颜色 */
+.signal { fill: var(--ink); transition: fill .18s ease; }
+
+.draw { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.play .draw { animation: rtdraw var(--dur-draw, .34s) cubic-bezier(.35,.1,.25,1) var(--del, 0s) forwards; }
+@keyframes rtdraw { to { stroke-dashoffset: 0; } }
+.pop { opacity: 0; }
+.play .pop { animation: rtpop .26s ease-out var(--del, 0s) forwards; }
+@keyframes rtpop { to { opacity: 1; } }
+.gwdraw { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.play .gwdraw { animation: rtdraw .32s cubic-bezier(.35,.1,.25,1) .3s forwards; }
+
+@media (prefers-reduced-motion: reduce) {
+  .draw, .gwdraw { stroke-dashoffset: 0 !important; }
+  .pop { opacity: 1 !important; }
+  .signal { display: none; }
+}
+
+/* ---------- 渠道墙 ---------- */
+.chan-more {
+  margin-top: 34px; border-top: 1px solid var(--rule); padding-top: 16px;
+  display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+}
+
+/* ---------- 三步 ---------- */
+.step .n { font-size: 72px; font-weight: 700; letter-spacing: -0.06em; line-height: .8; font-variant-numeric: tabular-nums; }
+.step.hot .n { color: var(--blue); }
+.step h3 { font-size: var(--t-h3); font-weight: 600; letter-spacing: -0.025em; margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--ink); }
+.step.hot h3 { border-top-color: var(--blue); }
+.step p { margin-top: 9px; font-size: var(--t-xs); line-height: 1.6; color: var(--dim); }
+.step .m { margin-top: 12px; font-family: var(--f-mono); font-size: 11.5px; color: var(--faint); letter-spacing: .04em; }
+
+/* ---------- 结尾 ---------- */
+.end h2 { font-size: clamp(30px, 4.4vw, 52px); line-height: 1.02; letter-spacing: -0.045em; font-weight: 700; max-width: 16ch; }
+.end .r { margin-top: 30px; display: flex; align-items: baseline; gap: 24px; flex-wrap: wrap; }
+
+/* ---------- 行距 ---------- */
+.rows-38 { row-gap: 38px; }
+.rows-34 { row-gap: 34px; }
+.rows-40 { row-gap: 40px; }
+.rows-44 { row-gap: 44px; }
+.rows-30 { row-gap: 30px; }
+
+@media (max-width: 720px) {
+  .stat { display: flex; align-items: baseline; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--hair); }
+  .stat .l { margin-top: 0; }
+  .step .n { font-size: 56px; }
+}
+.notice-spaced { margin-top: 40px; }
+
+/* ---------- 协议行（与渠道墙同一板块，四栏对齐） ---------- */
+.proto { border-top: 1px solid var(--hair); padding-top: 12px; }
+.proto .t { font-size: 13.5px; font-weight: 600; letter-spacing: -0.01em; }
+.proto .p { margin-top: 6px; font-family: var(--f-mono); font-size: 11.5px; color: var(--blue); word-break: break-all; }
+.proto .d { margin-top: 6px; font-size: 12px; line-height: 1.55; color: var(--dim); }
+
+/* ---------- 部署与接入并排 ---------- */
+.run-note { margin-top: 12px; font-size: 12.5px; line-height: 1.6; color: var(--dim); }

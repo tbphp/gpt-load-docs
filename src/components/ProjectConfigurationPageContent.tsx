@@ -8,7 +8,7 @@ export default function ProjectConfigurationPageContent() {
   const { t } = useTranslation();
   
   // 关键：添加 useSeo hook 用于语言切换时的SEO更新
-  useSeo("/docs/configuration/project");
+  useSeo("/v1/docs/configuration/project");
 
   return (
     <div className="max-w-4xl mx-auto">

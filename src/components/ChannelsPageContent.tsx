@@ -8,7 +8,7 @@ export default function ChannelsPageContent() {
   const { t, tArray, tObjectArray } = useTranslation();
   
   // 关键：添加 useSeo hook 用于语言切换时的SEO更新
-  useSeo("/docs/channels");
+  useSeo("/v1/docs/channels");
 
   return (
     <div className="max-w-4xl mx-auto">
