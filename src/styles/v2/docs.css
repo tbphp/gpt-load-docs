@@ -1,11 +1,26 @@
 /* ============================================================================
    文档页 — 左导航 + 正文（+ 可选右目录）
    ============================================================================ */
-.docs { padding: 44px 0 0; }
-.docs-grid { align-items: start; }
+/* 三栏用底色区分：两侧栏是浅灰导航区，正文保持纯白。
+   正文最亮，视线自然落在阅读区；侧栏退后一档，但仍在同一套灰阶里，不喧宾夺主。 */
+.docs { padding: 0; background: var(--tint); }
+.docs-grid { align-items: stretch; column-gap: 0; }
+
+/* 正文区：白底 + 两侧分隔线，从视觉上"浮"在灰底之上 */
+.docs-main, .docs-main-wide {
+  background: var(--paper);
+  border-left: 1px solid var(--hair);
+  border-right: 1px solid var(--hair);
+  /* 底部留白必须在白色区内部：放到外层 .docs 上撑开的是灰底，
+     白区仍会在最后一个元素处直接切断。 */
+  padding: 44px 40px 72px;
+  min-height: calc(100dvh - 62px);
+}
+/* 无右侧目录时，正文右边界就是内容边界，不需要那条线 */
+.docs-main-wide { border-right: none; }
 
 /* ---------- 左导航 ---------- */
-.docs-nav { grid-column: span 2; position: sticky; top: 88px; }
+.docs-nav { grid-column: span 2; position: sticky; top: 88px; padding: 44px 20px 40px 0; align-self: start; }
 .docs-nav-g + .docs-nav-g { margin-top: 24px; }
 .docs-nav-g > .h {
   font-family: var(--f-mono); font-size: var(--t-label); letter-spacing: .16em;
@@ -14,7 +29,7 @@
 .docs-nav-g ul { margin-top: 10px; display: flex; flex-direction: column; }
 .docs-nav-g li a {
   display: block; font-size: 13.5px; color: var(--dim); padding: 5px 0 5px 11px;
-  border-left: 1px solid var(--hair); transition: color var(--dur), border-color var(--dur);
+  border-left: 1px solid var(--hair-on-tint); transition: color var(--dur), border-color var(--dur);
 }
 .docs-nav-g li a:hover { color: var(--ink); border-left-color: var(--rule); }
 .docs-nav-g li a.on { color: var(--ink); font-weight: 600; border-left-color: var(--blue); border-left-width: 2px; padding-left: 10px; }
@@ -23,7 +38,7 @@
 /* 内容待补的条目弱化，但仍可点进去 */
 .docs-nav-g li a.draft { color: var(--faint); }
 .docs-nav-g li a.draft:hover { color: var(--dim); }
-.docs-nav-foot { margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--hair); }
+.docs-nav-foot { margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--hair-on-tint); }
 
 /* ---------- 正文 ---------- */
 .docs-main { grid-column: span 7; min-width: 0; }
@@ -36,13 +51,15 @@
 /* ---------- 正文排版 ---------- */
 .prose { margin-top: 34px; max-width: 72ch; }
 .prose > * + * { margin-top: 20px; }
-.prose h2 {
+.prose h2, .prose .prose-h {
   font-size: 22px; font-weight: 700; letter-spacing: -0.03em;
   margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--rule);
 }
+/* 首个小节紧跟标题栏，不需要再撑开一段 */
+.prose > :first-child { margin-top: 0; }
 .prose h3 { font-size: 17px; font-weight: 600; letter-spacing: -0.02em; margin-top: 32px; }
 .prose p { font-size: 15px; line-height: 1.75; color: #2c2c2c; }
-.prose ul, .prose ol { display: flex; flex-direction: column; gap: 9px; margin-top: 16px; }
+.prose ul, .prose ol { display: flex; flex-direction: column; gap: 11px; margin-top: 18px; }
 .prose li { font-size: 15px; line-height: 1.7; color: #2c2c2c; padding-left: 18px; position: relative; }
 .prose li::before { content: ""; position: absolute; left: 0; top: 11px; width: 6px; height: 1px; background: var(--ink); }
 .prose ol { counter-reset: step; }
@@ -60,14 +77,15 @@
 .prose a { color: var(--blue); }
 .prose a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .prose strong { font-weight: 600; color: var(--ink); }
-.prose .code, .prose .notice, .prose .tbl-wrap { margin-top: 22px; }
+.prose .code-wrap, .prose .notice, .prose .tbl-wrap, .prose .fig { margin-top: 26px; }
+.prose .fig + p, .prose .code-wrap + p, .prose .notice + p { margin-top: 22px; }
 .prose .code code { background: none; border: none; padding: 0; }
 
 /* ---------- 右目录 ---------- */
-.docs-toc { grid-column: span 3; position: sticky; top: 88px; }
+.docs-toc { grid-column: span 3; position: sticky; top: 88px; padding: 44px 0 40px 24px; align-self: start; }
 .docs-toc .h { font-family: var(--f-mono); font-size: var(--t-label); letter-spacing: .16em; text-transform: uppercase; color: var(--dim); }
 .docs-toc ul { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
-.docs-toc a { font-size: 13px; color: var(--dim); border-left: 1px solid var(--hair); padding-left: 11px; display: block; }
+.docs-toc a { font-size: 13px; color: var(--dim); border-left: 1px solid var(--hair-on-tint); padding-left: 11px; display: block; }
 .docs-toc a:hover { color: var(--ink); border-left-color: var(--rule); }
 
 /* ---------- 翻页 ---------- */
@@ -107,12 +125,19 @@
 .docs-nav-toggle { display: none; }
 @media (max-width: 1080px) {
   .docs-toc { display: none; }
-  .docs-main, .docs-main-wide { grid-column: span 10; }
+  .docs-main, .docs-main-wide { grid-column: span 10; border-right: none; }
 }
 @media (max-width: 860px) {
+  /* 窄屏下三栏塌成单栏，底色区分失去意义，整页回到白底。
+     白底时页脚需要正常的留白隔开，把宽屏那条 .docs + .foot { margin-top: 0 } 抵消掉。 */
+  .docs { background: var(--paper); }
+  .docs + .foot { margin-top: 104px; }
+  .docs-main, .docs-main-wide {
+    border-left: none; border-right: none; padding: 0; min-height: 0;
+  }
   .docs-nav {
     grid-column: span 12; position: static;
-    border-bottom: 1px solid var(--hair); padding-bottom: 20px; margin-bottom: 26px;
+    border-bottom: 1px solid var(--hair); padding: 20px 0; margin-bottom: 26px;
   }
   .docs-nav-inner { display: none; }
   .docs-nav-inner.open { display: block; margin-top: 16px; }
@@ -125,4 +150,24 @@
   .docs-pager { flex-direction: column; }
   .docs-pager a { max-width: 100%; }
   .docs-pager .next { margin-left: 0; text-align: left; }
+}
+
+/* ---------- 小节锚点 ---------- */
+.prose .prose-h { position: relative; }
+.prose .prose-h .anchor {
+  margin-left: 10px; font-size: 13px; font-weight: 400; color: var(--faint);
+  opacity: 0; transition: opacity var(--dur), color var(--dur);
+  font-family: var(--f-mono); letter-spacing: .04em; vertical-align: middle;
+}
+.prose .prose-h:hover .anchor,
+.prose .prose-h .anchor:focus-visible { opacity: 1; }
+.prose .prose-h .anchor:hover { color: var(--blue); }
+
+/* 锚点跳转后标题不被吸顶导航挡住 */
+.prose .prose-h { scroll-margin-top: 84px; }
+
+/* ---------- 目录当前项 ---------- */
+.docs-toc a.on {
+  color: var(--ink); font-weight: 600;
+  border-left-color: var(--blue); border-left-width: 2px; padding-left: 10px;
 }

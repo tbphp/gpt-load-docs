@@ -23,44 +23,48 @@ export type DocGroup = {
 
 export const DOC_GROUPS: DocGroup[] = [
   {
-    title: "开始",
+    title: "开始使用",
     items: [
       { href: "/docs", label: "文档首页", desc: "按任务找到该看哪一页", status: "ready" },
-      { href: "/docs/quickstart", label: "快速开始", desc: "从零到第一个请求成功，约五分钟", status: "ready" },
-      { href: "/docs/concepts", label: "核心概念", desc: "渠道、分组、AccessKey 的三层模型", status: "draft" },
-      { href: "/docs/install", label: "部署", desc: "Docker Compose、原生二进制、源码构建", status: "draft" },
+      { href: "/docs/quickstart", label: "快速开始", desc: "从零到第一个请求成功，约十分钟", status: "ready" },
+      { href: "/docs/concepts", label: "核心概念", desc: "分组与访问密钥两层模型", status: "ready" },
+      { href: "/docs/install", label: "部署", desc: "Docker Compose、原生二进制、源码构建", status: "ready" },
     ],
   },
   {
     title: "配置",
     items: [
-      { href: "/docs/channels", label: "渠道", desc: "二十个内置渠道的配置方式", status: "draft" },
-      { href: "/docs/channels/subscription", label: "订阅账号", desc: "Codex、Claude、Antigravity、Grok 的 OAuth 授权", status: "draft" },
-      { href: "/docs/groups", label: "分组与模型", desc: "模型发现、模型路由与分组策略", status: "draft" },
-      { href: "/docs/access-keys", label: "AccessKey", desc: "协议选择、分组授权与限流", status: "draft" },
-      { href: "/docs/config", label: "配置参考", desc: "环境变量全表", status: "draft" },
-    ],
-  },
-  {
-    title: "运行",
-    items: [
-      { href: "/docs/scheduling", label: "调度与容错", desc: "权重、亲和、重试、冷却、拉黑", status: "draft" },
-      { href: "/docs/monitoring", label: "监控与用量", desc: "健康、路由检查、日志、成本估算", status: "draft" },
-      { href: "/docs/database", label: "数据库", desc: "三种驱动、DSN、迁移与备份", status: "draft" },
-      { href: "/docs/security", label: "安全", desc: "两把密钥、网络边界、上生产清单", status: "draft" },
-    ],
-  },
-  {
-    title: "接入",
-    items: [
+      { href: "/docs/groups", label: "分组与渠道", desc: "二十个内置渠道、分组配置与凭据池", status: "ready" },
+      { href: "/docs/groups/subscription", label: "订阅账号", desc: "Codex、Claude、Antigravity、Grok 的 OAuth 授权", status: "draft" },
+      { href: "/docs/models", label: "模型管理", desc: "模型发现、别名与价格", status: "draft" },
+      { href: "/docs/access-keys", label: "访问密钥", desc: "授权范围、限流与成本上限", status: "draft" },
       { href: "/docs/clients", label: "客户端接入", desc: "Claude Code、Codex、Cherry Studio 等", status: "draft" },
     ],
   },
   {
-    title: "其他",
+    title: "运维",
     items: [
-      { href: "/docs/migrate-from-1x", label: "从 1.x 迁移", desc: "2.0 无法原地升级，需并行部署", status: "draft" },
+      { href: "/docs/monitor", label: "监控与排障", desc: "健康、请求日志、路由检查、用量成本", status: "draft" },
+      { href: "/docs/settings", label: "运行时设置", desc: "超时、重试、亲和等十三项参数", status: "draft" },
+      { href: "/docs/database", label: "数据库与备份", desc: "三种驱动、DSN、迁移与备份", status: "draft" },
+      { href: "/docs/security", label: "安全与上生产", desc: "两把密钥、网络边界、上线清单", status: "draft" },
+    ],
+  },
+  {
+    title: "深入",
+    items: [
+      { href: "/docs/internals/scheduling", label: "调度是怎么做的", desc: "权重、亲和、重试、冷却、拉黑", status: "draft" },
+      { href: "/docs/internals/protocols", label: "协议与转换边界", desc: "四种协议，什么能转什么不能", status: "draft" },
+      { href: "/docs/advanced/proxy-and-headers", label: "代理、请求头与覆盖", desc: "非标场景的处理方式", status: "draft" },
+    ],
+  },
+  {
+    title: "参考",
+    items: [
+      { href: "/docs/reference/env", label: "环境变量", desc: "进程配置全表", status: "draft" },
+      { href: "/docs/reference/api", label: "管理 API", desc: "脚本化管理分组与密钥", status: "draft" },
       { href: "/docs/faq", label: "常见问题", desc: "部署、接入与排障的高频问题", status: "draft" },
+      { href: "/docs/migrate-from-1x", label: "从 1.x 迁移", desc: "2.0 无法原地升级，需并行部署", status: "draft" },
     ],
   },
 ];
