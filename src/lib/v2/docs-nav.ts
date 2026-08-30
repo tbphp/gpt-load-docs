@@ -35,19 +35,19 @@ export const DOC_GROUPS: DocGroup[] = [
     title: "配置",
     items: [
       { href: "/docs/groups", label: "分组与渠道", desc: "二十个内置渠道、分组配置与凭据池", status: "ready" },
-      { href: "/docs/groups/subscription", label: "订阅账号", desc: "Codex、Claude、Antigravity、Grok 的 OAuth 授权", status: "draft" },
-      { href: "/docs/models", label: "模型管理", desc: "模型发现、别名与价格", status: "draft" },
-      { href: "/docs/access-keys", label: "访问密钥", desc: "授权范围、限流与成本上限", status: "draft" },
-      { href: "/docs/clients", label: "客户端接入", desc: "Claude Code、Codex、Cherry Studio 等", status: "draft" },
+      { href: "/docs/groups/subscription", label: "订阅账号", desc: "Codex、Claude、Antigravity、Grok 的 OAuth 授权", status: "ready" },
+      { href: "/docs/models", label: "模型管理", desc: "模型发现、别名与价格", status: "ready" },
+      { href: "/docs/access-keys", label: "访问密钥", desc: "授权范围、限流与成本上限", status: "ready" },
+      { href: "/docs/clients", label: "客户端接入", desc: "Claude Code、Codex、Cherry Studio 等", status: "ready" },
     ],
   },
   {
     title: "运维",
     items: [
-      { href: "/docs/monitor", label: "监控与排障", desc: "健康、请求日志、路由检查、用量成本", status: "draft" },
-      { href: "/docs/settings", label: "运行时设置", desc: "超时、重试、亲和等十三项参数", status: "draft" },
+      { href: "/docs/monitor", label: "监控与排障", desc: "健康、请求日志、路由检查、用量成本", status: "ready" },
+      { href: "/docs/settings", label: "运行时设置", desc: "超时、重试、亲和等运行参数", status: "ready" },
       { href: "/docs/database", label: "数据库与备份", desc: "三种驱动、DSN、迁移与备份", status: "draft" },
-      { href: "/docs/security", label: "安全与上生产", desc: "两把密钥、网络边界、上线清单", status: "draft" },
+      { href: "/docs/security", label: "安全与上生产", desc: "两把密钥、网络边界、上线清单", status: "ready" },
     ],
   },
   {
@@ -64,7 +64,7 @@ export const DOC_GROUPS: DocGroup[] = [
       { href: "/docs/reference/env", label: "环境变量", desc: "进程配置全表", status: "draft" },
       { href: "/docs/reference/api", label: "管理 API", desc: "脚本化管理分组与密钥", status: "draft" },
       { href: "/docs/faq", label: "常见问题", desc: "部署、接入与排障的高频问题", status: "draft" },
-      { href: "/docs/migrate-from-1x", label: "从 1.x 迁移", desc: "2.0 无法原地升级，需并行部署", status: "draft" },
+      { href: "/docs/migrate-from-1x", label: "从 1.x 迁移", desc: "2.0 无法原地升级，需并行部署", status: "ready" },
     ],
   },
 ];
