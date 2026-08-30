@@ -47,7 +47,8 @@ export default function OpengraphImage() {
           >
             v2.0 / MIT License
           </div>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
+          {/* 这里由 ImageResponse(satori) 渲染成位图，不是浏览器 DOM，
+              用不了也不该用 next/image */}
           <img src={MARK} width={88} height={88} alt="" />
         </div>
 
