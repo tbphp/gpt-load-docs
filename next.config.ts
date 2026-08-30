@@ -11,10 +11,12 @@ const nextConfig: NextConfig = {
     mdxRs: true,
   },
   async redirects() {
-    // 1.4.x 的旧文档链接。2.0 的 /docs 已经启用，所以这里只能逐条列出
-    // **2.0 没有对应页面**的旧路径，不能再用 /docs/:path* 通配——
-    // 那会把新文档整个拦截掉。
-    // 2.0 已有同名页面的（/docs/channels、/docs/faq）刻意不重定向，直接走新版。
+    // 1.4.x 时代对外发布过的文档链接，散落在 README、issue、他人收藏里。
+    // 这些路径在 2.0 里没有对应页面（内容被拆分重组到了别处），
+    // 转发到归档站是它们唯一还能提供价值的方式，**应当长期保留**。
+    //
+    // 只能逐条列出，不能用 /docs/:path* 通配——那会把 2.0 的新文档整个拦截掉。
+    // 2.0 已有同名页面的（/docs/channels、/docs/faq）刻意不转发，直接走新版。
     const v1Only = [
       "introduction",
       "gemini-openai",
