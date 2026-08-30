@@ -3,6 +3,8 @@ import { pageMeta } from "@/lib/v2/site";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
 import { Figure, Notice } from "@/components/v2/ui";
+import { getLocale } from "@/i18n/v2/server";
+import { docScreenshot } from "@/lib/v2/doc-screenshot";
 
 export const metadata: Metadata = pageMeta({
   title: "核心概念",
@@ -20,7 +22,9 @@ const TOC = [
   { id: "how", label: "该建几个分组" },
 ];
 
-export default function Concepts() {
+export default async function Concepts() {
+  const locale = await getLocale();
+
   return (
     <DocsPage
       path="/docs/concepts"
@@ -66,27 +70,21 @@ export default function Concepts() {
       </ol>
 
       <Figure
-        src="/v2/docs/cpt-01-group-tabs.png"
+        src={docScreenshot(locale, "cpt-01-group-tabs.png")}
+        alt="分组详情页，顶部显示凭据、模型与别名、设置三个标签页"
+        width={2880}
+        height={1440}
         caption="FIG. 1 — 分组详情"
-        note="凭据 · 模型 · 设置"
-        shot={{
-          id: "CPT-01",
-          where: "管理台 → 分组 → 点进任意一个分组，停在顶部",
-          include: [
-            "分组名称与所属渠道",
-            "「凭据」「模型」「设置」三个 tab 都可见",
-            "当前停在凭据 tab，能看到凭据条目",
-          ],
-          hint: "这张图要让人一眼看出「一个分组包含这三块」，所以三个 tab 必须都在画面里。",
-        }}
+        note="凭据 · 模型与别名 · 设置"
       >
-        一个分组的全部内容就在这三个 tab 里：凭据池、开放的模型、运行策略。
+        一个分组的全部内容就在这三个 tab 里：凭据池、模型与别名、运行策略。
       </Figure>
 
       <Heading id="channel">渠道不是单独建的</Heading>
       <Notice label="容易找不到" tone="amber">
-        管理台里<b>没有「渠道」这个菜单</b>。渠道是你新建分组时的一个下拉选项——
-        选完 OpenAI 或 Anthropic，这个分组就固定对接那个上游了。
+        管理台里<b>没有「渠道」这个菜单</b>。渠道是在「导入渠道凭据」的新建分组页中选择的——
+        常用渠道直接显示为按钮，其余渠道在「其他渠道」里。选完 OpenAI 或 Anthropic，
+        这个分组就固定对接那个上游了。
         想接两个不同的服务商，就建两个分组。
       </Notice>
       <p>

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
 import { Figure, Notice } from "@/components/v2/ui";
+import { getLocale } from "@/i18n/v2/server";
+import { docScreenshot } from "@/lib/v2/doc-screenshot";
 import { pageMeta } from "@/lib/v2/site";
 
 export const metadata: Metadata = pageMeta({
@@ -20,7 +22,9 @@ const TOC = [
   { id: "flow", label: "排障顺序" },
 ];
 
-export default function Monitor() {
+export default async function Monitor() {
+  const locale = await getLocale();
+
   return (
     <DocsPage
       path="/docs/monitor"
@@ -71,18 +75,12 @@ export default function Monitor() {
       </p>
 
       <Figure
-        src="/v2/docs/mon-01-health.png"
+        src={docScreenshot(locale, "mon-01-health.png")}
+        alt="监控健康页，展示凭据健康概览、分组状态和问题列表"
+        width={2880}
+        height={1440}
         caption="FIG. 1 — 健康"
         note="分组 · 凭据 · 问题清单"
-        shot={{
-          id: "MON-01",
-          where: "管理台 → 监控 → 健康",
-          include: [
-            "顶部的健康概览条",
-            "分组健康列表",
-            "如果有异常凭据，让问题清单显示出来",
-          ],
-        }}
       >
         有问题的凭据会集中列出，不用逐个分组翻。
       </Figure>
@@ -114,7 +112,8 @@ export default function Monitor() {
       <Heading id="inspect">路由检查</Heading>
       <p>
         <strong>这是排障最快的入口。</strong>输入一把访问密钥和一个模型名，
-        它直接告诉你：这个请求会走哪个分组、哪个凭据，或者为什么走不通。
+        它直接告诉你：这个请求是否可以路由、有哪些候选分组、当前有多少可用凭据，
+        或者为什么走不通。
       </p>
       <p>典型用途：</p>
       <ul>
@@ -123,7 +122,7 @@ export default function Monitor() {
           这把密钥能用的分组里，有没有开放这个模型
         </li>
         <li>
-          <strong>「为什么总是走同一个凭据」</strong>——可能是会话亲和生效了
+          <strong>「为什么没有可用凭据」</strong>——按候选分组查看凭据总数和当前可用数
         </li>
         <li>
           <strong>「加了新分组但没生效」</strong>——确认访问密钥有没有授权到它
@@ -131,20 +130,14 @@ export default function Monitor() {
       </ul>
 
       <Figure
-        src="/v2/docs/mon-02-inspect.png"
+        src={docScreenshot(locale, "mon-02-inspect.png")}
+        alt="路由检查页，展示模拟请求条件、可路由结论、候选分组和可用凭据数量"
+        width={2880}
+        height={1440}
         caption="FIG. 2 — 路由检查"
-        note="给条件 · 看结果"
-        shot={{
-          id: "MON-02",
-          where: "管理台 → 监控 → 路由检查",
-          include: [
-            "输入表单（访问密钥、模型名等条件）",
-            "下方的检查结果，能看出选中了哪个分组与凭据",
-          ],
-          hint: "如果结果里带密钥信息，同样脱敏。",
-        }}
+        note="条件 · 候选分组 · 凭据数量"
       >
-        不用发真实请求就能知道网关会怎么选。
+        不用发真实请求就能看到候选分组与当前可用凭据。
       </Figure>
 
       <Heading id="usage">用量与成本</Heading>
@@ -233,7 +226,7 @@ export default function Monitor() {
           是的话问题在上游或密钥本身
         </li>
         <li>
-          <strong>再用路由检查</strong>——请求本该走哪？
+          <strong>再用路由检查</strong>——有没有候选分组和可用凭据？
           走不通的话它会直接告诉你原因
         </li>
         <li>
@@ -242,7 +235,7 @@ export default function Monitor() {
         </li>
       </ol>
       <p>
-        如果健康正常、路由检查也能选中凭据，但请求还是失败，
+        如果健康正常、路由检查也显示存在候选分组和可用凭据，但请求还是失败，
         那多半是上游侧的问题（额度、模型下线、区域限制），
         日志里的原始错误信息会说明。
       </p>

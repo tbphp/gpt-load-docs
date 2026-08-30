@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
 import { CodeBlock, Figure, Notice } from "@/components/v2/ui";
+import { getLocale } from "@/i18n/v2/server";
+import { docScreenshot } from "@/lib/v2/doc-screenshot";
 import { pageMeta } from "@/lib/v2/site";
 
 export const metadata: Metadata = pageMeta({
@@ -20,7 +22,9 @@ const TOC = [
   { id: "rule", label: "使用前提" },
 ];
 
-export default function Subscription() {
+export default async function Subscription() {
+  const locale = await getLocale();
+
   return (
     <DocsPage
       path="/docs/groups/subscription"
@@ -49,24 +53,18 @@ export default function Subscription() {
 
       <Heading id="add">接入一个账号</Heading>
       <p>
-        订阅账号也是<strong>建在分组里</strong>的。新建分组时把接入方式选成订阅账号，
+        订阅账号也是<strong>建在分组里</strong>的。进入
+        <strong>分组 → 导入渠道凭据 → 新建分组</strong>，把接入方式选成订阅账号，
         再选具体渠道（Codex / Claude / Antigravity / Grok），然后完成授权。
       </p>
 
       <Figure
-        src="/v2/docs/sub-01-connect.png"
+        src={docScreenshot(locale, "sub-01-connect.png")}
+        alt="Codex 订阅分组的连接账号面板，显示 OAuth 授权链接和回调地址输入框"
+        width={2880}
+        height={1440}
         caption="FIG. 1 — 连接账号"
         note="授权入口"
-        shot={{
-          id: "SUB-01",
-          where: "管理台 → 分组 → 新建订阅类分组，或已有订阅分组 → 凭据 tab → 连接账号",
-          include: [
-            "「连接账号」按钮或授权面板",
-            "授权链接与回调地址输入框都处于展开可见状态",
-            "能看出当前是哪个订阅渠道（Codex / Claude 等）",
-          ],
-          hint: "授权链接里通常带 state 参数，截图前替换成示例值或打码。",
-        }}
       >
         授权入口常驻展开，不折叠——远程部署时需要手动复制链接与回调地址，是高频路径而非兜底方案。
       </Figure>
@@ -215,19 +213,12 @@ export default function Subscription() {
       </div>
 
       <Figure
-        src="/v2/docs/sub-02-accounts.png"
+        src={docScreenshot(locale, "sub-02-accounts.png")}
+        alt="订阅账号凭据列表，展示账号状态、额度窗口和重置时间"
+        width={2880}
+        height={1440}
         caption="FIG. 2 — 账号列表"
-        note="状态 · 额度 · 诊断"
-        shot={{
-          id: "SUB-02",
-          where: "管理台 → 分组 → 订阅类分组 → 凭据 tab",
-          include: [
-            "多个订阅账号，状态尽量不同",
-            "额度窗口与重置时间",
-            "顶部按状态的统计条",
-          ],
-          hint: "账号邮箱一律换成 user@example.com 一类的示例地址。",
-        }}
+        note="状态 · 额度 · 重置时间"
       >
         额度窗口、重置时间、授权状态在同一屏内可见。
       </Figure>
@@ -245,7 +236,7 @@ export default function Subscription() {
       </Notice>
       <p>
         所以额度那栏的用途是<strong>让你判断要不要再加账号</strong>，
-        而不是用来预测网关下一次会选谁。想知道会选谁，用{" "}
+        而不是用来预测网关下一次会选谁。想确认是否有候选分组和可用凭据，用{" "}
         <Link href="/docs/monitor">监控与排障</Link> 里的路由检查。
       </p>
 

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
 import { Figure, Notice } from "@/components/v2/ui";
+import { getLocale } from "@/i18n/v2/server";
+import { docScreenshot } from "@/lib/v2/doc-screenshot";
 import { pageMeta } from "@/lib/v2/site";
 
 export const metadata: Metadata = pageMeta({
@@ -21,7 +23,9 @@ const TOC = [
   { id: "practice", label: "实践建议" },
 ];
 
-export default function AccessKeys() {
+export default async function AccessKeys() {
+  const locale = await getLocale();
+
   return (
     <DocsPage
       path="/docs/access-keys"
@@ -58,19 +62,12 @@ export default function AccessKeys() {
       </p>
 
       <Figure
-        src="/v2/docs/key-01-list.png"
+        src={docScreenshot(locale, "key-01-list.png")}
+        alt="访问密钥列表，展示密钥状态、授权分组、协议范围和用量限额"
+        width={2880}
+        height={1440}
         caption="FIG. 1 — 访问密钥列表"
         note="授权范围 · 限额 · 状态"
-        shot={{
-          id: "KEY-01",
-          where: "管理台 → 访问密钥，列表页",
-          include: [
-            "2–3 把密钥，最好授权范围不同",
-            "能看到各自的可用分组、状态（启用/停用）",
-            "如果配了限额，让它显示出来",
-          ],
-          hint: "密钥串只留后四位，前面用星号。",
-        }}
       >
         密钥创建后只显示掩码，需要时可以显式查看真实值。
       </Figure>

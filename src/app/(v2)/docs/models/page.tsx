@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
 import { Figure, Notice } from "@/components/v2/ui";
+import { getLocale } from "@/i18n/v2/server";
+import { docScreenshot } from "@/lib/v2/doc-screenshot";
 import { pageMeta } from "@/lib/v2/site";
 
 export const metadata: Metadata = pageMeta({
@@ -19,7 +21,9 @@ const TOC = [
   { id: "unpriced", label: "没有价格会怎样" },
 ];
 
-export default function Models() {
+export default async function Models() {
+  const locale = await getLocale();
+
   return (
     <DocsPage
       path="/docs/models"
@@ -35,13 +39,12 @@ export default function Models() {
           只有列在这里的模型才能被请求到
         </li>
         <li>
-          <strong>模型页</strong>——全局的模型信息：别名、价格、规格。
-          影响的是成本估算和请求转发时的名称映射
+          <strong>模型页</strong>——全局的模型价格和规格，影响成本估算
         </li>
       </ul>
       <p>
         日常配置主要在分组里做，见 <Link href="/docs/groups">分组与渠道</Link>。
-        这一页讲全局的那部分。
+        这一页分别说明分组里的模型与别名，以及全局价格信息。
       </p>
 
       <Heading id="discover">模型发现</Heading>
@@ -59,25 +62,20 @@ export default function Models() {
       </p>
 
       <Figure
-        src="/v2/docs/mdl-01-discover.png"
+        src={docScreenshot(locale, "mdl-01-discover.png")}
+        alt="分组模型页打开获取上游模型列表抽屉，可搜索并勾选尚未添加的模型"
+        width={2880}
+        height={1440}
         caption="FIG. 1 — 模型发现"
         note="从上游拉取"
-        shot={{
-          id: "MDL-01",
-          where: "管理台 → 分组 → 某个分组 → 模型 tab → 发现模型",
-          include: [
-            "发现结果列表（可勾选状态）",
-            "能看出哪些已选、哪些未选",
-            "手工添加的入口",
-          ],
-        }}
       >
         拉取结果按上游返回，勾选后才对外开放。
       </Figure>
 
       <Heading id="alias">模型别名</Heading>
       <p>
-        别名解决一个很实际的问题：<strong>客户端请求的名字，
+        别名在<strong>分组的「模型与别名」tab</strong> 中配置，解决一个很实际的问题：
+        <strong>客户端请求的名字，
         和上游实际的模型名对不上</strong>。
       </p>
       <p>典型场景：</p>
@@ -97,14 +95,12 @@ export default function Models() {
       </ul>
 
       <Figure
-        src="/v2/docs/mdl-02-alias.png"
+        src={docScreenshot(locale, "mdl-02-alias.png")}
+        alt="分组的模型与别名表格，模型 ID 旁可直接编辑对外别名"
+        width={2880}
+        height={1440}
         caption="FIG. 2 — 模型别名"
-        note="对外名 → 实际名"
-        shot={{
-          id: "MDL-02",
-          where: "管理台 → 模型 → 某个模型的别名编辑",
-          include: ["别名编辑界面", "能看出「对外的名字」和「实际请求的名字」两侧"],
-        }}
+        note="模型 ID → 对外别名"
       >
         应用请求别名，网关转发时换成实际的模型名。
       </Figure>

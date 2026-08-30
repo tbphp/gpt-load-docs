@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
 import { Figure, Notice } from "@/components/v2/ui";
+import { getLocale } from "@/i18n/v2/server";
+import { docScreenshot } from "@/lib/v2/doc-screenshot";
 import { pageMeta } from "@/lib/v2/site";
 
 export const metadata: Metadata = pageMeta({
@@ -20,7 +22,9 @@ const TOC = [
   { id: "when", label: "什么时候该调" },
 ];
 
-export default function Settings() {
+export default async function Settings() {
+  const locale = await getLocale();
+
   return (
     <DocsPage
       path="/docs/settings"
@@ -48,14 +52,12 @@ export default function Settings() {
       </p>
 
       <Figure
-        src="/v2/docs/set-01-runtime.png"
+        src={docScreenshot(locale, "set-01-runtime.png")}
+        alt="系统运行时设置页，展示出站代理、超时、检测间隔、重试和拉黑阈值等全局值"
+        width={2880}
+        height={1440}
         caption="FIG. 1 — 系统级设置"
         note="全局默认值"
-        shot={{
-          id: "SET-01",
-          where: "管理台 → 设置 → 运行时设置区域",
-          include: ["超时、重试、亲和等可配项", "当前生效的值"],
-        }}
       >
         分组里没有单独配置时，用的就是这里的值。
       </Figure>

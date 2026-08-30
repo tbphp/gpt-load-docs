@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 /**
  * 待截图时填这个：占位块会把要求原样显示出来，也是给截图人的说明。
  *
- * 命名规范：`<页面前缀>-<两位序号>-<描述>.png`，统一放 `public/v2/docs/`。
+ * 命名规范：`<页面前缀>-<两位序号>-<描述>.png`，统一放 `public/v2/screenshots/{en,zh,ja}/`。
  *   qs   快速开始    cpt  核心概念
  *   ins  部署        grp  分组与渠道
  * 例：`grp-02-credentials.png`

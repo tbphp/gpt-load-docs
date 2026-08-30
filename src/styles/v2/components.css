@@ -443,3 +443,25 @@
 .nav-spon svg { display: block; flex: none; }
 .nav-spon:hover { color: var(--ink) !important; }
 .nav-spon.on { color: var(--blue) !important; font-weight: 500; }
+
+/* ---------- 行距 ----------
+   放在组件层而非页面层：首页与文档首页都在用，
+   任何一处的页面级 CSS 都不该成为另一处的隐式依赖。 */
+.rows-30 { row-gap: 30px; }
+.rows-34 { row-gap: 34px; }
+.rows-38 { row-gap: 38px; }
+.rows-40 { row-gap: 40px; }
+.rows-44 { row-gap: 44px; }
+
+/* ---------- 编号步骤卡 ----------
+   首页的「三步配完」与文档首页的快捷路径共用。
+   曾经只定义在 home.css 里，导致直接刷新 /docs 时样式丢失。 */
+.step .n { font-size: 72px; font-weight: 700; letter-spacing: -0.06em; line-height: .8; font-variant-numeric: tabular-nums; }
+.step.hot .n { color: var(--blue); }
+.step h3 { font-size: var(--t-h3); font-weight: 600; letter-spacing: -0.025em; margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--ink); }
+.step.hot h3 { border-top-color: var(--blue); }
+.step p { margin-top: 9px; font-size: var(--t-xs); line-height: 1.6; color: var(--dim); }
+.step .m { margin-top: 12px; font-family: var(--f-mono); font-size: 11.5px; color: var(--faint); letter-spacing: .04em; }
+@media (max-width: 720px) {
+  .step .n { font-size: 56px; }
+}

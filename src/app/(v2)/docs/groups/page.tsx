@@ -3,6 +3,8 @@ import { pageMeta } from "@/lib/v2/site";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
 import { Figure, Notice } from "@/components/v2/ui";
+import { getLocale } from "@/i18n/v2/server";
+import { docScreenshot } from "@/lib/v2/doc-screenshot";
 
 export const metadata: Metadata = pageMeta({
   title: "分组与渠道",
@@ -34,7 +36,9 @@ const CHANNELS = [
   { g: "订阅账号", c: "var(--cat-4)", items: "Codex · Claude · Antigravity · Grok", cred: "OAuth 授权" },
 ];
 
-export default function Groups() {
+export default async function Groups() {
+  const locale = await getLocale();
+
   return (
     <DocsPage
       path="/docs/groups"
@@ -54,7 +58,10 @@ export default function Groups() {
       </p>
 
       <Heading id="channels">二十个内置渠道</Heading>
-      <p>建分组时从这些里选一个。不同类别的凭据形态不一样：</p>
+      <p>
+        建分组时从这些里选一个。常用渠道直接显示为按钮，其余渠道收在「其他渠道」中。
+        不同类别的凭据形态不一样：
+      </p>
 
       <div className="tbl-wrap">
         <table className="tbl">
@@ -90,23 +97,17 @@ export default function Groups() {
 
       <Heading id="create">建一个分组</Heading>
       <p>
-        点<strong>分组 → 新建</strong>。要填的核心只有三样：渠道、凭据、模型。
+        点<strong>分组 → 导入渠道凭据 → 新建分组</strong>。
+        要填的核心只有三样：渠道、凭据、模型。
       </p>
 
       <Figure
-        src="/v2/docs/grp-01-list.png"
+        src={docScreenshot(locale, "grp-01-list.png")}
+        alt="分组列表，展示多个分组的状态、渠道、模型数量和凭据状态"
+        width={2880}
+        height={1440}
         caption="FIG. 1 — 分组列表"
         note="每个分组一个上游"
-        shot={{
-          id: "GRP-01",
-          where: "管理台 → 分组，列表页",
-          include: [
-            "至少 2–3 个分组，最好对应不同渠道",
-            "能看到每个分组的渠道、凭据数量、状态",
-            "「新建」按钮",
-          ],
-          hint: "分组名如果带了公司或项目信息，改成通用名称再截。",
-        }}
       >
         接几个上游就建几个分组。同一个服务商的多把密钥不用拆，放同一个分组里即可。
       </Figure>
@@ -126,7 +127,8 @@ export default function Groups() {
       </ul>
       <p>
         填错这些通常表现为请求全部失败。遇到时用{" "}
-        <Link href="/docs/monitor">监控与排障</Link> 里的路由检查，能直接看出网关实际发到了哪。
+        <Link href="/docs/monitor">监控与排障</Link> 里的路由检查，
+        能看出哪些分组进入候选，以及当前有多少可用凭据。
       </p>
 
       <Heading id="creds">管理凭据池</Heading>
@@ -136,20 +138,12 @@ export default function Groups() {
       </p>
 
       <Figure
-        src="/v2/docs/grp-02-credentials.png"
+        src={docScreenshot(locale, "grp-02-credentials.png")}
+        alt="分组凭据页，展示多条凭据及可用、冷却和停用等状态统计"
+        width={2880}
+        height={1440}
         caption="FIG. 2 — 凭据池"
         note="多条凭据 · 不同状态"
-        shot={{
-          id: "GRP-02",
-          where: "管理台 → 分组 → 某个分组 → 凭据 tab",
-          include: [
-            "多条凭据（4 条以上最好）",
-            "状态尽量不一样：有可用的，最好也有冷却中或已停用的",
-            "顶部的状态统计（全部 / 可用 / 冷却 / 拉黑 / 停用）",
-            "批量操作栏",
-          ],
-          hint: "这是本页最重要的一张。密钥一律脱敏，只留后四位。如果环境里没有异常状态的凭据，截正常状态也可以。",
-        }}
       >
         顶部按状态分类统计。可用的参与轮转，冷却中的暂时跳过，拉黑的已被自动摘除。
       </Figure>
@@ -157,7 +151,8 @@ export default function Groups() {
       <p>凭据可以做这些操作：</p>
       <ul>
         <li>
-          <strong>批量导入</strong>——一次粘贴多把密钥，每行一个
+          <strong>批量导入</strong>——从分组列表进入独立的「导入渠道凭据」页面，
+          一次粘贴多把密钥，每行一个
         </li>
         <li>
           <strong>启用／停用</strong>——停用后不参与轮转，但保留在池子里
@@ -175,15 +170,12 @@ export default function Groups() {
       </ul>
 
       <Figure
-        src="/v2/docs/grp-05-import.png"
+        src={docScreenshot(locale, "grp-05-import.png")}
+        alt="导入渠道凭据的已有分组页，显示目标分组和多行 API 密钥输入区"
+        width={2880}
+        height={1440}
         caption="FIG. 3 — 批量导入"
         note="一行一个密钥"
-        shot={{
-          id: "GRP-05",
-          where: "管理台 → 分组 → 某个分组 → 凭据 tab → 批量导入",
-          include: ["导入弹窗或面板", "多行密钥的粘贴区域（脱敏）", "导入按钮与数量提示"],
-          hint: "示例密钥用 sk-xxxx-••••1234 这种形式，保证一眼看出是占位。",
-        }}
       >
         重复的密钥会被自动识别并跳过，可以放心整段粘贴。
       </Figure>
@@ -195,20 +187,18 @@ export default function Groups() {
       </p>
 
       <Figure
-        src="/v2/docs/grp-03-models.png"
-        caption="FIG. 4 — 可用模型"
-        note="发现 · 勾选"
-        shot={{
-          id: "GRP-03",
-          where: "管理台 → 分组 → 某个分组 → 模型 tab",
-          include: ["已选中的模型列表", "模型发现的入口按钮"],
-        }}
+        src={docScreenshot(locale, "grp-03-models.png")}
+        alt="分组的模型与别名表格，展示模型 ID、对外别名和定价状态"
+        width={2880}
+        height={1440}
+        caption="FIG. 4 — 模型与别名"
+        note="发现 · 手工添加 · 别名"
       >
         只有列在这里的模型，才能通过这个分组被请求到。
       </Figure>
 
       <p>
-        模型别名、价格与成本估算是独立的一块，见{" "}
+        模型别名就在同一张表里配置；价格与成本估算见{" "}
         <Link href="/docs/models">模型管理</Link>。
       </p>
 
@@ -219,14 +209,12 @@ export default function Groups() {
       </p>
 
       <Figure
-        src="/v2/docs/grp-04-settings.png"
+        src={docScreenshot(locale, "grp-04-settings.png")}
+        alt="分组设置页，展示权重、超时、重试及继承系统默认值的配置项"
+        width={2880}
+        height={1440}
         caption="FIG. 5 — 分组设置"
         note="覆盖系统级默认值"
-        shot={{
-          id: "GRP-04",
-          where: "管理台 → 分组 → 某个分组 → 设置 tab",
-          include: ["权重、超时、重试等可配项", "能看出哪些是继承系统默认、哪些被单独覆盖"],
-        }}
       >
         这些参数<strong>系统级也有一份</strong>，分组这里填了就覆盖系统值，没填则继承。
       </Figure>

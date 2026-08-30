@@ -62,29 +62,13 @@
   display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
 }
 
-/* ---------- 三步 ---------- */
-.step .n { font-size: 72px; font-weight: 700; letter-spacing: -0.06em; line-height: .8; font-variant-numeric: tabular-nums; }
-.step.hot .n { color: var(--blue); }
-.step h3 { font-size: var(--t-h3); font-weight: 600; letter-spacing: -0.025em; margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--ink); }
-.step.hot h3 { border-top-color: var(--blue); }
-.step p { margin-top: 9px; font-size: var(--t-xs); line-height: 1.6; color: var(--dim); }
-.step .m { margin-top: 12px; font-family: var(--f-mono); font-size: 11.5px; color: var(--faint); letter-spacing: .04em; }
-
 /* ---------- 结尾 ---------- */
 .end h2 { font-size: clamp(30px, 4.4vw, 52px); line-height: 1.02; letter-spacing: -0.045em; font-weight: 700; max-width: 16ch; }
 .end .r { margin-top: 30px; display: flex; align-items: baseline; gap: 24px; flex-wrap: wrap; }
 
-/* ---------- 行距 ---------- */
-.rows-38 { row-gap: 38px; }
-.rows-34 { row-gap: 34px; }
-.rows-40 { row-gap: 40px; }
-.rows-44 { row-gap: 44px; }
-.rows-30 { row-gap: 30px; }
-
 @media (max-width: 720px) {
   .stat { display: flex; align-items: baseline; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--hair); }
   .stat .l { margin-top: 0; }
-  .step .n { font-size: 56px; }
 }
 .notice-spaced { margin-top: 40px; }
 

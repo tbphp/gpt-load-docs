@@ -3,6 +3,8 @@ import { pageMeta } from "@/lib/v2/site";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
 import { CodeBlock, Figure, Notice } from "@/components/v2/ui";
+import { getLocale } from "@/i18n/v2/server";
+import { docScreenshot } from "@/lib/v2/doc-screenshot";
 
 export const metadata: Metadata = pageMeta({
   title: "快速开始",
@@ -20,7 +22,9 @@ const TOC = [
   { id: "next", label: "接下来" },
 ];
 
-export default function Quickstart() {
+export default async function Quickstart() {
+  const locale = await getLocale();
+
   return (
     <DocsPage
       path="/docs/quickstart"
@@ -73,15 +77,12 @@ export default function Quickstart() {
       </p>
 
       <Figure
-        src="/v2/docs/qs-01-login.png"
+        src={docScreenshot(locale, "qs-01-login.png")}
+        alt="GPT-Load 管理台登录页，包含管理密钥输入框和登录按钮"
+        width={2880}
+        height={1440}
         caption="FIG. 1 — 登录"
         note="填入管理密钥"
-        shot={{
-          id: "QS-01",
-          where: "浏览器打开 http://127.0.0.1:3001，停在登录页",
-          include: ["密钥输入框（可以是填了一半的状态）", "登录按钮", "页面上的产品标识"],
-          hint: "输入框里不要出现真实密钥，填几个星号或示例字符即可。",
-        }}
       />
 
       <Notice label="也可以" tone="blue">
@@ -92,44 +93,32 @@ export default function Quickstart() {
 
       <Heading id="group">三 · 建一个分组</Heading>
       <p>
-        分组是「对接哪个上游、用哪些密钥」的集合。点<strong>分组 → 新建</strong>，
-        第一步是选渠道：
+        分组是「对接哪个上游、用哪些密钥」的集合。点
+        <strong>分组 → 导入渠道凭据 → 新建分组</strong>，第一步是选渠道：
       </p>
 
       <Figure
-        src="/v2/docs/qs-02-group-new.png"
+        src={docScreenshot(locale, "qs-02-group-new.png")}
+        alt="导入渠道凭据的新建分组页，显示常用渠道按钮和其他渠道入口"
+        width={2880}
+        height={1440}
         caption="FIG. 2 — 选择渠道"
         note="渠道是建分组时选的"
-        shot={{
-          id: "QS-02",
-          where: "管理台 → 分组 → 新建分组，把渠道下拉展开",
-          include: [
-            "展开的渠道列表，尽量多露出几个（OpenAI、Anthropic、Gemini…）",
-            "能看出这是「新建分组」表单的一部分",
-          ],
-          hint: "这张图很关键——新用户最常问「渠道在哪加」，这张图直接回答了它是分组里的一个选项。",
-        }}
       >
-        管理台里没有独立的「渠道」菜单，渠道是新建分组时的一个选项。
+        常用渠道直接显示为按钮，其余渠道从「其他渠道」里选择。
       </Figure>
 
-      <p>选好渠道后，把 API 密钥粘进凭据框，再勾选这个分组要开放的模型：</p>
+      <p>
+        选好渠道后，把 API 密钥粘进凭据框，再通过模型表格添加这个分组要开放的模型：
+      </p>
 
       <Figure
-        src="/v2/docs/qs-03-group-filled.png"
+        src={docScreenshot(locale, "qs-03-group-filled.png")}
+        alt="填写完成的新建分组表单，包含分组名称、示例 API 密钥和模型表格"
+        width={2880}
+        height={1440}
         caption="FIG. 3 — 填好的分组"
         note="渠道 · 凭据 · 模型"
-        shot={{
-          id: "QS-03",
-          where: "管理台 → 分组 → 新建分组，表单填写完成、即将提交的状态",
-          include: [
-            "分组名称已填",
-            "渠道已选定（建议用 OpenAI，认知门槛最低）",
-            "凭据框里有 key（脱敏）",
-            "已勾选至少一个模型",
-          ],
-          hint: "key 只留前缀和后四位，中间用星号，例如 sk-proj-••••a5df。",
-        }}
       >
         一个分组可以放多把密钥，网关会在它们之间轮转；某把失效会自动避开，不影响其他。
       </Figure>
@@ -177,19 +166,12 @@ export default function Quickstart() {
       </p>
 
       <Figure
-        src="/v2/docs/qs-04-connect.png"
+        src={docScreenshot(locale, "qs-04-connect.png")}
+        alt="管理台首页的一键接入区域，显示访问密钥、客户端选项和生成的配置参数"
+        width={2880}
+        height={1440}
         caption="FIG. 4 — 一键接入"
         note="选密钥与客户端，自动生成参数"
-        shot={{
-          id: "QS-04",
-          where: "管理台 → 首页 → 「连接到网关」区域",
-          include: [
-            "访问密钥下拉（已选中一个）",
-            "客户端下拉（选 Claude Code 或 Cherry Studio 一类）",
-            "下方自动生成的接入参数或配置片段",
-          ],
-          hint: "密钥同样脱敏，只留后四位。",
-        }}
       >
         选好访问密钥和目标客户端，参数直接生成，复制即可。
       </Figure>

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
 import { CodeBlock, Figure, Notice } from "@/components/v2/ui";
+import { getLocale } from "@/i18n/v2/server";
+import { docScreenshot } from "@/lib/v2/doc-screenshot";
 import { pageMeta } from "@/lib/v2/site";
 
 export const metadata: Metadata = pageMeta({
@@ -22,7 +24,9 @@ const TOC = [
   { id: "trouble", label: "接不上时" },
 ];
 
-export default function Clients() {
+export default async function Clients() {
+  const locale = await getLocale();
+
   return (
     <DocsPage
       path="/docs/clients"
@@ -61,19 +65,12 @@ export default function Clients() {
       </p>
 
       <Figure
-        src="/v2/docs/cli-01-connect.png"
+        src={docScreenshot(locale, "cli-01-connect.png")}
+        alt="管理台首页的一键生成配置区域，显示访问密钥、客户端列表和配置片段"
+        width={2880}
+        height={1440}
         caption="FIG. 1 — 一键生成配置"
         note="选密钥与客户端"
-        shot={{
-          id: "CLI-01",
-          where: "管理台 → 首页 → 「连接到网关」区域",
-          include: [
-            "访问密钥下拉（已选中）",
-            "客户端下拉展开，能看到支持的客户端列表",
-            "下方生成的配置片段",
-          ],
-          hint: "密钥脱敏，只留后四位。",
-        }}
       >
         支持 Claude Code、Codex、Gemini CLI、Cherry Studio、Cline、NextChat、Open WebUI、CC Switch 等常见客户端。
       </Figure>
@@ -207,7 +204,7 @@ export default function Clients() {
         <li>
           <strong>请求发出去但失败</strong>——用{" "}
           <Link href="/docs/monitor">监控与排障</Link> 里的请求日志看具体原因，
-          路由检查能告诉你网关选了哪个凭据
+          路由检查能展示候选分组和当前可用凭据数量
         </li>
       </ol>
     </DocsPage>
