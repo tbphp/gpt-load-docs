@@ -46,24 +46,24 @@ export const DOC_GROUPS: DocGroup[] = [
     items: [
       { href: "/docs/monitor", label: "监控与排障", desc: "健康、请求日志、路由检查、用量成本", status: "ready" },
       { href: "/docs/settings", label: "运行时设置", desc: "超时、重试、亲和等运行参数", status: "ready" },
-      { href: "/docs/database", label: "数据库与备份", desc: "三种驱动、DSN、迁移与备份", status: "draft" },
+      { href: "/docs/database", label: "数据库与备份", desc: "三种驱动、DSN、迁移与备份", status: "ready" },
       { href: "/docs/security", label: "安全与上生产", desc: "两把密钥、网络边界、上线清单", status: "ready" },
     ],
   },
   {
     title: "深入",
     items: [
-      { href: "/docs/internals/scheduling", label: "调度是怎么做的", desc: "权重、亲和、重试、冷却、拉黑", status: "draft" },
-      { href: "/docs/internals/protocols", label: "协议与转换边界", desc: "四种协议，什么能转什么不能", status: "draft" },
-      { href: "/docs/advanced/proxy-and-headers", label: "代理、请求头与覆盖", desc: "非标场景的处理方式", status: "draft" },
+      { href: "/docs/internals/scheduling", label: "调度是怎么做的", desc: "权重、亲和、重试、冷却、拉黑", status: "ready" },
+      { href: "/docs/internals/protocols", label: "协议与转换边界", desc: "四种协议，什么能转什么不能", status: "ready" },
+      { href: "/docs/advanced/proxy-and-headers", label: "代理、请求头与覆盖", desc: "非标场景的处理方式", status: "ready" },
     ],
   },
   {
     title: "参考",
     items: [
-      { href: "/docs/reference/env", label: "环境变量", desc: "进程配置全表", status: "draft" },
-      { href: "/docs/reference/api", label: "管理 API", desc: "脚本化管理分组与密钥", status: "draft" },
-      { href: "/docs/faq", label: "常见问题", desc: "部署、接入与排障的高频问题", status: "draft" },
+      { href: "/docs/reference/env", label: "环境变量", desc: "进程配置全表", status: "ready" },
+      { href: "/docs/reference/api", label: "管理 API", desc: "脚本化管理分组与密钥", status: "ready" },
+      { href: "/docs/faq", label: "常见问题", desc: "部署、接入与排障的高频问题", status: "ready" },
       { href: "/docs/migrate-from-1x", label: "从 1.x 迁移", desc: "2.0 无法原地升级，需并行部署", status: "ready" },
     ],
   },
