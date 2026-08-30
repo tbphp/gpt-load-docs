@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function Changelog() {
   return (
-    <main className="page">
+    <main id="main" className="page">
       <div className="shell">
         <div className="page-head">
           <span className="label">更新日志</span>

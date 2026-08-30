@@ -27,7 +27,7 @@ const SUPPORTERS = [
 
 export default function Sponsor() {
   return (
-    <main className="page">
+    <main id="main" className="page">
       <div className="shell">
         <div className="page-head">
           <span className="label">赞助支持</span>
@@ -42,18 +42,17 @@ export default function Sponsor() {
             <span className="n">01</span>
             <span className="t">主赞助</span>
           </div>
-          <div className="spon-main" style={{ marginTop: 20 }}>
-            <a className="spon-logo" href={SPONSOR.url} target="_blank" rel="noopener noreferrer">
-              <Image src={SPONSOR.logo} alt={SPONSOR.name} width={900} height={300} />
+          <div className="spon-grid" style={{ marginTop: 20 }}>
+            <a className="spon" href={SPONSOR.url} target="_blank" rel="noopener noreferrer">
+              <span className="spon-logo">
+                <Image src={SPONSOR.logo} alt={SPONSOR.name} width={900} height={300} />
+              </span>
+              <span className="spon-body">
+                <h3>{SPONSOR.name}</h3>
+                <p>{SPONSOR.desc}</p>
+                <span className="spon-cta">注册使用 →</span>
+              </span>
             </a>
-            <div className="spon-body">
-              <span className="label">Sponsor</span>
-              <h3>{SPONSOR.name}</h3>
-              <p>{SPONSOR.desc}</p>
-              <a className="spon-cta" href={SPONSOR.url} target="_blank" rel="noopener noreferrer">
-                注册使用 →
-              </a>
-            </div>
           </div>
 
           <div className="sec-head" style={{ marginTop: 56 }}>

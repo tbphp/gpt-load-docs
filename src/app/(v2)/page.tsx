@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import "@/styles/v2/home.css";
 import RouteDiagram from "@/components/v2/RouteDiagram";
-import { Section, Button, CodeBlock, Notice, Stat } from "@/components/v2/ui";
+import StructuredData from "@/components/v2/StructuredData";
+import { Section, Button, CodeBlock, Notice, Stat, Figure } from "@/components/v2/ui";
 
 /* 四个数字讲的是一组对比：接得多、装得轻、改得少。
    给两端上色把这层对比点出来，中间两个留墨色，避免一排全彩失去重点。 */
@@ -59,24 +60,27 @@ const CHANNELS = [
   { t: "订阅账号", c: 4, cat: "var(--cat-4)", items: ["Codex", "Claude", "Antigravity", "Grok"] },
 ];
 
+/* 只有分组和访问密钥两层：分组朝上游，访问密钥朝应用。
+   渠道不是独立对象，它是建分组时的一个选项——这点要在文案里说清楚，
+   否则用户会在管理台里找不到「添加渠道」的入口。 */
 const STEPS = [
   {
     n: "01",
-    t: "添加渠道",
-    d: "选一个上游服务，填入一个或多个 API 密钥。订阅渠道按提示完成 OAuth 授权，或直接导入已有凭据。",
-    m: "CHANNEL → 凭据",
+    t: "建一个分组",
+    d: "选一个上游渠道，把 API 密钥粘进去。Codex、Claude 这类订阅账号则走 OAuth 授权，之后共用同一套调度。",
+    m: "分组 → 渠道 + 凭据池",
   },
   {
     n: "02",
-    t: "创建分组",
-    d: "挑一个渠道，配置这个分组可用的模型和运行策略：权重、重试次数、冷却时长、会话亲和。",
-    m: "GROUP → 模型 + 策略",
+    t: "选开放的模型",
+    d: "勾选这个分组对外提供哪些模型，可以从上游自动发现。顺手还能调权重、超时、重试这些运行策略。",
+    m: "分组 → 模型 + 策略",
   },
   {
     n: "03",
-    t: "创建 AccessKey",
-    d: "指定它能用哪些分组、哪些客户端协议，然后把生成的 AccessKey 交给你的应用。这是应用唯一需要知道的东西。",
-    m: "ACCESSKEY → 分组 + 协议",
+    t: "发一把访问密钥",
+    d: "指定它能用哪些分组、哪些客户端协议，设好限流和成本上限，把生成的密钥交给应用。这是应用唯一需要知道的东西。",
+    m: "访问密钥 → 授权 + 限额",
     hot: true,
   },
 ];
@@ -129,7 +133,9 @@ const BOUNDS = [
 
 export default function Home() {
   return (
-    <main>
+    // tint-end：页面以浅色板块（07 边界）收尾，footer 的默认外边距要据此收起
+    <main id="main" className="tint-end">
+      <StructuredData />
       {/* ---------- Hero：整页唯一保持纯黑白的部分 ---------- */}
       <section className="hero">
         <div className="shell">
@@ -278,8 +284,8 @@ export default function Home() {
       <Section
         n="04"
         tag="接入"
-        title="三层配置，一次配完"
-        lede="管理台里只有三个概念：渠道装凭据，分组定策略，AccessKey 交给应用。它们之间是层层收窄的关系。"
+        title="三步配完，之后不用再动"
+        lede="要管的只有两样东西：分组朝上游，访问密钥朝应用。中间的调度、重试、计费统计，网关自己完成。"
       >
         <div className="g12 rows-40">
           {STEPS.map((s) => (
@@ -375,38 +381,31 @@ export default function Home() {
         lede="管理台随二进制一起分发，不需要另外部署前端。打开浏览器就能配渠道、看健康、查日志、算成本。"
       >
         <div className="g12 rows-44">
-          <figure className="col-6 fig">
-            <figcaption>
-              <span className="label">FIG. 2 — 订阅账号</span>
-              <span className="label">额度窗口 · 状态 · 诊断</span>
-            </figcaption>
-            <Image
-              src="/v2/subscription-accounts.png"
-              alt="GPT-Load 管理台订阅账号页：额度窗口、可用与冷却状态、用量窗口与运行时诊断"
-              width={2880}
-              height={1440}
-            />
-            <p className="d">
-              订阅账号的额度窗口、重置时间、可用与冷却状态一屏看完。额度信息只作展示，
-              真正触发切换的是上游的限流响应。
-            </p>
-          </figure>
-          <figure className="col-6 fig">
-            <figcaption>
-              <span className="label">FIG. 3 — 用量与成本</span>
-              <span className="label">请求 · Token · 估算</span>
-            </figcaption>
-            <Image
-              src="/v2/usage-cost.png"
-              alt="GPT-Load 管理台用量与成本页：请求数、缓存命中率、Token 分类、成本估算与用量质量"
-              width={2880}
-              height={1440}
-            />
-            <p className="d">
-              请求量与成败趋势、缓存命中、Token 分类明细、成本估算，以及用量数据本身的完整度——
-              缺了多少条、哪些模型还没有价格。
-            </p>
-          </figure>
+          <Figure
+            className="col-6"
+            src="/v2/subscription-accounts.png"
+            alt="GPT-Load 管理台订阅账号页：额度窗口、可用与冷却状态、用量窗口与运行时诊断"
+            width={2880}
+            height={1440}
+            caption="FIG. 2 — 订阅账号"
+            note="额度窗口 · 状态 · 诊断"
+          >
+            订阅账号的额度窗口、重置时间、可用与冷却状态一屏看完。额度信息只作展示，
+            真正触发切换的是上游的限流响应。
+          </Figure>
+
+          <Figure
+            className="col-6"
+            src="/v2/usage-cost.png"
+            alt="GPT-Load 管理台用量与成本页：请求数、缓存命中率、Token 分类、成本估算与用量质量"
+            width={2880}
+            height={1440}
+            caption="FIG. 3 — 用量与成本"
+            note="请求 · Token · 估算"
+          >
+            请求量与成败趋势、缓存命中、Token 分类明细、成本估算，以及用量数据本身的完整度——
+            缺了多少条、哪些模型还没有价格。
+          </Figure>
         </div>
       </Section>
 

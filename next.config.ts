@@ -29,6 +29,13 @@ const nextConfig: NextConfig = {
         { source: `/docs/${seg}`, destination: `/v1/docs/${seg}`, permanent: false },
         { source: `/docs/${seg}/:path*`, destination: `/v1/docs/${seg}/:path*`, permanent: false },
       ]),
+      // 文档结构调整后的旧路径
+      { source: "/docs/scheduling", destination: "/docs/internals/scheduling", permanent: false },
+      { source: "/docs/monitoring", destination: "/docs/monitor", permanent: false },
+      { source: "/docs/config", destination: "/docs/reference/env", permanent: false },
+      // 渠道不是独立对象，内容并入分组页（见 /docs/concepts）
+      { source: "/docs/channels", destination: "/docs/groups", permanent: false },
+      { source: "/docs/channels/subscription", destination: "/docs/groups/subscription", permanent: false },
       // 这两页在 2.0 里提升为一级页面
       { source: "/docs/sponsor", destination: "/sponsor", permanent: false },
       { source: "/docs/contributors", destination: "/contributors", permanent: false },

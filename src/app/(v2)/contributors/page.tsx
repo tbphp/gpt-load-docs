@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function Contributors() {
   return (
-    <main className="page">
+    <main id="main" className="page">
       <div className="shell">
         <div className="page-head">
           <span className="label">贡献者</span>

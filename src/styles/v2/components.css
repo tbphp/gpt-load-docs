@@ -39,6 +39,17 @@
 
 /* ---------- 表格 ---------- */
 .tbl-wrap { overflow-x: auto; }
+/* 窄屏下表格要横滑，给个边缘渐隐提示它还有内容 */
+@media (max-width: 720px) {
+  .tbl-wrap {
+    background:
+      linear-gradient(90deg, var(--paper) 30%, transparent) left / 24px 100% no-repeat,
+      linear-gradient(-90deg, var(--paper) 30%, transparent) right / 24px 100% no-repeat,
+      radial-gradient(farthest-side at 0 50%, rgba(10,10,10,.12), transparent) left / 12px 100% no-repeat,
+      radial-gradient(farthest-side at 100% 50%, rgba(10,10,10,.12), transparent) right / 12px 100% no-repeat;
+    background-attachment: local, local, scroll, scroll;
+  }
+}
 .tbl { width: 100%; border-collapse: collapse; min-width: 560px; }
 .tbl th {
   text-align: left; font-family: var(--f-mono); font-size: var(--t-label);
@@ -142,6 +153,14 @@
 .dark-end + .foot { margin-top: 0; padding-top: 0; }
 .dark-end + .foot .foot-top { border-top: 1px solid rgba(255,255,255,.16); padding-top: 52px; }
 
+/* 页面以 tint 板块收尾时同理：那块板块自己已经带 84px 底部留白，
+   .foot 的默认 104px 外边距不该再叠加一次，否则会多出一段灰 + 白的双重空白。 */
+.tint-end + .foot { margin-top: 0; }
+
+/* 文档页整体是浅灰底，灰色要一直铺到页脚，中间不能夹一段白。
+   底部留白由 .docs 自己的 padding-bottom 提供（见 docs.css）。 */
+.docs + .foot { margin-top: 0; }
+
 .v1link { border: 1px solid rgba(255,255,255,.3); padding: 5px 11px; transition: background var(--dur); }
 .v1link:hover { background: rgba(255,255,255,.1); }
 
@@ -174,6 +193,11 @@
   display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   gap: 1px; background: var(--ink); border: 1px solid var(--ink);
 }
+/* 只有一个赞助方时也占满整行——这是曝光位，缩窄反而像坏掉的布局。
+   描述文字不限行宽：这是卡片里的一句短说明，限宽只会把它挤成多行、白白抬高卡片。 */
+.spon-grid:has(> :only-child) .spon { grid-template-columns: 232px 1fr; }
+.spon-grid:has(> :only-child) .spon-logo { padding: 22px 26px; }
+.spon-grid:has(> :only-child) .spon-body { padding: 22px 26px 20px; }
 .spon {
   background: var(--paper); display: grid; grid-template-columns: 148px 1fr;
   transition: background var(--dur);
@@ -240,3 +264,182 @@
   font-size: 13px; color: var(--dim); transition: border-color var(--dur), color var(--dur);
 }
 .lang-inline button.on { border-color: var(--blue); color: var(--blue); }
+
+/* ---------- 图片展示 ----------
+   正文里的图都是缩小的，统一走 <Figure>，点击由全局 Lightbox 接管。 */
+.fig-btn {
+  display: block; width: 100%; padding: 0; border: 1px solid var(--rule);
+  background: none; cursor: zoom-in; position: relative; overflow: hidden;
+  transition: border-color var(--dur);
+}
+.fig-btn:hover { border-color: var(--ink); }
+.fig-btn img { width: 100%; height: auto; display: block; }
+.fig-hint {
+  position: absolute; right: 0; bottom: 0;
+  background: var(--ink); color: var(--ink-inv);
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+  padding: 5px 10px; opacity: 0; transition: opacity var(--dur);
+}
+.fig-btn:hover .fig-hint, .fig-btn:focus-visible .fig-hint { opacity: 1; }
+
+/* 待截图占位：编号与文件名放在最显眼处，方便对号放图 */
+.fig-todo { border: 1px dashed var(--amber); background: var(--amber-soft); padding: 16px 20px 18px; }
+.fig-todo-h { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1px solid color-mix(in srgb, var(--amber) 26%, transparent); }
+.fig-todo-h .k {
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--amber-soft); background: var(--amber); padding: 3px 8px;
+}
+.fig-todo-h .id {
+  font-family: var(--f-mono); font-size: 15px; font-weight: 600; letter-spacing: .06em; color: var(--ink);
+}
+.fig-todo-spec { margin: 12px 0 0; display: grid; grid-template-columns: 62px 1fr; gap: 9px 14px; }
+.fig-todo-spec dt {
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--amber); padding-top: 2px;
+}
+.fig-todo-spec dd { margin: 0; font-size: 13px; line-height: 1.55; color: #6f4d10; min-width: 0; }
+.fig-todo-spec dd code {
+  font-family: var(--f-mono); font-size: 12px; color: var(--ink);
+  background: rgba(255,255,255,.6); border: 1px solid color-mix(in srgb, var(--amber) 30%, transparent);
+  padding: 2px 6px; word-break: break-all;
+}
+.fig-todo-spec ul { display: flex; flex-direction: column; gap: 4px; }
+.fig-todo-spec li { padding-left: 15px; position: relative; }
+.fig-todo-spec li::before { content: ""; position: absolute; left: 0; top: 9px; width: 6px; height: 1px; background: var(--amber); }
+.fig-todo-spec .hint { color: #8a6a2a; font-style: italic; }
+@media (max-width: 560px) { .fig-todo-spec { grid-template-columns: 1fr; gap: 4px 0; } .fig-todo-spec dt { padding-top: 8px; } }
+
+/* ---------- 图片查看器 ----------
+   没有「全屏」控件：查看器本身已占满视口，进浏览器全屏只是少个地址栏，
+   对看清截图没有帮助。真正有用的是缩放，所以控件都给了缩放。 */
+.lb { padding: 0; border: none; background: none; max-width: 100vw; max-height: 100vh; width: 100%; height: 100%; }
+.lb::backdrop { background: rgba(8, 9, 10, .95); }
+.lb:not([open]) { display: none; }
+.lb-in { width: 100vw; height: 100vh; display: flex; flex-direction: column; background: #0a0b0c; }
+
+.lb-bar {
+  flex: none; display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+  padding: 13px 20px; border-bottom: 1px solid rgba(255,255,255,.14);
+}
+.lb-cap { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; min-width: 0; }
+.lb-cap, .lb-note {
+  font-family: var(--f-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #fff;
+}
+.lb-note { color: rgba(255,255,255,.5); }
+.lb-acts { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.lb-count {
+  font-family: var(--f-mono); font-size: 11px; letter-spacing: .1em;
+  color: rgba(255,255,255,.5); font-variant-numeric: tabular-nums; margin-right: 4px;
+}
+
+/* 缩放控件三件套连成一体 */
+.lb-zoom { display: flex; align-items: center; border: 1px solid rgba(255,255,255,.3); }
+.lb-zoom button {
+  background: none; border: none; color: #fff; cursor: pointer;
+  width: 30px; height: 30px; font-size: 15px; line-height: 1;
+  transition: background var(--dur);
+}
+.lb-zoom button:hover { background: rgba(255,255,255,.16); }
+.lb-zoom .pct {
+  font-family: var(--f-mono); font-size: 11px; color: #fff; min-width: 48px; text-align: center;
+  font-variant-numeric: tabular-nums;
+  border-left: 1px solid rgba(255,255,255,.22); border-right: 1px solid rgba(255,255,255,.22);
+  line-height: 30px;
+}
+
+.lb-acts > button {
+  background: none; border: 1px solid rgba(255,255,255,.3); color: #fff; cursor: pointer;
+  font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em;
+  padding: 7px 12px; transition: background var(--dur), border-color var(--dur), opacity var(--dur);
+}
+.lb-acts > button:hover:not(:disabled) { background: rgba(255,255,255,.16); border-color: rgba(255,255,255,.6); }
+.lb-acts > button:disabled { opacity: .34; cursor: default; }
+
+.lb-stage {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  padding: 26px; overflow: hidden; position: relative;
+}
+.lb-stage img {
+  max-width: 100%; max-height: 100%; object-fit: contain; display: block;
+  border: 1px solid rgba(255,255,255,.16); cursor: zoom-in; user-select: none;
+}
+/* 放大后交给容器滚动 + 指针拖动，比自己算 transform 稳，也支持触摸 */
+.lb-stage.zoomed { overflow: auto; align-items: flex-start; justify-content: flex-start; cursor: grab; }
+.lb-stage.zoomed:active { cursor: grabbing; }
+.lb-stage.zoomed img { cursor: inherit; }
+
+.lb-nav {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+  background: rgba(10,11,12,.72); border: 1px solid rgba(255,255,255,.28); color: #fff;
+  width: 42px; height: 62px; cursor: pointer; font-size: 17px;
+  transition: background var(--dur), border-color var(--dur);
+}
+.lb-nav:hover { background: rgba(255,255,255,.16); border-color: rgba(255,255,255,.6); }
+.lb-nav.prev { left: 14px; }
+.lb-nav.next { right: 14px; }
+.lb-stage.zoomed .lb-nav { position: fixed; }
+
+.lb-tip {
+  flex: none; padding: 10px 20px; border-top: 1px solid rgba(255,255,255,.14);
+  font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .08em;
+  color: rgba(255,255,255,.42); text-align: center;
+}
+
+@media (max-width: 700px) {
+  .lb-bar { gap: 10px; padding: 11px 13px; }
+  .lb-cap { font-size: 10px; }
+  .lb-acts { gap: 6px; }
+  .lb-acts > button { padding: 6px 9px; font-size: 10px; }
+  .lb-stage { padding: 12px; }
+  .lb-nav { width: 34px; height: 52px; }
+  .lb-tip { display: none; }
+}
+
+/* ---------- 代码块复制 ---------- */
+.code-box { position: relative; }
+.code-copy {
+  position: absolute; top: 10px; right: 10px;
+  background: var(--paper); border: 1px solid var(--rule); color: var(--dim);
+  font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase;
+  padding: 5px 10px; cursor: pointer;
+  opacity: 0; transition: opacity var(--dur), color var(--dur), border-color var(--dur);
+}
+.code-box:hover .code-copy,
+.code-copy:focus-visible { opacity: 1; }
+.code-copy:hover { color: var(--ink); border-color: var(--ink); }
+.code-copy[data-state="done"] { opacity: 1; color: var(--green); border-color: var(--green); }
+.code-copy[data-state="fail"] { opacity: 1; color: var(--rust); border-color: var(--rust); }
+/* 触摸设备没有 hover，直接常显 */
+@media (hover: none) { .code-copy { opacity: 1; } }
+
+/* pre 默认带 margin，且要能横向滚动 */
+.code { margin: 0; }
+
+/* ---------- 跳到主内容 ---------- */
+.skip {
+  position: absolute; left: 50%; top: 0; transform: translate(-50%, -120%);
+  z-index: 200; background: var(--ink); color: var(--ink-inv);
+  font-size: 13px; padding: 11px 20px;
+  transition: transform var(--dur);
+}
+.skip:focus { transform: translate(-50%, 0); }
+
+/* ---------- 外链标识 ----------
+   站内与站外用同一个样式会让人误判，正文里的外链统一带一个角标。
+   顶栏、页脚这类固定区域不加，那里本来就都是外链。 */
+.prose a[target="_blank"]::after,
+.link[target="_blank"]::after {
+  content: "↗";
+  font-family: var(--f-mono); font-size: .78em; margin-left: 3px;
+  vertical-align: super; opacity: .65;
+}
+
+/* ---------- 顶栏赞助入口 ----------
+   赞助是给赞助方的引导位，用品牌色 + 图标从普通导航项里跳出来。 */
+.nav-spon {
+  display: inline-flex; align-items: center; gap: 5px;
+  color: var(--blue) !important;
+}
+.nav-spon svg { display: block; flex: none; }
+.nav-spon:hover { color: var(--ink) !important; }
+.nav-spon.on { color: var(--blue) !important; font-weight: 500; }
