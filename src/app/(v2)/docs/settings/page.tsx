@@ -4,13 +4,11 @@ import { DocsPage, Heading } from "@/components/v2/docs";
 import { Figure, Notice } from "@/components/v2/ui";
 import { getLocale } from "@/i18n/v2/server";
 import { docScreenshot } from "@/lib/v2/doc-screenshot";
-import { pageMeta } from "@/lib/v2/site";
+import { docPageMetadata } from "@/lib/v2/doc-meta";
 
-export const metadata: Metadata = pageMeta({
-  title: "运行时设置",
-  description: "超时、重试、会话亲和、日志留存等运行参数，以及系统级与分组级的覆盖关系。",
-  path: "/docs/settings",
-});
+export function generateMetadata(): Promise<Metadata> {
+  return docPageMetadata("/docs/settings");
+}
 
 const TOC = [
   { id: "two", label: "两层设置" },
@@ -41,7 +39,7 @@ export default async function Settings() {
           <strong>系统级</strong>——在设置页配置，作为全局默认值
         </li>
         <li>
-          <strong>分组级</strong>——在分组的设置 tab 配置，
+          <strong>分组级</strong>——在分组的设置标签页配置，
           <strong>填了就覆盖系统值，留空则继承</strong>
         </li>
       </ul>
@@ -63,7 +61,7 @@ export default async function Settings() {
       </Figure>
 
       <Notice label="怎么确认生效值" tone="blue">
-        分组的设置 tab 会标出哪些是<b>继承自系统</b>、哪些是<b>本分组单独覆盖</b>的。
+        分组的设置标签页会标出哪些是<b>继承自系统</b>、哪些是<b>本分组单独覆盖</b>的。
         排查「为什么这个分组行为和别的不一样」时，先看这里。
       </Notice>
 

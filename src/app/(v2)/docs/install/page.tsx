@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
-import { pageMeta } from "@/lib/v2/site";
+import { docPageMetadata } from "@/lib/v2/doc-meta";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
 import { CodeBlock, Notice } from "@/components/v2/ui";
 
-export const metadata: Metadata = pageMeta({
-  title: "部署",
-  description: "用 Docker Compose、原生二进制或源码构建部署 GPT-Load，以及升级、数据位置与常用运维命令。",
-  path: "/docs/install",
-});
+export function generateMetadata(): Promise<Metadata> {
+  return docPageMetadata("/docs/install");
+}
 
 const TOC = [
   { id: "pick", label: "选哪种" },
@@ -73,7 +71,7 @@ export default function Install() {
         下载对应平台的构建。提供 Linux、macOS（Intel / Apple 芯片）、Windows 五个目标。
       </p>
       <p>
-        <strong>下载后先校验</strong>，Release 里附了 <code>SHA256SUMS</code>：
+        <strong>下载后先校验</strong>，发布页附有 <code>SHA256SUMS</code>：
       </p>
       <CodeBlock caption="校验并运行">
         <span className="c"># 核对校验和</span>{"\n"}

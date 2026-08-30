@@ -4,13 +4,11 @@ import { DocsPage, Heading } from "@/components/v2/docs";
 import { CodeBlock, Figure, Notice } from "@/components/v2/ui";
 import { getLocale } from "@/i18n/v2/server";
 import { docScreenshot } from "@/lib/v2/doc-screenshot";
-import { pageMeta } from "@/lib/v2/site";
+import { docPageMetadata } from "@/lib/v2/doc-meta";
 
-export const metadata: Metadata = pageMeta({
-  title: "订阅账号",
-  description: "把 Codex、Claude、Antigravity、Grok 订阅账号接入 GPT-Load：授权方式、回调端口、远程部署与额度观察。",
-  path: "/docs/groups/subscription",
-});
+export function generateMetadata(): Promise<Metadata> {
+  return docPageMetadata("/docs/groups/subscription");
+}
 
 const TOC = [
   { id: "what", label: "和 API 密钥的区别" },

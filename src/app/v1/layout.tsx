@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import "@fontsource-variable/inter/wght.css";
 import "../globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -9,11 +9,6 @@ import ClientLayoutWrapper from "./ClientLayoutWrapper";
 import { META_CONFIGS, OG_CONFIGS } from "@/lib/metadata";
 import { getServerLanguage } from "@/lib/serverLanguage";
 import ThemeProvider from "@/components/ThemeProvider";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
 
 export async function generateMetadata(): Promise<Metadata> {
   const lang = await getServerLanguage();
@@ -78,7 +73,7 @@ export default async function V1Layout({
   const serverLang = await getServerLanguage();
 
   return (
-    <div className={`${inter.variable} font-sans antialiased v1-root pt-8`} data-site="v1">
+    <div className="font-sans antialiased v1-root pt-8" data-site="v1">
       <ThemeProvider>
         <LanguageProvider initialLanguage={serverLang}>
           <GitHubStarsProvider>

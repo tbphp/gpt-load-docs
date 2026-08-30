@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, type CSSProperties } from "react";
+import { useEffect, useMemo, useRef, type CSSProperties } from "react";
+import { useLocale } from "@/i18n/v2/LocaleProvider";
 
 /**
  * 首屏路由图。
@@ -14,8 +15,6 @@ import { useEffect, useRef, type CSSProperties } from "react";
 
 type Endpoint = {
   key: string;
-  name: string;
-  count: string;
   /** 支线路径 */
   d: string;
   /** 端点标签基线 y，方块与数量由它推出 */
@@ -29,10 +28,10 @@ type Endpoint = {
 };
 
 const ENDPOINTS: Endpoint[] = [
-  { key: "r0", name: "官方 API", count: "4 CHANNELS", d: "M415,162 H492 V26  H617", labelY: 16,  cat: "var(--cat-1)", weight: 44, drawDelay: 0.62 },
-  { key: "r1", name: "云平台",   count: "3 CHANNELS", d: "M415,174 H593 V110 H617", labelY: 100, cat: "var(--cat-2)", weight: 18, drawDelay: 0.68 },
-  { key: "r2", name: "模型服务", count: "8 CHANNELS", d: "M415,186 H593 V250 H617", labelY: 240, cat: "var(--cat-3)", weight: 24, drawDelay: 0.74 },
-  { key: "r3", name: "订阅账号", count: "4 CHANNELS", d: "M415,198 H492 V334 H617", labelY: 324, cat: "var(--cat-4)", weight: 14, drawDelay: 0.80 },
+  { key: "r0", d: "M415,162 H492 V26  H617", labelY: 16,  cat: "var(--cat-1)", weight: 44, drawDelay: 0.62 },
+  { key: "r1", d: "M415,174 H593 V110 H617", labelY: 100, cat: "var(--cat-2)", weight: 18, drawDelay: 0.68 },
+  { key: "r2", d: "M415,186 H593 V250 H617", labelY: 240, cat: "var(--cat-3)", weight: 24, drawDelay: 0.74 },
+  { key: "r3", d: "M415,198 H492 V334 H617", labelY: 324, cat: "var(--cat-4)", weight: 14, drawDelay: 0.80 },
 ];
 
 /** 快节奏：进 / 挑凭据 / 出 / 间歇（毫秒） */
@@ -51,6 +50,11 @@ const catStyle = (s: number, d: number, cat: string) =>
   ({ "--del": `${s}s`, "--dur-draw": `${d}s`, "--rt-c": cat }) as CSSProperties;
 
 export default function RouteDiagram() {
+  const { locale, t } = useLocale();
+  const endpoints = useMemo(
+    () => ENDPOINTS.map((endpoint, index) => ({ ...endpoint, name: t.home.protocols.groups[index], count: [4, 3, 8, 4][index] })),
+    [t]
+  );
   const rootRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
@@ -69,7 +73,7 @@ export default function RouteDiagram() {
     root.classList.add("play");
     if (reduce) return;
 
-    const routes = ENDPOINTS.map((e) => ({
+    const routes = endpoints.map((e) => ({
       ...e,
       path: root.querySelector<SVGPathElement>(`#${e.key}`),
       end: root.querySelector<SVGGElement>(`#${e.key}-end`),
@@ -104,7 +108,7 @@ export default function RouteDiagram() {
         r.end!.classList.toggle("dim", !on);
         r.end!.querySelectorAll(".nd").forEach((n) => n.classList.toggle("hot", on));
       }
-      legend.textContent = `ROUTED → ${sel.name}`;
+      legend.textContent = t.common.routeRouted.replace("{name}", sel.name);
       legendSw?.setAttribute("fill", sel.cat);
     };
 
@@ -151,13 +155,13 @@ export default function RouteDiagram() {
             if (cur) applyHighlight(cur);
           }
         } else if (phase === "out" && cur) {
-          const t = Math.min(phaseT / OUT, 1);
-          place(cur.path!, ease(t));
-          if (t >= 1) {
+          const progress = Math.min(phaseT / OUT, 1);
+          place(cur.path!, ease(progress));
+          if (progress >= 1) {
             phase = "rest"; phaseT = 0;
             sig.setAttribute("opacity", "0");
             count += 1;
-            counter.textContent = `${count.toLocaleString("en-US")} REQ`;
+            counter.textContent = t.common.routeRequests.replace("{count}", count.toLocaleString(locale));
           }
         } else if (phase === "rest") {
           if (phaseT >= REST) {
@@ -189,22 +193,22 @@ export default function RouteDiagram() {
       cancelAnimationFrame(raf);
       io.disconnect();
     };
-  }, []);
+  }, [endpoints, locale, t.common.routeRequests, t.common.routeRouted]);
 
   return (
-    <svg ref={rootRef} className="route-svg" viewBox="0 0 700 420" fill="none" aria-label="GPT-Load 路由结构图">
+    <svg ref={rootRef} className="route-svg" viewBox="0 0 700 420" fill="none" aria-label={t.common.routeDiagram}>
       {/* 主干 */}
       <path className="rt draw" id="pIn" pathLength={1} style={delDur(0.06, 0.3)} d="M11,180 H213" />
 
       {/* 起点 */}
       <rect className="nd pop" style={del(0)} x="4" y="173" width="14" height="14" fill="#0a0a0a" />
-      <text className="pop" style={del(0.04)} x="4" y="158" fill="#0a0a0a" fontSize="12" fontWeight="600" fontFamily={SANS}>你的应用</text>
-      <text className="pop" style={del(0.08)} x="4" y="214" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.5" fontFamily={MONO}>1 BASE URL</text>
-      <text className="pop" style={del(0.11)} x="4" y="228" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.5" fontFamily={MONO}>1 ACCESSKEY</text>
+      <text className="pop" style={del(0.04)} x="4" y="158" fill="#0a0a0a" fontSize="12" fontWeight="600" fontFamily={SANS}>{t.common.yourApplication}</text>
+      <text className="pop" style={del(0.08)} x="4" y="214" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.5" fontFamily={MONO}>{t.common.routeBaseUrl}</text>
+      <text className="pop" style={del(0.11)} x="4" y="228" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.5" fontFamily={MONO}>{t.common.routeAccessKey}</text>
 
       {/* 认证 */}
       <rect className="nd pop" style={del(0.22)} x="106" y="174" width="12" height="12" fill="#ffffff" stroke="#0a0a0a" strokeWidth="2" />
-      <text className="pop" style={del(0.25)} x="106" y="160" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.4" fontFamily={MONO}>AUTH</text>
+      <text className="pop" style={del(0.25)} x="106" y="160" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.4" fontFamily={MONO}>{t.common.routeAuth}</text>
 
       {/* 网关：框内只放名字，说明放框外，避免溢出 */}
       <rect className="gwbox gwdraw" id="gw" pathLength={1} x="213" y="148" width="202" height="64" fill="#ffffff" stroke="#0a0a0a" strokeWidth="2" />
@@ -212,20 +216,20 @@ export default function RouteDiagram() {
       <g className="pop" style={del(0.6)} stroke="#0a0a0a" strokeWidth="2">
         <path d="M401,162 H415 M401,174 H415 M401,186 H415 M401,198 H415" />
       </g>
-      <text className="pop" style={del(0.64)} x="213" y="234" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.4" fontFamily={MONO}>SCHEDULE / RETRY / COOLDOWN</text>
-      <text className="pop" style={del(0.67)} x="213" y="248" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.4" fontFamily={MONO}>AFFINITY / LOG / USAGE</text>
+      <text className="pop" style={del(0.64)} x="213" y="234" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.4" fontFamily={MONO}>{t.common.routeSchedule}</text>
+      <text className="pop" style={del(0.67)} x="213" y="248" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.4" fontFamily={MONO}>{t.common.routeObservability}</text>
 
       {/* 四条支线，各自带分类色 */}
-      {ENDPOINTS.map((e) => (
+      {endpoints.map((e) => (
         <path key={e.key} className="rt draw" id={e.key} pathLength={1} style={catStyle(e.drawDelay, 0.34, e.cat)} d={e.d} />
       ))}
 
       {/* 端点：标签在上、方块居中、数量在下 */}
-      {ENDPOINTS.map((e, i) => (
+      {endpoints.map((e, i) => (
         <g className="lb" id={`${e.key}-end`} key={`${e.key}-end`} style={{ "--rt-c": e.cat } as CSSProperties}>
-          <text className="pop lb-name" style={del(0.94 + i * 0.02)} x="617" y={e.labelY} fill="#0a0a0a" fontSize="13" fontWeight="600" fontFamily={SANS}>{e.name}</text>
+          <text className="pop lb-name" style={del(0.94 + i * 0.02)} x="696" y={e.labelY} textAnchor="end" fill="#0a0a0a" fontSize="12" fontWeight="600" fontFamily={SANS}>{e.name}</text>
           <rect className="nd pop" style={del(0.92 + i * 0.02)} x="617" y={e.labelY + 4} width="12" height="12" fill="#ffffff" stroke={e.cat} strokeWidth="2" />
-          <text className="pop" style={del(0.97 + i * 0.02)} x="617" y={e.labelY + 34} fill="#6a6a6a" fontSize="9.5" letterSpacing="1.3" fontFamily={MONO}>{e.count}</text>
+          <text className="pop" style={del(0.97 + i * 0.02)} x="696" y={e.labelY + 34} textAnchor="end" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.3" fontFamily={MONO}>{t.common.routeChannels.replace("{count}", String(e.count))}</text>
         </g>
       ))}
 
@@ -235,10 +239,10 @@ export default function RouteDiagram() {
       {/* 图注 */}
       <g className="pop" style={del(1.06)}>
         <path d="M11,378 H693" stroke="#ececec" strokeWidth="1" />
-        <text x="11" y="400" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.6" fontFamily={MONO}>FIG. 1 — ROUTING</text>
+        <text x="11" y="400" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.6" fontFamily={MONO}>{t.common.routeFigure}</text>
         <rect id="legendSw" x="160" y="391" width="9" height="9" fill="var(--cat-1)" />
-        <text id="legendTx" x="178" y="400" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.3" fontFamily={MONO}>ROUTED → 官方 API</text>
-        <text id="counter" x="693" y="400" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.3" textAnchor="end" fontFamily={MONO}>0 REQ</text>
+        <text id="legendTx" x="178" y="400" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.3" fontFamily={MONO}>{t.common.routeRouted.replace("{name}", endpoints[0].name)}</text>
+        <text id="counter" x="693" y="400" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.3" textAnchor="end" fontFamily={MONO}>{t.common.routeRequests.replace("{count}", "0")}</text>
       </g>
     </svg>
   );

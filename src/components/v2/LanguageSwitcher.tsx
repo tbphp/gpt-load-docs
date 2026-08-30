@@ -1,6 +1,7 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { LOCALES, LOCALE_COOKIE, LOCALE_NAMES, type Locale } from "@/i18n/v2/config";
 import { useLocale } from "@/i18n/v2/LocaleProvider";
@@ -9,7 +10,6 @@ export default function LanguageSwitcher() {
   const { locale, t } = useLocale();
   const [open, setOpen] = useState(false);
   const boxRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -32,16 +32,32 @@ export default function LanguageSwitcher() {
 
   const choose = (next: Locale) => {
     setOpen(false);
-    if (next === locale) return;
-
     // 记住选择：一年有效，与 1.4.x 共用同一个 cookie
     document.cookie = `${LOCALE_COOKIE}=${next};path=/;max-age=${365 * 24 * 60 * 60};SameSite=Lax`;
+  };
 
-    // URL 上带 ?lang=，刷新后仍是这个语言，链接也可以直接分享
+  const hrefFor = (next: Locale) => {
     const params = new URLSearchParams(searchParams.toString());
-    params.set("lang", next);
-    router.replace(`${pathname}?${params.toString()}`);
-    router.refresh();
+    if (next === "en") params.delete("lang");
+    else params.set("lang", next);
+    const query = params.toString();
+    return query ? `${pathname}?${query}` : pathname;
+  };
+
+  const moveFocus = (event: React.KeyboardEvent<HTMLUListElement>) => {
+    if (!["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) return;
+    const links = Array.from(event.currentTarget.querySelectorAll<HTMLAnchorElement>("a"));
+    if (links.length === 0) return;
+    event.preventDefault();
+    const current = links.indexOf(document.activeElement as HTMLAnchorElement);
+    const next = event.key === "Home"
+      ? 0
+      : event.key === "End"
+        ? links.length - 1
+        : event.key === "ArrowDown"
+          ? (current + 1 + links.length) % links.length
+          : (current - 1 + links.length) % links.length;
+    links[next].focus();
   };
 
   return (
@@ -51,7 +67,7 @@ export default function LanguageSwitcher() {
         className="lang-btn"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
-        aria-haspopup="listbox"
+        aria-haspopup="menu"
         aria-label={t.nav.language}
       >
         {LOCALE_NAMES[locale]}
@@ -59,18 +75,18 @@ export default function LanguageSwitcher() {
       </button>
 
       {open ? (
-        <ul className="lang-menu" role="listbox" aria-label={t.nav.language}>
+        <ul className="lang-menu" role="menu" aria-label={t.nav.language} onKeyDown={moveFocus}>
           {LOCALES.map((code) => (
             <li key={code}>
-              <button
-                type="button"
-                role="option"
-                aria-selected={code === locale}
+              <Link
+                role="menuitem"
+                aria-current={code === locale ? "true" : undefined}
                 className={code === locale ? "on" : undefined}
                 onClick={() => choose(code)}
+                href={hrefFor(code)}
               >
                 {LOCALE_NAMES[code]}
-              </button>
+              </Link>
             </li>
           ))}
         </ul>

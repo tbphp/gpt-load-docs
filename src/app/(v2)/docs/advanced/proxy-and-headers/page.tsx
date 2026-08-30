@@ -2,13 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
 import { Notice } from "@/components/v2/ui";
-import { pageMeta } from "@/lib/v2/site";
+import { docPageMetadata } from "@/lib/v2/doc-meta";
 
-export const metadata: Metadata = pageMeta({
-  title: "代理、请求头与覆盖",
-  description: "出站代理的三级配置、请求头规则与参数覆盖，用于网络受限或非标上游场景。",
-  path: "/docs/advanced/proxy-and-headers",
-});
+export function generateMetadata(): Promise<Metadata> {
+  return docPageMetadata("/docs/advanced/proxy-and-headers");
+}
 
 const TOC = [
   { id: "when", label: "什么时候需要" },

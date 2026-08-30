@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "GPT-Load — 自托管 AI 网关";
+export const alt = "GPT-Load — Self-hosted AI Gateway";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

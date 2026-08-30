@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
-import { pageMeta } from "@/lib/v2/site";
+import { docPageMetadata } from "@/lib/v2/doc-meta";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
 import { CodeBlock, Figure, Notice } from "@/components/v2/ui";
 import { getLocale } from "@/i18n/v2/server";
 import { docScreenshot } from "@/lib/v2/doc-screenshot";
 
-export const metadata: Metadata = pageMeta({
-  title: "快速开始",
-  description: "十分钟跑通 GPT-Load：启动服务、登录管理台、建一个分组、发出第一个请求。",
-  path: "/docs/quickstart",
-});
+export function generateMetadata(): Promise<Metadata> {
+  return docPageMetadata("/docs/quickstart");
+}
 
 const TOC = [
   { id: "need", label: "开始之前" },
@@ -134,7 +132,7 @@ export default async function Quickstart() {
         点<strong>访问密钥 → 新建</strong>，勾上刚建的分组，选好允许的协议，保存。
       </p>
       <p>
-        生成的这串 key 就是<strong>交给应用的东西</strong>——应用不需要知道背后有几个分组、
+        生成的这串密钥就是<strong>交给应用的东西</strong>——应用不需要知道背后有几个分组、
         几把上游密钥。
       </p>
 
@@ -144,7 +142,7 @@ export default async function Quickstart() {
         <span className="k">export</span> GPT_LOAD_KEY=<span className="s">&quot;你的访问密钥&quot;</span>{"\n"}
         {"\n"}
         curl http://127.0.0.1:3001/v1/chat/completions \{"\n"}
-        {"  "}-H <span className="s">&quot;Authorization: Bearer ${"${GPT_LOAD_KEY}"}&quot;</span> \{"\n"}
+        {"  "}-H <span className="s">&quot;Authorization: Bearer {"${GPT_LOAD_KEY}"}&quot;</span> \{"\n"}
         {"  "}-H <span className="s">&quot;Content-Type: application/json&quot;</span> \{"\n"}
         {"  "}-d <span className="s">
           &apos;{"{"}&quot;model&quot;: &quot;你的模型名&quot;, &quot;messages&quot;: [{"{"}&quot;role&quot;:

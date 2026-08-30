@@ -72,18 +72,37 @@ export const DOC_GROUPS: DocGroup[] = [
 /** 扁平顺序，用于上下页翻页 */
 export const DOC_FLAT: DocItem[] = DOC_GROUPS.flatMap((g) => g.items);
 
-export function findDoc(href: string): DocItem | undefined {
-  return DOC_FLAT.find((d) => d.href === href);
+/** 路由与状态保持单一来源，标题和说明按当前词典覆盖。 */
+export function getLocalizedDocGroups(t: Dict): DocGroup[] {
+  let itemIndex = 0;
+  return DOC_GROUPS.map((group, groupIndex) => ({
+    title: t.docsNav.groups[groupIndex],
+    items: group.items.map((item) => {
+      const copy = t.docsNav.items[itemIndex++];
+      return { ...item, label: copy.label, desc: copy.description };
+    }),
+  }));
+}
+
+export function getLocalizedDocFlat(t: Dict): DocItem[] {
+  return getLocalizedDocGroups(t).flatMap((group) => group.items);
+}
+
+export function findDoc(href: string, t?: Dict): DocItem | undefined {
+  return (t ? getLocalizedDocFlat(t) : DOC_FLAT).find((d) => d.href === href);
 }
 
 /** 取相邻页，用于页脚翻页 */
-export function findNeighbors(href: string): { prev?: DocItem; next?: DocItem } {
-  const i = DOC_FLAT.findIndex((d) => d.href === href);
+export function findNeighbors(href: string, t?: Dict): { prev?: DocItem; next?: DocItem } {
+  const docs = t ? getLocalizedDocFlat(t) : DOC_FLAT;
+  const i = docs.findIndex((d) => d.href === href);
   if (i < 0) return {};
-  return { prev: DOC_FLAT[i - 1], next: DOC_FLAT[i + 1] };
+  return { prev: docs[i - 1], next: docs[i + 1] };
 }
 
 /** 当前页所属分组名，用于面包屑 */
-export function findGroupTitle(href: string): string | undefined {
-  return DOC_GROUPS.find((g) => g.items.some((d) => d.href === href))?.title;
+export function findGroupTitle(href: string, t?: Dict): string | undefined {
+  const groups = t ? getLocalizedDocGroups(t) : DOC_GROUPS;
+  return groups.find((g) => g.items.some((d) => d.href === href))?.title;
 }
+import type { Dict } from "@/i18n/v2/dict";

@@ -2,13 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
 import { CodeBlock, Notice } from "@/components/v2/ui";
-import { pageMeta } from "@/lib/v2/site";
+import { docPageMetadata } from "@/lib/v2/doc-meta";
 
-export const metadata: Metadata = pageMeta({
-  title: "从 1.x 迁移",
-  description: "GPT-Load 2.0 无法原地升级，也不能导入 1.x 数据。本页说明并行部署与安全切流量的步骤。",
-  path: "/docs/migrate-from-1x",
-});
+export function generateMetadata(): Promise<Metadata> {
+  return docPageMetadata("/docs/migrate-from-1x");
+}
 
 const TOC = [
   { id: "no", label: "先说结论" },
@@ -93,7 +91,7 @@ export default function Migrate() {
             <tr>
               <td>对外的分组名</td>
               <td>访问密钥</td>
-              <td>应用侧改为持有一把 key，不再拼分组名</td>
+              <td>应用侧改为持有一把密钥，不再拼分组名</td>
             </tr>
           </tbody>
         </table>
@@ -115,7 +113,7 @@ export default function Migrate() {
         http://host:3001/v1/chat/completions
       </CodeBlock>
       <p>
-        换句话说，2.0 里<strong>应用只需要一个 base URL 和一把访问密钥</strong>。
+        换句话说，2.0 里<strong>应用只需要一个基础 URL 和一把访问密钥</strong>。
         以后你在管理台增删分组、换服务商，应用侧都不用再动。
       </p>
 

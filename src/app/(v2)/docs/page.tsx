@@ -1,22 +1,26 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { DOC_GROUPS } from "@/lib/v2/docs-nav";
+import { getLocalizedDocGroups } from "@/lib/v2/docs-nav";
+import { getLocale, getT } from "@/i18n/v2/server";
+import { DocsSearch } from "@/components/v2/docs";
+import { dictionaryPageMeta } from "@/lib/v2/site";
 
-export const metadata: Metadata = {
-  title: "文档",
-  description: "GPT-Load 2.0 文档：部署、渠道配置、分组与 AccessKey、调度与监控、客户端接入。",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  return dictionaryPageMeta({ locale, path: "/docs", select: (dict) => dict.pages.docs });
+}
 
 /** 首屏的三条快捷路径，覆盖绝大多数人来文档的目的 */
-const FAST: { href: string; n: string; t: string; d: string; hot?: boolean }[] = [
-  { href: "/docs/quickstart", n: "01", t: "装起来", d: "一条 compose 命令，五分钟拿到管理密钥" },
-  { href: "/docs/concepts", n: "02", t: "配好它", d: "分组朝上游，访问密钥朝应用，只有这两层" },
-  { href: "/docs/clients", n: "03", t: "接上去", d: "改 base URL 和 API Key 两行，客户端照旧", hot: true },
+const FAST = [
+  { href: "/docs/quickstart", n: "01" },
+  { href: "/docs/concepts", n: "02" },
+  { href: "/docs/clients", n: "03", hot: true },
 ];
 
-export default function DocsIndex() {
+export default async function DocsIndex() {
+  const t = await getT();
   // 文档首页自身不在索引里重复出现
-  const groups = DOC_GROUPS.map((g) => ({
+  const groups = getLocalizedDocGroups(t).map((g) => ({
     ...g,
     items: g.items.filter((d) => d.href !== "/docs"),
   })).filter((g) => g.items.length > 0);
@@ -24,24 +28,26 @@ export default function DocsIndex() {
   return (
     <div className="docs-main-wide">
       <div className="docs-crumb">
-        <span className="label">文档</span>
+        <span className="label">{t.docsUi.crumb}</span>
       </div>
-      <h1 className="docs-title">GPT-Load 2.0 文档</h1>
+      <h1 className="docs-title">{t.docsUi.indexTitle}</h1>
       <p className="docs-lede">
-        按任务组织，不是目录树的翻版。想了解这个项目是什么，回
+        {t.docsUi.indexLedeBefore}
         <Link className="link" href="/">
-          首页
+          {t.docsUi.indexHome}
         </Link>
-        ；来这里的人是要动手的。
+        {t.docsUi.indexLedeAfter}
       </p>
       <div className="docs-rule" />
 
+      <DocsSearch />
+
       <div className="g12 rows-30" style={{ marginTop: 34 }}>
-        {FAST.map((f) => (
+        {FAST.map((f, i) => (
           <Link className={`col-4 step${f.hot ? " hot" : ""}`} key={f.href} href={f.href}>
             <div className="n">{f.n}</div>
-            <h3>{f.t}</h3>
-            <p>{f.d}</p>
+            <h3>{t.docsUi.fast[i].title}</h3>
+            <p>{t.docsUi.fast[i].description}</p>
           </Link>
         ))}
       </div>
@@ -69,14 +75,14 @@ export default function DocsIndex() {
       </div>
 
       <div className="notice" style={{ marginTop: 56 }}>
-        <span className="t">1.4.x</span>
+        <span className="t">{t.docsUi.legacyLabel}</span>
         <p>
-          仍在使用 1.4.x？它的文档完整保留在 <a className="link" href="/v1/docs">1.4.x 文档</a>。
-          注意 <b>2.0 无法原地升级</b>，也不能导入 1.x 数据，迁移方式见{" "}
+          {t.docsUi.legacyBefore}<a className="link" href="/v1/docs">{t.docsUi.legacyLink}</a>
+          {t.docsUi.legacyMiddle}{" "}
           <Link className="link" href="/docs/migrate-from-1x">
-            从 1.x 迁移
+            {t.docsUi.migration}
           </Link>
-          。
+          {t.docsUi.legacyAfter}
         </p>
       </div>
     </div>

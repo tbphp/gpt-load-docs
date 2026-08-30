@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useLocale } from "@/i18n/v2/LocaleProvider";
 
 /**
  * 全局图片查看器。
@@ -35,6 +36,7 @@ function collect(): Shot[] {
 }
 
 export default function Lightbox() {
+  const { t } = useLocale();
   const [shots, setShots] = useState<Shot[]>([]);
   const [index, setIndex] = useState(-1);
   /** null = 适应窗口；数字 = 相对原始尺寸的倍率 */
@@ -206,7 +208,7 @@ export default function Lightbox() {
       className="lb"
       onClose={close}
       onCancel={close}
-      aria-label={current?.caption || "图片查看"}
+      aria-label={current?.caption || t.common.imageViewer}
     >
       {current ? (
         <div className="lb-in">
@@ -224,15 +226,15 @@ export default function Lightbox() {
               ) : null}
 
               <div className="lb-zoom">
-                <button type="button" onClick={() => nudge(-1)} aria-label="缩小">−</button>
+                <button type="button" onClick={() => nudge(-1)} aria-label={t.common.zoomOut}>−</button>
                 <span className="pct">{shownPct}%</span>
-                <button type="button" onClick={() => nudge(1)} aria-label="放大">+</button>
+                <button type="button" onClick={() => nudge(1)} aria-label={t.common.zoomIn}>+</button>
               </div>
 
               <button type="button" onClick={() => setZoom(null)} disabled={!zoomed}>
-                适应窗口
+                {t.common.fitWindow}
               </button>
-              <button type="button" onClick={close} aria-label="关闭">✕</button>
+              <button type="button" onClick={close} aria-label={t.common.close}>✕</button>
             </div>
           </div>
 
@@ -245,7 +247,7 @@ export default function Lightbox() {
             onPointerCancel={zoomed ? endDrag : undefined}
           >
             {shots.length > 1 ? (
-              <button className="lb-nav prev" type="button" onClick={() => step(-1)} aria-label="上一张">
+              <button className="lb-nav prev" type="button" onClick={() => step(-1)} aria-label={t.common.previousImage}>
                 ←
               </button>
             ) : null}
@@ -263,14 +265,14 @@ export default function Lightbox() {
             />
 
             {shots.length > 1 ? (
-              <button className="lb-nav next" type="button" onClick={() => step(1)} aria-label="下一张">
+              <button className="lb-nav next" type="button" onClick={() => step(1)} aria-label={t.common.nextImage}>
                 →
               </button>
             ) : null}
           </div>
 
           <div className="lb-tip">
-            滚轮缩放 · 双击切换 100% · 放大后可拖动 · ← → 切换 · Esc 关闭
+            {t.common.viewerHelp}
           </div>
         </div>
       ) : null}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useLocale } from "@/i18n/v2/LocaleProvider";
 
 /**
  * 代码块的复制按钮。
@@ -9,6 +10,7 @@ import { useRef, useState } from "react";
  * 迟早不同步。这里向上找到 .code 节点直接取 textContent，永远和显示的内容一致。
  */
 export default function CopyButton() {
+  const { t } = useLocale();
   const ref = useRef<HTMLButtonElement>(null);
   const [state, setState] = useState<"idle" | "done" | "fail">("idle");
 
@@ -34,9 +36,9 @@ export default function CopyButton() {
       className="code-copy"
       onClick={copy}
       data-state={state}
-      aria-label="复制代码"
+      aria-label={t.common.copyCode}
     >
-      {state === "done" ? "已复制" : state === "fail" ? "复制失败" : "复制"}
+      {state === "done" ? t.common.copied : state === "fail" ? t.common.copyFailed : t.common.copy}
     </button>
   );
 }

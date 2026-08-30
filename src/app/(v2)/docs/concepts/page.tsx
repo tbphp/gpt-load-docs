@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
-import { pageMeta } from "@/lib/v2/site";
+import { docPageMetadata } from "@/lib/v2/doc-meta";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
 import { Figure, Notice } from "@/components/v2/ui";
 import { getLocale } from "@/i18n/v2/server";
 import { docScreenshot } from "@/lib/v2/doc-screenshot";
 
-export const metadata: Metadata = pageMeta({
-  title: "核心概念",
-  description: "GPT-Load 只有分组和访问密钥两层：分组管上游与凭据，访问密钥管应用能用什么。",
-  path: "/docs/concepts",
-});
+export function generateMetadata(): Promise<Metadata> {
+  return docPageMetadata("/docs/concepts");
+}
 
 const TOC = [
   { id: "two", label: "只有两层" },
@@ -77,7 +75,7 @@ export default async function Concepts() {
         caption="FIG. 1 — 分组详情"
         note="凭据 · 模型与别名 · 设置"
       >
-        一个分组的全部内容就在这三个 tab 里：凭据池、模型与别名、运行策略。
+        一个分组的全部内容就在这三个标签页里：凭据池、模型与别名、运行策略。
       </Figure>
 
       <Heading id="channel">渠道不是单独建的</Heading>
@@ -96,7 +94,7 @@ export default async function Concepts() {
       <p>建分组时要选接入方式，它决定凭据长什么样：</p>
       <ul>
         <li>
-          <strong>API 密钥</strong>——粘贴一串或多串 key，最常见的方式
+          <strong>API 密钥</strong>——粘贴一串或多串密钥，最常见的方式
         </li>
         <li>
           <strong>订阅账号</strong>——走 OAuth 授权，用于 Codex、Claude、Antigravity、Grok
@@ -133,7 +131,7 @@ export default async function Concepts() {
 
       <Heading id="url">分组不出现在 URL 里</Heading>
       <Notice label="与 1.x 的差异" tone="amber">
-        1.x 需要把分组名拼进请求地址。<b>2.0 不需要</b>——应用只认一个固定的 base URL，
+        1.x 需要把分组名拼进请求地址。<b>2.0 不需要</b>——应用只认一个固定的基础 URL，
         用哪个分组由访问密钥的授权范围和请求里的模型名共同决定。
       </Notice>
       <p>
@@ -148,12 +146,12 @@ export default async function Concepts() {
           <strong>按上游分</strong>——这是硬性的，一个分组只能对接一个渠道
         </li>
         <li>
-          <strong>按策略分</strong>——同一个服务商，如果你想让一批 key 走高优先级、另一批做兜底，
-          或者两批 key 的超时和重试要求不同，那就拆成两个分组
+          <strong>按策略分</strong>——同一个服务商，如果你想让一批密钥走高优先级、另一批做兜底，
+          或者两批密钥的超时和重试要求不同，那就拆成两个分组
         </li>
       </ul>
       <p>
-        反过来，<strong>同一个服务商的多把 key 不需要拆分组</strong>——
+        反过来，<strong>同一个服务商的多把密钥不需要拆分组</strong>——
         直接扔进同一个凭据池，网关会自己轮转和避让。
       </p>
     </DocsPage>

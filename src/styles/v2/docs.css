@@ -48,6 +48,26 @@
 .docs-lede { margin-top: 16px; font-size: 16px; line-height: 1.62; color: var(--dim); max-width: 60ch; }
 .docs-rule { border-top: 1px solid var(--ink); margin-top: 26px; }
 
+/* ---------- 文档搜索 ---------- */
+.docs-search { display: block; margin-top: 28px; }
+.docs-search label {
+  display: block; margin-bottom: 8px; font-family: var(--f-mono);
+  font-size: var(--t-label); letter-spacing: .14em; text-transform: uppercase; color: var(--dim);
+}
+.docs-search input {
+  width: 100%; min-height: 46px; border: 1px solid var(--rule); border-radius: 0;
+  background: var(--paper); color: var(--ink); padding: 11px 14px; font-size: 16px;
+  transition: border-color var(--dur);
+}
+.docs-search input:hover { border-color: var(--faint); }
+.docs-search input:focus { border-color: var(--blue); outline: none; }
+.docs-search-results { margin-top: 18px; border-top: 1px solid var(--hair); }
+.docs-search-count {
+  padding-top: 12px; font-family: var(--f-mono); font-size: var(--t-label);
+  letter-spacing: .1em; color: var(--dim); text-transform: uppercase;
+}
+.docs-search-results .idx-list { margin-top: 8px; }
+
 /* ---------- 正文排版 ---------- */
 .prose { margin-top: 34px; max-width: 72ch; }
 .prose > * + * { margin-top: 20px; }
@@ -90,7 +110,7 @@
 
 /* ---------- 翻页 ---------- */
 .docs-pager { margin-top: 62px; border-top: 1px solid var(--ink); padding-top: 18px; display: flex; gap: 20px; }
-.docs-pager a { display: flex; flex-direction: column; gap: 4px; max-width: 46%; }
+.docs-pager a { display: flex; flex-direction: column; justify-content: center; min-height: 44px; gap: 4px; max-width: 46%; }
 .docs-pager .k { font-family: var(--f-mono); font-size: var(--t-label); letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
 .docs-pager .t { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; color: var(--blue); }
 .docs-pager .next { margin-left: auto; text-align: right; }
@@ -142,11 +162,13 @@
   .docs-nav-inner { display: none; }
   .docs-nav-inner.open { display: block; margin-top: 16px; }
   .docs-nav-toggle {
-    display: block; width: 100%; text-align: left; background: none;
+    display: block; width: 100%; min-height: 44px; text-align: left; background: none;
     border: 1px solid var(--rule); padding: 10px 14px; cursor: pointer;
     font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
   }
   .docs-main, .docs-main-wide { grid-column: span 12; }
+  .docs-nav-g li a { display: flex; align-items: center; min-height: 44px; padding-top: 8px; padding-bottom: 8px; }
+  .prose p, .prose li { font-size: 16px; }
   .docs-pager { flex-direction: column; }
   .docs-pager a { max-width: 100%; }
   .docs-pager .next { margin-left: 0; text-align: left; }

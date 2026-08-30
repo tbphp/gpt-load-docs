@@ -2,13 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
 import { Notice } from "@/components/v2/ui";
-import { pageMeta } from "@/lib/v2/site";
+import { docPageMetadata } from "@/lib/v2/doc-meta";
 
-export const metadata: Metadata = pageMeta({
-  title: "协议与转换边界",
-  description: "四种客户端协议的入口、能力覆盖，以及网关能转换与不能转换的边界。",
-  path: "/docs/internals/protocols",
-});
+export function generateMetadata(): Promise<Metadata> {
+  return docPageMetadata("/docs/internals/protocols");
+}
 
 const TOC = [
   { id: "four", label: "四种协议" },

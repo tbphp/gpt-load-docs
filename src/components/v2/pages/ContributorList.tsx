@@ -3,10 +3,13 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { fetchContributors, REPO_URL, type Contributor } from "@/lib/v2/github";
+import { useLocale } from "@/i18n/v2/LocaleProvider";
 
 type State = { status: "loading" } | { status: "ok"; data: Contributor[] } | { status: "fail" };
 
 export default function ContributorList() {
+  const { t } = useLocale();
+  const copy = t.pages.contributors;
   const [state, setState] = useState<State>({ status: "loading" });
 
   useEffect(() => {
@@ -37,13 +40,13 @@ export default function ContributorList() {
   if (state.status === "fail" || state.data.length === 0) {
     return (
       <div className="notice">
-        <span className="t">暂时取不到</span>
+        <span className="t">{copy.unavailable}</span>
         <p>
-          GitHub 接口没有返回数据，可能是限流或网络问题。完整名单见{" "}
+          {copy.unavailableDescription}{" "}
           <a className="link" href={`${REPO_URL}/graphs/contributors`} target="_blank" rel="noopener noreferrer">
-            GitHub 贡献者页面
+            {copy.contributorsPage}
           </a>
-          。
+          {copy.unavailableAfter}
         </p>
       </div>
     );
@@ -52,14 +55,14 @@ export default function ContributorList() {
   return (
     <>
       <div style={{ display: "flex", justifyContent: "space-between", gap: 16, flexWrap: "wrap", marginBottom: 18 }}>
-        <span className="label">共 {state.data.length} 位</span>
+        <span className="label">{copy.totalBefore}{state.data.length}{copy.totalAfter}</span>
         <a
           className="label label-blue"
           href={`${REPO_URL}/graphs/contributors`}
           target="_blank"
           rel="noopener noreferrer"
         >
-          在 GitHub 查看 →
+          {copy.viewGitHub}
         </a>
       </div>
       <div className="contrib-grid">
@@ -67,7 +70,7 @@ export default function ContributorList() {
           <a className="contrib" key={p.login} href={p.url} target="_blank" rel="noopener noreferrer">
             <Image src={p.avatar} alt={p.login} width={44} height={44} unoptimized />
             <span className="n">{p.login}</span>
-            <span className="c">{p.contributions} commits</span>
+            <span className="c">{copy.contributionCount.replace("{count}", String(p.contributions))}</span>
           </a>
         ))}
       </div>

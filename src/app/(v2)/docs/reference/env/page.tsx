@@ -2,13 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
 import { CodeBlock, Notice } from "@/components/v2/ui";
-import { pageMeta } from "@/lib/v2/site";
+import { docPageMetadata } from "@/lib/v2/doc-meta";
 
-export const metadata: Metadata = pageMeta({
-  title: "环境变量",
-  description: "GPT-Load 进程配置的环境变量全表：默认值、取值范围与单位。",
-  path: "/docs/reference/env",
-});
+export function generateMetadata(): Promise<Metadata> {
+  return docPageMetadata("/docs/reference/env");
+}
 
 const TOC = [
   { id: "diff", label: "和运行时设置的区别" },

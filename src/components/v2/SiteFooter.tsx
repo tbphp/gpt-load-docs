@@ -8,17 +8,17 @@ const COL_DEFS = [
     links: [
       { href: "/docs/quickstart", key: "docsQuickstart" },
       { href: "/docs/install", key: "docsInstall" },
-      { href: "/docs/config", key: "docsConfig" },
+      { href: "/docs/reference/env", key: "docsConfig" },
       { href: "/docs/faq", key: "docsFaq" },
     ],
   },
   {
     title: "colFeatures",
     links: [
-      { href: "/docs/channels", key: "featChannels" },
+      { href: "/docs/groups", key: "featChannels" },
       { href: "/docs/groups", key: "featGroups" },
       { href: "/docs/access-keys", key: "featKeys" },
-      { href: "/docs/monitoring", key: "featMonitoring" },
+      { href: "/docs/monitor", key: "featMonitoring" },
     ],
   },
   {

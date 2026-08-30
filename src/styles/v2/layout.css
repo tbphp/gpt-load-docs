@@ -4,7 +4,7 @@
 
 /* 12 栏容器 */
 .shell { max-width: var(--max); margin: 0 auto; padding: 0 var(--edge); }
-.g12 { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gutter); }
+.g12 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); }
 
 /* 常用跨栏，避免每个页面手写 grid-column */
 .col-2  { grid-column: span 2; }

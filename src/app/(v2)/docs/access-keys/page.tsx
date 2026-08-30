@@ -4,13 +4,11 @@ import { DocsPage, Heading } from "@/components/v2/docs";
 import { Figure, Notice } from "@/components/v2/ui";
 import { getLocale } from "@/i18n/v2/server";
 import { docScreenshot } from "@/lib/v2/doc-screenshot";
-import { pageMeta } from "@/lib/v2/site";
+import { docPageMetadata } from "@/lib/v2/doc-meta";
 
-export const metadata: Metadata = pageMeta({
-  title: "访问密钥",
-  description: "访问密钥的授权范围、客户端协议、限流与成本上限配置。",
-  path: "/docs/access-keys",
-});
+export function generateMetadata(): Promise<Metadata> {
+  return docPageMetadata("/docs/access-keys");
+}
 
 const TOC = [
   { id: "what", label: "它管什么" },

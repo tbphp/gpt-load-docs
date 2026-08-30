@@ -2,13 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
 import { Notice } from "@/components/v2/ui";
-import { pageMeta } from "@/lib/v2/site";
+import { docPageMetadata } from "@/lib/v2/doc-meta";
 
-export const metadata: Metadata = pageMeta({
-  title: "调度是怎么做的",
-  description: "一个请求进来之后，网关如何选出分组与凭据，以及失败后的重试、冷却与拉黑机制。",
-  path: "/docs/internals/scheduling",
-});
+export function generateMetadata(): Promise<Metadata> {
+  return docPageMetadata("/docs/internals/scheduling");
+}
 
 const TOC = [
   { id: "flow", label: "一次请求的完整路径" },

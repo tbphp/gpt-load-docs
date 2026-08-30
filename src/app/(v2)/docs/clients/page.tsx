@@ -4,13 +4,11 @@ import { DocsPage, Heading } from "@/components/v2/docs";
 import { CodeBlock, Figure, Notice } from "@/components/v2/ui";
 import { getLocale } from "@/i18n/v2/server";
 import { docScreenshot } from "@/lib/v2/doc-screenshot";
-import { pageMeta } from "@/lib/v2/site";
+import { docPageMetadata } from "@/lib/v2/doc-meta";
 
-export const metadata: Metadata = pageMeta({
-  title: "客户端接入",
-  description: "把 Claude Code、Codex、Cherry Studio、OpenAI SDK 等客户端接到 GPT-Load。",
-  path: "/docs/clients",
-});
+export function generateMetadata(): Promise<Metadata> {
+  return docPageMetadata("/docs/clients");
+}
 
 const TOC = [
   { id: "rule", label: "通用规则" },
@@ -54,7 +52,7 @@ export default async function Clients() {
 
       <Notice label="模型名要对得上" tone="blue">
         请求里的模型名，必须在这把访问密钥能用的某个分组里<b>已经开放</b>。
-        提示模型不存在时，先去分组的模型 tab 确认，见{" "}
+        提示模型不存在时，先去分组的模型标签页确认，见{" "}
         <Link href="/docs/groups">分组与渠道</Link>。
       </Notice>
 
@@ -130,6 +128,7 @@ export default async function Clients() {
       </CodeBlock>
       <p>
         要长期生效就写进 shell 配置文件。这把访问密钥需要勾选
+        {" "}
         <strong>Anthropic Messages</strong> 协议。
       </p>
 
@@ -199,7 +198,7 @@ export default async function Clients() {
           <code>/v1</code> 多了或少了，或者协议没在访问密钥里勾选
         </li>
         <li>
-          <strong>提示模型不存在</strong>——去分组的模型 tab 确认该模型已开放
+          <strong>提示模型不存在</strong>——去分组的模型标签页确认该模型已开放
         </li>
         <li>
           <strong>请求发出去但失败</strong>——用{" "}

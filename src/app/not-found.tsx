@@ -5,11 +5,19 @@ import "@/styles/v2/layout.css";
 import "@/styles/v2/components.css";
 import "@/styles/v2/pages.css";
 import Mark from "@/components/v2/Mark";
+import type { Metadata } from "next";
+import { getLocale, getT } from "@/i18n/v2/server";
+import { dictionaryPageMeta } from "@/lib/v2/site";
 
-export const metadata = {
-  title: "页面不存在 - GPT-Load",
-  robots: { index: false, follow: true },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const metadata = dictionaryPageMeta({
+    locale,
+    path: "/404",
+    select: (dict) => ({ title: dict.pages.notFound.title, description: dict.pages.notFound.lede }),
+  });
+  return { ...metadata, robots: { index: false, follow: true } };
+}
 
 /**
  * 全站 404。
@@ -21,12 +29,14 @@ export const metadata = {
  * 不重复整套顶栏页脚。
  */
 const WAYS = [
-  { href: "/docs/quickstart", t: "快速开始", d: "十分钟跑通第一个请求" },
-  { href: "/docs", t: "文档首页", d: "按任务找到该看哪一页" },
-  { href: "/v1/docs", t: "1.4.x 文档", d: "旧版本的内容在归档站" },
+  { href: "/docs/quickstart" },
+  { href: "/docs" },
+  { href: "/v1/docs" },
 ];
 
-export default function NotFound() {
+export default async function NotFound() {
+  const t = await getT();
+  const copy = t.pages.notFound;
   return (
     <div className="v2">
       <header className="top">
@@ -41,27 +51,24 @@ export default function NotFound() {
       <main id="main" className="page">
         <div className="shell">
           <div className="page-head">
-            <span className="label">404</span>
-            <h1 className="page-title">这个页面不在了</h1>
-            <p className="page-lede">
-              可能是地址输错了，也可能它在 2.0 改版时换了位置。
-              如果你是从 1.4.x 的链接过来的，内容多半还在归档站里。
-            </p>
+            <span className="label">{copy.label}</span>
+            <h1 className="page-title">{copy.headline}</h1>
+            <p className="page-lede">{copy.lede}</p>
           </div>
 
           <div className="page-body">
             <div className="g12 rows-30">
-              {WAYS.map((w) => (
+              {WAYS.map((w, i) => (
                 <Link className="col-4 item" key={w.href} href={w.href}>
-                  <h3 style={{ marginTop: 0 }}>{w.t}</h3>
-                  <p>{w.d}</p>
+                  <h3 style={{ marginTop: 0 }}>{copy.ways[i].title}</h3>
+                  <p>{copy.ways[i].description}</p>
                 </Link>
               ))}
             </div>
 
             <div className="btns" style={{ marginTop: 40 }}>
               <Link className="btn btn-p" href="/">
-                回首页
+                {copy.home}
               </Link>
               <a
                 className="btn btn-s"
@@ -69,7 +76,7 @@ export default function NotFound() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                报告失效链接
+                {copy.report}
               </a>
             </div>
           </div>

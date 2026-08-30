@@ -2,6 +2,8 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { findDoc, findGroupTitle, findNeighbors } from "@/lib/v2/docs-nav";
 import Toc from "./Toc";
+import { getLocale, getT } from "@/i18n/v2/server";
+import { translateDocNode, translateDocString } from "@/i18n/v2/docs-content";
 
 type TocItem = { id: string; label: string };
 
@@ -19,38 +21,43 @@ type Props = {
  * 文档页外壳：面包屑 + 标题 + 引言 + 正文 + 上下页。
  * 所有文档页都用它，翻页顺序由 docs-nav.ts 的扁平序列决定。
  */
-export default function DocsPage({ path, title, lede, toc, children }: Props) {
-  const group = findGroupTitle(path);
-  const doc = findDoc(path);
-  const { prev, next } = findNeighbors(path);
+export default async function DocsPage({ path, title, lede, toc, children }: Props) {
+  const [t, locale] = await Promise.all([getT(), getLocale()]);
+  const localizedTitle = translateDocString(locale, title).trim();
+  const localizedLede = lede ? translateDocNode(lede, locale) : undefined;
+  const localizedToc = toc?.map((item) => ({ ...item, label: translateDocString(locale, item.label).trim() }));
+  const localizedChildren = translateDocNode(children, locale);
+  const group = findGroupTitle(path, t);
+  const doc = findDoc(path, t);
+  const { prev, next } = findNeighbors(path, t);
   const hasToc = Boolean(toc && toc.length);
 
   return (
     <>
       <div className={hasToc ? "docs-main" : "docs-main-wide"}>
         <div className="docs-crumb">
-          <span className="label">文档</span>
+          <span className="label">{t.docsUi.crumb}</span>
           {group ? <span className="label">/ {group}</span> : null}
         </div>
-        <h1 className="docs-title">{title}</h1>
-        {lede ? <p className="docs-lede">{lede}</p> : null}
+        <h1 className="docs-title">{localizedTitle}</h1>
+        {localizedLede ? <p className="docs-lede">{localizedLede}</p> : null}
         <div className="docs-rule" />
 
-        {doc?.status === "draft" ? <DraftNotice title={title} /> : null}
+        {doc?.status === "draft" ? <DraftNotice title={localizedTitle} t={t} /> : null}
 
-        <div className="prose">{children}</div>
+        <div className="prose">{localizedChildren}</div>
 
         {(prev || next) && (
           <div className="docs-pager">
             {prev ? (
               <Link href={prev.href}>
-                <span className="k">← 上一页</span>
+                <span className="k">{t.docsUi.previous}</span>
                 <span className="t">{prev.label}</span>
               </Link>
             ) : null}
             {next ? (
               <Link href={next.href} className="next">
-                <span className="k">下一页 →</span>
+                <span className="k">{t.docsUi.next}</span>
                 <span className="t">{next.label}</span>
               </Link>
             ) : null}
@@ -58,30 +65,27 @@ export default function DocsPage({ path, title, lede, toc, children }: Props) {
         )}
       </div>
 
-      {hasToc ? <Toc items={toc!} /> : null}
+      {hasToc ? <Toc items={localizedToc!} /> : null}
     </>
   );
 }
 
 /** 骨架页提示：路由与导航已就位，内容待定稿。 */
-function DraftNotice({ title }: { title: string }) {
+function DraftNotice({ title, t }: { title: string; t: Awaited<ReturnType<typeof getT>> }) {
   return (
     <div className="docs-draft">
-      <div className="k">内容待完善</div>
-      <h3>「{title}」的正文还没有定稿</h3>
-      <p>
-        这一页的路由、导航位置和翻页顺序都已经就绪，正文内容需要先确认覆盖范围和写法再补。
-        在此之前，对应内容可以先参考仓库 README 或 1.4.x 文档。
-      </p>
+      <div className="k">{t.docsUi.draftLabel}</div>
+      <h3>{t.docsUi.draftTitleBefore}{title}{t.docsUi.draftTitleAfter}</h3>
+      <p>{t.docsUi.draftDescription}</p>
       <ul>
         <li>
           <a href="https://github.com/tbphp/gpt-load" target="_blank" rel="noopener noreferrer">
-            GitHub 仓库 README
+            {t.docsUi.readme}
           </a>
-          ——目前最完整的中文说明
+          {t.docsUi.readmeNote}
         </li>
         <li>
-          <a href="/v1/docs">1.4.x 文档</a>——注意 2.0 的概念模型已经改变，仅供参考
+          <a href="/v1/docs">1.4.x</a>{t.docsUi.legacyNote}
         </li>
       </ul>
     </div>

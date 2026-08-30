@@ -2,13 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
 import { CodeBlock, Notice } from "@/components/v2/ui";
-import { pageMeta } from "@/lib/v2/site";
+import { docPageMetadata } from "@/lib/v2/doc-meta";
 
-export const metadata: Metadata = pageMeta({
-  title: "数据库与备份",
-  description: "SQLite、MySQL、PostgreSQL 三种驱动的选择、DSN 写法、迁移机制与备份恢复。",
-  path: "/docs/database",
-});
+export function generateMetadata(): Promise<Metadata> {
+  return docPageMetadata("/docs/database");
+}
 
 const TOC = [
   { id: "pick", label: "该用哪个" },

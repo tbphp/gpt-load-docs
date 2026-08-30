@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
-import { pageMeta } from "@/lib/v2/site";
+import { docPageMetadata } from "@/lib/v2/doc-meta";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
 import { Figure, Notice } from "@/components/v2/ui";
 import { getLocale } from "@/i18n/v2/server";
 import { docScreenshot } from "@/lib/v2/doc-screenshot";
 
-export const metadata: Metadata = pageMeta({
-  title: "分组与渠道",
-  description: "GPT-Load 的二十个内置渠道、分组的创建与配置、凭据池的管理方式。",
-  path: "/docs/groups",
-});
+export function generateMetadata(): Promise<Metadata> {
+  return docPageMetadata("/docs/groups");
+}
 
 const TOC = [
   { id: "what", label: "分组是什么" },
@@ -204,7 +202,7 @@ export default async function Groups() {
 
       <Heading id="policy">运行策略</Heading>
       <p>
-        设置 tab 里是这个分组的运行参数：权重、超时、重试次数、冷却阈值、
+        设置标签页里是这个分组的运行参数：权重、超时、重试次数、冷却阈值、
         会话亲和、出站代理。
       </p>
 

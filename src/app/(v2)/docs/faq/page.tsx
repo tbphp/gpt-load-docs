@@ -2,13 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
 import { CodeBlock, Notice } from "@/components/v2/ui";
-import { pageMeta } from "@/lib/v2/site";
+import { docPageMetadata } from "@/lib/v2/doc-meta";
 
-export const metadata: Metadata = pageMeta({
-  title: "常见问题",
-  description: "GPT-Load 部署、接入与排障中的高频问题。",
-  path: "/docs/faq",
-});
+export function generateMetadata(): Promise<Metadata> {
+  return docPageMetadata("/docs/faq");
+}
 
 const TOC = [
   { id: "start", label: "装不起来" },
@@ -88,7 +86,7 @@ export default function Faq() {
       <ul>
         <li>
           <code>no_available_group</code>——没有分组开放这个模型，
-          去分组的模型 tab 添加
+          去分组的模型标签页添加
         </li>
         <li>
           <code>model_filtered</code>——访问密钥限制了模型范围

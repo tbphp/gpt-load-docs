@@ -4,13 +4,11 @@ import { DocsPage, Heading } from "@/components/v2/docs";
 import { Figure, Notice } from "@/components/v2/ui";
 import { getLocale } from "@/i18n/v2/server";
 import { docScreenshot } from "@/lib/v2/doc-screenshot";
-import { pageMeta } from "@/lib/v2/site";
+import { docPageMetadata } from "@/lib/v2/doc-meta";
 
-export const metadata: Metadata = pageMeta({
-  title: "模型管理",
-  description: "模型发现、别名映射、价格来源与成本估算的关系。",
-  path: "/docs/models",
-});
+export function generateMetadata(): Promise<Metadata> {
+  return docPageMetadata("/docs/models");
+}
 
 const TOC = [
   { id: "two", label: "两个层面" },
@@ -35,7 +33,7 @@ export default async function Models() {
       <p>模型这件事分在两个地方，别搞混：</p>
       <ul>
         <li>
-          <strong>分组的模型 tab</strong>——决定<strong>这个分组对外开放哪些模型</strong>。
+          <strong>分组的模型标签页</strong>——决定<strong>这个分组对外开放哪些模型</strong>。
           只有列在这里的模型才能被请求到
         </li>
         <li>
@@ -49,7 +47,7 @@ export default async function Models() {
 
       <Heading id="discover">模型发现</Heading>
       <p>
-        不用手敲模型名——分组的模型 tab 里可以<strong>从上游拉取模型列表</strong>，
+        不用手敲模型名——分组的模型标签页里可以<strong>从上游拉取模型列表</strong>，
         勾选需要的即可。
       </p>
       <p>
@@ -74,7 +72,7 @@ export default async function Models() {
 
       <Heading id="alias">模型别名</Heading>
       <p>
-        别名在<strong>分组的「模型与别名」tab</strong> 中配置，解决一个很实际的问题：
+        别名在<strong>分组的「模型与别名」标签页</strong>中配置，解决一个很实际的问题：
         <strong>客户端请求的名字，
         和上游实际的模型名对不上</strong>。
       </p>

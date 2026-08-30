@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLocale } from "@/i18n/v2/LocaleProvider";
 
 type TocItem = { id: string; label: string };
 
@@ -11,6 +12,7 @@ type TocItem = { id: string; label: string };
  * offsetTop，也就不会触发强制重排。
  */
 export default function Toc({ items }: { items: TocItem[] }) {
+  const { t } = useLocale();
   const [active, setActive] = useState<string>(items[0]?.id ?? "");
 
   useEffect(() => {
@@ -35,7 +37,7 @@ export default function Toc({ items }: { items: TocItem[] }) {
 
   return (
     <aside className="docs-toc">
-      <div className="h">本页目录</div>
+      <div className="h">{t.docsUi.toc}</div>
       <ul>
         {items.map((t) => (
           <li key={t.id}>
@@ -44,7 +46,8 @@ export default function Toc({ items }: { items: TocItem[] }) {
               className={t.id === active ? "on" : undefined}
               onClick={(e) => {
                 e.preventDefault();
-                document.getElementById(t.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+                const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+                document.getElementById(t.id)?.scrollIntoView({ behavior, block: "start" });
                 window.history.replaceState(null, "", `#${t.id}`);
               }}
             >

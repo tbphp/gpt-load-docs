@@ -2,13 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
 import { CodeBlock, Notice } from "@/components/v2/ui";
-import { pageMeta } from "@/lib/v2/site";
+import { docPageMetadata } from "@/lib/v2/doc-meta";
 
-export const metadata: Metadata = pageMeta({
-  title: "安全与上生产",
-  description: "GPT-Load 的两把密钥、网络边界、文件权限，以及正式使用前的检查清单。",
-  path: "/docs/security",
-});
+export function generateMetadata(): Promise<Metadata> {
+  return docPageMetadata("/docs/security");
+}
 
 const TOC = [
   { id: "keys", label: "两把密钥" },

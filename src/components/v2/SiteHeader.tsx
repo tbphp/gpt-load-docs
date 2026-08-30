@@ -12,7 +12,7 @@ import { LOCALES, LOCALE_COOKIE, LOCALE_NAMES, type Locale } from "@/i18n/v2/con
 /** 标题走词典，路径固定 */
 const NAV = [
   { href: "/docs", key: "docs" },
-  { href: "/docs/channels", key: "channels" },
+  { href: "/docs/groups", key: "channels" },
   { href: "/docs/install", key: "deploy" },
   { href: "/changelog", key: "changelog" },
 ] as const;
@@ -32,6 +32,12 @@ export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [stars, setStars] = useState<string | null>(null);
   const pathname = usePathname();
+  const isActive = (href: string) => {
+    if (href === "/docs") {
+      return pathname.startsWith("/docs") && !pathname.startsWith("/docs/groups") && !pathname.startsWith("/docs/install");
+    }
+    return pathname.startsWith(href);
+  };
 
   // 浏览器直接问 GitHub 要 star 数，用访客自己的配额；取不到就不显示数字
   useEffect(() => {
@@ -44,11 +50,21 @@ export default function SiteHeader() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [open]);
+
   // 抽屉里的切换：写 cookie 后带 ?lang 整页跳转，逻辑与下拉一致但不依赖 router
   const switchLocale = (next: Locale) => {
     document.cookie = `${LOCALE_COOKIE}=${next};path=/;max-age=${365 * 24 * 60 * 60};SameSite=Lax`;
     const url = new URL(window.location.href);
-    url.searchParams.set("lang", next);
+    if (next === "en") url.searchParams.delete("lang");
+    else url.searchParams.set("lang", next);
     window.location.href = url.toString();
   };
 
@@ -60,9 +76,14 @@ export default function SiteHeader() {
           GPT-Load
         </Link>
 
-        <nav className="nav">
+        <nav className="nav" aria-label={t.common.primaryNavigation}>
           {NAV.map((item) => (
-            <Link key={item.href} href={item.href} className={pathname.startsWith(item.href) ? "on" : undefined}>
+            <Link
+              key={item.href}
+              href={item.href}
+              className={isActive(item.href) ? "on" : undefined}
+              aria-current={isActive(item.href) ? "page" : undefined}
+            >
               {t.nav[item.key]}
             </Link>
           ))}
@@ -70,6 +91,7 @@ export default function SiteHeader() {
           <Link
             href="/sponsor"
             className={`nav-spon${pathname.startsWith("/sponsor") ? " on" : ""}`}
+            aria-current={pathname.startsWith("/sponsor") ? "page" : undefined}
           >
             <HeartIcon />
             {t.nav.sponsor}
@@ -87,22 +109,37 @@ export default function SiteHeader() {
           </Link>
         </div>
 
-        <button className="burger" type="button" onClick={() => setOpen(!open)} aria-expanded={open}>
+        <button
+          className="burger"
+          type="button"
+          onClick={() => setOpen(!open)}
+          aria-expanded={open}
+          aria-controls="site-mobile-nav"
+        >
           {open ? t.nav.close : t.nav.menu}
         </button>
       </div>
 
-      <div className={`shell top-drawer${open ? " open" : ""}`}>
+      <div id="site-mobile-nav" className={`shell top-drawer${open ? " open" : ""}`} hidden={!open}>
         <ul>
           {NAV.map((item) => (
             <li key={item.href}>
-              <Link href={item.href} onClick={() => setOpen(false)}>
+              <Link
+                href={item.href}
+                onClick={() => setOpen(false)}
+                aria-current={isActive(item.href) ? "page" : undefined}
+              >
                 {t.nav[item.key]}
               </Link>
             </li>
           ))}
           <li>
-            <Link className="nav-spon" href="/sponsor" onClick={() => setOpen(false)}>
+            <Link
+              className="nav-spon"
+              href="/sponsor"
+              onClick={() => setOpen(false)}
+              aria-current={pathname.startsWith("/sponsor") ? "page" : undefined}
+            >
               <HeartIcon />
               {t.nav.sponsor}
             </Link>
@@ -127,6 +164,7 @@ export default function SiteHeader() {
                   key={code}
                   type="button"
                   className={code === locale ? "on" : undefined}
+                  aria-pressed={code === locale}
                   onClick={() => switchLocale(code)}
                 >
                   {LOCALE_NAMES[code]}

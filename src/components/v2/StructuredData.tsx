@@ -1,12 +1,16 @@
-import { SITE_NAME, SITE_URL } from "@/lib/v2/site";
+import { localeUrl, SITE_NAME, SITE_URL } from "@/lib/v2/site";
+import { HTML_LANG } from "@/i18n/v2/config";
+import { getLocale, getT } from "@/i18n/v2/server";
 
 /**
  * 结构化数据。
  *
- * 给搜索结果提供软件条目所需的字段（名称、类别、许可、价格），
- * 同时声明站内搜索入口。只在首页输出一次，其余页面不重复。
+ * 给搜索结果提供软件条目所需的字段（名称、类别、许可、价格）。
+ * 只在首页输出一次，其余页面不重复。
  */
-export default function StructuredData() {
+export default async function StructuredData() {
+  const locale = await getLocale();
+  const t = await getT();
   const data = [
     {
       "@context": "https://schema.org",
@@ -14,14 +18,14 @@ export default function StructuredData() {
       name: SITE_NAME,
       applicationCategory: "DeveloperApplication",
       operatingSystem: "Linux, macOS, Windows, Docker",
-      description:
-        "自托管的 AI 网关：二十个内置渠道，API 密钥与订阅账号统一调度，四种客户端协议原样透传，请求日志与成本估算一目了然。",
-      url: SITE_URL,
+      description: t.meta.description,
+      url: localeUrl("/", locale),
       license: "https://opensource.org/licenses/MIT",
       softwareVersion: "2.0",
       offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
       author: { "@type": "Person", name: "tbphp", url: "https://github.com/tbphp" },
       codeRepository: "https://github.com/tbphp/gpt-load",
+      inLanguage: HTML_LANG[locale],
     },
     {
       "@context": "https://schema.org",

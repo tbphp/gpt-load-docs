@@ -2,13 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
 import { CodeBlock, Notice } from "@/components/v2/ui";
-import { pageMeta } from "@/lib/v2/site";
+import { docPageMetadata } from "@/lib/v2/doc-meta";
 
-export const metadata: Metadata = pageMeta({
-  title: "管理 API",
-  description: "GPT-Load 管理接口的认证方式、响应约定与主要资源端点。",
-  path: "/docs/reference/api",
-});
+export function generateMetadata(): Promise<Metadata> {
+  return docPageMetadata("/docs/reference/api");
+}
 
 const TOC = [
   { id: "auth", label: "认证" },

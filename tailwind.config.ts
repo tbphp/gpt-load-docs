@@ -27,7 +27,7 @@ const config: Config = {
         border: "var(--border)",
       },
       fontFamily: {
-        inter: ["var(--font-inter)", "sans-serif"],
+        inter: ["Inter Variable", "sans-serif"],
       },
     },
   },

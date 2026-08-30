@@ -14,7 +14,7 @@
   --ink: #0a0a0a;
   --ink-inv: #ffffff;        /* 深底上的文字 */
   --dim: #666b70;            /* 次级文字 */
-  --faint: #969b9f;          /* 编号、注释 */
+  --faint: #70757a;          /* 编号、注释；白底对比度 4.65:1 */
 
   /* ==========================================================================
      色卡 — 全站只有这两组颜色，不再另加。
@@ -52,9 +52,9 @@
   --max: 1280px;
 
   /* --- 字 --- */
-  --f-sans: "Helvetica Neue", var(--font-archivo), Helvetica, "PingFang SC",
+  --f-sans: "Helvetica Neue", "Archivo Variable", Helvetica, "PingFang SC",
     "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
-  --f-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --f-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   /* --- 字号阶 --- */
   --t-display: clamp(38px, 5vw, 64px);
@@ -70,4 +70,8 @@
   --sec-pad: 84px;
   --sec-pad-sm: 62px;
   --dur: .2s;
+}
+
+@media (max-width: 720px) {
+  .v2 { --t-body: 16px; }
 }

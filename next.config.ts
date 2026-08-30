@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
 
 const nextConfig: NextConfig = {
+  output: "standalone",
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   images: {
     // 贡献者头像来自 GitHub，且以 unoptimized 方式直出（浏览器直连，不走优化管线）
@@ -9,6 +10,35 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     mdxRs: true,
+  },
+  async headers() {
+    const common = [
+      { key: "X-Content-Type-Options", value: "nosniff" },
+      { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+      { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+      { key: "X-Frame-Options", value: "SAMEORIGIN" },
+    ];
+    const production = process.env.NODE_ENV === "production"
+      ? [
+          { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains" },
+          {
+            key: "Content-Security-Policy",
+            value: [
+              "default-src 'self'",
+              "base-uri 'self'",
+              "connect-src 'self' https://api.github.com",
+              "font-src 'self'",
+              "frame-ancestors 'self'",
+              "img-src 'self' data: https://avatars.githubusercontent.com",
+              "object-src 'none'",
+              "script-src 'self' 'unsafe-inline'",
+              "style-src 'self' 'unsafe-inline'",
+            ].join("; "),
+          },
+        ]
+      : [];
+
+    return [{ source: "/:path*", headers: [...common, ...production] }];
   },
   async redirects() {
     // 1.4.x 时代对外发布过的文档链接，散落在 README、issue、他人收藏里。

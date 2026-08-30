@@ -2,10 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { fetchReleases, formatDate, REPO_URL, type Release } from "@/lib/v2/github";
+import { useLocale } from "@/i18n/v2/LocaleProvider";
 
 type State = { status: "loading" } | { status: "ok"; data: Release[] } | { status: "fail" };
 
 export default function ReleaseList() {
+  const { t } = useLocale();
+  const copy = t.pages.changelog;
   const [state, setState] = useState<State>({ status: "loading" });
 
   useEffect(() => {
@@ -42,13 +45,12 @@ export default function ReleaseList() {
   if (state.status === "fail" || state.data.length === 0) {
     return (
       <div className="notice">
-        <span className="t">暂时取不到</span>
+        <span className="t">{copy.unavailable}</span>
         <p>
-          GitHub 接口没有返回数据，可能是限流或网络问题。可以直接前往{" "}
+          {copy.unavailableDescription}{" "}
           <a className="link" href={`${REPO_URL}/releases`} target="_blank" rel="noopener noreferrer">
-            GitHub Releases
-          </a>{" "}
-          查看。
+            {copy.releases}
+          </a>{copy.unavailableAfter}
         </p>
       </div>
     );
@@ -61,14 +63,14 @@ export default function ReleaseList() {
           <div className="rel-meta">
             <span className="rel-tag">{r.tag}</span>
             <span className="rel-date">{formatDate(r.publishedAt)}</span>
-            {i === 0 && !r.prerelease ? <span className="rel-flag latest">最新</span> : null}
-            {r.prerelease ? <span className="rel-flag pre">预发布</span> : null}
+            {i === 0 && !r.prerelease ? <span className="rel-flag latest">{copy.latest}</span> : null}
+            {r.prerelease ? <span className="rel-flag pre">{copy.prerelease}</span> : null}
           </div>
           <div className="rel-body">
             <h3>{r.name}</h3>
             {r.summary ? <p>{r.summary}</p> : null}
             <a href={r.url} target="_blank" rel="noopener noreferrer">
-              在 GitHub 查看完整说明 →
+              {copy.viewFull}
             </a>
           </div>
         </article>

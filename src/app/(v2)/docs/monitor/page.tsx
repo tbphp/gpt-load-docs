@@ -4,13 +4,11 @@ import { DocsPage, Heading } from "@/components/v2/docs";
 import { Figure, Notice } from "@/components/v2/ui";
 import { getLocale } from "@/i18n/v2/server";
 import { docScreenshot } from "@/lib/v2/doc-screenshot";
-import { pageMeta } from "@/lib/v2/site";
+import { docPageMetadata } from "@/lib/v2/doc-meta";
 
-export const metadata: Metadata = pageMeta({
-  title: "监控与排障",
-  description: "用健康状态、请求日志、路由检查定位问题，以及用量与成本估算的口径说明。",
-  path: "/docs/monitor",
-});
+export function generateMetadata(): Promise<Metadata> {
+  return docPageMetadata("/docs/monitor");
+}
 
 const TOC = [
   { id: "where", label: "四个标签页" },
