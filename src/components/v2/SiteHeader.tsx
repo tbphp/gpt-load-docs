@@ -19,6 +19,14 @@ const NAV = [
 
 const GITHUB = "https://github.com/tbphp/gpt-load";
 
+function HeartIcon() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 21s-8-4.9-8-10.4C4 6.9 6.6 4.5 9.6 4.5c1.5 0 2.8.7 3.7 1.8.9-1.1 2.2-1.8 3.7-1.8 3 0 5.6 2.4 5.6 6.1C22.6 16.1 12 21 12 21z" />
+    </svg>
+  );
+}
+
 export default function SiteHeader() {
   const { locale, t } = useLocale();
   const [open, setOpen] = useState(false);
@@ -58,6 +66,14 @@ export default function SiteHeader() {
               {t.nav[item.key]}
             </Link>
           ))}
+          {/* 赞助单独出列：带图标与品牌色，是给赞助方的引导位，不是普通导航 */}
+          <Link
+            href="/sponsor"
+            className={`nav-spon${pathname.startsWith("/sponsor") ? " on" : ""}`}
+          >
+            <HeartIcon />
+            {t.nav.sponsor}
+          </Link>
         </nav>
 
         <div className="top-r">
@@ -85,6 +101,12 @@ export default function SiteHeader() {
               </Link>
             </li>
           ))}
+          <li>
+            <Link className="nav-spon" href="/sponsor" onClick={() => setOpen(false)}>
+              <HeartIcon />
+              {t.nav.sponsor}
+            </Link>
+          </li>
           <li>
             <Link href="/docs/quickstart" onClick={() => setOpen(false)}>
               {t.nav.quickstart} →

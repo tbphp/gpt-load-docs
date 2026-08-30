@@ -14,6 +14,7 @@ export const zh = {
     github: "GitHub",
     menu: "菜单",
     close: "关闭",
+    sponsor: "赞助",
     language: "语言",
   },
   footer: {

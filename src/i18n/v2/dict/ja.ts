@@ -15,6 +15,7 @@ export const ja: Dict = {
     github: "GitHub",
     menu: "メニュー",
     close: "閉じる",
+    sponsor: "スポンサー",
     language: "言語",
   },
   footer: {

@@ -17,6 +17,7 @@ export const en: Dict = {
     github: "GitHub",
     menu: "Menu",
     close: "Close",
+    sponsor: "Sponsor",
     language: "Language",
   },
   footer: {

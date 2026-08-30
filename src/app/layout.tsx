@@ -28,7 +28,12 @@ export default async function RootLayout({
 
   return (
     <html lang={htmlLang} suppressHydrationWarning>
-      <body>{children}</body>
+      {/*
+        浏览器默认给 body 加 8px margin。v1 站靠 Tailwind 的 preflight 清零，
+        v2 站没有全局 reset 覆盖到 body 本身（只重置 .v2 内部），
+        所以这里在根布局兜底清零一次，两站共用、互不影响。
+      */}
+      <body style={{ margin: 0 }}>{children}</body>
     </html>
   );
 }
