@@ -63,7 +63,7 @@ export default function SiteFooter({ t }: { t: Dict }) {
               <div className="h">{t.footer[col.title]}</div>
               <ul>
                 {col.links.map((link) => (
-                  <li key={link.href}>
+                  <li key={link.key}>
                     {"external" in link && link.external ? (
                       <a href={link.href} target="_blank" rel="noopener noreferrer">
                         {t.footer[link.key]}

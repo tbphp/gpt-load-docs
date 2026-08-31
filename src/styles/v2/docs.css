@@ -75,8 +75,10 @@
   font-size: 22px; font-weight: 700; letter-spacing: -0.03em;
   margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--rule);
 }
-/* 首个小节紧跟标题栏，不需要再撑开一段 */
+/* 首个小节复用页头已有的分隔线，避免连续出现两条横线。 */
 .prose > :first-child { margin-top: 0; }
+.prose > h2:first-child,
+.prose > .prose-h:first-child { padding-top: 0; border-top: 0; }
 .prose h3 { font-size: 17px; font-weight: 600; letter-spacing: -0.02em; margin-top: 32px; }
 .prose p { font-size: 15px; line-height: 1.75; color: #2c2c2c; }
 .prose ul, .prose ol { display: flex; flex-direction: column; gap: 11px; margin-top: 18px; }
