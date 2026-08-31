@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { LOCALES, LOCALE_COOKIE, LOCALE_NAMES, type Locale } from "@/i18n/v2/config";
@@ -78,7 +77,8 @@ export default function LanguageSwitcher() {
         <ul className="lang-menu" role="menu" aria-label={t.nav.language} onKeyDown={moveFocus}>
           {LOCALES.map((code) => (
             <li key={code}>
-              <Link
+              {/* 语言由服务端 layout 注入，必须整页导航以同步刷新 Provider 与 html lang。 */}
+              <a
                 role="menuitem"
                 aria-current={code === locale ? "true" : undefined}
                 className={code === locale ? "on" : undefined}
@@ -86,7 +86,7 @@ export default function LanguageSwitcher() {
                 href={hrefFor(code)}
               >
                 {LOCALE_NAMES[code]}
-              </Link>
+              </a>
             </li>
           ))}
         </ul>
