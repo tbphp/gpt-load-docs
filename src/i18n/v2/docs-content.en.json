@@ -1640,5 +1640,6 @@
   "还可以给访问密钥增加两个认证条件：": "You can add two authentication conditions to an AccessKey:",
   "进一步收窄。 请求进来时，": "to narrow it further. When a request arrives,",
   "零停机轮换": "zero-downtime rotation",
-  "，仍应新建第二把密钥、更新并验证应用， 然后再停用或删除旧密钥。": ", create a second AccessKey, update and verify the application, then disable or delete the old AccessKey."
+  "，仍应新建第二把密钥、更新并验证应用， 然后再停用或删除旧密钥。": ", create a second AccessKey, update and verify the application, then disable or delete the old AccessKey.",
+  "不用盯着 GitHub。管理台的设置页里有系统信息，会显示当前版本，出现新版本时给出提示和发布说明链接，也可以手动检查更新。": "No need to watch GitHub. The Settings page in the admin console has a System info section: it shows your current version, flags new releases with a link to the release notes, and lets you check for updates manually."
 }

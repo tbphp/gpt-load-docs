@@ -144,6 +144,7 @@ export default function Install() {
       </CodeBlock>
 
       <Heading id="upgrade">升级与回滚</Heading>
+      <p>不用盯着 GitHub。管理台的设置页里有系统信息，会显示当前版本，出现新版本时给出提示和发布说明链接，也可以手动检查更新。</p>
       <CodeBlock caption="升级到最新的 2.x">
         docker compose pull{"\n"}
         docker compose up -d
