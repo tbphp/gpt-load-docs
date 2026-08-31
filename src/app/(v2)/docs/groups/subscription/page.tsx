@@ -27,7 +27,7 @@ export default async function Subscription() {
     <DocsPage
       path="/docs/groups/subscription"
       title="订阅账号"
-      lede="Codex、Claude、Antigravity、Grok 这类按订阅计费的账号，走 OAuth 授权而不是填密钥。接进来之后，它们和 API 密钥共用同一套调度。"
+      lede="Codex、Claude、Antigravity、Grok 这类按订阅计费的账号，可完成 OAuth 授权，也可导入已有 OAuth JSON。接进来之后，它们和 API 密钥共用同一套调度。"
       toc={TOC}
     >
       <Heading id="what">和 API 密钥的区别</Heading>
@@ -39,7 +39,7 @@ export default async function Subscription() {
       <p>差别只在三处：</p>
       <ul>
         <li>
-          <strong>接入方式</strong>——不是粘贴密钥，而是完成一次 OAuth 授权
+          <strong>接入方式</strong>——完成一次 OAuth 授权，或导入已有 OAuth JSON
         </li>
         <li>
           <strong>凭据会过期</strong>——网关自动刷新；刷新失败时该账号会进入需要重新授权的状态
@@ -68,7 +68,7 @@ export default async function Subscription() {
       </Figure>
 
       <p>
-        授权流程分两类，取决于渠道：
+        接入方式分三类，取决于渠道和你是否已有授权凭据：
       </p>
       <ul>
         <li>
@@ -78,6 +78,10 @@ export default async function Subscription() {
         <li>
           <strong>设备码</strong>（Grok）——页面给出一个验证码，你在上游网站输入它完成授权，
           <strong>不需要任何回调端口</strong>
+        </li>
+        <li>
+          <strong>OAuth JSON 导入</strong>（全部四个订阅渠道）——上传或粘贴已有的 OAuth JSON，
+          不需要在这台机器上完成本地回调
         </li>
       </ul>
 
@@ -125,7 +129,7 @@ export default async function Subscription() {
       </p>
       <CodeBlock caption="docker-compose.yml 中的端口发布">
         ports:{"\n"}
-        {"  "}- <span className="s">&quot;${"${HOST:-127.0.0.1}"}:${"${PORT:-3001}"}:${"${PORT:-3001}"}&quot;</span>{"\n"}
+        {"  "}- <span className="s">&quot;${"${BIND_ADDRESS:-${HOST:-127.0.0.1}}"}:${"${PORT:-3001}"}:${"${PORT:-3001}"}&quot;</span>{"\n"}
         {"  "}- <span className="s">&quot;${"${OAUTH_CALLBACK_BIND_ADDRESS:-...}"}:1455:1455&quot;</span>{"   "}
         <span className="c"># Codex</span>{"\n"}
         {"  "}- <span className="s">&quot;${"${OAUTH_CALLBACK_BIND_ADDRESS:-...}"}:54545:54545&quot;</span>{" "}
@@ -134,10 +138,8 @@ export default async function Subscription() {
         <span className="c"># Antigravity</span>
       </CodeBlock>
 
-      <Notice label="端口是独占的" tone="amber">
-        因为端口由上游固定、无法更改，<b>一台主机上同时只能运行一个默认配置的 Compose 实例</b>。
-        需要跑多个实例时，只有一个能使用本地回调授权；其余实例要么改用设备码渠道，
-        要么在授权时临时停掉占用端口的那个实例。
+      <Notice label="回调端口只限制本地授权" tone="amber">
+        因为端口由上游固定、无法更改，一台主机上同一时刻只能有一个默认 Compose 实例使用本地回调授权。其他实例可导入已有 OAuth JSON；Grok 也可使用设备码。
       </Notice>
 
       <Heading id="remote">远程部署怎么授权</Heading>
@@ -146,7 +148,7 @@ export default async function Subscription() {
         <strong>你浏览器里的 <code>localhost</code> 指向的是你自己的电脑，不是服务器</strong>，
         授权完成后跳转会失败。
       </p>
-      <p>解决办法有两个，任选其一：</p>
+      <p>解决办法有三种，任选其一：</p>
       <ol>
         <li>
           <strong>手动粘贴回调地址</strong>——授权页面跳转失败后，
@@ -166,9 +168,10 @@ export default async function Subscription() {
         <span className="c"># 转发保持连接期间完成授权即可</span>
       </CodeBlock>
 
+      <p>已有 OAuth JSON 时，直接上传或粘贴导入即可，不需要回调端口。</p>
+
       <Notice label="不要为了授权开放公网" tone="amber">
-        回调端口<b>不应该暴露到公网</b>。用上面两种方式之一即可完成授权，
-        没有必要把 <code>OAUTH_CALLBACK_BIND_ADDRESS</code> 改成 <code>0.0.0.0</code>。
+        回调端口不应该暴露到公网。可以手动粘贴回调、使用 SSH 转发，或导入已有 OAuth JSON；无需把 OAUTH_CALLBACK_BIND_ADDRESS 改为 0.0.0.0。
       </Notice>
 
       <Heading id="state">四种授权状态</Heading>
@@ -237,6 +240,9 @@ export default async function Subscription() {
         而不是用来预测网关下一次会选谁。想确认是否有候选分组和可用凭据，用{" "}
         <Link href="/docs/monitor">监控与排障</Link> 里的路由检查。
       </p>
+      <Notice label="Codex 的重置额度" tone="blue">
+        仅 Codex 账号可能显示可用的重置额度。它需要在管理台手动消费，不参与自动调度；操作后等待额度信息刷新确认结果。
+      </Notice>
 
       <Heading id="rule">使用前提</Heading>
       <ul>

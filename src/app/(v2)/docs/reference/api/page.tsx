@@ -10,6 +10,7 @@ export function generateMetadata(): Promise<Metadata> {
 
 const TOC = [
   { id: "auth", label: "认证" },
+  { id: "lockout", label: "认证失败锁定" },
   { id: "shape", label: "响应约定" },
   { id: "res", label: "主要资源" },
   { id: "example", label: "几个例子" },
@@ -54,6 +55,11 @@ export default function Api() {
         </li>
       </ul>
       <p>需要写入或调用路由检查时必须使用 <code>AUTH_KEY</code>。</p>
+
+      <Heading id="lockout">认证失败锁定</Heading>
+      <Notice label="避免脚本反复重试错误密钥" tone="amber">
+        同一个直接对端地址在 30 分钟内连续 5 次管理认证失败，会被锁定 30 分钟。锁定期间返回 429 和 Retry-After；使用正确的 AUTH_KEY 成功认证会清除失败计数。
+      </Notice>
 
       <Heading id="shape">响应约定</Heading>
       <p>统一的返回结构，成功与失败靠 <code>code</code> 区分：</p>

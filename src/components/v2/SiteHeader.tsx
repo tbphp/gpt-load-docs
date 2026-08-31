@@ -63,8 +63,7 @@ export default function SiteHeader() {
   const switchLocale = (next: Locale) => {
     document.cookie = `${LOCALE_COOKIE}=${next};path=/;max-age=${365 * 24 * 60 * 60};SameSite=Lax`;
     const url = new URL(window.location.href);
-    if (next === "en") url.searchParams.delete("lang");
-    else url.searchParams.set("lang", next);
+    url.searchParams.set("lang", next);
     window.location.href = url.toString();
   };
 

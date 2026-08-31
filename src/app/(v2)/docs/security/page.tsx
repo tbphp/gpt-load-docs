@@ -151,7 +151,7 @@ export default function Security() {
 
       <Heading id="perm">文件权限</Heading>
       <p>
-        受管的数据目录会被收紧到<strong>仅属主可访问</strong>，
+        受管的数据目录会被收紧到与运行身份相匹配的访问权限，
         程序启动时自动处理，通常不需要你干预：
       </p>
       <ul>
@@ -162,7 +162,7 @@ export default function Security() {
           数据库文件与两把密钥：<code>0600</code>（仅属主可读写）
         </li>
         <li>
-          Windows 上使用当前用户专属的 ACL
+          Windows 前台运行使用当前用户 ACL；安装器服务使用服务 SID 与本地 Administrators ACL
         </li>
       </ul>
       <p>

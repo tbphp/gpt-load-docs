@@ -37,8 +37,7 @@ export default function LanguageSwitcher() {
 
   const hrefFor = (next: Locale) => {
     const params = new URLSearchParams(searchParams.toString());
-    if (next === "en") params.delete("lang");
-    else params.set("lang", next);
+    params.set("lang", next);
     const query = params.toString();
     return query ? `${pathname}?${query}` : pathname;
   };

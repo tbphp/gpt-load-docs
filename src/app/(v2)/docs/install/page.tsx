@@ -130,10 +130,10 @@ export default function Install() {
 
       <p>需要手动管服务时，用程序自带的子命令：</p>
       <CodeBlock caption="管理已安装的服务">
-        gpt-load-windows-amd64.exe service status{"\n"}
-        gpt-load-windows-amd64.exe service stop{"\n"}
-        gpt-load-windows-amd64.exe service start{"\n"}
-        gpt-load-windows-amd64.exe service restart
+        &quot;%ProgramFiles%\GPT-Load\gpt-load.exe&quot; service status{"\n"}
+        &quot;%ProgramFiles%\GPT-Load\gpt-load.exe&quot; service stop{"\n"}
+        &quot;%ProgramFiles%\GPT-Load\gpt-load.exe&quot; service start{"\n"}
+        &quot;%ProgramFiles%\GPT-Load\gpt-load.exe&quot; service restart
       </CodeBlock>
 
       <p>

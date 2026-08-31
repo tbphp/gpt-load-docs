@@ -71,7 +71,7 @@ export const en: Dict = {
   },
   meta: {
     title: "GPT-Load — Self-hosted AI Gateway",
-    description: "GPT-Load is a self-hosted AI gateway that schedules API keys and subscription accounts across twenty built-in channels while preserving four native client protocols, with request logs and usage estimates built in.",
+    description: "Self-hosted AI gateway for scheduling API keys and subscription accounts across 20 channels, with native client protocols, request logs, and usage estimates.",
     keywords: "GPT-Load, AI gateway, API gateway, self-hosted, OpenAI, Anthropic, Gemini, credential pooling, load balancing",
     ogDescription: "One endpoint for every channel and credential.",
   },

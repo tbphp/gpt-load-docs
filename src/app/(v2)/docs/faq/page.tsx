@@ -32,17 +32,15 @@ export default function Faq() {
       <p>
         默认端口 3001。改 <code>.env</code> 里的 <code>PORT</code> 即可。
         注意订阅账号还会用到 1455、54545、51121 三个回调端口，
-        它们<strong>由上游固定、不能改</strong>——所以
-        <strong>一台机器上只能跑一个使用订阅账号的实例</strong>。
+        它们<strong>由上游固定、不能改</strong>。
       </p>
+      <p>一台主机上同一时刻只能有一个默认 Compose 实例使用本地回调授权。已有 OAuth JSON 的账号可以导入，Grok 可以使用设备码。</p>
 
       <h3>改了 HOST 但容器里不生效</h3>
       <p>
         容器内的 <code>HOST</code> 和 <code>DATA_DIR</code> 是被固定的。
-        在 Compose 部署里，<code>HOST</code> 实际控制的是
-        <strong>发布到宿主机的哪个地址</strong>。详见{" "}
-        <Link href="/docs/reference/env">环境变量</Link>。
       </p>
+      <p>Compose 主服务的发布地址优先使用 BIND_ADDRESS；未设置时才回退到 HOST。它们都不改变容器内的监听地址。</p>
 
       <h3>启动报权限错误</h3>
       <p>
@@ -115,11 +113,7 @@ export default function Faq() {
       </p>
 
       <h3>凭据被拉黑了</h3>
-      <p>
-        连续失败超过阈值会自动拉黑。<strong>先确认凭据本身是否还有效</strong>
-        （余额、是否被吊销），确认没问题再恢复它。
-        阈值可调，见 <Link href="/docs/settings">运行时设置</Link>。
-      </p>
+      <p>连续失败超过阈值会自动拉黑。API Key 分组会按验证间隔自动探测，探测成功后恢复；订阅凭据不走这条自动恢复路径，需要重新授权或人工处理。阈值可在运行时设置调整。</p>
 
       <h3>推理模型总是超时</h3>
       <p>

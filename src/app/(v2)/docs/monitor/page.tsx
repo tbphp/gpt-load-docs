@@ -61,7 +61,7 @@ export default async function Monitor() {
           <strong>冷却中</strong>——刚被上游限流或报错，暂时跳过，到点自动恢复
         </li>
         <li>
-          <strong>已拉黑</strong>——连续失败超过阈值，自动摘除，需要人工确认后恢复
+          <strong>已拉黑</strong>——连续失败超过阈值，自动摘除。API Key 分组会按验证间隔自动探测并恢复；订阅凭据不走这条自动恢复路径
         </li>
         <li>
           <strong>已停用</strong>——你手动关掉的，不参与轮转

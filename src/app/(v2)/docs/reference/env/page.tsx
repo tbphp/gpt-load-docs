@@ -272,13 +272,9 @@ export default function Env() {
       </p>
       <CodeBlock caption="docker-compose.yml">
         ports:{"\n"}
-        {"  "}- <span className="s">&quot;${"${HOST:-127.0.0.1}"}:${"${PORT:-3001}"}:${"${PORT:-3001}"}&quot;</span>
+        {"  "}- <span className="s">&quot;${"${BIND_ADDRESS:-${HOST:-127.0.0.1}}"}:${"${PORT:-3001}"}:${"${PORT:-3001}"}&quot;</span>
       </CodeBlock>
-      <p>
-        也就是说：<strong>在容器部署里，<code>HOST</code> 控制的是发布到宿主机的哪个地址</strong>，
-        而不是容器内的监听地址。要对外提供服务，
-        正确做法是加反向代理，见 <Link href="/docs/security">安全与上生产</Link>。
-      </p>
+      <p>也就是说：在容器部署里，BIND_ADDRESS 已设置时控制发布到宿主机的地址；未设置时才回退到 HOST。它们都不控制容器内监听地址。要对外提供服务，正确做法是加反向代理。</p>
       <p>
         还有三个变量<strong>只在 Compose 部署里有意义</strong>，
         直接跑二进制时它们不起作用：
