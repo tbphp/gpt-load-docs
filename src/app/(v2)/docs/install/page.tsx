@@ -211,8 +211,10 @@ export default function Install() {
         数据在具名卷里，升级不会丢。数据库结构变更会在启动时自动完成，不需要手工操作。
       </p>
       <p>
-        官方 Compose 使用 <code>v2beta</code> 更新通道，<strong>不依赖 <code>latest</code></strong>。
-        这个标签会随 2.0 Beta 版本移动；需要固定版本时，请改用具体版本标签或镜像摘要。
+        官方 Compose 使用 <code>2</code> 更新通道。GA 前，它跟随已验证的 2.0 Beta 和 RC；GA
+        后只跟随稳定的 2.x。镜像精确标签会去掉 Git tag 的 <code>v</code> 前缀（例如
+        <code>2.0.0-beta.25</code>），<code>2.0-beta</code> 是 2.0 Beta 通道，且不会使用
+        <code>latest</code>。需要固定版本时，请改用精确版本标签或镜像摘要。
       </p>
       <p>
         数据库迁移是单向的，<strong>回滚不能只把镜像标签改回去</strong>。
