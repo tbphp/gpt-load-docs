@@ -68,6 +68,7 @@ async function ghJson<T>(path: string): Promise<T | null> {
 const TTL_STARS = 60 * 60 * 1000;
 const TTL_RELEASES = 30 * 60 * 1000;
 const TTL_CONTRIBUTORS = 60 * 60 * 1000;
+const CONTRIBUTOR_RETRY_DELAYS = [500, 1000, 2000];
 
 export async function fetchStars(): Promise<number | null> {
   const key = "gl:stars";
@@ -104,26 +105,54 @@ export async function fetchReleases(limit = 20): Promise<Release[] | null> {
 }
 
 export async function fetchContributors(): Promise<Contributor[] | null> {
-  const key = "gl:contributors";
+  const key = "gl:contributors:stats:v1";
   const hit = readCache<Contributor[]>(key, TTL_CONTRIBUTORS);
   if (hit) return hit;
 
-  const data = await ghJson<unknown>(`/repos/${REPO}/contributors?per_page=100`);
+  const data = await fetchContributorStats();
   if (!Array.isArray(data)) return null;
 
   const list = data
     .map((c) => {
       const o = c as Record<string, unknown>;
+      const author =
+        typeof o.author === "object" && o.author !== null
+          ? (o.author as Record<string, unknown>)
+          : {};
       return {
-        login: typeof o.login === "string" ? o.login : "",
-        avatar: typeof o.avatar_url === "string" ? o.avatar_url : "",
-        url: typeof o.html_url === "string" ? o.html_url : "",
-        contributions: typeof o.contributions === "number" ? o.contributions : 0,
+        login: typeof author.login === "string" ? author.login : "",
+        avatar: typeof author.avatar_url === "string" ? author.avatar_url : "",
+        url: typeof author.html_url === "string" ? author.html_url : "",
+        contributions: typeof o.total === "number" ? o.total : 0,
       } satisfies Contributor;
     })
-    .filter((c) => c.login && !c.login.endsWith("[bot]"));
+    .filter((c) => c.login && !c.login.endsWith("[bot]"))
+    .sort((a, b) => b.contributions - a.contributions || a.login.localeCompare(b.login));
   writeCache(key, list);
   return list;
+}
+
+/** GitHub 统计缓存未命中时返回 202；短暂等待后重试即可取得完整数据。 */
+async function fetchContributorStats(): Promise<unknown> {
+  const path = `/repos/${REPO}/stats/contributors`;
+
+  for (let attempt = 0; attempt <= CONTRIBUTOR_RETRY_DELAYS.length; attempt += 1) {
+    try {
+      const res = await fetch(`${API}${path}`, { headers: { Accept: "application/vnd.github+json" } });
+      if (res.status === 202) {
+        const delay = CONTRIBUTOR_RETRY_DELAYS[attempt];
+        if (delay === undefined) return null;
+        await new Promise((resolve) => setTimeout(resolve, delay));
+        continue;
+      }
+      if (!res.ok) return null;
+      return (await res.json()) as unknown;
+    } catch {
+      return null;
+    }
+  }
+
+  return null;
 }
 
 /* ---------------------------------------------------------------- 格式化 */
