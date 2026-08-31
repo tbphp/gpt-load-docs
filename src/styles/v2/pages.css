@@ -26,10 +26,11 @@
 @media (max-width: 720px) { .rel { grid-template-columns: 1fr; gap: 12px; } }
 
 /* ---------- 贡献者 ---------- */
-.contrib-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: 1px; background: var(--hair); border: 1px solid var(--hair); }
+.contrib-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
 .contrib {
-  position: relative; background: var(--paper); padding: 18px 16px;
-  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+  position: relative; background: var(--paper); padding: 20px 14px; border: 1px solid var(--hair);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  text-align: center;
   transition: background var(--dur);
 }
 /* hover 反馈：顶部一条墨蓝线从左划出，与左侧文档导航的选中语言一致。
@@ -43,7 +44,7 @@
 .contrib:hover::before { transform: scaleX(1); }
 .contrib:hover .n { color: var(--blue); }
 .contrib img { width: 44px; height: 44px; }
-.contrib .n { font-size: 13px; font-weight: 600; letter-spacing: -0.01em; word-break: break-all; transition: color var(--dur); }
+.contrib .n { width: 100%; font-size: 13px; font-weight: 600; letter-spacing: -0.01em; overflow-wrap: anywhere; transition: color var(--dur); }
 .contrib .c { font-family: var(--f-mono); font-size: 10.5px; color: var(--faint); letter-spacing: .06em; }
 
 /* ---------- 赞助 ---------- */
