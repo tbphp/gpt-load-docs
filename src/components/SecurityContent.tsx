@@ -16,7 +16,7 @@ import {
 
 export default function SecurityContent() {
   const { t, tArray, tObjectArray } = useTranslation();
-  useSeo("/docs/configuration/security");
+  useSeo("/v1/docs/configuration/security");
 
   const [copiedCommand, setCopiedCommand] = useState<string | null>(null);
 

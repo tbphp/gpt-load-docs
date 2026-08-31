@@ -1,109 +1,80 @@
 # GPT-Load 官网
 
-这是 [GPT-Load](https://github.com/tbphp/gpt-load) 项目的官方网站，使用 Next.js 14 构建。
+[GPT-Load](https://github.com/tbphp/gpt-load) 的官方网站与 2.0 文档站，基于 Next.js 15 App Router。
 
-## 项目简介
+## 站点内容
 
-GPT-Load 官网为开源项目提供了专业的展示平台，包含：
-
-- 🏠 **现代化首页** - 展示项目特性和优势
-- 📚 **完整文档** - 详细的使用指南和 API 参考
-- 🎨 **响应式设计** - 适配各种设备和屏幕尺寸
-- ⚡ **高性能** - 基于 Next.js 14 和 App Router
-- 🎯 **SEO 优化** - 搜索引擎友好
+- 2.0 产品首页、赞助、贡献者与 GitHub Releases 更新日志
+- 按任务组织的 2.0 文档，包括部署、配置、客户端接入、运维、安全与内部机制
+- 中文、英文、日文界面与可索引的语言链接
+- 1.4.x 官网与文档归档，保留历史公开链接的兼容重定向
+- 文档搜索、代码复制、高清截图查看器、站点地图、OpenGraph 与结构化数据
 
 ## 技术栈
 
-- **框架**: Next.js 14 (App Router)
-- **语言**: TypeScript
-- **样式**: Tailwind CSS
-- **动画**: Framer Motion
-- **文档**: MDX
-- **图标**: Lucide React
+- Next.js 15、React 19、TypeScript
+- pnpm 11
+- App Router、Server Components、Middleware
+- 原生 CSS 设计系统；旧版归档页面继续使用已有 Tailwind 样式
 
-## 功能特性
+## 本地开发
 
-### 首页
-
-- Hero 区域：动态背景动画，突出项目核心价值
-- 功能展示：10+ 核心功能的详细介绍
-- 架构图：交互式系统架构演示
-- 性能指标：实时性能数据展示
-- CTA 区域：引导用户快速开始
-
-### 文档系统
-
-- 侧边导航：清晰的文档结构
-- 快速搜索：便于查找相关内容
-- 代码高亮：语法高亮显示
-- 响应式布局：移动端友好
-
-### 设计特色
-
-- **品牌色彩**：蓝色渐变主题，体现科技感
-- **动画效果**：Framer Motion 提供流畅的交互体验
-- **可访问性**：遵循 WCAG 无障碍设计标准
-- **国际化**：支持中英文内容
-
-## 开发指南
-
-### 环境要求
-
-- Node.js 18+
-- npm/yarn/pnpm
-
-### 本地开发
+需要 Node.js 22 和 Corepack。
 
 ```bash
-# 安装依赖
-npm install
-
-# 启动开发服务器
-npm run dev
-
-# 构建生产版本
-npm run build
-
-# 启动生产服务器
-npm run start
+corepack enable
+pnpm install --frozen-lockfile
+pnpm dev
 ```
 
-### 项目结构
+默认地址为 <http://localhost:3000>。
 
-```
-src/
-├── app/                    # Next.js App Router
-│   ├── docs/              # 文档页面
-│   ├── globals.css        # 全局样式
-│   ├── layout.tsx         # 根布局
-│   └── page.tsx           # 首页
-├── components/            # React 组件
-│   ├── Navigation.tsx     # 导航组件
-│   ├── Hero.tsx          # 首页 Hero 区域
-│   ├── Features.tsx      # 功能特性展示
-│   ├── Architecture.tsx  # 架构图组件
-│   ├── Performance.tsx   # 性能展示
-│   ├── CTA.tsx          # 行动召唤
-│   ├── Footer.tsx       # 页脚
-│   └── DocsNavigation.tsx # 文档导航
-└── lib/
-    └── utils.ts          # 工具函数
-```
-
-### 构建配置
-
-项目已配置为静态导出：
+## 验证
 
 ```bash
-# 构建静态文件
-npm run build
+pnpm lint
+pnpm build
+pnpm audit --prod
+```
 
-# 输出目录: ./out
+## 生产运行
+
+构建结果使用 Next.js standalone 服务端模式。该模式保留语言检测、Cookie、重定向、图片优化与站内 API 等运行时能力。
+
+```bash
+pnpm build
+HOSTNAME=0.0.0.0 PORT=3000 node .next/standalone/server.js
+```
+
+standalone 目录不会自动包含静态资源；手动发布时还需要一起提供：
+
+- `public/`
+- `.next/static/`
+
+## Docker
+
+```bash
+docker build -t gpt-load-docs .
+docker run --rm -p 3000:3000 gpt-load-docs
+```
+
+镜像使用 Node.js 22、pnpm frozen lockfile 与非 root 运行用户，不采用 nginx 静态导出。
+
+## 目录
+
+```text
+src/app/(v2)/          2.0 官网与文档路由
+src/app/v1/            1.4.x 归档站
+src/components/v2/     2.0 公共组件
+src/i18n/v2/           2.0 中英日词典与语言检测
+src/lib/v2/            2.0 导航、SEO 与 GitHub 数据
+src/styles/v2/         2.0 设计系统样式
+public/v2/             2.0 品牌资源与三语高清截图
 ```
 
 ## 相关链接
 
 - [GPT-Load 主项目](https://github.com/tbphp/gpt-load)
-- [在线演示](https://www.gpt-load.com)
-- [文档](https://www.gpt-load.com/docs)
+- [线上官网](https://www.gpt-load.com)
+- [2.0 文档](https://www.gpt-load.com/docs)
 - [问题反馈](https://github.com/tbphp/gpt-load/issues)

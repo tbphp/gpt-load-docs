@@ -13,7 +13,7 @@ import { useSeo } from "@/hooks/useSeo";
 
 export default function ManagementPageContent() {
   const { t } = useTranslation();
-  useSeo("/docs/configuration/management");
+  useSeo("/v1/docs/configuration/management");
 
   return (
     <div className="max-w-4xl mx-auto">

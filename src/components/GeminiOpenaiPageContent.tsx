@@ -6,7 +6,7 @@ import { useSeo } from "@/hooks/useSeo";
 
 export default function GeminiOpenaiPageContent() {
   const { t, tArray, tObjectArray } = useTranslation();
-  useSeo("/docs/gemini-openai");
+  useSeo("/v1/docs/gemini-openai");
 
   const configurationSteps = tObjectArray<{title: string; items: string[]}>("geminiOpenai.configuration.steps");
   const cherryStudioSteps = tArray("geminiOpenai.examples.cherryStudio.steps");

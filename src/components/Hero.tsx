@@ -74,7 +74,7 @@ const Hero = () => {
             className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-12 sm:mb-16 px-4"
           >
             <Link
-              href="/docs"
+              href="/v1/docs"
               className="group bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-xl dark:shadow-blue-500/20 w-full sm:w-auto justify-center"
             >
               <FileText className="h-5 w-5" />
@@ -83,7 +83,7 @@ const Hero = () => {
             </Link>
 
             <Link
-              href="/docs/deployment"
+              href="/v1/docs/deployment"
               className="group border-2 border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 hover:shadow-md dark:hover:bg-gray-800 w-full sm:w-auto justify-center"
             >
               <Download className="h-5 w-5" />

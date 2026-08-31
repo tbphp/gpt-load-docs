@@ -15,7 +15,7 @@ export default function ArchitecturePageContent() {
   const { t, tArray, tObjectArray } = useTranslation();
 
   // 使用 useSeo hook 处理语言切换时的标题更新
-  useSeo("/docs/architecture-design");
+  useSeo("/v1/docs/architecture-design");
 
   return (
     <div className="max-w-4xl mx-auto">

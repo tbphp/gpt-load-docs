@@ -27,7 +27,7 @@ export default function AggregateGroupsContent() {
   const { t, tArray, tObjectArray } = useTranslation();
 
   // Use useSeo hook to handle title updates on language switch
-  useSeo("/docs/architecture-design/aggregate-groups");
+  useSeo("/v1/docs/architecture-design/aggregate-groups");
 
   return (
     <div className="max-w-4xl mx-auto">

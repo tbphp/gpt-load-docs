@@ -19,7 +19,7 @@ export default function IntroductionPageContent() {
   const { t, tArray, tObjectArray } = useTranslation();
   
   // 关键：添加 useSeo hook 用于语言切换时的SEO更新
-  useSeo("/docs/introduction");
+  useSeo("/v1/docs/introduction");
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -279,7 +279,7 @@ export default function IntroductionPageContent() {
 
         <div className="grid md:grid-cols-2 gap-6">
           <Link
-            href="/docs/architecture-design/performance"
+            href="/v1/docs/architecture-design/performance"
             className="group bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 dark:from-blue-900/20 dark:to-cyan-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-6 hover:shadow-lg dark:hover:shadow-blue-900/50 transition-all duration-300"
           >
             <div className="flex items-center mb-4">
@@ -304,7 +304,7 @@ export default function IntroductionPageContent() {
           </Link>
 
           <Link
-            href="/docs/architecture-design"
+            href="/v1/docs/architecture-design"
             className="group bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-900/20 dark:to-violet-900/20 dark:from-purple-900/20 dark:to-violet-900/20 border border-purple-200 dark:border-purple-800 rounded-xl p-6 hover:shadow-lg dark:hover:shadow-purple-900/50 transition-all duration-300"
           >
             <div className="flex items-center mb-4">
@@ -337,7 +337,7 @@ export default function IntroductionPageContent() {
           {t("introduction.gettingStarted.description")}
         </p>
         <Link
-          href="/docs/deployment"
+          href="/v1/docs/deployment"
           className="inline-flex items-center bg-white dark:bg-gray-800 text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 dark:bg-gray-800 transition-colors"
         >
           {t("introduction.gettingStarted.button")}

@@ -16,7 +16,7 @@ export default function KeyManagementPageContent() {
   const { t, tArray } = useTranslation();
   
   // 使用 useSeo hook 处理语言切换时的标题更新
-  useSeo("/docs/architecture-design/key-management");
+  useSeo("/v1/docs/architecture-design/key-management");
 
   return (
     <div className="max-w-4xl mx-auto">

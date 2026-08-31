@@ -20,7 +20,7 @@ export default function ClawCloudPageContent() {
   const { t, tArray } = useTranslation();
   
   // 关键：添加 useSeo hook 用于语言切换时的SEO更新
-  useSeo("/docs/deployment/claw-cloud");
+  useSeo("/v1/docs/deployment/claw-cloud");
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -697,14 +697,14 @@ export default function ClawCloudPageContent() {
         </ul>
         <div className="flex flex-col sm:flex-row gap-4">
           <a
-            href="/docs/configuration"
+            href="/v1/docs/configuration"
             className="inline-flex items-center justify-center px-6 py-3 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 transition-colors"
           >
             <Settings className="h-4 w-4 mr-2" />
             {t("clawCloud.nextSteps.buttons.configuration")}
           </a>
           <a
-            href="/docs/configuration/management"
+            href="/v1/docs/configuration/management"
             className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
             <Globe className="h-4 w-4 mr-2" />

@@ -16,7 +16,7 @@ export default function CloudflareAIGatewayPageContent() {
   const { t, tArray } = useTranslation();
   
   // 关键：添加 useSeo hook 用于语言切换时的SEO更新
-  useSeo("/docs/configuration/cloudflare-aigateway");
+  useSeo("/v1/docs/configuration/cloudflare-aigateway");
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -418,7 +418,7 @@ export default function CloudflareAIGatewayPageContent() {
           </Link>
           <br />
           <Link
-            href="/docs/configuration"
+            href="/v1/docs/configuration"
             className="inline-flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-300 transition-colors duration-200"
           >
             {t("cloudflareAIGateway.relatedResources.gptLoadConfig")}
@@ -426,7 +426,7 @@ export default function CloudflareAIGatewayPageContent() {
           </Link>
           <br />
           <Link
-            href="/docs/channels"
+            href="/v1/docs/channels"
             className="inline-flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-300 transition-colors duration-200"
           >
             {t("cloudflareAIGateway.relatedResources.channelTypes")}

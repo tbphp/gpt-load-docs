@@ -10,7 +10,7 @@ export default function RooCodePageContent() {
   const { t } = useTranslation();
   
   // 关键：添加 useSeo hook 用于语言切换时的SEO更新
-  useSeo("/docs/integrations/roo-code");
+  useSeo("/v1/docs/integrations/roo-code");
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -386,7 +386,7 @@ export default function RooCodePageContent() {
           </Link>
           <br />
           <Link
-            href="/docs/configuration"
+            href="/v1/docs/configuration"
             className="inline-flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-300 transition-colors duration-200"
           >
             {t("rooCode.relatedResources.gptLoadConfig")}
@@ -394,7 +394,7 @@ export default function RooCodePageContent() {
           </Link>
           <br />
           <Link
-            href="/docs/channels"
+            href="/v1/docs/channels"
             className="inline-flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-300 transition-colors duration-200"
           >
             {t("rooCode.relatedResources.channelTypes")}

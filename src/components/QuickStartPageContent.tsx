@@ -8,7 +8,7 @@ export default function QuickStartPageContent() {
   const { t } = useTranslation();
   
   // 使用 useSeo hook 处理语言切换时的标题更新
-  useSeo("/docs");
+  useSeo("/v1/docs");
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -253,7 +253,7 @@ export default function QuickStartPageContent() {
       <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
         <p className="text-gray-700 dark:text-gray-300">
           {t('docsQuickStart.nextSteps.description')}{" "}
-          <a href="/docs/deployment" className="text-blue-600 dark:text-blue-400 hover:underline">
+          <a href="/v1/docs/deployment" className="text-blue-600 dark:text-blue-400 hover:underline">
             <strong>{t('docsQuickStart.nextSteps.deploymentGuide')}</strong>
           </a>
           {t('docsQuickStart.nextSteps.period')}

@@ -7,7 +7,7 @@ import { useSeo } from "@/hooks/useSeo";
 export default function ModelRedirectPageContent() {
   const { t, tArray, tObjectArray } = useTranslation();
 
-  useSeo("/docs/architecture-design/model-redirect");
+  useSeo("/v1/docs/architecture-design/model-redirect");
 
   return (
     <div className="max-w-4xl mx-auto">

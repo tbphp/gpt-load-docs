@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils";
 
 export default function FaqContent() {
   const { t, tObjectArray } = useTranslation();
-  useSeo("/docs/faq");
+  useSeo("/v1/docs/faq");
 
   const [searchTerm, setSearchTerm] = useState("");
   const [activeCategory, setActiveCategory] = useState<string | null>(null);

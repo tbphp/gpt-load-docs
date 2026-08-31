@@ -10,9 +10,9 @@ const Footer = () => {
 
   const links = {
     product: [
-      { name: t("footer.links.docs"), href: "/docs" },
+      { name: t("footer.links.docs"), href: "/v1/docs" },
       { name: t("footer.links.changelog"), href: "https://github.com/tbphp/gpt-load/releases" },
-      { name: t("footer.links.sponsor"), href: "/docs/sponsor" },
+      { name: t("footer.links.sponsor"), href: "/v1/docs/sponsor" },
     ],
     community: [
       { name: t("footer.links.github"), href: "https://github.com/tbphp/gpt-load" },
@@ -20,8 +20,8 @@ const Footer = () => {
       { name: t("footer.links.telegram"), href: "https://t.me/+GHpy5SwEllg3MTUx" },
     ],
     resources: [
-      { name: t("footer.links.standalone"), href: "/docs/deployment/standalone" },
-      { name: t("footer.links.cluster"), href: "/docs/deployment/cluster" },
+      { name: t("footer.links.standalone"), href: "/v1/docs/deployment/standalone" },
+      { name: t("footer.links.cluster"), href: "/v1/docs/deployment/cluster" },
     ],
     friendlyLinks: [
       { name: "New API", href: "https://www.newapi.ai/" },
@@ -35,7 +35,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 sm:gap-8">
           {/* Brand section */}
           <div className="lg:col-span-2 sm:col-span-2">
-            <Link href="/" className="flex items-center space-x-2 mb-3 sm:mb-4">
+            <Link href="/v1" className="flex items-center space-x-2 mb-3 sm:mb-4">
               <Zap className="h-6 w-6 sm:h-8 sm:w-8 text-blue-400 dark:text-blue-300" />
               <span className="text-lg sm:text-xl font-bold">GPT-Load</span>
             </Link>

@@ -6,7 +6,7 @@ import { useSeo } from "@/hooks/useSeo";
 
 export default function StandalonePageContent() {
   const { t, tArray, tObjectArray } = useTranslation();
-  useSeo("/docs/deployment/standalone");
+  useSeo("/v1/docs/deployment/standalone");
 
   const requirements = tArray("standalone.requirements.items");
   const commonCommands = tObjectArray<{title: string; code: string}>("standalone.commonCommands.items");
@@ -431,14 +431,14 @@ export default function StandalonePageContent() {
         </ul>
         <div className="flex flex-col sm:flex-row gap-4">
           <a
-            href="/docs/configuration"
+            href="/v1/docs/configuration"
             className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
             <Settings className="h-4 w-4 mr-2" />
             {t("standalone.nextSteps.buttons.configuration")}
           </a>
           <a
-            href="/docs/configuration/management"
+            href="/v1/docs/configuration/management"
             className="inline-flex items-center justify-center px-6 py-3 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors"
           >
             <Shield className="h-4 w-4 mr-2" />

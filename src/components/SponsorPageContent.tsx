@@ -9,7 +9,7 @@ export default function SponsorPageContent() {
   const { t, tArray } = useTranslation();
   
   // 关键：添加 useSeo hook 用于语言切换时的SEO更新
-  useSeo("/docs/sponsor");
+  useSeo("/v1/docs/sponsor");
 
   return (
     <div className="max-w-4xl mx-auto">
