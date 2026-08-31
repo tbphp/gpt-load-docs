@@ -12,6 +12,20 @@ const JA_TEMPLATES: Record<string, string> = jaTemplates;
 
 const normalize = (value: string) => value.replace(/\s+/g, " ").trim();
 
+/**
+ * 缺失译文只会静默回退中文，构建和运行都不会报错。
+ * 开发期把缺口打到服务端终端，避免改动原文后漏翻却无人察觉。
+ * 同一 key 只报一次，防止渲染多次时刷屏。
+ */
+const reported = new Set<string>();
+function reportMissing(locale: Locale, key: string, kind: "content" | "template" = "content") {
+  if (process.env.NODE_ENV === "production") return;
+  const id = `${locale}:${kind}:${key}`;
+  if (reported.has(id)) return;
+  reported.add(id);
+  console.warn(`[i18n] 缺 ${locale} ${kind} 译文: ${JSON.stringify(key)}`);
+}
+
 function containsHan(node: ReactNode): boolean {
   if (typeof node === "string") return /\p{Script=Han}/u.test(node);
   if (Array.isArray(node)) return node.some((child) => containsHan(child));
@@ -25,7 +39,10 @@ export function translateDocString(locale: Locale, value: string, compact = fals
   const dictionary = locale === "ja" ? JA : EN;
   // JSX 会把 &quot; 解码成真实引号，而离线提取器读取的是源码文本。
   const translated = dictionary[key] ?? dictionary[key.replaceAll('"', "&quot;")];
-  if (!translated) return value;
+  if (!translated) {
+    reportMissing(locale, key);
+    return value;
+  }
 
   if (locale === "en") {
     if (compact) return translated;
@@ -61,7 +78,13 @@ function translateChildTemplate(children: ReactNode, locale: Locale): ReactNode 
   const key = normalize(parts.join(" "));
   const dictionary = locale === "ja" ? JA_TEMPLATES : EN_TEMPLATES;
   const template = dictionary[key] ?? dictionary[key.replaceAll('"', "&quot;")];
-  if (!template || (!/\p{Script=Han}/u.test(key) && !elements.some((element) => containsHan(element)))) return undefined;
+  const needsTranslation = /\p{Script=Han}/u.test(key) || elements.some((element) => containsHan(element));
+  if (!template) {
+    // 缺模板会退化成逐片段翻译：不会显示中文，但内联元素前后的语序可能失真。
+    if (needsTranslation) reportMissing(locale, key, "template");
+    return undefined;
+  }
+  if (!needsTranslation) return undefined;
 
   // 完整句翻译会保留内联元素边界，并在边界内给出结合上下文后的译文。
   // 例如链接里的宾语在英文中可能换位；只翻译元素前后的碎片会导致语序错乱。
