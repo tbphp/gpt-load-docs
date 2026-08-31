@@ -120,7 +120,8 @@ export default async function Concepts() {
           <strong>能用哪些协议</strong>——OpenAI Chat Completions、Responses、Anthropic Messages、Gemini
         </li>
         <li>
-          <strong>限额</strong>——每分钟请求数，以及每日／每月的成本上限
+          <strong>限额</strong>——每分钟请求数，以及成本上限（可以是不重置的总额度，
+          也可以是按周期重置的额度）
         </li>
       </ul>
       <p>

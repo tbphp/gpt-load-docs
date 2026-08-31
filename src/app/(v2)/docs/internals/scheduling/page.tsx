@@ -24,6 +24,9 @@ const REASONS = [
   ["access_key_expired", "访问密钥已过期", "新建一把或延长有效期"],
   ["protocol_filtered", "这把密钥没勾选该协议", "在密钥里补勾对应协议"],
   ["model_filtered", "请求的模型不在允许范围", "检查密钥的模型限制"],
+  ["model_required_by_filter", "密钥限制了模型范围，但请求没带模型名", "请求里显式指定模型，或去掉密钥的模型限制"],
+  ["operation_unsupported", "渠道不支持该协议下的这个操作", "换一个支持该能力的分组，见协议与转换边界"],
+  ["native_route_required", "该请求要求原生路由，这个分组只能靠转换提供", "改用与客户端协议一致的分组"],
   ["no_route_target", "找不到可路由的目标", "确认密钥授权了至少一个分组"],
   ["group_disabled", "分组被停用", "启用该分组"],
   ["group_filtered", "分组不在这把密钥的授权范围", "在密钥里补上该分组"],
@@ -34,6 +37,8 @@ const REASONS = [
   ["credential_auth_unavailable", "订阅账号授权失效", "重新授权，见订阅账号页"],
   ["credential_blacklisted", "凭据已被拉黑", "确认凭据本身有效后恢复它"],
   ["credential_cooldown", "凭据正在冷却", "等待自动恢复，或加更多凭据分担"],
+  ["credential_weight_zero", "旧配置中的凭据权重为 0", "改为自动权重或 1–100 的手动权重"],
+  ["credential_not_allowed", "本次请求已经排除了这个凭据", "正常现象，重试时不会再撞上刚失败的那个"],
   ["no_available_credential", "所有凭据都不可用", "看健康页，多半是集体限流或密钥失效"],
 ];
 

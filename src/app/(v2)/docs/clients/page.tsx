@@ -70,7 +70,8 @@ export default async function Clients() {
         caption="FIG. 1 — 一键生成配置"
         note="选密钥与客户端"
       >
-        支持 Claude Code、Codex、Gemini CLI、Cherry Studio、Cline、NextChat、Open WebUI、CC Switch 等常见客户端。
+        支持 Claude Code、Codex、Gemini CLI、Cherry Studio、Cline、NextChat、Open WebUI、CC Switch、New API 与 curl。
+        生成的配置里会标出这个客户端需要哪个协议，照着勾就不会错。
       </Figure>
 
       <Heading id="sdk">OpenAI SDK</Heading>
@@ -141,6 +142,11 @@ export default async function Clients() {
         <span className="k">export</span> OPENAI_BASE_URL=<span className="s">&quot;http://127.0.0.1:3001/v1&quot;</span>{"\n"}
         <span className="k">export</span> OPENAI_API_KEY=<span className="s">&quot;你的访问密钥&quot;</span>
       </CodeBlock>
+      <Notice label="Codex 要的是 Responses，不是 Chat Completions" tone="amber">
+        这把访问密钥必须勾选 <b>OpenAI Responses</b> 协议。
+        Codex 用的是 Responses 接口，只勾了 Chat Completions 会被直接拒绝——
+        路由检查里会看到 <code>protocol_filtered</code>。
+      </Notice>
       <Notice label="别和订阅账号搞混" tone="blue">
         这里说的是<b>把 Codex 客户端接到网关</b>。
         如果你想接的是「Codex 订阅账号作为上游」，那是另一件事，见{" "}

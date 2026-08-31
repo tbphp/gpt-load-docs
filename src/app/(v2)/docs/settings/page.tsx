@@ -159,7 +159,10 @@ export default async function Settings() {
         </li>
         <li>
           <strong>模型价格自动同步</strong>——是否从公开数据源同步价格，
-          见 <Link href="/docs/models">模型管理</Link>
+          见 <Link href="/docs/models">模型管理</Link>。
+          注意这一项可以被环境变量 <code>MODELS_DEV_AUTO_SYNC_ENABLED</code> 接管——
+          一旦设了那个变量，这里就变成只读，见{" "}
+          <Link href="/docs/reference/env">环境变量</Link>
         </li>
         <li>
           <strong>请求头规则</strong>与<strong>用量选项注入</strong>——

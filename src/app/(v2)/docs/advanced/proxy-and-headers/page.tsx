@@ -11,7 +11,7 @@ export function generateMetadata(): Promise<Metadata> {
 const TOC = [
   { id: "when", label: "什么时候需要" },
   { id: "proxy", label: "出站代理" },
-  { id: "level", label: "三级覆盖" },
+  { id: "level", label: "四级覆盖" },
   { id: "headers", label: "请求头规则" },
   { id: "usage", label: "用量选项注入" },
 ];
@@ -61,13 +61,19 @@ export default function ProxyHeaders() {
         比如大部分上游要代理，但有一个在内网、走代理反而不通。
       </Notice>
 
-      <Heading id="level">三级覆盖</Heading>
+      <Heading id="level">四级覆盖</Heading>
       <p>
-        代理可以配在三个层级，<strong>越具体的优先</strong>：
+        代理可以配在四个层级，<strong>越具体的优先</strong>。
+        完整的优先级链是：凭据 → 分组 → 全局 → 环境变量 → 直连。
       </p>
       <ol>
         <li>
-          <strong>全局</strong>——所有请求的默认出口
+          <strong>环境变量</strong>——<code>HTTP_PROXY</code> 与{" "}
+          <code>HTTPS_PROXY</code>，进程级的兜底出口。
+          只在上面三级都没有明确指定时才生效，改完需要重启进程
+        </li>
+        <li>
+          <strong>全局</strong>——管理台里配置的默认出口
         </li>
         <li>
           <strong>分组</strong>——覆盖全局，这个分组的所有凭据都走它
@@ -76,6 +82,14 @@ export default function ProxyHeaders() {
           <strong>单个凭据</strong>——覆盖分组，只对这一个凭据生效
         </li>
       </ol>
+      <Notice label="环境变量是最后一层，不是第一层" tone="blue">
+        管理台里选<b>继承</b>时，才会继续往下找；一路都是继承，最后才落到
+        <code>HTTP_PROXY</code> 这类环境变量上。所以在管理台配了全局代理之后，
+        环境变量就不再起作用了。反过来，任何一级选了<b>直连</b>，
+        环境变量同样不生效。
+        <br />
+        这三个变量在 <Link href="/docs/reference/env">环境变量</Link> 页有完整说明。
+      </Notice>
       <p>
         凭据级这一层是很多网关没有的。实际用途：
         同一个服务商的多个账号分属不同区域，

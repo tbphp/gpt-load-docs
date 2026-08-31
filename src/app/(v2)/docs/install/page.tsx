@@ -12,6 +12,7 @@ const TOC = [
   { id: "pick", label: "选哪种" },
   { id: "compose", label: "Docker Compose" },
   { id: "binary", label: "原生二进制" },
+  { id: "windows", label: "Windows 安装包" },
   { id: "source", label: "源码构建" },
   { id: "data", label: "数据放在哪" },
   { id: "ops", label: "日常运维" },
@@ -32,7 +33,10 @@ export default function Install() {
           <strong>Docker Compose</strong>——推荐。一条命令起服务，升级也是一条命令
         </li>
         <li>
-          <strong>原生二进制</strong>——不想装 Docker，或者要跑在 Windows 上
+          <strong>原生二进制</strong>——不想装 Docker
+        </li>
+        <li>
+          <strong>Windows 安装包</strong>——Windows 上想装成开机自启的服务
         </li>
         <li>
           <strong>源码构建</strong>——要改代码，或者需要特定平台的构建
@@ -68,7 +72,8 @@ export default function Install() {
         <a href="https://github.com/tbphp/gpt-load/releases" target="_blank" rel="noopener noreferrer">
           GitHub Releases
         </a>{" "}
-        下载对应平台的构建。提供 Linux、macOS（Intel / Apple 芯片）、Windows 五个目标。
+        下载对应平台的构建。共五个目标：Linux 与 macOS 各有 amd64、arm64 两个，
+        Windows 为 amd64。
       </p>
       <p>
         <strong>下载后先校验</strong>，发布页附有 <code>SHA256SUMS</code>：
@@ -82,6 +87,59 @@ export default function Install() {
       </CodeBlock>
       <p>
         然后打开 <code>http://127.0.0.1:3001</code>。管理密钥在 <code>./data/auth.key</code>。
+      </p>
+      <p>
+        Windows 上的 <code>gpt-load-windows-amd64.exe</code> 是<strong>前台运行</strong>的，
+        关掉窗口服务就停了。想让它常驻，用下面的安装包。
+      </p>
+
+      <Heading id="windows">Windows 安装包</Heading>
+      <p>
+        发布页另有 <code>gpt-load-windows-setup.exe</code>，
+        这是 Windows 上更省事的装法：双击、确认管理员权限，它会自动完成这些事：
+      </p>
+      <ul>
+        <li>
+          <strong>注册成 Windows 服务</strong>——以低权限账户运行，并设置开机自启
+        </li>
+        <li>
+          <strong>建好快捷方式</strong>——桌面和开始菜单里都有管理页面入口
+        </li>
+        <li>
+          <strong>启动服务</strong>——装完即可用，不需要再敲命令
+        </li>
+      </ul>
+
+      <Notice label="安装过程中会显示管理密钥" tone="amber">
+        首次生成的管理密钥<b>只在安装界面上显示这一次</b>，关掉页面前请先保存。
+        错过了也能找回——它就存在{" "}
+        <code>%ProgramData%\GPT-Load\data\auth.key</code>。
+      </Notice>
+
+      <p>装完之后，两个目录需要知道：</p>
+      <ul>
+        <li>
+          <strong>配置目录</strong>——<code>%ProgramData%\GPT-Load</code>，
+          服务从这里读 <code>.env</code>
+        </li>
+        <li>
+          <strong>数据目录</strong>——<code>%ProgramData%\GPT-Load\data</code>，
+          数据库与两把密钥都在这里
+        </li>
+      </ul>
+
+      <p>需要手动管服务时，用程序自带的子命令：</p>
+      <CodeBlock caption="管理已安装的服务">
+        gpt-load-windows-amd64.exe service status{"\n"}
+        gpt-load-windows-amd64.exe service stop{"\n"}
+        gpt-load-windows-amd64.exe service start{"\n"}
+        gpt-load-windows-amd64.exe service restart
+      </CodeBlock>
+
+      <p>
+        <strong>升级</strong>直接用新版安装包覆盖安装即可，它会先优雅停止服务再更新。
+        <strong>卸载</strong>会移除程序和服务，但<strong>保留数据目录</strong>——
+        这意味着重装后配置还在，也意味着确实要清干净时得手动删。
       </p>
 
       <Heading id="source">源码构建</Heading>

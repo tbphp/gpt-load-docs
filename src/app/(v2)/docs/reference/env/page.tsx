@@ -13,7 +13,9 @@ const TOC = [
   { id: "net", label: "进程与网络" },
   { id: "data", label: "数据与存储" },
   { id: "secret", label: "密钥" },
+  { id: "proxy", label: "出站代理" },
   { id: "log", label: "日志" },
+  { id: "misc", label: "模型价格同步" },
   { id: "docker", label: "容器里的覆写" },
 ];
 
@@ -28,8 +30,20 @@ const NET = [
 const DATA = [
   ["DATA_DIR", "./data", "数据目录，存数据库与两把密钥"],
   ["DATABASE_DSN", "（空）", "留空用受管 SQLite；填入则连接外部数据库"],
-  ["DATABASE_MAX_OPEN_CONNECTIONS", "10", "数据库最大连接数"],
-  ["DATABASE_MAX_IDLE_CONNECTIONS", "5", "最大空闲连接数，不得大于上一项"],
+  ["DATABASE_MAX_OPEN_CONNECTIONS", "10", "数据库最大连接数。仅对 MySQL 与 PostgreSQL 生效，SQLite 始终单连接"],
+  ["DATABASE_MAX_IDLE_CONNECTIONS", "5", "最大空闲连接数，不得大于上一项。同样只对 MySQL 与 PostgreSQL 生效"],
+];
+
+const PROXY = [
+  ["HTTP_PROXY", "（空）", "HTTP 上游请求的环境代理"],
+  ["HTTPS_PROXY", "（空）", "HTTPS 上游请求的环境代理"],
+  ["NO_PROXY", "（空）", "逗号分隔的主机、域名或 IP，这些目标不走环境代理"],
+];
+
+const COMPOSE = [
+  ["BIND_ADDRESS", "继承 HOST", "只影响 Compose：单独指定主服务端口发布到宿主机的哪个地址，不影响回调端口"],
+  ["OAUTH_CALLBACK_BIND_ADDRESS", "继承 HOST", "只影响 Compose：单独指定 1455、54545、51121 三个回调端口的发布地址"],
+  ["CONTAINER_STOP_GRACE_PERIOD", "15s", "只影响 Compose：强制停止容器前的等待时间，用 Docker 时长写法，应大于 GRACEFUL_SHUTDOWN_TIMEOUT"],
 ];
 
 export default function Env() {
@@ -158,6 +172,34 @@ export default function Env() {
         两把密钥的完整说明见 <Link href="/docs/security">安全与上生产</Link>。
       </p>
 
+      <Heading id="proxy">出站代理</Heading>
+      <div className="tbl-wrap">
+        <table className="tbl">
+          <thead>
+            <tr>
+              <th style={{ width: "34%" }}>变量</th>
+              <th style={{ width: "16%" }}>默认值</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            {PROXY.map(([k, d, desc]) => (
+              <tr key={k}>
+                <td className="m">{k}</td>
+                <td className="m">{d}</td>
+                <td>{desc}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <Notice label="它们是最后一层兜底" tone="blue">
+        环境代理<b>只在凭据、分组和全局设置都没有指定代理时才生效</b>。
+        在管理台里配了代理之后，这几个变量就不再起作用。
+        完整的优先级链见{" "}
+        <Link href="/docs/advanced/proxy-and-headers">代理与请求头</Link>。
+      </Notice>
+
       <Heading id="log">日志</Heading>
       <div className="tbl-wrap">
         <table className="tbl">
@@ -188,6 +230,36 @@ export default function Env() {
         不是请求日志。请求日志的留存天数在管理台配置。
       </p>
 
+      <Heading id="misc">模型价格同步</Heading>
+      <div className="tbl-wrap">
+        <table className="tbl">
+          <thead>
+            <tr>
+              <th style={{ width: "34%" }}>变量</th>
+              <th style={{ width: "16%" }}>默认值</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="m">MODELS_DEV_AUTO_SYNC_ENABLED</td>
+              <td className="m">（未设置）</td>
+              <td>
+                是否自动从 Models.dev 同步模型价格。
+                不设置时由管理台的持久化设置决定，初始为开启
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <Notice label="设了它，管理台里的开关会变成只读" tone="amber">
+        这个变量<b>不设置</b>时，开关由管理台掌握，随时可改。
+        一旦在 <code>.env</code> 里显式设成 <code>true</code> 或 <code>false</code>，
+        它就成了强制值，<b>管理台中的同名选项会变为只读</b>。
+        如果你发现管理台里关不掉自动同步，先检查这个变量。
+        价格来源见 <Link href="/docs/models">模型管理</Link>。
+      </Notice>
+
       <Heading id="docker">容器里的覆写</Heading>
       <Notice label="容器内这两项改了也没用" tone="amber">
         Compose 部署时，容器内的 <code>HOST</code> 被固定为 <code>0.0.0.0</code>、
@@ -208,9 +280,33 @@ export default function Env() {
         正确做法是加反向代理，见 <Link href="/docs/security">安全与上生产</Link>。
       </p>
       <p>
-        订阅账号的 OAuth 回调端口还有一个独立变量{" "}
-        <code>OAUTH_CALLBACK_BIND_ADDRESS</code>，见{" "}
-        <Link href="/docs/groups/subscription">订阅账号</Link>。
+        还有三个变量<strong>只在 Compose 部署里有意义</strong>，
+        直接跑二进制时它们不起作用：
+      </p>
+      <div className="tbl-wrap">
+        <table className="tbl">
+          <thead>
+            <tr>
+              <th style={{ width: "34%" }}>变量</th>
+              <th style={{ width: "16%" }}>默认值</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            {COMPOSE.map(([k, d, desc]) => (
+              <tr key={k}>
+                <td className="m">{k}</td>
+                <td className="m">{d}</td>
+                <td>{desc}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p>
+        <code>OAUTH_CALLBACK_BIND_ADDRESS</code> 的使用场景见{" "}
+        <Link href="/docs/groups/subscription">订阅账号</Link>——
+        简单说：<strong>不要为了完成授权把它改成 <code>0.0.0.0</code></strong>。
       </p>
     </DocsPage>
   );
