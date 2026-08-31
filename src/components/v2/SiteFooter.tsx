@@ -4,21 +4,12 @@ import type { Dict } from "@/i18n/v2/dict";
 
 const COL_DEFS = [
   {
-    title: "colDocs",
+    title: "colResources",
     links: [
-      { href: "/docs/quickstart", key: "docsQuickstart" },
-      { href: "/docs/install", key: "docsInstall" },
-      { href: "/docs/reference/env", key: "docsConfig" },
-      { href: "/docs/faq", key: "docsFaq" },
-    ],
-  },
-  {
-    title: "colFeatures",
-    links: [
-      { href: "/docs/groups", key: "featChannels" },
-      { href: "/docs/groups", key: "featGroups" },
-      { href: "/docs/access-keys", key: "featKeys" },
-      { href: "/docs/monitor", key: "featMonitoring" },
+      { href: "/docs", key: "resourcesDocs" },
+      { href: "/docs/quickstart", key: "resourcesQuickstart" },
+      { href: "/docs/install", key: "resourcesDeploy" },
+      { href: "/v1", key: "resourcesLegacy" },
     ],
   },
   {
@@ -31,11 +22,9 @@ const COL_DEFS = [
     ],
   },
   {
-    title: "colLegacy",
+    title: "colFriends",
     links: [
-      { href: "/v1", key: "legacySite" },
-      { href: "/v1/docs", key: "legacyDocs" },
-      { href: "/docs/migrate-from-1x", key: "legacyMigrate" },
+      { href: "https://www.newapi.ai/", key: "friendNewApi", external: true },
     ],
   },
 ] as const;
@@ -94,9 +83,6 @@ export default function SiteFooter({ t }: { t: Dict }) {
               LOBE ICONS
             </a>
           </span>
-          <Link className="v1link" href="/v1">
-            {t.footer.stillOnV1}
-          </Link>
         </div>
       </div>
     </footer>

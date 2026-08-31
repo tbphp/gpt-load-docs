@@ -136,8 +136,7 @@
 .foot a:hover { color: #fff; }
 .foot-top { row-gap: 30px; }
 /* 页脚是固定结构，栏位在组件内定义，不依赖页面的 .col-* */
-.foot-brand { grid-column: span 4; }
-.foot-col { grid-column: span 2; }
+.foot-brand, .foot-col { grid-column: span 3; }
 .foot-brand .m { margin-top: 14px; font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; color: rgba(255,255,255,.5); line-height: 1.8; }
 .foot-col .h { font-family: var(--f-mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.45); }
 .foot-col ul { margin-top: 14px; display: flex; flex-direction: column; gap: 9px; }
@@ -161,9 +160,6 @@
    底部留白由 .docs 自己的 padding-bottom 提供（见 docs.css）。 */
 .docs + .foot { margin-top: 0; }
 
-.v1link { border: 1px solid rgba(255,255,255,.3); padding: 5px 11px; transition: background var(--dur); }
-.v1link:hover { background: rgba(255,255,255,.1); }
-
 @media (max-width: 1080px) {
   .col-5, .col-7, .col-r6, .col-r5 { grid-column: span 12; }
   .col-6 { grid-column: span 12; }
@@ -180,10 +176,12 @@
 /* 页脚重排，须置于通用 .col-* 断点之后才能覆盖 */
 @media (max-width: 1080px) {
   .foot-brand { grid-column: span 12; }
-  .foot-col { grid-column: span 3; }
+  .foot-col { grid-column: span 4; }
 }
 @media (max-width: 720px) {
   .foot-col { grid-column: span 6; }
+  .foot-col:last-child { grid-column: span 12; }
+  .foot-col:last-child ul { flex-direction: row; flex-wrap: wrap; column-gap: 24px; }
   .foot-col a { display: inline-flex; align-items: center; min-height: 44px; }
 }
 
