@@ -67,18 +67,18 @@ export default function Security() {
 
       <Heading id="backup">备份</Heading>
       <p>
-        <strong>备份必须包含数据库和 <code>encryption.key</code> 两样，缺一不可。</strong>
-        只备数据库的话，恢复出来的凭据全是无法解密的密文。
+        <strong>数据库和加密密钥必须成套备份。</strong>
+        自动生成的 <code>auth.key</code> 与 <code>encryption.key</code> 在数据目录中；
+        显式设置的 <code>AUTH_KEY</code> 与 <code>ENCRYPTION_KEY</code> 则要从原来的
+        环境变量或密钥管理服务单独备份。
       </p>
-      <CodeBlock caption="Compose 部署：从数据卷里备份">
-        <span className="c"># 数据卷默认叫 gpt-load-data，里面有数据库和两把密钥</span>{"\n"}
-        docker run --rm \{"\n"}
-        {"  "}-v gpt-load-data:/data \{"\n"}
-        {"  "}-v <span className="s">&quot;$(pwd)&quot;</span>:/backup \{"\n"}
-        {"  "}alpine tar czf /backup/gpt-load-backup.tar.gz -C /data .
-      </CodeBlock>
+      <Notice label="Compose 必须停机备份" tone="amber">
+        SQLite 使用 WAL，不能在服务运行时直接打包数据卷。
+        Compose 的实际卷名还会随项目名变化，不能硬编码成 <code>gpt-load-data</code>。
+        请使用 <Link href="/docs/database#backup">数据库与备份</Link> 中的完整命令。
+      </Notice>
       <p>
-        恢复时把整个目录还原回去即可。<strong>备份文件本身包含可解密的凭据</strong>，
+        <strong>备份文件本身包含可解密的凭据</strong>，
         要按敏感数据对待——加密存放，不要丢进公开的网盘或仓库。
       </p>
       <p>

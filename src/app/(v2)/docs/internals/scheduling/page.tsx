@@ -29,7 +29,7 @@ const REASONS = [
   ["group_filtered", "分组不在这把密钥的授权范围", "在密钥里补上该分组"],
   ["no_available_group", "没有分组能提供这个模型", "确认模型已在某个分组里开放"],
   ["no_credentials", "分组里一个凭据都没有", "往分组里添加凭据"],
-  ["group_weight_zero", "分组权重为 0", "权重设为 0 等于不参与调度，调回正数"],
+  ["group_weight_zero", "旧配置中的分组权重为 0", "改为自动权重或 1–100 的手动权重"],
   ["credential_disabled", "凭据被停用", "启用它，或依赖其他凭据"],
   ["credential_auth_unavailable", "订阅账号授权失效", "重新授权，见订阅账号页"],
   ["credential_blacklisted", "凭据已被拉黑", "确认凭据本身有效后恢复它"],
@@ -78,7 +78,7 @@ export default function Scheduling() {
         <li>在这把访问密钥的授权范围内</li>
         <li>处于启用状态</li>
         <li>已开放请求里的那个模型</li>
-        <li>权重不为 0</li>
+        <li>有效权重大于 0</li>
       </ul>
       <p>
         满足条件的分组不止一个时，按权重挑。
@@ -91,7 +91,7 @@ export default function Scheduling() {
       <ul>
         <li>状态为可用（不是停用、冷却中、已拉黑）</li>
         <li>订阅账号还需授权状态正常</li>
-        <li>权重不为 0</li>
+        <li>有效权重大于 0</li>
       </ul>
       <p>
         剩下的候选里按权重随机选一个。<strong>不是简单轮询</strong>——
@@ -99,33 +99,33 @@ export default function Scheduling() {
       </p>
 
       <Heading id="weight">权重</Heading>
-      <p>权重决定分到多少流量，分组和凭据两级都有：</p>
+      <p>权重决定相对分到多少流量，分组和凭据两级都支持自动与手动模式：</p>
       <ul>
         <li>
-          <strong>不设</strong>——参与均衡分配
+          <strong>分组自动</strong>——使用默认权重
         </li>
         <li>
-          <strong>设为正数</strong>——数值越大分到越多
+          <strong>凭据自动</strong>——根据近期成功与失败情况动态计算
         </li>
         <li>
-          <strong>设为 0</strong>——<strong>完全不参与调度</strong>，
-          等于临时下线但保留配置
+          <strong>手动</strong>——范围为 1–100，数值越大，相对获得的流量越多
         </li>
       </ul>
-      <Notice label="权重 0 是个实用技巧" tone="blue">
-        想让某个凭据暂时不承载流量、又不想删掉它，把权重设成 0 即可。
-        比停用更轻——配置、统计都还在，随时调回来。
+      <Notice label="暂停流量请使用停用" tone="blue">
+        当前管理台和管理 API 都不接受手动权重 0。
+        需要暂时停止流量时，请停用对应分组或凭据；配置和历史统计仍会保留。
       </Notice>
 
       <Heading id="affinity">会话亲和</Heading>
       <p>
-        开启后，网关会记住<strong>某个会话上次用的是哪个凭据</strong>，
-        后续请求优先落回同一个。
+        开启后，网关会根据访问密钥、客户端协议以及请求中的指令或首个用户输入前缀
+        生成软亲和键。具有相同稳定前缀的后续请求，会优先复用之前成功的凭据。
       </p>
       <p>
-        这对<strong>有状态接口是必需的</strong>——
-        比如 OpenAI Responses 靠 <code>previous_response_id</code> 接续上下文，
-        换个凭据上游就找不到之前的会话了。
+        亲和机制<strong>不会读取</strong> <code>previous_response_id</code>、
+        <code>conversation</code> 或其他上游资源 ID，也不保证有状态资源一定回到原凭据。
+        可靠使用这类资源时，请让分组只保留一个凭据，
+        或确认上游允许不同凭据共享同一资源。
       </p>
       <p>
         亲和记录有 TTL 和容量上限（默认记一万条），超出后按老旧程度淘汰。

@@ -67,7 +67,7 @@ export default function OpengraphImage() {
             <div style={{ display: "flex" }}>20 CHANNELS</div>
             <div style={{ display: "flex" }}>4 PROTOCOLS</div>
             <div style={{ display: "flex" }}>1 BINARY</div>
-            <div style={{ display: "flex" }}>0 CLIENT CHANGES</div>
+            <div style={{ display: "flex" }}>2 CLIENT SETTINGS</div>
           </div>
         </div>
       </div>

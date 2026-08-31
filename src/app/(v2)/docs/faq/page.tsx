@@ -175,7 +175,7 @@ export default function Faq() {
         <strong>「成本未定价」数字大</strong>说明有模型缺价格，补上即可；
         <strong>「用量缺失」数字大</strong>说明上游没返回用量，
         试试开启用量选项注入，见{" "}
-        <Link href="/docs/advanced/proxy-and-headers">代理、请求头与覆盖</Link>。
+        <Link href="/docs/advanced/proxy-and-headers">代理与请求头</Link>。
       </p>
 
       <Heading id="ops">运维</Heading>

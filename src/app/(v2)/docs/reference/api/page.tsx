@@ -39,16 +39,21 @@ export default function Api() {
     >
       <Heading id="auth">认证</Heading>
       <p>
-        所有 <code>/api</code> 下的接口都需要带上管理密钥：
+        <code>/api</code> 下的受保护接口都使用 Bearer 认证：
       </p>
       <CodeBlock caption="请求头">
-        Authorization: Bearer <span className="s">你的 AUTH_KEY</span>
+        Authorization: Bearer <span className="s">你的 AUTH_KEY 或访问密钥</span>
       </CodeBlock>
-      <p>
-        用的是 <code>AUTH_KEY</code>（管理台登录那把），
-        <strong>不是访问密钥</strong>。两者的区别见{" "}
-        <Link href="/docs/security">安全与上生产</Link>。
-      </p>
+      <ul>
+        <li>
+          <strong><code>AUTH_KEY</code></strong>——管理权限，可读写配置，也能执行 Reveal 等敏感操作
+        </li>
+        <li>
+          <strong>访问密钥</strong>——只允许读取自身范围内的首页、模型、用量和脱敏请求日志，
+          不能修改配置，也不能查看上游凭据
+        </li>
+      </ul>
+      <p>需要写入或调用路由检查时必须使用 <code>AUTH_KEY</code>。</p>
 
       <Heading id="shape">响应约定</Heading>
       <p>统一的返回结构，成功与失败靠 <code>code</code> 区分：</p>
@@ -111,11 +116,11 @@ export default function Api() {
         curl -X POST http://127.0.0.1:3001/api/route/inspect \{"\n"}
         {"  "}-H <span className="s">&quot;Authorization: Bearer $AUTH_KEY&quot;</span> \{"\n"}
         {"  "}-H <span className="s">&quot;Content-Type: application/json&quot;</span> \{"\n"}
-        {"  "}-d <span className="s">&apos;{"{"}&quot;model&quot;: &quot;你的模型名&quot;{"}"}&apos;</span>
+        {"  "}-d <span className="s">&apos;{"{"}&quot;protocol&quot;:&quot;openai-completions&quot;,&quot;external_model&quot;:&quot;gpt-4o&quot;,&quot;access_key_id&quot;:1{"}"}&apos;</span>
       </CodeBlock>
       <p>
-        路由检查在脚本里很有用——<strong>部署后自动验证配置是否正确</strong>，
-        比真发一个请求更轻。
+        <code>access_key_id</code> 是管理台中访问密钥的数字 ID。
+        路由检查只计算当前配置下的候选结果，不会向上游发送真实请求。
       </p>
 
       <Heading id="warn">注意事项</Heading>

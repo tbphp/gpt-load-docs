@@ -119,32 +119,49 @@ export default function Database() {
 
       <Heading id="backup">备份</Heading>
       <Notice label="只备数据库是不够的" tone="amber">
-        <b>必须同时备份 <code>encryption.key</code></b>。
-        没有它，恢复出来的渠道凭据全是解不开的密文，
-        而且本版本<b>不支持更换主密钥</b>——只能全部重新录入。
+        数据库必须和<b>加密密钥来自同一套实例</b>。
+        使用自动生成的密钥时，<code>auth.key</code> 和 <code>encryption.key</code>
+        都在数据目录中；如果在环境变量或密钥管理服务中显式设置，
+        还要从原来的安全来源单独备份。本版本不支持主密钥轮换。
       </Notice>
 
       <p>
-        <strong>SQLite（默认部署）</strong>——整个数据目录一起打包最省事：
+        <strong>SQLite（官方 Compose 默认配置）</strong>——先停服务，再从现有容器解析
+        实际卷名并打包整个数据目录。下面的命令要在 <code>docker-compose.yml</code>
+        所在目录执行：
       </p>
-      <CodeBlock caption="备份 Compose 的数据卷">
-        docker run --rm \{"\n"}
-        {"  "}-v gpt-load-data:/data \{"\n"}
-        {"  "}-v <span className="s">&quot;$(pwd)&quot;</span>:/backup \{"\n"}
-        {"  "}alpine tar czf /backup/gpt-load-$(date +%F).tar.gz -C /data .
+      <CodeBlock caption="停机备份 Compose 的实际数据卷">
+        {"docker compose stop gpt-load\n"}
+        {"container_id=$(docker compose ps -a -q gpt-load)\n"}
+        {"test -n \"$container_id\"\n"}
+        {"data_volume=$(docker inspect --format '{{range .Mounts}}{{if eq .Destination \"/app/data\"}}{{.Name}}{{end}}{{end}}' \"$container_id\")\n"}
+        {"test -n \"$data_volume\"\n"}
+        {"docker volume inspect \"$data_volume\" >/dev/null\n"}
+        {"backup_file=\"gpt-load-$(date +%F-%H%M%S).tar.gz\"\n"}
+        {"docker run --rm --user 0:0 \\\n"}
+        {"  --mount \"type=volume,src=$data_volume,dst=/data,readonly\" \\\n"}
+        {"  --mount \"type=bind,src=$PWD,dst=/backup\" \\\n"}
+        {"  alpine:3.24.1 sh -eu -c \\\n"}
+        {"  'test -s /data/gpt-load.db; cd /data; tar -czf \"/backup/$1\" .' sh \"$backup_file\"\n"}
+        {"tar -tzf \"$backup_file\" | sed -n '1,20p'\n"}
+        {"docker compose start gpt-load"}
       </CodeBlock>
+      <p>
+        <code>docker volume inspect</code> 和 <code>test -s</code> 都必须成功，
+        归档列表中也必须包含 <code>gpt-load.db</code>。
+        不要把 Compose 的逻辑卷名 <code>gpt-load-data</code> 直接写进
+        <code>docker run -v</code>——实际卷名会随 Compose 项目名变化。
+      </p>
 
       <p>
         <strong>外部数据库</strong>——数据库用它自己的工具备份，
-        但<strong>别忘了单独备份密钥文件</strong>：
+        并从当前实例的安全来源备份匹配的 <code>AUTH_KEY</code> 与
+        <code>ENCRYPTION_KEY</code>：
       </p>
-      <CodeBlock caption="两部分都要">
-        <span className="c"># 1. 数据库</span>{"\n"}
+      <CodeBlock caption="使用数据库自己的备份工具">
         mysqldump -h db.example -u user -p gpt_load {">"} gpt_load.sql{"\n"}
-        <span className="c"># 或 pg_dump -h db.example -U user gpt_load {">"} gpt_load.sql</span>{"\n"}
-        {"\n"}
-        <span className="c"># 2. 密钥文件（在 DATA_DIR 里）</span>{"\n"}
-        cp /path/to/data/encryption.key ./encryption.key.bak
+        <span className="c"># 或</span>{"\n"}
+        pg_dump -h db.example -U user gpt_load {">"} gpt_load.sql
       </CodeBlock>
 
       <p>
@@ -154,14 +171,15 @@ export default function Database() {
 
       <Heading id="restore">恢复</Heading>
       <p>
-        恢复的关键是<strong>数据库和密钥必须来自同一次备份</strong>。
-        新旧混用会导致部分凭据解不开。
+        恢复的关键是<strong>数据库、加密密钥和程序版本必须匹配</strong>。
+        不要把备份内容直接覆盖到一个已有数据的目录或卷中。
       </p>
       <ol>
-        <li>停掉服务</li>
-        <li>还原数据库（或整个数据目录）</li>
-        <li>确认 <code>encryption.key</code> 是配套的那一份</li>
-        <li>启动，到管理台确认渠道凭据能正常查看</li>
+        <li>停止目标服务，并先备份目标当前数据</li>
+        <li>校验归档，恢复到新的空目录或空卷</li>
+        <li>恢复与数据库匹配的 <code>ENCRYPTION_KEY</code>；显式设置的密钥从原安全来源恢复</li>
+        <li>首次使用与备份相同的 GPT-Load 版本启动，不要同时升级</li>
+        <li>检查健康状态，并登录管理台确认渠道凭据可以正常解密</li>
       </ol>
       <p>
         <strong>验证过能恢复，备份才算数。</strong>

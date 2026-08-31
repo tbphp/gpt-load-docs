@@ -121,7 +121,8 @@ export default async function Settings() {
 
       <Heading id="affinity">会话亲和</Heading>
       <p>
-        开启后，<strong>来自同一会话的请求会尽量落在同一个凭据上</strong>。
+        开启后，网关会根据访问密钥、客户端协议以及请求中的指令或首个用户输入前缀
+        生成软亲和键，具有相同稳定前缀的请求会尽量落在同一个凭据上。
         三个参数：
       </p>
       <ul>
@@ -135,11 +136,11 @@ export default async function Settings() {
           <strong>容量</strong>——最多记住多少条会话（默认一万条）
         </li>
       </ul>
-      <Notice label="什么时候需要它" tone="blue">
-        用到<b>有状态接口</b>时必须开——比如 OpenAI Responses 里靠
-        <code>previous_response_id</code> 接续上下文的请求，
-        换凭据就找不到之前的会话了。
-        纯无状态的对话请求则不需要，关掉反而让负载更均衡。
+      <Notice label="它是软亲和，不是资源绑定" tone="blue">
+        亲和机制不读取 <code>previous_response_id</code>、<code>conversation</code>
+        或其他上游资源 ID。它适合让具有相同提示前缀的普通请求尽量复用凭据，
+        但不能保证有状态资源回到创建它的凭据。
+        这类资源请使用单凭据，或确认上游支持跨凭据共享。
       </Notice>
 
       <Heading id="logs">日志留存</Heading>
@@ -162,7 +163,7 @@ export default async function Settings() {
         </li>
         <li>
           <strong>请求头规则</strong>与<strong>用量选项注入</strong>——
-          非标场景用，见 <Link href="/docs/advanced/proxy-and-headers">代理、请求头与覆盖</Link>
+          非标场景用，见 <Link href="/docs/advanced/proxy-and-headers">代理与请求头</Link>
         </li>
       </ul>
 
@@ -189,7 +190,7 @@ export default async function Settings() {
           <strong>坏凭据隔离太慢</strong> → 调小拉黑阈值
         </li>
         <li>
-          <strong>有状态请求报找不到上下文</strong> → 开启会话亲和
+          <strong>有状态请求报找不到上下文</strong> → 使用单凭据，或确认上游支持跨凭据共享资源
         </li>
       </ul>
       <p>

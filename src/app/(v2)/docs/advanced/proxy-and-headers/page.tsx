@@ -13,7 +13,6 @@ const TOC = [
   { id: "proxy", label: "出站代理" },
   { id: "level", label: "三级覆盖" },
   { id: "headers", label: "请求头规则" },
-  { id: "override", label: "参数覆盖" },
   { id: "usage", label: "用量选项注入" },
 ];
 
@@ -21,8 +20,8 @@ export default function ProxyHeaders() {
   return (
     <DocsPage
       path="/docs/advanced/proxy-and-headers"
-      title="代理、请求头与覆盖"
-      lede="这一页是给非标场景准备的：网络受限、上游要求特殊请求头、需要强制某些参数。用不到就不用看。"
+      title="代理与请求头"
+      lede="这一页是给非标场景准备的：网络受限、不同凭据需要不同出口，或上游要求特殊请求头。用不到就不用看。"
       toc={TOC}
     >
       <Heading id="when">什么时候需要</Heading>
@@ -36,9 +35,6 @@ export default function ProxyHeaders() {
         </li>
         <li>
           <strong>上游要求特定请求头</strong>——某些中转服务会校验来源标识
-        </li>
-        <li>
-          <strong>想强制统一某个参数</strong>——比如给所有请求兜底一个温度值
         </li>
       </ul>
       <p>没有这些需求的话，这一页的配置全都留空即可。</p>
@@ -104,31 +100,6 @@ export default function ProxyHeaders() {
       <Notice label="别动认证头" tone="amber">
         认证相关的头由网关自己管理——它需要按选中的凭据动态填充。
         用规则去改它会导致请求失败。
-      </Notice>
-
-      <Heading id="override">参数覆盖</Heading>
-      <p>
-        分组可以配置<strong>参数覆盖</strong>，在转发前修改请求体里的参数。
-        两种用法：
-      </p>
-      <ul>
-        <li>
-          <strong>强制</strong>——不管客户端传什么，都改成指定值。
-          用于统一行为，比如禁止客户端开启某个昂贵的选项
-        </li>
-        <li>
-          <strong>补默认</strong>——客户端没传时才填上。
-          用于满足上游的必填要求
-        </li>
-      </ul>
-      <p>
-        这在对接<strong>行为不标准的上游</strong>时很有用——
-        有些服务要求某个参数必须存在，但客户端不会传。
-      </p>
-      <Notice label="覆盖是隐式的" tone="amber">
-        客户端不知道自己的参数被改过。<b>配置时留个记录</b>，
-        否则以后排查「为什么这个参数不生效」会很费时间——
-        请求日志里能看到最终发出去的内容，是确认覆盖是否生效的地方。
       </Notice>
 
       <Heading id="usage">用量选项注入</Heading>

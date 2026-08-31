@@ -55,7 +55,7 @@ export const DOC_GROUPS: DocGroup[] = [
     items: [
       { href: "/docs/internals/scheduling", label: "调度是怎么做的", desc: "权重、亲和、重试、冷却、拉黑", status: "ready" },
       { href: "/docs/internals/protocols", label: "协议与转换边界", desc: "四种协议，什么能转什么不能", status: "ready" },
-      { href: "/docs/advanced/proxy-and-headers", label: "代理、请求头与覆盖", desc: "非标场景的处理方式", status: "ready" },
+      { href: "/docs/advanced/proxy-and-headers", label: "代理与请求头", desc: "出站代理、覆盖层级与请求头规则", status: "ready" },
     ],
   },
   {

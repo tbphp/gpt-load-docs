@@ -154,9 +154,10 @@ export default function Protocols() {
         上下文<b>存在上游那一侧</b>，且通常<b>绑定在创建它的那个凭据上</b>。
         换一个凭据请求，上游会找不到之前的会话。
         <br />
-        所以用有状态接口时，<b>必须开启会话亲和</b>，见{" "}
-        <Link href="/docs/settings">运行时设置</Link>；
-        或者确保该分组只有一个凭据。
+        当前会话亲和依据提示词前缀，不读取 <code>previous_response_id</code>、
+        <code>conversation</code> 或其他资源 ID，因此不能提供强一致路由保证。
+        可靠使用有状态资源时，请确保该分组只有一个凭据，
+        或确认上游允许不同凭据共享同一资源。
       </Notice>
       <p>
         另一个选择是<strong>不用有状态接口</strong>——

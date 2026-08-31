@@ -104,25 +104,25 @@ export default function Install() {
 
       <Heading id="data">数据放在哪</Heading>
       <p>
-        所有状态都在 <code>DATA_DIR</code> 里，Compose 部署时是名为{" "}
-        <code>gpt-load-data</code> 的 Docker 卷：
+        默认 SQLite 部署的状态都在 <code>DATA_DIR</code> 里。Compose 配置中的逻辑卷名是
+        <code>gpt-load-data</code>，实际 Docker 卷名由 Compose 项目名决定，不一定与它相同：
       </p>
       <ul>
         <li>
           <code>gpt-load.db</code>——数据库（默认 SQLite）
         </li>
         <li>
-          <code>auth.key</code>——管理台登录密钥
+          <code>auth.key</code>——未显式设置 <code>AUTH_KEY</code> 时自动生成
         </li>
         <li>
-          <code>encryption.key</code>——加密上游凭据用的密钥
+          <code>encryption.key</code>——未显式设置 <code>ENCRYPTION_KEY</code> 时自动生成
         </li>
       </ul>
 
       <Notice label="备份要一起备" tone="amber">
-        <code>encryption.key</code> 用来解密你填进去的上游凭据。
-        <b>备份时必须和数据库一起备</b>，只备数据库的话，恢复出来的凭据是解不开的，
-        而且本版本不支持主密钥轮换。详见{" "}
+        加密密钥必须和数据库成套备份。使用显式 <code>AUTH_KEY</code> 或
+        <code>ENCRYPTION_KEY</code> 时，还要从原来的安全来源单独备份；
+        它们不会自动写入数据卷。详见{" "}
         <Link href="/docs/database">数据库与备份</Link>。
       </Notice>
 
@@ -152,12 +152,13 @@ export default function Install() {
         数据在具名卷里，升级不会丢。数据库结构变更会在启动时自动完成，不需要手工操作。
       </p>
       <p>
-        官方 Compose 用的是固定的版本标签，<strong>不依赖 <code>latest</code></strong>，
-        所以拉取不会意外跨到不兼容的大版本。
+        官方 Compose 使用 <code>v2beta</code> 更新通道，<strong>不依赖 <code>latest</code></strong>。
+        这个标签会随 2.0 Beta 版本移动；需要固定版本时，请改用具体版本标签或镜像摘要。
       </p>
       <p>
-        要回滚就把镜像标签改回旧版本再 <code>up -d</code>。
-        <strong>但跨版本回滚前先备份数据库</strong>——新版本执行过的结构变更，旧版本未必认得。
+        数据库迁移是单向的，<strong>回滚不能只把镜像标签改回去</strong>。
+        应在升级前停机备份；需要回滚时，恢复升级前的数据库和配套密钥，
+        再用备份对应的旧版本启动。
       </p>
 
       <p>
