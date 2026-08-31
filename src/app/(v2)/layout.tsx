@@ -14,7 +14,7 @@ import { getLocale } from "@/i18n/v2/server";
 import { getDict } from "@/i18n/v2/dict";
 import { LocaleProvider } from "@/i18n/v2/LocaleProvider";
 import { Lightbox } from "@/components/v2/ui";
-import { localeUrl } from "@/lib/v2/site";
+import { localeUrl, socialImage } from "@/lib/v2/site";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -33,11 +33,13 @@ export async function generateMetadata(): Promise<Metadata> {
       type: "website",
       url,
       locale: locale === "zh" ? "zh_CN" : locale === "ja" ? "ja_JP" : "en_US",
+      images: [socialImage()],
     },
     twitter: {
       card: "summary_large_image",
       title: t.meta.title,
       description: t.meta.ogDescription,
+      images: [socialImage()],
     },
   };
 }

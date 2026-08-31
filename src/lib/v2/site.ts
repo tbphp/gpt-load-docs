@@ -4,6 +4,16 @@ import { getDict, type Dict } from "@/i18n/v2/dict";
 
 export const SITE_URL = "https://www.gpt-load.com";
 export const SITE_NAME = "GPT-Load";
+export const SOCIAL_IMAGE_URL = `${SITE_URL}/social-card.png`;
+
+export function socialImage() {
+  return {
+    url: SOCIAL_IMAGE_URL,
+    width: 1200,
+    height: 630,
+    alt: "GPT-Load — Self-hosted AI Gateway",
+  };
+}
 
 export type LocalizedMeta = Record<Locale, { title: string; description: string; keywords?: string }>;
 
@@ -48,11 +58,13 @@ export function localizedPageMeta(opts: {
       alternateLocale: LOCALES.filter((code) => code !== opts.locale).map((code) =>
         code === "zh" ? "zh_CN" : code === "ja" ? "ja_JP" : "en_US"
       ),
+      images: [socialImage()],
     },
     twitter: {
       card: "summary_large_image",
       title: `${current.title} - ${SITE_NAME}`,
       description: current.description,
+      images: [socialImage()],
     },
   };
 }

@@ -8,12 +8,11 @@ import { Section, Button, CodeBlock, Notice, Stat, Figure } from "@/components/v
 import { DEFAULT_LOCALE, LOCALES } from "@/i18n/v2/config";
 import { getLocale, getT } from "@/i18n/v2/server";
 import { docScreenshot } from "@/lib/v2/doc-screenshot";
-import { localeUrl } from "@/lib/v2/site";
+import { localeUrl, socialImage } from "@/lib/v2/site";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const t = await getT();
-  const url = localeUrl("/", locale);
 
   return {
     title: { absolute: t.meta.title },
@@ -23,13 +22,14 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t.meta.title,
       description: t.meta.ogDescription,
       type: "website",
-      url,
       locale: locale === "zh" ? "zh_CN" : locale === "ja" ? "ja_JP" : "en_US",
+      images: [socialImage()],
     },
     twitter: {
       card: "summary_large_image",
       title: t.meta.title,
       description: t.meta.ogDescription,
+      images: [socialImage()],
     },
   };
 }
@@ -91,7 +91,8 @@ export default async function Home() {
   return (
     // tint-end：页面以浅色板块（07 边界）收尾，footer 的默认外边距要据此收起
     <main id="main" className="tint-end">
-      {/* Next 15 会丢弃根路径 alternate URL 的查询参数；React 19 会把这些 link 提升到 head。 */}
+      {/* Next 15 会丢弃根路径 metadata URL 的查询参数；React 19 会把这些元素提升到 head。 */}
+      <meta property="og:url" content={localeUrl("/", locale)} />
       <link rel="canonical" href={localeUrl("/", locale)} />
       {LOCALES.map((code) => (
         <link key={code} rel="alternate" hrefLang={code} href={localeUrl("/", code)} />

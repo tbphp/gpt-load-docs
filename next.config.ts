@@ -12,6 +12,9 @@ const nextConfig: NextConfig = {
     mdxRs: true,
   },
   async headers() {
+    // Vercel Preview 默认注入 Toolbar/Comments；只在 Preview 放行官方依赖，
+    // Production 继续使用不允许外部脚本的严格策略。
+    const vercelToolbar = process.env.VERCEL_ENV === "preview";
     const common = [
       { key: "X-Content-Type-Options", value: "nosniff" },
       { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
@@ -26,13 +29,14 @@ const nextConfig: NextConfig = {
             value: [
               "default-src 'self'",
               "base-uri 'self'",
-              "connect-src 'self' https://api.github.com",
-              "font-src 'self'",
+              `connect-src 'self' https://api.github.com${vercelToolbar ? " https://vercel.live wss://ws-us3.pusher.com" : ""}`,
+              `font-src 'self'${vercelToolbar ? " https://vercel.live https://assets.vercel.com" : ""}`,
               "frame-ancestors 'self'",
-              "img-src 'self' data: https://avatars.githubusercontent.com",
+              ...(vercelToolbar ? ["frame-src https://vercel.live"] : []),
+              `img-src 'self' data: https://avatars.githubusercontent.com${vercelToolbar ? " blob: https://vercel.live https://vercel.com" : ""}`,
               "object-src 'none'",
-              "script-src 'self' 'unsafe-inline'",
-              "style-src 'self' 'unsafe-inline'",
+              `script-src 'self' 'unsafe-inline'${vercelToolbar ? " https://vercel.live" : ""}`,
+              `style-src 'self' 'unsafe-inline'${vercelToolbar ? " https://vercel.live" : ""}`,
             ].join("; "),
           },
         ]

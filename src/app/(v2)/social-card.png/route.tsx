@@ -1,8 +1,10 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "GPT-Load — Self-hosted AI Gateway";
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+/* eslint-disable @next/next/no-img-element -- ImageResponse 由 satori 渲染，不支持 next/image。 */
+
+export const dynamic = "force-static";
+
+const SIZE = { width: 1200, height: 630 };
 
 // 品牌符号：旋转 45° 的一对 L。以 data URI 内联，避免运行时再取一次文件。
 const MARK =
@@ -16,11 +18,8 @@ const MARK =
       "</g></g></svg>"
   );
 
-/**
- * 社交分享图。文案刻意用英文——ImageResponse 默认字体不含中文字形，
- * 内嵌中文字体会让构建产物大出一个量级，得不偿失。
- */
-export default function OpengraphImage() {
+/** 全站共用的稳定社交分享图，由 Metadata API 显式引用。 */
+export function GET() {
   return new ImageResponse(
     (
       <div
@@ -47,8 +46,7 @@ export default function OpengraphImage() {
           >
             v2.0 / MIT License
           </div>
-          {/* 这里由 ImageResponse(satori) 渲染成位图，不是浏览器 DOM，
-              用不了也不该用 next/image */}
+          {/* ImageResponse 由 satori 渲染成位图，不使用 next/image。 */}
           <img src={MARK} width={88} height={88} alt="" />
         </div>
 
@@ -72,6 +70,6 @@ export default function OpengraphImage() {
         </div>
       </div>
     ),
-    size
+    SIZE
   );
 }
