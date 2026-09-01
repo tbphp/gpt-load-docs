@@ -60,6 +60,10 @@ export default function ProxyHeaders() {
         <b>直连</b>是「明确不走」，用来给个别凭据开例外——
         比如大部分上游要代理，但有一个在内网、走代理反而不通。
       </Notice>
+      <Notice label="三个云平台渠道例外" tone="amber">
+        Azure OpenAI、AWS Bedrock 与 Google Vertex AI 当前不支持 GPT-Load 托管代理。其他渠道的准确状态以支持矩阵为准。
+      </Notice>
+      <p><Link href="/docs/reference/support-matrix">查看托管代理支持矩阵 →</Link></p>
 
       <Heading id="level">四级覆盖</Heading>
       <p>

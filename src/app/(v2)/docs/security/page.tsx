@@ -226,6 +226,7 @@ export default function Security() {
         不要在多个实例前面挂负载均衡——调度、冷却、限流的状态都会各算各的。
         需要更大规模时，按业务维度拆成多个独立部署。
       </Notice>
+      <p><Link href="/docs/known-limitations">查看完整的 2.0 已知限制 →</Link></p>
     </DocsPage>
   );
 }

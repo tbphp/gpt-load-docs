@@ -216,6 +216,7 @@ export default function Install() {
         <code>2.0.0-beta.25</code>），<code>2.0-beta</code> 是 2.0 Beta 通道，且不会使用
         <code>latest</code>。需要固定版本时，请改用精确版本标签或镜像摘要。
       </p>
+      <p><Link href="/docs/known-limitations#tags">升级前查看已知限制与版本策略 →</Link></p>
       <p>
         数据库迁移是单向的，<strong>回滚不能只把镜像标签改回去</strong>。
         应在升级前停机备份；需要回滚时，恢复升级前的数据库和配套密钥，

@@ -103,6 +103,7 @@ export default function Protocols() {
         </li>
       </ul>
       <p>GET /v1/models 携带非空 anthropic-version 请求头时返回 Anthropic 模型列表；否则返回 OpenAI Chat Completions 格式。直接调接口时按客户端协议带上对应请求头。</p>
+      <p><Link href="/docs/reference/support-matrix">查看逐渠道协议与 Operation →</Link></p>
 
       <Heading id="convert">转换是怎么发生的</Heading>
       <p>
@@ -178,8 +179,8 @@ export default function Protocols() {
           换上游最省事
         </li>
         <li>
-          <strong>需要有状态接续</strong>——Responses，
-          但记得开会话亲和
+          <strong>需要有状态接续</strong>——Responses；
+          有状态资源请使用单凭据，或确认上游支持跨凭据共享
         </li>
       </ul>
       <p>

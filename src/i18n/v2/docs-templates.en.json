@@ -470,5 +470,7 @@
   "还有三个变量 {{0}} ， 直接跑二进制时它们不起作用：": "Three more variables {{0}}; they do nothing when you run the binary directly:",
   "这个变量 {{0}} 时，开关由管理台掌握，随时可改。 一旦在 {{1}} 里显式设成 {{2}} 或 {{3}} ， 它就成了强制值， {{4}} 。 如果你发现管理台里关不掉自动同步，先检查这个变量。 价格来源见 {{5}} 。": "When this variable {{0}}, the toggle stays under the management UI and can be changed at any time. Once you set it explicitly in {{1}} to {{2}} or {{3}}, it becomes a forced value and {{4}}. If you cannot turn auto-sync off in the management UI, check this variable first. For where prices come from, see {{5}}.",
   "这把访问密钥必须勾选 {{0}} 协议。 Codex 用的是 Responses 接口，只勾了 Chat Completions 会被直接拒绝—— 路由检查里会看到 {{1}} 。": "This AccessKey must have the {{0}} protocol ticked. Codex uses the Responses API; if you tick only Chat Completions the request is rejected outright — route checking will show {{1}}.",
-  "首次生成的管理密钥 {{0}} ，关掉页面前请先保存。 错过了也能找回——它就存在 {{1}} 。": "The admin key generated on first run {{0}}, so save it before closing the page. If you miss it, you can still find it at {{1}}."
+  "首次生成的管理密钥 {{0}} ，关掉页面前请先保存。 错过了也能找回——它就存在 {{1}} 。": "The admin key generated on first run {{0}}, so save it before closing the page. If you miss it, you can still find it at {{1}}.",
+  "{{0}} ——累计估算成本达到阈值后拒绝后续请求，不会重置。 适合发给外部协作者的一次性密钥": "§E0§Total quota§/E0§ — rejects later requests after cumulative estimated cost reaches the threshold and never resets. Suitable for a one-time key issued to an external collaborator",
+  "{{0}} ——Responses； 有状态资源请使用单凭据，或确认上游支持跨凭据共享": "§E0§Need stateful continuation§/E0§ — use Responses with one credential, or confirm that upstream supports sharing stateful resources across credentials"
 }

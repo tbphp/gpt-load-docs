@@ -29,6 +29,7 @@ export const DOC_GROUPS: DocGroup[] = [
       { href: "/docs/quickstart", label: "快速开始", desc: "从零到第一个请求成功，约十分钟", status: "ready" },
       { href: "/docs/concepts", label: "核心概念", desc: "分组与访问密钥两层模型", status: "ready" },
       { href: "/docs/install", label: "部署", desc: "Docker Compose、原生二进制、源码构建", status: "ready" },
+      { href: "/docs/known-limitations", label: "已知限制与版本策略", desc: "部署升级前确认运行边界与版本通道", status: "ready" },
     ],
   },
   {
@@ -61,6 +62,7 @@ export const DOC_GROUPS: DocGroup[] = [
   {
     title: "参考",
     items: [
+      { href: "/docs/reference/support-matrix", label: "渠道与能力矩阵", desc: "逐渠道协议、Operation、代理与验证等级", status: "ready" },
       { href: "/docs/reference/env", label: "环境变量", desc: "进程配置全表", status: "ready" },
       { href: "/docs/reference/api", label: "管理 API", desc: "脚本化管理分组与密钥", status: "ready" },
       { href: "/docs/faq", label: "常见问题", desc: "部署、接入与排障的高频问题", status: "ready" },

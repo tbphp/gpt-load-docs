@@ -234,7 +234,7 @@ export default async function Home() {
 
         <div className="chan-more">
           <span className="label">{h.protocols.custom}</span>
-          <Link className="label label-blue" href="/docs/groups">
+          <Link className="label label-blue" href="/docs/reference/support-matrix">
             {h.protocols.docs}
           </Link>
         </div>

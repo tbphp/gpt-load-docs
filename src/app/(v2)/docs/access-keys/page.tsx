@@ -156,12 +156,10 @@ export default async function AccessKeys() {
       </p>
 
       <Heading id="cost">成本上限</Heading>
-      <p>
-        比 RPM 更直接的保护：<strong>按花掉多少钱来封顶</strong>。支持两种规则：
-      </p>
+      <p>它按网关计算的估算成本限制后续请求，支持两种规则：</p>
       <ul>
         <li>
-          <strong>总额度</strong>——累计花到这个数就停，不会重置。
+          <strong>总额度</strong>——累计估算成本达到阈值后拒绝后续请求，不会重置。
           适合发给外部协作者的一次性密钥
         </li>
         <li>
@@ -170,13 +168,11 @@ export default async function AccessKeys() {
         </li>
       </ul>
 
-      <Notice label="它基于估算成本" tone="amber">
-        成本上限用的是<b>网关自己算出来的估算成本</b>，依据上游返回的 token 用量
-        与模型价格推算，<b>不等于服务商账单</b>。
-        没有价格数据的模型不计入消耗。
-        所以它适合用来<b>防止意外失控</b>，不适合当作精确的财务管控手段。
-        计费口径见 <Link href="/docs/monitor">监控与排障</Link>。
+      <Notice label="这是软保护，不是硬预算" tone="amber">
+        网关在请求完成后才把本次估算成本计入额度。单次大请求和已经放行的并发请求可能让累计金额超过阈值；没有价格或用量数据的请求也不会计入。它适合防止意外失控，不等于服务商账单或严格财务上限。
       </Notice>
+      <p><Link href="/docs/known-limitations#cost">查看成本限制边界 →</Link></p>
+      <p><Link href="/docs/monitor">查看成本估算口径 →</Link></p>
 
       <Heading id="rotate">停用与轮换</Heading>
       <p>

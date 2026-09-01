@@ -31,6 +31,7 @@ export default function Migrate() {
         两者的数据结构完全不同，2.0 不会读取、更不会转换 1.x 的数据。
         直接复用旧数据目录可能导致启动失败或数据损坏。
       </Notice>
+      <p><Link href="/docs/known-limitations">查看 2.0 已知限制与版本策略 →</Link></p>
 
       <Heading id="no">先说结论</Heading>
       <ul>

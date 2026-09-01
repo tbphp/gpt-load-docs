@@ -201,6 +201,7 @@ export default function Database() {
         沿用原来那把，重新录入的凭据才能和旧备份保持一致的加密方式。
         当然，如果是全新录入，用新密钥也可以，但要记得更新备份。
       </p>
+      <p><Link href="/docs/known-limitations#runtime">查看数据库与迁移边界 →</Link></p>
     </DocsPage>
   );
 }

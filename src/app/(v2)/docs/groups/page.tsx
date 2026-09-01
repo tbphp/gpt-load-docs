@@ -92,6 +92,7 @@ export default async function Groups() {
         网关在支持的能力之间做转换，但它不是万能翻译器——边界见{" "}
         <Link href="/docs/internals/protocols">协议与转换边界</Link>。
       </p>
+      <p><Link href="/docs/reference/support-matrix">查看逐渠道支持矩阵 →</Link></p>
 
       <Heading id="create">建一个分组</Heading>
       <p>
