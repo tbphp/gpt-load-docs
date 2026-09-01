@@ -10,11 +10,10 @@ export async function generateMetadata(): Promise<Metadata> {
   return dictionaryPageMeta({ locale, path: "/sponsor", select: (dict) => dict.pages.sponsor });
 }
 
-const SPONSOR = {
-  name: "APIMart",
-  logo: "/v2/sponsor-apimart.png",
-  url: "https://go.apimart.ai/gh-gpt-load",
-};
+const SPONSORS = [
+  { key: "axisnow", name: "AxisNow", logo: "/v2/sponsor-axisnow.jpg", url: "https://www.axisnow.io/zh", width: 340, height: 112 },
+  { key: "apimart", name: "APIMart", logo: "/v2/sponsor-apimart.png", url: "https://go.apimart.ai/gh-gpt-load", width: 900, height: 300 },
+] as const;
 
 const SUPPORTERS = [
   { name: "OpenAI", url: "https://openai.com/", logo: "/v2/sponsor-openai.svg", w: 120, h: 35 },
@@ -43,16 +42,18 @@ export default async function Sponsor() {
             <span className="t">{copy.primary}</span>
           </div>
           <div className="spon-grid" style={{ marginTop: 20 }}>
-            <a className="spon" href={SPONSOR.url} target="_blank" rel="noopener noreferrer">
-              <span className="spon-logo">
-                <Image src={SPONSOR.logo} alt={SPONSOR.name} width={900} height={300} />
-              </span>
-              <span className="spon-body">
-                <h3>{SPONSOR.name}</h3>
-                <p>{copy.sponsorDescription}</p>
-                <span className="spon-cta">{copy.register}</span>
-              </span>
-            </a>
+            {SPONSORS.map((sponsor) => (
+              <a className="spon" key={sponsor.key} href={sponsor.url} target="_blank" rel="noopener noreferrer">
+                <span className="spon-logo">
+                  <Image src={sponsor.logo} alt={sponsor.name} width={sponsor.width} height={sponsor.height} />
+                </span>
+                <span className="spon-body">
+                  <h3>{sponsor.name}</h3>
+                  <p>{copy[`${sponsor.key}Description`]}</p>
+                  <span className="spon-cta">{sponsor.key === "apimart" ? copy.register : copy.visit}</span>
+                </span>
+              </a>
+            ))}
           </div>
 
           <div className="sec-head" style={{ marginTop: 56 }}>

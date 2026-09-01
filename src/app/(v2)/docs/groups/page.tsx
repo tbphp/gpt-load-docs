@@ -12,7 +12,7 @@ export function generateMetadata(): Promise<Metadata> {
 
 const TOC = [
   { id: "what", label: "分组是什么" },
-  { id: "channels", label: "二十个内置渠道" },
+  { id: "channels", label: "23 个内置渠道" },
   { id: "create", label: "建一个分组" },
   { id: "params", label: "渠道参数" },
   { id: "creds", label: "管理凭据池" },
@@ -32,6 +32,7 @@ const CHANNELS = [
     cred: "API 密钥",
   },
   { g: "订阅账号", c: "var(--cat-4)", items: "Codex · Claude · Antigravity · Grok", cred: "OAuth 授权" },
+  { g: "网关与兼容", c: "var(--blue)", items: "GPT-Load · New API · CLIProxyAPI · OpenAI Compatible", cred: "API 密钥 + 网关根地址" },
 ];
 
 export default async function Groups() {
@@ -55,7 +56,7 @@ export default async function Groups() {
         简单说：<strong>分组朝上游，访问密钥朝应用</strong>。
       </p>
 
-      <Heading id="channels">二十个内置渠道</Heading>
+      <Heading id="channels">23 个内置渠道</Heading>
       <p>
         建分组时从这些里选一个。常用渠道直接显示为按钮，其余渠道收在「其他渠道」中。
         不同类别的凭据形态不一样：
@@ -78,11 +79,6 @@ export default async function Groups() {
                 <td>{row.cred}</td>
               </tr>
             ))}
-            <tr>
-              <td>自定义</td>
-              <td>OpenAI Compatible</td>
-              <td>API 密钥 + 自填地址</td>
-            </tr>
           </tbody>
         </table>
       </div>
@@ -116,6 +112,10 @@ export default async function Groups() {
       <ul>
         <li>
           <strong>接口地址</strong>——官方渠道有默认值，用中转或自建服务时才需要改
+        </li>
+        <li>
+          <strong>网关根地址</strong>——GPT-Load、New API、CLIProxyAPI 填根地址或部署前缀，
+          不要附加 <code>/v1</code>、<code>/v1beta</code> 或查询参数
         </li>
         <li>
           <strong>区域</strong>——AWS Bedrock、Google Vertex AI 这类云平台要指定区域

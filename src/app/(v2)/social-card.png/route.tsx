@@ -62,7 +62,7 @@ export function GET() {
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ display: "flex", height: 2, background: "#0a0a0a", marginBottom: 22 }} />
           <div style={{ display: "flex", gap: 52, fontSize: 25, color: "#6a6a6a", letterSpacing: "0.06em" }}>
-            <div style={{ display: "flex" }}>20 CHANNELS</div>
+            <div style={{ display: "flex" }}>23 CHANNELS</div>
             <div style={{ display: "flex" }}>4 PROTOCOLS</div>
             <div style={{ display: "flex" }}>1 BINARY</div>
             <div style={{ display: "flex" }}>2 CLIENT SETTINGS</div>

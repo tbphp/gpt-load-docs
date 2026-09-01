@@ -36,7 +36,7 @@
   "{{0}} ——参与均衡分配": "{{0}} — Participates in balanced distribution.",
   "{{0}} ——从分组列表进入独立的「导入渠道凭据」页面， 一次粘贴多把密钥，每行一个": "{{0}} — Open the dedicated Import Channel Credentials page from the Group list and paste one key per line.",
   "{{0}} ——从公开的模型价格数据源 （ {{1}} ） 获取，覆盖常见模型": "{{0}} — Fetch common-model prices from the public data source {{1}}.",
-  "{{0}} ——从内置的二十个上游里选一个，决定请求最终发到哪": "{{0}} — Choose one of the twenty built-in upstreams; it determines the request's final destination.",
+  "{{0}} ——从内置的 23 个上游里选一个，决定请求最终发到哪": "{{0}} — Choose one of the 23 built-in upstreams; it determines the request's final destination.",
   "{{0}} ——订阅按周期计量，管理台会展示剩余额度与重置时间": "{{0}} — Subscription quotas reset periodically; the management UI shows remaining quota and reset time.",
   "{{0}} ——对接上游的一切：用哪个服务、拿哪些凭据、开放哪些模型、按什么策略跑": "{{0}} — Everything about the upstream connection: provider, credentials, exposed models, and runtime policy.",
   "{{0}} ——多半是地址末尾的 {{1}} 多了或少了，或者协议没在访问密钥里勾选": "{{0}} — Usually the endpoint has an extra or missing {{1}}, or the protocol is not enabled on the AccessKey.",
@@ -505,5 +505,7 @@
   "{{0}} 的 {{1}} 包含 {{2}} 、 {{3}} 、 {{4}} 和可选的 {{5}} （Unix 秒）； {{6}} 包含 {{7}} 、 {{8}} （Unix 毫秒）与 {{9}} 。每条阻塞规则包含 {{10}} 、 {{11}} 、 {{12}} 、 {{13}} ， 周期规则还会给出 {{14}} 和 {{15}} 。": "For {{0}}, {{1}} contains {{2}}, {{3}}, {{4}}, and optional {{5}} in Unix seconds; {{6}} contains {{7}}, {{8}} in Unix milliseconds, and {{9}}. Each blocking rule contains {{10}}, {{11}}, {{12}}, and {{13}}; periodic rules also include {{14}} and {{15}}.",
   "{{0}} 中的尝试字段": "Attempt fields in {{0}}",
   "调度器还定义了 {{0}} ，用于把真实请求的候选限制在请求开始时捕获的凭据集合内。 当前 {{1}} 不接收这类请求级凭据集合，因此不会返回这个原因码。": "The scheduler also defines {{0}} to constrain a real request to the credential set captured when that request started. The current {{1}} endpoint does not accept that request-scoped credential set, so it does not return this reason code.",
-  "声明 JSON 请求体的端点只接受单个对象；未知字段、重复字段、尾随的第二个 JSON 值都会被拒绝。 采用空对象合同的无参数操作只接受空请求体或 {{0}} 。": "Endpoints that declare a JSON body accept exactly one object. Unknown fields, duplicate fields, and a trailing second JSON value are rejected. Parameterless operations using the empty-object contract accept only an empty body or {{0}}."
+  "声明 JSON 请求体的端点只接受单个对象；未知字段、重复字段、尾随的第二个 JSON 值都会被拒绝。 采用空对象合同的无参数操作只接受空请求体或 {{0}} 。": "Endpoints that declare a JSON body accept exactly one object. Unknown fields, duplicate fields, and a trailing second JSON value are rejected. Parameterless operations using the empty-object contract accept only an empty body or {{0}}.",
+  "{{0}} ——GPT-Load、New API、CLIProxyAPI 填根地址或部署前缀， 不要附加 {{1}} 、 {{2}} 或查询参数": "{{0}} — For GPT-Load, New API, and CLIProxyAPI, enter the base URL or deployment prefix without {{1}}, {{2}}, or query parameters.",
+  "模型发现抽屉里可以按上游结果 {{0}} 、 {{1}} 或 {{2}} 当前列表。同步只比较上游发现结果，不把价格目录当作上游模型； 保留下来的模型会保留别名，确认后直接保存。": "In the model-discovery drawer, you can {{0}}, {{1}}, or {{2}} the current list from upstream results. Sync compares only upstream discovery results, not the pricing catalog; retained models keep their aliases, and confirmation saves immediately."
 }

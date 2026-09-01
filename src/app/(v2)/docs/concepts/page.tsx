@@ -51,7 +51,7 @@ export default async function Concepts() {
       <p>一个分组把五件事绑在一起：</p>
       <ol>
         <li>
-          <strong>渠道</strong>——从内置的二十个上游里选一个，决定请求最终发到哪
+          <strong>渠道</strong>——从内置的 23 个上游里选一个，决定请求最终发到哪
         </li>
         <li>
           <strong>接入方式</strong>——用 API 密钥，还是用订阅账号授权

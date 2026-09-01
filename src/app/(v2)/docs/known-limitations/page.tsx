@@ -81,7 +81,7 @@ export default function KnownLimitations() {
           </thead>
           <tbody>
             <tr>
-              <td className="m">2.0.0-rc.2</td>
+              <td className="m">2.0.0-rc.3</td>
               <td>精确版本标签，不带 Git tag 的 v 前缀</td>
               <td>需要固定版本时使用；生产环境也可以固定镜像摘要</td>
             </tr>

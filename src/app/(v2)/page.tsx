@@ -37,7 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
 /* 四个数字讲的是一组对比：接得多、装得轻、接入配置少。
    给两端上色把这层对比点出来，中间两个留墨色，避免一排全彩失去重点。 */
 const FACTS = [
-  { value: "20", tone: "blue" },
+  { value: "23", tone: "blue" },
   { value: "4" },
   { value: "1" },
   { value: "2", tone: "green" },
@@ -67,9 +67,20 @@ const PROTOCOLS = [
 
 const SPONSORS = [
   {
+    key: "axisnow",
+    name: "AxisNow",
+    logo: "/v2/sponsor-axisnow.jpg",
+    url: "https://www.axisnow.io/zh",
+    width: 340,
+    height: 112,
+  },
+  {
+    key: "apimart",
     name: "APIMart",
     logo: "/v2/sponsor-apimart.png",
     url: "https://go.apimart.ai/gh-gpt-load",
+    width: 900,
+    height: 300,
   },
 ];
 
@@ -151,11 +162,11 @@ export default async function Home() {
           {SPONSORS.map((sp) => (
             <a className="spon" key={sp.name} href={sp.url} target="_blank" rel="noopener noreferrer">
               <span className="spon-logo">
-                <Image src={sp.logo} alt={sp.name} width={900} height={300} />
+                <Image src={sp.logo} alt={sp.name} width={sp.width} height={sp.height} />
               </span>
               <span className="spon-body">
                 <h3>{sp.name}</h3>
-                <p>{h.sponsors.apimart}</p>
+                <p>{h.sponsors[sp.key as "axisnow" | "apimart"]}</p>
                 <span className="spon-cta">{h.sponsors.detail}</span>
               </span>
             </a>

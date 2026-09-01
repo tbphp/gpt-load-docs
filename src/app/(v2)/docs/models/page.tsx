@@ -70,6 +70,12 @@ export default async function Models() {
         拉取结果按上游返回，勾选后才对外开放。
       </Figure>
 
+      <Notice label="快速同步" tone="blue">
+        模型发现抽屉里可以按上游结果<strong>完全同步</strong>、<strong>仅添加</strong>或
+        <strong>清理</strong>当前列表。同步只比较上游发现结果，不把价格目录当作上游模型；
+        保留下来的模型会保留别名，确认后直接保存。
+      </Notice>
+
       <Heading id="alias">模型别名</Heading>
       <p>
         别名在<strong>分组的「模型与别名」标签页</strong>中配置，解决一个很实际的问题：
