@@ -337,26 +337,26 @@ export default async function Home() {
         <div className="g12 rows-44">
           <Figure
             className="col-6"
-            src={docScreenshot(locale, "sub-02-accounts.png")}
-            alt={h.console.subscriptionAlt}
+            src={docScreenshot(locale, "grp-01-list.png")}
+            alt={h.console.groupsAlt}
             width={2880}
             height={1440}
-            caption={h.console.subscriptionCaption}
-            note={h.console.subscriptionNote}
+            caption={h.console.groupsCaption}
+            note={h.console.groupsNote}
           >
-            {h.console.subscriptionDescription}
+            {h.console.groupsDescription}
           </Figure>
 
           <Figure
             className="col-6"
-            src="/v2/usage-cost.png"
-            alt={h.console.usageAlt}
+            src={docScreenshot(locale, "mon-01-health.png")}
+            alt={h.console.healthAlt}
             width={2880}
             height={1440}
-            caption={h.console.usageCaption}
-            note={h.console.usageNote}
+            caption={h.console.healthCaption}
+            note={h.console.healthNote}
           >
-            {h.console.usageDescription}
+            {h.console.healthDescription}
           </Figure>
         </div>
       </Section>
