@@ -244,6 +244,7 @@ export const zh = {
       { label: "渠道与能力矩阵", description: "逐渠道协议、Operation、代理与验证等级" },
       { label: "环境变量", description: "进程配置全表" },
       { label: "管理 API", description: "脚本化管理分组与密钥" },
+      { label: "错误与恢复参考", description: "错误码、请求日志字段、路由原因与处理方式" },
       { label: "常见问题", description: "部署、接入与排障的高频问题" },
       { label: "从 1.x 迁移", description: "2.0 无法原地升级，需并行部署" },
     ],

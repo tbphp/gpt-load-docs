@@ -80,21 +80,10 @@ export default function Faq() {
       <Heading id="model">模型相关</Heading>
 
       <h3>提示模型不存在</h3>
-      <p>用路由检查最快，它会直接告诉你是哪一环的问题：</p>
-      <ul>
-        <li>
-          <code>no_available_group</code>——没有分组开放这个模型，
-          去分组的模型标签页添加
-        </li>
-        <li>
-          <code>model_filtered</code>——访问密钥限制了模型范围
-        </li>
-        <li>
-          <code>group_filtered</code>——密钥没有授权到那个分组
-        </li>
-      </ul>
       <p>
-        原因码全表见 <Link href="/docs/internals/scheduling">调度是怎么做的</Link>。
+        用路由检查最快，它会直接指出问题在访问密钥、分组还是凭据。
+        对照 <Link href="/docs/reference/errors#route-reasons">路由检查原因码</Link>
+        修改配置后，再执行一次检查确认当前状态。
       </p>
 
       <h3>想让客户端用别的模型名</h3>

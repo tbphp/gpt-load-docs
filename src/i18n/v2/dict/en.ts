@@ -247,6 +247,7 @@ export const en: Dict = {
       { label: "Channel capability matrix", description: "Protocols, operations, proxy support, and validation by channel" },
       { label: "Environment variables", description: "Complete process configuration reference" },
       { label: "Management API", description: "Scripted management of Groups and AccessKeys" },
+      { label: "Errors and recovery", description: "Error codes, request-log fields, route reasons, and remediation" },
       { label: "FAQ", description: "Common deployment, integration, and troubleshooting questions" },
       { label: "Moving from 1.x", description: "Run 2.0 in parallel; in-place upgrades are not supported" },
     ],

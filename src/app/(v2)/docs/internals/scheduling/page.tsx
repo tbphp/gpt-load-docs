@@ -19,29 +19,6 @@ const TOC = [
   { id: "reasons", label: "选不中时的原因码" },
 ];
 
-const REASONS = [
-  ["access_key_disabled", "访问密钥被停用", "去访问密钥页启用它"],
-  ["access_key_expired", "访问密钥已过期", "新建一把或延长有效期"],
-  ["protocol_filtered", "这把密钥没勾选该协议", "在密钥里补勾对应协议"],
-  ["model_filtered", "请求的模型不在允许范围", "检查密钥的模型限制"],
-  ["model_required_by_filter", "密钥限制了模型范围，但请求没带模型名", "请求里显式指定模型，或去掉密钥的模型限制"],
-  ["operation_unsupported", "渠道不支持该协议下的这个操作", "换一个支持该能力的分组，见协议与转换边界"],
-  ["native_route_required", "该请求要求原生路由，这个分组只能靠转换提供", "改用与客户端协议一致的分组"],
-  ["no_route_target", "找不到可路由的目标", "确认密钥授权了至少一个分组"],
-  ["group_disabled", "分组被停用", "启用该分组"],
-  ["group_filtered", "分组不在这把密钥的授权范围", "在密钥里补上该分组"],
-  ["no_available_group", "没有分组能提供这个模型", "确认模型已在某个分组里开放"],
-  ["no_credentials", "分组里一个凭据都没有", "往分组里添加凭据"],
-  ["group_weight_zero", "旧配置中的分组权重为 0", "改为自动权重或 1–100 的手动权重"],
-  ["credential_disabled", "凭据被停用", "启用它，或依赖其他凭据"],
-  ["credential_auth_unavailable", "订阅账号授权失效", "重新授权，见订阅账号页"],
-  ["credential_blacklisted", "凭据已被拉黑", "确认凭据本身有效后恢复它"],
-  ["credential_cooldown", "凭据正在冷却", "等待自动恢复，或加更多凭据分担"],
-  ["credential_weight_zero", "旧配置中的凭据权重为 0", "改为自动权重或 1–100 的手动权重"],
-  ["credential_not_allowed", "本次请求已经排除了这个凭据", "正常现象，重试时不会再撞上刚失败的那个"],
-  ["no_available_credential", "所有凭据都不可用", "看健康页，多半是集体限流或密钥失效"],
-];
-
 export default function Scheduling() {
   return (
     <DocsPage
@@ -73,8 +50,9 @@ export default function Scheduling() {
         </li>
       </ol>
       <p>
-        任何一步选不出目标，请求就会失败并给出<strong>原因码</strong>——
-        这些码在路由检查和请求日志里都能看到，见本页最后一节。
+        路由检查会说明访问密钥、分组或凭据为什么不能成为候选。
+        它的 <code>reason_code</code> 与客户端响应 <code>code</code>、
+        请求日志 <code>error_code</code> 是不同的信息，见本页最后一节。
       </p>
 
       <Heading id="group">先选分组</Heading>
@@ -189,34 +167,11 @@ export default function Scheduling() {
 
       <Heading id="reasons">选不中时的原因码</Heading>
       <p>
-        路由检查和请求日志会给出具体原因码。对照表：
+        路由检查按访问密钥、分组和凭据返回分层 <code>reason_code</code>。
+        完整原因、所属层级和处理方式统一收录在错误参考页。
       </p>
-
-      <div className="tbl-wrap">
-        <table className="tbl">
-          <thead>
-            <tr>
-              <th style={{ width: "30%" }}>原因码</th>
-              <th style={{ width: "32%" }}>含义</th>
-              <th>怎么处理</th>
-            </tr>
-          </thead>
-          <tbody>
-            {REASONS.map(([code, mean, fix]) => (
-              <tr key={code}>
-                <td className="m">{code}</td>
-                <td>{mean}</td>
-                <td>{fix}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
       <p>
-        看到原因码后，用 <Link href="/docs/monitor">路由检查</Link>{" "}
-        改条件再试一次，能快速确认修改是否生效——
-        不需要真的发一个请求。
+        <Link href="/docs/reference/errors#route-reasons">查看路由检查原因码及处理方式 →</Link>
       </p>
     </DocsPage>
   );

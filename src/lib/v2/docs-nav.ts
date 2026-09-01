@@ -65,6 +65,7 @@ export const DOC_GROUPS: DocGroup[] = [
       { href: "/docs/reference/support-matrix", label: "渠道与能力矩阵", desc: "逐渠道协议、Operation、代理与验证等级", status: "ready" },
       { href: "/docs/reference/env", label: "环境变量", desc: "进程配置全表", status: "ready" },
       { href: "/docs/reference/api", label: "管理 API", desc: "脚本化管理分组与密钥", status: "ready" },
+      { href: "/docs/reference/errors", label: "错误与恢复参考", desc: "错误码、请求日志字段、路由原因与处理方式", status: "ready" },
       { href: "/docs/faq", label: "常见问题", desc: "部署、接入与排障的高频问题", status: "ready" },
       { href: "/docs/migrate-from-1x", label: "从 1.x 迁移", desc: "2.0 无法原地升级，需并行部署", status: "ready" },
     ],

@@ -99,12 +99,13 @@ export default async function Monitor() {
           这里能看到转换过程
         </li>
         <li>
-          <strong>错误信息</strong>——上游返回的原始错误，
-          比网关自己的报错更能说明问题
+          <strong>错误信息</strong>——经过脱敏和长度限制的错误摘要，
+          配合错误码、来源、范围和命中规则判断
         </li>
       </ul>
       <p>
-        日志的保留天数可以配置，见 <Link href="/docs/settings">运行时设置</Link>。
+        字段和错误码见 <Link href="/docs/reference/errors#request-logs">错误与恢复参考</Link>；
+        日志保留天数见 <Link href="/docs/settings">运行时设置</Link>。
       </p>
 
       <Heading id="inspect">路由检查</Heading>
@@ -126,6 +127,9 @@ export default async function Monitor() {
           <strong>「加了新分组但没生效」</strong>——确认访问密钥有没有授权到它
         </li>
       </ul>
+      <p>
+        <Link href="/docs/reference/errors#route-reasons">查看路由检查原因码及处理方式 →</Link>
+      </p>
 
       <Figure
         src={docScreenshot(locale, "mon-02-inspect.png")}
@@ -229,7 +233,7 @@ export default async function Monitor() {
         </li>
         <li>
           <strong>最后翻请求日志</strong>——找到那条失败的，
-          看上游返回的原始错误
+          看错误码和已脱敏的错误摘要
         </li>
       </ol>
       <p>
@@ -241,7 +245,7 @@ export default async function Monitor() {
       <p>
         如果健康正常、路由检查也显示存在候选分组和可用凭据，但请求还是失败，
         那多半是上游侧的问题（额度、模型下线、区域限制），
-        日志里的原始错误信息会说明。
+        日志里的错误码和安全摘要会提供进一步线索。
       </p>
     </DocsPage>
   );

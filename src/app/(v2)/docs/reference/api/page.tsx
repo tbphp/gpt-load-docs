@@ -80,6 +80,11 @@ export default function Api() {
         <strong>成功时 <code>code</code> 是数字 0</strong>，失败时是字符串标识——
         判断时注意类型。
       </p>
+      <p>
+        程序应判断 <code>code</code> 和结构化 <code>data</code>，不要解析本地化的
+        <code>message</code>。完整错误码与恢复方式见{" "}
+        <Link href="/docs/reference/errors#management">错误与恢复参考</Link>。
+      </p>
 
       <Heading id="res">主要资源</Heading>
       <div className="tbl-wrap">

@@ -245,6 +245,7 @@ export const ja: Dict = {
       { label: "チャネル能力マトリクス", description: "チャネル別のプロトコル、Operation、プロキシ、検証レベル" },
       { label: "環境変数", description: "プロセス設定の完全なリファレンス" },
       { label: "管理 API", description: "Group と AccessKey のスクリプト管理" },
+      { label: "エラーと復旧", description: "エラーコード、リクエストログ項目、ルート理由、対処方法" },
       { label: "よくある質問", description: "デプロイ、接続、トラブルシューティングの質問" },
       { label: "1.x からの移行", description: "2.0 を並行稼働し、安全に切り替える" },
     ],
