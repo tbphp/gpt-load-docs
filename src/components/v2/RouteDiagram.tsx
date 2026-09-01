@@ -226,8 +226,8 @@ export default function RouteDiagram() {
 
       {/* 端点：标签在上、方块居中、数量在下 */}
       {endpoints.map((e, i) => (
-        <g className="lb" id={`${e.key}-end`} key={`${e.key}-end`} style={{ "--rt-c": e.cat } as CSSProperties}>
-          <text className="pop lb-name" style={del(0.94 + i * 0.02)} x="696" y={e.labelY} textAnchor="end" fill="#0a0a0a" fontSize="12" fontWeight="600" fontFamily={SANS}>{e.name}</text>
+        <g className="route-endpoint" id={`${e.key}-end`} key={`${e.key}-end`} style={{ "--rt-c": e.cat } as CSSProperties}>
+          <text className="pop route-endpoint-name" style={del(0.94 + i * 0.02)} x="696" y={e.labelY} textAnchor="end" fill="#0a0a0a" fontSize="12" fontWeight="600" fontFamily={SANS}>{e.name}</text>
           <rect className="nd pop" style={del(0.92 + i * 0.02)} x="617" y={e.labelY + 4} width="12" height="12" fill="#ffffff" stroke={e.cat} strokeWidth="2" />
           <text className="pop" style={del(0.97 + i * 0.02)} x="696" y={e.labelY + 34} textAnchor="end" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.3" fontFamily={MONO}>{t.common.routeChannels.replace("{count}", String(e.count))}</text>
         </g>

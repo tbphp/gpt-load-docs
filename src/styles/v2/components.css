@@ -288,12 +288,12 @@
 
 /* ---------- 图片查看器 ----------
    顶部只放图片信息，所有操作收敛到底部，避免窄屏工具栏换行。 */
-.lb {
+dialog.lb {
   inset: 0; width: 100vw; max-width: none; height: 100vh; height: 100dvh; max-height: none;
   margin: 0; padding: 0; border: 0; background: #0a0b0c; color: #fff;
 }
-.lb::backdrop { background: rgba(8,9,10,.96); }
-.lb:not([open]) { display: none; }
+dialog.lb::backdrop { background: rgba(8,9,10,.96); }
+dialog.lb:not([open]) { display: none; }
 .lb-in { width: 100%; height: 100%; display: flex; flex-direction: column; background: #0a0b0c; }
 
 .lb-header {
@@ -379,7 +379,7 @@
 }
 .lb-controls .lb-level:disabled { opacity: .68; }
 
-.lb :focus-visible { outline: 2px solid #fff; outline-offset: -3px; }
+dialog.lb :focus-visible { outline: 2px solid #fff; outline-offset: -3px; }
 .lb-sr {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;

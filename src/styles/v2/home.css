@@ -19,41 +19,41 @@
 /* 主干与网关保持墨色（结构），四条支线各自着色（分类信息）。
    线宽恒定 2px——命中与否只靠明度区分，不做加粗，
    加粗会让线在切换时「胀」一下，破坏数据流本身的连贯感。 */
-.rt {
+.route-svg .rt {
   stroke: var(--rt-c, var(--ink)); stroke-width: 2; fill: none;
   transition: opacity .22s ease;
 }
-.rt.dim { opacity: .2; }
-.rt.hot { opacity: 1; }
+.route-svg .rt.dim { opacity: .2; }
+.route-svg .rt.hot { opacity: 1; }
 
-.nd { transition: fill .22s ease, opacity .22s ease; }
-.nd.dim { opacity: .28; }
+.route-svg .nd { transition: fill .22s ease, opacity .22s ease; }
+.route-svg .nd.dim { opacity: .28; }
 /* 端点平时是空心描边，命中时用该类别的颜色填实 */
-.nd.hot { fill: var(--rt-c, var(--blue)); }
+.route-svg .nd.hot { fill: var(--rt-c, var(--blue)); }
 
-.lb { transition: opacity .22s ease; }
-.lb.dim { opacity: .32; }
-.lb-name { transition: fill .22s ease; }
-.lb.hot .lb-name { fill: var(--rt-c, var(--ink)); }
+.route-svg .route-endpoint { transition: opacity .22s ease; }
+.route-svg .route-endpoint.dim { opacity: .32; }
+.route-svg .route-endpoint-name { transition: fill .22s ease; }
+.route-svg .route-endpoint.hot .route-endpoint-name { fill: var(--rt-c, var(--ink)); }
 
-.gwbox { transition: stroke .22s ease; }
-.gwbox.pulse { stroke: var(--blue); }
+.route-svg .gwbox { transition: stroke .22s ease; }
+.route-svg .gwbox.pulse { stroke: var(--blue); }
 /* 请求方块：进入时是墨色（还没归属），出网关后染成该路由的颜色 */
-.signal { fill: var(--ink); transition: fill .18s ease; }
+.route-svg .signal { fill: var(--ink); transition: fill .18s ease; }
 
-.draw { stroke-dasharray: 1; stroke-dashoffset: 1; }
-.play .draw { animation: rtdraw var(--dur-draw, .34s) cubic-bezier(.35,.1,.25,1) var(--del, 0s) forwards; }
+.route-svg .draw { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.route-svg.play .draw { animation: rtdraw var(--dur-draw, .34s) cubic-bezier(.35,.1,.25,1) var(--del, 0s) forwards; }
 @keyframes rtdraw { to { stroke-dashoffset: 0; } }
-.pop { opacity: 0; }
-.play .pop { animation: rtpop .26s ease-out var(--del, 0s) forwards; }
+.route-svg .pop { opacity: 0; }
+.route-svg.play .pop { animation: rtpop .26s ease-out var(--del, 0s) forwards; }
 @keyframes rtpop { to { opacity: 1; } }
-.gwdraw { stroke-dasharray: 1; stroke-dashoffset: 1; }
-.play .gwdraw { animation: rtdraw .32s cubic-bezier(.35,.1,.25,1) .3s forwards; }
+.route-svg .gwdraw { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.route-svg.play .gwdraw { animation: rtdraw .32s cubic-bezier(.35,.1,.25,1) .3s forwards; }
 
 @media (prefers-reduced-motion: reduce) {
-  .draw, .gwdraw { stroke-dashoffset: 0 !important; }
-  .pop { opacity: 1 !important; }
-  .signal { display: none; }
+  .route-svg .draw, .route-svg .gwdraw { stroke-dashoffset: 0 !important; }
+  .route-svg .pop { opacity: 1 !important; }
+  .route-svg .signal { display: none; }
 }
 
 /* ---------- 渠道墙 ---------- */
