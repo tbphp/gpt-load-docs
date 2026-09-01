@@ -12,22 +12,28 @@ const TOC = [
   { id: "auth", label: "认证" },
   { id: "lockout", label: "认证失败锁定" },
   { id: "shape", label: "响应约定" },
+  { id: "write-contract", label: "写入前提" },
   { id: "res", label: "主要资源" },
   { id: "example", label: "几个例子" },
   { id: "warn", label: "注意事项" },
 ];
 
 const RESOURCES = [
-  ["/api/groups", "分组的增删改查"],
-  ["/api/groups/{id}/credentials", "凭据管理，含批量导入、查看真实值、下载"],
-  ["/api/access-keys", "访问密钥，含限额与查看真实值"],
-  ["/api/models", "模型信息"],
-  ["/api/model-prices", "模型价格，含同步与重置"],
-  ["/api/logs", "请求日志查询"],
+  ["/api/auth/session", "确认当前 Bearer 身份类型"],
+  ["/api/home", "首页摘要、统计与订阅账号概览"],
+  ["/api/health", "运行态健康状态"],
+  ["/api/logs", "请求日志列表与详情"],
   ["/api/usage", "用量与成本统计"],
-  ["/api/health", "健康状态"],
-  ["/api/settings", "运行时设置"],
-  ["/api/route/inspect", "路由检查"],
+  ["/api/settings", "全局运行时设置"],
+  ["/api/system", "部署信息与版本更新检查"],
+  ["/api/route/inspect", "只读路由检查"],
+  ["/api/channels", "渠道描述符、字段与能力"],
+  ["/api/models", "项目模型列表与上游模型发现"],
+  ["/api/model-prices", "模型价格查询、同步、修改、重置与删除"],
+  ["/api/groups", "分组列表、创建、详情、设置、模型与删除"],
+  ["/api/groups/{group_id}/credentials", "凭据管理，含批量导入、查看真实值、下载"],
+  ["/api/credential-stages", "订阅凭据的授权、导入、轮询与暂存状态"],
+  ["/api/access-keys", "访问密钥，含限额与查看真实值"],
 ];
 
 export default function Api() {
@@ -55,6 +61,11 @@ export default function Api() {
         </li>
       </ul>
       <p>需要写入或调用路由检查时必须使用 <code>AUTH_KEY</code>。</p>
+      <p>
+        访问密钥当前只允许读取 <code>/api/auth/session</code>、<code>/api/home</code>、
+        <code>/api/home/statistics</code>、<code>/api/models</code>、<code>/api/usage</code>、
+        <code>/api/logs</code> 和 <code>/api/logs/{`{request_id}`}</code>；其他管理路由返回 403。
+      </p>
 
       <Heading id="lockout">认证失败锁定</Heading>
       <Notice label="避免脚本反复重试错误密钥" tone="amber">
@@ -81,10 +92,51 @@ export default function Api() {
         判断时注意类型。
       </p>
       <p>
+        <code>data</code> 在成功和失败响应中都是可选字段；没有返回数据时会直接省略，
+        不要假设它始终存在或始终是对象。<code>message</code> 会随
+        <code>Accept-Language</code> 本地化。
+      </p>
+      <p>
         程序应判断 <code>code</code> 和结构化 <code>data</code>，不要解析本地化的
         <code>message</code>。完整错误码与恢复方式见{" "}
         <Link href="/docs/reference/errors#management">错误与恢复参考</Link>。
       </p>
+
+      <Heading id="write-contract">写入前提</Heading>
+      <div className="tbl-wrap">
+        <table className="tbl">
+          <thead>
+            <tr>
+              <th style={{ width: "24%" }}>请求头</th>
+              <th style={{ width: "42%" }}>哪些接口要求</th>
+              <th>合同</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="m">Idempotency-Key</td>
+              <td>
+                <code>POST /api/groups</code><br />
+                <code>POST /api/groups/{`{group_id}`}/credentials/import</code><br />
+                <code>POST /api/groups/{`{group_id}`}/credentials/connect</code><br />
+                <code>POST /api/groups/{`{group_id}`}/credentials/{`{credential_id}`}/reset-credits/consume</code><br />
+                <code>POST /api/access-keys</code><br />
+                <code>POST /api/access-keys/{`{id}`}/rotate</code>
+              </td>
+              <td>必须且只能有一个值，格式为规范的小写 UUID v4；同一逻辑操作重试时复用原值</td>
+            </tr>
+            <tr>
+              <td className="m">If-Match</td>
+              <td><code>PUT /api/settings</code></td>
+              <td>先读取设置响应中的 <code>ETag</code>，再原样带回；冲突时重新读取并合并</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <Notice label="JSON 请求体使用严格合同" tone="blue">
+        声明 JSON 请求体的端点只接受单个对象；未知字段、重复字段、尾随的第二个 JSON 值都会被拒绝。
+        采用空对象合同的无参数操作只接受空请求体或 <code>{`{}`}</code>。
+      </Notice>
 
       <Heading id="res">主要资源</Heading>
       <div className="tbl-wrap">
@@ -106,12 +158,10 @@ export default function Api() {
         </table>
       </div>
 
-      <Notice label="以管理台的实际请求为准" tone="blue">
-        每个端点的具体参数没有在这里逐一列出——
-        接口仍在演进，写死在文档里容易过时。
-        <b>最可靠的做法是打开浏览器开发者工具</b>，
-        在管理台做一次对应操作，直接看它发了什么请求。
-        这样拿到的参数一定是当前版本准确的。
+      <Notice label="自动化脚本要固定版本" tone="blue">
+        本表记录稳定资源边界，不复制仍在演进的全部端点字段。
+        当前版本的完整路由合同由代码中的 <code>internal/control/http_routes.go</code> 定义；
+        自动化脚本应固定 GPT-Load 的精确版本，并在升级后回归实际调用。
       </Notice>
 
       <Heading id="example">几个例子</Heading>
@@ -133,6 +183,13 @@ export default function Api() {
         <code>access_key_id</code> 是管理台中访问密钥的数字 ID。
         路由检查只计算当前配置下的候选结果，不会向上游发送真实请求。
       </p>
+      <CodeBlock caption="导入凭据：带幂等键">
+        curl -X POST http://127.0.0.1:3001/api/groups/1/credentials/import \{"\n"}
+        {"  "}-H <span className="s">&quot;Authorization: Bearer $AUTH_KEY&quot;</span> \{"\n"}
+        {"  "}-H <span className="s">&quot;Idempotency-Key: 7f6a7f86-3f58-4ae3-a1a1-46d3b8d17b71&quot;</span> \{"\n"}
+        {"  "}-H <span className="s">&quot;Content-Type: application/json&quot;</span> \{"\n"}
+        {"  "}-d <span className="s">&apos;{"{"}&quot;credentials&quot;:&quot;sk-example&quot;{"}"}&apos;</span>
+      </CodeBlock>
 
       <Heading id="warn">注意事项</Heading>
       <Notice label="不要暴露到公网" tone="amber">
@@ -150,8 +207,7 @@ export default function Api() {
           <strong>接口会随版本调整</strong>——自动化脚本升级后要回归验证
         </li>
         <li>
-          <strong>批量操作注意幂等</strong>——
-          比如重复导入同一批凭据，重复的会被自动跳过，但仍建议先查后写
+          <strong>不要自行改变幂等键</strong>——结果不明时复用原值；新的逻辑操作再生成新值
         </li>
       </ul>
     </DocsPage>

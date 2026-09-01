@@ -20,6 +20,8 @@ const TOC = [
 ];
 
 type ErrorRow = readonly [code: string, status: string, meaning: string, action: string];
+type FieldRow = readonly [field: string, values: string, meaning: string];
+type DataRow = readonly [code: string, fields: string, when: string];
 
 const MANAGEMENT_COMMON: ErrorRow[] = [
   ["BAD_REQUEST", "400", "请求参数或路径不合法", "修正请求后再试"],
@@ -30,6 +32,8 @@ const MANAGEMENT_COMMON: ErrorRow[] = [
   ["FORBIDDEN", "403", "当前身份没有该操作权限", "改用 AUTH_KEY 或缩小操作范围"],
   ["AUTH_LOCKED", "429", "同一直接对端连续认证失败后被临时锁定", "按 Retry-After 等待，不要继续重试错误密钥"],
   ["NOT_FOUND", "404", "目标资源不存在", "刷新资源列表并核对 ID"],
+  ["ROUTE_NOT_FOUND", "404", "请求的管理路由不存在或已经退役", "核对路径和当前版本的路由合同"],
+  ["METHOD_NOT_ALLOWED", "405", "管理路由存在，但 HTTP 方法不受支持", "改用该路由声明的方法"],
   ["DUPLICATE_RESOURCE", "409", "唯一资源已经存在", "复用现有资源或修改唯一字段"],
   ["BAD_GATEWAY", "502", "管理操作依赖的上游请求失败", "检查 data 和上游状态后再试"],
   ["DATABASE_ERROR", "500", "数据库操作失败", "检查服务日志和数据库可用性"],
@@ -58,7 +62,7 @@ const MANAGEMENT_DOMAIN: ErrorRow[] = [
   ["MODEL_PRICE_AUTOMATIC_DELETE_FORBIDDEN", "409", "自动同步的模型价格不能手动删除", "修改同步来源或等待后续同步"],
   ["OAUTH_FILE_INVALID", "400", "OAuth JSON 无法识别或字段无效", "重新导出并导入完整文件"],
   ["OAUTH_FILE_TOO_LARGE", "413", "OAuth 文件超过大小限制", "只保留所需凭据内容"],
-  ["AUTHORIZATION_UNAVAILABLE", "503", "当前渠道无法启动浏览器授权", "检查渠道能力和服务日志"],
+  ["AUTHORIZATION_UNAVAILABLE", "503", "浏览器授权、设备码授权或订阅凭据刷新暂不可用", "检查渠道能力、网络和服务日志"],
   ["AUTHORIZATION_STATE_INVALID", "400", "授权回调状态无效或不匹配", "重新发起一次授权"],
   ["AUTHORIZATION_EXCHANGE_FAILED", "502", "授权码交换凭据失败", "检查上游状态后重新授权"],
   ["STAGED_CREDENTIAL_NOT_READY", "409", "暂存凭据尚未完成授权", "完成授权后再连接"],
@@ -87,7 +91,7 @@ const DATA_PLANE_ERRORS: ErrorRow[] = [
   ["upstream_protocol_error", "502", "上游响应无法安全处理", "检查上游响应格式、Content-Encoding 和服务日志"],
   ["protocol_conversion_unsupported", "422", "没有路由能够原生执行或安全转换请求", "更换协议、Operation 或渠道"],
   ["request_too_large", "413", "数据面请求体超过大小限制", "减小请求体"],
-  ["unsupported_content_encoding", "415", "请求使用了不支持的 Content-Encoding", "改用 identity、gzip 或 zstd"],
+  ["unsupported_content_encoding", "415", "请求使用了不支持的 Content-Encoding", "改用 identity、gzip、br、deflate 或 zstd"],
   ["invalid_content_encoding", "400", "压缩请求体无法解码", "重新编码请求体并核对请求头"],
   ["not_acceptable", "406", "客户端不接受 identity 编码的响应", "允许 identity 响应"],
   ["model_list_too_large", "500", "可见模型列表超过安全响应限制", "缩小访问密钥可见的模型范围"],
@@ -120,21 +124,48 @@ const LOG_ONLY_ERRORS: readonly (readonly [code: string, meaning: string, action
   ["rate_limit_exceeded", "上游明确表示容量限流", "查看冷却和后续候选"],
 ];
 
-const LOG_FIELDS: readonly (readonly [field: string, values: string, meaning: string])[] = [
-  ["status_code", "HTTP 状态码", "请求最终结果或单次上游尝试的状态码"],
+const MANAGEMENT_DATA: DataRow[] = [
+  ["VALIDATION_FAILED", "entry, field, reason_code", "部分凭据字段校验失败时"],
+  ["AUTH_LOCKED", "retry_after_seconds", "认证锁定时，同时返回 Retry-After 响应头"],
+  ["BAD_GATEWAY", "trigger, checked_at_ms, successful_fetch_at_ms, not_modified, skipped, error_code", "手动同步 Models.dev 失败时"],
+  ["IDEMPOTENCY_KEY_REUSED", "operation_id, operation_kind", "幂等键对应另一请求时"],
+  ["IDEMPOTENCY_RESULT_EXPIRED", "operation_id, operation_kind, resource_identity, completed_at_ms", "幂等结果已经压缩时"],
+  ["CONTROL_OPERATION_INCOMPLETE", "operation_id, operation_kind, last_completed_stage, failed_stage, can_reconcile", "数据库提交后运行态恢复未完成时"],
+  ["CONTROL_RECOVERY_PENDING", "operation_id, operation_kind, failed_stage, retry_after_ms", "更早的提交阻塞当前写入时"],
+  ["SETTINGS_VERSION_CONFLICT", "settings, settings_etag", "If-Match 已经过期时"],
+  ["GROUP_IN_USE", "access_keys[] { id, name }", "删除仍被访问密钥引用的分组时"],
+  ["CHANNEL_TARGET_CONFLICT", "groups[] { id, name }", "创建相同渠道目标且没有确认时"],
+  ["MODEL_NAME_CONFLICT", "conflicts[] { client_model, indexes }", "分组模型名或别名冲突时"],
+  ["MODEL_PRICE_UNPRICED_CONFIRMATION_REQUIRED", "id", "未确认就把价格全部设为空时"],
+  ["MODEL_PRICE_REFERENCED", "id, reference_count, reference_group_count", "删除仍被分组引用的价格时"],
+  ["MODEL_PRICE_AUTOMATIC_DELETE_FORBIDDEN", "id", "删除自动同步价格时"],
+];
+
+const TOP_LEVEL_LOG_FIELDS: FieldRow[] = [
+  ["request_id", "UUID v4", "GPT-Load 请求 ID；用于关联请求详情和服务日志"],
+  ["status", "success / error / incomplete / canceled", "整个请求的最终状态"],
+  ["status_code", "0 / HTTP 状态码", "整个请求最终结果的状态码；没有形成 HTTP 响应时可以为 0"],
   ["error_code", "归一化错误码", "程序筛选和聚合使用；不要从 error_summary 反推"],
   ["error_summary", "已脱敏、长度受限的摘要", "用于人工排障，不保证保留上游原文"],
-  ["failure_category", "rate_limited / model_unavailable / invalid_key / upstream_host_error / client_error / conversion_unsupported / downstream_cancel / authentication_required / ambiguous", "失败的稳定业务分类"],
-  ["failure_origin", "client / upstream / downstream / internal", "错误责任域：客户端、上游、下游连接或网关内部"],
-  ["failure_scope", "request / model / credential / group", "错误影响的最小资源范围"],
-  ["retry_directive", "none / refresh_credential / next_candidate", "Judge 作出的重试意图，不代表下一次尝试已经发生"],
-  ["effect", "none / cooldown_credential / record_credential_failure / skip_group", "本次尝试对运行态产生的唯一效果"],
-  ["rule_id", "稳定规则标识", "说明哪条分类或安全规则产生了决定"],
+  ["attempt_count", "非负整数", "实际记录的上游或本地执行尝试数量"],
+];
+
+const ATTEMPT_LOG_FIELDS: FieldRow[] = [
+  ["sequence", "从 1 开始的整数", "尝试在本次请求中的顺序"],
+  ["status_code", "0 / HTTP 状态码", "这一次尝试的结果状态码；上游未响应时可以为 0"],
+  ["error_code", "归一化错误码", "这一次尝试的失败原因；成功时为空字符串"],
+  ["error_summary", "已脱敏、长度受限的摘要", "只用于人工排障"],
+  ["failure_category", "ok / rate_limited / model_unavailable / invalid_key / upstream_host_error / client_error / conversion_unsupported / downstream_cancel / authentication_required / ambiguous", "稳定业务分类，成功尝试为 ok"],
+  ["failure_origin", "client / upstream / downstream / internal / null", "错误责任域；旧记录可能为 null"],
+  ["failure_scope", "request / model / credential / group / null", "错误影响的最小资源范围；不适用或旧记录为 null"],
+  ["retry_directive", "none / refresh_credential / next_candidate / null", "Judge 作出的重试意图；旧记录可能为 null"],
+  ["effect", "none / cooldown_credential / record_credential_failure / skip_group / null", "本次尝试对运行态产生的唯一效果；旧记录可能为 null"],
+  ["rule_id", "稳定规则标识 / null", "产生决定的规则；旧记录可能为 null"],
   ["will_retry", "true / false", "之后是否真的开始了另一轮上游尝试"],
-  ["dispatch_state", "not_sent / maybe_sent", "请求确定未发送，或可能已经到达上游"],
-  ["response_started", "true / false", "是否已经收到上游响应"],
+  ["dispatch_state", "not_sent / maybe_sent / local / null", "确定未发送、可能已到上游、完全在 GPT-Load 本地完成，或旧记录未知"],
+  ["response_started", "true / false", "本次尝试是否已经形成响应；local 也可以为 true"],
   ["committed", "true / false", "是否已经开始向客户端输出；提交后不能安全切换候选"],
-  ["upstream_request_id", "上游请求 ID", "联系上游排障时使用，不等于 GPT-Load Request ID"],
+  ["upstream_request_id", "上游请求 ID / null", "联系上游排障时使用；本地执行或上游未返回时为 null"],
   ["action", "terminate / retry / cooldown_credential / fail_credential / skip_group", "兼容展示字段；精确判断应读取 retry_directive 和 effect"],
 ];
 
@@ -158,7 +189,6 @@ const ROUTE_REASONS: readonly (readonly [code: string, level: string, meaning: s
   ["credential_blacklisted", "凭据", "凭据已被拉黑", "确认凭据有效后恢复它"],
   ["credential_cooldown", "凭据", "凭据正在冷却", "等待自动恢复，或加更多凭据分担"],
   ["credential_weight_zero", "凭据", "旧配置中的凭据权重为 0", "改为自动权重或 1–100 的手动权重"],
-  ["credential_not_allowed", "凭据", "本次请求已经排除了这个凭据", "正常现象，重试不会再选择刚失败的凭据"],
 ];
 
 function errorTable(rows: ErrorRow[]) {
@@ -180,6 +210,31 @@ function errorTable(rows: ErrorRow[]) {
               <td>{status}</td>
               <td>{meaning}</td>
               <td>{action}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function fieldTable(rows: FieldRow[]) {
+  return (
+    <div className="tbl-wrap">
+      <table className="tbl">
+        <thead>
+          <tr>
+            <th style={{ width: "24%" }}>字段</th>
+            <th style={{ width: "38%" }}>取值</th>
+            <th>如何理解</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map(([field, values, meaning]) => (
+            <tr key={field}>
+              <td className="m">{field}</td>
+              <td>{values}</td>
+              <td>{meaning}</td>
             </tr>
           ))}
         </tbody>
@@ -257,6 +312,30 @@ export default function ErrorsReference() {
         字段定位、当前设置与 ETag、操作 ID、失败阶段、重试时间以及额度限制明细。
         未声明的错误通常没有 <code>data</code>。
       </Notice>
+      <h3>管理错误的结构化 data</h3>
+      <p>
+        下表只列有稳定结构的管理错误；同一个错误码在其他场景仍可能不带 <code>data</code>。
+      </p>
+      <div className="tbl-wrap">
+        <table className="tbl" style={{ minWidth: 900 }}>
+          <thead>
+            <tr>
+              <th style={{ width: "30%" }}>错误码</th>
+              <th style={{ width: "42%" }}>data 字段</th>
+              <th>何时返回</th>
+            </tr>
+          </thead>
+          <tbody>
+            {MANAGEMENT_DATA.map(([code, fields, when]) => (
+              <tr key={code}>
+                <td className="m">{code}</td>
+                <td className="m">{fields}</td>
+                <td>{when}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       <Heading id="data-plane">数据面错误</Heading>
       <p>
@@ -265,6 +344,15 @@ export default function ErrorsReference() {
         成本限制会额外返回结构化 <code>error</code> 和 <code>data</code>。
       </p>
       {errorTable(DATA_PLANE_ERRORS)}
+
+      <p>
+        <code>access_key_cost_limit_exceeded</code> 的 <code>error</code> 包含
+        <code>type</code>、<code>code</code>、<code>message</code> 和可选的
+        <code>resets_at</code>（Unix 秒）；<code>data</code> 包含 <code>recoverable</code>、
+        <code>next_available_at_ms</code>（Unix 毫秒）与 <code>blocking_rules</code>。每条阻塞规则包含
+        <code>id</code>、<code>kind</code>、<code>limit_usd</code>、<code>used_usd</code>，
+        周期规则还会给出 <code>period_seconds</code> 和 <code>window_ends_at_ms</code>。
+      </p>
 
       <Notice label="上游错误不一定使用这套结构" tone="amber">
         原生路由会在脱敏和安全检查后返回上游错误体；转换路由会投影成客户端协议的错误结构。
@@ -308,26 +396,10 @@ export default function ErrorsReference() {
       </Notice>
 
       <Heading id="log-fields">请求日志字段</Heading>
-      <div className="tbl-wrap">
-        <table className="tbl">
-          <thead>
-            <tr>
-              <th style={{ width: "24%" }}>字段</th>
-              <th style={{ width: "35%" }}>取值</th>
-              <th>如何理解</th>
-            </tr>
-          </thead>
-          <tbody>
-            {LOG_FIELDS.map(([field, values, meaning]) => (
-              <tr key={field}>
-                <td className="m">{field}</td>
-                <td>{values}</td>
-                <td>{meaning}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <h3>请求顶层</h3>
+      {fieldTable(TOP_LEVEL_LOG_FIELDS)}
+      <h3><code>attempts[]</code> 中的尝试字段</h3>
+      {fieldTable(ATTEMPT_LOG_FIELDS)}
 
       <Heading id="example">完整案例</Heading>
       <CodeBlock caption="请求日志中的一次失败尝试">
@@ -375,6 +447,10 @@ export default function ErrorsReference() {
           </tbody>
         </table>
       </div>
+      <Notice label="内部排除原因不会出现在当前路由检查里" tone="blue">
+        调度器还定义了 <code>credential_not_allowed</code>，用于把真实请求的候选限制在请求开始时捕获的凭据集合内。
+        当前 <code>/api/route/inspect</code> 不接收这类请求级凭据集合，因此不会返回这个原因码。
+      </Notice>
       <p>
         修改配置后回到<Link href="/docs/monitor">路由检查</Link>重新执行，即可验证当前状态，
         不需要发送真实模型请求。

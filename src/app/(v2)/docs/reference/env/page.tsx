@@ -28,7 +28,7 @@ const NET = [
 ];
 
 const DATA = [
-  ["DATA_DIR", "./data", "数据目录，存数据库与两把密钥"],
+  ["DATA_DIR", "./data", "受管数据目录，保存默认 SQLite、自动生成的密钥和运行状态文件；使用外部数据库或显式密钥时，对应文件不在这里"],
   ["DATABASE_DSN", "（空）", "留空用受管 SQLite；填入则连接外部数据库"],
   ["DATABASE_MAX_OPEN_CONNECTIONS", "10", "数据库最大连接数。仅对 MySQL 与 PostgreSQL 生效，SQLite 始终单连接"],
   ["DATABASE_MAX_IDLE_CONNECTIONS", "5", "最大空闲连接数，不得大于上一项。同样只对 MySQL 与 PostgreSQL 生效"],
@@ -214,7 +214,11 @@ export default function Env() {
             <tr>
               <td className="m">LOG_LEVEL</td>
               <td className="m">info</td>
-              <td>日志级别</td>
+              <td>
+                支持 <code>panic</code>、<code>fatal</code>、<code>error</code>、
+                <code>warn</code>、<code>warning</code>、<code>info</code>、
+                <code>debug</code>、<code>trace</code>；无效值会告警并回退到 <code>info</code>
+              </td>
             </tr>
             <tr>
               <td className="m">LOG_FORMAT</td>
