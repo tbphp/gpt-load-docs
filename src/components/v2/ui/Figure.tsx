@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Maximize2 } from "lucide-react";
 import type { ReactNode } from "react";
 import { getT } from "@/i18n/v2/server";
 
@@ -54,7 +55,8 @@ export default async function Figure({
       >
         <Image src={src} alt={alt ?? caption} width={width ?? 2880} height={height ?? 1440} />
         <span className="fig-hint" aria-hidden="true">
-          {t.common.clickToView}
+          <Maximize2 size={13} strokeWidth={1.75} />
+          {t.common.viewLarge}
         </span>
       </button>
 
