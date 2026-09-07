@@ -12,7 +12,7 @@ export function generateMetadata(): Promise<Metadata> {
 
 const TOC = [
   { id: "what", label: "分组是什么" },
-  { id: "channels", label: "23 个内置渠道" },
+  { id: "channels", label: "24 个内置渠道" },
   { id: "create", label: "建一个分组" },
   { id: "params", label: "渠道参数" },
   { id: "creds", label: "管理凭据池" },
@@ -32,7 +32,7 @@ const CHANNELS = [
     cred: "API 密钥",
   },
   { g: "订阅账号", c: "var(--cat-4)", items: "Codex · Claude · Antigravity · Grok", cred: "OAuth 授权" },
-  { g: "网关与兼容", c: "var(--blue)", items: "GPT-Load · New API · CLIProxyAPI · OpenAI Compatible", cred: "API 密钥 + 网关根地址" },
+  { g: "网关与兼容", c: "var(--blue)", items: "GPT-Load · New API · CLIProxyAPI · Sub2API · OpenAI Compatible", cred: "API 密钥 + 网关根地址" },
 ];
 
 export default async function Groups() {
@@ -56,7 +56,7 @@ export default async function Groups() {
         简单说：<strong>分组朝上游，访问密钥朝应用</strong>。
       </p>
 
-      <Heading id="channels">23 个内置渠道</Heading>
+      <Heading id="channels">24 个内置渠道</Heading>
       <p>
         建分组时从这些里选一个。常用渠道直接显示为按钮，其余渠道收在「其他渠道」中。
         不同类别的凭据形态不一样：
@@ -114,7 +114,7 @@ export default async function Groups() {
           <strong>接口地址</strong>——官方渠道有默认值，用中转或自建服务时才需要改
         </li>
         <li>
-          <strong>网关根地址</strong>——GPT-Load、New API、CLIProxyAPI 填根地址或部署前缀，
+          <strong>网关根地址</strong>——GPT-Load、New API、CLIProxyAPI、Sub2API 填根地址或部署前缀，
           不要附加 <code>/v1</code>、<code>/v1beta</code> 或查询参数
         </li>
         <li>
@@ -220,7 +220,7 @@ export default async function Groups() {
       <Heading id="policy">运行策略</Heading>
       <p>
         设置标签页里是这个分组的运行参数：权重、超时、重试次数、冷却阈值、
-        会话亲和、出站代理。
+        会话亲和、出站代理与参数覆盖规则。
       </p>
 
       <Figure
@@ -231,12 +231,20 @@ export default async function Groups() {
         caption="FIG. 5 — 分组设置"
         note="覆盖系统级默认值"
       >
-        这些参数<strong>系统级也有一份</strong>，分组这里填了就覆盖系统值，没填则继承。
+        支持继承的参数可启用覆盖，或恢复系统默认；保存后生效。
       </Figure>
 
       <p>
         各参数分别调什么、什么场景下该改，见{" "}
         <Link href="/docs/settings">运行时设置</Link>。
+      </p>
+      <p>
+        「参数覆盖规则」可按客户端协议和模型匹配，模型支持精确匹配或末尾 * 前缀匹配。
+        命中的规则依次执行，每条先删除指定 JSON 路径，再合并设置；后面的规则覆盖前面的值。
+        对象递归合并，数组整体替换，null 是普通值。
+      </p>
+      <p>
+        参数覆盖用于生成与 Embeddings 请求，不作用于图片编辑、Token 统计、Responses 资源操作或探测；不能修改根级 model、stream、store。
       </p>
 
       <Heading id="custom">自定义渠道</Heading>

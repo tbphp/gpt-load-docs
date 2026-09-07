@@ -155,7 +155,7 @@ const Hero = () => {
     -p 3001:3001 \\
     -e AUTH_KEY=your-secure-key-here \\
     -v "$(pwd)/data":/app/data \\
-    ghcr.io/tbphp/gpt-load:latest
+    ghcr.io/tbphp/gpt-load:1
 
 # 访问管理界面：http://localhost:3001
 `}</code>

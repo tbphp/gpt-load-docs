@@ -124,9 +124,17 @@ export default async function Clients() {
       <CodeBlock caption="终端里设置后再启动">
         <span className="k">export</span> ANTHROPIC_BASE_URL=<span className="s">&quot;http://127.0.0.1:3001&quot;</span>{"\n"}
         <span className="k">export</span> ANTHROPIC_AUTH_TOKEN=<span className="s">&quot;你的访问密钥&quot;</span>{"\n"}
+        <span className="k">export</span> ANTHROPIC_MODEL=<span className="s">&quot;YOUR_MODEL&quot;</span>{"\n"}
+        <span className="k">export</span> ANTHROPIC_CUSTOM_MODEL_OPTION=<span className="s">&quot;$ANTHROPIC_MODEL&quot;</span>{"\n"}
+        <span className="k">export</span> CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=<span className="s">&quot;1&quot;</span>{"\n"}
         {"\n"}
         claude
       </CodeBlock>
+      <p>
+        将 YOUR_MODEL 替换为这把访问密钥可用的模型 ID，并在同一 Shell 中启动或重启 Claude Code。
+        该模型会用于启动，也会加入 /model 的自定义选项；
+        自动发现仅额外列出 ID 含 claude 或 anthropic 的模型（不区分大小写）。
+      </p>
       <p>
         要长期生效就写进 shell 配置文件。这把访问密钥需要勾选
         {" "}

@@ -157,6 +157,11 @@ export default async function Models() {
         或者用了公开数据源没收录的模型——这几种情况下自动同步的价格不准，
         手动填一次更靠谱。
       </Notice>
+      <p>
+        分组设置和访问密钥编辑页都可设置价格倍率，默认均为 1。
+        最终费用 = 原计价费用 × 分组倍率 × 访问密钥倍率；
+        请求日志、用量统计和成本限额统一使用最终费用，倍率修改不回算历史。
+      </p>
 
       <Heading id="unpriced">没有价格会怎样</Heading>
       <Notice label="不影响请求" tone="blue">

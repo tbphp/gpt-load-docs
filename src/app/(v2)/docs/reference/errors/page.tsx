@@ -47,8 +47,6 @@ const MANAGEMENT_CONSISTENCY: ErrorRow[] = [
   ["IDEMPOTENCY_RESULT_EXPIRED", "410", "幂等结果已过保留期，但操作身份仍可识别", "根据 data 核对已完成资源，不要直接重复创建"],
   ["CONTROL_OPERATION_INCOMPLETE", "503", "数据库已提交，但运行态恢复尚未完成", "保留同一幂等键并等待自动协调"],
   ["CONTROL_RECOVERY_PENDING", "503", "更早的已提交操作仍在恢复", "按 data.retry_after_ms 等待后重试"],
-  ["SETTINGS_PRECONDITION_REQUIRED", "428", "更新设置缺少 If-Match", "先读取设置和 ETag，再带 If-Match 更新"],
-  ["SETTINGS_VERSION_CONFLICT", "412", "设置在读取后已被其他请求修改", "使用 data 中的新设置重新合并"],
 ];
 
 const MANAGEMENT_DOMAIN: ErrorRow[] = [
@@ -90,6 +88,7 @@ const DATA_PLANE_ERRORS: ErrorRow[] = [
   ["upstream_timeout", "504", "上游请求超时", "检查请求日志的派发和提交状态，非幂等请求不要盲目重放"],
   ["upstream_protocol_error", "502", "上游响应无法安全处理", "检查上游响应格式、Content-Encoding 和服务日志"],
   ["protocol_conversion_unsupported", "422", "没有路由能够原生执行或安全转换请求", "更换协议、Operation 或渠道"],
+  ["parameter_override_unavailable", "503", "没有候选能够应用分组参数覆盖规则", "检查分组的参数覆盖规则"],
   ["request_too_large", "413", "数据面请求体超过大小限制", "减小请求体"],
   ["unsupported_content_encoding", "415", "请求使用了不支持的 Content-Encoding", "改用 identity、gzip、br、deflate 或 zstd"],
   ["invalid_content_encoding", "400", "压缩请求体无法解码", "重新编码请求体并核对请求头"],
@@ -132,7 +131,6 @@ const MANAGEMENT_DATA: DataRow[] = [
   ["IDEMPOTENCY_RESULT_EXPIRED", "operation_id, operation_kind, resource_identity, completed_at_ms", "幂等结果已经压缩时"],
   ["CONTROL_OPERATION_INCOMPLETE", "operation_id, operation_kind, last_completed_stage, failed_stage, can_reconcile", "数据库提交后运行态恢复未完成时"],
   ["CONTROL_RECOVERY_PENDING", "operation_id, operation_kind, failed_stage, retry_after_ms", "更早的提交阻塞当前写入时"],
-  ["SETTINGS_VERSION_CONFLICT", "settings, settings_etag", "If-Match 已经过期时"],
   ["GROUP_IN_USE", "access_keys[] { id, name }", "删除仍被访问密钥引用的分组时"],
   ["CHANNEL_TARGET_CONFLICT", "groups[] { id, name }", "创建相同渠道目标且没有确认时"],
   ["MODEL_NAME_CONFLICT", "conflicts[] { client_model, indexes }", "分组模型名或别名冲突时"],
@@ -309,7 +307,7 @@ export default function ErrorsReference() {
 
       <Notice label="data 是错误合同的一部分" tone="blue">
         只有调用方需要据此作决定时才会返回 <code>data</code>。常见内容包括冲突资源、
-        字段定位、当前设置与 ETag、操作 ID、失败阶段、重试时间以及额度限制明细。
+        字段定位、操作 ID、失败阶段、重试时间以及额度限制明细。
         未声明的错误通常没有 <code>data</code>。
       </Notice>
       <h3>管理错误的结构化 data</h3>

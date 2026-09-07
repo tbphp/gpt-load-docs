@@ -49,6 +49,7 @@ const CORE_ROUTES: CoreRoute[] = [
   { channel: "GPT-Load", credential: "AccessKey + 根地址", chat: "N", responses: "N", anthropic: "N", gemini: "N" },
   { channel: "New API", credential: "API 密钥 + 根地址", chat: "N", responses: "N", anthropic: "N", gemini: "N" },
   { channel: "CLIProxyAPI", credential: "API 密钥 + 根地址", chat: "N", responses: "N", anthropic: "N", gemini: "N" },
+  { channel: "Sub2API", credential: "API 密钥 + 根地址", chat: "N", responses: "N", anthropic: "N", gemini: "N" },
   { channel: "OpenAI Compatible", credential: "API 密钥 + 自填地址", chat: "N", responses: "C", anthropic: "C", gemini: "C" },
 ];
 
@@ -87,6 +88,7 @@ const OPERATIONS: OperationRoute[] = [
   { channel: "GPT-Load", images: "N", embeddings: "N", anthropicCount: "N", geminiCount: "N", responsesCount: "N", responsesResources: "N", discovery: true, proxy: true },
   { channel: "New API", images: "N", embeddings: "N", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "N*", discovery: true, proxy: true },
   { channel: "CLIProxyAPI", images: "N", embeddings: "—", anthropicCount: "N", geminiCount: "N", responsesCount: "—", responsesResources: "N*", discovery: true, proxy: true },
+  { channel: "Sub2API", images: "N", embeddings: "—", anthropicCount: "N", geminiCount: "N", responsesCount: "—", responsesResources: "N*", discovery: true, proxy: true },
   { channel: "OpenAI Compatible", images: "N", embeddings: "N", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: true },
 ];
 
@@ -108,7 +110,7 @@ export default function SupportMatrix() {
     >
       <Heading id="scope">口径与版本</Heading>
       <p>本页描述 GPT-Load 已声明的路由能力，不代表任意模型或上游都支持该能力。</p>
-      <p>矩阵来源于 GPT-Load v2.0.0-rc.3 的渠道描述符，核对日期为 2026-09-02。后续版本以对应版本的渠道描述符为准。</p>
+      <p>矩阵核对基于 GPT-Load 主分支提交 0ddc41d8，核对日期为 2026-09-07。具体能力以所用版本为准。</p>
       <Notice label="读表方式" tone="blue">
         N 表示 Native，按目标协议原生执行；C 表示 Converted，由网关转换；N/C 表示按模型决定；N* 表示仅原生支持 Compact；— 表示当前没有声明该路由。
       </Notice>
@@ -193,7 +195,7 @@ export default function SupportMatrix() {
             <tr>
               <td>Automated contract</td>
               <td>渠道声明、RouteMode、适配器能力与自动化测试一致</td>
-              <td>覆盖本页列出的 23 个渠道路由合同</td>
+              <td>覆盖本页列出的 24 个渠道路由合同</td>
             </tr>
             <tr>
               <td>Artifact smoke</td>
@@ -203,7 +205,7 @@ export default function SupportMatrix() {
             <tr>
               <td>Live upstream verified</td>
               <td>指定版本、渠道、Operation 和模型使用真实凭据完成验证</td>
-              <td>当前没有集中发布、可逐项追溯的 23 渠道 Live E2E 记录</td>
+              <td>当前没有集中发布、可逐项追溯的 24 渠道 Live E2E 记录</td>
             </tr>
           </tbody>
         </table>

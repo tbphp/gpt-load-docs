@@ -46,7 +46,7 @@ export default function Install() {
 
       <Heading id="compose">Docker Compose</Heading>
       <CodeBlock caption="① 起服务">
-        git clone --depth 1 --branch v2 \{"\n"}
+        git clone --depth 1 --branch main \{"\n"}
         {"  "}https://github.com/tbphp/gpt-load.git{"\n"}
         cd gpt-load{"\n"}
         {"\n"}
@@ -147,7 +147,7 @@ export default function Install() {
         需要 Go 和 Node。管理台前端会被编译进二进制，所以要先构建前端：
       </p>
       <CodeBlock caption="从源码构建">
-        git clone --branch v2 https://github.com/tbphp/gpt-load.git{"\n"}
+        git clone --branch main https://github.com/tbphp/gpt-load.git{"\n"}
         cd gpt-load{"\n"}
         {"\n"}
         <span className="c"># 构建管理台，产物会嵌入二进制</span>{"\n"}

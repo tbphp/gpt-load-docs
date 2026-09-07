@@ -102,8 +102,8 @@ export default function KnownLimitations() {
             </tr>
             <tr>
               <td className="m">latest</td>
-              <td>继续保留在 1.x，不代表 2.x</td>
-              <td>部署 2.x 时不要使用</td>
+              <td>过渡期保留的旧标签，不再随 1.x 发布更新</td>
+              <td>1.x 使用 1；2.x 使用 2 或精确版本标签</td>
             </tr>
           </tbody>
         </table>

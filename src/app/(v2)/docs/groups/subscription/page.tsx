@@ -42,7 +42,7 @@ export default async function Subscription() {
           <strong>接入方式</strong>——完成一次 OAuth 授权，或导入已有 OAuth JSON
         </li>
         <li>
-          <strong>凭据会过期</strong>——网关自动刷新；刷新失败时该账号会进入需要重新授权的状态
+          <strong>凭据会过期</strong>——网关自动刷新；遇到授权异常时，可手动刷新凭据或重新连接账号
         </li>
         <li>
           <strong>有额度窗口</strong>——订阅按周期计量，管理台会展示剩余额度与重置时间
@@ -196,22 +196,26 @@ export default async function Subscription() {
             </tr>
             <tr>
               <td>刷新中</td>
-              <td>凭据即将过期，网关正在自动续期</td>
+              <td>网关正在刷新凭据</td>
               <td>等待即可，通常几秒完成</td>
             </tr>
             <tr>
               <td>需重新授权</td>
-              <td>自动刷新失败，多为上游撤销了授权或密码变更</td>
-              <td><strong>重新走一次授权流程</strong></td>
+              <td>上游拒绝刷新，或现有授权已失效</td>
+              <td>尝试刷新凭据；仍失败时重新连接或导入</td>
             </tr>
             <tr>
               <td>结果未知</td>
               <td>刷新请求没拿到明确结果，可能是网络问题</td>
-              <td>先观察，持续未恢复再重新授权</td>
+              <td>尝试刷新凭据；仍失败时重新连接或导入</td>
             </tr>
           </tbody>
         </table>
       </div>
+      <p>
+        「刷新凭据」在账号卡片的更多菜单中，用于恢复授权；「刷新额度」只更新额度信息。
+        手动停用的账号需先启用，才能刷新凭据。
+      </p>
 
       <Figure
         src={docScreenshot(locale, "sub-02-accounts.png")}
@@ -226,10 +230,11 @@ export default async function Subscription() {
 
       <Heading id="quota">额度信息怎么读</Heading>
       <p>
-        管理台会展示订阅账号的剩余额度和重置时间。但要理解一点：
+        首次导入后点击「刷新额度」获取当前额度和重置时间；
+        升级后额度未更新或显示异常，也可主动刷新一次。
       </p>
       <Notice label="额度只作展示" tone="blue">
-        <b>额度信息不参与调度决策。</b>它是从上游响应里被动观察到的，
+        <b>额度信息不参与调度决策。</b>它通过主动同步并结合上游响应更新，
         存在延迟，也不一定覆盖所有计费维度。
         <b>真正触发账号切换的是上游返回的限流响应</b>——
         当某个账号被限流，网关会立即让它冷却并换用其他账号，

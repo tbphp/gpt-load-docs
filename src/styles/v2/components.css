@@ -63,7 +63,7 @@
 
 /* ---------- 提示框 ---------- */
 .notice { border: 1px solid var(--ink); padding: 22px 24px; display: flex; gap: 20px; align-items: baseline; flex-wrap: wrap; }
-.notice > .t { font-family: var(--f-mono); font-size: var(--t-label); letter-spacing: .16em; text-transform: uppercase; color: var(--blue); flex: none; }
+.notice > .t { font-family: var(--f-mono); font-size: var(--t-label); letter-spacing: .16em; text-transform: uppercase; color: var(--blue); flex: none; max-width: 100%; }
 .notice p { font-size: var(--t-xs); line-height: 1.6; color: var(--dim); flex: 1; min-width: 260px; }
 .notice b { color: var(--ink); font-weight: 600; }
 /* 语义变体：颜色在这里承担信息，不是装饰 */

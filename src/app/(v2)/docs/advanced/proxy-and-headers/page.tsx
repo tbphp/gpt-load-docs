@@ -12,8 +12,8 @@ const TOC = [
   { id: "when", label: "什么时候需要" },
   { id: "proxy", label: "出站代理" },
   { id: "level", label: "四级覆盖" },
-  { id: "headers", label: "请求头规则" },
-  { id: "usage", label: "用量选项注入" },
+  { id: "headers", label: "上游请求头规则" },
+  { id: "browser-access", label: "响应头与跨域" },
 ];
 
 export default function ProxyHeaders() {
@@ -36,6 +36,7 @@ export default function ProxyHeaders() {
         <li>
           <strong>上游要求特定请求头</strong>——某些中转服务会校验来源标识
         </li>
+        <li>浏览器需要跨域调用，或客户端需要自定义响应头</li>
       </ul>
       <p>没有这些需求的话，这一页的配置全都留空即可。</p>
 
@@ -100,7 +101,7 @@ export default function ProxyHeaders() {
         需要各自从对应区域的出口访问，否则会被判定为异地登录。
       </p>
 
-      <Heading id="headers">请求头规则</Heading>
+      <Heading id="headers">上游请求头规则</Heading>
       <p>
         可以在转发前修改发往上游的请求头，支持<strong>添加</strong>和
         <strong>删除</strong>两类动作。配置分全局与分组两级。
@@ -120,19 +121,17 @@ export default function ProxyHeaders() {
         用规则去改它会导致请求失败。
       </Notice>
 
-      <Heading id="usage">用量选项注入</Heading>
+      <Heading id="browser-access">响应头与跨域</Heading>
       <p>
-        部分上游<strong>默认不返回 token 用量</strong>，需要在请求里显式声明才给。
-        开启用量选项注入后，网关会自动加上这个声明。
+        在「设置 → Header 与跨域」配置下游响应头规则，可设置或移除返回客户端的自定义 Header。
+        认证、协议必要字段和网关保留头不能覆盖，CORS 头通过专用配置管理。
       </p>
       <p>
-        影响的是<strong>统计和成本估算的完整度</strong>——
-        没有用量数据的请求，在监控页会计入「用量缺失」，也不产生成本估算。
+        CORS 默认关闭。浏览器跨域调用时，启用后配置允许的来源、方法和请求头；携带凭据时不能将允许来源设为 *。
       </p>
       <p>
-        如果你发现某个分组的成本估算明显偏低、
-        或者「用量缺失」数字很大，先检查这个开关，见{" "}
-        <Link href="/docs/monitor">监控与排障</Link>。
+        这两项仅作用于 /v1、/v1beta 数据面，不影响 /api 管理接口。
+        允许的预检会自动处理，实际请求仍需 AccessKey 认证。
       </p>
       <p>
         配置位置见 <Link href="/docs/settings">运行时设置</Link>。

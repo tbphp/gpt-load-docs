@@ -14,6 +14,7 @@ const TOC = [
   { id: "two", label: "两层设置" },
   { id: "timeout", label: "三种超时" },
   { id: "retry", label: "重试与拉黑" },
+  { id: "routing", label: "路由策略" },
   { id: "affinity", label: "会话亲和" },
   { id: "logs", label: "日志留存" },
   { id: "misc", label: "其他" },
@@ -27,12 +28,12 @@ export default async function Settings() {
     <DocsPage
       path="/docs/settings"
       title="运行时设置"
-      lede="这些参数在管理台里改，即时生效，不需要重启。和环境变量是两回事——那些改完要重启。"
+      lede="这些参数在管理台保存后即时生效，不需要重启。和环境变量是两回事——那些改完要重启。"
       toc={TOC}
     >
       <Heading id="two">两层设置</Heading>
       <p>
-        同一批参数存在于两个层级：
+        超时、重试等运行参数支持两层设置：
       </p>
       <ul>
         <li>
@@ -40,7 +41,7 @@ export default async function Settings() {
         </li>
         <li>
           <strong>分组级</strong>——在分组的设置标签页配置，
-          <strong>填了就覆盖系统值，留空则继承</strong>
+          <strong>启用覆盖后编辑，恢复默认则继承系统值；保存后生效</strong>
         </li>
       </ul>
       <p>
@@ -51,13 +52,13 @@ export default async function Settings() {
 
       <Figure
         src={docScreenshot(locale, "set-01-runtime.png")}
-        alt="系统运行时设置页，展示出站代理、超时、检测间隔、重试和拉黑阈值等全局值"
+        alt="系统运行时设置页，展示路由策略及全局设置分区"
         width={2880}
         height={1440}
         caption="FIG. 1 — 系统级设置"
         note="全局默认值"
       >
-        分组里没有单独配置时，用的就是这里的值。
+        支持分组覆盖的参数，未覆盖时继承系统值。
       </Figure>
 
       <Notice label="怎么确认生效值" tone="blue">
@@ -119,6 +120,12 @@ export default async function Settings() {
         两者的完整机制见 <Link href="/docs/internals/scheduling">调度是怎么做的</Link>。
       </p>
 
+      <Heading id="routing">路由策略</Heading>
+      <p>
+        在「设置 → 路由与调度」选择全局路由策略：默认「原生优先」，优先使用原生路由；「混合权重」让原生与转换候选按有效权重竞争。
+        该项不支持分组覆盖，实际流量仍受可用凭据、请求亲和与协议能力限制。
+      </p>
+
       <Heading id="affinity">会话亲和</Heading>
       <p>
         开启后，网关会根据访问密钥、客户端协议以及请求中的指令或首个用户输入前缀
@@ -165,7 +172,7 @@ export default async function Settings() {
           <Link href="/docs/reference/env">环境变量</Link>
         </li>
         <li>
-          <strong>请求头规则</strong>与<strong>用量选项注入</strong>——
+          <strong>上游请求头、下游响应头与跨域</strong>——
           非标场景用，见 <Link href="/docs/advanced/proxy-and-headers">代理与请求头</Link>
         </li>
       </ul>

@@ -37,7 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
 /* 四个数字讲的是一组对比：接得多、装得轻、接入配置少。
    给两端上色把这层对比点出来，中间两个留墨色，避免一排全彩失去重点。 */
 const FACTS = [
-  { value: "23", tone: "blue" },
+  { value: "24", tone: "blue" },
   { value: "4" },
   { value: "1" },
   { value: "2", tone: "green" },
@@ -270,7 +270,7 @@ export default async function Home() {
         <div className="g12 rows-30">
           <div className="col-6">
             <CodeBlock caption={h.start.startCaption} note="Docker Compose">
-              git clone --depth 1 --branch v2 \{"\n"}
+              git clone --depth 1 --branch main \{"\n"}
               {"  "}https://github.com/tbphp/gpt-load.git{"\n"}
               cd gpt-load && cp .env.example .env{"\n"}
               docker compose up -d{"\n"}

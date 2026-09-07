@@ -124,13 +124,13 @@ export default function QuickStartPageContent() {
                   # {t('docsQuickStart.steps.downloadConfig.dockerComment')}
                   <br />
                   wget
-                  https://raw.githubusercontent.com/tbphp/gpt-load/refs/heads/main/docker-compose.yml
+                  https://raw.githubusercontent.com/tbphp/gpt-load/refs/heads/v1/docker-compose.yml
                   <br />
                   <br />
                   # {t('docsQuickStart.steps.downloadConfig.envComment')}
                   <br />
                   wget -O .env
-                  https://raw.githubusercontent.com/tbphp/gpt-load/refs/heads/main/.env.example
+                  https://raw.githubusercontent.com/tbphp/gpt-load/refs/heads/v1/.env.example
                 </code>
               </div>
 

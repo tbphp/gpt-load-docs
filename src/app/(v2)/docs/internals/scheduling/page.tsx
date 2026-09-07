@@ -10,8 +10,8 @@ export function generateMetadata(): Promise<Metadata> {
 
 const TOC = [
   { id: "flow", label: "一次请求的完整路径" },
-  { id: "group", label: "先选分组" },
-  { id: "cred", label: "再选凭据" },
+  { id: "group", label: "候选分组" },
+  { id: "cred", label: "可用凭据" },
   { id: "weight", label: "权重" },
   { id: "affinity", label: "会话亲和" },
   { id: "retry", label: "失败之后" },
@@ -37,10 +37,10 @@ export default function Scheduling() {
           <strong>协议检查</strong>——这把密钥允许用当前协议吗
         </li>
         <li>
-          <strong>选分组</strong>——在密钥授权的分组里，找出能提供该模型的
+          <strong>筛选分组</strong>——在密钥授权的分组里，找出能提供该模型的
         </li>
         <li>
-          <strong>选凭据</strong>——在分组的凭据池里，挑一个可用的
+          <strong>选凭据</strong>——从候选分组中按路由策略和权重选择可用凭据
         </li>
         <li>
           <strong>转发</strong>——必要时做协议转换，发往上游
@@ -55,7 +55,7 @@ export default function Scheduling() {
         请求日志 <code>error_code</code> 是不同的信息，见本页最后一节。
       </p>
 
-      <Heading id="group">先选分组</Heading>
+      <Heading id="group">候选分组</Heading>
       <p>候选分组要同时满足：</p>
       <ul>
         <li>在这把访问密钥的授权范围内</li>
@@ -64,21 +64,19 @@ export default function Scheduling() {
         <li>有效权重大于 0</li>
       </ul>
       <p>
-        满足条件的分组不止一个时，按权重挑。
-        这就是<strong>同一个模型配多个来源</strong>能自动容灾的原理：
-        一个分组的凭据全挂了，另一个还能接住。
+        满足条件的分组共同提供候选凭据。同一个模型配置多个来源后，一个分组不可用时，其他分组仍可参与调度。
       </p>
 
-      <Heading id="cred">再选凭据</Heading>
-      <p>选定分组后，在它的凭据池里筛：</p>
+      <Heading id="cred">可用凭据</Heading>
+      <p>继续筛选这些分组中的凭据：</p>
       <ul>
         <li>状态为可用（不是停用、冷却中、已拉黑）</li>
         <li>订阅账号还需授权状态正常</li>
         <li>有效权重大于 0</li>
       </ul>
       <p>
-        剩下的候选里按权重随机选一个。<strong>不是简单轮询</strong>——
-        轮询在有凭据反复失败时会一直撞上它，加权随机配合冷却机制更稳。
+        网关按当前路由策略，在可用候选中按「分组权重 × 凭据权重」随机选择。
+        请求亲和仍可优先复用之前成功的凭据，实际流量不保证严格按权重分配。
       </p>
 
       <Heading id="weight">权重</Heading>

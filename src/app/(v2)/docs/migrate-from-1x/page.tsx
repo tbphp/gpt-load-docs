@@ -141,7 +141,7 @@ export default function Migrate() {
         <span className="c"># 1.x 保持原样运行，不要动它</span>{"\n"}
         {"\n"}
         <span className="c"># 2.0 clone 到另一个目录</span>{"\n"}
-        git clone --depth 1 --branch v2 \{"\n"}
+        git clone --depth 1 --branch main \{"\n"}
         {"  "}https://github.com/tbphp/gpt-load.git gpt-load-v2{"\n"}
         cd gpt-load-v2{"\n"}
         cp .env.example .env{"\n"}

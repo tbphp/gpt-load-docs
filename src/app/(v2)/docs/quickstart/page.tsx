@@ -46,7 +46,7 @@ export default async function Quickstart() {
 
       <Heading id="run">一 · 启动服务</Heading>
       <CodeBlock caption="拉起服务">
-        git clone --depth 1 --branch v2 \{"\n"}
+        git clone --depth 1 --branch main \{"\n"}
         {"  "}https://github.com/tbphp/gpt-load.git{"\n"}
         cd gpt-load{"\n"}
         {"\n"}

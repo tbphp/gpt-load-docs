@@ -125,14 +125,10 @@ export default function Api() {
               </td>
               <td>必须且只能有一个值，格式为规范的小写 UUID v4；同一逻辑操作重试时复用原值</td>
             </tr>
-            <tr>
-              <td className="m">If-Match</td>
-              <td><code>PUT /api/settings</code></td>
-              <td>先读取设置响应中的 <code>ETag</code>，再原样带回；冲突时重新读取并合并</td>
-            </tr>
           </tbody>
         </table>
       </div>
+      <p>PUT /api/settings 直接保存所提交的设置项，不要求 If-Match；同一项以后一次成功保存的值为准。</p>
       <Notice label="JSON 请求体使用严格合同" tone="blue">
         声明 JSON 请求体的端点只接受单个对象；未知字段、重复字段、尾随的第二个 JSON 值都会被拒绝。
         采用空对象合同的无参数操作只接受空请求体或 <code>{`{}`}</code>。

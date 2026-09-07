@@ -13,7 +13,7 @@ const QuickStart = () => {
       icon: Download,
       title: t("quickStartComponent.steps.clone.title"),
       description: t("quickStartComponent.steps.clone.description"),
-      code: `git clone https://github.com/tbphp/gpt-load.git
+      code: `git clone --branch v1 https://github.com/tbphp/gpt-load.git
 cd gpt-load`,
     },
     {

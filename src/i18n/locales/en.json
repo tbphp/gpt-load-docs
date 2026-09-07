@@ -787,7 +787,7 @@
             },
             "imageName": {
               "label": "Image Name",
-              "value": "ghcr.io/tbphp/gpt-load:latest"
+              "value": "ghcr.io/tbphp/gpt-load:1"
             }
           },
           "usage": {
@@ -2811,7 +2811,7 @@
       },
       "step2": {
         "title": "Node docker-compose.yml Reference (Same for Master and Slave)",
-        "dockerCompose": "services:\n  gpt-load:\n    image: ghcr.io/tbphp/gpt-load:latest\n    container_name: gpt-load\n    ports:\n      - \"${PORT:-3001}:${PORT:-3001}\"\n    env_file:\n      - .env\n    restart: always\n    volumes:\n      - ./data:/app/data\n    stop_grace_period: ${SERVER_GRACEFUL_SHUTDOWN_TIMEOUT:-10}s\n    healthcheck:\n      test: wget -q --spider -T 10 -O /dev/null http://localhost:${PORT:-3001}/health\n      interval: 30s\n      timeout: 10s\n      retries: 3\n      start_period: 40s",
+        "dockerCompose": "services:\n  gpt-load:\n    image: ghcr.io/tbphp/gpt-load:1\n    container_name: gpt-load\n    ports:\n      - \"${PORT:-3001}:${PORT:-3001}\"\n    env_file:\n      - .env\n    restart: always\n    volumes:\n      - ./data:/app/data\n    stop_grace_period: ${SERVER_GRACEFUL_SHUTDOWN_TIMEOUT:-10}s\n    healthcheck:\n      test: wget -q --spider -T 10 -O /dev/null http://localhost:${PORT:-3001}/health\n      interval: 30s\n      timeout: 10s\n      retries: 3\n      start_period: 40s",
         "slaveConfig": {
           "title": "Use Configuration to Distinguish Master and Slave Nodes",
           "code": "IS_SLAVE=true",

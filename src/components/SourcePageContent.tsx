@@ -121,7 +121,7 @@ export default function SourcePageContent() {
               </p>
               <div className="bg-gray-950 dark:bg-black border border-gray-700 dark:border-gray-600 text-gray-100 p-4 rounded-lg">
                 <code className="text-sm">
-                  git clone https://github.com/tbphp/gpt-load.git
+                  git clone --branch v1 https://github.com/tbphp/gpt-load.git
                   <br />
                   cd gpt-load
                 </code>
