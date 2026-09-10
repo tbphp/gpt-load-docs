@@ -161,9 +161,9 @@ export default async function Home() {
                 <Image src={sp.logo} alt={sp.name} width={sp.id === "ofoxai" ? 620 : 900} height={sp.id === "ofoxai" ? 240 : 300} />
               </span>
               <span className="spon-body">
-                <h3>{sp.name}</h3>
-                <p>{h.sponsors[sp.id]}</p>
-                <span className="spon-cta">{h.sponsors.detail}</span>
+                <h3>{sp.id === "ofoxai" ? t.pages.sponsor.ofoxaiTitle : sp.name}</h3>
+                <p>{sp.id === "ofoxai" ? t.pages.sponsor.ofoxaiDescription : h.sponsors.apimart}</p>
+                <span className="spon-cta">{sp.id === "ofoxai" ? t.pages.sponsor.ofoxaiAction : h.sponsors.detail}</span>
               </span>
             </a>
           ))}

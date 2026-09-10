@@ -58,7 +58,7 @@ export default async function Sponsor() {
                   <Image src={sp.logo} alt={sp.name} width={sp.id === "ofoxai" ? 620 : 900} height={sp.id === "ofoxai" ? 240 : 300} />
                 </span>
                 <span className="spon-body">
-                  <h3>{sp.name}</h3>
+                  <h3>{sp.id === "ofoxai" ? copy.ofoxaiTitle : sp.name}</h3>
                   <p>{sp.id === "ofoxai" ? copy.ofoxaiDescription : copy.sponsorDescription}</p>
                   <span className="spon-cta">{sp.id === "ofoxai" ? copy.ofoxaiAction : copy.register}</span>
                 </span>
