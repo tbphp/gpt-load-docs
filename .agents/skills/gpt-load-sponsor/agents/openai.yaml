@@ -1,0 +1,6 @@
+interface:
+  display_name: "GPT-Load 广告合作"
+  short_description: "按套餐引导广告物料收集、三语接入、续费、到期后一天提醒与下架"
+  default_prompt: "使用 $gpt-load-sponsor 管理本项目的广告合作，先确认操作和套餐，再收集对应资料并推进接入、续费或下架。"
+policy:
+  allow_implicit_invocation: true
