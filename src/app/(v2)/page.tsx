@@ -67,11 +67,18 @@ const PROTOCOLS = [
 
 const SPONSORS = [
   {
+    id: "ofoxai",
+    name: "OfoxAI",
+    logo: "/v2/sponsor-ofoxai.svg",
+    url: "https://ofox.ai/?utm_source=github&utm_medium=sponsorship&utm_content=gpt_load",
+  },
+  {
+    id: "apimart",
     name: "APIMart",
     logo: "/v2/sponsor-apimart.png",
     url: "https://go.apimart.ai/gh-gpt-load",
   },
-];
+] as const;
 
 const SUPPORTERS = [
   { name: "OpenAI", url: "https://openai.com/", logo: "/v2/sponsor-openai.svg", w: 88, h: 26 },
@@ -149,13 +156,13 @@ export default async function Home() {
       >
         <div className="spon-grid">
           {SPONSORS.map((sp) => (
-            <a className="spon" key={sp.name} href={sp.url} target="_blank" rel="sponsored noopener noreferrer">
+            <a className="spon" key={sp.name} href={sp.url} target="_blank" rel={sp.id === "ofoxai" ? "noopener noreferrer" : "sponsored noopener noreferrer"}>
               <span className="spon-logo">
-                <Image src={sp.logo} alt={sp.name} width={900} height={300} />
+                <Image src={sp.logo} alt={sp.name} width={sp.id === "ofoxai" ? 620 : 900} height={sp.id === "ofoxai" ? 240 : 300} />
               </span>
               <span className="spon-body">
                 <h3>{sp.name}</h3>
-                <p>{h.sponsors.apimart}</p>
+                <p>{h.sponsors[sp.id]}</p>
                 <span className="spon-cta">{h.sponsors.detail}</span>
               </span>
             </a>

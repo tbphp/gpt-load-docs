@@ -10,11 +10,20 @@ export async function generateMetadata(): Promise<Metadata> {
   return dictionaryPageMeta({ locale, path: "/sponsor", select: (dict) => dict.pages.sponsor });
 }
 
-const SPONSOR = {
-  name: "APIMart",
-  logo: "/v2/sponsor-apimart.png",
-  url: "https://go.apimart.ai/gh-gpt-load",
-};
+const SPONSORS = [
+  {
+    id: "ofoxai",
+    name: "OfoxAI",
+    logo: "/v2/sponsor-ofoxai.svg",
+    url: "https://ofox.ai/?utm_source=github&utm_medium=sponsorship&utm_content=gpt_load",
+  },
+  {
+    id: "apimart",
+    name: "APIMart",
+    logo: "/v2/sponsor-apimart.png",
+    url: "https://go.apimart.ai/gh-gpt-load",
+  },
+] as const;
 
 const SUPPORTERS = [
   { name: "OpenAI", url: "https://openai.com/", logo: "/v2/sponsor-openai.svg", w: 120, h: 35 },
@@ -43,16 +52,18 @@ export default async function Sponsor() {
             <span className="t">{copy.primary}</span>
           </div>
           <div className="spon-grid" style={{ marginTop: 20 }}>
-            <a className="spon" href={SPONSOR.url} target="_blank" rel="sponsored noopener noreferrer">
-              <span className="spon-logo">
-                <Image src={SPONSOR.logo} alt={SPONSOR.name} width={900} height={300} />
-              </span>
-              <span className="spon-body">
-                <h3>{SPONSOR.name}</h3>
-                <p>{copy.sponsorDescription}</p>
-                <span className="spon-cta">{copy.register}</span>
-              </span>
-            </a>
+            {SPONSORS.map((sp) => (
+              <a key={sp.id} className="spon" href={sp.url} target="_blank" rel={sp.id === "ofoxai" ? "noopener noreferrer" : "sponsored noopener noreferrer"}>
+                <span className="spon-logo">
+                  <Image src={sp.logo} alt={sp.name} width={sp.id === "ofoxai" ? 620 : 900} height={sp.id === "ofoxai" ? 240 : 300} />
+                </span>
+                <span className="spon-body">
+                  <h3>{sp.name}</h3>
+                  <p>{sp.id === "ofoxai" ? copy.ofoxaiDescription : copy.sponsorDescription}</p>
+                  <span className="spon-cta">{sp.id === "ofoxai" ? copy.ofoxaiAction : copy.register}</span>
+                </span>
+              </a>
+            ))}
           </div>
 
           <div className="sec-head" style={{ marginTop: 56 }}>
