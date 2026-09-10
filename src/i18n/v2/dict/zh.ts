@@ -97,7 +97,7 @@ export const zh = {
       title: "这个项目由他们支持",
       lede: "GPT-Load 以 MIT 协议开源。服务器、模型额度和开发时间，来自下面这些赞助方。",
       apimart: "AI 图片与视频生成 API，GPT-Image-2 低至 $0.006 一张。图片视频共用一套异步接口，批量不超时，按量计费无月费。",
-      ofoxai: "统一的 AI API 平台，汇集文本、图像与视频模型，支持 OpenAI 兼容接口及 Anthropic、Gemini 原生接口。",
+      ofoxai: "统一的 AI API 平台，汇集文本、图像与视频模型，支持 OpenAI 兼容接口及 Anthropic、Gemini 原生接口，适用于 AI 应用、智能体和内容创作。",
       detail: "了解详情 →",
       thanks: "同时感谢",
       join: "成为赞助商 →",
