@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { Mail } from "lucide-react";
 import "@/styles/v2/pages.css";
 import { Button } from "@/components/v2/ui";
 import { getLocale, getT } from "@/i18n/v2/server";
@@ -44,6 +45,16 @@ export default async function Sponsor() {
           <span className="label">{copy.label}</span>
           <h1 className="page-title">{copy.headline}</h1>
           <p className="page-lede">{copy.lede}</p>
+          <div className="sponsor-contact">
+            <a className="btn btn-p" href="mailto:tangb7420@gmail.com">
+              <Mail size={16} aria-hidden="true" />
+              {copy.contactAction}
+            </a>
+            <p>
+              {copy.contactHint}
+              <span>tangb7420@gmail.com</span>
+            </p>
+          </div>
         </div>
 
         <div className="page-body">

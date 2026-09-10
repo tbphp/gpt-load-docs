@@ -48,6 +48,10 @@
 .contrib .c { font-family: var(--f-mono); font-size: 10.5px; color: var(--faint); letter-spacing: .06em; }
 
 /* ---------- 赞助 ---------- */
+.sponsor-contact { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; margin-top: 24px; }
+.sponsor-contact .btn { display: inline-flex; align-items: center; gap: 8px; }
+.sponsor-contact p { font-size: var(--t-xs); line-height: 1.6; color: var(--dim); }
+.sponsor-contact p span { display: block; font-family: var(--f-mono); font-size: var(--t-code); color: var(--ink); }
 .pay { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--ink); border: 1px solid var(--ink); }
 .pay > div { background: var(--paper); padding: 24px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
 .pay img { width: 176px; height: auto; }

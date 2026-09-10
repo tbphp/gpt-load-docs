@@ -260,6 +260,8 @@ export const zh = {
       label: "赞助支持",
       headline: "让它继续做下去",
       lede: "GPT-Load 以 MIT 协议开源，永远免费。服务器、模型额度和开发时间由下面这些赞助方和社区支撑。",
+      contactAction: "成为赞助商",
+      contactHint: "广告合作，欢迎邮件联系",
       primary: "主赞助",
       sponsorDescription: "专注 AI 图片与视频生成的低价 API 平台。GPT-Image-2 低至 $0.006 一张，一美元能出 160 张以上。图片和视频共用一套异步接口：提交任务拿 ID，轮询或回调取结果，批量几万张不超时，换模型不用改代码。按量计费，没有月费。",
       ofoxaiTitle: "OfoxAI：一个平台，连接文本、图像与视频 AI",

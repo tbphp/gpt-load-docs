@@ -263,6 +263,8 @@ export const en: Dict = {
       label: "Sponsors",
       headline: "Help keep the project moving",
       lede: "GPT-Load is MIT-licensed and will remain free. Infrastructure, model credits, and development time are supported by the partners and community below.",
+      contactAction: "Become a sponsor",
+      contactHint: "Email us about sponsorship",
       primary: "Primary sponsor",
       sponsorDescription: "A low-cost API platform for AI image and video generation. GPT-Image-2 starts at $0.006 per image—more than 160 images per dollar. One asynchronous API covers images and video, handles batches of tens of thousands without timeouts, and lets you switch models without changing code. Pay as you go with no monthly fee.",
       ofoxaiTitle: "OfoxAI: Text, image, and video AI in one platform",
