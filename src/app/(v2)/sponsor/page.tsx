@@ -43,7 +43,7 @@ export default async function Sponsor() {
             <span className="t">{copy.primary}</span>
           </div>
           <div className="spon-grid" style={{ marginTop: 20 }}>
-            <a className="spon" href={SPONSOR.url} target="_blank" rel="noopener noreferrer">
+            <a className="spon" href={SPONSOR.url} target="_blank" rel="sponsored noopener noreferrer">
               <span className="spon-logo">
                 <Image src={SPONSOR.logo} alt={SPONSOR.name} width={900} height={300} />
               </span>

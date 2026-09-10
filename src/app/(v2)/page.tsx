@@ -149,7 +149,7 @@ export default async function Home() {
       >
         <div className="spon-grid">
           {SPONSORS.map((sp) => (
-            <a className="spon" key={sp.name} href={sp.url} target="_blank" rel="noopener noreferrer">
+            <a className="spon" key={sp.name} href={sp.url} target="_blank" rel="sponsored noopener noreferrer">
               <span className="spon-logo">
                 <Image src={sp.logo} alt={sp.name} width={900} height={300} />
               </span>
