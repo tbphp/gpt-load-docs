@@ -19,6 +19,12 @@ const SPONSORS = [
     url: "https://ofox.ai/?utm_source=github&utm_medium=sponsorship&utm_content=gpt_load",
   },
   {
+    id: "packycode",
+    name: "PackyCode",
+    logo: "/v2/packycode.png",
+    url: "https://www.packyapi.ai/register?aff=ahiS",
+  },
+  {
     id: "apimart",
     name: "APIMart",
     logo: "/v2/sponsor-apimart.png",
@@ -57,14 +63,19 @@ export default async function Sponsor() {
           </div>
           <div className="spon-grid" style={{ marginTop: 20 }}>
             {SPONSORS.map((sp) => (
-              <a key={sp.id} className="spon" href={sp.url} target="_blank" rel={sp.id === "ofoxai" ? "noopener noreferrer" : "sponsored noopener noreferrer"}>
+              <a key={sp.id} className={`spon${sp.id === "ofoxai" ? " spon-featured" : ""}`} href={sp.url} target="_blank" rel={sp.id === "ofoxai" ? "noopener noreferrer" : "sponsored noopener noreferrer"}>
                 <span className="spon-logo">
-                  <Image src={sp.logo} alt={sp.name} width={sp.id === "ofoxai" ? 620 : 900} height={sp.id === "ofoxai" ? 240 : 300} />
+                  <Image
+                    src={sp.logo}
+                    alt={sp.name}
+                    width={sp.id === "ofoxai" ? 620 : sp.id === "packycode" ? 1280 : 900}
+                    height={sp.id === "ofoxai" ? 240 : sp.id === "packycode" ? 511 : 300}
+                  />
                 </span>
                 <span className="spon-body">
                   <h3>{sp.id === "ofoxai" ? copy.ofoxaiTitle : sp.name}</h3>
-                  <p>{sp.id === "ofoxai" ? copy.ofoxaiDescription : copy.sponsorDescription}</p>
-                  <span className="spon-cta">{sp.id === "ofoxai" ? copy.ofoxaiAction : copy.register}</span>
+                  <p>{sp.id === "ofoxai" ? copy.ofoxaiDescription : sp.id === "packycode" ? copy.packycodeDescription : copy.sponsorDescription}</p>
+                  <span className="spon-cta">{sp.id === "ofoxai" ? copy.ofoxaiAction : sp.id === "packycode" ? copy.packycodeAction : copy.register}</span>
                 </span>
               </a>
             ))}

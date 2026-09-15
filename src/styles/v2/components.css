@@ -191,7 +191,7 @@
 
    用网格排布，赞助方增加时自动换行填格，不需要改结构。 */
 .spon-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1px; background: var(--ink); border: 1px solid var(--ink);
 }
 /* 只有一个赞助方时也占满整行——这是曝光位，缩窄反而像坏掉的布局。
@@ -199,6 +199,9 @@
 .spon-grid:has(> :only-child) .spon { grid-template-columns: 232px 1fr; }
 .spon-grid:has(> :only-child) .spon-logo { padding: 22px 26px; }
 .spon-grid:has(> :only-child) .spon-body { padding: 22px 26px 20px; }
+.spon.spon-featured { grid-column: 1 / -1; grid-template-columns: 232px 1fr; }
+.spon-featured .spon-logo { padding: 22px 26px; }
+.spon-featured .spon-body { padding: 22px 26px 20px; }
 .spon {
   background: var(--paper); display: grid; grid-template-columns: 148px 1fr;
   transition: background var(--dur);
@@ -228,8 +231,12 @@
 @media (max-width: 520px) {
   .notice { padding: 18px 16px; }
   .notice p { min-width: 0; flex-basis: 100%; }
+  .spon-grid { grid-template-columns: 1fr; }
   .spon { grid-template-columns: 1fr; }
+  .spon.spon-featured { grid-column: auto; grid-template-columns: 1fr; }
   .spon-logo { border-right: none; border-bottom: 1px solid var(--hair); padding: 18px; }
+  .spon-featured .spon-logo { padding: 18px; }
+  .spon-featured .spon-body { padding: 16px 18px 15px; }
   .spon-more .join { margin-left: 0; }
 }
 
