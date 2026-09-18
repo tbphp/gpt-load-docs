@@ -75,23 +75,12 @@ export default function Scheduling() {
         <li>有效权重大于 0</li>
       </ul>
       <p>
-        网关按当前路由策略，在可用候选中按「分组权重 × 凭据权重」随机选择。
+        网关按当前路由策略，在可用候选中按「分组权重 × 凭据权重」加权轮询。
         请求亲和仍可优先复用之前成功的凭据，实际流量不保证严格按权重分配。
       </p>
 
       <Heading id="weight">权重</Heading>
-      <p>权重决定相对分到多少流量，分组和凭据两级都支持自动与手动模式：</p>
-      <ul>
-        <li>
-          <strong>分组自动</strong>——使用默认权重
-        </li>
-        <li>
-          <strong>凭据自动</strong>——根据近期成功与失败情况动态计算
-        </li>
-        <li>
-          <strong>手动</strong>——范围为 1–100，数值越大，相对获得的流量越多
-        </li>
-      </ul>
+      <p>分组和凭据权重默认均为 50，可设置为 1–100；数值越大，相对获得的流量越多，不再根据成功率自动计算。</p>
       <Notice label="暂停流量请使用停用" tone="blue">
         当前管理台和管理 API 都不接受手动权重 0。
         需要暂时停止流量时，请停用对应分组或凭据；配置和历史统计仍会保留。
@@ -103,11 +92,10 @@ export default function Scheduling() {
         生成软亲和键。具有相同稳定前缀的后续请求，会优先复用之前成功的凭据。
       </p>
       <p>
-        亲和机制<strong>不会读取</strong> <code>previous_response_id</code>、
-        <code>conversation</code> 或其他上游资源 ID，也不保证有状态资源一定回到原凭据。
-        可靠使用这类资源时，请让分组只保留一个凭据，
-        或确认上游允许不同凭据共享同一资源。
+        Chat Completions 与 Responses 也可通过有效的 prompt_cache_key 形成软亲和，但亲和命中不代表上游缓存必然命中。
+        Responses 的响应 ID 续接独立于软亲和，边界见协议页。
       </p>
+      <p><Link href="/docs/internals/protocols#stateful">查看 Responses 续接边界 →</Link></p>
       <p>
         亲和记录有 TTL 和容量上限（默认记一万条），超出后按老旧程度淘汰。
         <strong>亲和不是绝对的</strong>：如果记住的那个凭据已经冷却或拉黑，
@@ -117,7 +105,7 @@ export default function Scheduling() {
 
       <Heading id="retry">失败之后</Heading>
       <p>
-        请求失败时，网关<strong>换一个凭据重试</strong>，直到成功或达到重试次数上限。
+        安全允许重放时，网关可换候选重试；额外重试次数由全局设置决定，跨分组切换也共用同一预算。
       </p>
       <p>关键在于「什么算失败」：</p>
       <ul>
@@ -126,11 +114,12 @@ export default function Scheduling() {
           <strong>换个凭据可能就好</strong>的问题
         </li>
         <li>
-          <strong>不重试</strong>——请求本身有问题（参数错误、模型不存在），
+          <strong>不重试</strong>——明确的参数错误、上下文超限或内容政策拒绝，
           换凭据也一样失败，重试只是浪费时间
         </li>
       </ul>
 
+      <p>明确的模型或能力拒绝可在安全边界内切换候选；已经输出或执行结果未知时，不盲目重放。响应 ID 续接不会换用其他凭据。</p>
       <Notice label="流式响应的特殊处理" tone="blue">
         流式请求一旦开始输出，就<b>不能再重试了</b>——
         客户端已经收到前半段内容，换凭据重发会导致内容错乱。
@@ -146,10 +135,10 @@ export default function Scheduling() {
           到点自动恢复。上游限流时最常见，属于正常现象
         </li>
         <li>
-          <strong>拉黑</strong>——<strong>连续</strong>失败次数超过阈值后自动摘除，
-          不再自动恢复，需要人工确认
+          <strong>拉黑</strong>——连续失败次数超过阈值后自动摘除；API Key 验活成功后可自动恢复，订阅凭据需人工处理
         </li>
       </ul>
+      <p>模型级限流只冷却该凭据的对应模型，其他模型仍可参与调度；明确的凭据级限制仍影响整份凭据。恢复凭据会清除其模型冷却。</p>
       <p>
         区别在于：冷却是<strong>临时避让</strong>，假设问题会自己好；
         拉黑是<strong>判定这个凭据坏了</strong>，比如密钥被吊销、账号欠费。

@@ -521,5 +521,14 @@
   "容器内的 {{0}} 和 {{1}} 是被固定的。": "{{0}} and {{1}} are fixed inside the container.",
   "{{0}} ——完成一次 OAuth 授权，或导入已有 OAuth JSON": "{{0}} — Complete an OAuth authorization flow or import existing OAuth JSON.",
   "{{0}} （全部四个订阅渠道）——上传或粘贴已有的 OAuth JSON， 不需要在这台机器上完成本地回调": "{{0}} (all four subscription channels) — Upload or paste existing OAuth JSON; a local callback on this machine is not required.",
-  "{{0}} ——连续失败超过阈值，自动摘除。API Key 分组会按验证间隔自动探测并恢复；订阅凭据不走这条自动恢复路径": "{{0}} — Automatically removed after the consecutive-failure threshold. API-key Groups are periodically probed and restored after a successful probe; subscription credentials do not use this automatic recovery path."
+  "{{0}} ——连续失败超过阈值，自动摘除。API Key 分组会按验证间隔自动探测并恢复；订阅凭据不走这条自动恢复路径": "{{0}} — Automatically removed after the consecutive-failure threshold. API-key Groups are periodically probed and restored after a successful probe; subscription credentials do not use this automatic recovery path.",
+  "{{0}} ——明确的参数错误、上下文超限或内容政策拒绝， 换凭据也一样失败，重试只是浪费时间": "{{0}} — explicit parameter errors, context limits, or content-policy rejection. Changing credentials does not help.",
+  "{{0}} ——连续失败次数超过阈值后自动摘除；API Key 验活成功后可自动恢复，订阅凭据需人工处理": "{{0}} — removed after consecutive failures exceed the threshold. API keys may recover automatically after successful validation; subscription credentials require manual handling.",
+  "{{0}} ——Responses； 注意响应 ID 续接与其他资源引用的不同边界": "{{0}} — Responses; distinguish response ID continuation from other resource references.",
+  "{{0}} ——全局额外重试预算，不支持分组覆盖。 调大能提高成功率，但失败请求的耗时也会变长": "{{0}} — a global additional-retry budget, without Group overrides. Increasing it may improve success rates but also delay failing requests.",
+  "{{0}} ——在分组的凭据页打开导入面板， 一次粘贴多把密钥，每行一个": "{{0}} — open the import panel on the Group’s Credentials page and paste multiple keys, one per line.",
+  "{{0}} → 检查响应 ID 是否已登记、原凭据是否可用；其他资源引用需单凭据或上游支持共享": "{{0}} → check whether the response ID is registered and its original credential is available. Other resource references need a single credential or upstream sharing.",
+  "管理台里 {{0}} 。渠道是在「分组 → 新建分组」中选择的—— 常用渠道直接显示为按钮，其余渠道在「其他渠道」里。选完 OpenAI 或 Anthropic， 这个分组就固定对接那个上游了。 想接两个不同的服务商，就建两个分组。": "The console has {{0}}. Choose a channel under Groups → New Group. Common channels appear as buttons; others are under Other Channels. Selecting OpenAI or Anthropic fixes that Group to the chosen upstream. Create separate Groups for different providers.",
+  "{{0}} ——同一个服务商，如果你想让一批密钥走高优先级、另一批做兜底， 或者两批密钥的超时和拉黑阈值要求不同，那就拆成两个分组": "{{0}} — split a provider’s keys into two Groups when one needs higher priority and the other is a fallback, or they need different timeouts and blacklisting thresholds.",
+  "多半是上游限流。模型级限制只冷却该凭据的对应模型，其他模型仍可使用；网关会在安全边界内切换候选—— {{0}} 。 频繁发生的话看健康页，确认是不是可用凭据太少。": "This is usually upstream rate limiting. Model-level limits cool down only that model on the credential; other models remain usable. The gateway switches candidates within safety boundaries — {{0}}. If frequent, check Health for too few available credentials."
 }

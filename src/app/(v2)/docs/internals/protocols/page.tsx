@@ -152,15 +152,12 @@ export default function Protocols() {
         <code>conversation</code> 或已有资源 ID 接续上下文。
         这类请求有个前提：
       </p>
-      <Notice label="有状态请求依赖同一个凭据" tone="amber">
-        上下文<b>存在上游那一侧</b>，且通常<b>绑定在创建它的那个凭据上</b>。
-        换一个凭据请求，上游会找不到之前的会话。
-        <br />
-        当前会话亲和依据提示词前缀，不读取 <code>previous_response_id</code>、
-        <code>conversation</code> 或其他资源 ID，因此不能提供强一致路由保证。
-        可靠使用有状态资源时，请确保该分组只有一个凭据，
-        或确认上游允许不同凭据共享同一资源。
+      <Notice label="响应续接使用原凭据" tone="amber">
+        对支持上游存储的原生 HTTP/SSE Responses，网关记录返回的响应 ID。使用同一访问密钥携带 previous_response_id 时，只使用当前仍允许的原凭据，不受软亲和开关影响，也不会因失败换号。
       </Notice>
+      <p>转换或无状态响应、明确 store:false 的新响应不会登记；未知、过期或淘汰的 ID 会在本地拒绝，包括网关外或升级前创建的 ID。仅正常停机成功保存后可恢复绑定，不保证崩溃恢复。</p>
+      <p>conversation 和其他资源操作仍不保证回到原凭据；请使用单凭据分组，或确认上游支持跨凭据共享。中转渠道只保证回到原下一跳。</p>
+      <p>GET /v1/responses 支持原生 WebSocket，当前适用于 OpenAI、Codex、xAI、GPT-Load、CLIProxyAPI、Sub2API。连接固定上游 Session，Codex 仅支持原连接内续接；不提供 WS→HTTP 转换，也不保证重连恢复上下文。开关见运行时设置。</p>
       <p>
         另一个选择是<strong>不用有状态接口</strong>——
         每次把完整上下文发过去。这样任何凭据都能处理，
@@ -180,7 +177,7 @@ export default function Protocols() {
         </li>
         <li>
           <strong>需要有状态接续</strong>——Responses；
-          有状态资源请使用单凭据，或确认上游支持跨凭据共享
+          注意响应 ID 续接与其他资源引用的不同边界
         </li>
       </ul>
       <p>

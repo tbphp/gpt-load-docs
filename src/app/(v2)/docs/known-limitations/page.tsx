@@ -56,10 +56,10 @@ export default function KnownLimitations() {
       <p><Link href="/docs/access-keys">查看访问密钥成本限制 →</Link></p>
 
       <Heading id="responses">Responses 有状态资源</Heading>
-      <Notice label="不提供资源到凭据的强绑定" tone="amber">
-        previous_response_id、conversation 和其他资源 ID 通常依赖创建资源的上游凭据。当前亲和机制不读取这些 ID，不能保证后续请求回到原凭据。
+      <Notice label="响应续接不等于完整资源绑定" tone="amber">
+        网关可为受支持的原生 Responses 响应登记归属，让 previous_response_id 续接回到原凭据。未知、过期或淘汰的 ID 会被拒绝；conversation 和其他资源操作不在该绑定保证内。
       </Notice>
-      <p>可靠使用有状态资源时，让分组只保留一个凭据，或确认上游允许不同凭据共享同一资源。</p>
+      <p>其他有状态资源仍需单凭据分组，或确认上游允许跨凭据共享。续接绑定也不保证上游历史持续有效或网关崩溃后可恢复。</p>
       <p><Link href="/docs/internals/protocols">查看协议与转换边界 →</Link></p>
 
       <Heading id="encryption">加密密钥</Heading>

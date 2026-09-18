@@ -123,7 +123,7 @@ export default function ProxyHeaders() {
 
       <Heading id="browser-access">响应头与跨域</Heading>
       <p>
-        在「设置 → Header 与跨域」配置下游响应头规则，可设置或移除返回客户端的自定义 Header。
+        在「设置 → 浏览器访问」配置下游响应头规则，可设置或移除返回客户端的自定义 Header。
         认证、协议必要字段和网关保留头不能覆盖，CORS 头通过专用配置管理。
       </p>
       <p>

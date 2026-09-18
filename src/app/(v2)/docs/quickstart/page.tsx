@@ -44,6 +44,7 @@ export default async function Quickstart() {
         管理台就在同一个程序里。
       </p>
 
+      <p>管理台默认使用 Modern 界面，管理员可在设置中切换 Classic；登录页和访问密钥只读会话使用 Modern。本文截图暂为旧界面，操作以当前按钮为准。</p>
       <Heading id="run">一 · 启动服务</Heading>
       <CodeBlock caption="拉起服务">
         git clone --depth 1 --branch main \{"\n"}
@@ -92,7 +93,7 @@ export default async function Quickstart() {
       <Heading id="group">三 · 建一个分组</Heading>
       <p>
         分组是「对接哪个上游、用哪些密钥」的集合。点
-        <strong>分组 → 导入渠道凭据 → 新建分组</strong>，第一步是选渠道：
+        <strong>分组 → 新建分组</strong>，第一步是选渠道：
       </p>
 
       <Figure

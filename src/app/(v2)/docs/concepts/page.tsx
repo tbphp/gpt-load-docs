@@ -80,7 +80,7 @@ export default async function Concepts() {
 
       <Heading id="channel">渠道不是单独建的</Heading>
       <Notice label="容易找不到" tone="amber">
-        管理台里<b>没有「渠道」这个菜单</b>。渠道是在「导入渠道凭据」的新建分组页中选择的——
+        管理台里<b>没有「渠道」这个菜单</b>。渠道是在「分组 → 新建分组」中选择的——
         常用渠道直接显示为按钮，其余渠道在「其他渠道」里。选完 OpenAI 或 Anthropic，
         这个分组就固定对接那个上游了。
         想接两个不同的服务商，就建两个分组。
@@ -148,7 +148,7 @@ export default async function Concepts() {
         </li>
         <li>
           <strong>按策略分</strong>——同一个服务商，如果你想让一批密钥走高优先级、另一批做兜底，
-          或者两批密钥的超时和重试要求不同，那就拆成两个分组
+          或者两批密钥的超时和拉黑阈值要求不同，那就拆成两个分组
         </li>
       </ul>
       <p>

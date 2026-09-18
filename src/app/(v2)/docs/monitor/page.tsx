@@ -11,7 +11,7 @@ export function generateMetadata(): Promise<Metadata> {
 }
 
 const TOC = [
-  { id: "where", label: "四个标签页" },
+  { id: "where", label: "四个监控入口" },
   { id: "health", label: "健康" },
   { id: "logs", label: "请求日志" },
   { id: "inspect", label: "路由检查" },
@@ -30,8 +30,8 @@ export default async function Monitor() {
       lede="请求失败时，这一页帮你定位到是哪个凭据、哪一步出的问题。"
       toc={TOC}
     >
-      <Heading id="where">四个标签页</Heading>
-      <p>监控页分四块，各管一件事：</p>
+      <Heading id="where">四个监控入口</Heading>
+      <p>Modern 管理台的监控导航分四块，各管一件事：</p>
       <ul>
         <li>
           <strong>健康</strong>——现在哪些凭据可用、哪些出了问题

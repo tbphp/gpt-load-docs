@@ -51,9 +51,7 @@ export default async function Subscription() {
 
       <Heading id="add">接入一个账号</Heading>
       <p>
-        订阅账号也是<strong>建在分组里</strong>的。进入
-        <strong>分组 → 导入渠道凭据 → 新建分组</strong>，把接入方式选成订阅账号，
-        再选具体渠道（Codex / Claude / Antigravity / Grok），然后完成授权。
+        订阅账号也是建在分组里的。进入「分组 → 新建分组」，选择 Codex、Claude、Antigravity 或 Grok，然后连接账号或导入凭据。
       </p>
 
       <Figure
@@ -85,6 +83,8 @@ export default async function Subscription() {
         </li>
       </ul>
 
+      <p>导入支持 CPA 兼容、官方 Codex、官方 Claude Code 及 sub2api OAuth JSON，可上传多文件或账号数组；不支持 PAT 或缺少必要刷新凭据的文件。</p>
+      <p>订阅分组可设置自定义 HTTPS 上游根地址或路径前缀，代理需承接对应渠道的调用、模型发现与额度查询，不会隐式回退官方业务地址。OAuth 授权与 Token 刷新仍使用官方端点。</p>
       <Heading id="ports">回调端口</Heading>
       <p>
         走本地回调的三个渠道，端口是<strong>上游客户端写死的</strong>，不能自定义：

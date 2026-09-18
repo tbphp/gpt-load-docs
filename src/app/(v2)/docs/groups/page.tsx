@@ -92,7 +92,7 @@ export default async function Groups() {
 
       <Heading id="create">建一个分组</Heading>
       <p>
-        点<strong>分组 → 导入渠道凭据 → 新建分组</strong>。
+        点<strong>分组 → 新建分组</strong>。
         要填的核心只有三样：渠道、凭据、模型。
       </p>
 
@@ -150,7 +150,7 @@ export default async function Groups() {
       <p>凭据可以做这些操作：</p>
       <ul>
         <li>
-          <strong>批量导入</strong>——从分组列表进入独立的「导入渠道凭据」页面，
+          <strong>批量导入</strong>——在分组的凭据页打开导入面板，
           一次粘贴多把密钥，每行一个
         </li>
         <li>
@@ -219,7 +219,7 @@ export default async function Groups() {
 
       <Heading id="policy">运行策略</Heading>
       <p>
-        设置标签页里是这个分组的运行参数：权重、超时、重试次数、冷却阈值、
+        设置标签页里是这个分组的运行参数：权重、超时、拉黑阈值、
         会话亲和、出站代理与参数覆盖规则。
       </p>
 
@@ -244,7 +244,7 @@ export default async function Groups() {
         对象递归合并，数组整体替换，null 是普通值。
       </p>
       <p>
-        参数覆盖用于生成与 Embeddings 请求，不作用于图片编辑、Token 统计、Responses 资源操作或探测；不能修改根级 model、stream、store。
+        参数覆盖用于生成、Embeddings 与 Rerank 请求，不作用于图片编辑、Token 统计、Responses 资源操作或探测；不能修改根级 model、stream、store，也不能注入或改写 previous_response_id。
       </p>
 
       <Heading id="custom">自定义渠道</Heading>

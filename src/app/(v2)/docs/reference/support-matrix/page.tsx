@@ -69,10 +69,10 @@ const OPERATIONS: OperationRoute[] = [
   { channel: "OpenAI", images: "N", embeddings: "N", anthropicCount: "C", geminiCount: "C", responsesCount: "N", responsesResources: "N", discovery: true, proxy: true },
   { channel: "Codex", images: "N", embeddings: "—", anthropicCount: "C", geminiCount: "C", responsesCount: "N", responsesResources: "—", discovery: true, proxy: true },
   { channel: "Claude", images: "—", embeddings: "—", anthropicCount: "N", geminiCount: "C", responsesCount: "C", responsesResources: "—", discovery: true, proxy: true },
-  { channel: "Antigravity", images: "—", embeddings: "—", anthropicCount: "C", geminiCount: "N", responsesCount: "C", responsesResources: "—", discovery: true, proxy: true },
+  { channel: "Antigravity", images: "C", embeddings: "—", anthropicCount: "C", geminiCount: "N", responsesCount: "C", responsesResources: "—", discovery: true, proxy: true },
   { channel: "Grok", images: "—", embeddings: "—", anthropicCount: "C", geminiCount: "C", responsesCount: "N", responsesResources: "—", discovery: true, proxy: true },
   { channel: "Anthropic", images: "—", embeddings: "—", anthropicCount: "N", geminiCount: "C", responsesCount: "C", responsesResources: "—", discovery: true, proxy: true },
-  { channel: "Google Gemini", images: "—", embeddings: "—", anthropicCount: "C", geminiCount: "N", responsesCount: "C", responsesResources: "—", discovery: true, proxy: true },
+  { channel: "Google Gemini", images: "C", embeddings: "—", anthropicCount: "C", geminiCount: "N", responsesCount: "C", responsesResources: "—", discovery: true, proxy: true },
   { channel: "Azure OpenAI", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: false },
   { channel: "AWS Bedrock", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: false },
   { channel: "Google Vertex AI", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: false },
@@ -110,7 +110,7 @@ export default function SupportMatrix() {
     >
       <Heading id="scope">口径与版本</Heading>
       <p>本页描述 GPT-Load 已声明的路由能力，不代表任意模型或上游都支持该能力。</p>
-      <p>矩阵核对基于 GPT-Load 主分支提交 0ddc41d8，核对日期为 2026-09-07。具体能力以所用版本为准。</p>
+      <p>矩阵核对基于 GPT-Load 主分支提交 e9a10bb5，核对日期为 2026-09-18。具体能力以所用版本为准。</p>
       <Notice label="读表方式" tone="blue">
         N 表示 Native，按目标协议原生执行；C 表示 Converted，由网关转换；N/C 表示按模型决定；N* 表示仅原生支持 Compact；— 表示当前没有声明该路由。
       </Notice>
@@ -177,7 +177,8 @@ export default function SupportMatrix() {
           </tbody>
         </table>
       </div>
-      <p>Images 同时表示生成与编辑；Responses 资源接口包括查询、删除、取消、输入项、压缩及命名空间透传。</p>
+      <p>Images 的 N 表示原生生成与编辑；C 表示 Gemini 与 Antigravity 仅支持单张、非流式、Base64 图片生成转换，不含编辑。Responses 资源接口包括查询、删除、取消、输入项、压缩及命名空间透传。</p>
+      <p>纯文本 Rerank 由 OpenAI Compatible、New API、GPT-Load 原生支持，入口为 POST /v1/rerank；不支持流式或协议互转，访问密钥需允许 rerank 协议。</p>
       <p>模型发现指管理端使用凭据发现上游模型；数据面的模型列表返回当前 AccessKey 可见的已配置模型，不会实时查询上游。</p>
       <p>托管代理指 GPT-Load 在凭据、分组或全局层注入的代理；Provider SDK 自行读取环境变量不属于这个合同。</p>
 

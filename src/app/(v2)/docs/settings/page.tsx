@@ -33,7 +33,7 @@ export default async function Settings() {
     >
       <Heading id="two">两层设置</Heading>
       <p>
-        超时、重试等运行参数支持两层设置：
+        超时、拉黑阈值等运行参数支持两层设置：
       </p>
       <ul>
         <li>
@@ -47,7 +47,7 @@ export default async function Settings() {
       <p>
         这样设计是因为不同上游的特性差异很大：
         有的服务商响应慢但稳定，有的快但偶尔抽风，
-        用同一套超时和重试参数不合适。
+        用同一套超时和拉黑阈值不合适。
       </p>
 
       <Figure
@@ -87,8 +87,8 @@ export default async function Settings() {
               <td>上游排队久，请求还没开始响应就被判失败</td>
             </tr>
             <tr>
-              <td>请求超时</td>
-              <td>整个请求的总时长上限</td>
+              <td>单次上游请求超时</td>
+              <td>每次上游尝试的时长上限，不是跨重试的总时长</td>
               <td>长输出任务被中途掐断</td>
             </tr>
             <tr>
@@ -108,7 +108,7 @@ export default async function Settings() {
       <Heading id="retry">重试与拉黑</Heading>
       <ul>
         <li>
-          <strong>重试次数</strong>——一个请求失败后最多换几个凭据重试。
+          <strong>重试次数</strong>——全局额外重试预算，不支持分组覆盖。
           调大能提高成功率，但失败请求的耗时也会变长
         </li>
         <li>
@@ -122,10 +122,11 @@ export default async function Settings() {
 
       <Heading id="routing">路由策略</Heading>
       <p>
-        在「设置 → 路由与调度」选择全局路由策略：默认「原生优先」，优先使用原生路由；「混合权重」让原生与转换候选按有效权重竞争。
+        在「设置 → 路由调度」选择全局路由策略：默认「原生优先」，优先使用原生路由；「混合权重」让原生与转换候选按有效权重竞争。
         该项不支持分组覆盖，实际流量仍受可用凭据、请求亲和与协议能力限制。
       </p>
 
+      <p>Responses WebSocket 默认开启，分组可继承或覆盖；关闭会中断受影响连接，普通 HTTP/SSE 不受影响。全局关闭不会覆盖分组的显式开启。</p>
       <Heading id="affinity">会话亲和</Heading>
       <p>
         开启后，网关会根据访问密钥、客户端协议以及请求中的指令或首个用户输入前缀
@@ -144,10 +145,7 @@ export default async function Settings() {
         </li>
       </ul>
       <Notice label="它是软亲和，不是资源绑定" tone="blue">
-        亲和机制不读取 <code>previous_response_id</code>、<code>conversation</code>
-        或其他上游资源 ID。它适合让具有相同提示前缀的普通请求尽量复用凭据，
-        但不能保证有状态资源回到创建它的凭据。
-        这类资源请使用单凭据，或确认上游支持跨凭据共享。
+        软亲和只尽量复用凭据，不保证资源归属。Responses 的 previous_response_id 使用独立的续接绑定，不受亲和开关影响；conversation 和其他资源引用不在该保证内。
       </Notice>
 
       <Heading id="logs">日志留存</Heading>
@@ -200,7 +198,7 @@ export default async function Settings() {
           <strong>坏凭据隔离太慢</strong> → 调小拉黑阈值
         </li>
         <li>
-          <strong>有状态请求报找不到上下文</strong> → 使用单凭据，或确认上游支持跨凭据共享资源
+          <strong>有状态请求报找不到上下文</strong> → 检查响应 ID 是否已登记、原凭据是否可用；其他资源引用需单凭据或上游支持共享
         </li>
       </ul>
       <p>

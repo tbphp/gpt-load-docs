@@ -180,13 +180,13 @@ const ROUTE_REASONS: readonly (readonly [code: string, level: string, meaning: s
   ["group_disabled", "分组", "分组被停用", "启用该分组"],
   ["group_filtered", "分组", "分组不在这把密钥的授权范围", "在密钥里补上该分组"],
   ["no_credentials", "分组", "分组里一个凭据都没有", "往分组里添加凭据"],
-  ["group_weight_zero", "分组", "旧配置中的分组权重为 0", "改为自动权重或 1–100 的手动权重"],
+  ["group_weight_zero", "分组", "旧配置中的分组权重为 0", "恢复默认权重 50 或设置为 1–100"],
   ["no_available_credential", "分组", "分组内所有凭据都不可用", "继续查看凭据级 reason_code"],
   ["credential_disabled", "凭据", "凭据被停用", "启用它，或依赖其他凭据"],
   ["credential_auth_unavailable", "凭据", "订阅账号授权失效", "重新授权，见订阅账号页"],
   ["credential_blacklisted", "凭据", "凭据已被拉黑", "确认凭据有效后恢复它"],
   ["credential_cooldown", "凭据", "凭据正在冷却", "等待自动恢复，或加更多凭据分担"],
-  ["credential_weight_zero", "凭据", "旧配置中的凭据权重为 0", "改为自动权重或 1–100 的手动权重"],
+  ["credential_weight_zero", "凭据", "旧配置中的凭据权重为 0", "恢复默认权重 50 或设置为 1–100"],
 ];
 
 function errorTable(rows: ErrorRow[]) {
