@@ -27,6 +27,14 @@ type CoreRoute = {
 };
 
 const CORE_ROUTES: CoreRoute[] = [
+  { channel: "Jev", credential: "API 密钥", chat: "—", responses: "—", anthropic: "—", gemini: "—" },
+  { channel: "Cerebras", credential: "API 密钥", chat: "N", responses: "C", anthropic: "C", gemini: "C" },
+  { channel: "Mistral", credential: "API 密钥", chat: "N", responses: "C", anthropic: "C", gemini: "C" },
+  { channel: "Nebius", credential: "API 密钥", chat: "N", responses: "C", anthropic: "C", gemini: "C" },
+  { channel: "Parasail", credential: "API 密钥", chat: "N", responses: "C", anthropic: "C", gemini: "C" },
+  { channel: "Wafer", credential: "API 密钥", chat: "N", responses: "C", anthropic: "C", gemini: "C" },
+  { channel: "Hugging Face", credential: "API 密钥", chat: "N", responses: "C", anthropic: "C", gemini: "C" },
+  { channel: "Cohere", credential: "API 密钥", chat: "—", responses: "—", anthropic: "—", gemini: "—" },
   { channel: "OpenAI", credential: "API 密钥", chat: "N", responses: "N", anthropic: "C", gemini: "C" },
   { channel: "Codex", credential: "OAuth / OAuth JSON", chat: "C", responses: "N", anthropic: "C", gemini: "C" },
   { channel: "Claude", credential: "OAuth / OAuth JSON", chat: "C", responses: "C", anthropic: "N", gemini: "C" },
@@ -66,13 +74,21 @@ type OperationRoute = {
 };
 
 const OPERATIONS: OperationRoute[] = [
+  { channel: "Jev", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: true },
+  { channel: "Cerebras", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: true },
+  { channel: "Mistral", images: "—", embeddings: "N", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: true },
+  { channel: "Nebius", images: "—", embeddings: "N", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: true },
+  { channel: "Parasail", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: true },
+  { channel: "Wafer", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: true },
+  { channel: "Hugging Face", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: true },
+  { channel: "Cohere", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: false, proxy: true },
   { channel: "OpenAI", images: "N", embeddings: "N", anthropicCount: "C", geminiCount: "C", responsesCount: "N", responsesResources: "N", discovery: true, proxy: true },
   { channel: "Codex", images: "N", embeddings: "—", anthropicCount: "C", geminiCount: "C", responsesCount: "N", responsesResources: "—", discovery: true, proxy: true },
   { channel: "Claude", images: "—", embeddings: "—", anthropicCount: "N", geminiCount: "C", responsesCount: "C", responsesResources: "—", discovery: true, proxy: true },
   { channel: "Antigravity", images: "C", embeddings: "—", anthropicCount: "C", geminiCount: "N", responsesCount: "C", responsesResources: "—", discovery: true, proxy: true },
   { channel: "Grok", images: "—", embeddings: "—", anthropicCount: "C", geminiCount: "C", responsesCount: "N", responsesResources: "—", discovery: true, proxy: true },
   { channel: "Anthropic", images: "—", embeddings: "—", anthropicCount: "N", geminiCount: "C", responsesCount: "C", responsesResources: "—", discovery: true, proxy: true },
-  { channel: "Google Gemini", images: "C", embeddings: "—", anthropicCount: "C", geminiCount: "N", responsesCount: "C", responsesResources: "—", discovery: true, proxy: true },
+  { channel: "Google Gemini", images: "C", embeddings: "C", anthropicCount: "C", geminiCount: "N", responsesCount: "C", responsesResources: "—", discovery: true, proxy: true },
   { channel: "Azure OpenAI", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: false },
   { channel: "AWS Bedrock", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: false },
   { channel: "Google Vertex AI", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: false },
@@ -110,7 +126,7 @@ export default function SupportMatrix() {
     >
       <Heading id="scope">口径与版本</Heading>
       <p>本页描述 GPT-Load 已声明的路由能力，不代表任意模型或上游都支持该能力。</p>
-      <p>矩阵核对基于 GPT-Load 主分支提交 e9a10bb5，核对日期为 2026-09-18。具体能力以所用版本为准。</p>
+      <p>矩阵核对基于 GPT-Load 主分支提交 73b3122f，核对日期为 2026-09-26。具体能力以所用版本为准。</p>
       <Notice label="读表方式" tone="blue">
         N 表示 Native，按目标协议原生执行；C 表示 Converted，由网关转换；N/C 表示按模型决定；N* 表示仅原生支持 Compact；— 表示当前没有声明该路由。
       </Notice>
@@ -151,7 +167,7 @@ export default function SupportMatrix() {
             <tr>
               <th>渠道</th>
               <th>Images 生成/编辑</th>
-              <th>Embeddings</th>
+              <th>OpenAI Embeddings</th>
               <th>Anthropic CountTokens</th>
               <th>Gemini CountTokens</th>
               <th>Responses Input Tokens</th>
@@ -178,7 +194,9 @@ export default function SupportMatrix() {
         </table>
       </div>
       <p>Images 的 N 表示原生生成与编辑；C 表示 Gemini 与 Antigravity 仅支持单张、非流式、Base64 图片生成转换，不含编辑。Responses 资源接口包括查询、删除、取消、输入项、压缩及命名空间透传。</p>
-      <p>纯文本 Rerank 由 OpenAI Compatible、New API、GPT-Load 原生支持，入口为 POST /v1/rerank；不支持流式或协议互转，访问密钥需允许 rerank 协议。</p>
+      <p>纯文本 Rerank 由 Cohere、OpenAI Compatible、New API、GPT-Load 原生支持，入口为 POST /v1/rerank；不支持流式或协议互转，访问密钥需允许 rerank 协议。</p>
+      <p>Gemini 原生嵌入（embedContent／batchEmbedContents）由 Google Gemini、New API、GPT-Load 支持，使用 gemini-embeddings 协议。表中的 Google Gemini OpenAI Embeddings 为文本转换，不接受 token ID 输入。</p>
+      <p>Jev 与 OpenRouter 原生支持 decisions；Codex 订阅渠道支持独立的 codex-live 实时语音。Jev 与 Cohere 没有对话路由，不应作为普通聊天渠道使用。</p>
       <p>模型发现指管理端使用凭据发现上游模型；数据面的模型列表返回当前 AccessKey 可见的已配置模型，不会实时查询上游。</p>
       <p>托管代理指 GPT-Load 在凭据、分组或全局层注入的代理；Provider SDK 自行读取环境变量不属于这个合同。</p>
 
@@ -196,7 +214,7 @@ export default function SupportMatrix() {
             <tr>
               <td>Automated contract</td>
               <td>渠道声明、RouteMode、适配器能力与自动化测试一致</td>
-              <td>覆盖本页列出的 24 个渠道路由合同</td>
+              <td>覆盖本页列出的 32 个渠道路由合同</td>
             </tr>
             <tr>
               <td>Artifact smoke</td>
@@ -206,7 +224,7 @@ export default function SupportMatrix() {
             <tr>
               <td>Live upstream verified</td>
               <td>指定版本、渠道、Operation 和模型使用真实凭据完成验证</td>
-              <td>当前没有集中发布、可逐项追溯的 24 渠道 Live E2E 记录</td>
+              <td>当前没有集中发布、可逐项追溯的 32 渠道 Live E2E 记录</td>
             </tr>
           </tbody>
         </table>

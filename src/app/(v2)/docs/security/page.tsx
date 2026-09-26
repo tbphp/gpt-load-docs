@@ -171,6 +171,11 @@ export default function Security() {
       </p>
 
       <Heading id="leak">不要泄漏的东西</Heading>
+      <p>需要在业务请求外发前隐藏敏感文本，或按规则判断是否允许转发，可以配置下面两项功能。它们不替代本页的访问控制与备份要求。</p>
+      <ul>
+        <li><Link href="/docs/advanced/redaction">请求脱敏：固定替换与可逆加密</Link></li>
+        <li><Link href="/docs/advanced/guardrails">JEV 智能护栏：规则、告警与拦截</Link></li>
+      </ul>
       <ul>
         <li>
           <strong>两把密钥</strong>——不要提交到仓库、贴进 issue、发在群里

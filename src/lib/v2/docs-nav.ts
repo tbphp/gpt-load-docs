@@ -35,11 +35,12 @@ export const DOC_GROUPS: DocGroup[] = [
   {
     title: "配置",
     items: [
-      { href: "/docs/groups", label: "分组与渠道", desc: "24 个内置渠道、分组配置与凭据池", status: "ready" },
+      { href: "/docs/groups", label: "分组与渠道", desc: "32 个内置渠道、分组配置与凭据池", status: "ready" },
       { href: "/docs/groups/subscription", label: "订阅账号", desc: "Codex、Claude、Antigravity、Grok 的 OAuth 授权", status: "ready" },
       { href: "/docs/models", label: "模型管理", desc: "模型发现、别名与价格", status: "ready" },
       { href: "/docs/access-keys", label: "访问密钥", desc: "授权范围、限流与成本上限", status: "ready" },
       { href: "/docs/clients", label: "客户端接入", desc: "Claude Code、Codex、Cherry Studio 等", status: "ready" },
+      { href: "/docs/clients/codex-voice", label: "Codex 实时语音", desc: "客户端配置、直连与中继部署", status: "ready" },
     ],
   },
   {
@@ -55,8 +56,10 @@ export const DOC_GROUPS: DocGroup[] = [
     title: "深入",
     items: [
       { href: "/docs/internals/scheduling", label: "调度是怎么做的", desc: "权重、亲和、重试、冷却、拉黑", status: "ready" },
-      { href: "/docs/internals/protocols", label: "协议与转换边界", desc: "四种协议，什么能转什么不能", status: "ready" },
+      { href: "/docs/internals/protocols", label: "协议与转换边界", desc: "原生协议与转换能力的边界", status: "ready" },
       { href: "/docs/advanced/proxy-and-headers", label: "代理与请求头", desc: "出站代理、覆盖层级与请求头规则", status: "ready" },
+      { href: "/docs/advanced/redaction", label: "请求脱敏", desc: "固定替换、可逆加密与还原边界", status: "ready" },
+      { href: "/docs/advanced/guardrails", label: "JEV 智能护栏", desc: "规则审查、告警、拦截与费用", status: "ready" },
     ],
   },
   {

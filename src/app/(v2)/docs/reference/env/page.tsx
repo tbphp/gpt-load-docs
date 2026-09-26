@@ -11,6 +11,7 @@ export function generateMetadata(): Promise<Metadata> {
 const TOC = [
   { id: "diff", label: "和运行时设置的区别" },
   { id: "net", label: "进程与网络" },
+  { id: "voice", label: "实时语音" },
   { id: "data", label: "数据与存储" },
   { id: "secret", label: "密钥" },
   { id: "proxy", label: "出站代理" },
@@ -44,6 +45,13 @@ const COMPOSE = [
   ["BIND_ADDRESS", "继承 HOST", "只影响 Compose：单独指定主服务端口发布到宿主机的哪个地址，不影响回调端口"],
   ["OAUTH_CALLBACK_BIND_ADDRESS", "继承 HOST", "只影响 Compose：单独指定 1455、54545、51121 三个回调端口的发布地址"],
   ["CONTAINER_STOP_GRACE_PERIOD", "15s", "只影响 Compose：强制停止容器前的等待时间，用 Docker 时长写法，应大于 GRACEFUL_SHUTDOWN_TIMEOUT"],
+];
+
+const VOICE = [
+  ["CODEX_LIVE_PUBLIC_IP", "（空）", "中继媒体对客户端可达的 IP，不接受域名；Docker 语音配置要求显式填写"],
+  ["CODEX_LIVE_UDP_PORT_MIN / CODEX_LIVE_UDP_PORT_MAX", "50000 / 50127", "中继 UDP 范围，必须同时配置并保持与端口映射、防火墙一致"],
+  ["CODEX_LIVE_MAX_SESSIONS", "32", "语音并发会话上限，1–1024；包含等待确认挂断的会话"],
+  ["CODEX_LIVE_ICE_SERVERS", "[]", "可选的 ICE/STUN/TURN 服务 JSON 数组；TURN 需要 username 和 credential"],
 ];
 
 export default function Env() {
@@ -112,6 +120,15 @@ export default function Env() {
         不是毫秒。这是最容易配错的一处——
         写成 <code>60000</code> 会得到一个 16 小时的超时。
       </Notice>
+
+      <Heading id="voice">实时语音</Heading>
+      <p>媒体 IP、UDP 与 ICE 设置仅用于网关中继；语音并发上限适用于整个实例。直连／中继／关闭在管理台运行时设置中选择。</p>
+      <div className="tbl-wrap"><table className="tbl">
+        <thead><tr><th>变量</th><th>默认值</th><th>说明</th></tr></thead>
+        <tbody>{VOICE.map(([key, value, description]) => <tr key={key}><td className="m">{key}</td><td className="m">{value}</td><td>{description}</td></tr>)}</tbody>
+      </table></div>
+      <CodeBlock caption="ICE 配置格式示例">{`CODEX_LIVE_ICE_SERVERS=[{"urls":["stun:stun.example.com:3478"]}]`}</CodeBlock>
+      <p><Link href="/docs/clients/codex-voice#relay">Codex 语音中继的完整部署步骤 →</Link></p>
 
       <Heading id="data">数据与存储</Heading>
       <div className="tbl-wrap">

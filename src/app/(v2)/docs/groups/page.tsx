@@ -12,7 +12,7 @@ export function generateMetadata(): Promise<Metadata> {
 
 const TOC = [
   { id: "what", label: "分组是什么" },
-  { id: "channels", label: "24 个内置渠道" },
+  { id: "channels", label: "32 个内置渠道" },
   { id: "create", label: "建一个分组" },
   { id: "params", label: "渠道参数" },
   { id: "creds", label: "管理凭据池" },
@@ -28,7 +28,7 @@ const CHANNELS = [
   {
     g: "模型服务",
     c: "var(--cat-3)",
-    items: "DeepSeek · Moonshot AI · SiliconFlow · 智谱 AI · 阿里云 · 火山引擎 · OpenRouter · Groq",
+    items: "DeepSeek · Moonshot AI · SiliconFlow · 智谱 AI · 阿里云 · 火山引擎 · OpenRouter · Groq · Jev · Cerebras · Mistral · Nebius · Parasail · Wafer · Hugging Face · Cohere",
     cred: "API 密钥",
   },
   { g: "订阅账号", c: "var(--cat-4)", items: "Codex · Claude · Antigravity · Grok", cred: "OAuth 授权" },
@@ -56,7 +56,7 @@ export default async function Groups() {
         简单说：<strong>分组朝上游，访问密钥朝应用</strong>。
       </p>
 
-      <Heading id="channels">24 个内置渠道</Heading>
+      <Heading id="channels">32 个内置渠道</Heading>
       <p>
         建分组时从这些里选一个。常用渠道直接显示为按钮，其余渠道收在「其他渠道」中。
         不同类别的凭据形态不一样：
@@ -108,6 +108,7 @@ export default async function Groups() {
       </Figure>
 
       <Heading id="params">渠道参数</Heading>
+      <p>已有 API Key 分组可在高级配置中切换到其他 API Key 渠道，无需重新导入凭据；订阅分组不支持这样切换。切换前确认目标渠道兼容现有凭据，并核对保留的自定义地址和模型配置。</p>
       <p>选定渠道后，表单会出现这个渠道特有的参数。常见的几种：</p>
       <ul>
         <li>

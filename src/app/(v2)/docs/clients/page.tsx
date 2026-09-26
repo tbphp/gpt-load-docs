@@ -143,13 +143,24 @@ export default async function Clients() {
 
       <Heading id="codex">Codex CLI</Heading>
       <p>
-        Codex 走 OpenAI 协议，把它的接口地址和密钥指向网关即可。
-        管理台的一键生成里有 Codex 选项，直接复制那段配置最稳妥。
+        管理台首页选择 Codex 后会生成配置文件和环境变量。模型发现只返回当前访问密钥可用、且具有 Responses 生成路由的模型；下面是文本接入示例。
       </p>
-      <CodeBlock caption="环境变量方式">
-        <span className="k">export</span> OPENAI_BASE_URL=<span className="s">&quot;http://127.0.0.1:3001/v1&quot;</span>{"\n"}
-        <span className="k">export</span> OPENAI_API_KEY=<span className="s">&quot;你的访问密钥&quot;</span>
-      </CodeBlock>
+      <CodeBlock caption="~/.codex/config.toml">{`model = "YOUR_MODEL"
+model_provider = "gpt-load"
+
+[model_providers.gpt-load]
+name = "OpenAI"
+base_url = "http://127.0.0.1:3001/v1"
+model_catalog_url = "http://127.0.0.1:3001/v1/models"
+env_key = "GPT_LOAD_API_KEY"
+wire_api = "responses"
+supports_websockets = true
+
+[features]
+api_key_model_discovery = true`}</CodeBlock>
+      <CodeBlock caption="在启动客户端的环境中设置">{`export GPT_LOAD_API_KEY="YOUR_ACCESS_KEY"`}</CodeBlock>
+      <p>将 YOUR_MODEL 替换为已开放的模型，合并配置后重新启动客户端。模型发现参数需客户端支持；以当前管理台生成的配置为准。</p>
+      <p><Link href="/docs/clients/codex-voice">Codex 实时语音：客户端配置、直连与中继部署 →</Link></p>
       <Notice label="Codex 要的是 Responses，不是 Chat Completions" tone="amber">
         这把访问密钥必须勾选 <b>OpenAI Responses</b> 协议。
         Codex 用的是 Responses 接口，只勾了 Chat Completions 会被直接拒绝——
@@ -192,6 +203,8 @@ export default async function Clients() {
         具体到某个客户端的截图步骤，用管理台的一键生成更快——
         它会给出那个客户端对应的准确字段。
       </p>
+
+      <p>CC Switch 的余额查询可使用通用模板和访问密钥，Base URL 填网关根地址或 /v1 均可。返回的是访问密钥总成本限额的美元估算余额，不是上游账户余额；周期限额不参与，没有总限额时 total 和 balance 均为 0。</p>
 
       <Heading id="trouble">接不上时</Heading>
       <p>按这个顺序排查，多数问题在前两步就能定位：</p>

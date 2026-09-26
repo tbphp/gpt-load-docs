@@ -119,6 +119,8 @@ export default async function Settings() {
       <p>
         两者的完整机制见 <Link href="/docs/internals/scheduling">调度是怎么做的</Link>。
       </p>
+      <p>「空响应重试」默认关闭，分组可覆盖。开启后，流式对话在尚未向客户端交付、上游自然结束且没有产出时尝试下一个候选；用尽预算后交付原空响应。不适用于 WebSocket、非流式、预热或带历史资源引用的请求，也不重试拒答、内容过滤或输出预算耗尽等有明确原因的空结果。</p>
+      <p>被重试的空响应可能已经在上游计费，但网关只记录最终交付尝试的用量与成本；开启前应接受这个估算边界。</p>
 
       <Heading id="routing">路由策略</Heading>
       <p>
@@ -158,6 +160,13 @@ export default async function Settings() {
       </p>
 
       <Heading id="misc">其他</Heading>
+      <p>请求脱敏在独立设置区配置；自动选模和 JEV 智能护栏在「实验功能」中配置。实时语音模式位于「连接与超时」，Codex 分组可单独覆盖。详细步骤见：</p>
+      <ul>
+        <li><Link href="/docs/advanced/redaction">请求脱敏：固定替换与可逆加密</Link></li>
+        <li><Link href="/docs/advanced/guardrails">JEV 智能护栏：规则、告警与拦截</Link></li>
+        <li><Link href="/docs/clients/codex-voice">Codex 实时语音接入</Link></li>
+        <li><Link href="/docs/models#auto-model">自动选模配置</Link></li>
+      </ul>
       <ul>
         <li>
           <strong>校验间隔</strong>——多久对凭据做一次可用性校验

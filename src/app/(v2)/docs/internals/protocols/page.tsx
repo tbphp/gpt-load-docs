@@ -9,7 +9,7 @@ export function generateMetadata(): Promise<Metadata> {
 }
 
 const TOC = [
-  { id: "four", label: "四种协议" },
+  { id: "four", label: "四种对话协议" },
   { id: "entry", label: "接口入口" },
   { id: "convert", label: "转换是怎么发生的" },
   { id: "limit", label: "不能转换的情况" },
@@ -25,11 +25,8 @@ export default function Protocols() {
       lede="网关能在协议之间转换，但不是万能翻译器。这一页说明边界在哪，以及遇到不支持的组合时会怎样。"
       toc={TOC}
     >
-      <Heading id="four">四种协议</Heading>
-      <p>
-        GPT-Load 接受四种客户端协议。它们是<strong>并列关系</strong>，
-        一把访问密钥可以同时允许多个：
-      </p>
+      <Heading id="four">四种对话协议</Heading>
+      <p>GPT-Load 接受四种对话协议。它们是并列关系，一把访问密钥可以同时允许多个；图片、向量、重排序、决策和实时语音另有独立协议权限。</p>
       <ul>
         <li>
           <strong>OpenAI Chat Completions</strong>——最通用，
@@ -91,7 +88,7 @@ export default function Protocols() {
           <code>/v1beta/models</code>
         </li>
         <li>
-          <strong>向量嵌入</strong>——<code>/v1/embeddings</code>
+          <strong>向量嵌入</strong>——<code>/v1/embeddings</code>；Gemini 原生使用 <code>/v1beta/models/…:embedContent</code> 或 <code>:batchEmbedContents</code>
         </li>
         <li>
           <strong>图片生成与编辑</strong>——<code>/v1/images/generations</code>、
@@ -101,7 +98,12 @@ export default function Protocols() {
           <strong>token 计数</strong>——<code>/v1/messages/count_tokens</code>{" "}
           及 Gemini 的 <code>countTokens</code>
         </li>
+        <li>纯文本重排序：POST /v1/rerank，独立使用 rerank 协议，不支持流式或协议互转。</li>
+        <li>JEV 决策：POST /v1/decisions，由 Jev 或 OpenRouter 渠道原生执行，独立使用 decisions 协议。</li>
+        <li>Codex 实时语音：独立使用 codex-live 协议，不是 Responses WebSocket 的另一种文本模式。</li>
       </ul>
+      <p>Gemini、New API 与 GPT-Load 支持原生 gemini-embeddings；Gemini 渠道还可将 OpenAI Embeddings 的文本请求转成 Gemini 原生批量嵌入，支持 dimensions 及 float／base64 输出，不支持 token ID 输入。</p>
+      <p><Link href="/docs/clients/codex-voice">Codex 实时语音接入指南 →</Link></p>
       <p>GET /v1/models 携带非空 anthropic-version 请求头时返回 Anthropic 模型列表；否则返回 OpenAI Chat Completions 格式。直接调接口时按客户端协议带上对应请求头。</p>
       <p><Link href="/docs/reference/support-matrix">查看逐渠道协议与 Operation →</Link></p>
 

@@ -14,6 +14,7 @@ const TOC = [
   { id: "two", label: "两个层面" },
   { id: "discover", label: "模型发现" },
   { id: "alias", label: "模型别名" },
+  { id: "auto-model", label: "自动选模" },
   { id: "price", label: "价格从哪来" },
   { id: "manual", label: "手动改价" },
   { id: "unpriced", label: "没有价格会怎样" },
@@ -58,6 +59,7 @@ export default async function Models() {
       <p>
         上游没有列出但确实可用的模型，可以<strong>手工添加</strong>。
       </p>
+      <p>普通模型的显示名称、上下文窗口、推理级别和输入类型可在模型页调整，用于 Codex 模型发现；修改这些描述不会让上游获得原本不支持的能力。</p>
 
       <Figure
         src={docScreenshot(locale, "mdl-01-discover.png")}
@@ -108,6 +110,12 @@ export default async function Models() {
       >
         应用请求别名，网关转发时换成实际的模型名。
       </Figure>
+
+      <p>同一分组中，多个不同上游模型可以使用同一个对外别名。网关先按权重选择凭据，再轮流选择该凭据当前可用的同名模型；增加模型数量不会额外增加凭据的流量份额。向量模型不要混用：同一客户端模型名应始终对应同一种 Embedding 模型。</p>
+
+      <Heading id="auto-model">自动选模</Heading>
+      <p>在「设置 → 实验功能」中启用自动模型，可让客户端始终请求一个名称，由 JEV 根据任务从你配置的预设模型中选择。先配置可用的 Decisions 分组与 JEV 公共配置，再添加自动模型名称、各档预设的适用描述和目标模型，并指定回退预设。</p>
+      <p>自动选模默认关闭。决策失败时使用配置的回退预设，但候选和回退模型仍必须符合访问密钥权限；它不会替应用开放原本无权使用的模型。JEV 调用可能增加延迟和费用，日志会显示选择结果与决策成本。</p>
 
       <Heading id="price">价格从哪来</Heading>
       <p>
