@@ -2503,5 +2503,9 @@
   "Gemini 原生嵌入（embedContent／batchEmbedContents）由 Google Gemini、New API、GPT-Load 支持，使用 gemini-embeddings 协议。表中的 Google Gemini OpenAI Embeddings 为文本转换，不接受 token ID 输入。": "Google Gemini, New API, and GPT-Load support native Gemini embeddings (embedContent/batchEmbedContents) using gemini-embeddings. Google Gemini's OpenAI Embeddings entry in the table is a text conversion route and does not accept token-ID input.",
   "Jev 与 OpenRouter 原生支持 decisions；Codex 订阅渠道支持独立的 codex-live 实时语音。Jev 与 Cohere 没有对话路由，不应作为普通聊天渠道使用。": "Jev and OpenRouter natively support decisions. The Codex subscription channel supports the independent codex-live voice protocol. Jev and Cohere have no conversation routes and should not be used as ordinary chat channels.",
   "覆盖本页列出的 32 个渠道路由合同": "Covers the routing contracts of all 32 channels listed here",
-  "当前没有集中发布、可逐项追溯的 32 渠道 Live E2E 记录": "No centralized, individually traceable live E2E records are currently published for all 32 channels"
+  "当前没有集中发布、可逐项追溯的 32 渠道 Live E2E 记录": "No centralized, individually traceable live E2E records are currently published for all 32 channels",
+  "客户端原文经 GPT-Load 加密后发给上游；上游原样返回密文，由 GPT-Load 还原后交给客户端": "GPT-Load encrypts client plaintext before sending it upstream; unchanged ciphertext returned by upstream is restored by GPT-Load before reaching the client",
+  "FIG. 1 — 可逆脱敏流程": "FIG. 1 — Reversible redaction flow",
+  "GPT-Load 将请求送交 JEV 审核，根据规则结果转发至业务上游、告警放行或拒绝请求": "GPT-Load submits requests to JEV for review, then forwards them to the business upstream, allows them with warnings, or rejects them according to the rules",
+  "FIG. 1 — 智能护栏处理流程": "FIG. 1 — AI Guardrails flow"
 }

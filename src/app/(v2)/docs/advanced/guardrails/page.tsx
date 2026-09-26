@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
-import { Notice } from "@/components/v2/ui";
+import { Figure, Notice } from "@/components/v2/ui";
+import { getLocale } from "@/i18n/v2/server";
 import { docPageMetadata } from "@/lib/v2/doc-meta";
 
 export function generateMetadata(): Promise<Metadata> {
@@ -17,7 +18,9 @@ const TOC = [
   { id: "trouble", label: "查看结果与排障" },
 ];
 
-export default function Guardrails() {
+export default async function Guardrails() {
+  const locale = await getLocale();
+
   return (
     <DocsPage path="/docs/advanced/guardrails" title="JEV 智能护栏" lede="在业务请求发往上游之前，用 JEV 按自然语言规则审查文本，命中后告警放行或直接拦截。" toc={TOC}>
       <Heading id="purpose">它检查什么</Heading>
@@ -36,6 +39,15 @@ export default function Guardrails() {
       <Notice label="送审也是外部调用" tone="amber">待检文本、规则和必要上下文会发送到选定的 JEV 服务，产生延迟和可能的费用。启用前应确认该服务适合接收你的数据。启用请求脱敏时，JEV 收到的是脱敏后的内容。</Notice>
 
       <Heading id="flow">审查与拦截流程</Heading>
+      {locale === "zh" && (
+        <Figure
+          src="/v2/guardrails-flow-zh.png"
+          alt="GPT-Load 将请求送交 JEV 审核，根据规则结果转发至业务上游、告警放行或拒绝请求"
+          width={1672}
+          height={941}
+          caption="FIG. 1 — 智能护栏处理流程"
+        />
+      )}
       <ol>
         <li>请求通过身份与权限检查，网关准备业务外发内容；启用了脱敏时先处理文本。</li>
         <li>提取本次携带的消息、系统提示、工具相关文本，复用有效的已审结果，对新增或修改的内容调用 JEV。</li>

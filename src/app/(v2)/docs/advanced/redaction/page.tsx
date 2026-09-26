@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
-import { CodeBlock, Notice } from "@/components/v2/ui";
+import { CodeBlock, Figure, Notice } from "@/components/v2/ui";
+import { getLocale } from "@/i18n/v2/server";
 import { docPageMetadata } from "@/lib/v2/doc-meta";
 
 export function generateMetadata(): Promise<Metadata> {
@@ -17,7 +18,9 @@ const TOC = [
   { id: "trouble", label: "排障与密钥" },
 ];
 
-export default function Redaction() {
+export default async function Redaction() {
+  const locale = await getLocale();
+
   return (
     <DocsPage path="/docs/advanced/redaction" title="请求脱敏" lede="在消息发给业务上游或 JEV 前隐藏敏感文本；需要把原值交回客户端时，可以使用可逆加密。" toc={TOC}>
       <Heading id="purpose">解决什么问题</Heading>
@@ -41,6 +44,15 @@ export default function Redaction() {
       <p>同一原文上的匹配会合并重叠区间，并采用排在前面的规则处理该区间；不是前一条替换后再让后一条重新匹配。避免把匹配整段消息的宽泛规则放在前面。</p>
 
       <Heading id="flow">请求与响应流程</Heading>
+      {locale === "zh" && (
+        <Figure
+          src="/v2/redaction-flow-zh.png"
+          alt="客户端原文经 GPT-Load 加密后发给上游；上游原样返回密文，由 GPT-Load 还原后交给客户端"
+          width={1672}
+          height={941}
+          caption="FIG. 1 — 可逆脱敏流程"
+        />
+      )}
       <ol>
         <li>客户端把原始消息交给 GPT-Load；网关仍按原有权限、模型和路由配置选择目标。</li>
         <li>网关处理参数覆盖后的外发文本，将匹配片段替换或加密。业务上游和 JEV 收到的都是处理后的内容。</li>
