@@ -52,7 +52,7 @@ const catStyle = (s: number, d: number, cat: string) =>
 export default function RouteDiagram() {
   const { locale, t } = useLocale();
   const endpoints = useMemo(
-    () => ENDPOINTS.map((endpoint, index) => ({ ...endpoint, name: t.home.protocols.groups[index], count: [4, 3, 16, 4][index] })),
+    () => ENDPOINTS.map((endpoint, index) => ({ ...endpoint, name: t.home.protocols.groups[index], count: [4, 3, 19, 4][index] })),
     [t]
   );
   const rootRef = useRef<SVGSVGElement>(null);

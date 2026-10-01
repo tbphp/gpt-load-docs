@@ -94,6 +94,7 @@ const DATA_PLANE_ERRORS: ErrorRow[] = [
   ["invalid_content_encoding", "400", "压缩请求体无法解码", "重新编码请求体并核对请求头"],
   ["not_acceptable", "406", "客户端不接受 identity 编码的响应", "允许 identity 响应"],
   ["model_list_too_large", "500", "可见模型列表超过安全响应限制", "缩小访问密钥可见的模型范围"],
+  ["concurrency_limit_exceeded", "429", "全局、访问密钥或分组达到并发上限", "等待活跃请求完成；检查运行时设置与单独覆盖，不会自动排队"],
   ["access_key_rate_limited", "429", "访问密钥超过 RPM 限制", "按 Retry-After 等待"],
   ["access_key_cost_limit_exceeded", "429", "访问密钥触发估算成本限制", "检查 data.recoverable、next_available_at_ms 和 blocking_rules"],
   ["configuration_changed", "503", "请求使用的配置快照已经失效", "按 Retry-After 短暂等待后重试"],

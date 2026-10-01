@@ -49,7 +49,7 @@ export default async function AccessKeys() {
           <strong>访问条件</strong>——允许的来源 IP/CIDR 和有效期
         </li>
         <li>
-          <strong>用量边界</strong>——每分钟请求数，以及成本封顶
+          <strong>用量边界</strong>——每分钟请求数、并发上限，以及成本封顶
         </li>
       </ul>
       <p>
@@ -155,6 +155,9 @@ export default async function AccessKeys() {
         它的作用是<strong>防止单个应用失控</strong>——
         比如某个脚本写错了循环，不至于把所有上游额度耗光。
       </p>
+
+      <p>「并发上限」限制这把密钥跨分组同时处理的请求数。留空继承系统默认值，0 表示该密钥不单独限并发；全局和分组上限仍然生效。</p>
+      <p><Link href="/docs/settings#concurrency">查看并发上限与拒绝行为 →</Link></p>
 
       <Heading id="cost">成本上限</Heading>
       <p>它按网关计算的估算成本限制后续请求，支持两种规则：</p>

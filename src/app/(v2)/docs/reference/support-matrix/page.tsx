@@ -52,8 +52,11 @@ const CORE_ROUTES: CoreRoute[] = [
   { channel: "Alibaba Cloud Bailian", credential: "API 密钥", chat: "N", responses: "C", anthropic: "C", gemini: "C" },
   { channel: "Volcengine Ark", credential: "API 密钥", chat: "N", responses: "C", anthropic: "C", gemini: "C" },
   { channel: "OpenRouter", credential: "API 密钥", chat: "N", responses: "N", anthropic: "C", gemini: "C" },
+  { channel: "Cline", credential: "API 密钥", chat: "N", responses: "C", anthropic: "C", gemini: "C" },
   { channel: "Groq", credential: "API 密钥", chat: "N", responses: "C", anthropic: "C", gemini: "C" },
   { channel: "xAI", credential: "API 密钥", chat: "N", responses: "N", anthropic: "C", gemini: "C" },
+  { channel: "OpenCode Go", credential: "API 密钥", chat: "N", responses: "N", anthropic: "N", gemini: "—" },
+  { channel: "OpenCode Zen", credential: "API 密钥", chat: "N", responses: "N", anthropic: "N", gemini: "—" },
   { channel: "GPT-Load", credential: "AccessKey + 根地址", chat: "N", responses: "N", anthropic: "N", gemini: "N" },
   { channel: "New API", credential: "API 密钥 + 根地址", chat: "N", responses: "N", anthropic: "N", gemini: "N" },
   { channel: "CLIProxyAPI", credential: "API 密钥 + 根地址", chat: "N", responses: "N", anthropic: "N", gemini: "N" },
@@ -99,8 +102,11 @@ const OPERATIONS: OperationRoute[] = [
   { channel: "Alibaba Cloud Bailian", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: true },
   { channel: "Volcengine Ark", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: true },
   { channel: "OpenRouter", images: "—", embeddings: "N", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: true },
+  { channel: "Cline", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: true },
   { channel: "Groq", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: true },
   { channel: "xAI", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: true },
+  { channel: "OpenCode Go", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: true },
+  { channel: "OpenCode Zen", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: true },
   { channel: "GPT-Load", images: "N", embeddings: "N", anthropicCount: "N", geminiCount: "N", responsesCount: "N", responsesResources: "N", discovery: true, proxy: true },
   { channel: "New API", images: "N", embeddings: "N", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "N*", discovery: true, proxy: true },
   { channel: "CLIProxyAPI", images: "N", embeddings: "—", anthropicCount: "N", geminiCount: "N", responsesCount: "—", responsesResources: "N*", discovery: true, proxy: true },
@@ -126,7 +132,7 @@ export default function SupportMatrix() {
     >
       <Heading id="scope">口径与版本</Heading>
       <p>本页描述 GPT-Load 已声明的路由能力，不代表任意模型或上游都支持该能力。</p>
-      <p>矩阵核对基于 GPT-Load 主分支提交 73b3122f，核对日期为 2026-09-26。具体能力以所用版本为准。</p>
+      <p>矩阵核对基于 GPT-Load 主分支提交 25142f96，核对日期为 2026-10-01。主分支能力不等同于所有已发布版本的能力，请以所用版本为准。</p>
       <Notice label="读表方式" tone="blue">
         N 表示 Native，按目标协议原生执行；C 表示 Converted，由网关转换；N/C 表示按模型决定；N* 表示仅原生支持 Compact；— 表示当前没有声明该路由。
       </Notice>
@@ -197,6 +203,7 @@ export default function SupportMatrix() {
       <p>纯文本 Rerank 由 Cohere、OpenAI Compatible、New API、GPT-Load 原生支持，入口为 POST /v1/rerank；不支持流式或协议互转，访问密钥需允许 rerank 协议。</p>
       <p>Gemini 原生嵌入（embedContent／batchEmbedContents）由 Google Gemini、New API、GPT-Load 支持，使用 gemini-embeddings 协议。表中的 Google Gemini OpenAI Embeddings 为文本转换，不接受 token ID 输入。</p>
       <p>Jev 与 OpenRouter 原生支持 decisions；Codex 订阅渠道支持独立的 codex-live 实时语音。Jev 与 Cohere 没有对话路由，不应作为普通聊天渠道使用。</p>
+      <p>Mistral 渠道原生支持 OCR、FIM 补全、音频转写、语音合成、文本与聊天审核、分类、音色管理和 WebSocket 实时转写，访问密钥需允许独立的 mistral 协议。Chat Completions 与 Embeddings 仍使用 OpenAI 兼容协议。</p>
       <p>模型发现指管理端使用凭据发现上游模型；数据面的模型列表返回当前 AccessKey 可见的已配置模型，不会实时查询上游。</p>
       <p>托管代理指 GPT-Load 在凭据、分组或全局层注入的代理；Provider SDK 自行读取环境变量不属于这个合同。</p>
 
@@ -214,7 +221,7 @@ export default function SupportMatrix() {
             <tr>
               <td>Automated contract</td>
               <td>渠道声明、RouteMode、适配器能力与自动化测试一致</td>
-              <td>覆盖本页列出的 32 个渠道路由合同</td>
+              <td>覆盖本页列出的 35 个渠道路由合同</td>
             </tr>
             <tr>
               <td>Artifact smoke</td>
@@ -224,7 +231,7 @@ export default function SupportMatrix() {
             <tr>
               <td>Live upstream verified</td>
               <td>指定版本、渠道、Operation 和模型使用真实凭据完成验证</td>
-              <td>当前没有集中发布、可逐项追溯的 32 渠道 Live E2E 记录</td>
+              <td>当前没有集中发布、可逐项追溯的 35 渠道 Live E2E 记录</td>
             </tr>
           </tbody>
         </table>
@@ -237,6 +244,8 @@ export default function SupportMatrix() {
       <ul>
         <li>OpenAI Compatible 的真实能力取决于你填写的中转服务；矩阵只说明 GPT-Load 能构造和接收哪些请求。</li>
         <li>Google Vertex AI 的 Gemini 路由按模型决定 Native 或 Converted。</li>
+        <li>OpenCode Go 与 OpenCode Zen 仅支持上游模型可用的原生协议；Responses 为无状态创建，不支持 Gemini 或 Responses 资源接口。</li>
+        <li>Mistral 原生接口不包含 files、batch、agents、conversations 或浏览器临时令牌会话。</li>
         <li>协议路由不代表模型一定支持 tools、reasoning、视觉或其他模型级特性。</li>
         <li>Azure OpenAI、AWS Bedrock 与 Google Vertex AI 不支持 GPT-Load 托管代理。</li>
       </ul>

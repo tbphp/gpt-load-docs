@@ -13,6 +13,7 @@ export function generateMetadata(): Promise<Metadata> {
 const TOC = [
   { id: "two", label: "两层设置" },
   { id: "timeout", label: "三种超时" },
+  { id: "concurrency", label: "并发上限" },
   { id: "retry", label: "重试与拉黑" },
   { id: "routing", label: "路由策略" },
   { id: "affinity", label: "会话亲和" },
@@ -104,6 +105,12 @@ export default async function Settings() {
         <strong>推理模型要特别注意首字节超时</strong>——
         它们在开始输出前可能思考很久，默认值偏紧的话会误判为失败。
       </p>
+
+      <Heading id="concurrency">并发上限</Heading>
+      <p>在「设置 → 路由调度」配置全局并发上限、访问密钥默认并发上限和分组默认并发上限。默认均为 0，表示不限制；限制的是正在处理的请求数，不是每分钟请求数。</p>
+      <p>访问密钥可单独覆盖，留空继承默认值；分组在运行参数中启用覆盖。显式设为 0 只取消该层限制，仍受其他层上限约束。</p>
+      <p>达到上限时立即拒绝，不排队，HTTP 请求返回 429 和 concurrency_limit_exceeded。流式请求在处理期间持续占用名额；降低上限不会强行中断已放行的请求。</p>
+      <p>并发计数只在当前 GPT-Load 进程内生效，不是多实例共享的总上限。JEV 决策调用也受分组并发限制，不能依赖护栏的异常放行绕过并发准入。</p>
 
       <Heading id="retry">重试与拉黑</Heading>
       <ul>

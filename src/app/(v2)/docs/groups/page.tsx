@@ -12,7 +12,7 @@ export function generateMetadata(): Promise<Metadata> {
 
 const TOC = [
   { id: "what", label: "分组是什么" },
-  { id: "channels", label: "32 个内置渠道" },
+  { id: "channels", label: "35 个内置渠道" },
   { id: "create", label: "建一个分组" },
   { id: "params", label: "渠道参数" },
   { id: "creds", label: "管理凭据池" },
@@ -28,7 +28,7 @@ const CHANNELS = [
   {
     g: "模型服务",
     c: "var(--cat-3)",
-    items: "DeepSeek · Moonshot AI · SiliconFlow · 智谱 AI · 阿里云 · 火山引擎 · OpenRouter · Groq · Jev · Cerebras · Mistral · Nebius · Parasail · Wafer · Hugging Face · Cohere",
+    items: "DeepSeek · Moonshot AI · SiliconFlow · 智谱 AI · 阿里云 · 火山引擎 · OpenRouter · Cline · Groq · Jev · Cerebras · Mistral · Nebius · Parasail · Wafer · Hugging Face · Cohere · OpenCode Go · OpenCode Zen",
     cred: "API 密钥",
   },
   { g: "订阅账号", c: "var(--cat-4)", items: "Codex · Claude · Antigravity · Grok", cred: "OAuth 授权" },
@@ -56,7 +56,7 @@ export default async function Groups() {
         简单说：<strong>分组朝上游，访问密钥朝应用</strong>。
       </p>
 
-      <Heading id="channels">32 个内置渠道</Heading>
+      <Heading id="channels">35 个内置渠道</Heading>
       <p>
         建分组时从这些里选一个。常用渠道直接显示为按钮，其余渠道收在「其他渠道」中。
         不同类别的凭据形态不一样：
@@ -172,6 +172,8 @@ export default async function Groups() {
           <Link href="/docs/advanced/proxy-and-headers">代理与请求头</Link>
         </li>
       </ul>
+
+      <p>API Key 分组还可在凭据页选择「全量操作 → 从文件导入」，一次选择多个 UTF-8 编码的 TXT、JSON 或 JSONL 文件，核对凭据数量后提交。每次最多 5,000 条凭据、32 MiB；文件内容仍须符合当前渠道的凭据格式。</p>
 
       <Figure
         src={docScreenshot(locale, "grp-05-import.png")}

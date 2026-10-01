@@ -531,6 +531,7 @@
   "管理台里 {{0}} 。渠道是在「分组 → 新建分组」中选择的—— 常用渠道直接显示为按钮，其余渠道在「其他渠道」里。选完 OpenAI 或 Anthropic， 这个分组就固定对接那个上游了。 想接两个不同的服务商，就建两个分组。": "The console has {{0}}. Choose a channel under Groups → New Group. Common channels appear as buttons; others are under Other Channels. Selecting OpenAI or Anthropic fixes that Group to the chosen upstream. Create separate Groups for different providers.",
   "{{0}} ——同一个服务商，如果你想让一批密钥走高优先级、另一批做兜底， 或者两批密钥的超时和拉黑阈值要求不同，那就拆成两个分组": "{{0}} — split a provider’s keys into two Groups when one needs higher priority and the other is a fallback, or they need different timeouts and blacklisting thresholds.",
   "多半是上游限流。模型级限制只冷却该凭据的对应模型，其他模型仍可使用；网关会在安全边界内切换候选—— {{0}} 。 频繁发生的话看健康页，确认是不是可用凭据太少。": "This is usually upstream rate limiting. Model-level limits cool down only that model on the credential; other models remain usable. The gateway switches candidates within safety boundaries — {{0}}. If frequent, check Health for too few available credentials.",
-  "{{0}} ——从内置的 32 个上游里选一个，决定请求最终发到哪": "{{0}} — choose one of the 32 built-in upstreams to determine where requests are sent.",
-  "{{0}} —— {{1}} ；Gemini 原生使用 {{2}} 或 {{3}}": "{{0}} — {{1}}; native Gemini uses {{2}} or {{3}}."
+  "{{0}} —— {{1}} ；Gemini 原生使用 {{2}} 或 {{3}}": "{{0}} — {{1}}; native Gemini uses {{2}} or {{3}}.",
+  "{{0}} ——从内置的 35 个上游里选一个，决定请求最终发到哪": "{{0}} — choose one of the 35 built-in upstreams to determine where requests are sent.",
+  "{{0}} ——每分钟请求数、并发上限，以及成本封顶": "{{0}} — Requests per minute, concurrency limits, and cost caps"
 }
