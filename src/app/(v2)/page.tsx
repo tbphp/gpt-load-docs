@@ -233,9 +233,9 @@ export default async function Home() {
 
         <div style={{ marginTop: 46 }}>
           <span className="label">{h.protocols.outgoing}</span>
-          <div className="g12 rows-34" style={{ marginTop: 16 }}>
+          <div className="g12 rows-34 home-channels" style={{ marginTop: 16 }}>
             {CHANNELS.map((g, i) => (
-              <div className="col-3 chan" key={h.protocols.groups[i]} style={{ "--cat": g.cat } as React.CSSProperties}>
+              <div className={`${g.providers.length > 8 ? "col-6 chan-models" : "col-2"} chan`} key={h.protocols.groups[i]} style={{ "--cat": g.cat } as React.CSSProperties}>
                 <div className="chan-h">
                   <span className="t">{h.protocols.groups[i]}</span>
                   <span className="c">{g.c}</span>
@@ -352,7 +352,7 @@ export default async function Home() {
         title={h.console.title}
         lede={h.console.lede}
       >
-        <div className="g12 rows-44">
+        <div className="g12 rows-44 home-console">
           <Figure
             className="col-6"
             src={docScreenshot(locale, "grp-01-list.png")}
