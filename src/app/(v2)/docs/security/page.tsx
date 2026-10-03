@@ -149,6 +149,9 @@ export default function Security() {
         流式响应如果被代理缓冲住，客户端会一直等不到输出。
       </p>
 
+      <p>默认客户端 IP 是连接来源。反向代理后需要真实 IP 时，配置 CLIENT_IP_HEADER 并将 TRUSTED_PROXIES 限定为实际代理的 IP/CIDR，修改后重启；不要直接信任客户端传入的头。此地址统一用于日志、IP 限制和安全事件。</p>
+      <p>指定可信代理列表后，X-Forwarded-For 从右向左跳过可信代理，取首个不可信地址；全部可信时取最左侧。请求头缺失或无效时回退连接地址。TRUSTED_PROXIES 留空会直接信任选定请求头（X-Forwarded-For 取最左侧），只适用于入口代理保证覆盖或清理该头的环境。</p>
+
       <Heading id="perm">文件权限</Heading>
       <p>
         受管的数据目录会被收紧到与运行身份相匹配的访问权限，

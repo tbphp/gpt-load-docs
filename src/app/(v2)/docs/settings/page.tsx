@@ -167,6 +167,7 @@ export default async function Settings() {
       </p>
 
       <Heading id="misc">其他</Heading>
+      <p>全局上游代理在设置页的「上游代理」中选择；代理地址统一在侧栏「代理」页新增、批量导入、编辑和测试，供全局、分组与凭据复用。测试由服务器经指定代理访问测试地址，不会自动启用或停用代理。</p>
       <p>请求脱敏在独立设置区配置；自动选模和 JEV 智能护栏在「实验功能」中配置。实时语音模式位于「连接与超时」，Codex 分组可单独覆盖。详细步骤见：</p>
       <ul>
         <li><Link href="/docs/advanced/redaction">请求脱敏：固定替换与可逆加密</Link></li>
