@@ -13,6 +13,7 @@ export function generateMetadata(): Promise<Metadata> {
 const TOC = [
   { id: "two", label: "两个层面" },
   { id: "discover", label: "模型发现" },
+  { id: "client-catalog", label: "Codex 模型目录" },
   { id: "alias", label: "模型别名" },
   { id: "auto-model", label: "自动选模" },
   { id: "price", label: "价格从哪来" },
@@ -38,12 +39,12 @@ export default async function Models() {
           只有列在这里的模型才能被请求到
         </li>
         <li>
-          <strong>模型页</strong>——全局的模型价格和规格，影响成本估算
+          <strong>模型页</strong>——全局的模型价格、规格与客户端目录，影响成本估算和 Codex 展示
         </li>
       </ul>
       <p>
         日常配置主要在分组里做，见 <Link href="/docs/groups">分组与渠道</Link>。
-        这一页分别说明分组里的模型与别名，以及全局价格信息。
+        这一页分别说明分组里的模型与别名，以及全局价格和客户端目录。
       </p>
 
       <Heading id="discover">模型发现</Heading>
@@ -59,7 +60,6 @@ export default async function Models() {
       <p>
         上游没有列出但确实可用的模型，可以<strong>手工添加</strong>。
       </p>
-      <p>普通模型的显示名称、上下文窗口、推理级别和输入类型可在模型页调整，用于 Codex 模型发现；修改这些描述不会让上游获得原本不支持的能力。</p>
 
       <Figure
         src={docScreenshot(locale, "mdl-01-discover.png")}
@@ -77,6 +77,22 @@ export default async function Models() {
         <strong>清理</strong>当前列表。同步只比较上游发现结果，不把价格目录当作上游模型；
         保留下来的模型会保留别名，确认后直接保存。
       </Notice>
+
+      <Heading id="client-catalog">Codex 模型目录</Heading>
+      <Notice label="适用版本" tone="blue">
+        以下目录编辑功能适用于 main 分支，尚未包含在 v2.0.0-rc.42 中；使用发布包时请先确认该版本是否包含此功能。
+      </Notice>
+      <p>用管理员身份进入「模型 → 客户端模型目录」，Modern 和 Classic 都提供此入口。候选来自具有 Responses 生成路由的对外模型名，包括别名和可用的自动模型。</p>
+      <ol>
+        <li>点击「添加模型」选择要展示的候选。默认仅加入 gpt- 开头的模型（排除 gpt-image 和 gpt-image-*），按版本从新到旧排列；其他候选需手动添加。</li>
+        <li>拖动或使用上下移动调整顺序，展开模型资料可修改显示名称、说明、上下文窗口、自动压缩阈值、思考等级及默认等级、输入类型和 Fast／Ultrafast 展示。</li>
+        <li>默认思考等级必须属于已选等级，输入类型必须包含文本。确认后点击「保存所有更改」，目录和资料会一起保存。</li>
+      </ol>
+      <p>「恢复默认目录」只恢复选模与顺序，保留已编辑的模型资料；资料可单独恢复默认属性。修改后都需要保存。</p>
+      <Notice label="容量与权限" tone="amber">
+        目录响应最多 1 MiB。预览按全部权限计算，实际客户端还会按访问密钥的分组、协议和模型过滤；超过容量时只返回按顺序能装下的完整前缀，可减少模型或把常用模型移到前面。
+      </Notice>
+      <p>移出目录只影响 Codex 展示，不影响模型调用和访问密钥权限。模型资料应按上游实际能力填写；修改规格或展示加速档位不会让上游获得原本不支持的能力。</p>
 
       <Heading id="alias">模型别名</Heading>
       <p>
