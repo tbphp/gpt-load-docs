@@ -80,7 +80,7 @@ export default async function Models() {
 
       <Heading id="client-catalog">Codex 模型目录</Heading>
       <Notice label="适用版本" tone="blue">
-        以下目录编辑功能适用于 main 分支，尚未包含在 v2.0.0-rc.42 中；使用发布包时请先确认该版本是否包含此功能。
+        以下目录编辑功能从 v2.0.0-rc.43 起可用；更早的 2.0 预发布版本需要升级。
       </Notice>
       <p>用管理员身份进入「模型 → 客户端模型目录」，Modern 和 Classic 都提供此入口。候选来自具有 Responses 生成路由的对外模型名，包括别名和可用的自动模型。</p>
       <ol>

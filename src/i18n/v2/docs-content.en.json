@@ -2219,7 +2219,7 @@
   "上游拒绝刷新，或现有授权已失效": "The upstream rejected the refresh, or the existing authorization is no longer valid",
   "尝试刷新凭据；仍失败时重新连接或导入": "Try refreshing the credentials; reconnect or import the account if it still fails",
   "「刷新凭据」在账号卡片的更多菜单中，用于恢复授权；「刷新额度」只更新额度信息。 手动停用的账号需先启用，才能刷新凭据。": "Refresh credentials, in the account card's More menu, attempts to restore authorization; Refresh quota only updates quota information. Enable a manually disabled account before refreshing its credentials.",
-  "首次导入后点击「刷新额度」获取当前额度和重置时间； 升级后额度未更新或显示异常，也可主动刷新一次。": "After the first import, click Refresh quota to fetch the current quota and reset time. If quota data does not update or looks incorrect after an upgrade, refresh it manually once.",
+  "首次导入后同步额度，获取当前额度和重置时间； 升级后额度未更新或显示异常，也可主动刷新一次。": "After the first import, sync quota to fetch the current quota and reset time. If quota data does not update or looks incorrect after an upgrade, refresh it manually once.",
   "它通过主动同步并结合上游响应更新， 存在延迟，也不一定覆盖所有计费维度。": "It is updated through active synchronization and upstream responses, may be delayed, and may not cover every billing dimension.",
   "可从账号卡片的更多菜单尝试「刷新凭据」，仍失败时重新连接或导入账号。 「结果未知」也可这样处理；「刷新额度」不会恢复授权。四种授权状态的含义见订阅账号页。": "Try Refresh credentials from the account card's More menu; reconnect or import the account if it still fails. The same applies to Outcome unknown. Refresh quota does not restore authorization. See Subscription Accounts for the four authorization states.",
   "——从内置的 24 个上游里选一个，决定请求最终发到哪": "— Choose one of the 24 built-in upstreams; it determines the request's final destination",
@@ -2558,7 +2558,7 @@
   "Codex 模型目录": "Codex model catalog",
   "适用版本": "Applicable version",
   "容量与权限": "Capacity and permissions",
-  "以下目录编辑功能适用于 main 分支，尚未包含在 v2.0.0-rc.42 中；使用发布包时请先确认该版本是否包含此功能。": "The catalog editor below applies to the main branch and is not included in v2.0.0-rc.42. If you use a release package, first check whether your version includes it.",
+  "以下目录编辑功能从 v2.0.0-rc.43 起可用；更早的 2.0 预发布版本需要升级。": "The catalog editor below is available from v2.0.0-rc.43. Earlier 2.0 prereleases need an upgrade.",
   "用管理员身份进入「模型 → 客户端模型目录」，Modern 和 Classic 都提供此入口。候选来自具有 Responses 生成路由的对外模型名，包括别名和可用的自动模型。": "As an administrator, open Models → Client model catalog in either Modern or Classic. Candidates are client-facing model names with a Responses generation route, including aliases and available automatic models.",
   "点击「添加模型」选择要展示的候选。默认仅加入 gpt- 开头的模型（排除 gpt-image 和 gpt-image-*），按版本从新到旧排列；其他候选需手动添加。": "Click Add models to choose candidates to display. By default, only names starting with gpt- are included, excluding gpt-image and gpt-image-*, with newer versions first. Add other candidates manually.",
   "拖动或使用上下移动调整顺序，展开模型资料可修改显示名称、说明、上下文窗口、自动压缩阈值、思考等级及默认等级、输入类型和 Fast／Ultrafast 展示。": "Drag models or move them up and down to reorder them. Expand a model to edit its display name, description, context window, automatic compaction threshold, reasoning levels and default level, input types, and Fast/Ultrafast visibility.",
@@ -2572,5 +2572,8 @@
   "使用支持该功能的 Codex CLI 时，可用以下命令启用会话内思考等级更新。所选模型也需支持 configuration_update；GPT-Load 会保留更新及原有缓存语义，能否命中缓存仍由上游决定。": "With a Codex CLI version that supports this feature, use the command below to enable reasoning-level updates within a session. The selected model must also support configuration_update. GPT-Load preserves the updates and existing cache behavior; cache hits still depend on the upstream.",
   "启用客户端实验功能": "Enable the experimental client feature",
   "此开关由客户端版本决定；模型目录中的等级展示不代表模型支持会话内更新。": "This switch depends on the client version. Displaying reasoning levels in the catalog does not establish support for updates within a session.",
-  "main 分支可在模型页选择 Codex 展示的模型并排序，操作与发布范围见": "On the main branch, choose and order the models shown in Codex from the Models page. For instructions and release availability, see"
+  "从 v2.0.0-rc.43 起，可在模型页选择 Codex 展示的模型并排序，操作见": "From v2.0.0-rc.43, choose and order the models shown in Codex from the Models page. See",
+  "Codex 点数余额（main 分支）": "Codex credit balance (main branch)",
+  "目前适用于 main 分支，v2.0.0-rc.43 尚未包含。进入 Codex 分组后同步额度（Modern 的「同步额度」或 Classic 的「同步」）；账号卡片会在上游返回正余额或不限量状态时显示「点数」，未显示不代表余额为零。": "This currently applies to the main branch and is not included in v2.0.0-rc.43. Open a Codex group and sync quota using Sync quota in Modern or Sync in Classic. Account cards show Credits when the upstream reports a positive balance or unlimited credits. An absent label does not establish a zero balance.",
+  "点数通过主动刷新、HTTP 响应头和 WebSocket 额度事件更新，与周期额度和重置额度分别展示，不会累加，也不参与调度决策。": "Credits are updated by active refreshes, HTTP response headers, and WebSocket quota events. They are shown separately from periodic quotas and reset credits, are not added together, and do not affect scheduling decisions."
 }
