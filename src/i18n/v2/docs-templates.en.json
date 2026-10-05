@@ -537,5 +537,5 @@
   "{{0}} ——从统一代理列表中选择已启用的代理": "{{0}} — choose an enabled proxy from the shared catalog",
   "{{0}} ——全局的模型价格、规格与客户端目录，影响成本估算和 Codex 展示": "{{0}} — Global model prices, specifications, and client catalog, affecting cost estimates and Codex visibility",
   "日常配置主要在分组里做，见 {{0}} 。 这一页分别说明分组里的模型与别名，以及全局价格和客户端目录。": "Manage everyday configuration in groups; see {{0}}. This page covers group models and aliases, global pricing, and the client catalog.",
-  "从 v2.0.0-rc.43 起，可在模型页选择 Codex 展示的模型并排序，操作见 {{0}} 。": "From v2.0.0-rc.43, choose and order the models shown in Codex from the Models page. See {{0}}."
+  "可在模型页选择 Codex 展示的模型并排序，操作见 {{0}} 。": "Choose and order the models shown in Codex from the Models page. See {{0}}."
 }

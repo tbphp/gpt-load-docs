@@ -8,7 +8,7 @@ export function generateMetadata(): Promise<Metadata> {
 }
 
 const TOC = [
-  { id: "scope", label: "口径与版本" },
+  { id: "scope", label: "能力口径" },
   { id: "core", label: "凭据与核心协议" },
   { id: "operations", label: "附加 Operation" },
   { id: "validation", label: "验证等级" },
@@ -130,9 +130,8 @@ export default function SupportMatrix() {
       lede="逐渠道核对凭据类型、客户端协议、Operation、路由模式、模型发现与托管代理。"
       toc={TOC}
     >
-      <Heading id="scope">口径与版本</Heading>
+      <Heading id="scope">能力口径</Heading>
       <p>本页描述 GPT-Load 已声明的路由能力，不代表任意模型或上游都支持该能力。</p>
-      <p>矩阵核对基于 GPT-Load 主分支提交 25142f96，核对日期为 2026-10-01。主分支能力不等同于所有已发布版本的能力，请以所用版本为准。</p>
       <Notice label="读表方式" tone="blue">
         N 表示 Native，按目标协议原生执行；C 表示 Converted，由网关转换；N/C 表示按模型决定；N* 表示仅原生支持 Compact；— 表示当前没有声明该路由。
       </Notice>

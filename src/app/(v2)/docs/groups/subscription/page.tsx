@@ -245,10 +245,10 @@ export default async function Subscription() {
         而不是用来预测网关下一次会选谁。想确认是否有候选分组和可用凭据，用{" "}
         <Link href="/docs/monitor">监控与排障</Link> 里的路由检查。
       </p>
-      <Notice label="Codex 点数余额（main 分支）" tone="blue">
-        目前适用于 main 分支，v2.0.0-rc.43 尚未包含。进入 Codex 分组后同步额度（Modern 的「同步额度」或 Classic 的「同步」）；账号卡片会在上游返回正余额或不限量状态时显示「点数」，未显示不代表余额为零。
+      <Notice label="Codex 点数余额" tone="blue">
+        进入 Codex 分组，点击 Modern 的「同步额度」或 Classic 的「同步」。上游返回正余额或不限量状态时，账号卡片显示「点数」；未显示不代表余额为零。
       </Notice>
-      <p>点数通过主动刷新、HTTP 响应头和 WebSocket 额度事件更新，与周期额度和重置额度分别展示，不会累加，也不参与调度决策。</p>
+      <p>点数与周期额度、重置额度分别展示，不累加，也不参与调度。</p>
       <Notice label="Codex 的重置额度" tone="blue">
         仅 Codex 账号可能显示可用的重置额度。它需要在管理台手动消费，不参与自动调度；操作后等待额度信息刷新确认结果。
       </Notice>

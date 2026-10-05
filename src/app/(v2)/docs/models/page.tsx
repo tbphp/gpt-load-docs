@@ -79,9 +79,6 @@ export default async function Models() {
       </Notice>
 
       <Heading id="client-catalog">Codex 模型目录</Heading>
-      <Notice label="适用版本" tone="blue">
-        以下目录编辑功能从 v2.0.0-rc.43 起可用；更早的 2.0 预发布版本需要升级。
-      </Notice>
       <p>用管理员身份进入「模型 → 客户端模型目录」，Modern 和 Classic 都提供此入口。候选来自具有 Responses 生成路由的对外模型名，包括别名和可用的自动模型。</p>
       <ol>
         <li>点击「添加模型」选择要展示的候选。默认仅加入 gpt- 开头的模型（排除 gpt-image 和 gpt-image-*），按版本从新到旧排列；其他候选需手动添加。</li>

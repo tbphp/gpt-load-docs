@@ -160,7 +160,7 @@ supports_websockets = true
 api_key_model_discovery = true`}</CodeBlock>
       <CodeBlock caption="在启动客户端的环境中设置">{`export GPT_LOAD_API_KEY="YOUR_ACCESS_KEY"`}</CodeBlock>
       <p>将 YOUR_MODEL 替换为已开放的模型，合并配置后重新启动客户端。模型发现参数需客户端支持；以当前管理台生成的配置为准。</p>
-      <p>从 v2.0.0-rc.43 起，可在模型页选择 Codex 展示的模型并排序，操作见 <Link href="/docs/models#client-catalog">Codex 模型目录</Link>。</p>
+      <p>可在模型页选择 Codex 展示的模型并排序，操作见 <Link href="/docs/models#client-catalog">Codex 模型目录</Link>。</p>
       <Notice label="会话内切换思考等级" tone="blue">
         使用支持该功能的 Codex CLI 时，可用以下命令启用会话内思考等级更新。所选模型也需支持 configuration_update；GPT-Load 会保留更新及原有缓存语义，能否命中缓存仍由上游决定。
       </Notice>
