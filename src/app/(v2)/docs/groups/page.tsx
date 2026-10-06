@@ -226,10 +226,8 @@ export default async function Groups() {
       </p>
 
       <Heading id="policy">运行策略</Heading>
-      <p>
-        设置标签页里是这个分组的运行参数：权重、超时、拉黑阈值、
-        会话亲和、出站代理与参数覆盖规则。
-      </p>
+      <p>分组基础配置可设置优先级和权重；其他运行参数包括超时、拉黑阈值、会话亲和、出站代理与参数覆盖规则。</p>
+      <p>优先级默认 0，可为负数；越大越优先。可将主用设为 100、备用设为 0，同层再按路由策略和权重分配流量。重试降层规则见 <Link href="/docs/internals/scheduling#retry">失败之后</Link>。</p>
 
       <Figure
         src={docScreenshot(locale, "grp-04-settings.png")}
