@@ -2492,7 +2492,7 @@
   "可选的 ICE/STUN/TURN 服务 JSON 数组；TURN 需要 username 和 credential": "任意の ICE/STUN/TURN サーバーの JSON 配列。TURN には username と credential が必要",
   "ICE 配置格式示例": "ICE 設定例",
   "Codex 语音中继的完整部署步骤 →": "Codex 音声中継の詳しいデプロイ手順 →",
-  "纯文本 Rerank 由 Cohere、OpenAI Compatible、New API、GPT-Load 原生支持，入口为 POST /v1/rerank；不支持流式或协议互转，访问密钥需允许 rerank 协议。": "Cohere、OpenAI Compatible、New API、GPT-Load は、POST /v1/rerank でテキスト専用のネイティブ Rerank に対応します。ストリーミングやプロトコル変換は非対応で、アクセスキーに rerank プロトコルの許可が必要です。",
+  "纯文本 Rerank 由 Cohere、SiliconFlow、OpenAI Compatible、New API、GPT-Load 原生支持，入口为 POST /v1/rerank；不支持流式或协议互转，访问密钥需允许 rerank 协议。": "Cohere、SiliconFlow、OpenAI Compatible、New API、GPT-Load は、POST /v1/rerank でテキスト専用のネイティブ Rerank に対応します。ストリーミングやプロトコル変換は非対応で、アクセスキーに rerank プロトコルの許可が必要です。",
   "Gemini 原生嵌入（embedContent／batchEmbedContents）由 Google Gemini、New API、GPT-Load 支持，使用 gemini-embeddings 协议。表中的 Google Gemini OpenAI Embeddings 为文本转换，不接受 token ID 输入。": "Google Gemini、New API、GPT-Load は、gemini-embeddings プロトコルで Gemini ネイティブ埋め込み（embedContent／batchEmbedContents）に対応します。表の Google Gemini の OpenAI Embeddings はテキスト変換ルートで、トークン ID 入力は受け付けません。",
   "Jev 与 OpenRouter 原生支持 decisions；Codex 订阅渠道支持独立的 codex-live 实时语音。Jev 与 Cohere 没有对话路由，不应作为普通聊天渠道使用。": "Jev と OpenRouter は decisions にネイティブ対応し、Codex サブスクリプションチャネルは独立した codex-live 音声プロトコルに対応します。Jev と Cohere には会話ルートがないため、通常のチャットチャネルとしては使用しないでください。",
   "客户端原文经 GPT-Load 加密后发给上游；上游原样返回密文，由 GPT-Load 还原后交给客户端": "GPT-Load がクライアントの原文を暗号化して上流へ送信し、そのまま返された暗号文を復元してクライアントへ返す流れ",

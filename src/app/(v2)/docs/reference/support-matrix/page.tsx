@@ -97,7 +97,7 @@ const OPERATIONS: OperationRoute[] = [
   { channel: "Google Vertex AI", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: false },
   { channel: "DeepSeek", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: true },
   { channel: "Moonshot AI", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: true },
-  { channel: "SiliconFlow", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: true },
+  { channel: "SiliconFlow", images: "—", embeddings: "N", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: true },
   { channel: "Zhipu AI", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: true },
   { channel: "Alibaba Cloud Bailian", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: true },
   { channel: "Volcengine Ark", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: true },
@@ -199,7 +199,7 @@ export default function SupportMatrix() {
         </table>
       </div>
       <p>Images 的 N 表示原生生成与编辑；C 表示 Gemini 与 Antigravity 仅支持单张、非流式、Base64 图片生成转换，不含编辑。Responses 资源接口包括查询、删除、取消、输入项、压缩及命名空间透传。</p>
-      <p>纯文本 Rerank 由 Cohere、OpenAI Compatible、New API、GPT-Load 原生支持，入口为 POST /v1/rerank；不支持流式或协议互转，访问密钥需允许 rerank 协议。</p>
+      <p>纯文本 Rerank 由 Cohere、SiliconFlow、OpenAI Compatible、New API、GPT-Load 原生支持，入口为 POST /v1/rerank；不支持流式或协议互转，访问密钥需允许 rerank 协议。</p>
       <p>Gemini 原生嵌入（embedContent／batchEmbedContents）由 Google Gemini、New API、GPT-Load 支持，使用 gemini-embeddings 协议。表中的 Google Gemini OpenAI Embeddings 为文本转换，不接受 token ID 输入。</p>
       <p>Jev 与 OpenRouter 原生支持 decisions；Codex 订阅渠道支持独立的 codex-live 实时语音。Jev 与 Cohere 没有对话路由，不应作为普通聊天渠道使用。</p>
       <p>Mistral 渠道原生支持 OCR、FIM 补全、音频转写、语音合成、文本与聊天审核、分类、音色管理和 WebSocket 实时转写，访问密钥需允许独立的 mistral 协议。Chat Completions 与 Embeddings 仍使用 OpenAI 兼容协议。</p>
