@@ -160,6 +160,7 @@ export default function Protocols() {
       <p>转换或无状态响应、明确 store:false 的新响应不会登记；未知、过期或淘汰的 ID 会在本地拒绝，包括网关外或升级前创建的 ID。仅正常停机成功保存后可恢复绑定，不保证崩溃恢复。</p>
       <p>conversation 和其他资源操作仍不保证回到原凭据；请使用单凭据分组，或确认上游支持跨凭据共享。中转渠道只保证回到原下一跳。</p>
       <p>GET /v1/responses 支持原生 WebSocket，当前适用于 OpenAI、Codex、xAI、GPT-Load、CLIProxyAPI、Sub2API。连接固定上游 Session，Codex 仅支持原连接内续接；不提供 WS→HTTP 转换，也不保证重连恢复上下文。开关见运行时设置。</p>
+      <p>Codex WebSocket 支持在生成期间发送 response.interrupt，携带同一连接中当前响应的 response_id；网关在原上游连接立即转发，中断确认后可用 previous_response_id 续接。已结束响应的迟到或重复中断会被忽略，不会影响下一轮。若上游以 response.incomplete 返回中断且没有输出、output_tokens 为 0，连接仍会关闭，不能续接。</p>
       <p>
         另一个选择是<strong>不用有状态接口</strong>——
         每次把完整上下文发过去。这样任何凭据都能处理，

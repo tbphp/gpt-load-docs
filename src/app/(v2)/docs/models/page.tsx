@@ -60,6 +60,7 @@ export default async function Models() {
       <p>
         上游没有列出但确实可用的模型，可以<strong>手工添加</strong>。
       </p>
+      <p>Claude、Codex、Antigravity、Grok 订阅渠道会在启动时及每 3 小时在线刷新模型目录；下载或校验失败时保留当前目录，首次启动以内置目录兜底。目录下载使用环境变量代理，不受分组或全局出站代理设置影响；刷新不会修改分组中已保存的模型。</p>
 
       <Figure
         src={docScreenshot(locale, "mdl-01-discover.png")}
