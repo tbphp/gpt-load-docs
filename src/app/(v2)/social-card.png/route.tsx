@@ -1,4 +1,6 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
 /* eslint-disable @next/next/no-img-element -- ImageResponse 由 satori 渲染，不支持 next/image。 */
 
@@ -6,20 +8,16 @@ export const dynamic = "force-static";
 
 const SIZE = { width: 1200, height: 630 };
 
-// 品牌符号：旋转 45° 的一对 L。以 data URI 内联，避免运行时再取一次文件。
-const MARK =
-  "data:image/svg+xml;utf8," +
-  encodeURIComponent(
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="96" height="96">' +
-      '<path fill="#1c4f6e" d="M5 0H19A5 5 0 0 1 24 5V19A5 5 0 0 1 19 24H5A5 5 0 0 1 0 19V5A5 5 0 0 1 5 0Z"/>' +
-      '<g fill="#ffffff" transform="translate(12 12) scale(0.8) translate(-12 -12)">' +
-      '<g transform="rotate(45 12 12)">' +
-      '<path d="M4 6.6H8V16H14.4V20H4Z"/><path d="M20 17.4H16V8H9.6V4H20Z"/>' +
-      "</g></g></svg>"
+/** 全站共用的稳定社交分享图，由 Metadata API 显式引用。 */
+export async function GET() {
+  // 与页面共用品牌素材，内联为 data URI，避免生成分享图时请求外部资源。
+  const [icon, logo] = await Promise.all(
+    ["icon.svg", "logo-light.svg"].map(async (name) => {
+      const svg = await readFile(join(process.cwd(), "public/v2/brand", name));
+      return `data:image/svg+xml;base64,${svg.toString("base64")}`;
+    })
   );
 
-/** 全站共用的稳定社交分享图，由 Metadata API 显式引用。 */
-export function GET() {
   return new ImageResponse(
     (
       <div
@@ -47,13 +45,11 @@ export function GET() {
             v2.0 / MIT License
           </div>
           {/* ImageResponse 由 satori 渲染成位图，不使用 next/image。 */}
-          <img src={MARK} width={88} height={88} alt="" />
+          <img src={icon} width={88} height={88} alt="" />
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", fontSize: 104, fontWeight: 700, letterSpacing: "-0.04em", color: "#0a0a0a" }}>
-            GPT-Load
-          </div>
+          <img src={logo} width={760} height={190} alt="GPT-Load" />
           <div style={{ display: "flex", fontSize: 44, color: "#1c4f6e", marginTop: 14, letterSpacing: "-0.02em" }}>
             Self-hosted AI Gateway
           </div>

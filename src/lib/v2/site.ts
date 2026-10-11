@@ -4,7 +4,7 @@ import { getDict, type Dict } from "@/i18n/v2/dict";
 
 export const SITE_URL = "https://www.gpt-load.com";
 export const SITE_NAME = "GPT-Load";
-export const SOCIAL_IMAGE_URL = `${SITE_URL}/social-card.png`;
+export const SOCIAL_IMAGE_URL = `${SITE_URL}/social-card.png?v=coral-anchor-orange`;
 
 export function socialImage() {
   return {

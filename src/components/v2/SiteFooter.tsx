@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Mark from "./Mark";
+import BrandLogo from "./BrandLogo";
 import type { Dict } from "@/i18n/v2/dict";
 
 const COL_DEFS = [
@@ -35,10 +35,8 @@ export default function SiteFooter({ t }: { t: Dict }) {
       <div className="shell">
         <div className="g12 foot-top">
           <div className="foot-brand">
-            <div className="brand" style={{ color: "#fff" }}>
-              {/* 页脚是纯黑底，墨蓝对比度不够，改用白色符号版 */}
-              <Mark size={20} variant="glyph" color="#ffffff" />
-              GPT-Load
+            <div className="brand">
+              <BrandLogo width={144} theme="dark" />
             </div>
             <div className="m">
               {t.footer.tagline}

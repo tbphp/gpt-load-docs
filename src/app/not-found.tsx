@@ -4,7 +4,7 @@ import "@/styles/v2/base.css";
 import "@/styles/v2/layout.css";
 import "@/styles/v2/components.css";
 import "@/styles/v2/pages.css";
-import Mark from "@/components/v2/Mark";
+import BrandLogo from "@/components/v2/BrandLogo";
 import type { Metadata } from "next";
 import { getLocale, getT } from "@/i18n/v2/server";
 import { dictionaryPageMeta } from "@/lib/v2/site";
@@ -42,8 +42,7 @@ export default async function NotFound() {
       <header className="top">
         <div className="shell top-in">
           <Link className="brand" href="/">
-            <Mark size={20} />
-            GPT-Load
+            <BrandLogo />
           </Link>
         </div>
       </header>

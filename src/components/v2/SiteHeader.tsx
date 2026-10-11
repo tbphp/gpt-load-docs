@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import Mark from "./Mark";
+import BrandLogo from "./BrandLogo";
 import { fetchStars, formatStars } from "@/lib/v2/github";
 import { useLocale } from "@/i18n/v2/LocaleProvider";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -71,8 +71,7 @@ export default function SiteHeader() {
     <header className="top">
       <div className="shell top-in">
         <Link className="brand" href="/">
-          <Mark size={18} color="currentColor" />
-          GPT-Load
+          <BrandLogo />
         </Link>
 
         <nav className="nav" aria-label={t.common.primaryNavigation}>

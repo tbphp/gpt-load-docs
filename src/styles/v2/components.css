@@ -112,7 +112,7 @@
 .top { position: sticky; top: 0; z-index: 50; background: var(--paper); border-bottom: 1px solid var(--ink); }
 .top-in { height: 62px; display: flex; align-items: center; gap: 30px; }
 .brand { font-weight: 700; font-size: 16px; letter-spacing: -0.02em; display: flex; align-items: center; gap: 9px; }
-.brand svg { display: block; flex: none; }
+.brand img { display: block; flex: none; }
 .nav { display: flex; gap: 24px; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--dim); }
 .nav a { display: inline-flex; align-items: center; min-height: 44px; transition: color var(--dur); }
 .nav a.on, .nav a:hover { color: var(--ink); }
