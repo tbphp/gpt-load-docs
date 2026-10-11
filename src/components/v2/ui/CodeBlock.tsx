@@ -18,15 +18,17 @@ type Props = {
 export default function CodeBlock({ children, caption, note, noCopy }: Props) {
   return (
     <div className="code-wrap">
-      {(caption || note) && (
+      {(caption || note || !noCopy) && (
         <div className="code-cap">
           <span className="label">{caption}</span>
-          {note ? <span className="label">{note}</span> : null}
+          <div className="code-actions">
+            {note ? <span className="label">{note}</span> : null}
+            {noCopy ? null : <CopyButton />}
+          </div>
         </div>
       )}
       <div className="code-box">
         <pre className="code">{children}</pre>
-        {noCopy ? null : <CopyButton />}
       </div>
     </div>
   );

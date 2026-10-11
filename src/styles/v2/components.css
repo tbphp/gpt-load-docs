@@ -6,16 +6,18 @@
    注意：选择器要能压过 base.css 的 a 规则。base 用 :where() 归零了优先级，
    所以这里单类名即可生效。 */
 .btn {
-  display: inline-block; font-size: 13px; font-weight: 500;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; font-size: 13px; font-weight: 500; line-height: 1.4;
   padding: 13px 24px; border: 1px solid transparent;
   transition: background var(--dur), color var(--dur), border-color var(--dur), opacity var(--dur);
   cursor: pointer;
 }
-.btn-p { background: var(--ink); color: var(--ink-inv); border-color: var(--ink); }
-/* 悬停转品牌色，让交互也带上颜色，而不是简单降透明度 */
-.btn-p:hover { background: var(--blue); border-color: var(--blue); }
-.btn-s { background: transparent; color: var(--ink); border-color: var(--ink); }
-.btn-s:hover { background: var(--blue); color: var(--ink-inv); border-color: var(--blue); }
+.btn-p { background: var(--brand-text); color: var(--ink-inv); border-color: var(--brand-text); }
+.btn-p:hover { background: var(--brand-hover); border-color: var(--brand-hover); }
+.btn-p:active { background: var(--brand-active); border-color: var(--brand-active); }
+.btn-s { background: transparent; color: var(--ink); border-color: var(--control-border); }
+.btn-s:hover { background: var(--brand-soft); color: var(--brand-text); border-color: var(--brand-text); }
+.btn-s:active { color: var(--brand-active); border-color: var(--brand-active); }
 /* 深色板块上的反色按钮 */
 .sec-ink .btn-p { background: var(--ink-inv); color: var(--ink); border-color: var(--ink-inv); }
 .sec-ink .btn-s { color: var(--ink-inv); border-color: rgba(255,255,255,.45); }
@@ -23,19 +25,20 @@
 .btns { display: flex; flex-wrap: wrap; gap: 10px; }
 
 /* ---------- 内联链接 ---------- */
-.link { color: var(--blue); }
-.link:hover { text-decoration: underline; text-underline-offset: 3px; }
+.link { color: var(--brand-text); text-decoration: underline; text-decoration-color: var(--brand-border); text-underline-offset: 3px; }
+.link:hover { color: var(--brand-hover); text-decoration-color: currentColor; }
 
 /* ---------- 代码块 ---------- */
 .code {
-  background: var(--wash); border-left: 2px solid var(--ink);
+  background: var(--wash); border-left: 2px solid var(--brand-border);
   padding: 20px 22px; font-family: var(--f-mono); font-size: var(--t-code);
-  line-height: 1.9; overflow-x: auto; white-space: pre; color: var(--ink);
+  line-height: 1.9; overflow-x: auto; white-space: pre; color: var(--ink-soft);
 }
 .code .c { color: var(--faint); }        /* 注释 */
-.code .s { color: var(--blue); }         /* 字符串 */
+.code .s { color: var(--green); }        /* 字符串 */
 .code .k { color: var(--cat-4); font-weight: 600; }  /* 关键字 */
-.code-cap { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 9px; }
+.code-cap { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px 16px; padding-bottom: 9px; }
+.code-actions { display: inline-flex; align-items: center; gap: 12px; margin-left: auto; }
 
 /* ---------- 表格 ---------- */
 .tbl-wrap { overflow-x: auto; }
@@ -57,20 +60,21 @@
   padding: 0 16px 10px 0; border-bottom: 1px solid var(--ink);
 }
 .tbl td { padding: 15px 16px 15px 0; border-bottom: 1px solid var(--hair); font-size: 14px; vertical-align: baseline; }
-/* 表格里的路径 / 标识符按代码对待，与代码块中的字符串同色 */
-.tbl td.m { font-family: var(--f-mono); font-size: var(--t-code); color: var(--blue); }
+/* 路径和标识符是数据，使用正文色，链接单独使用品牌色。 */
+.tbl td.m { font-family: var(--f-mono); font-size: var(--t-code); color: var(--ink-soft); }
 .tbl tr td:first-child { font-weight: 600; }
 
 /* ---------- 提示框 ---------- */
-.notice { border: 1px solid var(--ink); padding: 22px 24px; display: flex; gap: 20px; align-items: baseline; flex-wrap: wrap; }
-.notice > .t { font-family: var(--f-mono); font-size: var(--t-label); letter-spacing: .16em; text-transform: uppercase; color: var(--blue); flex: none; max-width: 100%; }
+.notice { border: 1px solid var(--rule); border-left-width: 3px; padding: 20px 22px; display: flex; gap: 18px; align-items: baseline; flex-wrap: wrap; }
+.notice > .t { font-family: var(--f-mono); font-size: var(--t-label); letter-spacing: .16em; text-transform: uppercase; color: var(--ink); flex: none; max-width: 100%; }
 .notice p { font-size: var(--t-xs); line-height: 1.6; color: var(--dim); flex: 1; min-width: 260px; }
 .notice b { color: var(--ink); font-weight: 600; }
 /* 语义变体：颜色在这里承担信息，不是装饰 */
 .notice-amber { border-color: var(--amber); background: var(--amber-soft); }
 .notice-amber > .t { color: var(--amber); }
 .notice-amber p { color: #6f4d10; }
-.notice-blue { border-color: var(--blue); background: var(--blue-soft); }
+.notice-blue { border-color: var(--brand-border); border-left-color: var(--brand-text); background: var(--brand-soft); }
+.notice-blue > .t { color: var(--brand-text); }
 
 /* ---------- 带上边线的条目（能力 / 边界 / 规格）---------- */
 .item { border-top: 1px solid var(--ink); padding-top: 14px; }
@@ -86,7 +90,7 @@
 .stat .n { font-size: clamp(30px, 3.4vw, 40px); font-weight: 700; letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; }
 .stat .n small { font-size: .38em; font-weight: 500; color: var(--dim); margin-left: 5px; letter-spacing: 0; }
 .stat .l { margin-top: 8px; }
-.stat-blue .n { color: var(--blue); }
+.stat-blue .n { color: var(--brand); }
 .stat-green .n { color: var(--green); }
 .stat-amber .n { color: var(--amber); }
 .stat-rust .n { color: var(--rust); }
@@ -95,11 +99,13 @@
 /* 表头用分类色，与首屏路由图的四条支线一一对应，
    让读者能把「图上那条线」和「这一组渠道」连起来。 */
 .chan-h {
+  /* 分类线保留原色，小字略加深以适配浅灰底。 */
+  --cat-text: color-mix(in srgb, var(--cat, var(--ink)) 85%, var(--ink));
   display: flex; align-items: baseline; justify-content: space-between;
   border-bottom: 2px solid var(--cat, var(--ink)); padding-bottom: 9px;
 }
-.chan-h .t { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; color: var(--cat, var(--ink)); }
-.chan-h .c { font-family: var(--f-mono); font-size: 11px; color: var(--cat, var(--dim)); opacity: .72; }
+.chan-h .t { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; color: var(--cat-text); }
+.chan-h .c { font-family: var(--f-mono); font-size: 11px; color: var(--cat-text); }
 .chan ul { margin-top: 12px; display: flex; flex-direction: column; }
 .chan li { font-size: var(--t-xs); padding: 7px 0; border-bottom: 1px solid var(--hair); }
 
@@ -113,38 +119,43 @@
 .top-in { height: 62px; display: flex; align-items: center; gap: 30px; }
 .brand { font-weight: 700; font-size: 16px; letter-spacing: -0.02em; display: flex; align-items: center; gap: 9px; }
 .brand img { display: block; flex: none; }
+.top .brand { min-height: 44px; }
 .nav { display: flex; gap: 24px; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--dim); }
-.nav a { display: inline-flex; align-items: center; min-height: 44px; transition: color var(--dur); }
-.nav a.on, .nav a:hover { color: var(--ink); }
+.nav a { position: relative; display: inline-flex; align-items: center; min-height: 44px; transition: color var(--dur); }
+.nav a:hover, .nav a.on { color: var(--brand-text); }
+.nav a.on::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--brand); }
 .top-r { margin-left: auto; display: flex; gap: 20px; align-items: center; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--dim); }
 .top-r a { display: inline-flex; align-items: center; min-height: 44px; transition: color var(--dur); }
 .top-r a:hover { color: var(--ink); }
-.top-r .b { color: var(--ink); font-weight: 500; }
-.top-r .b:hover { color: var(--blue); }
+.top-r .b { color: var(--brand-text); font-weight: 500; }
+.top-r .b:hover { color: var(--brand-hover); }
 .gh { display: inline-flex; align-items: baseline; gap: 7px; }
 .gh .k { font-family: var(--f-mono); color: var(--ink); font-weight: 500; font-variant-numeric: tabular-nums; }
-.burger { display: none; min-height: 44px; margin-left: auto; background: none; border: 1px solid var(--rule); padding: 8px 12px; font-family: var(--f-mono); font-size: 11px; cursor: pointer; }
+.burger { display: none; min-height: 44px; margin-left: auto; background: none; border: 1px solid var(--rule); padding: 8px 12px; font-family: var(--f-mono); font-size: 11px; cursor: pointer; transition: background var(--dur), border-color var(--dur), color var(--dur); }
+.burger:hover, .burger[aria-expanded="true"] { background: var(--brand-soft); border-color: var(--brand-border); color: var(--brand-text); }
 .top-drawer { display: none; border-top: 1px solid var(--hair); padding: 14px 0 18px; }
 .top-drawer.open { display: block; }
 .top-drawer ul { display: flex; flex-direction: column; gap: 12px; }
-.top-drawer a { display: flex; align-items: center; min-height: 44px; font-size: 14px; }
+.top-drawer a { display: flex; align-items: center; min-height: 44px; padding: 8px 12px; font-size: 14px; transition: background var(--dur), color var(--dur); }
+.top-drawer a:hover, .top-drawer a[aria-current="page"] { background: var(--brand-soft); color: var(--brand-text); }
 
 /* ---------- 页脚 ---------- */
 /* 与正文之间的统一留白。页面以深色块收尾时由 .dark-end 规则接管，见下。 */
-.foot { background: var(--ink); color: var(--ink-inv); padding: 52px 0 44px; margin-top: 104px; }
-.foot a { color: rgba(255,255,255,.82); transition: color var(--dur); }
-.foot a:hover { color: #fff; }
+.foot { background: var(--dark-canvas); color: var(--dark-ink); padding: 52px 0 44px; margin-top: 104px; }
+.foot a { color: var(--dark-ink); transition: color var(--dur); }
+.foot a:hover { color: var(--brand-on-dark); }
+.foot :focus-visible { outline-color: var(--brand-on-dark); }
 .foot-top { row-gap: 30px; }
 /* 页脚是固定结构，栏位在组件内定义，不依赖页面的 .col-* */
 .foot-brand, .foot-col { grid-column: span 3; }
-.foot-brand .m { margin-top: 14px; font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; color: rgba(255,255,255,.5); line-height: 1.8; }
-.foot-col .h { font-family: var(--f-mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.45); }
+.foot-brand .m { margin-top: 14px; font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; color: var(--dark-dim); line-height: 1.8; }
+.foot-col .h { font-family: var(--f-mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--dark-dim); }
 .foot-col ul { margin-top: 14px; display: flex; flex-direction: column; gap: 9px; }
 .foot-col a { font-size: 13px; }
 .foot-bot {
-  margin-top: 46px; border-top: 1px solid rgba(255,255,255,.16); padding-top: 20px;
+  margin-top: 46px; border-top: 1px solid var(--dark-rule); padding-top: 20px;
   display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap;
-  font-family: var(--f-mono); font-size: var(--t-label); letter-spacing: .1em; color: rgba(255,255,255,.5);
+  font-family: var(--f-mono); font-size: var(--t-label); letter-spacing: .1em; color: var(--dark-dim);
 }
 /* 页面以深色块收尾时，页脚与它连成一片黑，需要一条线划开。
    由页面在 <main> 上标记 .dark-end —— 深色块在 main 内部，
@@ -192,7 +203,7 @@
    用网格排布，赞助方增加时自动换行填格，不需要改结构。 */
 .spon-grid {
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px; background: var(--ink); border: 1px solid var(--ink);
+  gap: 1px; background: var(--rule); border: 1px solid var(--rule);
 }
 /* 只有一个赞助方时也占满整行——这是曝光位，缩窄反而像坏掉的布局。
    描述文字不限行宽：这是卡片里的一句短说明，限宽只会把它挤成多行、白白抬高卡片。 */
@@ -212,10 +223,10 @@
   background: var(--paper); display: grid; grid-template-columns: 148px 1fr;
   transition: background var(--dur);
 }
-.spon:hover { background: var(--wash); }
+.spon:hover, .spon:focus-visible { background: var(--brand-soft); }
 .spon-logo {
   border-right: 1px solid var(--hair); padding: 10px 18px;
-  min-width: 0; display: flex; align-items: center; justify-content: center;
+  min-width: 0; display: flex; align-items: center; justify-content: center; background: var(--paper);
 }
 .spon-logo img { width: 100%; height: auto; }
 .spon-body { padding: 10px 16px 9px; min-width: 0; }
@@ -225,7 +236,7 @@
 .spon-head .clamp { flex: 1; }
 .spon-tag {
   flex: none; padding: 2px 7px; line-height: 1.5;
-  background: var(--blue); color: var(--ink-inv);
+  border: 1px solid var(--brand-border); background: var(--brand-soft); color: var(--brand-text);
 }
 .spon-body h3 {
   font-size: 15px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.45;
@@ -248,7 +259,7 @@
   position: absolute; z-index: 5; top: -7px; left: -9px; right: -9px;
   margin: 0; padding: 6px 8px; height: auto; display: block;
   overflow: visible; white-space: normal; -webkit-line-clamp: unset; line-clamp: none;
-  background: var(--paper); border: 1px solid var(--ink); pointer-events: none;
+  background: var(--paper); border: 1px solid var(--brand-border); pointer-events: none;
 }
 
 .spon-more {
@@ -286,14 +297,16 @@
   font-size: 12px; letter-spacing: .06em; color: var(--dim);
   transition: color var(--dur);
 }
-.lang-btn:hover, .lang-btn[aria-expanded="true"] { color: var(--ink); }
+.lang-btn:hover, .lang-btn[aria-expanded="true"] { color: var(--brand-text); }
 .lang-caret {
   width: 0; height: 0; border-left: 3.5px solid transparent; border-right: 3.5px solid transparent;
   border-top: 4px solid currentColor;
+  transition: transform var(--dur);
 }
+.lang-btn[aria-expanded="true"] .lang-caret { transform: rotate(180deg); }
 .lang-menu {
   position: absolute; top: calc(100% + 12px); right: 0; z-index: 60;
-  min-width: 132px; background: var(--paper); border: 1px solid var(--ink);
+  min-width: 132px; background: var(--paper); border: 1px solid var(--rule);
   display: flex; flex-direction: column;
 }
 .lang-menu li + li { border-top: 1px solid var(--hair); }
@@ -302,16 +315,16 @@
   padding: 10px 14px; cursor: pointer; font-size: 13px; color: var(--ink);
   transition: background var(--dur), color var(--dur);
 }
-.lang-menu a:hover { background: var(--wash); }
-.lang-menu a.on { color: var(--blue); font-weight: 600; }
+.lang-menu a:hover, .lang-menu a:focus-visible { background: var(--brand-soft); color: var(--brand-text); }
+.lang-menu a.on { background: var(--brand-soft); color: var(--brand-text); font-weight: 600; }
 
 /* 抽屉里的语言选择：横排按钮，不再套一层下拉 */
 .lang-inline { display: flex; gap: 10px; flex-wrap: wrap; }
 .lang-inline button {
   min-height: 44px; background: none; border: 1px solid var(--rule); padding: 7px 13px; cursor: pointer;
-  font-size: 13px; color: var(--dim); transition: border-color var(--dur), color var(--dur);
+  font-size: 13px; color: var(--dim); transition: background var(--dur), border-color var(--dur), color var(--dur);
 }
-.lang-inline button.on { border-color: var(--blue); color: var(--blue); }
+.lang-inline button:hover, .lang-inline button.on { background: var(--brand-soft); border-color: var(--brand-text); color: var(--brand-text); }
 
 /* ---------- 图片展示 ----------
    正文里的图都是缩小的，统一走 <Figure>，点击由全局 Lightbox 接管。 */
@@ -320,57 +333,57 @@
   background: none; cursor: zoom-in; position: relative; overflow: hidden;
   transition: border-color var(--dur), background var(--dur);
 }
-.fig-btn:hover, .fig-btn:focus-visible { border-color: var(--ink); background: var(--wash); }
+.fig-btn:hover, .fig-btn:focus-visible { border-color: var(--brand-text); background: var(--wash); }
 .fig-btn img { width: 100%; height: auto; display: block; border: 0; }
 .fig-hint {
   position: absolute; right: 0; bottom: 0;
   display: inline-flex; align-items: center; gap: 6px; min-height: 31px;
-  background: rgba(10,10,10,.88); color: var(--ink-inv);
+  background: var(--dark-surface); color: var(--dark-ink);
   font-family: var(--f-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
-  padding: 6px 10px; opacity: .72; transition: opacity var(--dur);
+  padding: 6px 10px; transition: background var(--dur);
 }
-.fig-btn:hover .fig-hint, .fig-btn:focus-visible .fig-hint { opacity: 1; }
+.fig-btn:hover .fig-hint, .fig-btn:focus-visible .fig-hint { background: var(--brand-text); color: var(--ink-inv); }
 
 /* ---------- 图片查看器 ----------
    顶部只放图片信息，所有操作收敛到底部，避免窄屏工具栏换行。 */
 dialog.lb {
   inset: 0; width: 100vw; max-width: none; height: 100vh; height: 100dvh; max-height: none;
-  margin: 0; padding: 0; border: 0; background: #0a0b0c; color: #fff;
+  margin: 0; padding: 0; border: 0; background: var(--dark-canvas); color: var(--dark-ink);
 }
-dialog.lb::backdrop { background: rgba(8,9,10,.96); }
+dialog.lb::backdrop { background: var(--dark-canvas); }
 dialog.lb:not([open]) { display: none; }
-.lb-in { width: 100%; height: 100%; display: flex; flex-direction: column; background: #0a0b0c; }
+.lb-in { width: 100%; height: 100%; display: flex; flex-direction: column; background: var(--dark-surface); }
 
 .lb-header {
   flex: none; min-height: 64px; padding: calc(9px + env(safe-area-inset-top)) 12px 9px 20px;
-  border-bottom: 1px solid rgba(255,255,255,.14);
+  border-bottom: 1px solid var(--dark-rule);
   display: flex; align-items: center; gap: 18px;
 }
 .lb-heading { min-width: 0; }
 .lb-heading h2 {
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   font-family: var(--f-mono); font-size: 11.5px; font-weight: 500;
-  letter-spacing: .13em; line-height: 1.35; text-transform: uppercase; color: #fff;
+  letter-spacing: .13em; line-height: 1.35; text-transform: uppercase; color: var(--dark-ink);
 }
 .lb-heading p {
   margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .08em;
-  line-height: 1.35; color: rgba(255,255,255,.52);
+  line-height: 1.35; color: var(--dark-dim);
 }
 .lb-header-actions { margin-left: auto; display: flex; align-items: center; gap: 12px; flex: none; }
 .lb-count {
   font-family: var(--f-mono); font-size: 11px; letter-spacing: .1em;
-  color: rgba(255,255,255,.56); font-variant-numeric: tabular-nums;
+  color: var(--dark-dim); font-variant-numeric: tabular-nums;
 }
 .lb-close {
-  width: 44px; height: 44px; padding: 0; border: 1px solid rgba(255,255,255,.28);
-  background: transparent; color: #fff; cursor: pointer;
+  width: 44px; height: 44px; padding: 0; border: 1px solid var(--dark-rule);
+  background: transparent; color: var(--dark-ink); cursor: pointer;
   display: inline-flex; align-items: center; justify-content: center;
   transition: background var(--dur), border-color var(--dur);
 }
-.lb-close:hover { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.58); }
+.lb-close:hover { background: var(--brand-soft-on-dark); border-color: var(--brand-on-dark); color: var(--brand-on-dark); }
 
-.lb-body { flex: 1; min-height: 0; position: relative; }
+.lb-body { flex: 1; min-height: 0; position: relative; background: var(--dark-canvas); }
 .lb-stage {
   width: 100%; height: 100%; overflow: auto; overscroll-behavior: contain;
   scrollbar-color: rgba(255,255,255,.28) transparent;
@@ -401,21 +414,22 @@ dialog.lb:not([open]) { display: none; }
 .lb-footer {
   flex: none; min-height: 64px;
   padding: 9px 12px calc(9px + env(safe-area-inset-bottom));
-  border-top: 1px solid rgba(255,255,255,.14);
+  border-top: 1px solid var(--dark-rule);
   display: flex; align-items: center; justify-content: center;
 }
 .lb-controls {
   display: inline-flex; align-items: stretch;
-  border: 1px solid rgba(255,255,255,.3);
+  border: 1px solid var(--dark-rule);
 }
 .lb-controls button {
-  width: 44px; height: 44px; padding: 0; border: 0; border-left: 1px solid rgba(255,255,255,.22);
-  background: transparent; color: #fff; cursor: pointer;
+  width: 44px; height: 44px; padding: 0; border: 0; border-left: 1px solid var(--dark-rule);
+  background: transparent; color: var(--dark-ink); cursor: pointer;
   display: inline-flex; align-items: center; justify-content: center;
   transition: background var(--dur), opacity var(--dur);
 }
 .lb-controls button:first-child { border-left: 0; }
-.lb-controls button:hover:not(:disabled) { background: rgba(255,255,255,.14); }
+.lb-controls button:hover:not(:disabled) { background: var(--brand-soft-on-dark); color: var(--brand-on-dark); }
+.lb-controls button:active:not(:disabled) { background: var(--brand-on-dark); color: var(--dark-canvas); }
 .lb-controls button:disabled { opacity: .4; cursor: default; }
 .lb-controls .lb-level {
   width: auto; min-width: 70px; gap: 6px; padding: 0 10px;
@@ -424,7 +438,7 @@ dialog.lb:not([open]) { display: none; }
 }
 .lb-controls .lb-level:disabled { opacity: .68; }
 
-dialog.lb :focus-visible { outline: 2px solid #fff; outline-offset: -3px; }
+dialog.lb :focus-visible { outline: 2px solid var(--brand-on-dark); outline-offset: -3px; }
 .lb-sr {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
@@ -449,21 +463,18 @@ dialog.lb :focus-visible { outline: 2px solid #fff; outline-offset: -3px; }
 }
 
 /* ---------- 代码块复制 ---------- */
-.code-box { position: relative; }
 .code-copy {
-  position: absolute; top: 10px; right: 10px;
   background: var(--paper); border: 1px solid var(--rule); color: var(--dim);
   font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase;
-  padding: 5px 10px; cursor: pointer;
-  opacity: 0; transition: opacity var(--dur), color var(--dur), border-color var(--dur);
+  min-height: 32px; padding: 5px 10px; cursor: pointer;
+  transition: background var(--dur), color var(--dur), border-color var(--dur);
 }
-.code-box:hover .code-copy,
-.code-copy:focus-visible { opacity: 1; }
-.code-copy:hover { color: var(--ink); border-color: var(--ink); }
-.code-copy[data-state="done"] { opacity: 1; color: var(--green); border-color: var(--green); }
-.code-copy[data-state="fail"] { opacity: 1; color: var(--rust); border-color: var(--rust); }
+.code-copy:hover { color: var(--brand-text); border-color: var(--brand-text); background: var(--brand-soft); }
+.code-copy:active { color: var(--brand-active); border-color: var(--brand-active); }
+.code-copy[data-state="done"] { color: var(--green); border-color: var(--green); background: var(--green-soft); }
+.code-copy[data-state="fail"] { color: var(--rust); border-color: var(--rust); background: var(--rust-soft); }
 /* 触摸设备没有 hover，直接常显 */
-@media (hover: none) { .code-copy { min-height: 44px; opacity: 1; } }
+@media (hover: none) { .code-copy { min-height: 44px; } }
 
 /* pre 默认带 margin，且要能横向滚动 */
 .code { margin: 0; }
@@ -494,7 +505,7 @@ dialog.lb :focus-visible { outline: 2px solid #fff; outline-offset: -3px; }
   color: var(--blue) !important;
 }
 .nav-spon svg { display: block; flex: none; }
-.nav-spon:hover { color: var(--ink) !important; }
+.nav-spon:hover { color: var(--brand-hover) !important; }
 .nav-spon.on { color: var(--blue) !important; font-weight: 500; }
 
 /* ---------- 行距 ----------
@@ -510,7 +521,7 @@ dialog.lb :focus-visible { outline: 2px solid #fff; outline-offset: -3px; }
    首页的「三步配完」与文档首页的快捷路径共用。
    曾经只定义在 home.css 里，导致直接刷新 /docs 时样式丢失。 */
 .step .n { font-size: 72px; font-weight: 700; letter-spacing: -0.06em; line-height: .8; font-variant-numeric: tabular-nums; }
-.step.hot .n { color: var(--blue); }
+.step.hot .n { color: var(--brand); }
 .step h3 { font-size: var(--t-h3); font-weight: 600; letter-spacing: -0.025em; margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--ink); }
 .step.hot h3 { border-top-color: var(--blue); }
 .step p { margin-top: 9px; font-size: var(--t-xs); line-height: 1.6; color: var(--dim); }

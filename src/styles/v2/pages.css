@@ -17,8 +17,8 @@
   align-self: flex-start; font-family: var(--f-mono); font-size: 9.5px; letter-spacing: .12em;
   text-transform: uppercase; padding: 2px 7px; border: 1px solid currentColor;
 }
-.rel-flag.latest { color: var(--green); }
-.rel-flag.pre { color: var(--amber); }
+.rel-flag.latest { color: var(--green); background: var(--green-soft); }
+.rel-flag.pre { color: var(--amber); background: var(--amber-soft); }
 .rel-body h3 { font-size: 16px; font-weight: 600; letter-spacing: -0.02em; }
 .rel-body p { margin-top: 9px; font-size: var(--t-xs); line-height: 1.7; color: var(--dim); max-width: 72ch; }
 .rel-body a { margin-top: 12px; display: inline-block; font-size: 13px; color: var(--blue); }
@@ -31,18 +31,18 @@
   position: relative; background: var(--paper); padding: 20px 14px; border: 1px solid var(--hair);
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
   text-align: center;
-  transition: background var(--dur);
+  transition: background var(--dur), border-color var(--dur);
 }
-/* hover 反馈：顶部一条墨蓝线从左划出，与左侧文档导航的选中语言一致。
+/* 悬停和键盘聚焦共用品牌提示线，与文档导航的选中状态一致。
    头像是真人照片，任何时候都保持原色。 */
 .contrib::before {
   content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: var(--blue); transform: scaleX(0); transform-origin: left;
+  background: var(--brand); transform: scaleX(0); transform-origin: left;
   transition: transform var(--dur);
 }
-.contrib:hover { background: var(--wash); }
-.contrib:hover::before { transform: scaleX(1); }
-.contrib:hover .n { color: var(--blue); }
+.contrib:hover, .contrib:focus-visible { background: var(--brand-soft); border-color: var(--brand-border); }
+.contrib:hover::before, .contrib:focus-visible::before { transform: scaleX(1); }
+.contrib:hover .n, .contrib:focus-visible .n { color: var(--brand-text); }
 .contrib img { width: 44px; height: 44px; }
 .contrib .n { width: 100%; font-size: 13px; font-weight: 600; letter-spacing: -0.01em; overflow-wrap: anywhere; transition: color var(--dur); }
 .contrib .c { font-family: var(--f-mono); font-size: 10.5px; color: var(--faint); letter-spacing: .06em; }

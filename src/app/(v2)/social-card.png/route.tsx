@@ -50,7 +50,7 @@ export async function GET() {
 
         <div style={{ display: "flex", flexDirection: "column" }}>
           <img src={logo} width={760} height={190} alt="GPT-Load" />
-          <div style={{ display: "flex", fontSize: 44, color: "#1c4f6e", marginTop: 14, letterSpacing: "-0.02em" }}>
+          <div style={{ display: "flex", fontSize: 44, color: "#ff4f1f", marginTop: 14, letterSpacing: "-0.02em" }}>
             Self-hosted AI Gateway
           </div>
         </div>

@@ -7,7 +7,7 @@
 .hero-in { align-items: start; }
 .hero-fig { padding-top: 6px; }
 .h1 { font-size: var(--t-display); line-height: .98; letter-spacing: -0.045em; font-weight: 700; margin-top: 20px; }
-.h1 em { font-style: normal; color: var(--blue); }
+.h1 em { font-style: normal; color: var(--brand); }
 .hero-sub { margin-top: 26px; font-size: var(--t-sm); line-height: 1.62; color: var(--dim); max-width: 40ch; }
 .hero-btns { margin-top: 30px; }
 .hero-rule { border-top: 1px solid var(--ink); margin-top: 54px; }
@@ -16,7 +16,7 @@
 
 /* ---------- 路由图 ---------- */
 .route-svg { width: 100%; height: auto; display: block; }
-/* 主干与网关保持墨色（结构），四条支线各自着色（分类信息）。
+/* 主干保持墨色，网关使用品牌色，四条支线各自着色（分类信息）。
    线宽恒定 2px——命中与否只靠明度区分，不做加粗，
    加粗会让线在切换时「胀」一下，破坏数据流本身的连贯感。 */
 .route-svg .rt {
@@ -37,7 +37,7 @@
 .route-svg .route-endpoint.hot .route-endpoint-name { fill: var(--rt-c, var(--ink)); }
 
 .route-svg .gwbox { transition: stroke .22s ease; }
-.route-svg .gwbox.pulse { stroke: var(--blue); }
+.route-svg .gwbox.pulse { stroke: var(--brand-text); }
 /* 请求方块：进入时是墨色（还没归属），出网关后染成该路由的颜色 */
 .route-svg .signal { fill: var(--ink); transition: fill .18s ease; }
 
@@ -92,7 +92,7 @@
 /* ---------- 协议行（与渠道墙同一板块，四栏对齐） ---------- */
 .proto { border-top: 1px solid var(--hair); padding-top: 12px; }
 .proto .t { font-size: 13.5px; font-weight: 600; letter-spacing: -0.01em; }
-.proto .p { margin-top: 6px; font-family: var(--f-mono); font-size: 11.5px; color: var(--blue); word-break: break-all; }
+.proto .p { margin-top: 6px; font-family: var(--f-mono); font-size: 11.5px; color: var(--ink-soft); word-break: break-all; }
 .proto .d { margin-top: 6px; font-size: 12px; line-height: 1.55; color: var(--dim); }
 
 /* ---------- 部署与接入并排 ---------- */

@@ -201,23 +201,23 @@ export default function RouteDiagram() {
       <path className="rt draw" id="pIn" pathLength={1} style={delDur(0.06, 0.3)} d="M11,180 H213" />
 
       {/* 起点 */}
-      <rect className="nd pop" style={del(0)} x="4" y="173" width="14" height="14" fill="#0a0a0a" />
-      <text className="pop" style={del(0.04)} x="4" y="158" fill="#0a0a0a" fontSize="12" fontWeight="600" fontFamily={SANS}>{t.common.yourApplication}</text>
-      <text className="pop" style={del(0.08)} x="4" y="214" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.5" fontFamily={MONO}>{t.common.routeBaseUrl}</text>
-      <text className="pop" style={del(0.11)} x="4" y="228" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.5" fontFamily={MONO}>{t.common.routeAccessKey}</text>
+      <rect className="nd pop" style={del(0)} x="4" y="173" width="14" height="14" fill="var(--ink)" />
+      <text className="pop" style={del(0.04)} x="4" y="158" fill="var(--ink)" fontSize="12" fontWeight="600" fontFamily={SANS}>{t.common.yourApplication}</text>
+      <text className="pop" style={del(0.08)} x="4" y="214" fill="var(--dim)" fontSize="9.5" letterSpacing="1.5" fontFamily={MONO}>{t.common.routeBaseUrl}</text>
+      <text className="pop" style={del(0.11)} x="4" y="228" fill="var(--dim)" fontSize="9.5" letterSpacing="1.5" fontFamily={MONO}>{t.common.routeAccessKey}</text>
 
       {/* 认证 */}
-      <rect className="nd pop" style={del(0.22)} x="106" y="174" width="12" height="12" fill="#ffffff" stroke="#0a0a0a" strokeWidth="2" />
-      <text className="pop" style={del(0.25)} x="106" y="160" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.4" fontFamily={MONO}>{t.common.routeAuth}</text>
+      <rect className="nd pop" style={del(0.22)} x="106" y="174" width="12" height="12" fill="var(--paper)" stroke="var(--ink)" strokeWidth="2" />
+      <text className="pop" style={del(0.25)} x="106" y="160" fill="var(--dim)" fontSize="9.5" letterSpacing="1.4" fontFamily={MONO}>{t.common.routeAuth}</text>
 
       {/* 网关：框内只放名字，说明放框外，避免溢出 */}
-      <rect className="gwbox gwdraw" id="gw" pathLength={1} x="213" y="148" width="202" height="64" fill="#ffffff" stroke="#0a0a0a" strokeWidth="2" />
-      <text className="pop" style={del(0.56)} x="237" y="187" fill="#0a0a0a" fontSize="19" fontWeight="700" letterSpacing="-0.5" fontFamily={SANS}>GPT-LOAD</text>
-      <g className="pop" style={del(0.6)} stroke="#0a0a0a" strokeWidth="2">
+      <rect className="gwbox gwdraw" id="gw" pathLength={1} x="213" y="148" width="202" height="64" fill="var(--brand-soft)" stroke="var(--brand)" strokeWidth="2" />
+      <text className="pop" style={del(0.56)} x="237" y="187" fill="var(--brand-text)" fontSize="19" fontWeight="700" letterSpacing="-0.5" fontFamily={SANS}>GPT-LOAD</text>
+      <g className="pop" style={del(0.6)} stroke="var(--brand)" strokeWidth="2">
         <path d="M401,162 H415 M401,174 H415 M401,186 H415 M401,198 H415" />
       </g>
-      <text className="pop" style={del(0.64)} x="213" y="234" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.4" fontFamily={MONO}>{t.common.routeSchedule}</text>
-      <text className="pop" style={del(0.67)} x="213" y="248" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.4" fontFamily={MONO}>{t.common.routeObservability}</text>
+      <text className="pop" style={del(0.64)} x="213" y="234" fill="var(--dim)" fontSize="9.5" letterSpacing="1.4" fontFamily={MONO}>{t.common.routeSchedule}</text>
+      <text className="pop" style={del(0.67)} x="213" y="248" fill="var(--dim)" fontSize="9.5" letterSpacing="1.4" fontFamily={MONO}>{t.common.routeObservability}</text>
 
       {/* 四条支线，各自带分类色 */}
       {endpoints.map((e) => (
@@ -227,9 +227,9 @@ export default function RouteDiagram() {
       {/* 端点：标签在上、方块居中、数量在下 */}
       {endpoints.map((e, i) => (
         <g className="route-endpoint" id={`${e.key}-end`} key={`${e.key}-end`} style={{ "--rt-c": e.cat } as CSSProperties}>
-          <text className="pop route-endpoint-name" style={del(0.94 + i * 0.02)} x="696" y={e.labelY} textAnchor="end" fill="#0a0a0a" fontSize="12" fontWeight="600" fontFamily={SANS}>{e.name}</text>
-          <rect className="nd pop" style={del(0.92 + i * 0.02)} x="617" y={e.labelY + 4} width="12" height="12" fill="#ffffff" stroke={e.cat} strokeWidth="2" />
-          <text className="pop" style={del(0.97 + i * 0.02)} x="696" y={e.labelY + 34} textAnchor="end" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.3" fontFamily={MONO}>{t.common.routeChannels.replace("{count}", String(e.count))}</text>
+          <text className="pop route-endpoint-name" style={del(0.94 + i * 0.02)} x="696" y={e.labelY} textAnchor="end" fill="var(--ink)" fontSize="12" fontWeight="600" fontFamily={SANS}>{e.name}</text>
+          <rect className="nd pop" style={del(0.92 + i * 0.02)} x="617" y={e.labelY + 4} width="12" height="12" fill="var(--paper)" stroke={e.cat} strokeWidth="2" />
+          <text className="pop" style={del(0.97 + i * 0.02)} x="696" y={e.labelY + 34} textAnchor="end" fill="var(--dim)" fontSize="9.5" letterSpacing="1.3" fontFamily={MONO}>{t.common.routeChannels.replace("{count}", String(e.count))}</text>
         </g>
       ))}
 
@@ -238,11 +238,11 @@ export default function RouteDiagram() {
 
       {/* 图注 */}
       <g className="pop" style={del(1.06)}>
-        <path d="M11,378 H693" stroke="#ececec" strokeWidth="1" />
-        <text x="11" y="400" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.6" fontFamily={MONO}>{t.common.routeFigure}</text>
+        <path d="M11,378 H693" stroke="var(--hair)" strokeWidth="1" />
+        <text x="11" y="400" fill="var(--dim)" fontSize="9.5" letterSpacing="1.6" fontFamily={MONO}>{t.common.routeFigure}</text>
         <rect id="legendSw" x="160" y="391" width="9" height="9" fill="var(--cat-1)" />
-        <text id="legendTx" x="178" y="400" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.3" fontFamily={MONO}>{t.common.routeRouted.replace("{name}", endpoints[0].name)}</text>
-        <text id="counter" x="693" y="400" fill="#6a6a6a" fontSize="9.5" letterSpacing="1.3" textAnchor="end" fontFamily={MONO}>{t.common.routeRequests.replace("{count}", "0")}</text>
+        <text id="legendTx" x="178" y="400" fill="var(--dim)" fontSize="9.5" letterSpacing="1.3" fontFamily={MONO}>{t.common.routeRouted.replace("{name}", endpoints[0].name)}</text>
+        <text id="counter" x="693" y="400" fill="var(--dim)" fontSize="9.5" letterSpacing="1.3" textAnchor="end" fontFamily={MONO}>{t.common.routeRequests.replace("{count}", "0")}</text>
       </g>
     </svg>
   );

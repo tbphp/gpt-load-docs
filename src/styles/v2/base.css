@@ -30,7 +30,8 @@
 :where(.v2) img { display: block; max-width: 100%; }
 :where(.v2) button { font: inherit; color: inherit; }
 
-.v2 :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+.v2 :focus-visible { outline: 2px solid var(--brand-text); outline-offset: 3px; }
+.v2 ::selection { background: var(--brand-soft); color: var(--ink); }
 
 /* 工具类 */
 .mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
