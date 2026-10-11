@@ -199,24 +199,57 @@
 .spon-grid:has(> :only-child) .spon { grid-template-columns: 232px 1fr; }
 .spon-grid:has(> :only-child) .spon-logo { padding: 22px 26px; }
 .spon-grid:has(> :only-child) .spon-body { padding: 22px 26px 20px; }
+/* 首席之外恰好三家时排成一行三等分，避免第二行落单留出空格 */
+.spon-grid:has(> .spon-featured:first-child + .spon + .spon + .spon:last-child) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .spon.spon-featured { grid-column: 1 / -1; grid-template-columns: 232px 1fr; }
-.spon-featured .spon-logo { padding: 22px 26px; }
-.spon-featured .spon-body { padding: 22px 26px 20px; }
+.spon-featured .spon-logo { padding: 12px 24px; }
+.spon-featured .spon-body { padding: 11px 20px 10px; }
+/* 首席独占整行，不需要和别的卡片对齐链接，描述按内容自然撑开 */
+.spon-featured .spon-body p {
+  height: auto; display: block; overflow: visible; -webkit-line-clamp: unset; line-clamp: none;
+}
 .spon {
   background: var(--paper); display: grid; grid-template-columns: 148px 1fr;
   transition: background var(--dur);
 }
 .spon:hover { background: var(--wash); }
 .spon-logo {
-  border-right: 1px solid var(--hair); padding: 16px 18px;
+  border-right: 1px solid var(--hair); padding: 10px 18px;
   min-width: 0; display: flex; align-items: center; justify-content: center;
 }
 .spon-logo img { width: 100%; height: auto; }
-.spon-body { padding: 16px 18px 15px; min-width: 0; }
-.spon-body h3 { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
-.spon-body p { margin-top: 6px; font-size: 12.5px; line-height: 1.6; color: var(--dim); }
+.spon-body { padding: 10px 16px 9px; min-width: 0; }
+/* 标题与首席标签同行；标题固定一行、描述固定四行（不足也占满四行），
+   各卡片的链接因此对齐。被截断的全文由 ClampText 悬停浮出。 */
+.spon-head { display: flex; align-items: center; gap: 12px; margin-bottom: 2px; }
+.spon-head .clamp { flex: 1; }
+.spon-tag {
+  flex: none; padding: 2px 7px; line-height: 1.5;
+  background: var(--blue); color: var(--ink-inv);
+}
+.spon-body h3 {
+  font-size: 15px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.45;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.spon-body p {
+  font-size: 12.5px; line-height: 1.6; color: var(--dim);
+  height: 6.4em; overflow: hidden;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; line-clamp: 4;
+}
 .spon-cta { margin-top: 10px; display: inline-flex; align-items: center; min-height: 44px; font-size: 12.5px; font-weight: 500; color: var(--blue); }
 .spon-cta:hover { text-decoration: underline; text-underline-offset: 3px; }
+/* 整张卡片就是链接，卡片内的链接文字不需要单独的点击高度，紧跟描述换行即可 */
+.spon .spon-cta { display: block; margin-top: 3px; min-height: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* 截断文本的悬停浮层：复用原标签的字号与颜色，盖在原文位置上原地展开。
+   偏移量等于边框加内边距，让浮层里的文字与原文逐字对齐；不拦截指针，链接照常可点。 */
+.clamp { position: relative; display: block; min-width: 0; }
+.spon-body .clamp-tip {
+  position: absolute; z-index: 5; top: -7px; left: -9px; right: -9px;
+  margin: 0; padding: 6px 8px; height: auto; display: block;
+  overflow: visible; white-space: normal; -webkit-line-clamp: unset; line-clamp: none;
+  background: var(--paper); border: 1px solid var(--ink); pointer-events: none;
+}
 
 .spon-more {
   margin-top: 22px; border-top: 1px solid var(--rule); padding-top: 18px;
@@ -228,15 +261,20 @@
 .spon-more .who img { display: block; }
 .spon-more .join { margin-left: auto; }
 
+@media (max-width: 1080px) {
+  .spon-grid:has(> .spon-featured:first-child + .spon + .spon + .spon:last-child) { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 520px) {
   .notice { padding: 18px 16px; }
   .notice p { min-width: 0; flex-basis: 100%; }
   .spon-grid { grid-template-columns: 1fr; }
   .spon { grid-template-columns: 1fr; }
   .spon.spon-featured { grid-column: auto; grid-template-columns: 1fr; }
-  .spon-logo { border-right: none; border-bottom: 1px solid var(--hair); padding: 18px; }
-  .spon-featured .spon-logo { padding: 18px; }
-  .spon-featured .spon-body { padding: 16px 18px 15px; }
+  .spon-logo { border-right: none; border-bottom: 1px solid var(--hair); padding: 14px 18px; }
+  .spon-logo img { max-width: 150px; }
+  .spon-featured .spon-logo { padding: 14px 18px; }
+  .spon-featured .spon-body { padding: 10px 16px 9px; }
   .spon-more .join { margin-left: 0; }
 }
 

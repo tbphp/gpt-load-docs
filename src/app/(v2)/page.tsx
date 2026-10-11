@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import "@/styles/v2/home.css";
+import ClampText from "@/components/v2/ClampText";
 import RouteDiagram from "@/components/v2/RouteDiagram";
 import StructuredData from "@/components/v2/StructuredData";
 import { Section, Button, CodeBlock, Notice, Stat, Figure } from "@/components/v2/ui";
@@ -65,24 +66,39 @@ const PROTOCOLS = [
   { t: "Gemini", p: "/v1beta/models/…" },
 ];
 
+// 第一位是首席合作伙伴，独占整行并带标签；其余赞助方同级
 const SPONSORS = [
+  {
+    id: "modelflare",
+    name: "Modelflare",
+    logo: "/v2/sponsor-modelflare.png",
+    url: "https://modelflare.dev/sign-up?utm_source=gptload&utm_campaign=gptload",
+    width: 1200,
+    height: 216,
+  },
   {
     id: "ofoxai",
     name: "OfoxAI",
     logo: "/v2/sponsor-ofoxai.svg",
     url: "https://ofox.ai/?utm_source=github&utm_medium=sponsorship&utm_content=gpt_load",
+    width: 620,
+    height: 240,
   },
   {
     id: "packycode",
     name: "PackyCode",
     logo: "/v2/packycode.png",
     url: "https://www.packyapi.ai/register?aff=ahiS",
+    width: 1280,
+    height: 511,
   },
   {
     id: "apimart",
     name: "APIMart",
     logo: "/v2/sponsor-apimart.png",
     url: "https://go.apimart.ai/gh-gpt-load",
+    width: 900,
+    height: 300,
   },
 ] as const;
 
@@ -101,6 +117,12 @@ export default async function Home() {
   const t = await getT();
   const h = t.home;
   const locale = await getLocale();
+  const sponsorCopy = {
+    modelflare: { title: t.pages.sponsor.modelflareTitle, description: t.pages.sponsor.modelflareDescription, action: t.pages.sponsor.modelflareAction },
+    ofoxai: { title: t.pages.sponsor.ofoxaiTitle, description: t.pages.sponsor.ofoxaiDescription, action: t.pages.sponsor.ofoxaiAction },
+    packycode: { title: "PackyCode", description: h.sponsors.packycodeDescription, action: h.sponsors.packycodeAction },
+    apimart: { title: "APIMart", description: h.sponsors.apimart, action: h.sponsors.detail },
+  };
   return (
     // tint-end：页面以浅色板块（07 边界）收尾，footer 的默认外边距要据此收起
     <main id="main" className="tint-end">
@@ -162,19 +184,17 @@ export default async function Home() {
       >
         <div className="spon-grid">
           {SPONSORS.map((sp) => (
-            <a className={`spon${sp.id === "ofoxai" ? " spon-featured" : ""}`} key={sp.name} href={sp.url} target="_blank" rel={sp.id === "ofoxai" ? "noopener noreferrer" : "sponsored noopener noreferrer"}>
+            <a className={`spon${sp.id === "modelflare" ? " spon-featured" : ""}`} key={sp.name} href={sp.url} target="_blank" rel={sp.id === "ofoxai" ? "noopener noreferrer" : "sponsored noopener noreferrer"}>
               <span className="spon-logo">
-                <Image
-                  src={sp.logo}
-                  alt={sp.name}
-                  width={sp.id === "ofoxai" ? 620 : sp.id === "packycode" ? 1280 : 900}
-                  height={sp.id === "ofoxai" ? 240 : sp.id === "packycode" ? 511 : 300}
-                />
+                <Image src={sp.logo} alt={sp.name} width={sp.width} height={sp.height} />
               </span>
               <span className="spon-body">
-                <h3>{sp.id === "ofoxai" ? t.pages.sponsor.ofoxaiTitle : sp.name}</h3>
-                <p>{sp.id === "ofoxai" ? t.pages.sponsor.ofoxaiDescription : sp.id === "packycode" ? h.sponsors.packycodeDescription : h.sponsors.apimart}</p>
-                <span className="spon-cta">{sp.id === "ofoxai" ? t.pages.sponsor.ofoxaiAction : sp.id === "packycode" ? h.sponsors.packycodeAction : h.sponsors.detail}</span>
+                <span className="spon-head">
+                  <ClampText as="h3" text={sponsorCopy[sp.id].title} />
+                  {sp.id === "modelflare" ? <span className="label spon-tag">{t.pages.sponsor.principalPartner}</span> : null}
+                </span>
+                <ClampText as="p" text={sponsorCopy[sp.id].description} />
+                <span className="spon-cta">{sponsorCopy[sp.id].action}</span>
               </span>
             </a>
           ))}

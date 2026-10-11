@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import "@/styles/v2/pages.css";
+import ClampText from "@/components/v2/ClampText";
 import SponsorContactButton from "@/components/v2/SponsorContactButton";
 import { Button } from "@/components/v2/ui";
 import { getLocale, getT } from "@/i18n/v2/server";
@@ -11,24 +12,39 @@ export async function generateMetadata(): Promise<Metadata> {
   return dictionaryPageMeta({ locale, path: "/sponsor", select: (dict) => dict.pages.sponsor });
 }
 
+// 第一位是首席合作伙伴，独占整行并带标签；其余赞助方同级
 const SPONSORS = [
+  {
+    id: "modelflare",
+    name: "Modelflare",
+    logo: "/v2/sponsor-modelflare.png",
+    url: "https://modelflare.dev/sign-up?utm_source=gptload&utm_campaign=gptload",
+    width: 1200,
+    height: 216,
+  },
   {
     id: "ofoxai",
     name: "OfoxAI",
     logo: "/v2/sponsor-ofoxai.svg",
     url: "https://ofox.ai/?utm_source=github&utm_medium=sponsorship&utm_content=gpt_load",
+    width: 620,
+    height: 240,
   },
   {
     id: "packycode",
     name: "PackyCode",
     logo: "/v2/packycode.png",
     url: "https://www.packyapi.ai/register?aff=ahiS",
+    width: 1280,
+    height: 511,
   },
   {
     id: "apimart",
     name: "APIMart",
     logo: "/v2/sponsor-apimart.png",
     url: "https://go.apimart.ai/gh-gpt-load",
+    width: 900,
+    height: 300,
   },
 ] as const;
 
@@ -44,6 +60,12 @@ const SUPPORTERS = [
 export default async function Sponsor() {
   const t = await getT();
   const copy = t.pages.sponsor;
+  const sponsorCopy = {
+    modelflare: { title: copy.modelflareTitle, description: copy.modelflareDescription, action: copy.modelflareAction },
+    ofoxai: { title: copy.ofoxaiTitle, description: copy.ofoxaiDescription, action: copy.ofoxaiAction },
+    packycode: { title: "PackyCode", description: copy.packycodeDescription, action: copy.packycodeAction },
+    apimart: { title: "APIMart", description: copy.sponsorDescription, action: copy.register },
+  };
   return (
     <main id="main" className="page">
       <div className="shell">
@@ -63,19 +85,17 @@ export default async function Sponsor() {
           </div>
           <div className="spon-grid" style={{ marginTop: 20 }}>
             {SPONSORS.map((sp) => (
-              <a key={sp.id} className={`spon${sp.id === "ofoxai" ? " spon-featured" : ""}`} href={sp.url} target="_blank" rel={sp.id === "ofoxai" ? "noopener noreferrer" : "sponsored noopener noreferrer"}>
+              <a key={sp.id} className={`spon${sp.id === "modelflare" ? " spon-featured" : ""}`} href={sp.url} target="_blank" rel={sp.id === "ofoxai" ? "noopener noreferrer" : "sponsored noopener noreferrer"}>
                 <span className="spon-logo">
-                  <Image
-                    src={sp.logo}
-                    alt={sp.name}
-                    width={sp.id === "ofoxai" ? 620 : sp.id === "packycode" ? 1280 : 900}
-                    height={sp.id === "ofoxai" ? 240 : sp.id === "packycode" ? 511 : 300}
-                  />
+                  <Image src={sp.logo} alt={sp.name} width={sp.width} height={sp.height} />
                 </span>
                 <span className="spon-body">
-                  <h3>{sp.id === "ofoxai" ? copy.ofoxaiTitle : sp.name}</h3>
-                  <p>{sp.id === "ofoxai" ? copy.ofoxaiDescription : sp.id === "packycode" ? copy.packycodeDescription : copy.sponsorDescription}</p>
-                  <span className="spon-cta">{sp.id === "ofoxai" ? copy.ofoxaiAction : sp.id === "packycode" ? copy.packycodeAction : copy.register}</span>
+                  <span className="spon-head">
+                    <ClampText as="h3" text={sponsorCopy[sp.id].title} />
+                    {sp.id === "modelflare" ? <span className="label spon-tag">{copy.principalPartner}</span> : null}
+                  </span>
+                  <ClampText as="p" text={sponsorCopy[sp.id].description} />
+                  <span className="spon-cta">{sponsorCopy[sp.id].action}</span>
                 </span>
               </a>
             ))}
