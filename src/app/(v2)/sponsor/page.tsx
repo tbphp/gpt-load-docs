@@ -18,7 +18,7 @@ const SPONSORS = [
     id: "modelflare",
     name: "Modelflare",
     logo: "/v2/sponsor-modelflare.png",
-    url: "https://modelflare.dev/sign-up?utm_source=gptload&utm_campaign=gptload",
+    url: "https://modelflare.dev/sign-up?utm_source=github&utm_campaign=gptload",
     width: 1200,
     height: 216,
   },
