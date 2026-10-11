@@ -158,8 +158,8 @@ const ATTEMPT_LOG_FIELDS: FieldRow[] = [
   ["failure_origin", "client / upstream / downstream / internal / null", "错误责任域；旧记录可能为 null"],
   ["failure_scope", "request / model / credential / group / null", "错误影响的最小资源范围；不适用或旧记录为 null"],
   ["retry_directive", "none / refresh_credential / next_candidate / null", "Judge 作出的重试意图；旧记录可能为 null"],
-  ["effect", "none / cooldown_credential / record_credential_failure / skip_group / null", "本次尝试对运行态产生的唯一效果；旧记录可能为 null"],
-  ["rule_id", "稳定规则标识 / null", "产生决定的规则；旧记录可能为 null"],
+  ["effect", "none / cooldown_model / cooldown_credential / record_credential_failure / skip_group / null", "本次尝试对运行态产生的唯一效果；旧记录可能为 null"],
+  ["rule_id", "规则标识 / null", "产生决定的规则；旧记录可能为 null"],
   ["will_retry", "true / false", "之后是否真的开始了另一轮上游尝试"],
   ["dispatch_state", "not_sent / maybe_sent / local / null", "确定未发送、可能已到上游、完全在 GPT-Load 本地完成，或旧记录未知"],
   ["response_started", "true / false", "本次尝试是否已经形成响应；local 也可以为 true"],
@@ -399,6 +399,7 @@ export default function ErrorsReference() {
       {fieldTable(TOP_LEVEL_LOG_FIELDS)}
       <h3><code>attempts[]</code> 中的尝试字段</h3>
       {fieldTable(ATTEMPT_LOG_FIELDS)}
+      <p>自定义命中的 rule_id 为 custom.global.N 或 custom.group.N，N 是从 1 开始的规则顺序号。管理台尝试链显示对应来源和编号；规则重新排序后，应结合当时的配置理解历史日志。</p>
 
       <Heading id="example">完整案例</Heading>
       <CodeBlock caption="请求日志中的一次失败尝试">
@@ -456,6 +457,7 @@ export default function ErrorsReference() {
       </p>
 
       <Heading id="recovery">重试与恢复</Heading>
+      <p>以下为未命中自定义规则时的内置处理。</p>
       <ul>
         <li><strong>请求错误</strong>——修正请求，不换凭据重试，也不改变凭据健康。</li>
         <li><strong>限流</strong>——遵守 Retry-After；凭据级限流通常会触发冷却并尝试其他候选。</li>
@@ -464,6 +466,7 @@ export default function ErrorsReference() {
         <li><strong>流式响应</strong>——开始向客户端输出后不能切换候选，避免重复或错乱内容。</li>
         <li><strong>管理写操作结果不明</strong>——保留并复用原 Idempotency-Key，先确认操作状态。</li>
       </ul>
+      <p>如需调整上游错误的处理方式，见 <Link href="/docs/settings#error-rules">上游错误规则</Link>；重试仍受安全边界约束。</p>
       <p><Link href="/docs/internals/scheduling">查看完整的调度、冷却与拉黑机制 →</Link></p>
     </DocsPage>
   );

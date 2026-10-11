@@ -217,6 +217,13 @@ export default function Install() {
         <code>latest</code>。需要固定版本时，请改用精确版本标签或镜像摘要。
       </p>
       <p><Link href="/docs/known-limitations#tags">升级前查看已知限制与版本策略 →</Link></p>
+      <p>原生二进制请先停机备份，再查看版本并更新；将示例中的文件名换成实际下载的文件名：</p>
+      <CodeBlock caption="原生二进制：查看版本与更新">
+        ./gpt-load-linux-amd64 version{"\n"}
+        ./gpt-load-linux-amd64 update
+      </CodeBlock>
+      <p>version（或 --version）打印构建版本和平台。update 与管理台使用同一选版规则，选择同一主版本内更新的官方发布，稳定版不会升级到预发布版；下载匹配平台的二进制并校验 SHA256SUMS 后替换当前文件。</p>
+      <p>update 不弹确认，也不会重启进程；下载或校验失败时不会替换原文件。更新后通过原来的服务管理方式重启。开发构建不能自动更新，执行用户需要程序目录的写权限。</p>
       <p>
         数据库迁移是单向的，<strong>回滚不能只把镜像标签改回去</strong>。
         应在升级前停机备份；需要回滚时，恢复升级前的数据库和配套密钥，

@@ -100,7 +100,7 @@ export default function Scheduling() {
 
       <Heading id="retry">失败之后</Heading>
       <p>安全允许换目标重试时，优先降到下一个更低的可用层，不先耗尽同层凭据；没有更低层时才继续当前层的其他凭据。降层后，本次请求不再回到更高层。跨组和跨层切换仍共用全局重试预算。</p>
-      <p>关键在于「什么算失败」：</p>
+      <p>以下为内置默认行为；自定义处理见 <Link href="/docs/settings#error-rules">上游错误规则</Link>：</p>
       <ul>
         <li>
           <strong>会重试</strong>——上游限流、服务端错误、网络超时这类
