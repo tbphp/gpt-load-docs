@@ -249,8 +249,8 @@ export default async function Subscription() {
         进入 Codex 分组，点击 Modern 的「同步额度」或 Classic 的「同步」。上游返回正余额或不限量状态时，账号卡片显示「点数」；未显示不代表余额为零。
       </Notice>
       <p>点数与周期额度、重置额度分别展示，不累加，也不参与调度。</p>
-      <Notice label="Codex 的重置额度" tone="blue">
-        仅 Codex 账号可能显示可用的重置额度。它需要在管理台手动消费，不参与自动调度；操作后等待额度信息刷新确认结果。
+      <Notice label="Codex 与 Claude 的重置额度" tone="blue">
+        Codex 和 Claude 账号可能提供重置额度，卡片展示可用次数及到期时间。需在管理台手动确认消费，不会自动使用；完成后刷新额度确认结果。若结果未知，等待并核对原操作，不要重复发起新的重置。
       </Notice>
 
       <Heading id="rule">使用前提</Heading>

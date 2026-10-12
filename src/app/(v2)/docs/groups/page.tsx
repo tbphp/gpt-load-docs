@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { docPageMetadata } from "@/lib/v2/doc-meta";
 import Link from "next/link";
 import { DocsPage, Heading } from "@/components/v2/docs";
-import { Figure, Notice } from "@/components/v2/ui";
+import { CodeBlock, Figure, Notice } from "@/components/v2/ui";
 import { getLocale } from "@/i18n/v2/server";
 import { docScreenshot } from "@/lib/v2/doc-screenshot";
 
@@ -176,6 +176,8 @@ export default async function Groups() {
         </li>
       </ul>
 
+      <p>在 API Key 分组勾选多条凭据，点击「批量测试」，统一选择协议与模型；最多同时测试 10 条，可停止并重测失败或未完成项。离开分组会取消本轮测试。测试会发出真实请求，可能产生费用，不自动改变启停或拉黑状态。</p>
+
       <p>分组与单条凭据的代理从「代理」页维护的已启用代理中选择，也可选择继承或直连。同一代理可被多处引用；修改地址会影响这些引用，停用或删除后则回退到上一级配置，最终可能直连。</p>
 
       <p>API Key 分组还可在凭据页选择「全量操作 → 从文件导入」，一次选择多个 UTF-8 编码的 TXT、JSON 或 JSONL 文件，核对凭据数量后提交。每次最多 5,000 条凭据、32 MiB；文件内容仍须符合当前渠道的凭据格式。</p>
@@ -244,11 +246,9 @@ export default async function Groups() {
         各参数分别调什么、什么场景下该改，见{" "}
         <Link href="/docs/settings">运行时设置</Link>。
       </p>
-      <p>
-        「参数覆盖规则」可按客户端协议和模型匹配，模型支持精确匹配或末尾 * 前缀匹配。
-        命中的规则依次执行，每条先删除指定 JSON 路径，再合并设置；后面的规则覆盖前面的值。
-        对象递归合并，数组整体替换，null 是普通值。
-      </p>
+      <p>「参数覆盖规则」可按客户端协议和模型匹配，模型支持精确匹配或末尾 * 前缀匹配。 命中的规则依次执行，每条先删除指定 JSON 路径，再合并设置；后面的规则覆盖前面的值。 对象递归合并，直接设置数组值时整体替换，null 是普通值。</p>
+      <p>对数组内的对象，可在 set 中用 * 逐项设置字段，在 remove 路径中用 * 逐项删除字段；只遍历已有元素，保留其他字段及数组顺序，不删除数组元素，也不支持数字索引。例如移除每条消息的 reasoning_content：</p>
+      <CodeBlock caption="参数覆盖：逐项删除字段">{`[{"remove":["/messages/*/reasoning_content"]}]`}</CodeBlock>
       <p>
         参数覆盖用于生成、Embeddings 与 Rerank 请求，不作用于图片编辑、Token 统计、Responses 资源操作或探测；不能修改根级 model、stream、store，也不能注入或改写 previous_response_id。
       </p>

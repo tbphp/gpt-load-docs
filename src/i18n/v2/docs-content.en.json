@@ -1763,8 +1763,6 @@
   "解决办法有三种，任选其一：": "There are three ways to solve this; choose one:",
   "已有 OAuth JSON 时，直接上传或粘贴导入即可，不需要回调端口。": "If you already have OAuth JSON, upload or paste it directly; no callback port is needed.",
   "回调端口不应该暴露到公网。可以手动粘贴回调、使用 SSH 转发，或导入已有 OAuth JSON；无需把 OAUTH_CALLBACK_BIND_ADDRESS 改为 0.0.0.0。": "Callback ports must not be exposed publicly. Paste the callback manually, use SSH forwarding, or import existing OAuth JSON; do not set OAUTH_CALLBACK_BIND_ADDRESS to 0.0.0.0.",
-  "Codex 的重置额度": "Codex reset credits",
-  "仅 Codex 账号可能显示可用的重置额度。它需要在管理台手动消费，不参与自动调度；操作后等待额度信息刷新确认结果。": "Only Codex accounts may show available reset credits. Consume them manually in the management UI; they do not participate in automatic scheduling. Wait for quota information to refresh and confirm the result.",
   "——连续失败超过阈值，自动摘除。API Key 分组会按验证间隔自动探测并恢复；订阅凭据不走这条自动恢复路径": "— automatically removed after the consecutive-failure threshold. API-key Groups are periodically probed and restored automatically; subscription credentials do not use this recovery path",
   "一台主机上同一时刻只能有一个默认 Compose 实例使用本地回调授权。已有 OAuth JSON 的账号可以导入，Grok 可以使用设备码。": "Only one default Compose instance on a host can use local callback authorization at a time. Accounts with existing OAuth JSON can be imported, and Grok can use device authorization.",
   "Compose 主服务的发布地址优先使用 BIND_ADDRESS；未设置时才回退到 HOST。它们都不改变容器内的监听地址。": "For the Compose main service, BIND_ADDRESS takes precedence for the published host address; HOST is only the fallback. Neither changes the address listened on inside the container.",
@@ -2245,7 +2243,6 @@
   "。常见内容包括冲突资源、 字段定位、操作 ID、失败阶段、重试时间以及额度限制明细。 未声明的错误通常没有": ". Common contents include conflicting resources, field locations, operation IDs, failed stages, retry timing, and quota-limit details. Errors without a declared structure usually omit",
   "设置标签页里是这个分组的运行参数：权重、超时、重试次数、冷却阈值、 会话亲和、出站代理与参数覆盖规则。": "The Settings tab contains the group's runtime parameters: weight, timeouts, retry count, cooldown threshold, session affinity, outbound proxy, and parameter override rules.",
   "支持继承的参数可启用覆盖，或恢复系统默认；保存后生效。": "For settings that support inheritance, enable an override or restore the system default. Changes take effect after saving.",
-  "「参数覆盖规则」可按客户端协议和模型匹配，模型支持精确匹配或末尾 * 前缀匹配。 命中的规则依次执行，每条先删除指定 JSON 路径，再合并设置；后面的规则覆盖前面的值。 对象递归合并，数组整体替换，null 是普通值。": "Parameter override rules can match the client protocol and model, using either an exact model name or a prefix followed by *. Matching rules run in order: each removes the specified JSON paths, then merges its settings. Later rules override earlier values. Objects merge recursively, arrays are replaced as a whole, and null is an ordinary value.",
   "参数覆盖用于生成与 Embeddings 请求，不作用于图片编辑、Token 统计、Responses 资源操作或探测；不能修改根级 model、stream、store。": "Parameter overrides apply to generation and Embeddings requests, not image edits, token counting, Responses resource operations, or probes. The root-level model, stream, and store fields cannot be changed.",
   "成本是根据上游返回的 token 用量 结合模型价格、分组与访问密钥的价格倍率估算出来的，用于运营分析，": "Costs are estimated from upstream token usage, model prices, and the group and access-key price multipliers for operational analysis; they are",
   "时，检查上游是否返回用量数据，见": ", check whether the upstream returns usage data; see",
@@ -2589,5 +2586,11 @@
   "以下为未命中自定义规则时的内置处理。": "The following describes built-in handling when no custom rule matches.",
   "如需调整上游错误的处理方式，见": "To adjust upstream error handling, see",
   "；重试仍受安全边界约束。": ". Retry safety boundaries still apply.",
-  "以下为内置默认行为；自定义处理见": "The following describes the built-in defaults. For custom handling, see"
+  "以下为内置默认行为；自定义处理见": "The following describes the built-in defaults. For custom handling, see",
+  "在 API Key 分组勾选多条凭据，点击「批量测试」，统一选择协议与模型；最多同时测试 10 条，可停止并重测失败或未完成项。离开分组会取消本轮测试。测试会发出真实请求，可能产生费用，不自动改变启停或拉黑状态。": "Select multiple credentials in an API Key group and choose Batch test, then select a shared protocol and model. Up to 10 credentials are tested concurrently. You can stop the batch or retry failed and unfinished items; leaving the group cancels the batch. Tests send real requests and may incur charges, without automatically changing enabled or blacklist states.",
+  "「参数覆盖规则」可按客户端协议和模型匹配，模型支持精确匹配或末尾 * 前缀匹配。 命中的规则依次执行，每条先删除指定 JSON 路径，再合并设置；后面的规则覆盖前面的值。 对象递归合并，直接设置数组值时整体替换，null 是普通值。": "Parameter override rules match the client protocol and model, using exact model names or a trailing * for prefix matching. Matching rules run in order: each removes the specified JSON paths before merging settings, and later rules override earlier values. Objects merge recursively; assigning an array value replaces the entire array, and null is an ordinary value.",
+  "对数组内的对象，可在 set 中用 * 逐项设置字段，在 remove 路径中用 * 逐项删除字段；只遍历已有元素，保留其他字段及数组顺序，不删除数组元素，也不支持数字索引。例如移除每条消息的 reasoning_content：": "For objects inside arrays, use * in set to update fields in each item, or * in remove paths to delete fields. Only existing items are traversed; other fields and array order are preserved. Array elements cannot be deleted, and numeric indexes are not supported. For example, remove reasoning_content from each message:",
+  "参数覆盖：逐项删除字段": "Parameter override: remove a field from each item",
+  "Codex 与 Claude 的重置额度": "Codex and Claude reset credits",
+  "Codex 和 Claude 账号可能提供重置额度，卡片展示可用次数及到期时间。需在管理台手动确认消费，不会自动使用；完成后刷新额度确认结果。若结果未知，等待并核对原操作，不要重复发起新的重置。": "Codex and Claude accounts may offer reset credits; account cards show available credits and expiration. Credits are consumed only after manual confirmation, never automatically. Refresh quota information afterward to verify the result. If the outcome is unknown, check the original operation rather than starting another reset."
 }
