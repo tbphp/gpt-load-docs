@@ -133,7 +133,7 @@ export default function SupportMatrix() {
       <Heading id="scope">能力口径</Heading>
       <p>本页描述 GPT-Load 已声明的路由能力，不代表任意模型或上游都支持该能力。</p>
       <Notice label="读表方式" tone="blue">
-        N 表示 Native，按目标协议原生执行；C 表示 Converted，由网关转换；N/C 表示按模型决定；N* 表示仅原生支持 Compact；— 表示当前没有声明该路由。
+        N 表示 Native，按目标协议原生执行；C 表示 Converted，由网关转换；N/C 表示按模型决定；N* 表示仅支持部分原生资源操作，范围见表后说明；— 表示当前没有声明该路由。
       </Notice>
 
       <Heading id="core">凭据与核心协议</Heading>
@@ -199,6 +199,8 @@ export default function SupportMatrix() {
         </table>
       </div>
       <p>Images 的 N 表示原生生成与编辑；C 表示 Gemini 与 Antigravity 仅支持单张、非流式、Base64 图片生成转换，不含编辑。Responses 资源接口包括查询、删除、取消、输入项、压缩及命名空间透传。</p>
+      <p>Responses 资源列的 N*：CLIProxyAPI 与 New API 支持 Compact 及 Responses 命名空间扩展透传，Sub2API 仅支持 Compact。三者均不支持响应查询、删除、取消、输入项或 Responses Input Tokens；GPT-Load 渠道支持这些操作。扩展透传不保证上游实现该接口，上游的错误状态仍会原样返回。</p>
+      <p>CLIProxyAPI、New API 与 GPT-Load 原生支持 POST /v1/alpha/search，访问密钥需允许 openai-responses 协议。模型映射与搜索载荷会传给上游，响应内容和状态保留；搜索不计作模型 token 用量。上游账号和服务是否允许搜索仍需自行确认。</p>
       <p>纯文本 Rerank 由 Cohere、SiliconFlow、OpenAI Compatible、New API、GPT-Load 原生支持，入口为 POST /v1/rerank；不支持流式或协议互转，访问密钥需允许 rerank 协议。</p>
       <p>Gemini 原生嵌入（embedContent／batchEmbedContents）由 Google Gemini、New API、GPT-Load 支持，使用 gemini-embeddings 协议。表中的 Google Gemini OpenAI Embeddings 为文本转换，不接受 token ID 输入。</p>
       <p>Jev 与 OpenRouter 原生支持 decisions；Codex 订阅渠道支持独立的 codex-live 实时语音。Jev 与 Cohere 没有对话路由，不应作为普通聊天渠道使用。</p>

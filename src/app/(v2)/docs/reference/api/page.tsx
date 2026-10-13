@@ -56,7 +56,7 @@ export default function Api() {
           <strong><code>AUTH_KEY</code></strong>——管理权限，可读写配置，也能执行 Reveal 等敏感操作
         </li>
         <li>
-          <strong>访问密钥</strong>——只允许读取自身范围内的首页、模型、用量和脱敏请求日志，
+          <strong>访问密钥</strong>——只允许读取自身范围内的首页、模型、用量和请求日志，
           不能修改配置，也不能查看上游凭据
         </li>
       </ul>
@@ -67,6 +67,7 @@ export default function Api() {
         <code>/api/logs</code> 和 <code>/api/logs/{`{request_id}`}</code>；其他管理路由返回 403。
       </p>
 
+      <p>GET /api/logs/&#123;request_id&#125; 在有记录时返回 request_body，包含 state、original_bytes 和 body；管理员与发送该请求的访问密钥会话均可读取。原始体不是脱敏摘要，不会因访问密钥身份而隐藏。record_request_body 是访问密钥的独立布尔设置，默认 false，不是全局运行时设置。</p>
       <Heading id="lockout">认证失败锁定</Heading>
       <Notice label="避免脚本反复重试错误密钥" tone="amber">
         同一个直接对端地址在 30 分钟内连续 5 次管理认证失败，会被锁定 30 分钟。锁定期间返回 429 和 Retry-After；使用正确的 AUTH_KEY 成功认证会清除失败计数。

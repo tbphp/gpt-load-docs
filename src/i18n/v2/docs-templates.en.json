@@ -540,5 +540,6 @@
   "可在模型页选择 Codex 展示的模型并排序，操作见 {{0}} 。": "Choose and order the models shown in Codex from the Models page. See {{0}}.",
   "优先级默认 0，可为负数；越大越优先。可将主用设为 100、备用设为 0，同层再按路由策略和权重分配流量。重试降层规则见 {{0}} 。": "Priority defaults to 0 and accepts negative values. Higher values take precedence. For example, set primary groups to 100 and backups to 0; within a tier, the routing strategy and weights distribute traffic. See {{0}} for retry fallback rules.",
   "如需调整上游错误的处理方式，见 {{0}} ；重试仍受安全边界约束。": "To adjust upstream error handling, see §E0§upstream error rules§/E0§. Retry safety boundaries still apply.",
-  "以下为内置默认行为；自定义处理见 {{0}} ：": "The following describes the built-in defaults. For custom handling, see §E0§upstream error rules§/E0§:"
+  "以下为内置默认行为；自定义处理见 {{0}} ：": "The following describes the built-in defaults. For custom handling, see §E0§upstream error rules§/E0§:",
+  "{{0}} ——只允许读取自身范围内的首页、模型、用量和请求日志， 不能修改配置，也不能查看上游凭据": "{{0}} — may only read its scoped home page, models, usage, and request logs; it cannot change configuration or view upstream credentials"
 }

@@ -107,6 +107,7 @@ export default function Protocols() {
       <p>GET /v1/models 携带非空 anthropic-version 请求头时返回 Anthropic 模型列表；否则返回 OpenAI Chat Completions 格式。直接调接口时按客户端协议带上对应请求头。</p>
       <p><Link href="/docs/reference/support-matrix">查看逐渠道协议与 Operation →</Link></p>
 
+      <p>原生搜索入口为 POST /v1/alpha/search，使用 openai-responses 协议，支持 CLIProxyAPI、New API 与 GPT-Load 渠道。它不是聊天协议转换，也不意味着任意上游账号都能搜索。</p>
       <Heading id="convert">转换是怎么发生的</Heading>
       <p>
         客户端用的协议，和上游渠道支持的协议<strong>不一定相同</strong>。
@@ -167,6 +168,7 @@ export default function Protocols() {
         调度也更均衡，代价是每次请求的输入 token 更多。
       </p>
 
+      <p>CLIProxyAPI 与 New API 的 Responses 扩展透传不包含响应资源的查询、删除、取消、输入项或 Input Tokens。普通 previous_response_id 续接仍依赖上游存储；需要未声明资源能力的输入会在本地拒绝，不会先发给上游试探。</p>
       <Heading id="pick">该用哪个协议</Heading>
       <p>没有绝对的优劣，按情况选：</p>
       <ul>
