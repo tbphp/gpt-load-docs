@@ -206,7 +206,6 @@
   "{{0}} 限制这把密钥的调用频率， 超出的请求会被拒绝。留空或设为 0 表示不限制。": "{{0}} limits how frequently this AccessKey may be used. Excess requests are rejected; leave it empty or set it to 0 for no limit.",
   "{{0}} 用来解密你填进去的上游凭据。 {{1}} ，只备数据库的话，恢复出来的凭据是解不开的， 而且本版本不支持主密钥轮换。详见 {{2}} 。": "{{0}} decrypts the upstream credentials you add. {{1}}; a database-only backup leaves restored credentials unreadable, and this release does not support master-key rotation. See {{2}}.",
   "{{0}} 与 {{1}} —— 非标场景用，见 {{2}}": "{{0}} and {{1}} — For non-standard scenarios; see {{2}}.",
-  "{{0}} 真正触发切换的是上游返回的限流响应—— 被限流就立即冷却换人，不管显示的额度是多少。": "{{0}}. Upstream rate-limit responses trigger switching: the account enters cooldown immediately regardless of its displayed quota.",
   "{{0}} 只备数据库的话，恢复出来的凭据全是无法解密的密文。": "{{0}}. A database-only backup restores credentials as unreadable ciphertext.",
   "{{0}} 只备数据库的话，恢复出来的凭据是解不开的密文， 而且本版本不支持更换主密钥。见 {{1}} 。": "{{0}}. A database-only backup restores credentials as unreadable ciphertext, and this release does not support changing the master key. See {{1}}.",
   "{{0}} 只读的演示应用没必要授权到贵模型的分组": "{{0}}. A read-only demo does not need access to Groups containing expensive models.",
@@ -541,5 +540,6 @@
   "优先级默认 0，可为负数；越大越优先。可将主用设为 100、备用设为 0，同层再按路由策略和权重分配流量。重试降层规则见 {{0}} 。": "Priority defaults to 0 and accepts negative values. Higher values take precedence. For example, set primary groups to 100 and backups to 0; within a tier, the routing strategy and weights distribute traffic. See {{0}} for retry fallback rules.",
   "如需调整上游错误的处理方式，见 {{0}} ；重试仍受安全边界约束。": "To adjust upstream error handling, see §E0§upstream error rules§/E0§. Retry safety boundaries still apply.",
   "以下为内置默认行为；自定义处理见 {{0}} ：": "The following describes the built-in defaults. For custom handling, see §E0§upstream error rules§/E0§:",
-  "{{0}} ——只允许读取自身范围内的首页、模型、用量和请求日志， 不能修改配置，也不能查看上游凭据": "{{0}} — may only read its scoped home page, models, usage, and request logs; it cannot change configuration or view upstream credentials"
+  "{{0}} ——只允许读取自身范围内的首页、模型、用量和请求日志， 不能修改配置，也不能查看上游凭据": "{{0}} — may only read its scoped home page, models, usage, and request logs; it cannot change configuration or view upstream credentials",
+  "{{0}} 真正触发切换的是上游返回的限流响应—— 被限流就立即冷却换人，不管显示的额度是多少。": "{{0}} Upstream rate-limit responses trigger switching: the account enters cooldown immediately regardless of its displayed quota."
 }
