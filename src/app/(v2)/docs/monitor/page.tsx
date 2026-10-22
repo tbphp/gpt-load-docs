@@ -71,6 +71,7 @@ export default async function Monitor() {
         冷却和拉黑的触发条件、恢复方式见{" "}
         <Link href="/docs/internals/scheduling">调度是怎么做的</Link>。
       </p>
+      <p>Modern 凭据详情和 Classic 订阅账号诊断会显示仍保留的日志中最近一次失败摘要。后续成功不会清除它，它也不代表当前健康状态；摘要随请求日志清理，历史未记录的消息不会补回。</p>
 
       <Figure
         src={docScreenshot(locale, "mon-01-health.png")}
@@ -89,6 +90,7 @@ export default async function Monitor() {
         <strong>点开单条能看到完整链路</strong>：用了哪个凭据、
         是否发生过协议转换、重试了几次、上游返回了什么。
       </p>
+      <p>手机上，Modern 请求日志以卡片显示；点卡片查看完整详情，在「更多筛选」面板调整条件，重置面板筛选会保留当前时间范围。</p>
       <p>排障时最有用的几个字段：</p>
       <ul>
         <li>
@@ -99,7 +101,7 @@ export default async function Monitor() {
           这里能看到转换过程
         </li>
         <li>
-          <strong>错误信息</strong>——经过脱敏和长度限制的错误摘要，
+          <strong>错误信息</strong>——优先显示上游可读错误消息，遮蔽敏感凭据并限制长度；
           配合错误码、来源、范围和命中规则判断
         </li>
       </ul>
@@ -178,6 +180,8 @@ export default async function Monitor() {
         缓存命中率上去了，成本会明显下降。
       </p>
 
+      <p>请求失败、断连、超时或取消时，仍可能保留上游已报告的 token 用量及可定价部分的成本。统计只归属于所选尝试，并使用该次尝试冻结的价格，不跨网关重试累加；未报告的消耗仍未知。</p>
+
       <Notice label="成本是估算，不是账单" tone="amber">
         成本由<b>上游 token 用量、模型价格及分组与访问密钥价格倍率</b>推算而来，
         用于运营分析和容量规划，<b>不等于服务商账单，也不能作为财务对账依据</b>。
@@ -204,12 +208,12 @@ export default async function Monitor() {
             <tr>
               <td>用量缺失</td>
               <td>上游没有返回 token 用量</td>
-              <td>这些请求不计入统计与成本</td>
+              <td>缺失的用量不计入 token 与成本统计</td>
             </tr>
             <tr>
               <td>用量部分缺失</td>
-              <td>只返回了部分维度</td>
-              <td>成本偏低于实际</td>
+              <td>只报告了部分维度，或失败前已报告的消耗</td>
+              <td>成本可能偏低</td>
             </tr>
             <tr>
               <td>成本未定价</td>

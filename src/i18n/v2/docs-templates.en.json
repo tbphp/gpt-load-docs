@@ -489,7 +489,7 @@
   "{{0}} ——保留并复用原 Idempotency-Key，先确认操作状态。": "§E0§Indeterminate management write§/E0§ — preserve and reuse the original Idempotency-Key and confirm operation state first.",
   "路由检查会说明访问密钥、分组或凭据为什么不能成为候选。 它的 {{0}} 与客户端响应 {{1}} 、 请求日志 {{2}} 是不同的信息，见本页最后一节。": "Route inspection explains why an AccessKey, Group, or credential cannot be a candidate. Its {{0}} differs from client-response {{1}} and request-log {{2}}; see the final section.",
   "路由检查按访问密钥、分组和凭据返回分层 {{0}} 。 完整原因、所属层级和处理方式统一收录在错误参考页。": "Route inspection returns layered {{0}} values for the AccessKey, Groups, and credentials. The error reference is the single catalog for reasons, levels, and remediation.",
-  "{{0}} ——经过脱敏和长度限制的错误摘要， 配合错误码、来源、范围和命中规则判断": "§E0§Error details§/E0§ — a redacted, length-bounded summary to interpret together with the error code, origin, scope, and matched rule",
+  "{{0}} ——优先显示上游可读错误消息，遮蔽敏感凭据并限制长度； 配合错误码、来源、范围和命中规则判断": "§E0§Error details§/E0§ — the readable upstream message when available, with sensitive credentials masked and length limited; interpret it with the error code, origin, scope, and matched rule",
   "字段和错误码见 {{0}} ； 日志保留天数见 {{1}} 。": "See §E0§Errors and recovery§/E0§ for fields and codes, and §E1§Runtime settings§/E1§ for log retention.",
   "{{0}} ——找到那条失败的， 看错误码和已脱敏的错误摘要": "§E0§Finally, open the request log§/E0§ — find the failed request and inspect its error code and redacted summary",
   "用路由检查最快，它会直接指出问题在访问密钥、分组还是凭据。 对照 {{0}} 修改配置后，再执行一次检查确认当前状态。": "Route inspection is fastest: it identifies whether the problem is the AccessKey, Group, or credential. Use the §E0§route-inspection reason codes§/E0§, change configuration, and run the inspection again.",

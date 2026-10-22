@@ -74,6 +74,7 @@ export default async function Quickstart() {
         </a>
         ，把这串密钥填进去。
       </p>
+      <p>管理员在手机上使用 Modern 时，通过底部导航切换首页、分组、日志和用量，访问密钥等其他入口在「更多」中。分组详情在窄屏下通过「凭据／运行概况／分组设置」页签切换。</p>
 
       <Figure
         src={docScreenshot(locale, "qs-01-login.png")}

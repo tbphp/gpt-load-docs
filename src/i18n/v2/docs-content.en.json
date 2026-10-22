@@ -1332,7 +1332,7 @@
   "用环境变量指向网关：": "Use environment variables to point to the gateway:",
   "用来加密你填进去的上游凭据， 它和数据库必须一起备份——丢了就解不开了。": "Used to encrypt the upstream credentials you enter, which must be backed up together with the database—if lost, it cannot be decrypted",
   "用来解密你填进去的上游凭据。": "Used to decrypt the upstream credentials you enter",
-  "用量部分缺失": "Usage section missing",
+  "用量部分缺失": "Partial usage",
   "用量缺失": "Usage missing",
   "用量上限": "Usage limit",
   "用量选项注入": "Usage options injection",
@@ -2119,7 +2119,6 @@
   "管理写操作结果不明": "Indeterminate management write",
   "查看完整的调度、冷却与拉黑机制 →": "View the complete scheduling, cooldown, and blacklisting behavior →",
   "查看路由检查原因码及处理方式 →": "View route-inspection reasons and remediation →",
-  "——经过脱敏和长度限制的错误摘要， 配合错误码、来源、范围和命中规则判断": "— a redacted, length-bounded summary to interpret together with the error code, origin, scope, and matched rule",
   "字段和错误码见": "For fields and error codes, see",
   "； 日志保留天数见": "; for log retention, see",
   "——找到那条失败的， 看错误码和已脱敏的错误摘要": "— open the failed request and inspect its error code and redacted summary",
@@ -2620,5 +2619,13 @@
   "刷新额度可在观测到符合条件的额度回升时提前解除额度冷却；不满足条件时仍需等待冷却到期。": "Refreshing quota can release quota cooldowns early when eligible quota recovery is observed; otherwise, wait for the cooldown to expire.",
   "订阅额度恢复可提前解除内置额度冷却；成功使用重置额度也会触发恢复。未记录冷却原因的历史状态仍保留原截止时间，可用显式恢复凭据操作处理。": "Subscription quota recovery can release built-in quota cooldowns early; successfully redeeming a quota reset also triggers recovery. Historical states without a recorded cooldown cause keep their original deadlines and can be cleared with an explicit credential restoration.",
   "模型一致性比较发往上游的模型与上游响应报告的模型，观测发生在客户端别名改写之前。对话响应未报告模型时为 unknown；同一次尝试出现过不一致时，不会被后续一致值覆盖。它不改变路由、重试或计价，历史日志不会回写。": "Model consistency compares the model sent upstream with the model reported in the upstream response, before client alias rewriting. A conversation response without a reported model is unknown; a mismatch within an attempt is not overwritten by a later matching value. This does not change routing, retries, or pricing, and historical logs are not rewritten.",
-  "「刷新凭据」在账号卡片的更多菜单中，用于恢复授权；「刷新额度」更新额度信息，满足恢复条件时也会解除额度冷却。 手动停用的账号需先启用，才能刷新凭据。": "Use Refresh credentials in the account card menu to restore authorization. Refresh quota updates quota information and also clears quota cooldowns when recovery conditions are met. Manually disabled accounts must be enabled before refreshing credentials."
+  "「刷新凭据」在账号卡片的更多菜单中，用于恢复授权；「刷新额度」更新额度信息，满足恢复条件时也会解除额度冷却。 手动停用的账号需先启用，才能刷新凭据。": "Use Refresh credentials in the account card menu to restore authorization. Refresh quota updates quota information and also clears quota cooldowns when recovery conditions are met. Manually disabled accounts must be enabled before refreshing credentials.",
+  "管理员在手机上使用 Modern 时，通过底部导航切换首页、分组、日志和用量，访问密钥等其他入口在「更多」中。分组详情在窄屏下通过「凭据／运行概况／分组设置」页签切换。": "On phones, administrators can use Modern’s bottom navigation to switch between Home, Groups, Logs, and Usage. Access Keys and other pages are under More. In narrow layouts, group details use Credentials, Overview, and Group settings tabs.",
+  "Modern 凭据详情和 Classic 订阅账号诊断会显示仍保留的日志中最近一次失败摘要。后续成功不会清除它，它也不代表当前健康状态；摘要随请求日志清理，历史未记录的消息不会补回。": "Modern credential details and Classic subscription account diagnostics show the latest failed-attempt summary from retained logs. Later successes do not clear it, and it does not indicate current health. The summary expires with request logs; messages not recorded in historical logs are not recovered.",
+  "手机上，Modern 请求日志以卡片显示；点卡片查看完整详情，在「更多筛选」面板调整条件，重置面板筛选会保留当前时间范围。": "On phones, Modern shows request logs as cards. Tap a card for full details and use More filters to adjust conditions. Resetting the panel’s filters preserves the current time range.",
+  "请求失败、断连、超时或取消时，仍可能保留上游已报告的 token 用量及可定价部分的成本。统计只归属于所选尝试，并使用该次尝试冻结的价格，不跨网关重试累加；未报告的消耗仍未知。": "Failed, disconnected, timed-out, or canceled requests may still retain token usage reported by the upstream and cost estimates for the priced portion. Statistics belong only to the selected attempt and use its frozen prices; they do not accumulate across gateway retries. Unreported consumption remains unknown.",
+  "缺失的用量不计入 token 与成本统计": "Missing usage is excluded from token and cost totals",
+  "只报告了部分维度，或失败前已报告的消耗": "Only some usage dimensions, or consumption reported before a failure",
+  "成本可能偏低": "Cost may be underestimated",
+  "——优先显示上游可读错误消息，遮蔽敏感凭据并限制长度； 配合错误码、来源、范围和命中规则判断": "— the readable upstream message when available, with sensitive credentials masked and length limited; interpret it with the error code, origin, scope, and matched rule"
 }
