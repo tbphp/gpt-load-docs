@@ -83,13 +83,15 @@ const DATA_PLANE_ERRORS: ErrorRow[] = [
   ["method_not_allowed", "405", "端点存在，但 HTTP 方法不受支持", "使用该端点声明的方法"],
   ["invalid_protocol_request", "400", "请求体或协议字段无法解析", "按客户端协议修正请求"],
   ["model_required_by_filter", "400", "访问密钥限制了模型，但请求没有模型名", "指定模型或移除模型过滤"],
+  ["advisor_model_unavailable", "400", "分组未提供 advisor 模型，或其对外名称未通过访问密钥过滤", "核对 tools[].model 的上游模型 ID、分组模型与密钥过滤"],
+  ["encrypted_content_recovery_exhausted", "400 (HTTP)", "Responses 历史清理重放后仍被上游同类拒绝", "使用可读完整历史重发或新建会话"],
   ["no_available_candidate", "503", "当前没有可路由的分组或凭据", "先用路由检查定位具体 reason_code"],
   ["upstream_connect_failed", "502", "无法连接到任何可用上游", "检查网络、代理和上游地址后再试"],
   ["upstream_timeout", "504", "上游请求超时", "检查请求日志的派发和提交状态，非幂等请求不要盲目重放"],
   ["upstream_protocol_error", "502", "上游响应无法安全处理", "检查上游响应格式、Content-Encoding 和服务日志"],
   ["protocol_conversion_unsupported", "422", "没有路由能够原生执行或安全转换请求", "更换协议、Operation 或渠道"],
   ["parameter_override_unavailable", "503", "没有候选能够应用分组参数覆盖规则", "检查分组的参数覆盖规则"],
-  ["request_too_large", "413", "数据面请求体超过大小限制", "减小请求体"],
+  ["request_too_large", "413", "请求体超过大小限制，编码、解码与转换后均会检查", "缩小请求，核对协议限制和启动日志中的请求体上限"],
   ["unsupported_content_encoding", "415", "请求使用了不支持的 Content-Encoding", "改用 identity、gzip、br、deflate 或 zstd"],
   ["invalid_content_encoding", "400", "压缩请求体无法解码", "重新编码请求体并核对请求头"],
   ["not_acceptable", "406", "客户端不接受 identity 编码的响应", "允许 identity 响应"],
@@ -343,6 +345,7 @@ export default function ErrorsReference() {
         成本限制会额外返回结构化 <code>error</code> 和 <code>data</code>。
       </p>
       {errorTable(DATA_PLANE_ERRORS)}
+      <p><Link href="/docs/reference/env#memory">查看请求体与内存限制 →</Link></p>
 
       <p>
         <code>access_key_cost_limit_exceeded</code> 的 <code>error</code> 包含
@@ -464,6 +467,7 @@ export default function ErrorsReference() {
         <li><strong>无效凭据</strong>——记录凭据失败；连续达到阈值后拉黑。</li>
         <li><strong>上游主机错误</strong>——跳过当前分组；只有只读操作或上游明确拒绝处理时才安全重放。</li>
         <li><strong>流式响应</strong>——开始向客户端输出后不能切换候选，避免重复或错乱内容。</li>
+        <li><strong>Responses 历史被拒</strong>——输出前可尝试一次同凭据清理重放，仍受重试预算、错误规则与冷却约束；连接与历史边界见 <Link href="/docs/internals/protocols#stateful">有状态请求</Link>。</li>
         <li><strong>管理写操作结果不明</strong>——保留并复用原 Idempotency-Key，先确认操作状态。</li>
       </ul>
       <p>如需调整上游错误的处理方式，见 <Link href="/docs/settings#error-rules">上游错误规则</Link>；重试仍受安全边界约束。</p>

@@ -116,6 +116,7 @@ export default function Scheduling() {
       <Notice label="流式响应的特殊处理" tone="blue">
         流式响应一旦提交给客户端，就不能再切换候选。开启空响应重试时，网关可短暂保留尚未产出内容的前导事件，因此收到上游数据块不等于已经向客户端输出。具体适用范围与计费限制见运行时设置。
       </Notice>
+      <p>原生 Codex Responses 的前导缓冲不依赖「空响应重试」开关；向客户端输出前明确返回 server_is_overloaded 时，可按错误规则重试。输出内容或工具事件后不重放。</p>
 
       <Heading id="cooldown">冷却与拉黑</Heading>
       <p>两级保护机制，避免坏凭据反复拖慢请求：</p>

@@ -122,6 +122,7 @@ export default function ProxyHeaders() {
         认证相关的头由网关自己管理——它需要按选中的凭据动态填充。
         用规则去改它会导致请求失败。
       </Notice>
+      <p>Antigravity 的会话隔离与重放标识由网关管理，客户端 Session-Id、Session_id 等会话头不能覆盖内部会话范围。</p>
 
       <Heading id="browser-access">响应头与跨域</Heading>
       <p>

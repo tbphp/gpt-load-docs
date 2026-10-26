@@ -293,7 +293,6 @@
   "两者 {{0}} 。也就是说， 你不需要为订阅账号单独维护一套运维逻辑，它们在网关眼里都只是「一池凭据」。 订阅账号的授权细节见 {{1}} 。": "Both {{0}}. You do not need separate operations for subscription accounts; to the gateway, they are simply credentials in a pool. See {{1}} for authorization details.",
   "两者的完整机制见 {{0}} 。": "See {{0}} for the complete behavior of both settings.",
   "另外提醒一点： {{0}} 。 今天补的价格只影响之后的统计，之前那些请求仍然是未计价状态。": "One more point: {{0}}. A price added today affects only future statistics; earlier requests remain unpriced.",
-  "另一个选择是 {{0}} —— 每次把完整上下文发过去。这样任何凭据都能处理， 调度也更均衡，代价是每次请求的输入 token 更多。": "Another option is to {{0}} and send the full context on every request. Any credential can then handle it and load is distributed more evenly, at the cost of more input tokens.",
   "流量切完之后， {{0}} 。 确认 2.0 在真实负载下稳定、没有遗漏的应用还在连旧实例，再考虑下线。 删除前记得备份它的数据目录。": "After the traffic is cut, the set of §E0§1.x should be kept for at least one to two weeks§/E0§. Make sure that 2.0 is stable under real load and that no missing applications are still connected to the old instance before considering taking it offline. Remember to back up its data directory before deleting it.",
   "流式请求一旦开始输出，就 {{0}} —— 客户端已经收到前半段内容，换凭据重发会导致内容错乱。 所以网关只在 {{1}} 做安全切换， 之后出错只能如实返回给客户端。": "Once streaming output starts, the request {{0}}: the client already has partial content, so replaying on another credential would corrupt the response. The gateway switches safely only {{1}}; later errors are returned as-is.",
   "路由检查在脚本里很有用—— {{0}} ， 比真发一个请求更轻。": "Route Check is useful in scripts: {{0}} without sending a real request.",
@@ -541,5 +540,8 @@
   "如需调整上游错误的处理方式，见 {{0}} ；重试仍受安全边界约束。": "To adjust upstream error handling, see §E0§upstream error rules§/E0§. Retry safety boundaries still apply.",
   "以下为内置默认行为；自定义处理见 {{0}} ：": "The following describes the built-in defaults. For custom handling, see §E0§upstream error rules§/E0§:",
   "{{0}} ——只允许读取自身范围内的首页、模型、用量和请求日志， 不能修改配置，也不能查看上游凭据": "{{0}} — may only read its scoped home page, models, usage, and request logs; it cannot change configuration or view upstream credentials",
-  "{{0}} 真正触发切换的是上游返回的限流响应—— 被限流就立即冷却换人，不管显示的额度是多少。": "{{0}} Upstream rate-limit responses trigger switching: the account enters cooldown immediately regardless of its displayed quota."
+  "{{0}} 真正触发切换的是上游返回的限流响应—— 被限流就立即冷却换人，不管显示的额度是多少。": "{{0}} Upstream rate-limit responses trigger switching: the account enters cooldown immediately regardless of its displayed quota.",
+  "带 Anthropic advisor 工具的请求仅走原生路由；子模型的开放、访问限制与价格配置见 {{0}} 。": "Requests with Anthropic advisor tools require a native route. For advisor model availability, access restrictions, and pricing, see {{0}}.",
+  "另一个选择是 {{0}} ，减少对原账号存储的依赖； 历史中的加密内容和条目 ID 仍可能与原账号绑定，不能保证任意凭据都能接续，输入 token 也可能更多。": "Another option is to {{0}}, reducing dependence on storage in the original account. Encrypted history and item IDs may still be bound to that account, so continuation with any credential is not guaranteed, and input token usage may increase.",
+  "{{0}} ——输出前可尝试一次同凭据清理重放，仍受重试预算、错误规则与冷却约束；连接与历史边界见 {{1}} 。": "{{0}} — One cleanup replay on the same credential may be attempted before output, subject to the retry budget, error rules, and cooldowns. For connection and history limits, see {{1}}."
 }

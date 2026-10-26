@@ -126,6 +126,7 @@ export default async function Models() {
       </Figure>
 
       <p>同一分组中，多个不同上游模型可以使用同一个对外别名。网关先按权重选择凭据，再轮流选择该凭据当前可用的同名模型；增加模型数量不会额外增加凭据的流量份额。向量模型不要混用：同一客户端模型名应始终对应同一种 Embedding 模型。</p>
+      <p>使用 Anthropic advisor 工具时，tools[].model 填写上游模型 ID。所选分组必须提供该模型，其对外名称也须通过访问密钥的模型过滤，否则返回 400 advisor_model_unavailable；此类请求只走原生路由。</p>
 
       <Heading id="auto-model">自动选模</Heading>
       <p>在「设置 → 实验功能」中启用自动模型，可让客户端始终请求一个名称，由 JEV 根据任务从你配置的预设模型中选择。先配置可用的 Decisions 分组与 JEV 公共配置，再添加自动模型名称、各档预设的适用描述和目标模型，并指定回退预设。</p>
@@ -165,6 +166,7 @@ export default async function Models() {
         部分模型还支持<strong>按上下文长度分档计价</strong>——
         超过某个长度后单价更高，这种阶梯价也能配。
       </p>
+      <p>Anthropic usage.iterations 中的 advisor 调用按同渠道 advisor 模型的价格分别计费，每次调用按自己的输入量选择上下文价格档；费用合入请求总成本和访问密钥限额，不沿用主模型价格。</p>
 
       <Heading id="manual">手动改价</Heading>
       <p>

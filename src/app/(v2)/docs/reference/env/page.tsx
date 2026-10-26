@@ -11,6 +11,7 @@ export function generateMetadata(): Promise<Metadata> {
 const TOC = [
   { id: "diff", label: "和运行时设置的区别" },
   { id: "net", label: "进程与网络" },
+  { id: "memory", label: "内存与请求体" },
   { id: "voice", label: "实时语音" },
   { id: "data", label: "数据与存储" },
   { id: "secret", label: "密钥" },
@@ -28,6 +29,7 @@ const NET = [
   ["READ_TIMEOUT", "60", "读取请求的超时，单位秒"],
   ["IDLE_TIMEOUT", "120", "连接空闲超时，单位秒"],
   ["GRACEFUL_SHUTDOWN_TIMEOUT", "10", "优雅关闭的等待时长，单位秒"],
+  ["GOMEMLIMIT", "自动", "Go 软内存上限；启动环境已设置的值（含 off）优先，写入应用 .env 无效"],
 ];
 
 const DATA = [
@@ -61,7 +63,7 @@ export default function Env() {
     <DocsPage
       path="/docs/reference/env"
       title="环境变量"
-      lede="进程级配置，写在 .env 里，改完需要重启。这是一张查表用的页面，不用通读。"
+      lede="进程级配置，通常写在 .env 中，修改后需要重启；GOMEMLIMIT 必须在启动前设置。"
       toc={TOC}
     >
       <Heading id="diff">和运行时设置的区别</Heading>
@@ -79,7 +81,7 @@ export default function Env() {
           <tbody>
             <tr>
               <td>环境变量</td>
-              <td><code>.env</code> 文件</td>
+              <td>进程启动环境或 .env（GOMEMLIMIT 除外）</td>
               <td><strong>需要重启</strong>。管进程本身：监听地址、数据库、密钥</td>
             </tr>
             <tr>
@@ -122,6 +124,10 @@ export default function Env() {
         不是毫秒。这是最容易配错的一处——
         写成 <code>60000</code> 会得到一个 16 小时的超时。
       </Notice>
+
+      <Heading id="memory">内存与请求体</Heading>
+      <p>Linux 下取 cgroup 限额与主机总内存中已知的较小值。数据面单个请求体上限为该值的 1/14，最低 16 MiB、最高 128 MiB；无法探测时为 128 MiB。编码后的传输体、解码后及协议转换后的请求体均受此限制，超限返回 413 request_too_large。Responses WebSocket 和 Codex Live 仍有各自更小的消息限制。</p>
+      <p>未在启动环境设置 GOMEMLIMIT 且能探测内存时，Go 软内存上限默认设为可用内存的 80%。可在启动日志 startup.memory_limits 查看实际限制；这不保证并发请求的总内存或进程 RSS 不超限。</p>
 
       <Heading id="voice">实时语音</Heading>
       <p>媒体 IP、UDP 与 ICE 设置仅用于网关中继；语音并发上限适用于整个实例。直连／中继／关闭在管理台运行时设置中选择。</p>
@@ -295,7 +301,7 @@ export default function Env() {
       </p>
       <CodeBlock caption="docker-compose.yml">
         ports:{"\n"}
-        {"  "}- <span className="s">&quot;${"${BIND_ADDRESS:-${HOST:-127.0.0.1}}"}:${"${PORT:-3001}"}:${"${PORT:-3001}"}&quot;</span>
+        {"  "}- <span className="s">&quot;{"${BIND_ADDRESS:-${HOST:-127.0.0.1}}"}:{"${PORT:-3001}"}:{"${PORT:-3001}"}&quot;</span>
       </CodeBlock>
       <p>也就是说：在容器部署里，BIND_ADDRESS 已设置时控制发布到宿主机的地址；未设置时才回退到 HOST。它们都不控制容器内监听地址。要对外提供服务，正确做法是加反向代理。</p>
       <p>

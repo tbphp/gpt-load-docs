@@ -148,6 +148,7 @@ export default function Protocols() {
         遇到这类问题，<strong>最直接的解法是让客户端协议和渠道协议对齐</strong>：
         用 Claude 客户端就配 Anthropic 渠道，减少中间转换。
       </p>
+      <p>带 Anthropic advisor 工具的请求仅走原生路由；子模型的开放、访问限制与价格配置见 <Link href="/docs/models">模型管理</Link>。</p>
 
       <Heading id="stateful">有状态请求</Heading>
       <p>
@@ -163,10 +164,11 @@ export default function Protocols() {
       <p>GET /v1/responses 支持原生 WebSocket，当前适用于 OpenAI、Codex、xAI、GPT-Load、CLIProxyAPI、Sub2API。连接固定上游 Session，Codex 仅支持原连接内续接；不提供 WS→HTTP 转换，也不保证重连恢复上下文。开关见运行时设置。</p>
       <p>Codex WebSocket 支持在生成期间发送 response.interrupt，携带同一连接中当前响应的 response_id；网关在原上游连接立即转发，中断确认后可用 previous_response_id 续接。已结束响应的迟到或重复中断会被忽略，不会影响下一轮。若上游以 response.incomplete 返回中断且没有输出、output_tokens 为 0，连接仍会关闭，不能续接。</p>
       <p>
-        另一个选择是<strong>不用有状态接口</strong>——
-        每次把完整上下文发过去。这样任何凭据都能处理，
-        调度也更均衡，代价是每次请求的输入 token 更多。
+        另一个选择是<strong>每次发送完整可读上下文</strong>，减少对原账号存储的依赖；
+        历史中的加密内容和条目 ID 仍可能与原账号绑定，不能保证任意凭据都能接续，输入 token 也可能更多。
       </p>
+      <p>HTTP/SSE 与 WebSocket Responses 在向客户端输出前被上游明确拒绝历史加密内容或条目 ID 时，可尝试一次同凭据清理重放；WebSocket 仅限新连接首轮。重放计入 retry_count，并遵守错误规则与凭据冷却。已有内容或工具活动后不重放，compaction 与 item_reference 不会被自动删除。</p>
+      <p>清理重放后仍被同类拒绝时，HTTP 返回 400 encrypted_content_recovery_exhausted；可用可读完整历史重发或新建会话。WebSocket 已绑定的上游连接失效时，仍需客户端重新连接并重发。</p>
 
       <p>CLIProxyAPI 与 New API 的 Responses 扩展透传不包含响应资源的查询、删除、取消、输入项或 Input Tokens。普通 previous_response_id 续接仍依赖上游存储；需要未声明资源能力的输入会在本地拒绝，不会先发给上游试探。</p>
       <Heading id="pick">该用哪个协议</Heading>
