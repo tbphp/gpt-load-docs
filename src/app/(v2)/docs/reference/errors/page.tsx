@@ -58,6 +58,9 @@ const MANAGEMENT_DOMAIN: ErrorRow[] = [
   ["MODEL_PRICE_UNPRICED_CONFIRMATION_REQUIRED", "409", "将模型标记为未定价需要显式确认", "确认后重新提交"],
   ["MODEL_PRICE_REFERENCED", "409", "模型价格仍被分组引用", "先解除引用，再删除价格"],
   ["MODEL_PRICE_AUTOMATIC_DELETE_FORBIDDEN", "409", "自动同步的模型价格不能手动删除", "修改同步来源或等待后续同步"],
+  ["MODEL_PRICE_REFERENCE_CYCLE", "409", "模型价格关联自身或形成循环", "选择其他来源模型"],
+  ["MODEL_PRICE_SOURCE_REFERENCED", "409", "仍有模型关联此价格来源，无法删除价格或移除全部分组引用", "先更换依赖模型的关联或改为手动价格"],
+  ["MODEL_PRICE_SOURCE_UNAVAILABLE", "409", "关联价格来源已不可用或未定价", "重新选择已在分组中使用且已定价的来源模型"],
   ["OAUTH_FILE_INVALID", "400", "OAuth JSON 无法识别或字段无效", "重新导出并导入完整文件"],
   ["OAUTH_FILE_TOO_LARGE", "413", "OAuth 文件超过大小限制", "只保留所需凭据内容"],
   ["AUTHORIZATION_UNAVAILABLE", "503", "浏览器授权、设备码授权或订阅凭据刷新暂不可用", "检查渠道能力、网络和服务日志"],
@@ -140,6 +143,7 @@ const MANAGEMENT_DATA: DataRow[] = [
   ["MODEL_PRICE_UNPRICED_CONFIRMATION_REQUIRED", "id", "未确认就把价格全部设为空时"],
   ["MODEL_PRICE_REFERENCED", "id, reference_count, reference_group_count", "删除仍被分组引用的价格时"],
   ["MODEL_PRICE_AUTOMATIC_DELETE_FORBIDDEN", "id", "删除自动同步价格时"],
+  ["MODEL_PRICE_SOURCE_REFERENCED", "source, dependents", "删除来源价格或移除其全部分组引用，仍有模型关联时"],
 ];
 
 const TOP_LEVEL_LOG_FIELDS: FieldRow[] = [

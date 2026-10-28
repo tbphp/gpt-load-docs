@@ -2648,5 +2648,21 @@
   "——输出前可尝试一次同凭据清理重放，仍受重试预算、错误规则与冷却约束；连接与历史边界见": "— One cleanup replay on the same credential may be attempted before output, subject to the retry budget, error rules, and cooldowns. For connection and history limits, see",
   "自动": "Automatic",
   "请求体超过大小限制，编码、解码与转换后均会检查": "The request body exceeds the size limit, checked in encoded, decoded, and converted forms",
-  "缩小请求，核对协议限制和启动日志中的请求体上限": "Reduce the request size and check protocol limits and the body limit in startup logs"
+  "缩小请求，核对协议限制和启动日志中的请求体上限": "Reduce the request size and check protocol limits and the body limit in startup logs",
+  "手动与关联定价": "Manual and linked pricing",
+  "成本估算需要模型价格。价格支持三种维护方式：": "Cost estimates require model prices. There are three ways to maintain them:",
+  "关联模型": "Linked model",
+  "——跟随其他模型的价格，来源更新时自动生效": "— Follow another model’s prices; source updates apply automatically",
+  "目录暂不可用或未匹配到新价格时，已有有效价格会保留。": "If the catalog is temporarily unavailable or no new price matches, existing valid prices are retained.",
+  "在模型页打开「价格设置」，选择「手动」或「关联」。批量定价一次最多应用到 100 个模型，保存时覆盖目标的完整价格，包括基础价、上下文阶梯和模式价格；任一目标校验失败时整批不生效。": "On the Models page, open Price settings and choose Manual or Link. Bulk pricing applies to at most 100 models at a time and replaces each target’s complete prices, including base prices, context tiers, and mode prices. If any target fails validation, the entire batch is rejected.",
+  "手动模式可先从参考模型复制价格，保存后独立维护；关联模式持续跟随来源。两种方式复用的都是倍率前单价，分组和访问密钥倍率仍分别生效。": "Manual mode can copy prices from a reference model, then maintain them independently after saving. Link mode continues to follow the source. Both reuse unit prices before multipliers; group and AccessKey multipliers still apply separately.",
+  "关联来源须是已在分组中使用且已定价的模型，不能关联自身或形成循环。仍有模型关联时，不能删除来源价格或将来源模型从所有分组移除；先更换关联或改为手动价格。": "The source must be a priced model used in at least one group. A model cannot link to itself or form a cycle. While other models still follow it, its price cannot be deleted and the source model cannot be removed from all groups. Change the dependent models’ links or switch them to manual pricing first.",
+  "模型价格查询、批量设置、关联、同步、重置与删除": "Query, bulk-set, link, sync, reset, and delete model prices",
+  "模型价格关联自身或形成循环": "A model price links to itself or forms a cycle",
+  "选择其他来源模型": "Choose another source model",
+  "仍有模型关联此价格来源，无法删除价格或移除全部分组引用": "Models still follow this price source, so its price cannot be deleted or removed from all groups",
+  "先更换依赖模型的关联或改为手动价格": "Change the dependent models’ links or switch them to manual pricing first",
+  "关联价格来源已不可用或未定价": "The linked price source is unavailable or unpriced",
+  "重新选择已在分组中使用且已定价的来源模型": "Choose a priced source model used in at least one group",
+  "删除来源价格或移除其全部分组引用，仍有模型关联时": "Deleting a source price or removing its last group reference while models still follow it"
 }

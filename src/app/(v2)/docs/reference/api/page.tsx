@@ -29,7 +29,7 @@ const RESOURCES = [
   ["/api/route/inspect", "只读路由检查"],
   ["/api/channels", "渠道描述符、字段与能力"],
   ["/api/models", "项目模型列表与上游模型发现"],
-  ["/api/model-prices", "模型价格查询、同步、修改、重置与删除"],
+  ["/api/model-prices", "模型价格查询、批量设置、关联、同步、重置与删除"],
   ["/api/groups", "分组列表、创建、详情、设置、模型与删除"],
   ["/api/groups/{group_id}/credentials", "凭据管理，含批量导入、查看真实值、下载"],
   ["/api/credential-stages", "订阅凭据的授权、导入、轮询与暂存状态"],

@@ -17,7 +17,7 @@ const TOC = [
   { id: "alias", label: "模型别名" },
   { id: "auto-model", label: "自动选模" },
   { id: "price", label: "价格从哪来" },
-  { id: "manual", label: "手动改价" },
+  { id: "manual", label: "手动与关联定价" },
   { id: "unpriced", label: "没有价格会怎样" },
 ];
 
@@ -134,7 +134,7 @@ export default async function Models() {
 
       <Heading id="price">价格从哪来</Heading>
       <p>
-        成本估算需要模型价格。价格有两个来源：
+        成本估算需要模型价格。价格支持三种维护方式：
       </p>
       <ul>
         <li>
@@ -145,7 +145,11 @@ export default async function Models() {
         <li>
           <strong>手动录入</strong>——数据源没有的、或者你有专属价格的，自己填
         </li>
+        <li>
+          <strong>关联模型</strong>——跟随其他模型的价格，来源更新时自动生效
+        </li>
       </ul>
+      <p>目录暂不可用或未匹配到新价格时，已有有效价格会保留。</p>
       <p>
         自动同步可以在设置里关闭，见 <Link href="/docs/settings">运行时设置</Link>。
         关掉之后价格完全由你维护。
@@ -168,7 +172,7 @@ export default async function Models() {
       </p>
       <p>Anthropic usage.iterations 中的 advisor 调用按同渠道 advisor 模型的价格分别计费，每次调用按自己的输入量选择上下文价格档；费用合入请求总成本和访问密钥限额，不沿用主模型价格。</p>
 
-      <Heading id="manual">手动改价</Heading>
+      <Heading id="manual">手动与关联定价</Heading>
       <p>
         自动同步来的价格可以被<strong>手动覆盖</strong>。改过之后那条会标记为手动维护，
         后续自动同步<strong>不会覆盖掉你的修改</strong>。
@@ -176,6 +180,9 @@ export default async function Models() {
       <p>
         想恢复成自动同步的值，用重置即可。
       </p>
+      <p>在模型页打开「价格设置」，选择「手动」或「关联」。批量定价一次最多应用到 100 个模型，保存时覆盖目标的完整价格，包括基础价、上下文阶梯和模式价格；任一目标校验失败时整批不生效。</p>
+      <p>手动模式可先从参考模型复制价格，保存后独立维护；关联模式持续跟随来源。两种方式复用的都是倍率前单价，分组和访问密钥倍率仍分别生效。</p>
+      <p>关联来源须是已在分组中使用且已定价的模型，不能关联自身或形成循环。仍有模型关联时，不能删除来源价格或将来源模型从所有分组移除；先更换关联或改为手动价格。</p>
       <Notice label="什么时候需要手动改" tone="blue">
         你有企业协议价、走的是中转服务有自己的定价、
         或者用了公开数据源没收录的模型——这几种情况下自动同步的价格不准，
