@@ -26,7 +26,7 @@ export default function Protocols() {
       toc={TOC}
     >
       <Heading id="four">四种对话协议</Heading>
-      <p>GPT-Load 接受四种对话协议。它们是并列关系，一把访问密钥可以同时允许多个；图片、向量、重排序、决策和实时语音另有独立协议权限。</p>
+      <p>GPT-Load 接受四种对话协议。它们是并列关系，一把访问密钥可以同时允许多个；图片、向量、重排序、决策、语音合成和实时语音另有独立协议权限。</p>
       <ul>
         <li>
           <strong>OpenAI Chat Completions</strong>——最通用，
@@ -100,8 +100,10 @@ export default function Protocols() {
         </li>
         <li>纯文本重排序：POST /v1/rerank，独立使用 rerank 协议，不支持流式或协议互转。</li>
         <li>JEV 决策：POST /v1/decisions，由 Jev 或 OpenRouter 渠道原生执行，独立使用 decisions 协议。</li>
+        <li>语音合成：POST /v1/audio/speech，独立使用 audio-speech 协议，仅支持原生、非流式请求，不做协议互转。</li>
         <li>Codex 实时语音：独立使用 codex-live 协议，不是 Responses WebSocket 的另一种文本模式。</li>
       </ul>
+      <p id="audio-speech">语音合成目前仅支持 OpenRouter 与 Mistral。请求必须是含 model 的 JSON，voice、voice_id、response_format 等参数遵循所选渠道。OpenRouter 可返回音频字节，Mistral 可返回含 audio_data 的 JSON；客户端应按实际 Content-Type 处理响应。</p>
       <p>Gemini、New API 与 GPT-Load 支持原生 gemini-embeddings；Gemini 渠道还可将 OpenAI Embeddings 的文本请求转成 Gemini 原生批量嵌入，支持 dimensions 及 float／base64 输出，不支持 token ID 输入。</p>
       <p><Link href="/docs/clients/codex-voice">Codex 实时语音接入指南 →</Link></p>
       <p>GET /v1/models 携带非空 anthropic-version 请求头时返回 Anthropic 模型列表；否则返回 OpenAI Chat Completions 格式。直接调接口时按客户端协议带上对应请求头。</p>

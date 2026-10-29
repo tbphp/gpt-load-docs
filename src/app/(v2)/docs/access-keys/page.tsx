@@ -127,6 +127,7 @@ export default async function AccessKeys() {
           <strong>Gemini</strong>——Gemini 客户端的原生入口
         </li>
       </ul>
+      <p>若设置协议过滤，语音合成需允许独立的 audio-speech；Mistral 渠道也一样，只有 mistral 权限不够。分组中还需开放支持语音合成的模型。</p>
       <p>
         拿不准就把应用会用到的都勾上。协议之间的能力差异见{" "}
         <Link href="/docs/internals/protocols">协议与转换边界</Link>。
