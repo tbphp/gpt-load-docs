@@ -544,5 +544,6 @@
   "带 Anthropic advisor 工具的请求仅走原生路由；子模型的开放、访问限制与价格配置见 {{0}} 。": "Requests with Anthropic advisor tools require a native route. For advisor model availability, access restrictions, and pricing, see {{0}}.",
   "另一个选择是 {{0}} ，减少对原账号存储的依赖； 历史中的加密内容和条目 ID 仍可能与原账号绑定，不能保证任意凭据都能接续，输入 token 也可能更多。": "Another option is to {{0}}, reducing dependence on storage in the original account. Encrypted history and item IDs may still be bound to that account, so continuation with any credential is not guaranteed, and input token usage may increase.",
   "{{0}} ——输出前可尝试一次同凭据清理重放，仍受重试预算、错误规则与冷却约束；连接与历史边界见 {{1}} 。": "{{0}} — One cleanup replay on the same credential may be attempted before output, subject to the retry budget, error rules, and cooldowns. For connection and history limits, see {{1}}.",
-  "{{0}} ——跟随其他模型的价格，来源更新时自动生效": "{{0}} — Follow another model’s prices; source updates apply automatically."
+  "{{0}} ——跟随其他模型的价格，来源更新时自动生效": "{{0}} — Follow another model’s prices; source updates apply automatically.",
+  "在线演示： {{0}} ，登录密钥为 {{1}} 。": "Online demo: {{0}}. Login key: {{1}}."
 }

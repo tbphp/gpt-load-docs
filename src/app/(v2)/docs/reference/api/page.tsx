@@ -25,6 +25,7 @@ const RESOURCES = [
   ["/api/logs", "请求日志列表与详情"],
   ["/api/usage", "用量与成本统计"],
   ["/api/settings", "全局运行时设置"],
+  ["/api/settings/request-redaction", "脱敏规则校验与纯文本预览"],
   ["/api/system", "部署信息与版本更新检查"],
   ["/api/route/inspect", "只读路由检查"],
   ["/api/channels", "渠道描述符、字段与能力"],
@@ -154,6 +155,9 @@ export default function Api() {
           </tbody>
         </table>
       </div>
+
+      <p>POST /api/settings/request-redaction/preview 使用管理员 AUTH_KEY 认证，接收 rules 数组与 text 字符串，返回 match_count 和 segments。它只检查提交的草稿，不保存设置或样例，也不调用上游。</p>
+      <p>预览请求体最多 1 MiB，样例按 UTF-8 最多 64 KiB，合并命中片段最多 200 个。请求体超限返回 413 REQUEST_TOO_LARGE；无效规则、文本或命中数超限返回 400 VALIDATION_FAILED。加密片段只返回规则与原文信息，不生成真实密文。</p>
 
       <Notice label="自动化脚本要固定版本" tone="blue">
         本表记录稳定资源边界，不复制仍在演进的全部端点字段。

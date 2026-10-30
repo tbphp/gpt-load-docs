@@ -14,6 +14,7 @@ const TOC = [
   { id: "binary", label: "原生二进制" },
   { id: "windows", label: "Windows 安装包" },
   { id: "source", label: "源码构建" },
+  { id: "demo", label: "共享演示" },
   { id: "data", label: "数据放在哪" },
   { id: "ops", label: "日常运维" },
   { id: "upgrade", label: "升级与回滚" },
@@ -159,6 +160,14 @@ export default function Install() {
         具体的 Go 与 Node 版本要求以仓库根目录的 <code>go.mod</code> 和{" "}
         <code>web/package.json</code> 为准。
       </p>
+
+      <Heading id="demo">共享演示</Heading>
+      <p>在线演示：<a href="https://demo.gpt-load.com" target="_blank" rel="noopener noreferrer">demo.gpt-load.com</a>，登录密钥为 <code>gpt-load-demo</code>。</p>
+      <p>所有访客共享并可修改演示配置；预置分组、访问密钥和近七天的合成日志每 30 分钟重建一次，重置时服务会短暂中断。请勿输入真实密钥或个人信息。</p>
+      <p>演示环境只开放部分管理操作；真实上游调用、OAuth、模型发现、网络探测及脱敏预览等受限操作返回 403 DEMO_RESTRICTED。实际请求与脱敏效果请在自己的实例验证。</p>
+      <p>在本机体验时，构建或下载二进制后显式运行 demo 子命令：</p>
+      <CodeBlock caption="启动临时演示">./gpt-load demo</CodeBlock>
+      <p>演示模式使用独立临时 SQLite，不读取常规 .env，也不使用 DATA_DIR、AUTH_KEY 或 ENCRYPTION_KEY；DATABASE_DSN 环境变量必须为空，否则拒绝启动。默认监听 127.0.0.1:3001，可用 HOST 和 PORT 环境变量调整；登录密钥同样固定为 gpt-load-demo。</p>
 
       <Heading id="data">数据放在哪</Heading>
       <p>
