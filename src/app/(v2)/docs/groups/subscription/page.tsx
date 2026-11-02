@@ -17,6 +17,7 @@ const TOC = [
   { id: "remote", label: "远程部署怎么授权" },
   { id: "state", label: "四种授权状态" },
   { id: "quota", label: "额度信息怎么读" },
+  { id: "subscription-info", label: "Codex 订阅信息" },
   { id: "rule", label: "使用前提" },
 ];
 
@@ -249,6 +250,11 @@ export default async function Subscription() {
       <Notice label="Codex 与 Claude 的重置额度" tone="blue">
         Codex 和 Claude 账号可能提供重置额度，卡片展示可用次数及到期时间。需在管理台手动确认消费，不会自动使用；完成后刷新额度确认结果。若结果未知，等待并核对原操作，不要重复发起新的重置。
       </Notice>
+
+      <Heading id="subscription-info">Codex 订阅信息</Heading>
+      <p>在 Codex 分组点击「同步额度」（Classic 为「同步」），会并发获取额度、重置额度与订阅信息。Modern 账号卡片与 Classic 账号详情可显示订阅周期截止日期和续费状态；订阅截止与 OAuth 凭据到期是两项不同信息。</p>
+      <p>上游未返回续费标记时显示「续费未知」。订阅查询失败时，有旧值则保留并提示，无旧值则显示暂不可用；上游返回 404 时清除旧订阅信息。</p>
+      <p>最近观测时间不是独立的订阅确认时间；额度同步成功也不代表订阅信息已在本次查询中确认，应同时查看订阅信息的失败或旧值提示。</p>
 
       <Heading id="rule">使用前提</Heading>
       <ul>

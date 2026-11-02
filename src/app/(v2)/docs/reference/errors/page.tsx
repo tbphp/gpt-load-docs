@@ -375,6 +375,7 @@ export default function ErrorsReference() {
       <p>
         下表只列请求日志额外使用的归一化码。与数据面固定错误同名的码以上一节为准，不重复列出。
       </p>
+      <p>Codex 流式响应的 response.incomplete 会保留为 incomplete 日志状态，包括转换为 Chat Completions、Anthropic 和 Gemini 的响应。HTTP 200 不代表生成完整结束；已收到的内容与用量照常保留，即使没有内容，也不会仅因空响应而重试。</p>
       <div className="tbl-wrap">
         <table className="tbl">
           <thead>
@@ -465,6 +466,7 @@ export default function ErrorsReference() {
 
       <Heading id="recovery">重试与恢复</Heading>
       <p>以下为未命中自定义规则时的内置处理。</p>
+      <p>Codex 被明确识别为临时容量不足时（如 turn_rate_limit_exceeded），按候选不可用处理，不计入额度冷却；真实 usage_limit_reached 与普通 rate_limit_exceeded 仍按各自的额度或限流规则处理。是否切换候选仍取决于重放安全性，WebSocket 不会因容量不足而自动重放结果未知的请求。</p>
       <ul>
         <li><strong>请求错误</strong>——修正请求，不换凭据重试，也不改变凭据健康。</li>
         <li><strong>限流</strong>——遵守 Retry-After；凭据级限流通常会触发冷却并尝试其他候选。</li>
