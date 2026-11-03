@@ -38,7 +38,7 @@ export async function generateMetadata(): Promise<Metadata> {
 /* 四个数字讲的是一组对比：接得多、装得轻、接入配置少。
    给两端上色把这层对比点出来，中间两个留墨色，避免一排全彩失去重点。 */
 const FACTS = [
-  { value: "35", tone: "blue" },
+  { value: "37", tone: "blue" },
   { value: "4" },
   { value: "1" },
   { value: "2", tone: "green" },
@@ -51,7 +51,7 @@ const CHANNELS = [
   { c: 4, cat: "var(--cat-1)", providers: [0, 1, 2, 3] },
   { c: 3, cat: "var(--cat-2)", providers: [4, 5, 6] },
   { c: 19, cat: "var(--cat-3)", providers: [7, 8, 9, 10, 11, 12, 13, 14, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29] },
-  { c: 4, cat: "var(--cat-4)", providers: [15, 16, 17, 18] },
+  { c: 6, cat: "var(--cat-4)", providers: [15, 16, 17, 18, 30, 31] },
 ];
 
 /* 只有分组和访问密钥两层：分组朝上游，访问密钥朝应用。

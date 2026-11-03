@@ -13,6 +13,8 @@ export function generateMetadata(): Promise<Metadata> {
 const TOC = [
   { id: "what", label: "和 API 密钥的区别" },
   { id: "add", label: "接入一个账号" },
+  { id: "muse", label: "Muse Code" },
+  { id: "devin", label: "Devin" },
   { id: "ports", label: "回调端口" },
   { id: "remote", label: "远程部署怎么授权" },
   { id: "state", label: "四种授权状态" },
@@ -28,7 +30,7 @@ export default async function Subscription() {
     <DocsPage
       path="/docs/groups/subscription"
       title="订阅账号"
-      lede="Codex、Claude、Antigravity、Grok 这类按订阅计费的账号，可完成 OAuth 授权，也可导入已有 OAuth JSON。接进来之后，它们和 API 密钥共用同一套调度。"
+      lede="Codex、Claude、Antigravity、Grok、Muse Code、Devin 这类订阅账号，可完成渠道对应的授权，也可导入已有凭据 JSON。接进来之后，它们和 API 密钥共用同一套调度。"
       toc={TOC}
     >
       <Heading id="what">和 API 密钥的区别</Heading>
@@ -40,19 +42,19 @@ export default async function Subscription() {
       <p>差别只在三处：</p>
       <ul>
         <li>
-          <strong>接入方式</strong>——完成一次 OAuth 授权，或导入已有 OAuth JSON
+          <strong>接入方式</strong>——完成渠道对应的授权，或导入已有凭据 JSON
         </li>
         <li>
-          <strong>凭据会过期</strong>——网关自动刷新；遇到授权异常时，可手动刷新凭据或重新连接账号
+          <strong>凭据需维护</strong>——网关按渠道刷新凭据或核实账号状态；遇到授权异常时，可手动刷新或重新连接
         </li>
         <li>
-          <strong>有额度窗口</strong>——订阅按周期计量，管理台会展示剩余额度与重置时间
+          <strong>额度能力因渠道而异</strong>——上游提供额度查询时，管理台展示剩余额度与重置时间；未提供不代表额度为零
         </li>
       </ul>
 
       <Heading id="add">接入一个账号</Heading>
       <p>
-        订阅账号也是建在分组里的。进入「分组 → 新建分组」，选择 Codex、Claude、Antigravity 或 Grok，然后连接账号或导入凭据。
+        订阅账号也是建在分组里的。进入「分组 → 新建分组」，选择 Codex、Claude、Antigravity、Grok、Muse Code 或 Devin，然后连接账号或导入凭据。
       </p>
 
       <Figure
@@ -71,24 +73,34 @@ export default async function Subscription() {
       </p>
       <ul>
         <li>
-          <strong>本地回调</strong>（Codex、Claude、Antigravity）——浏览器完成授权后，
+          <strong>本地回调</strong>（Codex、Claude、Antigravity、Devin）——浏览器完成授权后，
           上游会跳回本机的一个固定端口，网关在那里接住授权码
         </li>
         <li>
-          <strong>设备码</strong>（Grok）——页面给出一个验证码，你在上游网站输入它完成授权，
+          <strong>设备码</strong>（Grok、Muse Code）——页面给出一个验证码，你在上游网站输入它完成授权，
           <strong>不需要任何回调端口</strong>
         </li>
         <li>
-          <strong>OAuth JSON 导入</strong>（全部四个订阅渠道）——上传或粘贴已有的 OAuth JSON，
+          <strong>凭据 JSON 导入</strong>（全部六个订阅渠道）——上传或粘贴对应渠道的凭据 JSON，
           不需要在这台机器上完成本地回调
         </li>
       </ul>
 
-      <p>导入支持 CPA 兼容、官方 Codex、官方 Claude Code 及 sub2api OAuth JSON，可上传多文件或账号数组；不支持 PAT 或缺少必要刷新凭据的文件。</p>
+      <p>导入支持 CPA 兼容凭据（包括 Meta/Muse 与 Devin）、官方 Codex、官方 Claude Code 及 sub2api OAuth JSON，可上传多文件或账号数组；不支持 PAT，各渠道所需的授权字段必须完整。</p>
       <p>订阅分组可设置自定义 HTTPS 上游根地址或路径前缀，代理需承接对应渠道的调用、模型发现与额度查询，不会隐式回退官方业务地址。OAuth 授权与 Token 刷新仍使用官方端点。</p>
+
+      <Heading id="muse">Muse Code</Heading>
+      <p>Muse Code 使用设备码授权，不需要回调端口；导入 CPA Meta/Muse 凭据时必须带有 DCA 令牌。授权或导入时会向官方端点兑换请求密钥并确认订阅有效，仅有 API Key 的文件不能代替该流程。</p>
+      <p>模型发现读取账号实际返回的模型列表。当前不提供主动额度查询；额度未显示不代表已经耗尽。Contributor Mode 固定关闭。</p>
+
+      <Heading id="devin">Devin</Heading>
+      <p>Devin 使用浏览器授权，固定回调地址为 http://localhost:17326/callback；也可导入带 session_token 或 api_key 字段的 CPA Devin 凭据。授权和导入都会核实上游账号身份。</p>
+      <p>Devin 使用长期会话令牌。「刷新凭据」只核实身份与账号状态，不轮换令牌，也不推算令牌到期时间。额度同步可展示每日、每周剩余比例及重置时间；上游缺少的字段保持未知，不按零处理。</p>
+      <p>Devin 的模型发现先核实账号，再返回随版本发布的模型目录；列出某个模型不代表当前账号一定可用。四种对话协议均通过转换接入，具体边界见支持矩阵。</p>
+
       <Heading id="ports">回调端口</Heading>
       <p>
-        走本地回调的三个渠道，端口是<strong>上游客户端写死的</strong>，不能自定义：
+        走本地回调的四个渠道，端口是<strong>上游客户端写死的</strong>，不能自定义：
       </p>
 
       <div className="tbl-wrap">
@@ -117,7 +129,12 @@ export default async function Subscription() {
               <td>由上游客户端固定</td>
             </tr>
             <tr>
-              <td>Grok</td>
+              <td>Devin</td>
+              <td className="m">17326</td>
+              <td>回调地址 http://localhost:17326/callback</td>
+            </tr>
+            <tr>
+              <td>Grok · Muse Code</td>
               <td className="m">不需要</td>
               <td>设备码授权，不占用本机端口</td>
             </tr>
@@ -126,21 +143,22 @@ export default async function Subscription() {
       </div>
 
       <p>
-        Docker Compose 默认会把这三个端口发布出来，和主服务一样<strong>只绑定到 127.0.0.1</strong>：
+        Docker Compose 默认发布 Codex、Claude、Antigravity 的三个回调端口，和主服务一样<strong>只绑定到 127.0.0.1</strong>：
       </p>
       <CodeBlock caption="docker-compose.yml 中的端口发布">
         ports:{"\n"}
-        {"  "}- <span className="s">&quot;${"${BIND_ADDRESS:-${HOST:-127.0.0.1}}"}:${"${PORT:-3001}"}:${"${PORT:-3001}"}&quot;</span>{"\n"}
-        {"  "}- <span className="s">&quot;${"${OAUTH_CALLBACK_BIND_ADDRESS:-...}"}:1455:1455&quot;</span>{"   "}
+        {"  "}- <span className="s">&quot;{"${BIND_ADDRESS:-${HOST:-127.0.0.1}}:${PORT:-3001}:${PORT:-3001}"}&quot;</span>{"\n"}
+        {"  "}- <span className="s">&quot;{"${OAUTH_CALLBACK_BIND_ADDRESS:-${HOST:-127.0.0.1}}:1455:1455"}&quot;</span>{"   "}
         <span className="c"># Codex</span>{"\n"}
-        {"  "}- <span className="s">&quot;${"${OAUTH_CALLBACK_BIND_ADDRESS:-...}"}:54545:54545&quot;</span>{" "}
+        {"  "}- <span className="s">&quot;{"${OAUTH_CALLBACK_BIND_ADDRESS:-${HOST:-127.0.0.1}}:54545:54545"}&quot;</span>{" "}
         <span className="c"># Claude</span>{"\n"}
-        {"  "}- <span className="s">&quot;${"${OAUTH_CALLBACK_BIND_ADDRESS:-...}"}:51121:51121&quot;</span>{" "}
+        {"  "}- <span className="s">&quot;{"${OAUTH_CALLBACK_BIND_ADDRESS:-${HOST:-127.0.0.1}}:51121:51121"}&quot;</span>{" "}
         <span className="c"># Antigravity</span>
       </CodeBlock>
+      <p>默认 Compose 未发布 Devin 的 17326 端口。可直接手动粘贴完整回调地址或导入凭据；需要自动接收本地回调时，在 ports 中增加 &quot;127.0.0.1:17326:17326&quot;，远程部署再配合 SSH 转发。</p>
 
       <Notice label="回调端口只限制本地授权" tone="amber">
-        因为端口由上游固定、无法更改，一台主机上同一时刻只能有一个默认 Compose 实例使用本地回调授权。其他实例可导入已有 OAuth JSON；Grok 也可使用设备码。
+        同一个固定回调端口同一时刻只能由一个实例占用。其他实例可导入已有凭据 JSON；Grok 与 Muse Code 也可使用设备码。
       </Notice>
 
       <Heading id="remote">远程部署怎么授权</Heading>
@@ -165,14 +183,14 @@ export default async function Subscription() {
       <CodeBlock caption="SSH 端口转发（以 Codex 为例）">
         ssh -L 1455:127.0.0.1:1455 user@your-server{"\n"}
         {"\n"}
-        <span className="c"># Claude 用 54545，Antigravity 用 51121</span>{"\n"}
+        <span className="c"># Claude 用 54545，Antigravity 用 51121，Devin 用 17326</span>{"\n"}
         <span className="c"># 转发保持连接期间完成授权即可</span>
       </CodeBlock>
 
-      <p>已有 OAuth JSON 时，直接上传或粘贴导入即可，不需要回调端口。</p>
+      <p>已有对应渠道的凭据 JSON 时，直接上传或粘贴导入即可，不需要回调端口。</p>
 
       <Notice label="不要为了授权开放公网" tone="amber">
-        回调端口不应该暴露到公网。可以手动粘贴回调、使用 SSH 转发，或导入已有 OAuth JSON；无需把 OAUTH_CALLBACK_BIND_ADDRESS 改为 0.0.0.0。
+        回调端口不应该暴露到公网。可以手动粘贴回调、使用 SSH 转发，或导入已有凭据 JSON；无需把 OAUTH_CALLBACK_BIND_ADDRESS 改为 0.0.0.0。
       </Notice>
 
       <Heading id="state">四种授权状态</Heading>

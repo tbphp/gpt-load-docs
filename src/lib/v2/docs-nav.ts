@@ -35,8 +35,8 @@ export const DOC_GROUPS: DocGroup[] = [
   {
     title: "配置",
     items: [
-      { href: "/docs/groups", label: "分组与渠道", desc: "35 个内置渠道、分组配置与凭据池", status: "ready" },
-      { href: "/docs/groups/subscription", label: "订阅账号", desc: "Codex、Claude、Antigravity、Grok 的 OAuth 授权", status: "ready" },
+      { href: "/docs/groups", label: "分组与渠道", desc: "37 个内置渠道、分组配置与凭据池", status: "ready" },
+      { href: "/docs/groups/subscription", label: "订阅账号", desc: "订阅授权、凭据导入与额度信息", status: "ready" },
       { href: "/docs/models", label: "模型管理", desc: "模型发现、别名与价格", status: "ready" },
       { href: "/docs/access-keys", label: "访问密钥", desc: "授权范围、限流与成本上限", status: "ready" },
       { href: "/docs/clients", label: "客户端接入", desc: "Claude Code、Codex、Cherry Studio 等", status: "ready" },

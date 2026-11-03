@@ -12,7 +12,7 @@ export function generateMetadata(): Promise<Metadata> {
 
 const TOC = [
   { id: "what", label: "分组是什么" },
-  { id: "channels", label: "35 个内置渠道" },
+  { id: "channels", label: "37 个内置渠道" },
   { id: "create", label: "建一个分组" },
   { id: "params", label: "渠道参数" },
   { id: "creds", label: "管理凭据池" },
@@ -31,7 +31,7 @@ const CHANNELS = [
     items: "DeepSeek · Moonshot AI · SiliconFlow · 智谱 AI · 阿里云 · 火山引擎 · OpenRouter · Cline · Groq · Jev · Cerebras · Mistral · Nebius · Parasail · Wafer · Hugging Face · Cohere · OpenCode Go · OpenCode Zen",
     cred: "API 密钥",
   },
-  { g: "订阅账号", c: "var(--cat-4)", items: "Codex · Claude · Antigravity · Grok", cred: "OAuth 授权" },
+  { g: "订阅账号", c: "var(--cat-4)", items: "Codex · Claude · Antigravity · Grok · Muse Code · Devin", cred: "OAuth 授权" },
   { g: "网关与兼容", c: "var(--blue)", items: "GPT-Load · New API · CLIProxyAPI · Sub2API · OpenAI Compatible", cred: "API 密钥 + 网关根地址" },
 ];
 
@@ -56,7 +56,7 @@ export default async function Groups() {
         简单说：<strong>分组朝上游，访问密钥朝应用</strong>。
       </p>
 
-      <Heading id="channels">35 个内置渠道</Heading>
+      <Heading id="channels">37 个内置渠道</Heading>
       <p>
         建分组时从这些里选一个。常用渠道直接显示为按钮，其余渠道收在「其他渠道」中。
         不同类别的凭据形态不一样：
@@ -274,7 +274,7 @@ export default async function Groups() {
       </p>
 
       <Notice label="订阅账号" tone="blue">
-        Codex、Claude、Antigravity、Grok 这类账号走的是 OAuth 授权而不是填密钥，
+        Codex、Claude、Antigravity、Grok、Muse Code、Devin 这类账号走的是 OAuth 授权而不是填密钥，
         配置方式有额外的注意事项（尤其是回调端口和远程部署），见{" "}
         <Link href="/docs/groups/subscription">订阅账号</Link>。
       </Notice>

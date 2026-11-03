@@ -51,7 +51,7 @@ export default async function Concepts() {
       <p>一个分组把五件事绑在一起：</p>
       <ol>
         <li>
-          <strong>渠道</strong>——从内置的 35 个上游里选一个，决定请求最终发到哪
+          <strong>渠道</strong>——从内置的 37 个上游里选一个，决定请求最终发到哪
         </li>
         <li>
           <strong>接入方式</strong>——用 API 密钥，还是用订阅账号授权
@@ -97,7 +97,7 @@ export default async function Concepts() {
           <strong>API 密钥</strong>——粘贴一串或多串密钥，最常见的方式
         </li>
         <li>
-          <strong>订阅账号</strong>——走 OAuth 授权，用于 Codex、Claude、Antigravity、Grok
+          <strong>订阅账号</strong>——走 OAuth 授权，用于 Codex、Claude、Antigravity、Grok、Muse Code、Devin
           这类按订阅计费的账号
         </li>
       </ul>

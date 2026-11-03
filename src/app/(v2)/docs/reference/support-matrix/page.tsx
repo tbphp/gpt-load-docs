@@ -40,6 +40,8 @@ const CORE_ROUTES: CoreRoute[] = [
   { channel: "Claude", credential: "OAuth / OAuth JSON", chat: "C", responses: "C", anthropic: "N", gemini: "C" },
   { channel: "Antigravity", credential: "OAuth / OAuth JSON", chat: "C", responses: "C", anthropic: "C", gemini: "N" },
   { channel: "Grok", credential: "设备码 / OAuth JSON", chat: "C", responses: "N", anthropic: "C", gemini: "C" },
+  { channel: "Muse Code", credential: "设备码 / CPA 凭据 JSON", chat: "C", responses: "N", anthropic: "C", gemini: "C" },
+  { channel: "Devin", credential: "浏览器授权 / CPA 凭据 JSON", chat: "C", responses: "C", anthropic: "C", gemini: "C" },
   { channel: "Anthropic", credential: "API 密钥", chat: "C", responses: "C", anthropic: "N", gemini: "C" },
   { channel: "Google Gemini", credential: "API 密钥", chat: "C", responses: "C", anthropic: "C", gemini: "N" },
   { channel: "Azure OpenAI", credential: "API 密钥 / Entra", chat: "C", responses: "C", anthropic: "C", gemini: "C" },
@@ -90,6 +92,8 @@ const OPERATIONS: OperationRoute[] = [
   { channel: "Claude", images: "—", embeddings: "—", anthropicCount: "N", geminiCount: "C", responsesCount: "C", responsesResources: "—", discovery: true, proxy: true },
   { channel: "Antigravity", images: "C", embeddings: "—", anthropicCount: "C", geminiCount: "N", responsesCount: "C", responsesResources: "—", discovery: true, proxy: true },
   { channel: "Grok", images: "—", embeddings: "—", anthropicCount: "C", geminiCount: "C", responsesCount: "N", responsesResources: "—", discovery: true, proxy: true },
+  { channel: "Muse Code", images: "—", embeddings: "—", anthropicCount: "C", geminiCount: "C", responsesCount: "N", responsesResources: "—", discovery: true, proxy: true },
+  { channel: "Devin", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: true },
   { channel: "Anthropic", images: "—", embeddings: "—", anthropicCount: "N", geminiCount: "C", responsesCount: "C", responsesResources: "—", discovery: true, proxy: true },
   { channel: "Google Gemini", images: "C", embeddings: "C", anthropicCount: "C", geminiCount: "N", responsesCount: "C", responsesResources: "—", discovery: true, proxy: true },
   { channel: "Azure OpenAI", images: "—", embeddings: "—", anthropicCount: "—", geminiCount: "—", responsesCount: "—", responsesResources: "—", discovery: true, proxy: false },
@@ -164,6 +168,7 @@ export default function SupportMatrix() {
         </table>
       </div>
       <p>路由模式按协议和 Operation 分别声明；同一个渠道可以同时包含 Native 与 Converted。</p>
+      <p>Devin 的四种对话入口均转换为其私有上游调用，不新增公开协议，也不提供原生 Responses WebSocket、独立 Token 计数或 Responses 资源操作。</p>
 
       <Heading id="operations">附加 Operation</Heading>
       <div className="tbl-wrap">
@@ -207,6 +212,7 @@ export default function SupportMatrix() {
       <p>OpenRouter 与 Mistral 原生支持语音合成，入口为 POST /v1/audio/speech，访问密钥需允许独立的 audio-speech 协议；仅支持非流式，不支持协议互转。其他渠道当前未声明该路由。</p>
       <p>Mistral 渠道原生支持 OCR、FIM 补全、音频转写、文本与聊天审核、分类、音色管理和 WebSocket 实时转写，访问密钥需允许独立的 mistral 协议。Chat Completions 与 Embeddings 仍使用 OpenAI 兼容协议。</p>
       <p>模型发现指管理端使用凭据发现上游模型；数据面的模型列表返回当前 AccessKey 可见的已配置模型，不会实时查询上游。</p>
+      <p>Muse Code 的 Token 计数仅对 muse- 模型提供本地估算，返回 X-GPT-Load-Token-Count: local-estimate，不代表上游精确计数。Devin 的模型发现先核实账号，再读取随版本发布的目录，具体可用性仍取决于上游账号。</p>
       <p>托管代理指 GPT-Load 在凭据、分组或全局层注入的代理；Provider SDK 自行读取环境变量不属于这个合同。</p>
 
       <Heading id="validation">验证等级</Heading>
@@ -223,7 +229,7 @@ export default function SupportMatrix() {
             <tr>
               <td>Automated contract</td>
               <td>渠道声明、RouteMode、适配器能力与自动化测试一致</td>
-              <td>覆盖本页列出的 35 个渠道路由合同</td>
+              <td>覆盖本页列出的 37 个渠道路由合同</td>
             </tr>
             <tr>
               <td>Artifact smoke</td>
@@ -233,7 +239,7 @@ export default function SupportMatrix() {
             <tr>
               <td>Live upstream verified</td>
               <td>指定版本、渠道、Operation 和模型使用真实凭据完成验证</td>
-              <td>当前没有集中发布、可逐项追溯的 35 渠道 Live E2E 记录</td>
+              <td>当前没有集中发布、可逐项追溯的 37 渠道 Live E2E 记录</td>
             </tr>
           </tbody>
         </table>
@@ -248,6 +254,8 @@ export default function SupportMatrix() {
         <li>Google Vertex AI 的 Gemini 路由按模型决定 Native 或 Converted。</li>
         <li>OpenCode Go 与 OpenCode Zen 仅支持上游模型可用的原生协议；Responses 为无状态创建，不支持 Gemini 或 Responses 资源接口。</li>
         <li>Mistral 原生接口不包含 files、batch、agents、conversations 或浏览器临时令牌会话。</li>
+        <li>Devin 仅接受文本、内联图片与客户端工具；拒绝远程图片、音频、视频、文档、服务端工具及对话中途的 system 指令。</li>
+        <li>Devin 不支持上游响应续接标识、非空 stop、强制或禁用工具、强制串行工具调用或受约束的输出格式。Chat Completions 只接受 function 工具；Responses 可使用 custom 与 namespace 工具。</li>
         <li>协议路由不代表模型一定支持 tools、reasoning、视觉或其他模型级特性。</li>
         <li>Azure OpenAI、AWS Bedrock 与 Google Vertex AI 不支持 GPT-Load 托管代理。</li>
       </ul>
