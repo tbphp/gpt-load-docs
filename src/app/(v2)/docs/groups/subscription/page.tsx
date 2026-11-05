@@ -94,7 +94,8 @@ export default async function Subscription() {
       <p>模型发现读取账号实际返回的模型列表。当前不提供主动额度查询；额度未显示不代表已经耗尽。Contributor Mode 固定关闭。</p>
 
       <Heading id="devin">Devin</Heading>
-      <p>Devin 使用浏览器授权，固定回调地址为 http://localhost:17326/callback；也可导入带 session_token 或 api_key 字段的 CPA Devin 凭据。授权和导入都会核实上游账号身份。</p>
+      <p>Devin 使用浏览器授权，固定回调地址为 http://127.0.0.1:17326/callback；也可导入带 session_token 或 api_key 字段的 CPA Devin 凭据。授权和导入都会核实上游账号身份。</p>
+      <p>手动粘贴 Devin 回调 URL 时，必须保留 127.0.0.1、17326 和 /callback，主机不能改成 localhost；主机、端口或路径不匹配都会被拒绝。</p>
       <p>Devin 使用长期会话令牌。「刷新凭据」只核实身份与账号状态，不轮换令牌，也不推算令牌到期时间。额度同步可展示每日、每周剩余比例及重置时间；上游缺少的字段保持未知，不按零处理。</p>
       <p>Devin 的模型发现先核实账号，再返回随版本发布的模型目录；列出某个模型不代表当前账号一定可用。四种对话协议均通过转换接入，具体边界见支持矩阵。</p>
 
@@ -131,7 +132,7 @@ export default async function Subscription() {
             <tr>
               <td>Devin</td>
               <td className="m">17326</td>
-              <td>回调地址 http://localhost:17326/callback</td>
+              <td>回调地址 http://127.0.0.1:17326/callback</td>
             </tr>
             <tr>
               <td>Grok · Muse Code</td>
@@ -164,7 +165,7 @@ export default async function Subscription() {
       <Heading id="remote">远程部署怎么授权</Heading>
       <p>
         这是最容易卡住的一步。服务跑在远程服务器上时，
-        <strong>你浏览器里的 <code>localhost</code> 指向的是你自己的电脑，不是服务器</strong>，
+        <strong>你浏览器里的 <code>localhost / 127.0.0.1</code> 指向的是你自己的电脑，不是服务器</strong>，
         授权完成后跳转会失败。
       </p>
       <p>解决办法有三种，任选其一：</p>

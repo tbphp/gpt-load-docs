@@ -103,6 +103,7 @@ export default function Api() {
         <code>message</code>。完整错误码与恢复方式见{" "}
         <Link href="/docs/reference/errors#management">错误与恢复参考</Link>。
       </p>
+      <p>凭据测试完成时，即使上游拒绝请求，管理 API 仍可返回 code=0；应读取 data.outcome 和 data.reason 判断测试结果。可选的 data.error_detail 是脱敏后的诊断文本，可能被截断或省略，仅供排障，不应作为程序判断依据。</p>
 
       <Heading id="write-contract">写入前提</Heading>
       <div className="tbl-wrap">
