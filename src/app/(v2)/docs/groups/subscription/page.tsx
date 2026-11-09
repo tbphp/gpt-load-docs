@@ -87,6 +87,7 @@ export default async function Subscription() {
       </ul>
 
       <p>导入支持 CPA 兼容凭据（包括 Meta/Muse 与 Devin）、官方 Codex、官方 Claude Code 及 sub2api OAuth JSON，可上传多文件或账号数组；不支持 PAT，各渠道所需的授权字段必须完整。</p>
+      <p>Claude 浏览器授权使用与原生 Claude Code 一致的权限集合，其中包含 org:create_api_key（Console API Key 创建权限）。</p>
       <p>订阅分组可设置自定义 HTTPS 上游根地址或路径前缀，代理需承接对应渠道的调用、模型发现与额度查询，不会隐式回退官方业务地址。OAuth 授权与 Token 刷新仍使用官方端点。</p>
 
       <Heading id="muse">Muse Code</Heading>

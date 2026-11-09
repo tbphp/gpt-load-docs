@@ -51,7 +51,7 @@ const CORE_ROUTES: CoreRoute[] = [
   { channel: "Moonshot AI", credential: "API 密钥", chat: "N", responses: "C", anthropic: "C", gemini: "C" },
   { channel: "SiliconFlow", credential: "API 密钥", chat: "N", responses: "C", anthropic: "C", gemini: "C" },
   { channel: "Zhipu AI", credential: "API 密钥", chat: "N", responses: "C", anthropic: "C", gemini: "C" },
-  { channel: "Alibaba Cloud Bailian", credential: "API 密钥", chat: "N", responses: "C", anthropic: "C", gemini: "C" },
+  { channel: "Alibaba Cloud Bailian", credential: "API 密钥", chat: "N", responses: "N", anthropic: "N", gemini: "C" },
   { channel: "Volcengine Ark", credential: "API 密钥", chat: "N", responses: "C", anthropic: "C", gemini: "C" },
   { channel: "OpenRouter", credential: "API 密钥", chat: "N", responses: "N", anthropic: "C", gemini: "C" },
   { channel: "Cline", credential: "API 密钥", chat: "N", responses: "C", anthropic: "C", gemini: "C" },
@@ -168,6 +168,9 @@ export default function SupportMatrix() {
         </table>
       </div>
       <p>路由模式按协议和 Operation 分别声明；同一个渠道可以同时包含 Native 与 Converted。</p>
+      <p>百炼的 Chat Completions、Responses Create 和 Anthropic Messages 原生执行，Gemini Generate 仍转换为 Chat Completions。Responses 仅支持无状态创建，不支持资源操作或原生 WebSocket。</p>
+      <p>百炼 Base URL 继续填写 OpenAI 兼容根地址，默认 https://dashscope.aliyuncs.com/compatible-mode/v1。Responses 在此地址后追加 /responses；Anthropic 则将末尾的 /compatible-mode/v1（或 /v1）替换为 /apps/anthropic，无上述后缀时直接追加 /apps/anthropic，再追加 /v1/messages，保留原主机与前置路径。</p>
+      <p>百炼 Anthropic 请求直接调用上游；模型不支持 Messages 时返回上游错误，不再回退到 Chat Completions 转换。模型发现仍读取 OpenAI 兼容 /models，列出模型不代表它支持 Messages；tools、cache_control、thinking 等能力以该模型和账号实际支持范围为准。</p>
       <p>Devin 的四种对话入口均转换为其私有上游调用，不新增公开协议，也不提供原生 Responses WebSocket、独立 Token 计数或 Responses 资源操作。</p>
 
       <Heading id="operations">附加 Operation</Heading>
