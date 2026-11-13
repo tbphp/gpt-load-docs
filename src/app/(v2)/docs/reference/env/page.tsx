@@ -30,6 +30,7 @@ const NET = [
   ["IDLE_TIMEOUT", "120", "连接空闲超时，单位秒"],
   ["GRACEFUL_SHUTDOWN_TIMEOUT", "10", "优雅关闭的等待时长，单位秒"],
   ["GOMEMLIMIT", "自动", "Go 软内存上限；启动环境已设置的值（含 off）优先，写入应用 .env 无效"],
+  ["UPSTREAM_USER_AGENT_FALLBACK", "（空）", "普通渠道 User-Agent 兜底；留空使用 GPT-Load/<version>，修改后需重启进程或重建容器"],
 ];
 
 const DATA = [
@@ -120,6 +121,7 @@ export default function Env() {
         </table>
       </div>
 
+      <p>UPSTREAM_USER_AGENT_FALLBACK 用于普通渠道的 API、流式调用、凭据探测、模型发现及 Responses WebSocket 握手，不改变订阅渠道身份。首尾空白会被去除，非法 HTTP 头值会导致启动失败。</p>
       <Notice label="所有超时项的单位都是秒" tone="blue">
         不是毫秒。这是最容易配错的一处——
         写成 <code>60000</code> 会得到一个 16 小时的超时。

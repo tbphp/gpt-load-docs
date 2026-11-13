@@ -118,6 +118,8 @@ export default function ProxyHeaders() {
           有些客户端会附带自己的追踪头，上游可能不接受
         </li>
       </ul>
+      <p>普通渠道先应用全局和分组请求头规则，再保留最终非空的 User-Agent；仅在缺失、被删除或全是空白时使用 UPSTREAM_USER_AGENT_FALLBACK。该变量留空时默认 GPT-Load/&lt;version&gt;，不改变订阅渠道身份。</p>
+      <p>例如设置 UPSTREAM_USER_AGENT_FALLBACK=Go-http-client/1.1，修改后重启进程或重建容器。示例值是固定字符串，不会随 HTTP/1.1、HTTP/2 自动变化；若要覆盖客户端的非空 UA，仍需使用请求头规则。</p>
       <Notice label="别动认证头" tone="amber">
         认证相关的头由网关自己管理——它需要按选中的凭据动态填充。
         用规则去改它会导致请求失败。

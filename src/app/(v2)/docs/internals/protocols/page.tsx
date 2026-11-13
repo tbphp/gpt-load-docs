@@ -103,8 +103,10 @@ export default function Protocols() {
         <li>语音合成：POST /v1/audio/speech，独立使用 audio-speech 协议，仅支持原生、非流式请求，不做协议互转。</li>
         <li>Codex 实时语音：独立使用 codex-live 协议，不是 Responses WebSocket 的另一种文本模式。</li>
       </ul>
-      <p id="audio-speech">语音合成目前仅支持 OpenRouter 与 Mistral。请求必须是含 model 的 JSON，voice、voice_id、response_format 等参数遵循所选渠道。OpenRouter 可返回音频字节，Mistral 可返回含 audio_data 的 JSON；客户端应按实际 Content-Type 处理响应。</p>
-      <p>Gemini、New API 与 GPT-Load 支持原生 gemini-embeddings；Gemini 渠道还可将 OpenAI Embeddings 的文本请求转成 Gemini 原生批量嵌入，支持 dimensions 及 float／base64 输出，不支持 token ID 输入。</p>
+      <p id="audio-speech">语音合成支持 OpenAI、OpenRouter 与 Mistral。请求必须是含 model 的 JSON，voice、voice_id、response_format、instructions 等参数遵循所选渠道。OpenAI 与 OpenRouter 可返回音频字节，Mistral 可返回含 audio_data 的 JSON；客户端应按实际 Content-Type 处理响应。不支持 SSE 语音事件或语音凭据探测。</p>
+      <p>OpenAI 语音合成的 Base URL 留空时使用官方地址；自定义地址按 OpenAI 渠道约定填写，不含末尾 /v1，网关保留原有路径前缀并追加 /v1/audio/speech。</p>
+      <p>Gemini、Google Vertex AI、New API 与 GPT-Load 支持原生 gemini-embeddings；Gemini 与 Vertex AI 渠道还可将 OpenAI Embeddings 的文本请求转成 Gemini 原生批量嵌入，支持 dimensions 及 float／base64 输出，不支持 token ID 输入。</p>
+      <p>Vertex AI 沿用服务账号 JSON 与 location 配置，适用于 Gemini 嵌入接口模型，如 gemini-embedding-2。模型名可使用短名、google/ 或 publishers/google/models/ 前缀；不支持数字自定义端点及使用 :predict 的旧式向量模型。多模态输入需使用原生 Gemini 嵌入格式，具体能力仍取决于模型。</p>
       <p><Link href="/docs/clients/codex-voice">Codex 实时语音接入指南 →</Link></p>
       <p>GET /v1/models 携带非空 anthropic-version 请求头时返回 Anthropic 模型列表；否则返回 OpenAI Chat Completions 格式。直接调接口时按客户端协议带上对应请求头。</p>
       <p><Link href="/docs/reference/support-matrix">查看逐渠道协议与 Operation →</Link></p>
