@@ -57,6 +57,16 @@ pnpm audit --prod
 
 构建会生成安全响应头、兼容入口、三语 404 和 `site-build.json`，并检查免费计划的文件数与单文件大小限制。`site-build.json` 中的提交号用于核验实际发布版本。
 
+### 正式发布流程
+
+Cloudflare Pages 项目 `gpt-load-docs` 已通过 GitHub 连接本仓库。推送到远端 `main` 后，Pages 自动构建并发布到 <https://gpt-load.com>，日常发布无需在 Cloudflare 控制台手动部署。
+
+1. 完成与改动匹配的验证，复核差异后签名提交，正常推送 `main`。
+2. 核验该提交的 `Cloudflare Pages` 检查：应用为 `cloudflare-workers-and-pages`，`head_sha` 与远端提交一致，状态为 `completed`、结果为 `success`。
+3. 核验 <https://gpt-load-docs.pages.dev/site-build.json> 和 <https://gpt-load.com/site-build.json>：`commit` 必须匹配本次提交，`dirty=false`、`functions=false`。再验证正式站点受影响的 `/en`、`/zh`、`/ja` 正文、语言、链接、资源及浏览器运行结果，全部符合预期后记录发布完成。
+
+构建或线上验收未完成时，保留待发布状态并接续核查。HTTP 核验使用明确的维护工具 User-Agent；保留静态 HTML 的邮箱混淆保护注释及 Cloudflare Analytics 的 CSP 配置，检查数据库示例与归档页的渲染和控制台错误。Vercel 历史部署及其状态检查不作为当前官网的发布依据。
+
 本地使用 Pages 运行时检查静态产物：
 
 ```bash
@@ -64,7 +74,7 @@ pnpm build
 pnpm dlx wrangler@4.162.0 pages dev out --compatibility-date=2026-11-13
 ```
 
-## 生产运行
+## 自托管运行
 
 也可使用 Next.js standalone 模式自行运行，三语页面仍在构建时生成：
 
