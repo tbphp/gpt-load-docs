@@ -37,7 +37,7 @@ if (process.env.NEXT_OUTPUT !== 'standalone') {
     }
   }
   await writeFile(join(output, '_redirects'), redirects.sort((a, b) => Number(a.includes('*')) - Number(b.includes('*'))).join('\n') + '\n');
-  const policy = ["default-src 'self'", "base-uri 'self'", "connect-src 'self' https://api.github.com", "font-src 'self'", "frame-ancestors 'self'", "img-src 'self' data: https://avatars.githubusercontent.com", "object-src 'none'", "script-src 'self' 'unsafe-inline'", "style-src 'self' 'unsafe-inline'"].join('; ');
+  const policy = ["default-src 'self'", "base-uri 'self'", "connect-src 'self' https://api.github.com", "font-src 'self'", "frame-ancestors 'self'", "img-src 'self' data: https://avatars.githubusercontent.com", "object-src 'none'", "script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com", "style-src 'self' 'unsafe-inline'"].join('; ');
   await writeFile(join(output, '_headers'), `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n  X-Frame-Options: SAMEORIGIN\n  Strict-Transport-Security: max-age=31536000; includeSubDomains\n  Content-Security-Policy: ${policy}\n`);
   const commit = process.env.CF_PAGES_COMMIT_SHA || execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
   const dirty = execFileSync('git', ['status', '--porcelain'], { encoding: 'utf8' }).trim() !== '';
@@ -47,7 +47,17 @@ if (process.env.NEXT_OUTPUT !== 'standalone') {
     for (const item of await readdir(directory, { withFileTypes: true })) {
       const path = join(directory, item.name);
       if (item.isDirectory()) await inventory(path);
-      else files.push({ path, bytes: (await stat(path)).size });
+      else {
+        if (item.name.endsWith('.html')) {
+          const html = await readFile(path, 'utf8');
+          // 避免边缘邮箱混淆改写正文和连接串，破坏 React 水合及示例复制。
+          if (!html.includes('<!--email_off-->')) {
+            if (!/<body\b/.test(html) || !html.includes('</body>')) throw new Error(`Missing HTML body: ${path}`);
+            await writeFile(path, html.replace(/(<body\b[^>]*>)/, '$1<!--email_off-->').replace('</body>', '<!--/email_off--></body>'));
+          }
+        }
+        files.push({ path, bytes: (await stat(path)).size });
+      }
     }
   }
   await inventory(output);
