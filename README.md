@@ -102,6 +102,6 @@ public/v2/             2.0 品牌资源与三语高清截图
 ## 相关链接
 
 - [GPT-Load 主项目](https://github.com/tbphp/gpt-load)
-- [线上官网](https://www.gpt-load.com)
-- [2.0 文档](https://www.gpt-load.com/docs)
+- [线上官网](https://gpt-load.com)
+- [2.0 文档](https://gpt-load.com/docs)
 - [问题反馈](https://github.com/tbphp/gpt-load/issues)

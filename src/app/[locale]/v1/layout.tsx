@@ -1,3 +1,4 @@
+import { SITE_URL } from "@/lib/v2/site";
 import { initLocale, type LocalizedPageProps, type LocalizedLayoutProps } from "@/i18n/static-locale";
 import Link from "@/components/LocalizedLink";
 import type { Metadata } from "next";
@@ -37,7 +38,7 @@ export async function generateMetadata({ params }: LocalizedPageProps): Promise<
       title: ogConfig.title,
       description: ogConfig.description,
       type: "website",
-      url: "https://www.gpt-load.com/v1",
+      url: `${SITE_URL}/v1`,
       images: [
         {
           url: "/logo.png",

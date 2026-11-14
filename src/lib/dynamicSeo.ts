@@ -1,3 +1,4 @@
+import { SITE_URL } from "@/lib/v2/site";
 import { Metadata } from 'next';
 import { SupportedLanguage } from '@/i18n/utils';
 import { PAGE_SEO_CONFIGS, PageSeoConfig, OG_CONFIGS } from './metadata';
@@ -44,7 +45,7 @@ export async function generatePageMetadata(
       description: pageConfig.description,
       keywords: pageConfig.keywords,
       authors: [{ name: "tbphp" }],
-      metadataBase: new URL('https://www.gpt-load.com'),
+      metadataBase: new URL(SITE_URL),
       icons: {
         icon: [
           { url: "/logo.png", sizes: "32x32", type: "image/png" },
@@ -57,7 +58,7 @@ export async function generatePageMetadata(
         title: ogConfig.title,
         description: ogConfig.description,
         type: getOpenGraphType(pageConfig.type),
-        url: `https://www.gpt-load.com${normalizedPath}`,
+        url: `${SITE_URL}${normalizedPath}`,
         locale: getLocaleFromLang(detectedLang),
         images: [
           {
@@ -75,11 +76,11 @@ export async function generatePageMetadata(
         images: ["/logo.png"],
       },
       alternates: {
-        canonical: `https://www.gpt-load.com${normalizedPath}`,
+        canonical: `${SITE_URL}${normalizedPath}`,
         languages: {
-          'zh-CN': `https://www.gpt-load.com${normalizedPath}?lang=zh`,
-          'en': `https://www.gpt-load.com${normalizedPath}?lang=en`,
-          'ja': `https://www.gpt-load.com${normalizedPath}?lang=ja`,
+          'zh-CN': `${SITE_URL}${normalizedPath}?lang=zh`,
+          'en': `${SITE_URL}${normalizedPath}?lang=en`,
+          'ja': `${SITE_URL}${normalizedPath}?lang=ja`,
         }
       }
     };
@@ -142,7 +143,7 @@ async function generateFallbackMetadata(): Promise<Metadata> {
       title: config.title,
       description: config.description,
       keywords: config.keywords,
-      metadataBase: new URL('https://www.gpt-load.com'),
+      metadataBase: new URL(SITE_URL),
     };
   } catch {
     // 最后的降级方案
@@ -150,7 +151,7 @@ async function generateFallbackMetadata(): Promise<Metadata> {
       title: "GPT-Load - 高性能 AI 接口透明代理服务",
       description: "企业级 AI 接口透明代理服务",
       keywords: "GPT-Load, AI, 代理",
-      metadataBase: new URL('https://www.gpt-load.com'),
+      metadataBase: new URL(SITE_URL),
     };
   }
 }

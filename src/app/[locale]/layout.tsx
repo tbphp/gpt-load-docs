@@ -1,3 +1,4 @@
+import { SITE_URL } from "@/lib/v2/site";
 import type { Metadata } from "next";
 import { HTML_LANG } from "@/i18n/v2/config";
 import { initLocale } from "@/i18n/static-locale";
@@ -11,7 +12,7 @@ import LocaleEntry from "@/components/LocaleEntry";
  *   v1/layout.tsx   — 1.4.x 归档站，沿用原 Tailwind 主题
  */
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.gpt-load.com"),
+  metadataBase: new URL(SITE_URL),
 };
 
 export const dynamicParams = false;

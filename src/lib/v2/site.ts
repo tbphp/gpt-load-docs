@@ -3,7 +3,7 @@ import { DEFAULT_LOCALE, LOCALES, type Locale } from "@/i18n/v2/config";
 import { getDict, type Dict } from "@/i18n/v2/dict";
 import { localeHref } from '@/i18n/routing.mjs';
 
-export const SITE_URL = "https://www.gpt-load.com";
+export const SITE_URL = "https://gpt-load.com";
 export const SITE_NAME = "GPT-Load";
 export const SOCIAL_IMAGE_URL = `${SITE_URL}/social-card.png?v=coral-anchor-orange-v2`;
 
