@@ -100,10 +100,11 @@ export default function Protocols() {
         </li>
         <li>纯文本重排序：POST /v1/rerank，独立使用 rerank 协议，不支持流式或协议互转。</li>
         <li>JEV 决策：POST /v1/decisions，由 Jev 或 OpenRouter 渠道原生执行，独立使用 decisions 协议。</li>
-        <li>语音合成：POST /v1/audio/speech，独立使用 audio-speech 协议，仅支持原生、非流式请求，不做协议互转。</li>
+        <li>语音合成：POST /v1/audio/speech，独立使用 audio-speech 协议，按渠道原生格式处理普通或 SSE 响应，不做协议互转。</li>
         <li>Codex 实时语音：独立使用 codex-live 协议，不是 Responses WebSocket 的另一种文本模式。</li>
       </ul>
-      <p id="audio-speech">语音合成支持 OpenAI、OpenRouter 与 Mistral。请求必须是含 model 的 JSON，voice、voice_id、response_format、instructions 等参数遵循所选渠道。OpenAI 与 OpenRouter 可返回音频字节，Mistral 可返回含 audio_data 的 JSON；客户端应按实际 Content-Type 处理响应。不支持 SSE 语音事件或语音凭据探测。</p>
+      <p id="audio-speech">语音合成支持 OpenAI、OpenRouter 与 Mistral。请求必须是含 model 的 JSON，voice、voice_id、response_format、instructions 等参数遵循所选渠道。普通响应中，OpenAI 与 OpenRouter 可返回音频字节，Mistral 可返回含 audio_data 的 JSON；客户端应按实际 Content-Type 处理响应。语音凭据探测不受支持。</p>
+      <p>OpenAI 设 stream_format 为 sse，Mistral 设 stream 为 true，即可使用原生 SSE；OpenRouter 仅支持普通响应。事件按渠道格式实时透传，客户端需按 text/event-stream 消费；speech.audio.done 表示完成，错误事件或意外中断按失败记录。</p>
       <p>OpenAI 语音合成的 Base URL 留空时使用官方地址；自定义地址按 OpenAI 渠道约定填写，不含末尾 /v1，网关保留原有路径前缀并追加 /v1/audio/speech。</p>
       <p>Gemini、Google Vertex AI、New API 与 GPT-Load 支持原生 gemini-embeddings；Gemini 与 Vertex AI 渠道还可将 OpenAI Embeddings 的文本请求转成 Gemini 原生批量嵌入，支持 dimensions 及 float／base64 输出，不支持 token ID 输入。</p>
       <p>Vertex AI 沿用服务账号 JSON 与 location 配置，适用于 Gemini 嵌入接口模型，如 gemini-embedding-2。模型名可使用短名、google/ 或 publishers/google/models/ 前缀；不支持数字自定义端点及使用 :predict 的旧式向量模型。多模态输入需使用原生 Gemini 嵌入格式，具体能力仍取决于模型。</p>
@@ -163,8 +164,9 @@ export default function Protocols() {
       <Notice label="响应续接使用原凭据" tone="amber">
         对支持上游存储的原生 HTTP/SSE Responses，网关记录返回的响应 ID。使用同一访问密钥携带 previous_response_id 时，只使用当前仍允许的原凭据，不受软亲和开关影响，也不会因失败换号。
       </Notice>
-      <p>转换或无状态响应、明确 store:false 的新响应不会登记；未知、过期或淘汰的 ID 会在本地拒绝，包括网关外或升级前创建的 ID。仅正常停机成功保存后可恢复绑定，不保证崩溃恢复。</p>
-      <p>conversation 和其他资源操作仍不保证回到原凭据；请使用单凭据分组，或确认上游支持跨凭据共享。中转渠道只保证回到原下一跳。</p>
+      <p>转换或无状态响应、明确 store:false 的新响应不会登记；网关外创建或归属记录已过期、淘汰、未恢复的 ID 会在本地拒绝。只有正常停机成功保存后才能恢复绑定，不保证异常退出后的恢复。</p>
+      <p>查询、输入项列表、删除、取消和资源子路径都要求使用创建响应时的同一访问密钥，并固定到记录的原凭据；仍需满足当前权限、渠道能力和凭据健康状态，不会因失败换号。未知或非本密钥拥有的 ID 统一返回本地 404 response_resource_not_found，不请求上游。</p>
+      <p>conversation 与其他非响应 ID 引用仍不保证回到原凭据；可用单凭据分组，或确认上游支持共享。中转渠道只保证回到原下一跳。POST 创建、compact 与 input_tokens 保持各自原有的行为。</p>
       <p>GET /v1/responses 支持原生 WebSocket，当前适用于 OpenAI、Codex、xAI、GPT-Load、CLIProxyAPI、Sub2API。连接固定上游 Session，Codex 仅支持原连接内续接；不提供 WS→HTTP 转换，也不保证重连恢复上下文。开关见运行时设置。</p>
       <p>Codex WebSocket 支持在生成期间发送 response.interrupt，携带同一连接中当前响应的 response_id；网关在原上游连接立即转发，中断确认后可用 previous_response_id 续接。已结束响应的迟到或重复中断会被忽略，不会影响下一轮。若上游以 response.incomplete 返回中断且没有输出、output_tokens 为 0，连接仍会关闭，不能续接。</p>
       <p>

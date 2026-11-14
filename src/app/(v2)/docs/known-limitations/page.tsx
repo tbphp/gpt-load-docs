@@ -56,10 +56,10 @@ export default function KnownLimitations() {
       <p><Link href="/docs/access-keys">查看访问密钥成本限制 →</Link></p>
 
       <Heading id="responses">Responses 有状态资源</Heading>
-      <Notice label="响应续接不等于完整资源绑定" tone="amber">
-        网关可为受支持的原生 Responses 响应登记归属，让 previous_response_id 续接回到原凭据。未知、过期或淘汰的 ID 会被拒绝；conversation 和其他资源操作不在该绑定保证内。
+      <Notice label="归属绑定的边界" tone="amber">
+        网关为受支持的原生 Responses 响应登记归属。previous_response_id 续接和持久化响应资源操作都要求同一访问密钥的有效绑定，并固定使用当前仍允许的原凭据。网关外创建、未知、过期、淘汰或未恢复的 ID 会被拒绝。
       </Notice>
-      <p>其他有状态资源仍需单凭据分组，或确认上游允许跨凭据共享。续接绑定也不保证上游历史持续有效或网关崩溃后可恢复。</p>
+      <p>conversation 等非响应 ID 资源引用仍需单凭据分组，或确认上游允许跨凭据共享。归属绑定不保证上游历史持续有效，也不保证异常退出后可恢复。</p>
       <p><Link href="/docs/internals/protocols">查看协议与转换边界 →</Link></p>
 
       <Heading id="encryption">加密密钥</Heading>

@@ -85,6 +85,7 @@ const DATA_PLANE_ERRORS: ErrorRow[] = [
   ["protocol_endpoint_not_found", "404", "请求路径不属于已启用的数据面端点", "核对基础 URL、协议和路径"],
   ["method_not_allowed", "405", "端点存在，但 HTTP 方法不受支持", "使用该端点声明的方法"],
   ["invalid_protocol_request", "400", "请求体或协议字段无法解析", "按客户端协议修正请求"],
+  ["response_resource_not_found", "404", "响应资源未知、属于其他访问密钥，或归属记录已失效", "使用创建响应时的访问密钥，并确认本网关的归属绑定仍有效"],
   ["model_required_by_filter", "400", "访问密钥限制了模型，但请求没有模型名", "指定模型或移除模型过滤"],
   ["advisor_model_unavailable", "400", "分组未提供 advisor 模型，或其对外名称未通过访问密钥过滤", "核对 tools[].model 的上游模型 ID、分组模型与密钥过滤"],
   ["encrypted_content_recovery_exhausted", "400 (HTTP)", "Responses 历史清理重放后仍被上游同类拒绝", "使用可读完整历史重发或新建会话"],

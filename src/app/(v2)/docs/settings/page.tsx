@@ -164,7 +164,7 @@ export default async function Settings() {
         </li>
       </ul>
       <Notice label="它是软亲和，不是资源绑定" tone="blue">
-        软亲和只尽量复用凭据，不保证资源归属。Responses 的 previous_response_id 使用独立的续接绑定，不受亲和开关影响；conversation 和其他资源引用不在该保证内。
+        软亲和只尽量复用凭据，不保证资源归属。Responses 的 previous_response_id 与受支持的持久化响应资源操作使用独立归属绑定，不受亲和开关影响；conversation 和其他非响应 ID 引用不在该保证内。
       </Notice>
 
       <Heading id="logs">日志留存</Heading>
