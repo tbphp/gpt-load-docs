@@ -1,6 +1,8 @@
 "use client";
 
-import Link from "next/link";
+import { stripLocale } from "@/i18n/routing.mjs";
+
+import Link from "@/components/LocalizedLink";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { cn } from "../lib/utils";
@@ -29,7 +31,7 @@ import {
 } from "lucide-react";
 
 const DocsNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
-  const pathname = usePathname();
+  const pathname = stripLocale(usePathname());
   const { t } = useTranslation();
 
   const navigation = [

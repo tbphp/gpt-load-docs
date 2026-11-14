@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/LocalizedLink";
 import BrandLogo from "./BrandLogo";
 import type { Dict } from "@/i18n/v2/dict";
 

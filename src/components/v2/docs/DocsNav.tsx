@@ -1,6 +1,8 @@
 "use client";
 
-import Link from "next/link";
+import { stripLocale } from "@/i18n/routing.mjs";
+
+import Link from "@/components/LocalizedLink";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { getLocalizedDocGroups } from "@/lib/v2/docs-nav";
@@ -9,7 +11,7 @@ import { useLocale } from "@/i18n/v2/LocaleProvider";
 export default function DocsNav() {
   const { t } = useLocale();
   const groups = getLocalizedDocGroups(t);
-  const pathname = usePathname();
+  const pathname = stripLocale(usePathname());
   const [open, setOpen] = useState(false);
   const current = groups.flatMap((g) => g.items).find((d) => d.href === pathname);
 
@@ -56,9 +58,9 @@ export default function DocsNav() {
         ))}
 
         <div className="docs-nav-foot">
-          <a className="label" href="/v1/docs">
+          <Link fullReload className="label" href="/v1/docs">
             {t.docsUi.legacy}
-          </a>
+          </Link>
         </div>
       </div>
     </nav>

@@ -1,3 +1,5 @@
+import { LANGUAGE_COOKIE } from './routing.mjs';
+
 export type SupportedLanguage = 'zh' | 'en' | 'ja';
 
 export const SUPPORTED_LANGUAGES: SupportedLanguage[] = ['zh', 'en', 'ja'];
@@ -9,7 +11,7 @@ export const LANGUAGE_NAMES = {
 } as const;
 
 export const DEFAULT_LANGUAGE: SupportedLanguage = 'zh';
-export const COOKIE_NAME = 'preferred-language';
+export const COOKIE_NAME = LANGUAGE_COOKIE;
 
 /**
  * 检查语言是否受支持

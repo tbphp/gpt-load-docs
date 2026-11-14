@@ -3,6 +3,8 @@ import { DOC_FLAT } from "@/lib/v2/docs-nav";
 import { localeUrl } from "@/lib/v2/site";
 import { LOCALES } from "@/i18n/v2/config";
 
+export const dynamic = 'force-static';
+
 /**
  * 只收录 2.0 的页面。1.4.x 归档站带 noindex，不进 sitemap，
  * 免得和 2.0 文档争抢同一批关键词的权重。

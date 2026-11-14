@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Github, Download, FileText } from "lucide-react";
-import Link from "next/link";
+import Link from "@/components/LocalizedLink";
 import Image from "next/image";
 import { useTranslation } from "@/hooks/useTranslation";
 

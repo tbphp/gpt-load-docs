@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Github, BookOpen, Download, Heart } from "lucide-react";
-import Link from "next/link";
+import Link from "@/components/LocalizedLink";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const CTA = () => {

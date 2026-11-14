@@ -5,9 +5,9 @@ import {
   SupportedLanguage, 
   initLanguage, 
   setPreferredLanguage, 
-  removeUrlLanguageParam,
   DEFAULT_LANGUAGE 
 } from './utils';
+import { localeHref } from './routing.mjs';
 
 interface LanguageContextType {
   currentLanguage: SupportedLanguage;
@@ -54,11 +54,8 @@ export function LanguageProvider({ children, initialLanguage }: LanguageProvider
     // 更新 Cookie
     setPreferredLanguage(newLang);
     
-    // 清除 URL 参数
-    removeUrlLanguageParam();
-    
-    // 更新状态
-    setCurrentLanguage(newLang);
+    // 归档的正文、元数据与新版一样，切换到对应的静态语言页。
+    window.location.href = localeHref(window.location.pathname + window.location.search + window.location.hash, newLang);
   };
 
   const value: LanguageContextType = {

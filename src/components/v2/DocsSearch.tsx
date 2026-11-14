@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/LocalizedLink";
 import { useMemo, useState } from "react";
 import { useLocale } from "@/i18n/v2/LocaleProvider";
 import { getLocalizedDocFlat } from "@/lib/v2/docs-nav";

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/LocalizedLink";
 import { useState } from "react";
 import { Github, Users, Heart, ExternalLink } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";

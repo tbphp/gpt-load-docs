@@ -1,6 +1,8 @@
 "use client";
 
-import Link from "next/link";
+import { stripLocale, localeHref } from "@/i18n/routing.mjs";
+
+import Link from "@/components/LocalizedLink";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import BrandLogo from "./BrandLogo";
@@ -31,7 +33,7 @@ export default function SiteHeader() {
   const { locale, t } = useLocale();
   const [open, setOpen] = useState(false);
   const [stars, setStars] = useState<string | null>(null);
-  const pathname = usePathname();
+  const pathname = stripLocale(usePathname());
   const isActive = (href: string) => {
     if (href === "/docs") {
       return pathname.startsWith("/docs") && !pathname.startsWith("/docs/groups") && !pathname.startsWith("/docs/install");
@@ -59,12 +61,11 @@ export default function SiteHeader() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
-  // 抽屉里的切换：写 cookie 后带 ?lang 整页跳转，逻辑与下拉一致但不依赖 router
+  // 抽屉里的切换使用静态语言路径，并保留查询参数与当前锚点。
   const switchLocale = (next: Locale) => {
     document.cookie = `${LOCALE_COOKIE}=${next};path=/;max-age=${365 * 24 * 60 * 60};SameSite=Lax`;
     const url = new URL(window.location.href);
-    url.searchParams.set("lang", next);
-    window.location.href = url.toString();
+    window.location.href = localeHref(url.pathname + url.search + url.hash, next);
   };
 
   return (

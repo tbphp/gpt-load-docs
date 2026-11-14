@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "@/components/LocalizedLink";
+
 import { Zap, CheckCircle } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useSeo } from "@/hooks/useSeo";
@@ -253,9 +255,9 @@ export default function QuickStartPageContent() {
       <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
         <p className="text-gray-700 dark:text-gray-300">
           {t('docsQuickStart.nextSteps.description')}{" "}
-          <a href="/v1/docs/deployment" className="text-blue-600 dark:text-blue-400 hover:underline">
+          <Link fullReload href="/v1/docs/deployment" className="text-blue-600 dark:text-blue-400 hover:underline">
             <strong>{t('docsQuickStart.nextSteps.deploymentGuide')}</strong>
-          </a>
+          </Link>
           {t('docsQuickStart.nextSteps.period')}
         </p>
       </div>

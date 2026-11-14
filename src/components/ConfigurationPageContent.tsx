@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "@/components/LocalizedLink";
+
 import { ArrowRight, Layers, CheckCircle, AlertTriangle } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useSeo } from "@/hooks/useSeo";
@@ -166,7 +168,7 @@ export default function ConfigurationPageContent() {
           {t("configurationPage.furtherReading.title")}
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <a
+          <Link fullReload
             href="/v1/docs/configuration/environment"
             className="block bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 p-6 rounded-lg transition-colors"
           >
@@ -176,8 +178,8 @@ export default function ConfigurationPageContent() {
             <p className="text-blue-700 dark:text-blue-300">
               {t("configurationPage.furtherReading.environment.description")}
             </p>
-          </a>
-          <a
+          </Link>
+          <Link fullReload
             href="/v1/docs/configuration/project"
             className="block bg-orange-50 dark:bg-orange-900/20 hover:bg-orange-100 dark:hover:bg-orange-900/30 p-6 rounded-lg transition-colors"
           >
@@ -187,8 +189,8 @@ export default function ConfigurationPageContent() {
             <p className="text-orange-700 dark:text-orange-400">
               {t("configurationPage.furtherReading.project.description")}
             </p>
-          </a>
-          <a
+          </Link>
+          <Link fullReload
             href="/v1/docs/configuration/cloudflare-aigateway"
             className="block bg-cyan-50 dark:bg-cyan-900/20 hover:bg-cyan-100 dark:hover:bg-cyan-900/30 p-6 rounded-lg transition-colors"
           >
@@ -200,7 +202,7 @@ export default function ConfigurationPageContent() {
                 "configurationPage.furtherReading.cloudflareAiGateway.description"
               )}
             </p>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

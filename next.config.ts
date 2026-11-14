@@ -1,16 +1,21 @@
 import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
 
+const standalone = process.env.NEXT_OUTPUT === "standalone";
+
 const nextConfig: NextConfig = {
-  output: "standalone",
+  output: standalone ? "standalone" : "export",
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   images: {
+    unoptimized: true,
     // 贡献者头像来自 GitHub，且以 unoptimized 方式直出（浏览器直连，不走优化管线）
     remotePatterns: [{ protocol: "https", hostname: "avatars.githubusercontent.com" }],
   },
   experimental: {
     mdxRs: true,
+    globalNotFound: true,
   },
+  ...(standalone ? {
   async headers() {
     // Vercel Preview 默认注入 Toolbar/Comments；只在 Preview 放行官方依赖，
     // Production 继续使用不允许外部脚本的严格策略。
@@ -75,8 +80,15 @@ const nextConfig: NextConfig = {
       // 这两页在 2.0 里提升为一级页面
       { source: "/docs/sponsor", destination: "/sponsor", permanent: false },
       { source: "/docs/contributors", destination: "/contributors", permanent: false },
+      // Docker standalone 保留旧入口；Pages 使用构建时生成的兼容页。
+      { source: "/", destination: "/en", permanent: false },
+      ...["docs", "changelog", "sponsor", "contributors"].map((part) => ({ source: `/${part}`, destination: `/en/${part}`, permanent: false })),
+      { source: "/docs/:path*", destination: "/en/docs/:path*", permanent: false },
+      { source: "/v1", destination: "/zh/v1", permanent: false },
+      { source: "/v1/:path*", destination: "/zh/v1/:path*", permanent: false },
     ];
   },
+  } : {}),
 };
 
 const withMDX = createMDX({});

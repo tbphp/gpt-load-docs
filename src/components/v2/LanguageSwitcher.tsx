@@ -1,6 +1,7 @@
 "use client";
 
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { localeHref } from '@/i18n/routing.mjs';
 import { useEffect, useRef, useState } from "react";
 import { LOCALES, LOCALE_COOKIE, LOCALE_NAMES, type Locale } from "@/i18n/v2/config";
 import { useLocale } from "@/i18n/v2/LocaleProvider";
@@ -10,7 +11,6 @@ export default function LanguageSwitcher() {
   const [open, setOpen] = useState(false);
   const boxRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   // 点击外部或按 Esc 收起
   useEffect(() => {
@@ -36,10 +36,8 @@ export default function LanguageSwitcher() {
   };
 
   const hrefFor = (next: Locale) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("lang", next);
-    const query = params.toString();
-    return query ? `${pathname}?${query}` : pathname;
+    const suffix = typeof window === 'undefined' ? '' : window.location.search + window.location.hash;
+    return localeHref(pathname + suffix, next);
   };
 
   const moveFocus = (event: React.KeyboardEvent<HTMLUListElement>) => {

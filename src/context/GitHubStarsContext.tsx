@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { fetchStars as fetchRepositoryStars } from '@/lib/v2/github';
 
 interface GitHubStarsContextType {
   stars: number | null;
@@ -16,13 +17,7 @@ export const GitHubStarsProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const fetchStars = async () => {
       try {
-        const response = await fetch('/api/github-stars?repo=tbphp/gpt-load');
-        const data = await response.json();
-        if (response.ok) {
-          setStars(data.stars);
-        } else {
-          console.error('Failed to fetch GitHub stars');
-        }
+        setStars(await fetchRepositoryStars());
       } catch (error) {
         console.error('Error fetching GitHub stars:', error);
       } finally {

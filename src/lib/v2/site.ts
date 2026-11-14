@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DEFAULT_LOCALE, LOCALES, type Locale } from "@/i18n/v2/config";
 import { getDict, type Dict } from "@/i18n/v2/dict";
+import { localeHref } from '@/i18n/routing.mjs';
 
 export const SITE_URL = "https://www.gpt-load.com";
 export const SITE_NAME = "GPT-Load";
@@ -18,11 +19,7 @@ export function socialImage() {
 export type LocalizedMeta = Record<Locale, { title: string; description: string; keywords?: string }>;
 
 export function localeUrl(path: string, locale: Locale): string {
-  const url = new URL(path, SITE_URL);
-  // 每个语言版本都使用显式 URL。否则英文裸 URL 会再次按请求头/Cookie
-  // 跳到中日版本，hreflang 与 canonical 就不是稳定资源。
-  url.searchParams.set("lang", locale);
-  return url.toString();
+  return new URL(localeHref(path, locale), SITE_URL).toString();
 }
 
 export function localeAlternates(path: string, locale: Locale): Metadata["alternates"] {

@@ -5,14 +5,15 @@
  * 但**默认语言不同**：1.4.x 默认中文，2.0 在识别不出时默认英文。
  */
 
-export const LOCALES = ["en", "zh", "ja"] as const;
+import { LANGUAGE_COOKIE, LOCALES } from '../routing.mjs';
+export { LOCALES };
 export type Locale = (typeof LOCALES)[number];
 
 /** 识别不出浏览器语言时的兜底 */
 export const DEFAULT_LOCALE: Locale = "en";
 
 /** 与 1.4.x 共用，用户的显式选择在两站之间通用 */
-export const LOCALE_COOKIE = "preferred-language";
+export const LOCALE_COOKIE = LANGUAGE_COOKIE;
 
 export const LOCALE_NAMES: Record<Locale, string> = {
   en: "English",

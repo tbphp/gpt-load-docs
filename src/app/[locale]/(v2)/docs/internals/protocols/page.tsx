@@ -1,0 +1,206 @@
+import { initLocale, type LocalizedPageProps } from "@/i18n/static-locale";
+import type { Metadata } from "next";
+import Link from "@/components/LocalizedLink";
+import { DocsPage, Heading } from "@/components/v2/docs";
+import { Notice } from "@/components/v2/ui";
+import { docPageMetadata } from "@/lib/v2/doc-meta";
+
+export async function generateMetadata({ params }: LocalizedPageProps): Promise<Metadata> {
+  await initLocale(params);
+  return docPageMetadata("/docs/internals/protocols");
+}
+
+const TOC = [
+  { id: "four", label: "四种对话协议" },
+  { id: "entry", label: "接口入口" },
+  { id: "convert", label: "转换是怎么发生的" },
+  { id: "limit", label: "不能转换的情况" },
+  { id: "stateful", label: "有状态请求" },
+  { id: "pick", label: "该用哪个协议" },
+];
+
+export default async function Protocols({ params }: LocalizedPageProps) {
+  await initLocale(params);
+  return (
+    <DocsPage
+      path="/docs/internals/protocols"
+      title="协议与转换边界"
+      lede="网关能在协议之间转换，但不是万能翻译器。这一页说明边界在哪，以及遇到不支持的组合时会怎样。"
+      toc={TOC}
+    >
+      <Heading id="four">四种对话协议</Heading>
+      <p>GPT-Load 接受四种对话协议。它们是并列关系，一把访问密钥可以同时允许多个；图片、向量、重排序、决策、语音合成和实时语音另有独立协议权限。</p>
+      <ul>
+        <li>
+          <strong>OpenAI Chat Completions</strong>——最通用，
+          绝大多数兼容客户端和第三方服务都走这条
+        </li>
+        <li>
+          <strong>OpenAI Responses</strong>——较新的接口形态，
+          支持有状态的多轮接续
+        </li>
+        <li>
+          <strong>Anthropic Messages</strong>——Claude 系客户端的原生入口
+        </li>
+        <li>
+          <strong>Gemini</strong>——Gemini 系客户端的原生入口
+        </li>
+      </ul>
+
+      <Notice label="OpenAI 是两个协议" tone="blue">
+        Chat Completions 和 Responses 是<b>两个独立协议</b>，不是一个的新旧版本。
+        管理台里选「OpenAI」预设时会同时勾上这两个，但它们各自有独立的入口和能力。
+      </Notice>
+
+      <Heading id="entry">接口入口</Heading>
+      <p>客户端按各自协议的习惯访问，不需要在路径里带分组名：</p>
+
+      <div className="tbl-wrap">
+        <table className="tbl">
+          <thead>
+            <tr>
+              <th style={{ width: "30%" }}>协议</th>
+              <th>主要入口</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>OpenAI Chat Completions</td>
+              <td className="m">/v1/chat/completions</td>
+            </tr>
+            <tr>
+              <td>OpenAI Responses</td>
+              <td className="m">/v1/responses 及其资源路径</td>
+            </tr>
+            <tr>
+              <td>Anthropic Messages</td>
+              <td className="m">/v1/messages</td>
+            </tr>
+            <tr>
+              <td>Gemini</td>
+              <td className="m">/v1beta/models/…</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>除对话外，还提供这些接口（可用性取决于上游渠道）：</p>
+      <ul>
+        <li>
+          <strong>模型列表</strong>——<code>/v1/models</code> 与{" "}
+          <code>/v1beta/models</code>
+        </li>
+        <li>
+          <strong>向量嵌入</strong>——<code>/v1/embeddings</code>；Gemini 原生使用 <code>/v1beta/models/…:embedContent</code> 或 <code>:batchEmbedContents</code>
+        </li>
+        <li>
+          <strong>图片生成与编辑</strong>——<code>/v1/images/generations</code>、
+          <code>/v1/images/edits</code>
+        </li>
+        <li>
+          <strong>token 计数</strong>——<code>/v1/messages/count_tokens</code>{" "}
+          及 Gemini 的 <code>countTokens</code>
+        </li>
+        <li>纯文本重排序：POST /v1/rerank，独立使用 rerank 协议，不支持流式或协议互转。</li>
+        <li>JEV 决策：POST /v1/decisions，由 Jev 或 OpenRouter 渠道原生执行，独立使用 decisions 协议。</li>
+        <li>语音合成：POST /v1/audio/speech，独立使用 audio-speech 协议，按渠道原生格式处理普通或 SSE 响应，不做协议互转。</li>
+        <li>Codex 实时语音：独立使用 codex-live 协议，不是 Responses WebSocket 的另一种文本模式。</li>
+      </ul>
+      <p id="audio-speech">语音合成支持 OpenAI、OpenRouter 与 Mistral。请求必须是含 model 的 JSON，voice、voice_id、response_format、instructions 等参数遵循所选渠道。普通响应中，OpenAI 与 OpenRouter 可返回音频字节，Mistral 可返回含 audio_data 的 JSON；客户端应按实际 Content-Type 处理响应。语音凭据探测不受支持。</p>
+      <p>OpenAI 设 stream_format 为 sse，Mistral 设 stream 为 true，即可使用原生 SSE；OpenRouter 仅支持普通响应。事件按渠道格式实时透传，客户端需按 text/event-stream 消费；speech.audio.done 表示完成，错误事件或意外中断按失败记录。</p>
+      <p>OpenAI 语音合成的 Base URL 留空时使用官方地址；自定义地址按 OpenAI 渠道约定填写，不含末尾 /v1，网关保留原有路径前缀并追加 /v1/audio/speech。</p>
+      <p>Gemini、Google Vertex AI、New API 与 GPT-Load 支持原生 gemini-embeddings；Gemini 与 Vertex AI 渠道还可将 OpenAI Embeddings 的文本请求转成 Gemini 原生批量嵌入，支持 dimensions 及 float／base64 输出，不支持 token ID 输入。</p>
+      <p>Vertex AI 沿用服务账号 JSON 与 location 配置，适用于 Gemini 嵌入接口模型，如 gemini-embedding-2。模型名可使用短名、google/ 或 publishers/google/models/ 前缀；不支持数字自定义端点及使用 :predict 的旧式向量模型。多模态输入需使用原生 Gemini 嵌入格式，具体能力仍取决于模型。</p>
+      <p><Link href="/docs/clients/codex-voice">Codex 实时语音接入指南 →</Link></p>
+      <p>GET /v1/models 携带非空 anthropic-version 请求头时返回 Anthropic 模型列表；否则返回 OpenAI Chat Completions 格式。直接调接口时按客户端协议带上对应请求头。</p>
+      <p><Link href="/docs/reference/support-matrix">查看逐渠道协议与 Operation →</Link></p>
+
+      <p>原生搜索入口为 POST /v1/alpha/search，使用 openai-responses 协议，支持 CLIProxyAPI、New API 与 GPT-Load 渠道。它不是聊天协议转换，也不意味着任意上游账号都能搜索。</p>
+      <Heading id="convert">转换是怎么发生的</Heading>
+      <p>
+        客户端用的协议，和上游渠道支持的协议<strong>不一定相同</strong>。
+        比如你用 Claude Code（Anthropic 协议）请求一个 OpenAI 渠道的模型——
+        网关会把请求转成 OpenAI 格式发出去，再把响应转回 Anthropic 格式。
+      </p>
+      <p>
+        这个转换对客户端是透明的。<strong>请求日志里能看到转换过程</strong>，
+        排查响应格式异常时先看这里，见{" "}
+        <Link href="/docs/monitor">监控与排障</Link>。
+      </p>
+      <p>
+        <strong>协议相同时不发生转换</strong>，请求基本原样透传——
+        这也是延迟最低、兼容性最好的路径。
+      </p>
+
+      <Heading id="limit">不能转换的情况</Heading>
+      <Notice label="它不是万能翻译器" tone="amber">
+        每个渠道<b>声明自己能执行哪些协议与能力</b>。网关只在这些声明的能力之间转换，
+        不会尝试把任意协议、任意 JSON 强行翻译成另一种。
+      </Notice>
+      <p>常见的转换失败场景：</p>
+      <ul>
+        <li>
+          <strong>目标渠道不支持该能力</strong>——
+          比如向一个纯文本模型请求图片生成
+        </li>
+        <li>
+          <strong>协议特有的参数没有对应物</strong>——
+          某些参数只存在于一种协议里，转换时会被丢弃或报错
+        </li>
+        <li>
+          <strong>模型本身不支持</strong>——
+          比如对不支持视觉的模型发送图片输入
+        </li>
+      </ul>
+      <p>
+        遇到这类问题，<strong>最直接的解法是让客户端协议和渠道协议对齐</strong>：
+        用 Claude 客户端就配 Anthropic 渠道，减少中间转换。
+      </p>
+      <p>带 Anthropic advisor 工具的请求仅走原生路由；子模型的开放、访问限制与价格配置见 <Link href="/docs/models">模型管理</Link>。</p>
+
+      <Heading id="stateful">有状态请求</Heading>
+      <p>
+        OpenAI Responses 支持靠 <code>previous_response_id</code>、
+        <code>conversation</code> 或已有资源 ID 接续上下文。
+        这类请求有个前提：
+      </p>
+      <Notice label="响应续接使用原凭据" tone="amber">
+        对支持上游存储的原生 HTTP/SSE Responses，网关记录返回的响应 ID。使用同一访问密钥携带 previous_response_id 时，只使用当前仍允许的原凭据，不受软亲和开关影响，也不会因失败换号。
+      </Notice>
+      <p>转换或无状态响应、明确 store:false 的新响应不会登记；网关外创建或归属记录已过期、淘汰、未恢复的 ID 会在本地拒绝。只有正常停机成功保存后才能恢复绑定，不保证异常退出后的恢复。</p>
+      <p>查询、输入项列表、删除、取消和资源子路径都要求使用创建响应时的同一访问密钥，并固定到记录的原凭据；仍需满足当前权限、渠道能力和凭据健康状态，不会因失败换号。未知或非本密钥拥有的 ID 统一返回本地 404 response_resource_not_found，不请求上游。</p>
+      <p>conversation 与其他非响应 ID 引用仍不保证回到原凭据；可用单凭据分组，或确认上游支持共享。中转渠道只保证回到原下一跳。POST 创建、compact 与 input_tokens 保持各自原有的行为。</p>
+      <p>GET /v1/responses 支持原生 WebSocket，当前适用于 OpenAI、Codex、xAI、GPT-Load、CLIProxyAPI、Sub2API。连接固定上游 Session，Codex 仅支持原连接内续接；不提供 WS→HTTP 转换，也不保证重连恢复上下文。开关见运行时设置。</p>
+      <p>Codex WebSocket 支持在生成期间发送 response.interrupt，携带同一连接中当前响应的 response_id；网关在原上游连接立即转发，中断确认后可用 previous_response_id 续接。已结束响应的迟到或重复中断会被忽略，不会影响下一轮。若上游以 response.incomplete 返回中断且没有输出、output_tokens 为 0，连接仍会关闭，不能续接。</p>
+      <p>
+        另一个选择是<strong>每次发送完整可读上下文</strong>，减少对原账号存储的依赖；
+        历史中的加密内容和条目 ID 仍可能与原账号绑定，不能保证任意凭据都能接续，输入 token 也可能更多。
+      </p>
+      <p>HTTP/SSE 与 WebSocket Responses 在向客户端输出前被上游明确拒绝历史加密内容或条目 ID 时，可尝试一次同凭据清理重放；WebSocket 仅限新连接首轮。重放计入 retry_count，并遵守错误规则与凭据冷却。已有内容或工具活动后不重放，compaction 与 item_reference 不会被自动删除。</p>
+      <p>清理重放后仍被同类拒绝时，HTTP 返回 400 encrypted_content_recovery_exhausted；可用可读完整历史重发或新建会话。WebSocket 已绑定的上游连接失效时，仍需客户端重新连接并重发。</p>
+
+      <p>CLIProxyAPI 与 New API 的 Responses 扩展透传不包含响应资源的查询、删除、取消、输入项或 Input Tokens。普通 previous_response_id 续接仍依赖上游存储；需要未声明资源能力的输入会在本地拒绝，不会先发给上游试探。</p>
+      <Heading id="pick">该用哪个协议</Heading>
+      <p>没有绝对的优劣，按情况选：</p>
+      <ul>
+        <li>
+          <strong>客户端已经定了</strong>——用它原生的那个，转换最少。
+          Claude Code 就用 Anthropic，Gemini CLI 就用 Gemini
+        </li>
+        <li>
+          <strong>自己写代码</strong>——Chat Completions 兼容性最广，
+          换上游最省事
+        </li>
+        <li>
+          <strong>需要有状态接续</strong>——Responses；
+          注意响应 ID 续接与其他资源引用的不同边界
+        </li>
+      </ul>
+      <p>
+        访问密钥里<strong>可以同时勾选多个协议</strong>，
+        不确定就都勾上，用不到的协议不会有副作用。
+        配置见 <Link href="/docs/access-keys">访问密钥</Link>。
+      </p>
+    </DocsPage>
+  );
+}

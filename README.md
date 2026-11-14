@@ -14,7 +14,7 @@
 
 - Next.js 15、React 19、TypeScript
 - pnpm 11
-- App Router、Server Components、Middleware
+- App Router、Server Components、三语静态生成
 - 原生 CSS 设计系统；旧版归档页面继续使用已有 Tailwind 样式
 
 ## 本地开发
@@ -33,16 +33,43 @@ pnpm dev
 
 ```bash
 pnpm lint
+pnpm test
 pnpm build
 pnpm audit --prod
 ```
 
-## 生产运行
+## Cloudflare Pages
 
-构建结果使用 Next.js standalone 服务端模式。该模式保留语言检测、Cookie、重定向、图片优化与站内 API 等运行时能力。
+默认构建生成 `out/`，部署为纯静态站点，不使用 Pages Functions。
+
+连接 `tbphp/gpt-load-docs` 仓库，使用以下构建设置：
+
+| 设置 | 值 |
+| --- | --- |
+| 生产分支 | `main` |
+| 框架 | Next.js（Static HTML Export） |
+| 构建命令 | `pnpm install --frozen-lockfile && pnpm build` |
+| 输出目录 | `out` |
+| `NODE_VERSION` | `22.21.1` |
+| `PNPM_VERSION` | `11.17.0` |
+
+英文、中文、日文分别使用 `/en`、`/zh`、`/ja` 路径。原公开路径保留完整的默认语言正文，浏览器根据 `?lang=`、已保存的语言或系统语言进入对应语言页。旧版入口继续指向 1.4.x 归档。
+
+构建会生成安全响应头、兼容入口、三语 404 和 `site-build.json`，并检查免费计划的文件数与单文件大小限制。`site-build.json` 中的提交号用于核验实际发布版本。
+
+本地使用 Pages 运行时检查静态产物：
 
 ```bash
 pnpm build
+pnpm dlx wrangler@4.162.0 pages dev out --compatibility-date=2026-11-13
+```
+
+## 生产运行
+
+也可使用 Next.js standalone 模式自行运行，三语页面仍在构建时生成：
+
+```bash
+NEXT_OUTPUT=standalone pnpm build
 HOSTNAME=0.0.0.0 PORT=3000 node .next/standalone/server.js
 ```
 
@@ -58,13 +85,13 @@ docker build -t gpt-load-docs .
 docker run --rm -p 3000:3000 gpt-load-docs
 ```
 
-镜像使用 Node.js 22、pnpm frozen lockfile 与非 root 运行用户，不采用 nginx 静态导出。
+镜像使用 Node.js 22、pnpm frozen lockfile、standalone 模式与非 root 运行用户。
 
 ## 目录
 
 ```text
-src/app/(v2)/          2.0 官网与文档路由
-src/app/v1/            1.4.x 归档站
+src/app/[locale]/(v2)/ 2.0 官网与文档路由
+src/app/[locale]/v1/   1.4.x 归档站
 src/components/v2/     2.0 公共组件
 src/i18n/v2/           2.0 中英日词典与语言检测
 src/lib/v2/            2.0 导航、SEO 与 GitHub 数据

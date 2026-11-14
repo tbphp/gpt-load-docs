@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "@/components/LocalizedLink";
+
 import { Zap, Database, Shield, Settings, CheckCircle } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useSeo } from "@/hooks/useSeo";
@@ -430,20 +432,20 @@ export default function StandalonePageContent() {
           ))}
         </ul>
         <div className="flex flex-col sm:flex-row gap-4">
-          <a
+          <Link fullReload
             href="/v1/docs/configuration"
             className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
             <Settings className="h-4 w-4 mr-2" />
             {t("standalone.nextSteps.buttons.configuration")}
-          </a>
-          <a
+          </Link>
+          <Link fullReload
             href="/v1/docs/configuration/management"
             className="inline-flex items-center justify-center px-6 py-3 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors"
           >
             <Shield className="h-4 w-4 mr-2" />
             {t("standalone.nextSteps.buttons.management")}
-          </a>
+          </Link>
         </div>
       </div>
     </div>

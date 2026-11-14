@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/LocalizedLink";
 import type { ReactNode } from "react";
 import { findDoc, findGroupTitle, findNeighbors } from "@/lib/v2/docs-nav";
 import Toc from "./Toc";
@@ -85,7 +85,7 @@ function DraftNotice({ title, t }: { title: string; t: Awaited<ReturnType<typeof
           {t.docsUi.readmeNote}
         </li>
         <li>
-          <a href="/v1/docs">1.4.x</a>{t.docsUi.legacyNote}
+          <Link fullReload href="/v1/docs">1.4.x</Link>{t.docsUi.legacyNote}
         </li>
       </ul>
     </div>

@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Terminal, Download, Settings, Play } from "lucide-react";
-import Link from "next/link";
+import Link from "@/components/LocalizedLink";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const QuickStart = () => {

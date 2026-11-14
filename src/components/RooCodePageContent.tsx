@@ -1,7 +1,7 @@
 "use client";
 
 import { AlertCircle, CheckCircle, ExternalLink } from "lucide-react";
-import Link from "next/link";
+import Link from "@/components/LocalizedLink";
 import ImageViewer from "./ImageViewer";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useSeo } from "@/hooks/useSeo";

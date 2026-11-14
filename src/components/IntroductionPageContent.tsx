@@ -11,7 +11,7 @@ import {
   CheckCircle,
   Layers,
 } from "lucide-react";
-import Link from "next/link";
+import Link from "@/components/LocalizedLink";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useSeo } from "@/hooks/useSeo";
 

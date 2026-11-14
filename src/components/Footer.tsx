@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/LocalizedLink";
 import { Github, Mail, Heart, Zap, MessageCircle } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
