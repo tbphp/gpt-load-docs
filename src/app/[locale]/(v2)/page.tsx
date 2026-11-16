@@ -68,16 +68,7 @@ const PROTOCOLS = [
   { t: "Gemini", p: "/v1beta/models/…" },
 ];
 
-// 第一位是首席合作伙伴，独占整行并带标签；其余赞助方同级
 const SPONSORS = [
-  {
-    id: "modelflare",
-    name: "Modelflare",
-    logo: "/v2/sponsor-modelflare.png",
-    url: "https://modelflare.dev/sign-up?utm_source=github&utm_campaign=gptload",
-    width: 1200,
-    height: 216,
-  },
   {
     id: "ofoxai",
     name: "OfoxAI",
@@ -121,7 +112,6 @@ export default async function Home({ params }: LocalizedPageProps) {
   const h = t.home;
   const locale = await getLocale();
   const sponsorCopy = {
-    modelflare: { title: t.pages.sponsor.modelflareTitle, description: t.pages.sponsor.modelflareDescription, action: t.pages.sponsor.modelflareAction },
     ofoxai: { title: t.pages.sponsor.ofoxaiTitle, description: t.pages.sponsor.ofoxaiDescription, action: t.pages.sponsor.ofoxaiAction },
     packycode: { title: "PackyCode", description: h.sponsors.packycodeDescription, action: h.sponsors.packycodeAction },
     apimart: { title: "APIMart", description: h.sponsors.apimart, action: h.sponsors.detail },
@@ -187,14 +177,13 @@ export default async function Home({ params }: LocalizedPageProps) {
       >
         <div className="spon-grid">
           {SPONSORS.map((sp) => (
-            <a className={`spon${sp.id === "modelflare" ? " spon-featured" : ""}`} key={sp.name} href={sp.url} target="_blank" rel={sp.id === "ofoxai" ? "noopener noreferrer" : "sponsored noopener noreferrer"}>
+            <a className="spon" key={sp.name} href={sp.url} target="_blank" rel={sp.id === "ofoxai" ? "noopener noreferrer" : "sponsored noopener noreferrer"}>
               <span className="spon-logo">
                 <Image src={sp.logo} alt={sp.name} width={sp.width} height={sp.height} />
               </span>
               <span className="spon-body">
                 <span className="spon-head">
                   <ClampText as="h3" text={sponsorCopy[sp.id].title} />
-                  {sp.id === "modelflare" ? <span className="label spon-tag">{t.pages.sponsor.principalPartner}</span> : null}
                 </span>
                 <ClampText as="p" text={sponsorCopy[sp.id].description} />
                 <span className="spon-cta">{sponsorCopy[sp.id].action}</span>

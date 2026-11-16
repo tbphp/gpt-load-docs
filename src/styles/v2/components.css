@@ -210,8 +210,8 @@
 .spon-grid:has(> :only-child) .spon { grid-template-columns: 232px 1fr; }
 .spon-grid:has(> :only-child) .spon-logo { padding: 22px 26px; }
 .spon-grid:has(> :only-child) .spon-body { padding: 22px 26px 20px; }
-/* 首席之外恰好三家时排成一行三等分，避免第二行落单留出空格 */
-.spon-grid:has(> .spon-featured:first-child + .spon + .spon + .spon:last-child) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+/* 恰好三家时维持一行三等分，避免第二行落单留出空格 */
+.spon-grid:has(> .spon:first-child + .spon + .spon:last-child) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .spon.spon-featured { grid-column: 1 / -1; grid-template-columns: 232px 1fr; }
 .spon-featured .spon-logo { padding: 12px 24px; }
 .spon-featured .spon-body { padding: 11px 20px 10px; }
@@ -273,7 +273,7 @@
 .spon-more .join { margin-left: auto; }
 
 @media (max-width: 1080px) {
-  .spon-grid:has(> .spon-featured:first-child + .spon + .spon + .spon:last-child) { grid-template-columns: 1fr; }
+  .spon-grid:has(> .spon:first-child + .spon + .spon:last-child) { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 520px) {

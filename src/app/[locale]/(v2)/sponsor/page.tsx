@@ -14,16 +14,7 @@ export async function generateMetadata({ params }: LocalizedPageProps): Promise<
   return dictionaryPageMeta({ locale, path: "/sponsor", select: (dict) => dict.pages.sponsor });
 }
 
-// 第一位是首席合作伙伴，独占整行并带标签；其余赞助方同级
 const SPONSORS = [
-  {
-    id: "modelflare",
-    name: "Modelflare",
-    logo: "/v2/sponsor-modelflare.png",
-    url: "https://modelflare.dev/sign-up?utm_source=github&utm_campaign=gptload",
-    width: 1200,
-    height: 216,
-  },
   {
     id: "ofoxai",
     name: "OfoxAI",
@@ -64,7 +55,6 @@ export default async function Sponsor({ params }: LocalizedPageProps) {
   const t = await getT();
   const copy = t.pages.sponsor;
   const sponsorCopy = {
-    modelflare: { title: copy.modelflareTitle, description: copy.modelflareDescription, action: copy.modelflareAction },
     ofoxai: { title: copy.ofoxaiTitle, description: copy.ofoxaiDescription, action: copy.ofoxaiAction },
     packycode: { title: "PackyCode", description: copy.packycodeDescription, action: copy.packycodeAction },
     apimart: { title: "APIMart", description: copy.sponsorDescription, action: copy.register },
@@ -88,14 +78,13 @@ export default async function Sponsor({ params }: LocalizedPageProps) {
           </div>
           <div className="spon-grid" style={{ marginTop: 20 }}>
             {SPONSORS.map((sp) => (
-              <a key={sp.id} className={`spon${sp.id === "modelflare" ? " spon-featured" : ""}`} href={sp.url} target="_blank" rel={sp.id === "ofoxai" ? "noopener noreferrer" : "sponsored noopener noreferrer"}>
+              <a key={sp.id} className="spon" href={sp.url} target="_blank" rel={sp.id === "ofoxai" ? "noopener noreferrer" : "sponsored noopener noreferrer"}>
                 <span className="spon-logo">
                   <Image src={sp.logo} alt={sp.name} width={sp.width} height={sp.height} />
                 </span>
                 <span className="spon-body">
                   <span className="spon-head">
                     <ClampText as="h3" text={sponsorCopy[sp.id].title} />
-                    {sp.id === "modelflare" ? <span className="label spon-tag">{copy.principalPartner}</span> : null}
                   </span>
                   <ClampText as="p" text={sponsorCopy[sp.id].description} />
                   <span className="spon-cta">{sponsorCopy[sp.id].action}</span>
