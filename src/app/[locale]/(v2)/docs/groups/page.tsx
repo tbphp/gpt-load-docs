@@ -257,6 +257,7 @@ export default async function Groups({ params }: LocalizedPageProps) {
         参数覆盖用于生成、语音合成、Embeddings 与 Rerank 请求，不作用于图片编辑、Token 统计、Responses 资源操作或探测；不能修改根级 model、stream、store，也不能注入或改写 previous_response_id。
       </p>
       <p>audio-speech 或未指定协议的规则还不能设置或删除根级 stream_format。旧规则仍可加载，但命中的语音请求会因参数覆盖不可用而失败，应先移除对该字段的设置或删除操作。</p>
+      <p>OpenRouter 分组可在请求体或分组参数覆盖规则中设置顶层 provider 对象。例如，用 provider.only 限定上游服务商，用 provider.allow_fallbacks 控制 OpenRouter 是否尝试备用服务商。原生 Chat Completions、Responses 和由 Anthropic 或 Gemini 转换的聊天请求都保留这些偏好。</p>
 
       <Heading id="custom">自定义渠道</Heading>
       <p>

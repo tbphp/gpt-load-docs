@@ -169,6 +169,7 @@ api_key_model_discovery = true`}</CodeBlock>
       </Notice>
       <CodeBlock caption="启用客户端实验功能">{`codex --enable reasoning_effort_override`}</CodeBlock>
       <p>此开关由客户端版本决定；模型目录中的等级展示不代表模型支持会话内更新。</p>
+      <p>Codex 订阅渠道的内置模型目录将 gpt-6.2-sol 和 gpt-6.2-astra 标记为支持会话内切换思考等级。使用前仍需确认分组和访问密钥已开放该模型。</p>
       <p><Link href="/docs/clients/codex-voice">Codex 实时语音：客户端配置、直连与中继部署 →</Link></p>
       <Notice label="Codex 要的是 Responses，不是 Chat Completions" tone="amber">
         这把访问密钥必须勾选 <b>OpenAI Responses</b> 协议。
