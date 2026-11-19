@@ -24,14 +24,6 @@ const SPONSORS = [
     height: 240,
   },
   {
-    id: "packycode",
-    name: "PackyCode",
-    logo: "/v2/packycode.png",
-    url: "https://www.packyapi.ai/register?aff=ahiS",
-    width: 1280,
-    height: 511,
-  },
-  {
     id: "apimart",
     name: "APIMart",
     logo: "/v2/sponsor-apimart.png",
@@ -56,7 +48,6 @@ export default async function Sponsor({ params }: LocalizedPageProps) {
   const copy = t.pages.sponsor;
   const sponsorCopy = {
     ofoxai: { title: copy.ofoxaiTitle, description: copy.ofoxaiDescription, action: copy.ofoxaiAction },
-    packycode: { title: "PackyCode", description: copy.packycodeDescription, action: copy.packycodeAction },
     apimart: { title: "APIMart", description: copy.sponsorDescription, action: copy.register },
   };
   return (
