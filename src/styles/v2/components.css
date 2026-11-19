@@ -252,6 +252,12 @@
 /* 整张卡片就是链接，卡片内的链接文字不需要单独的点击高度，紧跟描述换行即可 */
 .spon .spon-cta { display: block; margin-top: 3px; min-height: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
+.spon-full-copy .spon-body h3 { white-space: normal; overflow: visible; }
+.spon-full-copy .spon-body p {
+  height: auto; display: block; overflow: visible; -webkit-line-clamp: unset; line-clamp: none;
+}
+.spon.spon-full-copy .spon-cta { white-space: normal; overflow-wrap: anywhere; font-weight: 600; }
+
 /* 截断文本的悬停浮层：复用原标签的字号与颜色，盖在原文位置上原地展开。
    偏移量等于边框加内边距，让浮层里的文字与原文逐字对齐；不拦截指针，链接照常可点。 */
 .clamp { position: relative; display: block; min-width: 0; }
@@ -274,6 +280,10 @@
 
 @media (max-width: 1080px) {
   .spon-grid:has(> .spon:first-child + .spon + .spon:last-child) { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px) {
+  .spon-grid:has(> .spon-full-copy) { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 520px) {

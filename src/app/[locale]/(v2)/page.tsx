@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "@/components/LocalizedLink";
 import "@/styles/v2/home.css";
-import ClampText from "@/components/v2/ClampText";
+import SponsorGrid from "@/components/v2/SponsorGrid";
 import RouteDiagram from "@/components/v2/RouteDiagram";
 import StructuredData from "@/components/v2/StructuredData";
 import { Section, Button, CodeBlock, Notice, Stat, Figure } from "@/components/v2/ui";
@@ -68,25 +68,6 @@ const PROTOCOLS = [
   { t: "Gemini", p: "/v1beta/models/…" },
 ];
 
-const SPONSORS = [
-  {
-    id: "ofoxai",
-    name: "OfoxAI",
-    logo: "/v2/sponsor-ofoxai.svg",
-    url: "https://ofox.ai/?utm_source=github&utm_medium=sponsorship&utm_content=gpt_load",
-    width: 620,
-    height: 240,
-  },
-  {
-    id: "apimart",
-    name: "APIMart",
-    logo: "/v2/sponsor-apimart.png",
-    url: "https://go.apimart.ai/gh-gpt-load",
-    width: 900,
-    height: 300,
-  },
-] as const;
-
 const SUPPORTERS = [
   { name: "OpenAI", url: "https://openai.com/", logo: "/v2/sponsor-openai.svg", w: 88, h: 26 },
   { name: "LINUX DO", url: "https://linux.do" },
@@ -103,10 +84,6 @@ export default async function Home({ params }: LocalizedPageProps) {
   const t = await getT();
   const h = t.home;
   const locale = await getLocale();
-  const sponsorCopy = {
-    ofoxai: { title: t.pages.sponsor.ofoxaiTitle, description: t.pages.sponsor.ofoxaiDescription, action: t.pages.sponsor.ofoxaiAction },
-    apimart: { title: "APIMart", description: h.sponsors.apimart, action: h.sponsors.detail },
-  };
   return (
     // tint-end：页面以浅色板块（07 边界）收尾，footer 的默认外边距要据此收起
     <main id="main" className="tint-end">
@@ -166,22 +143,11 @@ export default async function Home({ params }: LocalizedPageProps) {
         title={h.sponsors.title}
         lede={h.sponsors.lede}
       >
-        <div className="spon-grid">
-          {SPONSORS.map((sp) => (
-            <a className="spon" key={sp.name} href={sp.url} target="_blank" rel={sp.id === "ofoxai" ? "noopener noreferrer" : "sponsored noopener noreferrer"}>
-              <span className="spon-logo">
-                <Image src={sp.logo} alt={sp.name} width={sp.width} height={sp.height} />
-              </span>
-              <span className="spon-body">
-                <span className="spon-head">
-                  <ClampText as="h3" text={sponsorCopy[sp.id].title} />
-                </span>
-                <ClampText as="p" text={sponsorCopy[sp.id].description} />
-                <span className="spon-cta">{sponsorCopy[sp.id].action}</span>
-              </span>
-            </a>
-          ))}
-        </div>
+        <SponsorGrid
+          copy={t.pages.sponsor}
+          apimartDescription={h.sponsors.apimart}
+          apimartAction={h.sponsors.detail}
+        />
 
         <div className="spon-more">
           <span className="label">{h.sponsors.thanks}</span>

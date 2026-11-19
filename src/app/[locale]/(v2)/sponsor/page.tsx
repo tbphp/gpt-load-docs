@@ -2,7 +2,7 @@ import { initLocale, type LocalizedPageProps } from "@/i18n/static-locale";
 import type { Metadata } from "next";
 import Image from "next/image";
 import "@/styles/v2/pages.css";
-import ClampText from "@/components/v2/ClampText";
+import SponsorGrid from "@/components/v2/SponsorGrid";
 import SponsorContactButton from "@/components/v2/SponsorContactButton";
 import { Button } from "@/components/v2/ui";
 import { getLocale, getT } from "@/i18n/v2/server";
@@ -13,25 +13,6 @@ export async function generateMetadata({ params }: LocalizedPageProps): Promise<
   const locale = await getLocale();
   return dictionaryPageMeta({ locale, path: "/sponsor", select: (dict) => dict.pages.sponsor });
 }
-
-const SPONSORS = [
-  {
-    id: "ofoxai",
-    name: "OfoxAI",
-    logo: "/v2/sponsor-ofoxai.svg",
-    url: "https://ofox.ai/?utm_source=github&utm_medium=sponsorship&utm_content=gpt_load",
-    width: 620,
-    height: 240,
-  },
-  {
-    id: "apimart",
-    name: "APIMart",
-    logo: "/v2/sponsor-apimart.png",
-    url: "https://go.apimart.ai/gh-gpt-load",
-    width: 900,
-    height: 300,
-  },
-] as const;
 
 const SUPPORTERS = [
   { name: "OpenAI", url: "https://openai.com/", logo: "/v2/sponsor-openai.svg", w: 120, h: 35 },
@@ -46,10 +27,6 @@ export default async function Sponsor({ params }: LocalizedPageProps) {
   await initLocale(params);
   const t = await getT();
   const copy = t.pages.sponsor;
-  const sponsorCopy = {
-    ofoxai: { title: copy.ofoxaiTitle, description: copy.ofoxaiDescription, action: copy.ofoxaiAction },
-    apimart: { title: "APIMart", description: copy.sponsorDescription, action: copy.register },
-  };
   return (
     <main id="main" className="page">
       <div className="shell">
@@ -67,22 +44,12 @@ export default async function Sponsor({ params }: LocalizedPageProps) {
             <span className="n">01</span>
             <span className="t">{copy.primary}</span>
           </div>
-          <div className="spon-grid" style={{ marginTop: 20 }}>
-            {SPONSORS.map((sp) => (
-              <a key={sp.id} className="spon" href={sp.url} target="_blank" rel={sp.id === "ofoxai" ? "noopener noreferrer" : "sponsored noopener noreferrer"}>
-                <span className="spon-logo">
-                  <Image src={sp.logo} alt={sp.name} width={sp.width} height={sp.height} />
-                </span>
-                <span className="spon-body">
-                  <span className="spon-head">
-                    <ClampText as="h3" text={sponsorCopy[sp.id].title} />
-                  </span>
-                  <ClampText as="p" text={sponsorCopy[sp.id].description} />
-                  <span className="spon-cta">{sponsorCopy[sp.id].action}</span>
-                </span>
-              </a>
-            ))}
-          </div>
+          <SponsorGrid
+            copy={copy}
+            apimartDescription={copy.sponsorDescription}
+            apimartAction={copy.register}
+            style={{ marginTop: 20 }}
+          />
 
           <div className="sec-head" style={{ marginTop: 56 }}>
             <span className="n">02</span>
