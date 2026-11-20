@@ -26,7 +26,7 @@ export default async function Redaction({ params }: LocalizedPageProps) {
   const locale = await getLocale();
 
   return (
-    <DocsPage path="/docs/advanced/redaction" title="请求脱敏" lede="在消息发给业务上游或 JEV 前隐藏敏感文本；需要把原值交回客户端时，可以使用可逆加密。" toc={TOC}>
+    <DocsPage path="/docs/advanced/redaction" title="请求脱敏" lede="在消息发给业务上游或决策模型前隐藏敏感文本；需要把原值交回客户端时，可以使用可逆加密。" toc={TOC}>
       <Heading id="purpose">解决什么问题</Heading>
       <p>对话、工具参数和工具结果可能带有邮箱、手机号、业务标识或密钥。请求脱敏在网关内按正则规则处理外发副本，减少这些文本暴露给上游的机会；它不负责判断请求是否违规，也不是只给日志打码。</p>
       <div className="tbl-wrap"><table className="tbl">
@@ -65,7 +65,7 @@ export default async function Redaction({ params }: LocalizedPageProps) {
       )}
       <ol>
         <li>客户端把原始消息交给 GPT-Load；网关仍按原有权限、模型和路由配置选择目标。</li>
-        <li>网关处理参数覆盖后的外发文本，将匹配片段替换或加密。业务上游和 JEV 收到的都是处理后的内容。</li>
+        <li>网关处理参数覆盖后的外发文本，将匹配片段替换或加密。业务上游和决策模型收到的都是处理后的内容。</li>
         <li>上游生成回复或工具调用。对话响应中的有效密文在返回客户端前还原，包括普通响应、SSE 和 Responses WebSocket。</li>
         <li>客户端工具获得还原后的参数；下一轮携带历史或工具结果时，网关再次保护需要外发的内容。</li>
       </ol>
@@ -91,8 +91,9 @@ export default async function Redaction({ params }: LocalizedPageProps) {
         <li>客户端执行的工具可以拿到还原后的参数；上游内置搜索、托管 MCP、代码执行等工具拿到的仍是密文，不能依赖原值执行。</li>
         <li>加密会增加文本长度，可能增加 token 用量；需要等待完整密文或工具 JSON 片段时，流式输出也可能短暂延后。</li>
       </ul>
-      <p>脱敏与智能护栏可以同时启用，但 JEV 审查的是脱敏后的内容。已被隐藏的原值不会再以明文交给 JEV 判断；应结合自己的保护目标选择规则。</p>
-      <p><Link href="/docs/advanced/guardrails">JEV 智能护栏：判断、告警与拦截 →</Link></p>
+      <p>直接调用 Gemini Decisions 时，脱敏规则也会处理 input 中的文本以及 questions 中的 instructions 和 criteria。媒体数据保持原样。</p>
+      <p>脱敏与智能护栏可以同时启用，但决策模型审查的是脱敏后的内容。已被隐藏的原值不会再以明文交给决策模型判断；应结合自己的保护目标选择规则。</p>
+      <p><Link href="/docs/advanced/guardrails">智能护栏：判断、告警与拦截 →</Link></p>
 
       <Heading id="trouble">排障与密钥</Heading>
       <p>出现 request_redaction_failed 时，检查规则范围、文本结构及处理大小限制；网关会拒绝无法安全处理的请求。回复仍有密文时，先确认模型是否改写密文、是否更换了访问密钥身份，以及该协议是否支持还原。</p>

@@ -114,7 +114,7 @@ export default async function Settings({ params }: LocalizedPageProps) {
       <p>在「设置 → 路由调度」配置全局并发上限、访问密钥默认并发上限和分组默认并发上限。默认均为 0，表示不限制；限制的是正在处理的请求数，不是每分钟请求数。</p>
       <p>访问密钥可单独覆盖，留空继承默认值；分组在运行参数中启用覆盖。显式设为 0 只取消该层限制，仍受其他层上限约束。</p>
       <p>达到上限时立即拒绝，不排队，HTTP 请求返回 429 和 concurrency_limit_exceeded。流式请求在处理期间持续占用名额；降低上限不会强行中断已放行的请求。</p>
-      <p>并发计数只在当前 GPT-Load 进程内生效，不是多实例共享的总上限。JEV 决策调用也受分组并发限制，不能依赖护栏的异常放行绕过并发准入。</p>
+      <p>并发计数只在当前 GPT-Load 进程内生效，不是多实例共享的总上限。决策调用也受分组并发限制，不能依赖护栏的异常放行绕过并发准入。</p>
 
       <Heading id="retry">重试与拉黑</Heading>
       <ul>
@@ -182,10 +182,10 @@ export default async function Settings({ params }: LocalizedPageProps) {
       <p>按访问密钥开启的原始请求体记录沿用同一日志保留期，与日志一起清理；没有单独的全局记录开关。关闭某把密钥的记录只影响后续请求，不删除既有内容。记录会增加数据库与备份体积，应按排障需要控制开启范围和时间。</p>
       <Heading id="misc">其他</Heading>
       <p>全局上游代理在设置页的「上游代理」中选择；代理地址统一在侧栏「代理」页新增、批量导入、编辑和测试，供全局、分组与凭据复用。测试由服务器经指定代理访问测试地址，不会自动启用或停用代理。</p>
-      <p>请求脱敏在独立设置区配置；自动选模和 JEV 智能护栏在「实验功能」中配置。实时语音模式位于「连接与超时」，Codex 分组可单独覆盖。详细步骤见：</p>
+      <p>请求脱敏在独立设置区配置；自动选模和智能护栏在「实验功能」中配置。实时语音模式位于「连接与超时」，Codex 分组可单独覆盖。详细步骤见：</p>
       <ul>
         <li><Link href="/docs/advanced/redaction">请求脱敏：固定替换与可逆加密</Link></li>
-        <li><Link href="/docs/advanced/guardrails">JEV 智能护栏：规则、告警与拦截</Link></li>
+        <li><Link href="/docs/advanced/guardrails">智能护栏：规则、告警与拦截</Link></li>
         <li><Link href="/docs/clients/codex-voice">Codex 实时语音接入</Link></li>
         <li><Link href="/docs/models#auto-model">自动选模配置</Link></li>
       </ul>

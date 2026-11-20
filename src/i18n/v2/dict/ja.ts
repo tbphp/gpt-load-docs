@@ -244,7 +244,7 @@ export const ja: Dict = {
       { label: "プロトコルと変換境界", description: "ネイティブプロトコルと変換の境界" },
       { label: "プロキシとリクエストヘッダー", description: "送信プロキシ、上書きの優先順位、リクエストヘッダールール" },
       { label: "リクエストのマスキング", description: "固定置換、復元可能な暗号化、復元の制限" },
-      { label: "JEV AI ガードレール", description: "ルール審査、警告、ブロック、費用" },
+      { label: "AI ガードレール", description: "ルール審査、警告、ブロック、費用" },
       { label: "チャネル能力マトリクス", description: "チャネル別のプロトコル、Operation、プロキシ、検証レベル" },
       { label: "環境変数", description: "プロセス設定の完全なリファレンス" },
       { label: "管理 API", description: "Group と AccessKey のスクリプト管理" },

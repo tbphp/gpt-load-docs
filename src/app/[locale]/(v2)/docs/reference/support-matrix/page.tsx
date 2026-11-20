@@ -214,7 +214,7 @@ export default async function SupportMatrix({ params }: LocalizedPageProps) {
       <p>CLIProxyAPI、New API 与 GPT-Load 原生支持 POST /v1/alpha/search，访问密钥需允许 openai-responses 协议。模型映射与搜索载荷会传给上游，响应内容和状态保留；搜索不计作模型 token 用量。上游账号和服务是否允许搜索仍需自行确认。</p>
       <p>纯文本 Rerank 由 Cohere、SiliconFlow、OpenAI Compatible、New API、GPT-Load 原生支持，入口为 POST /v1/rerank；不支持流式或协议互转，访问密钥需允许 rerank 协议。</p>
       <p>Gemini 原生嵌入（embedContent／batchEmbedContents）由 Google Gemini、Google Vertex AI、New API、GPT-Load 支持，使用 gemini-embeddings 协议。表中的 Google Gemini 与 Google Vertex AI OpenAI Embeddings 为文本转换，不接受 token ID 输入；Vertex 不支持数字自定义端点或旧式 :predict 向量模型。</p>
-      <p>Jev 与 OpenRouter 原生支持 decisions；Codex 订阅渠道支持独立的 codex-live 实时语音。Jev 与 Cohere 没有对话路由，不应作为普通聊天渠道使用。</p>
+      <p>Jev 与 OpenRouter 原生支持 decisions。只有 Gemini 渠道原生支持 gemini-decisions，可创建决策并探测凭据。Codex 订阅渠道支持 codex-live 实时语音。Jev 与 Cohere 没有对话路由。</p>
       <p>OpenAI、OpenRouter 与 Mistral 原生支持 POST /v1/audio/speech，访问密钥需允许独立的 audio-speech 协议。OpenAI 的 stream_format=sse 与 Mistral 的 stream=true 支持原生 SSE，OpenRouter 仅支持普通响应；不做协议互转，也不提供语音凭据探测。其他渠道当前未声明该路由。</p>
       <p>Mistral 渠道原生支持 OCR、FIM 补全、音频转写、文本与聊天审核、分类、音色管理和 WebSocket 实时转写，访问密钥需允许独立的 mistral 协议。Chat Completions 与 Embeddings 仍使用 OpenAI 兼容协议。</p>
       <p>模型发现指管理端使用凭据发现上游模型；数据面的模型列表返回当前 AccessKey 可见的已配置模型，不会实时查询上游。</p>

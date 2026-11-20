@@ -59,7 +59,7 @@ export const DOC_GROUPS: DocGroup[] = [
       { href: "/docs/internals/protocols", label: "协议与转换边界", desc: "原生协议与转换能力的边界", status: "ready" },
       { href: "/docs/advanced/proxy-and-headers", label: "代理与请求头", desc: "出站代理、覆盖层级与请求头规则", status: "ready" },
       { href: "/docs/advanced/redaction", label: "请求脱敏", desc: "固定替换、可逆加密与还原边界", status: "ready" },
-      { href: "/docs/advanced/guardrails", label: "JEV 智能护栏", desc: "规则审查、告警、拦截与费用", status: "ready" },
+      { href: "/docs/advanced/guardrails", label: "智能护栏", desc: "规则审查、告警、拦截与费用", status: "ready" },
     ],
   },
   {

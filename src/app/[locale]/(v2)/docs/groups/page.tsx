@@ -254,7 +254,7 @@ export default async function Groups({ params }: LocalizedPageProps) {
       <p>对数组内的对象，可在 set 中用 * 逐项设置字段，在 remove 路径中用 * 逐项删除字段；只遍历已有元素，保留其他字段及数组顺序，不删除数组元素，也不支持数字索引。例如移除每条消息的 reasoning_content：</p>
       <CodeBlock caption="参数覆盖：逐项删除字段">{`[{"remove":["/messages/*/reasoning_content"]}]`}</CodeBlock>
       <p>
-        参数覆盖用于生成、语音合成、Embeddings 与 Rerank 请求，不作用于图片编辑、Token 统计、Responses 资源操作或探测；不能修改根级 model、stream、store，也不能注入或改写 previous_response_id。
+        参数覆盖适用于生成、语音合成、Embeddings、Rerank 和决策请求。决策规则按 decisions 或 gemini-decisions 匹配。图片编辑、Token 统计、Responses 资源操作和探测不应用覆盖规则。根级 model、stream、store 和 previous_response_id 受保护。
       </p>
       <p>audio-speech 或未指定协议的规则还不能设置或删除根级 stream_format。旧规则仍可加载，但命中的语音请求会因参数覆盖不可用而失败，应先移除对该字段的设置或删除操作。</p>
       <p>OpenRouter 分组可在请求体或分组参数覆盖规则中设置顶层 provider 对象。例如，用 provider.only 限定上游服务商，用 provider.allow_fallbacks 控制 OpenRouter 是否尝试备用服务商。原生 Chat Completions、Responses 和由 Anthropic 或 Gemini 转换的聊天请求都保留这些偏好。</p>

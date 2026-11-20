@@ -246,7 +246,7 @@ export const en: Dict = {
       { label: "Protocols and conversion boundaries", description: "Native protocols and conversion boundaries" },
       { label: "Proxies and headers", description: "Outbound proxies, override precedence, and request-header rules" },
       { label: "Request redaction", description: "Fixed replacement, reversible encryption, and restoration limits" },
-      { label: "JEV AI Guardrails", description: "Review rules, warnings, blocking, and cost" },
+      { label: "AI Guardrails", description: "Review rules, warnings, blocking, and cost" },
       { label: "Channel capability matrix", description: "Protocols, operations, proxy support, and validation by channel" },
       { label: "Environment variables", description: "Complete process configuration reference" },
       { label: "Management API", description: "Scripted management of Groups and AccessKeys" },

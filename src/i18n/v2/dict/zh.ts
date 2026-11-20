@@ -243,7 +243,7 @@ export const zh = {
       { label: "协议与转换边界", description: "原生协议与转换能力的边界" },
       { label: "代理与请求头", description: "出站代理、覆盖层级与请求头规则" },
       { label: "请求脱敏", description: "固定替换、可逆加密与还原边界" },
-      { label: "JEV 智能护栏", description: "规则审查、告警、拦截与费用" },
+      { label: "智能护栏", description: "规则审查、告警、拦截与费用" },
       { label: "渠道与能力矩阵", description: "逐渠道协议、Operation、代理与验证等级" },
       { label: "环境变量", description: "进程配置全表" },
       { label: "管理 API", description: "脚本化管理分组与密钥" },

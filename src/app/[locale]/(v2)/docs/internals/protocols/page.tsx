@@ -102,11 +102,13 @@ export default async function Protocols({ params }: LocalizedPageProps) {
           及 Gemini 的 <code>countTokens</code>
         </li>
         <li>纯文本重排序：POST /v1/rerank，独立使用 rerank 协议，不支持流式或协议互转。</li>
-        <li>JEV 决策：POST /v1/decisions，由 Jev 或 OpenRouter 渠道原生执行，独立使用 decisions 协议。</li>
+        <li>决策接口按渠道使用原生格式。Jev 和 OpenRouter 使用 decisions（POST /v1/systemone），Gemini 使用 gemini-decisions（POST /v1beta/decisions）。两个接口之间不转换请求。</li>
+        <li>Gemini 客户端可用 x-goog-api-key 传入 GPT-Load 访问密钥，并通过 GET /v1beta/models 发现可用模型。已限制协议的密钥须允许 gemini-decisions；未设置协议过滤的密钥沿用原有分组和模型权限。</li>
         <li>语音合成：POST /v1/audio/speech，独立使用 audio-speech 协议，按渠道原生格式处理普通或 SSE 响应，不做协议互转。</li>
         <li>Codex 实时语音：独立使用 codex-live 协议，不是 Responses WebSocket 的另一种文本模式。</li>
       </ul>
       <p id="audio-speech">语音合成支持 OpenAI、OpenRouter 与 Mistral。请求必须是含 model 的 JSON，voice、voice_id、response_format、instructions 等参数遵循所选渠道。普通响应中，OpenAI 与 OpenRouter 可返回音频字节，Mistral 可返回含 audio_data 的 JSON；客户端应按实际 Content-Type 处理响应。语音凭据探测不受支持。</p>
+      <p>原生非流式响应支持 gzip 和 zstd 压缩，包括语音音频。即使转发时缺少 Content-Encoding，网关也可识别这两种格式并解压后返回；压缩的流式响应不受支持。</p>
       <p>OpenAI 设 stream_format 为 sse，Mistral 设 stream 为 true，即可使用原生 SSE；OpenRouter 仅支持普通响应。事件按渠道格式实时透传，客户端需按 text/event-stream 消费；speech.audio.done 表示完成，错误事件或意外中断按失败记录。</p>
       <p>OpenAI 语音合成的 Base URL 留空时使用官方地址；自定义地址按 OpenAI 渠道约定填写，不含末尾 /v1，网关保留原有路径前缀并追加 /v1/audio/speech。</p>
       <p>Gemini、Google Vertex AI、New API 与 GPT-Load 支持原生 gemini-embeddings；Gemini 与 Vertex AI 渠道还可将 OpenAI Embeddings 的文本请求转成 Gemini 原生批量嵌入，支持 dimensions 及 float／base64 输出，不支持 token ID 输入。</p>
